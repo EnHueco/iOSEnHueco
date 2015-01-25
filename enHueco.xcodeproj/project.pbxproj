@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1971E321A74922C00613644 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E311A74922C00613644 /* AppDelegate.swift */; };
+		F1971E351A74922C00613644 /* enHueco.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1971E331A74922C00613644 /* enHueco.xcdatamodeld */; };
+		F1971E371A74922C00613644 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E361A74922C00613644 /* ViewController.swift */; };
+		F1971E3A1A74922C00613644 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1971E381A74922C00613644 /* Main.storyboard */; };
+		F1971E3C1A74922C00613644 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1971E3B1A74922C00613644 /* Images.xcassets */; };
+		F1971E3F1A74922C00613644 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1971E3D1A74922C00613644 /* LaunchScreen.xib */; };
+		F1971E4B1A74922C00613644 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E4A1A74922C00613644 /* enHuecoTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1971E451A74922C00613644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1971E241A74922C00613644 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1971E2B1A74922C00613644;
+			remoteInfo = enHueco;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1971E2C1A74922C00613644 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1971E301A74922C00613644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1971E311A74922C00613644 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1971E341A74922C00613644 /* enHueco.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = enHueco.xcdatamodel; sourceTree = "<group>"; };
+		F1971E361A74922C00613644 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F1971E391A74922C00613644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1971E3B1A74922C00613644 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1971E3E1A74922C00613644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F1971E441A74922C00613644 /* enHuecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = enHuecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1971E491A74922C00613644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1971E4A1A74922C00613644 /* enHuecoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enHuecoTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1971E291A74922C00613644 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1971E411A74922C00613644 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1971E231A74922C00613644 = {
+			isa = PBXGroup;
+			children = (
+				F1971E2E1A74922C00613644 /* enHueco */,
+				F1971E471A74922C00613644 /* enHuecoTests */,
+				F1971E2D1A74922C00613644 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1971E2D1A74922C00613644 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1971E2C1A74922C00613644 /* enHueco.app */,
+				F1971E441A74922C00613644 /* enHuecoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1971E2E1A74922C00613644 /* enHueco */ = {
+			isa = PBXGroup;
+			children = (
+				F1971E311A74922C00613644 /* AppDelegate.swift */,
+				F1971E361A74922C00613644 /* ViewController.swift */,
+				F1971E381A74922C00613644 /* Main.storyboard */,
+				F1971E3B1A74922C00613644 /* Images.xcassets */,
+				F1971E3D1A74922C00613644 /* LaunchScreen.xib */,
+				F1971E331A74922C00613644 /* enHueco.xcdatamodeld */,
+				F1971E2F1A74922C00613644 /* Supporting Files */,
+			);
+			path = enHueco;
+			sourceTree = "<group>";
+		};
+		F1971E2F1A74922C00613644 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1971E301A74922C00613644 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1971E471A74922C00613644 /* enHuecoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1971E4A1A74922C00613644 /* enHuecoTests.swift */,
+				F1971E481A74922C00613644 /* Supporting Files */,
+			);
+			path = enHuecoTests;
+			sourceTree = "<group>";
+		};
+		F1971E481A74922C00613644 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1971E491A74922C00613644 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1971E2B1A74922C00613644 /* enHueco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1971E4E1A74922C00613644 /* Build configuration list for PBXNativeTarget "enHueco" */;
+			buildPhases = (
+				F1971E281A74922C00613644 /* Sources */,
+				F1971E291A74922C00613644 /* Frameworks */,
+				F1971E2A1A74922C00613644 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = enHueco;
+			productName = enHueco;
+			productReference = F1971E2C1A74922C00613644 /* enHueco.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1971E431A74922C00613644 /* enHuecoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1971E511A74922C00613644 /* Build configuration list for PBXNativeTarget "enHuecoTests" */;
+			buildPhases = (
+				F1971E401A74922C00613644 /* Sources */,
+				F1971E411A74922C00613644 /* Frameworks */,
+				F1971E421A74922C00613644 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1971E461A74922C00613644 /* PBXTargetDependency */,
+			);
+			name = enHuecoTests;
+			productName = enHuecoTests;
+			productReference = F1971E441A74922C00613644 /* enHuecoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1971E241A74922C00613644 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Diego Gómez";
+				TargetAttributes = {
+					F1971E2B1A74922C00613644 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					F1971E431A74922C00613644 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F1971E2B1A74922C00613644;
+					};
+				};
+			};
+			buildConfigurationList = F1971E271A74922C00613644 /* Build configuration list for PBXProject "enHueco" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1971E231A74922C00613644;
+			productRefGroup = F1971E2D1A74922C00613644 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1971E2B1A74922C00613644 /* enHueco */,
+				F1971E431A74922C00613644 /* enHuecoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1971E2A1A74922C00613644 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1971E3A1A74922C00613644 /* Main.storyboard in Resources */,
+				F1971E3F1A74922C00613644 /* LaunchScreen.xib in Resources */,
+				F1971E3C1A74922C00613644 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1971E421A74922C00613644 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1971E281A74922C00613644 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1971E371A74922C00613644 /* ViewController.swift in Sources */,
+				F1971E321A74922C00613644 /* AppDelegate.swift in Sources */,
+				F1971E351A74922C00613644 /* enHueco.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1971E401A74922C00613644 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1971E4B1A74922C00613644 /* enHuecoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1971E461A74922C00613644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1971E2B1A74922C00613644 /* enHueco */;
+			targetProxy = F1971E451A74922C00613644 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1971E381A74922C00613644 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1971E391A74922C00613644 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1971E3D1A74922C00613644 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1971E3E1A74922C00613644 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1971E4C1A74922C00613644 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1971E4D1A74922C00613644 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1971E4F1A74922C00613644 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = enHueco/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1971E501A74922C00613644 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = enHueco/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F1971E521A74922C00613644 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = enHuecoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/enHueco.app/enHueco";
+			};
+			name = Debug;
+		};
+		F1971E531A74922C00613644 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = enHuecoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/enHueco.app/enHueco";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1971E271A74922C00613644 /* Build configuration list for PBXProject "enHueco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1971E4C1A74922C00613644 /* Debug */,
+				F1971E4D1A74922C00613644 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1971E4E1A74922C00613644 /* Build configuration list for PBXNativeTarget "enHueco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1971E4F1A74922C00613644 /* Debug */,
+				F1971E501A74922C00613644 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1971E511A74922C00613644 /* Build configuration list for PBXNativeTarget "enHuecoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1971E521A74922C00613644 /* Debug */,
+				F1971E531A74922C00613644 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F1971E331A74922C00613644 /* enHueco.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F1971E341A74922C00613644 /* enHueco.xcdatamodel */,
+			);
+			currentVersion = F1971E341A74922C00613644 /* enHueco.xcdatamodel */;
+			path = enHueco.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F1971E241A74922C00613644 /* Project object */;
+}
