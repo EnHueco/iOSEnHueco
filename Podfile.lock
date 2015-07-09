@@ -1,0 +1,20 @@
+PODS:
+  - SwiftHTTP (0.9.1)
+
+DEPENDENCIES:
+  - SwiftHTTP (from `https://github.com/daltoniam/SwiftHTTP.git`, tag `0.9.1`)
+
+EXTERNAL SOURCES:
+  SwiftHTTP:
+    :git: https://github.com/daltoniam/SwiftHTTP.git
+    :tag: 0.9.1
+
+CHECKOUT OPTIONS:
+  SwiftHTTP:
+    :git: https://github.com/daltoniam/SwiftHTTP.git
+    :tag: 0.9.1
+
+SPEC CHECKSUMS:
+  SwiftHTTP: 454178bb6707734edbeb8c03c7fe9760e5c86156
+
+COCOAPODS: 0.35.0

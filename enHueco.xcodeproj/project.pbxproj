@@ -7,124 +7,238 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F1971E321A74922C00613644 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E311A74922C00613644 /* AppDelegate.swift */; };
-		F1971E351A74922C00613644 /* enHueco.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1971E331A74922C00613644 /* enHueco.xcdatamodeld */; };
-		F1971E371A74922C00613644 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E361A74922C00613644 /* ViewController.swift */; };
-		F1971E3A1A74922C00613644 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1971E381A74922C00613644 /* Main.storyboard */; };
-		F1971E3C1A74922C00613644 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1971E3B1A74922C00613644 /* Images.xcassets */; };
-		F1971E3F1A74922C00613644 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1971E3D1A74922C00613644 /* LaunchScreen.xib */; };
-		F1971E4B1A74922C00613644 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1971E4A1A74922C00613644 /* enHuecoTests.swift */; };
+		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */; };
+		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
+		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
+		F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */; };
+		F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1229C261A7495A200C4FDE2 /* Main.storyboard */; };
+		F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */; };
+		F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */; };
+		F1229C461A7495A200C4FDE2 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsTableViewCell.swift */; };
+		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
+		F1229C4A1A7495A200C4FDE2 /* enHueco.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */; };
+		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
+		F1229C501A7495A200C4FDE2 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */; };
+		F1229C511A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */; };
+		F1229C521A7495A200C4FDE2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */; };
+		F1229C531A7495A200C4FDE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */; };
+		F1229C541A7495A200C4FDE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */; };
+		F1229C551A7495A200C4FDE2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */; };
+		F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3E1A7495A200C4FDE2 /* ViewController.swift */; };
+		F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* APIurls.swift */; };
+		F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5F1A8014C800E6E9AB /* APIConnector.swift */; };
+		F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A59F851A802C7200D2C725 /* JSONToolkit.swift */; };
+		F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C94E1A811F0D00861606 /* AppController.swift */; };
+		F1A8C95E1A815F6000861606 /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C95D1A815F6000861606 /* PersistenceModel.swift */; };
+		F1A8C9601A815F6100861606 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C95F1A815F6100861606 /* Schedule.swift */; };
+		F1A8C9621A815F6100861606 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C9611A815F6100861606 /* User.swift */; };
+		F1A8C9641A815F6100861606 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C9631A815F6100861606 /* Day.swift */; };
+		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F1971E451A74922C00613644 /* PBXContainerItemProxy */ = {
+		F1229BEF1A74947200C4FDE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F1971E241A74922C00613644 /* Project object */;
+			containerPortal = F1229BCE1A74947200C4FDE2 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F1971E2B1A74922C00613644;
+			remoteGlobalIDString = F1229BD51A74947200C4FDE2;
 			remoteInfo = enHueco;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F1971E2C1A74922C00613644 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1971E301A74922C00613644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1971E311A74922C00613644 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F1971E341A74922C00613644 /* enHueco.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = enHueco.xcdatamodel; sourceTree = "<group>"; };
-		F1971E361A74922C00613644 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F1971E391A74922C00613644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F1971E3B1A74922C00613644 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F1971E3E1A74922C00613644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F1971E441A74922C00613644 /* enHuecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = enHuecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1971E491A74922C00613644 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1971E4A1A74922C00613644 /* enHuecoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enHuecoTests.swift; sourceTree = "<group>"; };
+		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
+		F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestResponseManager.swift; sourceTree = "<group>"; };
+		F1229BD61A74947200C4FDE2 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1229BDA1A74947200C4FDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = enHuecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1229BF31A74947200C4FDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enHuecoTests.swift; sourceTree = "<group>"; };
+		F1229C251A7495A200C4FDE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F1229C271A7495A200C4FDE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
+		F1229C2A1A7495A200C4FDE2 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = enHueco.xcdatamodel; sourceTree = "<group>"; };
+		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
+		F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
+		F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewController.swift; sourceTree = "<group>"; };
+		F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		F1229C3E1A7495A200C4FDE2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F134AE5D1A800BB200E6E9AB /* APIurls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIurls.swift; sourceTree = "<group>"; };
+		F134AE5F1A8014C800E6E9AB /* APIConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnector.swift; sourceTree = "<group>"; };
+		F1A59F851A802C7200D2C725 /* JSONToolkit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONToolkit.swift; sourceTree = "<group>"; };
+		F1A8C94E1A811F0D00861606 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		F1A8C95D1A815F6000861606 /* PersistenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
+		F1A8C95F1A815F6100861606 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		F1A8C9611A815F6100861606 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F1A8C9631A815F6100861606 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F1971E291A74922C00613644 /* Frameworks */ = {
+		F1229BD31A74947200C4FDE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F1971E411A74922C00613644 /* Frameworks */ = {
+		F1229BEB1A74947200C4FDE2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C23AD65ED86B332C367CF8C /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F1971E231A74922C00613644 = {
+		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E2E1A74922C00613644 /* enHueco */,
-				F1971E471A74922C00613644 /* enHuecoTests */,
-				F1971E2D1A74922C00613644 /* Products */,
+				F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1229BCD1A74947200C4FDE2 = {
+			isa = PBXGroup;
+			children = (
+				F1229BD81A74947200C4FDE2 /* enHueco */,
+				F1229BF11A74947200C4FDE2 /* enHuecoTests */,
+				F1229BD71A74947200C4FDE2 /* Products */,
+				7925AF665DEA52F357FF8A87 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		F1971E2D1A74922C00613644 /* Products */ = {
+		F1229BD71A74947200C4FDE2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E2C1A74922C00613644 /* enHueco.app */,
-				F1971E441A74922C00613644 /* enHuecoTests.xctest */,
+				F1229BD61A74947200C4FDE2 /* enHueco.app */,
+				F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F1971E2E1A74922C00613644 /* enHueco */ = {
+		F1229BD81A74947200C4FDE2 /* enHueco */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E311A74922C00613644 /* AppDelegate.swift */,
-				F1971E361A74922C00613644 /* ViewController.swift */,
-				F1971E381A74922C00613644 /* Main.storyboard */,
-				F1971E3B1A74922C00613644 /* Images.xcassets */,
-				F1971E3D1A74922C00613644 /* LaunchScreen.xib */,
-				F1971E331A74922C00613644 /* enHueco.xcdatamodeld */,
-				F1971E2F1A74922C00613644 /* Supporting Files */,
+				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
+				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
+				F1229C371A7495A200C4FDE2 /* Controllers */,
+				F1229C2C1A7495A200C4FDE2 /* Models */,
+				F1229BD91A74947200C4FDE2 /* Supporting Files */,
+				F1229C231A7495A200C4FDE2 /* Views */,
 			);
 			path = enHueco;
 			sourceTree = "<group>";
 		};
-		F1971E2F1A74922C00613644 /* Supporting Files */ = {
+		F1229BD91A74947200C4FDE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E301A74922C00613644 /* Info.plist */,
+				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
+				F1229BDA1A74947200C4FDE2 /* Info.plist */,
+				F1A59F851A802C7200D2C725 /* JSONToolkit.swift */,
+				F134AE5D1A800BB200E6E9AB /* APIurls.swift */,
+				F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */,
+				F134AE5F1A8014C800E6E9AB /* APIConnector.swift */,
+				F1A8C94E1A811F0D00861606 /* AppController.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F1971E471A74922C00613644 /* enHuecoTests */ = {
+		F1229BF11A74947200C4FDE2 /* enHuecoTests */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E4A1A74922C00613644 /* enHuecoTests.swift */,
-				F1971E481A74922C00613644 /* Supporting Files */,
+				F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */,
+				F1229BF21A74947200C4FDE2 /* Supporting Files */,
 			);
 			path = enHuecoTests;
 			sourceTree = "<group>";
 		};
-		F1971E481A74922C00613644 /* Supporting Files */ = {
+		F1229BF21A74947200C4FDE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F1971E491A74922C00613644 /* Info.plist */,
+				F1229BF31A74947200C4FDE2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1229C231A7495A200C4FDE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */,
+				F1229C261A7495A200C4FDE2 /* Main.storyboard */,
+				F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */,
+				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
+				F1229C2A1A7495A200C4FDE2 /* FriendsTableViewCell.swift */,
+				F1229C2B1A7495A200C4FDE2 /* Images.xcassets */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F1229C2C1A7495A200C4FDE2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1229C591A74997900C4FDE2 /* Extensions */,
+				F1229C581A74995500C4FDE2 /* Classes */,
+				F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */,
+				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F1229C371A7495A200C4FDE2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */,
+				F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */,
+				F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */,
+				F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */,
+				F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */,
+				F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */,
+				F1229C3E1A7495A200C4FDE2 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F1229C581A74995500C4FDE2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F1A8C9631A815F6100861606 /* Day.swift */,
+				F1A8C9611A815F6100861606 /* User.swift */,
+				F1A8C95F1A815F6100861606 /* Schedule.swift */,
+				F1A8C95D1A815F6000861606 /* PersistenceModel.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		F1229C591A74997900C4FDE2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F1971E2B1A74922C00613644 /* enHueco */ = {
+		F1229BD51A74947200C4FDE2 /* enHueco */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1971E4E1A74922C00613644 /* Build configuration list for PBXNativeTarget "enHueco" */;
+			buildConfigurationList = F1229BF81A74947200C4FDE2 /* Build configuration list for PBXNativeTarget "enHueco" */;
 			buildPhases = (
-				F1971E281A74922C00613644 /* Sources */,
-				F1971E291A74922C00613644 /* Frameworks */,
-				F1971E2A1A74922C00613644 /* Resources */,
+				F1229BD21A74947200C4FDE2 /* Sources */,
+				F1229BD31A74947200C4FDE2 /* Frameworks */,
+				F1229BD41A74947200C4FDE2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -132,46 +246,46 @@
 			);
 			name = enHueco;
 			productName = enHueco;
-			productReference = F1971E2C1A74922C00613644 /* enHueco.app */;
+			productReference = F1229BD61A74947200C4FDE2 /* enHueco.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F1971E431A74922C00613644 /* enHuecoTests */ = {
+		F1229BED1A74947200C4FDE2 /* enHuecoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1971E511A74922C00613644 /* Build configuration list for PBXNativeTarget "enHuecoTests" */;
+			buildConfigurationList = F1229BFB1A74947200C4FDE2 /* Build configuration list for PBXNativeTarget "enHuecoTests" */;
 			buildPhases = (
-				F1971E401A74922C00613644 /* Sources */,
-				F1971E411A74922C00613644 /* Frameworks */,
-				F1971E421A74922C00613644 /* Resources */,
+				F1229BEA1A74947200C4FDE2 /* Sources */,
+				F1229BEB1A74947200C4FDE2 /* Frameworks */,
+				F1229BEC1A74947200C4FDE2 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F1971E461A74922C00613644 /* PBXTargetDependency */,
+				F1229BF01A74947200C4FDE2 /* PBXTargetDependency */,
 			);
 			name = enHuecoTests;
 			productName = enHuecoTests;
-			productReference = F1971E441A74922C00613644 /* enHuecoTests.xctest */;
+			productReference = F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F1971E241A74922C00613644 /* Project object */ = {
+		F1229BCE1A74947200C4FDE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Diego Gómez";
 				TargetAttributes = {
-					F1971E2B1A74922C00613644 = {
+					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
-					F1971E431A74922C00613644 = {
+					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = F1971E2B1A74922C00613644;
+						TestTargetID = F1229BD51A74947200C4FDE2;
 					};
 				};
 			};
-			buildConfigurationList = F1971E271A74922C00613644 /* Build configuration list for PBXProject "enHueco" */;
+			buildConfigurationList = F1229BD11A74947200C4FDE2 /* Build configuration list for PBXProject "enHueco" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -179,29 +293,30 @@
 				en,
 				Base,
 			);
-			mainGroup = F1971E231A74922C00613644;
-			productRefGroup = F1971E2D1A74922C00613644 /* Products */;
+			mainGroup = F1229BCD1A74947200C4FDE2;
+			productRefGroup = F1229BD71A74947200C4FDE2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F1971E2B1A74922C00613644 /* enHueco */,
-				F1971E431A74922C00613644 /* enHuecoTests */,
+				F1229BD51A74947200C4FDE2 /* enHueco */,
+				F1229BED1A74947200C4FDE2 /* enHuecoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F1971E2A1A74922C00613644 /* Resources */ = {
+		F1229BD41A74947200C4FDE2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1971E3A1A74922C00613644 /* Main.storyboard in Resources */,
-				F1971E3F1A74922C00613644 /* LaunchScreen.xib in Resources */,
-				F1971E3C1A74922C00613644 /* Images.xcassets in Resources */,
+				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
+				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
+				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
+				F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F1971E421A74922C00613644 /* Resources */ = {
+		F1229BEC1A74947200C4FDE2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -211,55 +326,74 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F1971E281A74922C00613644 /* Sources */ = {
+		F1229BD21A74947200C4FDE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1971E371A74922C00613644 /* ViewController.swift in Sources */,
-				F1971E321A74922C00613644 /* AppDelegate.swift in Sources */,
-				F1971E351A74922C00613644 /* enHueco.xcdatamodeld in Sources */,
+				F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */,
+				F1229C531A7495A200C4FDE2 /* LoginViewController.swift in Sources */,
+				F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */,
+				F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */,
+				F1229C521A7495A200C4FDE2 /* FriendsViewController.swift in Sources */,
+				F1A8C95E1A815F6000861606 /* PersistenceModel.swift in Sources */,
+				F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */,
+				F1229C461A7495A200C4FDE2 /* FriendsTableViewCell.swift in Sources */,
+				F1A8C9621A815F6100861606 /* User.swift in Sources */,
+				F1229C501A7495A200C4FDE2 /* EditScheduleViewController.swift in Sources */,
+				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
+				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
+				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
+				F1229C4A1A7495A200C4FDE2 /* enHueco.xcdatamodeld in Sources */,
+				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
+				F1A8C9641A815F6100861606 /* Day.swift in Sources */,
+				F1229C541A7495A200C4FDE2 /* MeViewController.swift in Sources */,
+				F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */,
+				F1229C511A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift in Sources */,
+				F1A8C9601A815F6100861606 /* Schedule.swift in Sources */,
+				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
+				F1229C551A7495A200C4FDE2 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F1971E401A74922C00613644 /* Sources */ = {
+		F1229BEA1A74947200C4FDE2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1971E4B1A74922C00613644 /* enHuecoTests.swift in Sources */,
+				F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F1971E461A74922C00613644 /* PBXTargetDependency */ = {
+		F1229BF01A74947200C4FDE2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F1971E2B1A74922C00613644 /* enHueco */;
-			targetProxy = F1971E451A74922C00613644 /* PBXContainerItemProxy */;
+			target = F1229BD51A74947200C4FDE2 /* enHueco */;
+			targetProxy = F1229BEF1A74947200C4FDE2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F1971E381A74922C00613644 /* Main.storyboard */ = {
+		F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F1971E391A74922C00613644 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F1971E3D1A74922C00613644 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F1971E3E1A74922C00613644 /* Base */,
+				F1229C251A7495A200C4FDE2 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		F1229C261A7495A200C4FDE2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1229C271A7495A200C4FDE2 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		F1971E4C1A74922C00613644 /* Debug */ = {
+		F1229BF61A74947200C4FDE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,7 +435,7 @@
 			};
 			name = Debug;
 		};
-		F1971E4D1A74922C00613644 /* Release */ = {
+		F1229BF71A74947200C4FDE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -336,27 +470,40 @@
 			};
 			name = Release;
 		};
-		F1971E4F1A74922C00613644 /* Debug */ = {
+		F1229BF91A74947200C4FDE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = enHueco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		F1971E501A74922C00613644 /* Release */ = {
+		F1229BFA1A74947200C4FDE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = enHueco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 			};
 			name = Release;
 		};
-		F1971E521A74922C00613644 /* Debug */ = {
+		F1229BFC1A74947200C4FDE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -375,7 +522,7 @@
 			};
 			name = Debug;
 		};
-		F1971E531A74922C00613644 /* Release */ = {
+		F1229BFD1A74947200C4FDE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -393,45 +540,47 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F1971E271A74922C00613644 /* Build configuration list for PBXProject "enHueco" */ = {
+		F1229BD11A74947200C4FDE2 /* Build configuration list for PBXProject "enHueco" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F1971E4C1A74922C00613644 /* Debug */,
-				F1971E4D1A74922C00613644 /* Release */,
+				F1229BF61A74947200C4FDE2 /* Debug */,
+				F1229BF71A74947200C4FDE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F1971E4E1A74922C00613644 /* Build configuration list for PBXNativeTarget "enHueco" */ = {
+		F1229BF81A74947200C4FDE2 /* Build configuration list for PBXNativeTarget "enHueco" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F1971E4F1A74922C00613644 /* Debug */,
-				F1971E501A74922C00613644 /* Release */,
+				F1229BF91A74947200C4FDE2 /* Debug */,
+				F1229BFA1A74947200C4FDE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		F1971E511A74922C00613644 /* Build configuration list for PBXNativeTarget "enHuecoTests" */ = {
+		F1229BFB1A74947200C4FDE2 /* Build configuration list for PBXNativeTarget "enHuecoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F1971E521A74922C00613644 /* Debug */,
-				F1971E531A74922C00613644 /* Release */,
+				F1229BFC1A74947200C4FDE2 /* Debug */,
+				F1229BFD1A74947200C4FDE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F1971E331A74922C00613644 /* enHueco.xcdatamodeld */ = {
+		F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F1971E341A74922C00613644 /* enHueco.xcdatamodel */,
+				F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */,
 			);
-			currentVersion = F1971E341A74922C00613644 /* enHueco.xcdatamodel */;
+			currentVersion = F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */;
 			path = enHueco.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = F1971E241A74922C00613644 /* Project object */;
+	rootObject = F1229BCE1A74947200C4FDE2 /* Project object */;
 }
