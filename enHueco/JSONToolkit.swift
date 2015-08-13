@@ -9,23 +9,24 @@
 import Foundation
 
 
-class JSONToolkit{
-    
-    class func dictToJSONData(dictionary:NSDictionary) -> NSData{
-        
-        var jsonSerializationError : NSError?
-        
-        var jsonData = NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.PrettyPrinted, error: &jsonSerializationError)
-
-        return jsonData!
+class JSONToolkit
+{
+    class func dictToJSONData(dictionary:NSDictionary) -> NSData?
+    {
+        do
+        {
+            return try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.PrettyPrinted)
+        }
+        catch
+        {
+            return nil
+        }
     }
     
-    
-    class func dictToJSONString(dictionary:NSDictionary) -> NSString{
+    class func dictToJSONString(dictionary:NSDictionary) -> NSString?
+    {
+        guard let jsonData = dictToJSONData(dictionary) else { return nil }
         
-        var jsonData = self.dictToJSONData(dictionary)
-        var jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding)
-        
-        return jsonString!
+        return NSString(data: jsonData, encoding: NSUTF8StringEncoding)
     }
 }

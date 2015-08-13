@@ -8,9 +8,8 @@
 
 import Foundation
 
-
-public class APIurls{
-
+public class APIurls
+{
     // BASIC Settings
     let TESTDOMAIN : String = "http://enhueco.virtual.uniandes.edu.co"
     let PRODUCTION_DOMAIN: String = "enhueco.uniandes.edu.co"
@@ -21,27 +20,25 @@ public class APIurls{
     // Funcitonal URIs
     let AUTHENTICATIONURI : String = "/auth/"
     let GETAPPUSERURI : String = "/me/"
-    
-    
+
     //Functional URLs
     let AUTHENTICATIONURL : NSURL
     let GETAPPUSERURL : NSURL
     
-    
-    init(production: Bool){
-        
+    init(production: Bool)
+    {
         if(production)
         {
             DOMAIN = self.PRODUCTION_DOMAIN
         }
-        else{
+        else
+        {
             DOMAIN = self.TESTDOMAIN
         }
         
         // Define URLs
-        var baseURL = DOMAIN+":"+PORT+"/api"
+        let baseURL = DOMAIN+":"+PORT+"/api"
         self.AUTHENTICATIONURL = NSURL(string: baseURL + AUTHENTICATIONURI)!
         self.GETAPPUSERURL = NSURL(string: baseURL + GETAPPUSERURI)!
     }
-    
 }

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */; };
+		F113D1621B7CDD3A00325209 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* Friend.swift */; };
+		F113D1641B7CDD4C00325209 /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1631B7CDD4C00325209 /* Gap.swift */; };
+		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
+		F113D1681B7CDDA000325209 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1671B7CDDA000325209 /* Class.swift */; };
+		F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1691B7CDDEB00325209 /* DaySchedule.swift */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
 		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
 		F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */; };
@@ -17,23 +22,14 @@
 		F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */; };
 		F1229C461A7495A200C4FDE2 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsTableViewCell.swift */; };
 		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
-		F1229C4A1A7495A200C4FDE2 /* enHueco.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
-		F1229C501A7495A200C4FDE2 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */; };
-		F1229C511A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */; };
-		F1229C521A7495A200C4FDE2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */; };
-		F1229C531A7495A200C4FDE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */; };
-		F1229C541A7495A200C4FDE2 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */; };
-		F1229C551A7495A200C4FDE2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */; };
 		F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3E1A7495A200C4FDE2 /* ViewController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* APIurls.swift */; };
 		F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5F1A8014C800E6E9AB /* APIConnector.swift */; };
 		F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A59F851A802C7200D2C725 /* JSONToolkit.swift */; };
 		F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C94E1A811F0D00861606 /* AppController.swift */; };
-		F1A8C95E1A815F6000861606 /* PersistenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C95D1A815F6000861606 /* PersistenceModel.swift */; };
-		F1A8C9601A815F6100861606 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C95F1A815F6100861606 /* Schedule.swift */; };
-		F1A8C9621A815F6100861606 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C9611A815F6100861606 /* User.swift */; };
-		F1A8C9641A815F6100861606 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C9631A815F6100861606 /* Day.swift */; };
+		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
+		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +46,11 @@
 /* Begin PBXFileReference section */
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestResponseManager.swift; sourceTree = "<group>"; };
+		F113D1611B7CDD3A00325209 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		F113D1631B7CDD4C00325209 /* Gap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
+		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		F113D1671B7CDDA000325209 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		F113D1691B7CDDEB00325209 /* DaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
 		F1229BD61A74947200C4FDE2 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1229BDA1A74947200C4FDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,24 +63,15 @@
 		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1229C2A1A7495A200C4FDE2 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = enHueco.xcdatamodel; sourceTree = "<group>"; };
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
-		F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
-		F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewController.swift; sourceTree = "<group>"; };
-		F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
-		F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
-		F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F1229C3E1A7495A200C4FDE2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* APIurls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIurls.swift; sourceTree = "<group>"; };
 		F134AE5F1A8014C800E6E9AB /* APIConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnector.swift; sourceTree = "<group>"; };
 		F1A59F851A802C7200D2C725 /* JSONToolkit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONToolkit.swift; sourceTree = "<group>"; };
 		F1A8C94E1A811F0D00861606 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		F1A8C95D1A815F6000861606 /* PersistenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceModel.swift; sourceTree = "<group>"; };
-		F1A8C95F1A815F6100861606 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
-		F1A8C9611A815F6100861606 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		F1A8C9631A815F6100861606 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F1BA030A1B570BFC00DEF9C5 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,7 +127,7 @@
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
 				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
 				F1229C371A7495A200C4FDE2 /* Controllers */,
-				F1229C2C1A7495A200C4FDE2 /* Models */,
+				F1229C2C1A7495A200C4FDE2 /* Model */,
 				F1229BD91A74947200C4FDE2 /* Supporting Files */,
 				F1229C231A7495A200C4FDE2 /* Views */,
 			);
@@ -146,12 +138,12 @@
 			isa = PBXGroup;
 			children = (
 				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
-				F1229BDA1A74947200C4FDE2 /* Info.plist */,
 				F1A59F851A802C7200D2C725 /* JSONToolkit.swift */,
 				F134AE5D1A800BB200E6E9AB /* APIurls.swift */,
 				F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */,
 				F134AE5F1A8014C800E6E9AB /* APIConnector.swift */,
 				F1A8C94E1A811F0D00861606 /* AppController.swift */,
+				F1229BDA1A74947200C4FDE2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -186,47 +178,28 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		F1229C2C1A7495A200C4FDE2 /* Models */ = {
+		F1229C2C1A7495A200C4FDE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F1229C591A74997900C4FDE2 /* Extensions */,
-				F1229C581A74995500C4FDE2 /* Classes */,
-				F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */,
+				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
 				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
+				F113D1611B7CDD3A00325209 /* Friend.swift */,
+				F113D1651B7CDD6200325209 /* Schedule.swift */,
+				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
+				F113D1631B7CDD4C00325209 /* Gap.swift */,
+				F113D1671B7CDDA000325209 /* Class.swift */,
 			);
+			name = Model;
 			path = Models;
 			sourceTree = "<group>";
 		};
 		F1229C371A7495A200C4FDE2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F1229C3B1A7495A200C4FDE2 /* LoginViewController.swift */,
-				F1229C3C1A7495A200C4FDE2 /* MeViewController.swift */,
-				F1229C381A7495A200C4FDE2 /* EditScheduleViewController.swift */,
-				F1229C391A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift */,
-				F1229C3A1A7495A200C4FDE2 /* FriendsViewController.swift */,
-				F1229C3D1A7495A200C4FDE2 /* RegisterViewController.swift */,
+				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
 				F1229C3E1A7495A200C4FDE2 /* ViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		F1229C581A74995500C4FDE2 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				F1A8C9631A815F6100861606 /* Day.swift */,
-				F1A8C9611A815F6100861606 /* User.swift */,
-				F1A8C95F1A815F6100861606 /* Schedule.swift */,
-				F1A8C95D1A815F6000861606 /* PersistenceModel.swift */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		F1229C591A74997900C4FDE2 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +246,9 @@
 		F1229BCE1A74947200C4FDE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Diego Gómez";
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
@@ -330,28 +305,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
+				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
+				F113D1621B7CDD3A00325209 /* Friend.swift in Sources */,
 				F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */,
-				F1229C531A7495A200C4FDE2 /* LoginViewController.swift in Sources */,
+				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */,
 				F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */,
-				F1229C521A7495A200C4FDE2 /* FriendsViewController.swift in Sources */,
-				F1A8C95E1A815F6000861606 /* PersistenceModel.swift in Sources */,
+				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsTableViewCell.swift in Sources */,
-				F1A8C9621A815F6100861606 /* User.swift in Sources */,
-				F1229C501A7495A200C4FDE2 /* EditScheduleViewController.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
-				F1229C4A1A7495A200C4FDE2 /* enHueco.xcdatamodeld in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
-				F1A8C9641A815F6100861606 /* Day.swift in Sources */,
-				F1229C541A7495A200C4FDE2 /* MeViewController.swift in Sources */,
 				F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */,
-				F1229C511A7495A200C4FDE2 /* EnHuecoNowCollectionViewController.swift in Sources */,
-				F1A8C9601A815F6100861606 /* Schedule.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
-				F1229C551A7495A200C4FDE2 /* RegisterViewController.swift in Sources */,
+				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
+				F113D1641B7CDD4C00325209 /* Gap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +384,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -481,6 +453,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -498,6 +471,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 			};
@@ -517,6 +491,7 @@
 				);
 				INFOPLIST_FILE = enHuecoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/enHueco.app/enHueco";
 			};
@@ -532,6 +507,7 @@
 				);
 				INFOPLIST_FILE = enHuecoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/enHueco.app/enHueco";
 			};
@@ -568,19 +544,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		F1229C2F1A7495A200C4FDE2 /* enHueco.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */,
-			);
-			currentVersion = F1229C301A7495A200C4FDE2 /* enHueco.xcdatamodel */;
-			path = enHueco.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = F1229BCE1A74947200C4FDE2 /* Project object */;
 }

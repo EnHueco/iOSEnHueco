@@ -1,5 +1,5 @@
 //
-//  Schedule.swift
+//  Friend.swift
 //  enHueco
 //
 //  Created by Diego Montoya on 8/13/15.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-class Schedule: NSObject
-{
-    var days = [DaySchedule]()    
+class Friend: NSObject {
+
 }

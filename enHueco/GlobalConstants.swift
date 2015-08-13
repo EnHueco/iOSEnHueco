@@ -12,19 +12,12 @@ import Foundation
 
 public class GlobalConstants
 {
-
-    
-
-    
-    struct Schedule {
-        
+    struct Schedule
+    {
         static let hours : Array<String> =
         [
-            
 //                    "AM70", "AM71", "AM80", "AM81", "AM90","AM91","AM10","AM101","AM110","AM111",
 //           "AM70", "AM71", "AM80", "AM81", "AM90","AM91","AM10","AM101","AM110","AM111",
-
         ]
-        
     }
 }

@@ -8,44 +8,40 @@
 
 import UIKit
 
-import CoreData
-
-class LoginViewController : UIViewController, AppControllerDelegate{
-    
-    let managedObjectContext : NSManagedObjectContext?
-    
+class LoginViewController : UIViewController, AppControllerDelegate
+{
     @IBOutlet weak var loginInput: UITextField!
     
     @IBOutlet weak var passwordInput: UITextField!
     
-    @IBAction func logIn(sender: AnyObject) {
-
-        var app : AppController = AppController(delegate:self)
-        app.authenticateUser(loginInput.text, password: passwordInput.text)
+    @IBAction func logIn(sender: AnyObject)
+    {
+        let app : AppController = AppController(delegate:self)
+        app.authenticateUser(loginInput.text!, password: passwordInput.text!)
         
 //        var api: APIConnector = APIConnector(delegate: self)
 //        api.sendLoginRequest(loginInput.text, password: passwordInput.text)
-        
     }
-
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
         self.view.endEditing(true)
     }
     
-    func AppControllerValidResponseReceived() {
+    func AppControllerValidResponseReceived()
+    {
         dispatch_async(dispatch_get_main_queue()) {
             self.loginSuccess()
         }
     }
-    private func loginSuccess(){
-        let mainMenu = self.storyboard!.instantiateViewControllerWithIdentifier("mainMenu") as UITabBarController
+    private func loginSuccess()
+    {
+        let mainMenu = self.storyboard!.instantiateViewControllerWithIdentifier("mainMenu") as! UITabBarController
         self.presentViewController(mainMenu as UITabBarController, animated: true, completion: nil)
     }
     
-    func AppControllerInvalidResponseReceived(errorResponse:NSString) {
+    func AppControllerInvalidResponseReceived(errorResponse:NSString)
+    {
         
     }
-    
-
-    
 }

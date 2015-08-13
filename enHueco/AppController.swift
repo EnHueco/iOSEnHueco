@@ -10,10 +10,8 @@ import Foundation
 
 class AppController
 {
-    
     let api : APIConnector?
     var delegate : AppControllerDelegate?
-    
     
     init(delegate:AppControllerDelegate)
     {
@@ -21,62 +19,63 @@ class AppController
         self.delegate = delegate
     }
     
-
     func authenticateUser(login:String, password:String)
     {
-        var loginSuccessBlock  = {
+        let loginSuccessBlock  = {
             (login:String, token:String)->() in
             AppUser.sharedInstance.login = login
             AppUser.sharedInstance.token = token
             self.delegate?.AppControllerValidResponseReceived()
 
             return
-
         }
-        var loginFailureBlock = {
+        
+        let loginFailureBlock = {
             (errorResponse:NSString)->() in
             print(errorResponse)
             //self.delegate?.AppControllerValidResponseReceived(errorResponse)
 //            self.delegate?.AppControllerInvalidResponseReceived(errorResponse)
-
         }
+        
         self.api?.sendLoginRequest(login, password: password, onLoginSuccessBlock: loginSuccessBlock, onLoginFailureBlock: loginFailureBlock)
     }
     
-    func getLocalAndUpdateRemoteAppUser()->AppUser{
-      
-        var getUserSuccessBlock  = {
+    func getLocalAndUpdateRemoteAppUser()->AppUser
+    {
+        let getUserSuccessBlock  = {
             (user:AppUser)->() in
             
             AppUser.updateUser(user)
-            
             self.sendResponseToDelegate()
         }
-        var getUserFailureBlock = {
+        
+        let getUserFailureBlock = {
             (errorResponse:NSString)->() in
             print(errorResponse)
             
         }
         
-        self.api?.getAppUserRequest(AppUser.sharedInstance.login!, token: AppUser.sharedInstance.token!, getUserSuccessBlock, onGetUserFailureBlock: getUserFailureBlock)
-        
+        self.api?.getAppUserRequest(AppUser.sharedInstance.login!, token: AppUser.sharedInstance.token!, onGetUserSuccessBlock: getUserSuccessBlock, onGetUserFailureBlock: getUserFailureBlock)
         return getLocalAppUser()
     }
-    func getLocalAppUser()->AppUser{
-        var user = AppUser.sharedInstance
+    
+    func getLocalAppUser()->AppUser
+    {
+        let user = AppUser.sharedInstance
         return user
     }
-    private func sendResponseToDelegate(){
-        dispatch_async(dispatch_get_main_queue())
-            {
-                self.delegate!.AppControllerValidResponseReceived()
-            }
+    
+    private func sendResponseToDelegate()
+    {
+        dispatch_async(dispatch_get_main_queue()){
+            
+            self.delegate!.AppControllerValidResponseReceived()
+        }
     }
 }
 
-protocol AppControllerDelegate{
-    
+protocol AppControllerDelegate
+{
     func AppControllerValidResponseReceived()
     func AppControllerInvalidResponseReceived(errorResponse:NSString)
-    
 }

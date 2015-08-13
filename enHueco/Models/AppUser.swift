@@ -8,10 +8,12 @@
 
 import Foundation
 
-class AppUser {
-
-    class var sharedInstance: AppUser {
-        struct Static {
+class AppUser
+{
+    class var sharedInstance: AppUser
+    {
+        struct Static
+        {
             static var instance: AppUser?
             static var token: dispatch_once_t = 0
         }
@@ -33,28 +35,21 @@ class AppUser {
     
     class func updateUser(newUser: AppUser)
     {
-        
         sharedInstance.firstNames = newUser.firstNames
         sharedInstance.lastNames = newUser.lastNames
         sharedInstance.login = newUser.login
-        
     }
     
-    class func dictionaryToAppUser(dictionary : NSDictionary) -> AppUser?
+    class func dictionaryToAppUser(dictionary : NSDictionary) -> AppUser
     {
+        let user = AppUser()
         
-        var user : AppUser?
-        user = AppUser()
-        user!.login = dictionary["login"] as String?
-        user!.firstNames = dictionary["firstNames"] as String?
-        user!.lastNames = dictionary["lastNames"] as String?
-        user!.lastUpdatedOn = dictionary["lastUpdated_on"] as NSString?
-        return user!
-
+        user.login = dictionary["login"] as! String?
+        user.firstNames = dictionary["firstNames"] as! String?
+        user.lastNames = dictionary["lastNames"] as! String?
+        user.lastUpdatedOn = dictionary["lastUpdated_on"] as! String?
         
-        
+        return user
     }
-    
-    
 }
 

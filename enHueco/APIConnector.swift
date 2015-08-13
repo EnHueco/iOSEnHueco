@@ -8,33 +8,33 @@
 
 import Foundation
 
-class APIConnector {
-    
+class APIConnector
+{
     let apiurls : APIurls = APIurls(production: false)
     
 //    let user : User?
 
-    
-    func sendLoginRequest(login:String, password:String, onLoginSuccessBlock: (login:String, token:String) -> (), onLoginFailureBlock:(NSString) -> ()) {
+    func sendLoginRequest(login:String, password:String, onLoginSuccessBlock: (login:String, token:String) -> (), onLoginFailureBlock:(NSString) -> ())
+    {
+        let url = apiurls.AUTHENTICATIONURL
+        let dictionary: NSDictionary = ["login": login, "password": password]
         
-        var url = apiurls.AUTHENTICATIONURL
-        var dictionary: NSDictionary = ["login": login, "password": password]
+        let httpRRM = HTTPRequestResponseManager()
         
-        var httpRRM = HTTPRequestResponseManager()
-        
-        var successfulLogin = {
+        let successfulLogin =
+        {
             (dict:NSDictionary)->() in
-            var login = dict["owner"] as String
-            var token = dict["value"] as String
+            let login = dict["owner"] as! String
+            let token = dict["value"] as! String
             onLoginSuccessBlock(login:login, token:token)
         }
         
-        var failureLogin = {
+        let failureLogin = {
             (errorResponse:NSString)->() in
             onLoginFailureBlock(errorResponse)
         }
         
-        var successfulRequestBlock = {
+        let successfulRequestBlock = {
             (data:NSData)->() in
             self.onSuccessfulRequest(data, successBlock: successfulLogin, failureBlock: failureLogin)
         }
@@ -43,32 +43,34 @@ class APIConnector {
     }
     
     
-    func getAppUserRequest(login:NSString, token:NSString, onGetUserSuccessBlock:(AppUser)->(),onGetUserFailureBlock:NSString->()){
-        var url = apiurls.GETAPPUSERURL
-        var dictionary = ["login":login, "token":token]
-        var httpRRM = HTTPRequestResponseManager()
+    func getAppUserRequest(login:NSString, token:NSString, onGetUserSuccessBlock:(AppUser)->(),onGetUserFailureBlock:NSString->())
+    {
+        let url = apiurls.GETAPPUSERURL
+        let dictionary = ["login":login, "token":token]
+        let httpRRM = HTTPRequestResponseManager()
         
-        var successfulGetAppUser = {
+        let successfulGetAppUser = {
             (dict:NSDictionary) -> () in
-            var user = AppUser.dictionaryToAppUser(dict)
-            onGetUserSuccessBlock(user!)
+            let user = AppUser.dictionaryToAppUser(dict)
+            onGetUserSuccessBlock(user)
         }
-        var failureGetAppUser = {
+        
+        let failureGetAppUser = {
             (errorResponse:NSString)->() in
             onGetUserFailureBlock(errorResponse)
         }
-        var successfulRequestBlock = {
+        
+        let successfulRequestBlock = {
             (data:NSData)->() in
             self.onSuccessfulRequest(data, successBlock: successfulGetAppUser, failureBlock: failureGetAppUser)
         }
 
         httpRRM.sendRequest(url, method: HTTPRequestResponseManager.POST, dictionary: dictionary, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: self.printFailureRequest)
-
     }    
     
-    private func onSuccessfulRequest(data: NSData, successBlock:(NSDictionary) -> (), failureBlock:(NSString) -> () ){
-
-        var response = NSString(data: data, encoding: NSUTF8StringEncoding)
+    private func onSuccessfulRequest(data: NSData, successBlock:(NSDictionary) -> (), failureBlock:(NSString) -> () )
+    {
+        let response = NSString(data: data, encoding: NSUTF8StringEncoding)
 
         if(response!.containsString("ERROR"))
         {
@@ -76,10 +78,16 @@ class APIConnector {
         }
         else
         {
-            var jsonSerializationError : NSError?
-            var jsonData : NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: &jsonSerializationError) as NSDictionary
+            do
+            {
+                let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                successBlock(jsonData)
+            }
+            catch
+            {
+                
+            }
             
-            successBlock(jsonData)
         }
     }
     private func printFailureRequest(error:NSError)
