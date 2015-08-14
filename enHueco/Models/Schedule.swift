@@ -10,5 +10,5 @@ import Foundation
 
 class Schedule: NSObject
 {
-    var days = [DaySchedule]()    
+    var weekDays = [DaySchedule]()
 }

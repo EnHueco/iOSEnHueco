@@ -14,6 +14,8 @@ class System
 {
     static let sharedInstance = System()
     
+    let appUser: AppUser
+    
     private init()
     {
         

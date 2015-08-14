@@ -15,10 +15,10 @@ class DaySchedule: NSObject
     var gaps = [Gap]()
     var classes = [Class]()
     
-    init(weekDayName:String, gaps:[Gap], classes:[Class]? = nil)
+    init(weekDayName:String, gaps:[Gap], classes:[Class] = [Class]())
     {
         self.weekDayName = weekDayName
         
-        if let classes = classes { self.classes = classes }
+        self.classes = classes
     }
 }

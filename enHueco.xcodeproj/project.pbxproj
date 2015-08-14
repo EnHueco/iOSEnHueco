@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */; };
-		F113D1621B7CDD3A00325209 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* Friend.swift */; };
+		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1641B7CDD4C00325209 /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1631B7CDD4C00325209 /* Gap.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
 		F113D1681B7CDDA000325209 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1671B7CDDA000325209 /* Class.swift */; };
@@ -46,7 +46,7 @@
 /* Begin PBXFileReference section */
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestResponseManager.swift; sourceTree = "<group>"; };
-		F113D1611B7CDD3A00325209 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F113D1631B7CDD4C00325209 /* Gap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		F113D1671B7CDDA000325209 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 			children = (
 				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
 				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
-				F113D1611B7CDD3A00325209 /* Friend.swift */,
+				F113D1611B7CDD3A00325209 /* User.swift */,
 				F113D1651B7CDD6200325209 /* Schedule.swift */,
 				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
 				F113D1631B7CDD4C00325209 /* Gap.swift */,
@@ -307,7 +307,7 @@
 			files = (
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
-				F113D1621B7CDD3A00325209 /* Friend.swift in Sources */,
+				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
 				F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */,

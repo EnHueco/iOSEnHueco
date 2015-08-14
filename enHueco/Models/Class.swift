@@ -15,9 +15,11 @@ class Class: NSObject
     
     var location: String?
     
-    init(startHour: NSDateComponents, endHour: NSDateComponents)
+    init(startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
     {
         self.startHour = startHour
         self.endHour = endHour
+        
+        self.location = location
     }
 }

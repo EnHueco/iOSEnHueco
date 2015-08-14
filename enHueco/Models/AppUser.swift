@@ -8,48 +8,12 @@
 
 import Foundation
 
-class AppUser
+class AppUser: User
 {
-    class var sharedInstance: AppUser
-    {
-        struct Static
-        {
-            static var instance: AppUser?
-            static var token: dispatch_once_t = 0
-        }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = AppUser()
-        }
-        
-        return Static.instance!
-    }
-    
     var login : String?
     var token : String?
-    var firstNames: String?
-    var lastNames: String?
     var lastUpdatedOn: String?
-    
-    // Updates user if newer version is got.
-    
-    class func updateUser(newUser: AppUser)
-    {
-        sharedInstance.firstNames = newUser.firstNames
-        sharedInstance.lastNames = newUser.lastNames
-        sharedInstance.login = newUser.login
-    }
-    
-    class func dictionaryToAppUser(dictionary : NSDictionary) -> AppUser
-    {
-        let user = AppUser()
-        
-        user.login = dictionary["login"] as! String?
-        user.firstNames = dictionary["firstNames"] as! String?
-        user.lastNames = dictionary["lastNames"] as! String?
-        user.lastUpdatedOn = dictionary["lastUpdated_on"] as! String?
-        
-        return user
-    }
+
+    var friends = [User]()
 }
 
