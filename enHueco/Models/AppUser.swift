@@ -10,10 +10,19 @@ import Foundation
 
 class AppUser: User
 {
-    var login : String?
-    var token : String?
-    var lastUpdatedOn: String?
+    var token : String
+    var lastUpdatedOn: String
 
     var friends = [User]()
+    
+    var friendRequests = [String]()
+    
+    init(username: String, token : String, lastUpdatedOn: String, firstNames: String, lastNames: String, phoneNumber: Int?, imageURL: String)
+    {
+        self.token = token
+        self.lastUpdatedOn = lastUpdatedOn
+        
+        super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
+    }
 }
 

@@ -25,9 +25,6 @@
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C3E1A7495A200C4FDE2 /* ViewController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* APIurls.swift */; };
-		F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5F1A8014C800E6E9AB /* APIConnector.swift */; };
-		F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A59F851A802C7200D2C725 /* JSONToolkit.swift */; };
-		F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8C94E1A811F0D00861606 /* AppController.swift */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
 		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
@@ -67,9 +64,6 @@
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F1229C3E1A7495A200C4FDE2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* APIurls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIurls.swift; sourceTree = "<group>"; };
-		F134AE5F1A8014C800E6E9AB /* APIConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnector.swift; sourceTree = "<group>"; };
-		F1A59F851A802C7200D2C725 /* JSONToolkit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONToolkit.swift; sourceTree = "<group>"; };
-		F1A8C94E1A811F0D00861606 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F1BA030A1B570BFC00DEF9C5 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
@@ -138,11 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
-				F1A59F851A802C7200D2C725 /* JSONToolkit.swift */,
 				F134AE5D1A800BB200E6E9AB /* APIurls.swift */,
 				F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */,
-				F134AE5F1A8014C800E6E9AB /* APIConnector.swift */,
-				F1A8C94E1A811F0D00861606 /* AppController.swift */,
 				F1229BDA1A74947200C4FDE2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -311,15 +302,12 @@
 				F1229C561A7495A200C4FDE2 /* ViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* APIurls.swift in Sources */,
-				F1A59F861A802C7200D2C725 /* JSONToolkit.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
-				F1A8C94F1A811F0D00861606 /* AppController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsTableViewCell.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
-				F134AE601A8014C800E6E9AB /* APIConnector.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
 				F113D1641B7CDD4C00325209 /* Gap.swift in Sources */,

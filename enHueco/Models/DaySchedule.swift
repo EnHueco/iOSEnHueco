@@ -19,6 +19,7 @@ class DaySchedule: NSObject
     {
         self.weekDayName = weekDayName
         
+        self.gaps = gaps
         self.classes = classes
     }
 }

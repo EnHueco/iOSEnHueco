@@ -10,22 +10,27 @@ import Foundation
 
 class User: NSObject
 {
-    let ID: String
+    let username: String
     
-    let firstName: String
-    let lastName: String
+    let firstNames: String
+    let lastNames: String
     
-    var name: String { return firstName + lastName }
+    var name: String { return firstNames + lastNames }
     
-    let photoURL: String
+    let imageURL: String
     var phoneNumber: Int?
     
-    var schedule: Schedule
+    var schedule: Schedule?
     
-    init(ID: String, name: String, phoneNumber: Int? = nil)
+    init(username: String, firstNames: String, lastNames: String, phoneNumber: Int? = nil, imageURL: String)
     {
-        self.ID = ID
+        self.username = username
         
+        self.firstNames = firstNames
+        self.lastNames = lastNames
         self.phoneNumber = phoneNumber
+        self.imageURL = imageURL
+        
+        super.init()
     }
 }

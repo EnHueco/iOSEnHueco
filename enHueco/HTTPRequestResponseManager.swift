@@ -8,17 +8,19 @@
 
 import Foundation
 
+enum HTTPMethod: String
+{
+    case GET="GET", POST="POST"
+}
+
 class HTTPRequestResponseManager: NSObject
 {
-    class var GET : String { return "GET" }
-    class var POST : String { return "POST" }
-    
-    func sendRequest(url: NSURL, method:String, dictionary:NSDictionary, successfulRequestBlock:(NSData)->(), failureRequestBlock:(NSError)->() )
+    class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?,  onSuccess successfulRequestBlock:(Dictionary<String, AnyObject>)->(), onFailure failureRequestBlock:(NSError)->() )
     {
-        let dictionaryJSONData = JSONToolkit.dictToJSONData(dictionary)
+        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
         let request = NSMutableURLRequest(URL: url)
         
-        request.HTTPMethod = HTTPRequestResponseManager.POST
+        request.HTTPMethod = HTTPMethod.POST.rawValue
         request.HTTPBody = dictionaryJSONData
         request.setValue("application/json", forHTTPHeaderField: "Content-type")
         
@@ -26,13 +28,31 @@ class HTTPRequestResponseManager: NSObject
             
             if let data = data where error == nil
             {
-                successfulRequestBlock(data)
+                let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                
+                successfulRequestBlock(JSONResponse as! Dictionary<String, String>)
             }
             else if let error = error
             {
                 failureRequestBlock(error)
             }
         }
+    }
+    
+    class func sendSyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?) throws -> Dictionary<String, AnyObject>
+    {
+        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
+        let request = NSMutableURLRequest(URL: url)
+        
+        request.HTTPMethod = HTTPMethod.POST.rawValue
+        request.HTTPBody = dictionaryJSONData
+        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        
+        let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
+        
+        let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+
+        return JSONResponse as! Dictionary<String, AnyObject>
     }
 }
 

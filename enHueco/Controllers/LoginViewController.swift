@@ -8,19 +8,14 @@
 
 import UIKit
 
-class LoginViewController : UIViewController, AppControllerDelegate
+class LoginViewController : UIViewController
 {
     @IBOutlet weak var loginInput: UITextField!
     
     @IBOutlet weak var passwordInput: UITextField!
     
-    @IBAction func logIn(sender: AnyObject)
+    @IBAction func login(sender: AnyObject)
     {
-        let app : AppController = AppController(delegate:self)
-        app.authenticateUser(loginInput.text!, password: passwordInput.text!)
-        
-//        var api: APIConnector = APIConnector(delegate: self)
-//        api.sendLoginRequest(loginInput.text, password: passwordInput.text)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
