@@ -10,17 +10,14 @@ import Foundation
 
 let system = System()
 
+enum EHSystemNotification: String
+{
+    case SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
+    case SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
+}
+
 class System
 {
-    enum EHSystemNotification: String
-    {
-        case SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
-        case SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
-    }
-    
-    let baseURL = "http://enhueco.uniandes.edu.co"
-    let authURLSegment = "/auth/"
-    
     var appUser: AppUser!
     
     private init()
@@ -42,7 +39,7 @@ class System
     func login (username: String, password: String)
     {
         let params = ["user_id":username, "password":password]
-        let URL = NSURL(string: self.baseURL + self.authURLSegment)!
+        let URL = NSURL(string: APIURLS.URLS.base.rawValue + APIURLS.URLS.authSegment.rawValue)!
         
         HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: params, onSuccess: { (response) -> () in
             
@@ -70,22 +67,6 @@ class System
     
     func updateFriendsAndFriendsSchedules ()
     {
-        let params = []
-        let URL = NSURL(string: self.baseURL + self.authURLSegment)!
-        
-        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (response) -> () in
-            
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)
-            
-        }) { (error) -> () in
-                
-                
-        }
-    }
-    
-    func sendFriendRequest ()
-    {
-        
+        appUser.updateFriendsAndFriendsSchedules()
     }
 }

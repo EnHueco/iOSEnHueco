@@ -24,5 +24,31 @@ class AppUser: User
         
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
     }
+    
+    func updateFriendsAndFriendsSchedules ()
+    {
+        let params = []
+        let URL = NSURL(string: APIURLS.URLS.base.rawValue)!
+        
+        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (response) -> () in
+            
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)
+            
+        }) { (error) -> () in
+                
+                
+        }
+    }
+    
+    func sendFriendRequest ()
+    {
+        
+    }
+    
+    func stringEncodedSchedule () -> String
+    {
+        return "" //TODO
+    }
 }
 

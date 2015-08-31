@@ -10,12 +10,22 @@ import UIKit
 
 class LoginViewController : UIViewController
 {
-    @IBOutlet weak var loginInput: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var passwordInput: UITextField!
+    override func viewDidLoad()
+    {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin.rawValue, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("SystemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: system)
+    }
     
     @IBAction func login(sender: AnyObject)
     {
+        guard let username = usernameTextField.text, password = passwordTextField.text else { return }
+        
+        system.login(username, password: password)
+        
+        //TODO: Mostrar indicador "cargando"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -23,20 +33,14 @@ class LoginViewController : UIViewController
         self.view.endEditing(true)
     }
     
-    func AppControllerValidResponseReceived()
+    func systemDidLogin (notification: NSNotification)
     {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.loginSuccess()
-        }
-    }
-    private func loginSuccess()
-    {
-        let mainMenu = self.storyboard!.instantiateViewControllerWithIdentifier("mainMenu") as! UITabBarController
-        self.presentViewController(mainMenu as UITabBarController, animated: true, completion: nil)
+        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainViewController") as! UITabBarController
+        self.presentViewController(mainViewController, animated: true, completion: nil)
     }
     
-    func AppControllerInvalidResponseReceived(errorResponse:NSString)
+    func systemCouldNotLoginWithError (notification: NSNotification)
     {
-        
+        //TODO: Mostrar error
     }
 }

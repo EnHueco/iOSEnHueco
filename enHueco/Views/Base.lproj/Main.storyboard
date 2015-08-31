@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A262e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -175,7 +175,7 @@
             </objects>
             <point key="canvasLocation" x="973.5" y="183.75"/>
         </scene>
-        <!--En Hueco-->
+        <!--Amigos-->
         <scene sceneID="ZKe-ZB-Vfe">
             <objects>
                 <collectionViewController id="3U3-ls-Dxs" customClass="EnHuecoNowCollectionViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
@@ -226,13 +226,13 @@
                         </connections>
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="En Hueco" id="nqB-V2-84i"/>
+                    <tabBarItem key="tabBarItem" title="Amigos" id="nqB-V2-84i"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="24t-Ll-Fn4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="1290"/>
+            <point key="canvasLocation" x="279" y="1636.5"/>
         </scene>
-        <!--Amigos-->
+        <!--En Hueco-->
         <scene sceneID="k5K-16-jyE">
             <objects>
                 <viewController id="YQy-MY-fW4" customClass="FriendsViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
@@ -292,14 +292,36 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jgc-Qh-xHN" secondAttribute="trailing" id="G0i-QK-i12"/>
+                            <constraint firstItem="Y9a-M6-QAF" firstAttribute="top" secondItem="jgc-Qh-xHN" secondAttribute="bottom" id="W6I-gp-CbI"/>
+                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="leading" secondItem="mZz-YO-Avo" secondAttribute="leading" id="jFs-Yn-P1k"/>
+                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="top" secondItem="mZz-YO-Avo" secondAttribute="top" id="zLZ-x7-XdN"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="G0i-QK-i12"/>
+                                <exclude reference="jFs-Yn-P1k"/>
+                                <exclude reference="zLZ-x7-XdN"/>
+                                <exclude reference="W6I-gp-CbI"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="G0i-QK-i12"/>
+                                <include reference="jFs-Yn-P1k"/>
+                                <include reference="zLZ-x7-XdN"/>
+                                <include reference="W6I-gp-CbI"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Amigos" id="fM2-fE-HDl"/>
+                    <tabBarItem key="tabBarItem" title="En Hueco" id="fM2-fE-HDl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1HD-8a-T4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="1290"/>
+            <point key="canvasLocation" x="-372" y="1636.5"/>
         </scene>
-        <!--Yo-->
+        <!--Mi Perfil-->
         <scene sceneID="O0A-oe-FNP">
             <objects>
                 <viewController id="CS5-RI-5GR" customClass="MeViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
@@ -374,7 +396,7 @@
                             <constraint firstItem="TRW-kQ-isY" firstAttribute="leading" secondItem="3Qq-LL-ehd" secondAttribute="leading" id="xHb-s2-c9s"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Yo" id="27q-QX-vEE"/>
+                    <tabBarItem key="tabBarItem" title="Mi Perfil" id="27q-QX-vEE"/>
                     <connections>
                         <outlet property="editSchedule" destination="iIb-rX-ZiU" id="yUL-AK-K4b"/>
                         <outlet property="myName" destination="SHI-vm-BDJ" id="5WT-Ux-hmF"/>
@@ -384,12 +406,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHq-TM-9oX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-454.5" y="2148"/>
+            <point key="canvasLocation" x="934.5" y="1636.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar View Controller-->
         <scene sceneID="VXA-j6-i5Z">
             <objects>
-                <tabBarController storyboardIdentifier="mainMenu" id="R39-0i-VSi" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainMenu" id="R39-0i-VSi" customClass="MainTabBarViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Ups-PW-gE3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -398,14 +420,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CS5-RI-5GR" kind="relationship" relationship="viewControllers" id="Zqh-yO-Yda"/>
                         <segue destination="YQy-MY-fW4" kind="relationship" relationship="viewControllers" id="noe-pl-spn"/>
                         <segue destination="3U3-ls-Dxs" kind="relationship" relationship="viewControllers" id="LB8-vG-fsx"/>
+                        <segue destination="CS5-RI-5GR" kind="relationship" relationship="viewControllers" id="Zqh-yO-Yda"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RdA-Mt-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-454.5" y="1195.5"/>
+            <point key="canvasLocation" x="279" y="867"/>
         </scene>
         <!--Edit Schedule View Controller-->
         <scene sceneID="unR-Lx-IyB">
@@ -514,7 +536,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGw-Ka-fBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="601.5" y="2148"/>
+            <point key="canvasLocation" x="1063.5" y="2261.25"/>
         </scene>
         <!--Login-->
         <scene sceneID="L43-hT-odc">
@@ -554,6 +576,9 @@
                                 <state key="normal" title="Ingresar">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="Xdc-bZ-kc3" eventType="touchUpInside" id="7b3-QG-KG3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -570,8 +595,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Yas-Uc-AF7"/>
                     <connections>
-                        <outlet property="loginInput" destination="dKZ-Cl-i2z" id="rMJ-Nr-DSe"/>
-                        <outlet property="passwordInput" destination="vcH-iL-dbG" id="qyu-2W-IjM"/>
+                        <outlet property="passwordTextField" destination="vcH-iL-dbG" id="Quv-Bi-uFM"/>
+                        <outlet property="usernameTextField" destination="dKZ-Cl-i2z" id="ZBo-Mh-64G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0de-ww-DFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
