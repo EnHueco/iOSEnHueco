@@ -22,7 +22,7 @@ class AddFriendByQRViewController: UIViewController
     {
         super.viewDidLoad()
         
-        matrix = try! writer.encode(system.appUser.stringEncodedSchedule(), format: kBarcodeFormatQRCode, width: 200, height: 200)
+        matrix = try! writer.encode(system.appUser.stringEncodedUserRepresentation(), format: kBarcodeFormatQRCode, width: 200, height: 200)
     }
 
     override func didReceiveMemoryWarning()

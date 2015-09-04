@@ -17,12 +17,12 @@ class User: NSObject
     
     var name: String { return firstNames + lastNames }
     
-    let imageURL: String
-    var phoneNumber: Int?
+    let imageURL: String?
+    var phoneNumber: Int!
     
-    var schedule: Schedule?
+    let schedule = Schedule()
     
-    init(username: String, firstNames: String, lastNames: String, phoneNumber: Int? = nil, imageURL: String)
+    init(username: String, firstNames: String, lastNames: String, phoneNumber:Int!, imageURL: String?)
     {
         self.username = username
         

@@ -43,7 +43,11 @@ class System
         
         HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: params, onSuccess: { (response) -> () in
             
-            guard let token = response["value"] as? String else { return }
+            guard let token = response["value"] as? String else
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: self, userInfo: ["error": "Response received but token missing"])
+                return
+            }
             
             let username = response["username"] as! String
             let firstNames = response["firstNames"] as! String
@@ -61,7 +65,7 @@ class System
             
         }) { (error) -> () in
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: self, userInfo: ["Error": error])
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: self, userInfo: ["error": error as! AnyObject])
         }
     }
     

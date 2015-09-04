@@ -15,7 +15,7 @@ enum HTTPMethod: String
 
 class HTTPRequestResponseManager: NSObject
 {
-    class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?,  onSuccess successfulRequestBlock:(Dictionary<String, AnyObject>)->(), onFailure failureRequestBlock:(NSError)->() )
+    class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?,  onSuccess successfulRequestBlock:(Dictionary<String, AnyObject>)->(), onFailure failureRequestBlock:(ErrorType)->() )
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
         let request = NSMutableURLRequest(URL: url)
@@ -28,9 +28,16 @@ class HTTPRequestResponseManager: NSObject
             
             if let data = data where error == nil
             {
-                let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-                
-                successfulRequestBlock(JSONResponse as! Dictionary<String, String>)
+                do
+                {
+                    let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                    
+                    successfulRequestBlock(JSONResponse as! Dictionary<String, String>)
+                }
+                catch
+                {
+                    failureRequestBlock(error)
+                }
             }
             else if let error = error
             {
@@ -50,7 +57,7 @@ class HTTPRequestResponseManager: NSObject
         
         let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
         
-        let JSONResponse = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+        let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
 
         return JSONResponse as! Dictionary<String, AnyObject>
     }

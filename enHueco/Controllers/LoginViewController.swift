@@ -16,12 +16,12 @@ class LoginViewController : UIViewController
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin.rawValue, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("SystemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: system)
     }
     
     @IBAction func login(sender: AnyObject)
     {
-        guard let username = usernameTextField.text, password = passwordTextField.text else { return }
+        guard let username = usernameTextField.text, password = passwordTextField.text else { /* TODO: Mostrar error */ return  }
         
         system.login(username, password: password)
         

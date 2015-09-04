@@ -15,11 +15,8 @@ class DaySchedule: NSObject
     var gaps = [Gap]()
     var classes = [Class]()
     
-    init(weekDayName:String, gaps:[Gap], classes:[Class] = [Class]())
+    init(weekDayName:String)
     {
-        self.weekDayName = weekDayName
-        
-        self.gaps = gaps
-        self.classes = classes
+        self.weekDayName = weekDayName        
     }
 }
