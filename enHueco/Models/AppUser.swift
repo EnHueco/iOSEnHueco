@@ -61,51 +61,67 @@ class AppUser: User
         
         let phoneNumber = Int(mainComponents[2])!
         
-        let encodedGaps = mainComponents[4].componentsSeparatedByString(",")
+        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil)
+
+        let encodedWeekDays = mainComponents[4].componentsSeparatedByString("|")
         
-        var gaps = [Gap]()
-        
-        for encodedGap in encodedGaps
+        for (i, encodedWeekDay) in encodedWeekDays.enumerate()
         {
-            let hoursComponents = encodedGap.componentsSeparatedByString("-")
+            var gaps = [Gap]()
+            var classes = [Class]()
+
+            let encodedWeekDayComponents = encodedWeekDay.componentsSeparatedByString("#")
+            let encodedGaps = encodedWeekDayComponents[0].componentsSeparatedByString(",")
             
-            let startHourComponents = hoursComponents[0].componentsSeparatedByString(":")
-            let startHourDateComponents = NSDateComponents()
-            startHourDateComponents.hour = Int(startHourComponents[0])!
-            startHourDateComponents.minute = Int(startHourComponents[1])!
+            if encodedWeekDayComponents[0] != ""
+            {
+                for encodedGap in encodedGaps
+                {
+                    let hoursComponents = encodedGap.componentsSeparatedByString("-")
+                    
+                    let startHourComponents = hoursComponents[0].componentsSeparatedByString(":")
+                    let startHourDateComponents = NSDateComponents()
+                    startHourDateComponents.hour = Int(startHourComponents[0])!
+                    startHourDateComponents.minute = Int(startHourComponents[1])!
+                    
+                    let endHourComponents = hoursComponents[1].componentsSeparatedByString(":")
+                    let endHourDateComponents = NSDateComponents()
+                    endHourDateComponents.hour = Int(endHourComponents[0])!
+                    endHourDateComponents.minute = Int(endHourComponents[1])!
+                    
+                    gaps.append(Gap(startHour: startHourDateComponents, endHour: endHourDateComponents))
+                }
+            }
             
-            let endHourComponents = hoursComponents[1].componentsSeparatedByString(":")
-            let endHourDateComponents = NSDateComponents()
-            endHourDateComponents.hour = Int(endHourComponents[0])!
-            endHourDateComponents.minute = Int(endHourComponents[1])!
+            if encodedWeekDayComponents[1] != ""
+            {
+                let encodedClasses = encodedWeekDayComponents[1].componentsSeparatedByString(",")
+                
+                for encodedClass in encodedClasses
+                {
+                    let classComponents = encodedClass.componentsSeparatedByString("-")
+                    
+                    let startHourComponents = classComponents[0].componentsSeparatedByString(":")
+                    let startHourDateComponents = NSDateComponents()
+                    startHourDateComponents.hour = Int(startHourComponents[0])!
+                    startHourDateComponents.minute = Int(startHourComponents[1])!
+                    
+                    let endHourComponents = classComponents[1].componentsSeparatedByString(":")
+                    let endHourDateComponents = NSDateComponents()
+                    endHourDateComponents.hour = Int(endHourComponents[0])!
+                    endHourDateComponents.minute = Int(endHourComponents[1])!
+                    
+                    let location = classComponents[2]
+                    
+                    classes.append(Class(startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
+                }
+            }
             
-            gaps.append(Gap(startHour: startHourDateComponents, endHour: endHourDateComponents))
+            friend.schedule.weekDays[i].gaps = gaps
+            friend.schedule.weekDays[i].classes = classes
         }
         
-        let encodedClasses = mainComponents[5].componentsSeparatedByString(",")
-        
-        var classes = [Class]()
-        
-        for encodedClass in encodedClasses
-        {
-            let classComponents = encodedClass.componentsSeparatedByString("-")
-            
-            let startHourComponents = classComponents[0].componentsSeparatedByString(":")
-            let startHourDateComponents = NSDateComponents()
-            startHourDateComponents.hour = Int(startHourComponents[0])!
-            startHourDateComponents.minute = Int(startHourComponents[1])!
-            
-            let endHourComponents = classComponents[1].componentsSeparatedByString(":")
-            let endHourDateComponents = NSDateComponents()
-            endHourDateComponents.hour = Int(endHourComponents[0])!
-            endHourDateComponents.minute = Int(endHourComponents[1])!
-            
-            let location = classComponents[2]
-            
-            classes.append(Class(startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
-        }
-        
-        friends.append(User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil))
+        friends.append(friend)
     }
     
     /**
@@ -122,24 +138,28 @@ class AppUser: User
         
         for (i, daySchedule) in schedule.weekDays.enumerate()
         {
-            for gap in daySchedule.gaps
+            for (j, gap) in daySchedule.gaps.enumerate()
             {
                 encodedSchedule += "\(gap.startHour.hour):\(gap.startHour.minute)"
-                if i != daySchedule.gaps.count-1 { encodedSchedule += "," }
+                encodedSchedule += "-"
+                encodedSchedule += "\(gap.startHour.hour):\(gap.startHour.minute)"
+
+                if j != daySchedule.gaps.count-1 { encodedSchedule += "," }
             }
             
-            encodedSchedule += "/"
+            encodedSchedule += "#"
             
-            for aClass in daySchedule.classes
+            for (j, aClass) in daySchedule.classes.enumerate()
             {
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
                 encodedSchedule += "-"
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
-                encodedSchedule += "-"
-                encodedSchedule += aClass.location ?? ""
+                if aClass.location != nil { encodedSchedule += "-"+aClass.location! }
                 
-                if i != daySchedule.classes.count-1 { encodedSchedule += "," }
+                if j != daySchedule.classes.count-1 { encodedSchedule += "," }
             }
+            
+            if i != schedule.weekDays.count-1 { encodedSchedule += "|" }
         }
         
         return encodedSchedule

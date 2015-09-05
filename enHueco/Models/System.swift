@@ -22,7 +22,6 @@ class System
     
     private init()
     {
-        
     }
     
     /**
