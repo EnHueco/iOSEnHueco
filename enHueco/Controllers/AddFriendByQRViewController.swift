@@ -7,38 +7,51 @@
 //
 
 import UIKit
+import AVFoundation
 
-class AddFriendByQRViewController: UIViewController
+class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
 {
-    let writer = ZXMultiFormatWriter.writer() as! ZXMultiFormatWriter
-    var matrix: ZXBitMatrix!
-
-    required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init(coder:) has not been implemented")
-    }
+    @IBOutlet weak var appUserQRImageView: UIImageView!
+    
+    lazy var reader = QRCodeReaderViewController(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        matrix = try! writer.encode(system.appUser.stringEncodedUserRepresentation(), format: kBarcodeFormatQRCode, width: 200, height: 200)
+        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+        appUserQRImageView.image = code?.image
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
     }
 
+    @IBAction func scanQRButtonPressed(sender: AnyObject)
+    {
+        reader.delegate = self
+        
+        reader.modalPresentationStyle = .FormSheet
+        presentViewController(reader, animated: true, completion: nil)
+    }
+    
+    func reader(reader: QRCodeReaderViewController, didScanResult result: String)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+        
+        try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
+        
+        navigationController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func readerDidCancel(reader: QRCodeReaderViewController)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

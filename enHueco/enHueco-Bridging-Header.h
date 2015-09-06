@@ -3,5 +3,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZXMultiFormatWriter.h"
-#import "ZXBitMatrix.h"
+#import "QRCodeReader.h"
+#import "QRCodeReaderViewController.h"
+#import "QRCodeReaderDelegate.h"

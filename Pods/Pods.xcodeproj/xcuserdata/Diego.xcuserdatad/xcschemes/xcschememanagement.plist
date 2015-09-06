@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-QRCodeReaderViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-enHuecoTests-QRCodeReaderViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-enHuecoTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -14,25 +24,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ZXingObjC.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>366131078BA66DCFC0FC84FDA17B7FFD</key>
+		<key>747F182B7BE71F0AB77AB10A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AAA7105F69D2BB4F3A51F86E2AEF5957</key>
+		<key>7AA8EE3EF85355706CAC401B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E29179C261CCBA465FD0E254BF398C38</key>
+		<key>98AE86D7E01C9B69E4BD149A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6F70121D8237955EE29E287</key>
 		<dict>
 			<key>primary</key>
 			<true/>

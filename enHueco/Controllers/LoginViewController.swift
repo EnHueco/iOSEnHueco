@@ -15,6 +15,8 @@ class LoginViewController : UIViewController
     
     override func viewDidLoad()
     {
+        navigationController?.navigationBarHidden = true
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin.rawValue, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: system)
     }
@@ -26,6 +28,13 @@ class LoginViewController : UIViewController
         system.login(username, password: password)
         
         //TODO: Mostrar indicador "cargando"
+        
+        //Pruebas
+        
+        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+        navigationController!.pushViewController(mainViewController, animated: true)
+        
+        /////////
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -35,7 +44,7 @@ class LoginViewController : UIViewController
     
     func systemDidLogin (notification: NSNotification)
     {
-        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainViewController") as! UITabBarController
+        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         self.presentViewController(mainViewController, animated: true, completion: nil)
     }
     

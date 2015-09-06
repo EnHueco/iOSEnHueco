@@ -122,6 +122,8 @@ class AppUser: User
         }
         
         friends.append(friend)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend.rawValue, object: system, userInfo: nil)
     }
     
     /**

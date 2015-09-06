@@ -14,6 +14,7 @@ enum EHSystemNotification: String
 {
     case SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
     case SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
+    case SystemDidAddFriend = "SystemDidAddFriend"
 }
 
 class System
@@ -22,6 +23,11 @@ class System
     
     private init()
     {
+        //Pruebas
+        
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 1212753, imageURL: "")
+        
+        //////////
     }
     
     /**
