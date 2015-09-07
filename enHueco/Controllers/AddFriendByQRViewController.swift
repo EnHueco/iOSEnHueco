@@ -12,6 +12,7 @@ import AVFoundation
 class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
 {
     @IBOutlet weak var appUserQRImageView: UIImageView!
+    @IBOutlet weak var scanQRButton: UIButton!
     
     lazy var reader = QRCodeReaderViewController(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
     
@@ -21,6 +22,9 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
         
         let code = QRCode(system.appUser.stringEncodedUserRepresentation())
         appUserQRImageView.image = code?.image
+        
+        scanQRButton.clipsToBounds = true
+        scanQRButton.layer.cornerRadius = 4
     }
     
     override func viewWillAppear(animated: Bool)

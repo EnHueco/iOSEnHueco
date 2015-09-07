@@ -33,4 +33,29 @@ class User: NSObject
         
         super.init()
     }
+    
+    func currentGap () -> Gap?
+    {
+        let currentDate = NSDate()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let currentDayNumber = calendar.component(.Weekday, fromDate: currentDate)
+        
+        for gap in schedule.weekDays[currentDayNumber].gaps
+        {
+            let gapStartHourWithTodaysDate = calendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            let gapEndHourWithTodaysDate = calendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            
+            if currentDate.isBetween(gapStartHourWithTodaysDate, and: gapEndHourWithTodaysDate)
+            {
+                return gap
+            }
+        }
+        
+        return nil
+    }
+    
+    func nextGapOrClass () -> Either<Gap, Class>?
+    {
+        return nil //TODO
+    }
 }

@@ -39,6 +39,8 @@
 		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; settings = {ASSET_TAGS = (); }; };
+		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
+		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		F1BA030A1B570BFC00DEF9C5 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
+		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
+		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */,
+				F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				F134AE5D1A800BB200E6E9AB /* APIURLS.swift */,
 				F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */,
 				F1229BDA1A74947200C4FDE2 /* Info.plist */,
+				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -417,9 +423,11 @@
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
+				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
 				F113D1641B7CDD4C00325209 /* Gap.swift in Sources */,
+				F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,11 @@ class InGapViewController: UIViewController
 {
     override func viewWillAppear(animated: Bool)
     {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
     }
 }

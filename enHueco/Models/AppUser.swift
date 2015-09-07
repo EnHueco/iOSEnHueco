@@ -30,7 +30,7 @@ class AppUser: User
         let params = []
         let URL = NSURL(string: APIURLS.URLS.base.rawValue)!
         
-        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (response) -> () in
+        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: nil, onSuccess: { (response) -> () in
             
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)
@@ -46,8 +46,14 @@ class AppUser: User
         
     }
     
+    func sendFriendRequestToUserWithUsername (username: String)
+    {
+        
+    }
+    
     /**
         Adds friend from their string encoded representation.
+        The AppUser user is also added as a friend of the friend they are adding, without any approvals from either side.
     */
     func addFriendFromStringEncodedFriendRepresentation (encodedFriend: String) throws
     {
@@ -124,6 +130,16 @@ class AppUser: User
         friends.append(friend)
         
         NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend.rawValue, object: system, userInfo: nil)
+    }
+    
+    /**
+        Adds the AppUser as a friend of the friend they just added by string encoded representation (QR)
+        App user is added as a friend on the server directly (without friends confirmation)
+        Must only be called from "addFriendFromStringEncodedFriendRepresentation:".
+    */
+    private func _addAppUserAsFriendOfStringEncodedAddedFriend ()
+    {
+        // TODO
     }
     
     /**

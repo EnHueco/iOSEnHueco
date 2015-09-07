@@ -46,7 +46,7 @@ class System
         let params = ["user_id":username, "password":password]
         let URL = NSURL(string: APIURLS.URLS.base.rawValue + APIURLS.URLS.authSegment.rawValue)!
         
-        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: params, onSuccess: { (response) -> () in
+        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
             
             guard let token = response["value"] as? String else
             {
