@@ -53,4 +53,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let friend = system.appUser.friends[indexPath.row]
+        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
+        friendDetailViewController.friend = friend
+        
+        navigationController!.pushViewController(friendDetailViewController, animated: true)
+        
+    }
 }

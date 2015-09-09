@@ -29,6 +29,8 @@ class LoginViewController : UIViewController
         
         //TODO: Mostrar indicador "cargando"
         
+        
+        
         //Pruebas
         
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
@@ -45,7 +47,10 @@ class LoginViewController : UIViewController
     func systemDidLogin (notification: NSNotification)
     {
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-        self.presentViewController(mainViewController, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(mainViewController, animated: true, completion: nil)
+            });
+
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)

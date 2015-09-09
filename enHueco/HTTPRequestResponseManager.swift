@@ -32,7 +32,7 @@ class HTTPRequestResponseManager: NSObject
                 {
                     let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
                     
-                    successfulRequestBlock(JSONResponse as! Dictionary<String, String>)
+                    successfulRequestBlock(JSONResponse as! Dictionary<String, AnyObject>)
                 }
                 catch
                 {

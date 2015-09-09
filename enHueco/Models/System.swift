@@ -25,7 +25,7 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 1212753, imageURL: "")
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 3176694189, imageURL: "")
         
         //////////
     }
@@ -54,11 +54,12 @@ class System
                 return
             }
             
-            let username = response["username"] as! String
-            let firstNames = response["firstNames"] as! String
-            let lastNames = response["lastNames"] as! String
-            let imageURL = response["imageURL"] as! String
-            let lastUpdatedOn = response["lastUpdatedOn"] as! String
+            let user = response["user"] as! Dictionary<String, String>
+            let username = user["login"] as String!
+            let firstNames = user["firstNames"] as String!
+            let lastNames = user["lastNames"] as String!
+            let imageURL = user["imageURL"] as String!
+            let lastUpdatedOn = user["lastUpdated_on"] as String!
             
             let appUser = AppUser(username: username, token: token, lastUpdatedOn: lastUpdatedOn, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL)
             

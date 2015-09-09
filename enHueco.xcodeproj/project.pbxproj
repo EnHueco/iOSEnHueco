@@ -41,6 +41,10 @@
 		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; settings = {ASSET_TAGS = (); }; };
 		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; settings = {ASSET_TAGS = (); }; };
+		F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */; settings = {ASSET_TAGS = (); }; };
+		F1FAFF9F1B9FBB8000E8CCDD /* EditGapsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9E1B9FBB8000E8CCDD /* EditGapsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1FAFFA11B9FD49700E8CCDD /* AddGapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddGapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +100,10 @@
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
 		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
+		F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
+		F1FAFF9E1B9FBB8000E8CCDD /* EditGapsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGapsTableViewController.swift; sourceTree = "<group>"; };
+		F1FAFFA01B9FD49700E8CCDD /* AddGapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGapViewController.swift; sourceTree = "<group>"; };
+		F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +150,7 @@
 			children = (
 				F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */,
 				F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */,
+				F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -241,12 +250,15 @@
 			isa = PBXGroup;
 			children = (
 				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
+				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
 				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
 				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
+				F1FAFF9E1B9FBB8000E8CCDD /* EditGapsTableViewController.swift */,
+				F1FAFFA01B9FD49700E8CCDD /* AddGapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -316,6 +328,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4R547J5575;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -403,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,
@@ -411,10 +425,12 @@
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
+				F1FAFFA11B9FD49700E8CCDD /* AddGapViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* APIURLS.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */,
 				F1179E6E1B9BB3F100B04400 /* InGapViewController.swift in Sources */,
+				F1FAFF9F1B9FBB8000E8CCDD /* EditGapsTableViewController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
@@ -423,6 +439,7 @@
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
+				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
@@ -553,6 +570,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = enHueco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -561,6 +580,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -572,6 +592,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = enHueco/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -580,6 +602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "deego.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 			};
 			name = Release;
