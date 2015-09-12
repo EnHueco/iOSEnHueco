@@ -8,11 +8,47 @@
 
 import UIKit
 
-class InGapViewController: UIViewController
+class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var tableView: UITableView!
+    var friendsAndGaps : [(friend: User, gap: Gap)] = []
+    
+    override func viewDidLoad()
+    {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
+        self.tableView.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.friendsAndGaps.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let friendAndGap = self.friendsAndGaps[indexPath.row]
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
+        cell.friendNameLabel.text = friendAndGap.friend.name
+        cell.friendUsernameLabel.text = self.friendsAndGaps[indexPath.row].friend.username
+        // TODO: Update InGapFriendCell image to match friend.
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let friend = system.appUser.friends[indexPath.row]
+        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
+        friendDetailViewController.friend = friend
+        
+        navigationController!.pushViewController(friendDetailViewController, animated: true)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

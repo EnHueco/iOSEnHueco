@@ -21,6 +21,10 @@ class EditGapsTableViewController: UITableViewController {
         end.hour = 1
         end.minute = 30
         system.appUser.schedule.weekDays[0].gaps.append(Gap(startHour:  start, endHour: end))
+        
+        navigationController!.navigationBar.barStyle = UIBarStyle.Black
+        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -77,7 +81,8 @@ class EditGapsTableViewController: UITableViewController {
     }
     
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
         let cell = self.gapsTableView.dequeueReusableCellWithIdentifier("GapsCell") as! GapCell
@@ -85,7 +90,16 @@ class EditGapsTableViewController: UITableViewController {
         cell.endHourLabel.text = "\(gap.endHour.hour):\(gap.endHour.minute)"
         return cell
     }
-
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
+        let gapEditView  = storyboard?.instantiateViewControllerWithIdentifier("AddGapViewController") as! AddGapViewController
+        gapEditView.editingGap = gap
+        
+        navigationController!.pushViewController(gapEditView, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.

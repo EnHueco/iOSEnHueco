@@ -10,6 +10,7 @@ import UIKit
 
 class InGapFriendCell: UITableViewCell
 {
-    @IBOutlet weak var friendImage: UIImageView!
-    @IBOutlet weak var friendName: UILabel!
+    @IBOutlet weak var friendImageImageView: UIImageView!
+    @IBOutlet weak var friendNameLabel: UILabel!
+    @IBOutlet weak var friendUsernameLabel: UILabel!
 }

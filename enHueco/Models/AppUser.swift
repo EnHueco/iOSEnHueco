@@ -25,6 +25,16 @@ class AppUser: User
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
     }
     
+    func friendsCurrentlyInGap() -> [(friend: User, gap: Gap)]
+    {
+        var friendsAndGaps = [(friend: User, gap: Gap)]()
+        for friend in friends
+        {
+            if let gap = friend.currentGap()  { friendsAndGaps.append((friend, gap))}
+        }
+        return friendsAndGaps
+    }
+    
     func updateFriendsAndFriendsSchedules ()
     {
         let params = []

@@ -25,7 +25,7 @@ class LoginViewController : UIViewController
     {
         guard let username = usernameTextField.text, password = passwordTextField.text else { /* TODO: Mostrar error */ return  }
         
-        system.login(username, password: password)
+//        system.login(username, password: password)
         
         //TODO: Mostrar indicador "cargando"
         
@@ -47,7 +47,8 @@ class LoginViewController : UIViewController
     func systemDidLogin (notification: NSNotification)
     {
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-        dispatch_async(dispatch_get_main_queue(), {
+        dispatch_async(dispatch_get_main_queue(),
+            {
             self.presentViewController(mainViewController, animated: true, completion: nil)
             });
 

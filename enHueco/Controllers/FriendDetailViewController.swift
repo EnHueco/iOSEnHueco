@@ -20,7 +20,13 @@ class FriendDetailViewController: UIViewController {
         super.viewDidLoad()
         nameLabel.text = friend?.firstNames
         userNameLabel.text = friend?.username
-        // Do any additional setup after loading the view.
+        navigationController!.navigationBar.barStyle = UIBarStyle.Black
+        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController!.navigationBarHidden = false
     }
 
     override func didReceiveMemoryWarning() {

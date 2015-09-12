@@ -25,7 +25,13 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 3176694189, imageURL: "")
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 94189, imageURL: "")
+        let friend = User(username: "amiguito123", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: 1234567, imageURL: nil)
+        let start = NSDateComponents(); start.hour = 0; start.minute = 00
+        let end = NSDateComponents(); end.hour = 1; end.minute = 00
+        let gap = Gap(startHour: start, endHour: end)
+        friend.schedule.weekDays[6].gaps.append(gap)
+        appUser.friends.append(friend)
         
         //////////
     }
