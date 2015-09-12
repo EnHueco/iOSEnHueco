@@ -20,7 +20,7 @@ class EditGapsTableViewController: UITableViewController {
         let end = NSDateComponents();
         end.hour = 1
         end.minute = 30
-        system.appUser.schedule.weekDays[0].gaps.append(Gap(startHour:  start, endHour: end))
+        system.appUser.schedule.weekDays[0].gaps.append(Gap(daySchedule: system.appUser.schedule.weekDays[0], startHour:  start, endHour: end))
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

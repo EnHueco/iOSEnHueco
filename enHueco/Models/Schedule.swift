@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Schedule: NSObject
+class Schedule: NSObject, NSCoding
 {
     let weekDays:[DaySchedule]
     
@@ -25,5 +25,27 @@ class Schedule: NSObject
         weekDays.append(DaySchedule(weekDayName: "Domingo"))
         
         self.weekDays = weekDays
+    }
+    
+    //Mark: NSCoding
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard let weekDays = decoder.decodeObjectForKey("weekDays") as? [DaySchedule] else
+        {
+            self.weekDays = [DaySchedule]()
+
+            super.init()
+            return nil
+        }
+        
+        self.weekDays = weekDays
+        
+        super.init()
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(weekDays, forKey: "weekDays")
     }
 }

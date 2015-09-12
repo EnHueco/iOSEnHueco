@@ -31,6 +31,8 @@
 		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F134AE5E1A800BB200E6E9AB /* APIURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* APIURLS.swift */; };
+		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
+		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -89,6 +91,8 @@
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* APIURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLS.swift; sourceTree = "<group>"; };
+		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
+		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
 		F1B343621B9BBFAE00EED205 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1B343631B9BBFAE00EED205 /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F14A72BC1BA3786700D70BD1 /* AutoCoding */,
 				F1B343601B9BBFAE00EED205 /* QRCode */,
 				F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */,
 				0F782758D75200AB0BA9BB83 /* libPods.a */,
@@ -259,6 +264,7 @@
 				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
 				F1FAFF9E1B9FBB8000E8CCDD /* EditGapsTableViewController.swift */,
 				F1FAFFA01B9FD49700E8CCDD /* AddGapViewController.swift */,
+				F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
 				F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */,
+				F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +433,7 @@
 				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddGapViewController.swift in Sources */,
+				F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* APIURLS.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */,
@@ -583,6 +591,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Debug;
 		};
@@ -604,6 +613,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Release;
 		};

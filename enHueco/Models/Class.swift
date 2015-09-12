@@ -21,5 +21,34 @@ class Class: NSObject
         self.endHour = endHour
         
         self.location = location
+        
+        super.init()
+    }
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard
+            let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
+            let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
+        else
+        {
+            self.startHour = NSDateComponents()
+            self.endHour = NSDateComponents()
+            
+            super.init()
+            return nil
+        }
+        
+        self.startHour = startHour
+        self.endHour = endHour
+        self.location = decoder.decodeObjectForKey("location") as? String
+
+        super.init()
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(startHour, forKey: "startHour")
+        coder.encodeObject(endHour, forKey: "endHour")
     }
 }

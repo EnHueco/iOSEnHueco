@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 let system = System()
 
@@ -19,13 +20,35 @@ enum EHSystemNotification: String
 
 class System
 {
+    enum SystemError: ErrorType
+    {
+        case CouldNotPersistData
+    }
+    
+    let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    let persistancePath: String
+    
     var appUser: AppUser!
     
     private init()
     {
+        persistancePath = documents + "appUser.persistence"
+        
+        try? loadDataFromPersistence()
+        
+    }
+    
+    func createTestAppUser ()
+    {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: 3176694189, imageURL: "")
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: "94189", imageURL: nil)
+        let friend = User(username: "amiguito123", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "1234567", imageURL: nil)
+        let start = NSDateComponents(); start.hour = 0; start.minute = 00
+        let end = NSDateComponents(); end.hour = 1; end.minute = 00
+        let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
+        friend.schedule.weekDays[6].gaps.append(gap)
+        appUser.friends.append(friend)
         
         //////////
     }
@@ -58,7 +81,7 @@ class System
             let username = user["login"] as String!
             let firstNames = user["firstNames"] as String!
             let lastNames = user["lastNames"] as String!
-            let imageURL = user["imageURL"] as String!
+            let imageURL = NSURL(string: user["imageURL"] as String!)
             let lastUpdatedOn = user["lastUpdated_on"] as String!
             
             let appUser = AppUser(username: username, token: token, lastUpdatedOn: lastUpdatedOn, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL)
@@ -78,5 +101,20 @@ class System
     func updateFriendsAndFriendsSchedules ()
     {
         appUser.updateFriendsAndFriendsSchedules()
+    }
+    
+    func persistData () throws
+    {
+        guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistancePath) else
+        {
+            throw SystemError.CouldNotPersistData
+        }
+    }
+    
+    func loadDataFromPersistence () throws -> Bool
+    {
+        appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistancePath) as? AppUser
+        
+        return appUser != nil
     }
 }

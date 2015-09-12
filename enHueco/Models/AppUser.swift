@@ -17,7 +17,7 @@ class AppUser: User
     
     var friendRequests = [String]()
     
-    init(username: String, token : String, lastUpdatedOn: String, firstNames: String, lastNames: String, phoneNumber: Int!, imageURL: String)
+    init(username: String, token : String, lastUpdatedOn: String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?)
     {
         self.token = token
         self.lastUpdatedOn = lastUpdatedOn
@@ -65,7 +65,7 @@ class AppUser: User
         let firstNames = fullNameComponents[0]
         let lastNames = fullNameComponents[1]
         
-        let phoneNumber = Int(mainComponents[2])!
+        let phoneNumber = mainComponents[2]
         
         let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil)
 
@@ -95,7 +95,7 @@ class AppUser: User
                     endHourDateComponents.hour = Int(endHourComponents[0])!
                     endHourDateComponents.minute = Int(endHourComponents[1])!
                     
-                    gaps.append(Gap(startHour: startHourDateComponents, endHour: endHourDateComponents))
+                    gaps.append(Gap(daySchedule: schedule.weekDays[i], startHour: startHourDateComponents, endHour: endHourDateComponents))
                 }
             }
             
@@ -181,6 +181,49 @@ class AppUser: User
         }
         
         return encodedSchedule
+    }
+    
+    func importScheduleFromCalendar()
+    {
+        
+    }
+    
+    //NSCoding 
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard
+            let token = decoder.decodeObjectForKey("token") as? String,
+            let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? String,
+            let friends = decoder.decodeObjectForKey("friends") as? [User],
+            let friendRequests = decoder.decodeObjectForKey("friendRequests") as? [String]
+        else
+        {
+            self.token = ""
+            self.lastUpdatedOn = ""
+            self.friends = [User]()
+            self.friendRequests = [String]()
+            super.init(coder: decoder)
+            
+            return nil
+        }
+        
+        self.token = token
+        self.lastUpdatedOn = lastUpdatedOn
+        self.friends = friends
+        self.friendRequests = friendRequests
+        
+        super.init(coder: decoder)
+    }
+    
+    override func encodeWithCoder(coder: NSCoder)
+    {
+        super.encodeWithCoder(coder)
+        
+        coder.encodeObject(token, forKey: "token")
+        coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
+        coder.encodeObject(friends, forKey: "friends")
+        coder.encodeObject(friendRequests, forKey: "friendRequests")
     }
 }
 

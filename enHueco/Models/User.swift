@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: NSObject
+class User: NSObject, NSCoding
 {
     let username: String
     
@@ -17,12 +17,12 @@ class User: NSObject
     
     var name: String { return firstNames + lastNames }
     
-    let imageURL: String?
-    var phoneNumber: Int!
+    var imageURL: NSURL?
+    var phoneNumber: String!
     
     let schedule = Schedule()
     
-    init(username: String, firstNames: String, lastNames: String, phoneNumber:Int!, imageURL: String?)
+    init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?)
     {
         self.username = username
         
@@ -57,5 +57,43 @@ class User: NSObject
     func nextGapOrClass () -> Either<Gap, Class>?
     {
         return nil //TODO
+    }
+    
+    //Mark: NSCoding
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard
+            let username = decoder.decodeObjectForKey("username") as? String,
+            let firstNames = decoder.decodeObjectForKey("firstNames") as? String,
+            let lastNames = decoder.decodeObjectForKey("lastNames") as? String
+        else
+        {
+            self.username = ""
+            self.firstNames = ""
+            self.lastNames = ""
+            self.phoneNumber = ""
+
+            super.init()
+            return nil
+        }
+        
+        self.username = username
+        
+        self.firstNames = firstNames
+        self.lastNames = lastNames
+        self.phoneNumber = decoder.decodeObjectForKey("phoneNumber") as? String
+        self.imageURL = decoder.decodeObjectForKey("imageURL") as? NSURL
+        
+        super.init()
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(username, forKey: "username")
+        coder.encodeObject(firstNames, forKey: "firstNames")
+        coder.encodeObject(lastNames, forKey: "lastNames")
+        coder.encodeObject(phoneNumber, forKey: "phoneNumber")
+        coder.encodeObject(imageURL, forKey: "imageURL")
     }
 }

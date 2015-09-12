@@ -19,6 +19,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
+        
+        system.createTestAppUser()
     }
     
     override func viewWillAppear(animated: Bool)
