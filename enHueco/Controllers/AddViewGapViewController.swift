@@ -8,41 +8,43 @@
 
 import UIKit
 
-class AddGapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
+class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
+{
     @IBOutlet weak var dayPicker: UIPickerView!
     @IBOutlet weak var startHourDatePicker: UIDatePicker!
     @IBOutlet weak var endHourDatePicker: UIDatePicker!
     
-    var editingGap : Gap?
+    var gapToEdit : Gap?
     
     @IBAction func save(sender: UIButton)
     {
-        if editingGap == nil
+        if gapToEdit == nil
         {
             //editingGap?.startHour =
         }
-        
     }
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        
         self.dayPicker.dataSource = self
         self.dayPicker.delegate = self
-        if editingGap != nil
+        
+        if gapToEdit != nil
         {
             //dayPicker.selectedRowInComponent()
             let cal = NSCalendar.currentCalendar()
             
-            startHourDatePicker.setDate(cal.dateFromComponents(editingGap!.startHour)!, animated: true)
+            startHourDatePicker.setDate(cal.dateFromComponents(gapToEdit!.startHour)!, animated: true)
             
-            endHourDatePicker.setDate(cal.dateFromComponents(editingGap!.endHour)!, animated: true)
+            endHourDatePicker.setDate(cal.dateFromComponents(gapToEdit!.endHour)!, animated: true)
         }
-        
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -55,13 +57,16 @@ class AddGapViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 
     // returns the # of rows in each component..
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
         return 5
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
         return system.appUser.schedule.weekDays[row+2].weekDayName
     }
+    
     /*
     // MARK: - Navigation
 
@@ -71,5 +76,4 @@ class AddGapViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         // Pass the selected object to the new view controller.
     }
     */
-
 }

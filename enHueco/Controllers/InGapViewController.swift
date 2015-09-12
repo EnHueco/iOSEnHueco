@@ -22,6 +22,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
         self.tableView.reloadData()
     }
@@ -42,13 +43,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         let friend = system.appUser.friends[indexPath.row]
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

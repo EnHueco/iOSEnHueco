@@ -1301,10 +1301,10 @@
             </objects>
             <point key="canvasLocation" x="2560.5" y="1591.5"/>
         </scene>
-        <!--Add Gap View Controller-->
+        <!--Add View Gap View Controller-->
         <scene sceneID="6V7-P0-JmL">
             <objects>
-                <viewController storyboardIdentifier="AddGapViewController" id="2iU-cR-3ET" customClass="AddGapViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddViewGapViewController" id="2iU-cR-3ET" customClass="AddViewGapViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4kg-s5-0xI"/>
                         <viewControllerLayoutGuide type="bottom" id="2ix-Q4-5H2"/>
@@ -1912,10 +1912,10 @@
             </objects>
             <point key="canvasLocation" x="285" y="2303.25"/>
         </scene>
-        <!--Edit Gaps Table View Controller-->
+        <!--Gaps View Controller-->
         <scene sceneID="AgD-zH-00F">
             <objects>
-                <tableViewController id="Kre-U0-yZP" customClass="EditGapsTableViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Kre-U0-yZP" customClass="GapsViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FBJ-sH-FyC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -29,7 +29,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendsTableView.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         if let selectedIndex = friendsTableView.indexPathForSelectedRow
         {
             friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
@@ -69,8 +70,5 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendDetailViewController.friend = friend
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
-        
-
-        
     }
 }

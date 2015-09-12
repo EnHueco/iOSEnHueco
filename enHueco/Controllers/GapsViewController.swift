@@ -8,11 +8,12 @@
 
 import UIKit
 
-class EditGapsTableViewController: UITableViewController {
-
-
+class GapsViewController: UITableViewController
+{
     @IBOutlet var gapsTableView: UITableView!
-    override func viewDidLoad() {
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         let start = NSDateComponents();
         start.hour = 10
@@ -25,6 +26,7 @@ class EditGapsTableViewController: UITableViewController {
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -32,46 +34,49 @@ class EditGapsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 5
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return system.appUser.schedule.weekDays[section].gaps.count
     }
     
-
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
         var sectionName : String
-        switch section {
-        case 0:
-            sectionName = "Lunes"
-        case 1:
-            sectionName = "Martes"
-        case 2:
-            sectionName = "Miercoles"
-        case 3:
-            sectionName = "Jueves"
-        case 4:
-            sectionName = "Viernes"
-        default:
-            sectionName = ""
+        
+        switch section
+        {
+            case 0:
+                sectionName = "Lunes"
+            case 1:
+                sectionName = "Martes"
+            case 2:
+                sectionName = "Miercoles"
+            case 3:
+                sectionName = "Jueves"
+            case 4:
+                sectionName = "Viernes"
+            default:
+                sectionName = ""
         }
+        
         if system.appUser.schedule.weekDays[section].gaps.count == 0
         {
             sectionName = ""
         }
+        
         return sectionName
     }
     
@@ -83,11 +88,12 @@ class EditGapsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
         let cell = self.gapsTableView.dequeueReusableCellWithIdentifier("GapsCell") as! GapCell
+        
         cell.startHourLabel.text = "\(gap.startHour.hour):\(gap.startHour.minute)"
         cell.endHourLabel.text = "\(gap.endHour.hour):\(gap.endHour.minute)"
+        
         return cell
     }
     
@@ -95,8 +101,8 @@ class EditGapsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
-        let gapEditView  = storyboard?.instantiateViewControllerWithIdentifier("AddGapViewController") as! AddGapViewController
-        gapEditView.editingGap = gap
+        let gapEditView  = storyboard?.instantiateViewControllerWithIdentifier("AddViewGapViewController") as! AddViewGapViewController
+        gapEditView.gapToEdit = gap
         
         navigationController!.pushViewController(gapEditView, animated: true)
     }

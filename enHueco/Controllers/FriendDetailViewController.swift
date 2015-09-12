@@ -8,28 +8,32 @@
 
 import UIKit
 
-class FriendDetailViewController: UIViewController {
-
+class FriendDetailViewController: UIViewController
+{
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
-    var friend : User?
+    var friend : User!
     
-    
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        nameLabel.text = friend?.firstNames
-        userNameLabel.text = friend?.username
+        
+        nameLabel.text = friend.firstNames
+        userNameLabel.text = friend.username
+        
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool)
+    {
         navigationController!.navigationBarHidden = false
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -44,7 +48,7 @@ class FriendDetailViewController: UIViewController {
     
     @IBAction func call(sender: UIButton)
     {
-        if let num = friend?.phoneNumber
+        if let num = friend.phoneNumber
         {
             let url:NSURL = NSURL(string: "tel://\(num)")!
             UIApplication.sharedApplication().openURL(url)
