@@ -26,8 +26,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
         friendsTableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if let selectedIndex = friendsTableView.indexPathForSelectedRow
+        {
+            friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+        }
     }
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -51,7 +57,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let friend = system.appUser.friends[indexPath.row]
         
         let cell = friendsTableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
-        cell.friendNameLabel.text = friend.name
+        cell.friendNameLabel.text = friend.firstNames
         
         return cell
     }
@@ -63,6 +69,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendDetailViewController.friend = friend
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
+        
+
         
     }
 }

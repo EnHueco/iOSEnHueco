@@ -3,6 +3,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MSCollectionViewCalendarLayout.h"
+
+// MSCollectionCalendarComponents
+
+#import "MCSwipeTableViewCell.h"
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
 #import "QRCodeReaderDelegate.h"

@@ -11,10 +11,33 @@ import UIKit
 class AddGapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var dayPicker: UIPickerView!
+    @IBOutlet weak var startHourDatePicker: UIDatePicker!
+    @IBOutlet weak var endHourDatePicker: UIDatePicker!
+    
+    var editingGap : Gap?
+    
+    @IBAction func save(sender: UIButton)
+    {
+        if editingGap == nil
+        {
+            //editingGap?.startHour =
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dayPicker.dataSource = self
         self.dayPicker.delegate = self
+        if editingGap != nil
+        {
+            //dayPicker.selectedRowInComponent()
+            let cal = NSCalendar.currentCalendar()
+            
+            startHourDatePicker.setDate(cal.dateFromComponents(editingGap!.startHour)!, animated: true)
+            
+            endHourDatePicker.setDate(cal.dateFromComponents(editingGap!.endHour)!, animated: true)
+        }
+        
 
         // Do any additional setup after loading the view.
     }
@@ -25,18 +48,19 @@ class AddGapViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     }
 
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 2
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
+    {
+        return 1
     }
-    
+
     // returns the # of rows in each component..
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 12;
+        return 5
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row)"
+        return system.appUser.schedule.weekDays[row+2].weekDayName
     }
     /*
     // MARK: - Navigation

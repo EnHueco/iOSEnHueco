@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-QRCodeReaderViewController.xcscheme</key>
+		<key>MCSwipeTableViewCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-enHuecoTests-QRCodeReaderViewController.xcscheme</key>
+		<key>MSCollectionViewCalendarLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,9 +24,19 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>QRCodeReaderViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4DB98F154DFE36B3AB82A40A5FAE2B34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>747F182B7BE71F0AB77AB10A</key>
 		<dict>
 			<key>primary</key>
@@ -37,7 +47,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8139426284DB15FF69CB9A9C8EDADA61</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8479ADFB7A8E39318FCEA415994FB9A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>98AE86D7E01C9B69E4BD149A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABBD0E18B40ABED6BF33E3E321B74209</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C3649BCBEE6ADF4970B45A3B33C04ED4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

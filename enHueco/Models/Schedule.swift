@@ -15,14 +15,15 @@ class Schedule: NSObject, NSCoding
     override init()
     {
         var weekDays = [DaySchedule]()
-        
+        weekDays.append(DaySchedule(weekDayName: ""))
+        weekDays.append(DaySchedule(weekDayName: "Domingo"))
         weekDays.append(DaySchedule(weekDayName: "Lunes"))
         weekDays.append(DaySchedule(weekDayName: "Martes"))
         weekDays.append(DaySchedule(weekDayName: "Miércoles"))
         weekDays.append(DaySchedule(weekDayName: "Jueves"))
         weekDays.append(DaySchedule(weekDayName: "Viernes"))
         weekDays.append(DaySchedule(weekDayName: "Sábado"))
-        weekDays.append(DaySchedule(weekDayName: "Domingo"))
+
         
         self.weekDays = weekDays
     }

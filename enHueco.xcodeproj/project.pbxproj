@@ -20,6 +20,7 @@
 		F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1179E6E1B9BB3F100B04400 /* InGapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; settings = {ASSET_TAGS = (); }; };
 		F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
 		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
@@ -75,6 +76,7 @@
 		F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapViewController.swift; sourceTree = "<group>"; };
 		F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F11D6FA31BA3BE1500206B9A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendByQRViewController.swift; sourceTree = "<group>"; };
 		F1229BD61A74947200C4FDE2 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1229BDA1A74947200C4FDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */,
 				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
 				F1229C2B1A7495A200C4FDE2 /* Images.xcassets */,
+				F11D6FA31BA3BE1500206B9A /* Colors.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */,
+				F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,

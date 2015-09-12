@@ -20,6 +20,8 @@ extension NSDate
     {
         return startDate.compare(self) == .OrderedAscending && endDate.compare(self) == .OrderedDescending
     }
+    
+
 }
 
 func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents

@@ -37,13 +37,16 @@ class User: NSObject, NSCoding
     func currentGap () -> Gap?
     {
         let currentDate = NSDate()
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let currentDayNumber = calendar.component(.Weekday, fromDate: currentDate)
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let globalCalendar = NSCalendar.currentCalendar()
+        globalCalendar.timeZone = NSTimeZone(abbreviation: "GMT")!
+        let currentDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
         
         for gap in schedule.weekDays[currentDayNumber].gaps
         {
-            let gapStartHourWithTodaysDate = calendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
-            let gapEndHourWithTodaysDate = calendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            
+            let gapStartHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
             
             if currentDate.isBetween(gapStartHourWithTodaysDate, and: gapEndHourWithTodaysDate)
             {
