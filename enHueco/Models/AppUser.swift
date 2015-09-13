@@ -231,11 +231,14 @@ class AppUser: User
         let fetchEventsPredicate = eventStore.predicateForEventsWithStartDate(lastMondayAtStartOfDay, endDate: nextFridayAtEndOfDay, calendars: calendars)
         let fetchedEvents = eventStore.eventsMatchingPredicate(fetchEventsPredicate)
         
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        
         for event in fetchedEvents
         {
             let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
-            let startDateComponents = localCalendar.components(weekdayHourMinute, fromDate: event.startDate)
-            let endDateComponents = localCalendar.components(weekdayHourMinute, fromDate: event.endDate)
+            let startDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.startDate)
+            let endDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.endDate)
 
             let weekDayDaySchedule = schedule.weekDays[startDateComponents.weekday]
             let aClass = Class(daySchedule: weekDayDaySchedule, name:event.title, startHour: startDateComponents, endHour: endDateComponents, location: event.location)

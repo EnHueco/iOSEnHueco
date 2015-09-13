@@ -18,13 +18,8 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     @IBAction func save(sender: UIButton)
     {
-        if gapToEdit == nil
-        {
-            //editingGap?.startHour =
-        }
-        
         let calendar = NSCalendar.currentCalendar()
-        calendar.timeZone = NSTimeZone(abbreviation: "GMT")!
+        calendar.timeZone = NSTimeZone(name: "UTC")!
 
         let hourMinute: NSCalendarUnit = [.Hour, .Minute]
         let startHour = calendar.components(hourMinute, fromDate: startHourDatePicker.date)
@@ -32,11 +27,14 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         let daySchedule = system.appUser.schedule.weekDays[dayPicker.selectedRowInComponent(0)+2]
     
+        if let gapToEdit = gapToEdit
+        {
+            daySchedule.removeGap(gapToEdit)
+        }
+
         let gap = Gap(daySchedule: daySchedule, startHour: startHour, endHour: endHour)
         daySchedule.addGap(gap)
-        
-        //TODO: Gap has incorrect date when added
-        
+
         dismissViewControllerAnimated(true, completion: nil)
     }
     

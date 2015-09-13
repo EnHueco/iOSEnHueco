@@ -12,9 +12,9 @@ class Class: NSObject
 {
     unowned let daySchedule: DaySchedule
 
-    var name:String
-    var startHour: NSDateComponents
-    var endHour: NSDateComponents
+    let name:String
+    let startHour: NSDateComponents
+    let endHour: NSDateComponents
     
     var location: String?
     
@@ -65,4 +65,6 @@ class Class: NSObject
         coder.encodeObject(location, forKey: "location")
         coder.encodeObject(daySchedule, forKey: "daySchedule")
     }
+    
+    //TODO: Implement Equatable protocol
 }
