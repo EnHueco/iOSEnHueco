@@ -31,6 +31,7 @@ class FriendDetailViewController: UIViewController
     override func viewWillAppear(animated: Bool)
     {
         navigationController!.navigationBarHidden = false
+        
     }
 
     override func didReceiveMemoryWarning()
@@ -45,6 +46,13 @@ class FriendDetailViewController: UIViewController
         let url: NSURL = NSURL(string: "whatsapp://send?text=Hello%2C%20World!")!
         UIApplication.sharedApplication().openURL(url)
         
+    }
+    
+    @IBAction func viewSchedule(sender: UIButton)
+    {
+        let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as!ScheduleViewController
+        scheduleCalendar.user = friend
+        presentViewController(scheduleCalendar, animated: true, completion: nil)
     }
     
     @IBAction func call(sender: UIButton)

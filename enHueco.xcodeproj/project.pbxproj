@@ -366,17 +366,17 @@
 				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
 				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
 				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
+				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
 				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
 				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
-				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */,
 				F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */,
 				F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */,
-				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
+				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

@@ -15,7 +15,7 @@ class User: NSObject, NSCoding
     let firstNames: String
     let lastNames: String
     
-    var name: String { return firstNames + lastNames }
+    var name: String { return "\(firstNames) \(lastNames)" }
     
     var imageURL: NSURL?
     var phoneNumber: String!

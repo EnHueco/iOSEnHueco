@@ -27,11 +27,11 @@ class LoginViewController : UIViewController
         
 //        system.login(username, password: password)
         
-        //TODO: Mostrar indicador "cargando"
+        //TODO: Show loading indicator
         
         
         
-        //Pruebas
+        // Test
         
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         navigationController!.pushViewController(mainViewController, animated: true)

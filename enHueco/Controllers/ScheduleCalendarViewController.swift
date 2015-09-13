@@ -13,7 +13,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     /**
         User who's schedule will be displayed. Defaults to AppUser
     */
-    var user: User = system.appUser
+    var user: User! = system.appUser
     
     var currentDate: NSDate!
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!

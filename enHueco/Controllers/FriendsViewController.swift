@@ -18,13 +18,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
 
         friendsTableView.dataSource = self
-        friendsTableView.delegate = self        
+        friendsTableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         friendsTableView.reloadData()
+        
+        navigationController?.navigationBarHidden = true
+        
     }
     
     override func viewDidAppear(animated: Bool)
@@ -66,7 +69,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let friend = system.appUser.friends[indexPath.row]
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
-        
+        friendDetailViewController.hidesBottomBarWhenPushed = true
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }
 }

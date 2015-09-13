@@ -15,8 +15,12 @@ class ProfileViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         firstNamesLabel.text = system.appUser.name
         usernameLabel.text = system.appUser.username
+
     }
+    
+    
+    
 }

@@ -99,6 +99,13 @@ class System
         }
     }
     
+    
+    func logOut()
+    {
+        
+        // TODO: Persist information, send logout notification to server so token is deleted.
+    }
+    
     func updateFriendsAndFriendsSchedules ()
     {
         appUser.updateFriendsAndFriendsSchedules()

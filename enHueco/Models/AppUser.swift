@@ -132,7 +132,7 @@ class AppUser: User
                     
                     let location = classComponents[2]
                     
-                    //TODO:AGREGAR NAME A CLASE
+                    //TODO: Add name to the class
                     classes.append(Class(daySchedule: schedule.weekDays[i], name:"", startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
                 }
             }
@@ -183,7 +183,7 @@ class AppUser: User
             
             for (j, aClass) in daySchedule.classes.enumerate()
             {
-                //TODO:AGREGAR NAME A CLASE
+                // Add name to the class
                 
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
                 encodedSchedule += "-"
