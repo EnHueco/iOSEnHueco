@@ -8,9 +8,8 @@
 
 import UIKit
 
-class EnHuecoNowCollectionViewCell: UICollectionViewCell {
-
-    
+class EnHuecoNowCollectionViewCell: UICollectionViewCell
+{
     @IBOutlet weak var friendPicture: UIImageView!
     
     @IBOutlet weak var friendNameLabel: UILabel!

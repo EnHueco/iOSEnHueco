@@ -44,7 +44,6 @@ class User: NSObject, NSCoding
         
         for gap in schedule.weekDays[currentDayNumber].gaps
         {
-            
             let gapStartHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
             let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
             

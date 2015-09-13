@@ -12,8 +12,25 @@ class DaySchedule: NSObject, NSCoding
 {
     let weekDayName: String
     
-    var gaps = [Gap]()
-    var classes = [Class]()
+    private var mutableGaps = [Gap]()
+    private var mutableClasses = [Class]()
+    
+    var gaps:[Gap]
+    {
+        get
+        {
+            return mutableGaps
+        }
+    }
+    
+    var classes:[Class]
+    {
+        get
+        {
+            return mutableClasses
+        }
+    }
+
     
     init(weekDayName:String)
     {
@@ -24,8 +41,8 @@ class DaySchedule: NSObject, NSCoding
     {
         guard
             let weekDayName = decoder.decodeObjectForKey("weekDayName") as? String,
-            let gaps = decoder.decodeObjectForKey("gaps") as? [Gap],
-            let classes = decoder.decodeObjectForKey("classes") as? [Class]
+            let mutableGaps = decoder.decodeObjectForKey("mutableGaps") as? [Gap],
+            let mutableClasses = decoder.decodeObjectForKey("mutableClasses") as? [Class]
         else
         {
             self.weekDayName = ""
@@ -35,8 +52,8 @@ class DaySchedule: NSObject, NSCoding
         }
         
         self.weekDayName = weekDayName
-        self.gaps = gaps
-        self.classes = classes
+        self.mutableGaps = mutableGaps
+        self.mutableClasses = mutableClasses
         
         super.init()
     }
@@ -44,7 +61,35 @@ class DaySchedule: NSObject, NSCoding
     func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(weekDayName, forKey: "weekDayName")
-        coder.encodeObject(gaps, forKey: "gaps")
-        coder.encodeObject(classes, forKey: "classes")
+        coder.encodeObject(mutableGaps, forKey: "mutableGaps")
+        coder.encodeObject(mutableClasses, forKey: "mutableGaps")
+    }
+    
+    func setGaps(gaps: [Gap])
+    {
+        mutableGaps = gaps
+    }
+    
+    func setClasses(classes: [Class])
+    {
+        mutableClasses = classes
+    }
+    
+    /**
+        Adds gap if it doesn't overlap with any class
+    */
+    func addGap(gap: Gap)
+    {
+        //TODO: Check condition
+        mutableGaps.append(gap)
+    }
+    
+    /**
+        Adds class if it doesn't overlap with any gap
+    */
+    func addClass(aClass: Class)
+    {
+        //TODO: Check condition
+        mutableClasses.append(aClass)
     }
 }

@@ -33,8 +33,10 @@ class System
     {
         persistancePath = documents + "appUser.persistence"
         
-        try? loadDataFromPersistence()
-        
+        if !loadDataFromPersistence()
+        {
+            createTestAppUser()
+        }
     }
     
     func createTestAppUser ()
@@ -46,7 +48,7 @@ class System
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
-        friend.schedule.weekDays[6].gaps.append(gap)
+        friend.schedule.weekDays[6].addGap(gap)
         appUser.friends.append(friend)
         
         //////////
@@ -110,7 +112,7 @@ class System
         }
     }
     
-    func loadDataFromPersistence () throws -> Bool
+    func loadDataFromPersistence () -> Bool
     {
         appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistancePath) as? AppUser
         

@@ -8,20 +8,24 @@
 
 import UIKit
 
-class GapsViewController: UITableViewController
+class GapsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet var gapsTableView: UITableView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        gapsTableView.dataSource = self
+        gapsTableView.delegate = self
+        
         let start = NSDateComponents();
         start.hour = 10
         start.minute = 30
         let end = NSDateComponents();
         end.hour = 1
         end.minute = 30
-        system.appUser.schedule.weekDays[0].gaps.append(Gap(daySchedule: system.appUser.schedule.weekDays[0], startHour:  start, endHour: end))
+        system.appUser.schedule.weekDays[0].addGap(Gap(daySchedule: system.appUser.schedule.weekDays[0], startHour:  start, endHour: end))
         
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
@@ -42,17 +46,17 @@ class GapsViewController: UITableViewController
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 5
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return system.appUser.schedule.weekDays[section].gaps.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         var sectionName : String
         
@@ -86,10 +90,10 @@ class GapsViewController: UITableViewController
     }
     
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
-        let cell = self.gapsTableView.dequeueReusableCellWithIdentifier("GapsCell") as! GapCell
+        let cell = gapsTableView.dequeueReusableCellWithIdentifier("GapsCell") as! GapCell
         
         cell.startHourLabel.text = "\(gap.startHour.hour):\(gap.startHour.minute)"
         cell.endHourLabel.text = "\(gap.endHour.hour):\(gap.endHour.minute)"
@@ -98,7 +102,7 @@ class GapsViewController: UITableViewController
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
         let gapEditView  = storyboard?.instantiateViewControllerWithIdentifier("AddViewGapViewController") as! AddViewGapViewController

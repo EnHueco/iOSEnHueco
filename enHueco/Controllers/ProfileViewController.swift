@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventKit
 
 class AppUser: User
 {
@@ -28,10 +29,12 @@ class AppUser: User
     func friendsCurrentlyInGap() -> [(friend: User, gap: Gap)]
     {
         var friendsAndGaps = [(friend: User, gap: Gap)]()
+        
         for friend in friends
         {
             if let gap = friend.currentGap()  { friendsAndGaps.append((friend, gap))}
         }
+        
         return friendsAndGaps
     }
     
@@ -129,12 +132,13 @@ class AppUser: User
                     
                     let location = classComponents[2]
                     
-                    classes.append(Class(startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
+                    //TODO:AGREGAR NAME A CLASE
+                    classes.append(Class(daySchedule: schedule.weekDays[i], name:"", startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
                 }
             }
             
-            friend.schedule.weekDays[i].gaps = gaps
-            friend.schedule.weekDays[i].classes = classes
+            friend.schedule.weekDays[i].setGaps(gaps)
+            friend.schedule.weekDays[i].setClasses(classes)
         }
         
         friends.append(friend)
@@ -179,6 +183,8 @@ class AppUser: User
             
             for (j, aClass) in daySchedule.classes.enumerate()
             {
+                //TODO:AGREGAR NAME A CLASE
+                
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
                 encodedSchedule += "-"
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
@@ -193,9 +199,53 @@ class AppUser: User
         return encodedSchedule
     }
     
-    func importScheduleFromCalendar()
+    func importScheduleFromCalendar(calendar: EKCalendar) -> Bool
     {
+        let today = NSDate()
+        let eventStore = EKEventStore()
         
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        localCalendar.locale = NSLocale.currentLocale()
+        
+        let componentUnits: NSCalendarUnit = [.Year, .WeekOfYear, .Weekday, .Hour, .Minute, .Second]
+        var components = NSCalendar.currentCalendar().components(componentUnits, fromDate:today)
+        
+        components.weekday = 6
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        
+        let nextFridayAtEndOfDay = localCalendar.dateFromComponents(components)!
+        
+        components = NSCalendar.currentCalendar().components(componentUnits, fromDate:today)
+        
+        components.weekday = 2
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        let lastMondayAtStartOfDay = localCalendar.dateFromComponents(components)!
+
+        let calendars = [calendar]
+        
+        let fetchEventsPredicate = eventStore.predicateForEventsWithStartDate(lastMondayAtStartOfDay, endDate: nextFridayAtEndOfDay, calendars: calendars)
+        let fetchedEvents = eventStore.eventsMatchingPredicate(fetchEventsPredicate)
+        
+        for event in fetchedEvents
+        {
+            let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+            let startDateComponents = localCalendar.components(weekdayHourMinute, fromDate: event.startDate)
+            let endDateComponents = localCalendar.components(weekdayHourMinute, fromDate: event.endDate)
+
+            let weekDayDaySchedule = schedule.weekDays[startDateComponents.weekday]
+            let aClass = Class(daySchedule: weekDayDaySchedule, name:event.title, startHour: startDateComponents, endHour: endDateComponents, location: event.location)
+            
+            weekDayDaySchedule.addClass(aClass)
+        }
+        
+        //TODO: Calcular huecos y agregarlos
+        
+        return true
     }
     
     //NSCoding 

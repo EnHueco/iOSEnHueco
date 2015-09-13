@@ -13,6 +13,7 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+   
     var friend : User!
     
     override func viewDidLoad()

@@ -22,7 +22,24 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         {
             //editingGap?.startHour =
         }
+        
+        let calendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone(abbreviation: "GMT")!
+
+        let hourMinute: NSCalendarUnit = [.Hour, .Minute]
+        let startHour = calendar.components(hourMinute, fromDate: startHourDatePicker.date)
+        let endHour = calendar.components(hourMinute, fromDate: endHourDatePicker.date)
+        
+        let daySchedule = system.appUser.schedule.weekDays[dayPicker.selectedRowInComponent(0)+2]
+    
+        let gap = Gap(daySchedule: daySchedule, startHour: startHour, endHour: endHour)
+        daySchedule.addGap(gap)
+        
+        //TODO: Gap has incorrect date when added
+        
+        dismissViewControllerAnimated(true, completion: nil)
     }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -48,7 +65,6 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
     {

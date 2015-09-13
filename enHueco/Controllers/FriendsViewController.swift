@@ -18,9 +18,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
 
         friendsTableView.dataSource = self
-        friendsTableView.delegate = self
-        
-        system.createTestAppUser()
+        friendsTableView.delegate = self        
     }
     
     override func viewWillAppear(animated: Bool)

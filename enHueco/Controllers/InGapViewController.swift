@@ -11,7 +11,7 @@ import UIKit
 class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
-    var friendsAndGaps : [(friend: User, gap: Gap)] = []
+    var friendsAndGaps = [(friend: User, gap: Gap)]()
     
     override func viewDidLoad()
     {
@@ -36,10 +36,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let friendAndGap = self.friendsAndGaps[indexPath.row]
+        
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
         cell.friendNameLabel.text = friendAndGap.friend.name
         cell.friendUsernameLabel.text = self.friendsAndGaps[indexPath.row].friend.username
+        
         // TODO: Update InGapFriendCell image to match friend.
+        
         return cell
     }
     
