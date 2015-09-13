@@ -12,8 +12,8 @@ class Gap: NSObject, NSCoding
 {
     unowned let daySchedule: DaySchedule
     
-    var startHour: NSDateComponents
-    var endHour: NSDateComponents
+    let startHour: NSDateComponents
+    let endHour: NSDateComponents
     
     init(daySchedule: DaySchedule, startHour: NSDateComponents, endHour: NSDateComponents)
     {
@@ -52,4 +52,6 @@ class Gap: NSObject, NSCoding
         coder.encodeObject(endHour, forKey: "endHour")
         coder.encodeObject(daySchedule, forKey: "daySchedule")
     }
+    
+    //TODO: Implement Equatable protocol
 }

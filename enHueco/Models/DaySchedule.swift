@@ -92,4 +92,16 @@ class DaySchedule: NSObject, NSCoding
         //TODO: Check condition
         mutableClasses.append(aClass)
     }
+    
+    func removeGap(gap: Gap)
+    {
+        mutableGaps.removeObject(gap)
+    }
+    
+    func removeClass(aClass: Class)
+    {
+        mutableClasses.removeObject(aClass)
+    }
+    
+    //TODO: Implement Equatable protocol
 }
