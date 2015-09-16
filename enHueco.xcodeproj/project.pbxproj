@@ -49,6 +49,8 @@
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F134AE5E1A800BB200E6E9AB /* APIURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* APIURLS.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
+		F15209651BA912D600D05154 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F15209641BA912D600D05154 /* search.png */; settings = {ASSET_TAGS = (); }; };
+		F15209671BA9135A00D05154 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = F15209661BA9135A00D05154 /* whatsapp.png */; settings = {ASSET_TAGS = (); }; };
 		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
@@ -139,6 +141,8 @@
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* APIURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
+		F15209641BA912D600D05154 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		F15209661BA9135A00D05154 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
 		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 		F1229C231A7495A200C4FDE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F15209641BA912D600D05154 /* search.png */,
+				F15209661BA9135A00D05154 /* whatsapp.png */,
 				F1179E711B9BB5F500B04400 /* Cells */,
 				F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */,
 				F1229C261A7495A200C4FDE2 /* Main.storyboard */,
@@ -478,9 +484,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15209671BA9135A00D05154 /* whatsapp.png in Resources */,
 				F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */,
 				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
 				F1B343671B9BBFAE00EED205 /* Info.plist in Resources */,
+				F15209651BA912D600D05154 /* search.png in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
 				F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */,

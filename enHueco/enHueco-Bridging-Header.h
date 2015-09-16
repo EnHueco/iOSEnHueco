@@ -12,3 +12,12 @@
 #import "QRCodeReaderViewController.h"
 #import "QRCodeReaderDelegate.h"
 #import "TKCalendarDayViewController.h"
+
+
+// APAddressBook
+
+#import "APAddressBook.h"
+#import "APContact.h"
+#import "APSocialProfile.h"
+#import "APAddress.h"
+#import "APPhoneWithLabel.h"

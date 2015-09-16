@@ -40,7 +40,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.friendsTableView.backgroundView = emptyLabel
             self.friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         } else {
-            
+            friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
         
     }

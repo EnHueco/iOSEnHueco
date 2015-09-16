@@ -15,6 +15,7 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var userNameLabel: UILabel!
    
     var friend : User!
+    var recordId : NSNumber?
     
     override func viewDidLoad()
     {
@@ -26,6 +27,9 @@ class FriendDetailViewController: UIViewController
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+
+        setRecordId()
+        
     }
     
     override func viewWillAppear(animated: Bool)
@@ -43,7 +47,7 @@ class FriendDetailViewController: UIViewController
     
     @IBAction func whatsappMessage(sender: UIButton)
     {
-        let url: NSURL = NSURL(string: "whatsapp://send?text=Hello%2C%20World!")!
+        let url: NSURL = NSURL(string: "whatsapp://send?" + ((self.recordId == nil) ? "": "abid=\(self.recordId!)"))!
         UIApplication.sharedApplication().openURL(url)
         
     }
@@ -64,6 +68,48 @@ class FriendDetailViewController: UIViewController
         }
     }
 
+    func setRecordId()
+    {
+        if self.friend.phoneNumber.characters.count < 7
+        {
+            self.recordId = nil
+            return
+        }
+        let addressBook = APAddressBook()
+        addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
+        addressBook.loadContacts(
+            { (contacts: [AnyObject]!, error: NSError!) in
+                if contacts != nil {
+                    for contact in contacts
+                    {
+                        if let contactAP = contact as? APContact
+                        {
+                            for phone in contactAP.phones
+                            {
+                                if var phoneString = phone as? String
+                                {
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                    print(phoneString)
+                                    if phoneString.rangeOfString(self.friend.phoneNumber) != nil{
+                                        self.recordId = contactAP.recordID
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (error != nil) {
+                    self.recordId = nil
+                }
+                self.recordId = nil
+        })
+    }
     /*
     // MARK: - Navigation
 

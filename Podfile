@@ -12,6 +12,9 @@ pod 'MSCollectionViewCalendarLayout'
 # Swipe Cells
 pod 'MCSwipeTableViewCell', '~> 2.1.4'
 
+# Address Book
+pod 'APAddressBook'
+
 target 'enHuecoTests' do
  
 end

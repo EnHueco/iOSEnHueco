@@ -73,7 +73,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
-        print("ENTRA")
+
     }
     
     

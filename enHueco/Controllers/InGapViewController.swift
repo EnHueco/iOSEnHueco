@@ -35,7 +35,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         } else {
-
+            tableView.tableFooterView = UIView(frame: CGRectZero)
         }
     }
     
