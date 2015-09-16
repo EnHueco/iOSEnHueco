@@ -12,16 +12,14 @@ import EventKit
 class AppUser: User
 {
     var token : String
-    var lastUpdatedOn: String
-
+    
     var friends = [User]()
     
     var friendRequests = [String]()
     
-    init(username: String, token : String, lastUpdatedOn: String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?)
+    init(username: String, token : String, lastUpdatedOn: NSDate!, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?)
     {
         self.token = token
-        self.lastUpdatedOn = lastUpdatedOn
         
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
     }
@@ -174,7 +172,7 @@ class AppUser: User
             {
                 encodedSchedule += "\(gap.startHour.hour):\(gap.startHour.minute)"
                 encodedSchedule += "-"
-                encodedSchedule += "\(gap.startHour.hour):\(gap.startHour.minute)"
+                encodedSchedule += "\(gap.endHour.hour):\(gap.endHour.minute)"
 
                 if j != daySchedule.gaps.count-1 { encodedSchedule += "," }
             }
@@ -187,7 +185,7 @@ class AppUser: User
                 
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
                 encodedSchedule += "-"
-                encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
+                encodedSchedule += "\(aClass.endHour.hour):\(aClass.endHour.minute)"
                 if aClass.location != nil { encodedSchedule += "-"+aClass.location! }
                 
                 if j != daySchedule.classes.count-1 { encodedSchedule += "," }
@@ -257,13 +255,12 @@ class AppUser: User
     {
         guard
             let token = decoder.decodeObjectForKey("token") as? String,
-            let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? String,
+            //let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? NSDate,
             let friends = decoder.decodeObjectForKey("friends") as? [User],
             let friendRequests = decoder.decodeObjectForKey("friendRequests") as? [String]
         else
         {
             self.token = ""
-            self.lastUpdatedOn = ""
             self.friends = [User]()
             self.friendRequests = [String]()
             super.init(coder: decoder)
@@ -272,7 +269,7 @@ class AppUser: User
         }
         
         self.token = token
-        self.lastUpdatedOn = lastUpdatedOn
+        //self.lastUpdatedOn = lastUpdatedOn
         self.friends = friends
         self.friendRequests = friendRequests
         
@@ -284,7 +281,7 @@ class AppUser: User
         super.encodeWithCoder(coder)
         
         coder.encodeObject(token, forKey: "token")
-        coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
+        //coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
         coder.encodeObject(friends, forKey: "friends")
         coder.encodeObject(friendRequests, forKey: "friendRequests")
     }

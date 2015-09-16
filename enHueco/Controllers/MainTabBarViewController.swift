@@ -10,6 +10,11 @@ import UIKit
 
 class MainTabBarViewController: UITabBarController
 {
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         navigationController?.navigationBarHidden = true

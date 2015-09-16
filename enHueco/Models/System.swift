@@ -43,7 +43,7 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: "94189", imageURL: nil)
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: "94189", imageURL: nil)
 
         let friend = User(username: "amiguito123", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: nil)
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
@@ -86,7 +86,9 @@ class System
             let imageURL = NSURL(string: user["imageURL"] as String!)
             let lastUpdatedOn = user["lastUpdated_on"] as String!
             
-            let appUser = AppUser(username: username, token: token, lastUpdatedOn: lastUpdatedOn, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL)
+            //TODO: Asign lastUpdatedOn
+            
+            let appUser = AppUser(username: username, token: token, lastUpdatedOn: nil, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL)
             
             self.appUser = appUser
             

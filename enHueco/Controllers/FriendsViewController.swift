@@ -36,10 +36,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = NSTextAlignment.Center
         
-        if(system.appUser.friends.count == 0 ){
+        if system.appUser.friends.count == 0
+        {
             self.friendsTableView.backgroundView = emptyLabel
             self.friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        } else {
+        }
+        else
+        {
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
         
@@ -82,9 +85,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let friend = system.appUser.friends[indexPath.row]
+        
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
         friendDetailViewController.hidesBottomBarWhenPushed = true
+        
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }
 }
