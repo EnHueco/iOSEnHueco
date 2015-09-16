@@ -2,20 +2,26 @@ PODS:
   - APAddressBook (0.1.11):
     - APAddressBook/Core (= 0.1.11)
   - APAddressBook/Core (0.1.11)
+  - HexColors (2.2.1)
   - MCSwipeTableViewCell (2.1.4)
   - MSCollectionViewCalendarLayout (0.1.5)
   - QRCodeReaderViewController (3.5.2)
+  - TSMessages (0.9.12):
+    - HexColors (~> 2.2.0)
 
 DEPENDENCIES:
   - APAddressBook
   - MCSwipeTableViewCell (~> 2.1.4)
   - MSCollectionViewCalendarLayout
   - QRCodeReaderViewController (~> 3.5.2)
+  - TSMessages
 
 SPEC CHECKSUMS:
   APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
 COCOAPODS: 0.38.2

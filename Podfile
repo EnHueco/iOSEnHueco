@@ -15,6 +15,10 @@ pod 'MCSwipeTableViewCell', '~> 2.1.4'
 # Address Book
 pod 'APAddressBook'
 
+# TS Messages (Notifications)
+pod 'TSMessages'
+
+
 target 'enHuecoTests' do
  
 end

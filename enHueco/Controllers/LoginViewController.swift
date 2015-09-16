@@ -56,5 +56,9 @@ class LoginViewController : UIViewController
     func systemCouldNotLoginWithError (notification: NSNotification)
     {
         //TODO: Show error
+        dispatch_async(dispatch_get_main_queue())
+        {
+            TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
+        }
     }
 }
