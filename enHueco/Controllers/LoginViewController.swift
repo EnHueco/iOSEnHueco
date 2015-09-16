@@ -55,7 +55,6 @@ class LoginViewController : UIViewController
     
     func systemCouldNotLoginWithError (notification: NSNotification)
     {
-
-        //TODO: Mostrar error
+        //TODO: Show error
     }
 }

@@ -80,7 +80,26 @@ class DaySchedule: NSObject, NSCoding
     */
     func addGap(gap: Gap)
     {
-        //TODO: Check condition
+        for aClass in mutableClasses
+        {
+            if      aClass.startHour.hour <= gap.startHour.hour
+                &&  aClass.startHour.minute <= gap.startHour.minute
+                &&  gap.startHour.hour <= aClass.endHour.hour
+                &&  gap.startHour.minute < aClass.endHour.minute
+            {
+                // Class starts in between a gap
+                return
+            }
+            else if aClass.startHour.hour <= gap.endHour.hour
+                &&  aClass.startHour.minute < gap.endHour.minute
+                &&  gap.endHour.hour <= aClass.endHour.hour
+                &&  gap.endHour.minute <= aClass.endHour.minute
+            {
+                // Class ends in between a gap
+                return
+            }
+            
+        }
         mutableGaps.append(gap)
     }
     
@@ -89,7 +108,26 @@ class DaySchedule: NSObject, NSCoding
     */
     func addClass(aClass: Class)
     {
-        //TODO: Check condition
+        for gap in mutableGaps
+        {
+            if gap.startHour.hour <= aClass.startHour.hour
+            && gap.startHour.minute <= aClass.startHour.minute
+            &&  aClass.startHour.hour <= gap.endHour.hour
+            &&  aClass.startHour.minute < gap.endHour.minute
+            {
+                // Class starts in between a gap
+                return
+            }
+            else if gap.startHour.hour <= aClass.endHour.hour
+            &&  gap.startHour.minute < aClass.endHour.minute
+            &&  aClass.endHour.hour <= gap.endHour.hour
+            &&  aClass.endHour.minute <= gap.endHour.minute
+            {
+                // Class ends in between a gap
+                return
+            }
+            
+        }
         mutableClasses.append(aClass)
     }
     

@@ -244,7 +244,7 @@ class AppUser: User
             weekDayDaySchedule.addClass(aClass)
         }
         
-        //TODO: Calcular huecos y agregarlos
+        //TODO: Calculate Gaps and add them
         
         return true
     }
