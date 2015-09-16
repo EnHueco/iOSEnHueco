@@ -37,15 +37,25 @@ class User: NSObject, NSCoding
     func currentGap () -> Gap?
     {
         let currentDate = NSDate()
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let localCalendar = NSCalendar.currentCalendar()
         let globalCalendar = NSCalendar.currentCalendar()
         globalCalendar.timeZone = NSTimeZone(abbreviation: "GMT")!
-        let currentDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
+        var currentDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
         
         for gap in schedule.weekDays[currentDayNumber].gaps
         {
             let gapStartHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
-            let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            
+            var gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+            
+            let localCalendarGapStartHour = globalCalendar.component(.Hour, fromDate: gapStartHourWithTodaysDate)
+            
+            let localCalendarGapEndHour = globalCalendar.component(.Hour, fromDate: gapEndHourWithTodaysDate)
+            
+            if  localCalendarGapStartHour > localCalendarGapEndHour
+            {
+                gapEndHourWithTodaysDate = gapEndHourWithTodaysDate.dateByAddingTimeInterval(60*60*24)
+            }
             
             if currentDate.isBetween(gapStartHourWithTodaysDate, and: gapEndHourWithTodaysDate)
             {

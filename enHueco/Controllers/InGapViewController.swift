@@ -12,11 +12,17 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 {
     @IBOutlet weak var tableView: UITableView!
     var friendsAndGaps = [(friend: User, gap: Gap)]()
+    var emptyLabel : UILabel?
     
     override func viewDidLoad()
     {
         tableView.dataSource = self
         tableView.delegate = self
+        
+        emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        emptyLabel!.text = "No tienes amigos en hueco"
+        emptyLabel!.textColor = UIColor.grayColor()
+        emptyLabel!.textAlignment = NSTextAlignment.Center
     }
 
     override func viewWillAppear(animated: Bool)
@@ -26,16 +32,19 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
         self.tableView.reloadData()
         
-        var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        emptyLabel.text = "No tienes amigos en hueco"
-        emptyLabel.textColor = UIColor.grayColor()
-        emptyLabel.textAlignment = NSTextAlignment.Center
-        
         if(friendsAndGaps.count == 0 ){
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         } else {
+            self.tableView.backgroundView = nil
             tableView.tableFooterView = UIView(frame: CGRectZero)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if let selectedIndex = tableView.indexPathForSelectedRow
+        {
+            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
     }
     
