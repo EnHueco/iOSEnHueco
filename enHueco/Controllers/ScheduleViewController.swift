@@ -18,9 +18,18 @@ class ScheduleViewController: UIViewController
     @IBOutlet weak var importCalendarButton: UIButton!
     @IBOutlet weak var addGapOrClassButton: UIButton!
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        addGapOrClassButton.clipsToBounds = true
+        addGapOrClassButton.layer.cornerRadius = addGapOrClassButton.frame.size.height/2
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         navigationController?.navigationBarHidden = true
+       
         if user != system.appUser
         {
             importCalendarButton.hidden = true

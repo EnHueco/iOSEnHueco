@@ -1760,34 +1760,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJX-tP-vgi">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL9-4Z-Do4">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="33" id="FBK-zq-dVd"/>
-                                            <constraint firstAttribute="height" constant="33" id="vka-iq-B8P"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                        <state key="normal" title="+">
-                                            <color key="titleColor" red="0.81808750548443032" green="1" blue="0.6787986979812306" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="FBK-zq-dVd"/>
-                                                <exclude reference="vka-iq-B8P"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="FBK-zq-dVd"/>
-                                                <include reference="vka-iq-B8P"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="addFriendButtonPressed:" destination="53Q-rn-P9C" eventType="touchUpInside" id="vM0-gh-rBl"/>
-                                            <segue destination="2iU-cR-3ET" kind="presentation" id="7xr-oj-ohZ"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horario" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-9I-Axz">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <animations/>
@@ -1855,7 +1827,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Importar">
-                                            <color key="titleColor" red="0.0" green="0.35164232750085866" blue="0.67420296717171713" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.81808750549999998" green="1" blue="0.67879869800000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1877,6 +1849,35 @@
                                             <action selector="importScheduleButtonPressed:" destination="u7Q-2T-ZIj" eventType="touchUpInside" id="9mP-xL-kTS"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WL9-4Z-Do4">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.29237689389999999" green="0.29237689389999999" blue="0.29237689389999999" alpha="0.60359480570000001" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="FBK-zq-dVd"/>
+                                            <constraint firstAttribute="height" constant="33" id="vka-iq-B8P"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <state key="normal" title="﹢">
+                                            <color key="titleColor" red="0.81808750548443032" green="1" blue="0.6787986979812306" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="FBK-zq-dVd"/>
+                                                <exclude reference="vka-iq-B8P"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="FBK-zq-dVd"/>
+                                                <include reference="vka-iq-B8P"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="addFriendButtonPressed:" destination="53Q-rn-P9C" eventType="touchUpInside" id="vM0-gh-rBl"/>
+                                            <segue destination="2iU-cR-3ET" kind="presentation" id="7xr-oj-ohZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1884,55 +1885,57 @@
                                     <constraint firstAttribute="height" constant="90" id="0id-PK-A6Y"/>
                                     <constraint firstItem="7k9-vr-gPU" firstAttribute="leading" secondItem="gJX-tP-vgi" secondAttribute="leading" constant="14" id="2M3-cd-gzI"/>
                                     <constraint firstItem="WL9-4Z-Do4" firstAttribute="leading" secondItem="hR6-Rq-jJC" secondAttribute="trailing" constant="8" id="CtR-Pw-f7h"/>
+                                    <constraint firstItem="7k9-vr-gPU" firstAttribute="centerY" secondItem="hR6-Rq-jJC" secondAttribute="centerY" id="Hnj-3J-frc"/>
                                     <constraint firstAttribute="trailing" secondItem="WL9-4Z-Do4" secondAttribute="trailing" constant="8" id="J4Y-eo-SGY"/>
-                                    <constraint firstAttribute="bottom" secondItem="hR6-Rq-jJC" secondAttribute="bottom" constant="6" id="M0L-V4-F7j"/>
                                     <constraint firstItem="Pss-9I-Axz" firstAttribute="leading" secondItem="gJX-tP-vgi" secondAttribute="leadingMargin" id="QU4-JX-2kP"/>
-                                    <constraint firstAttribute="bottom" secondItem="7k9-vr-gPU" secondAttribute="bottom" constant="7" id="aNZ-rx-Ng2"/>
+                                    <constraint firstItem="hR6-Rq-jJC" firstAttribute="centerY" secondItem="WL9-4Z-Do4" secondAttribute="centerY" id="e4t-KX-3uz"/>
                                     <constraint firstItem="Pss-9I-Axz" firstAttribute="top" secondItem="gJX-tP-vgi" secondAttribute="topMargin" constant="19" id="ecG-22-M0D"/>
                                     <constraint firstItem="Pss-9I-Axz" firstAttribute="trailing" secondItem="gJX-tP-vgi" secondAttribute="trailingMargin" id="esa-Bt-Nya"/>
                                     <constraint firstAttribute="bottom" secondItem="WL9-4Z-Do4" secondAttribute="bottom" constant="8" id="gvh-bq-8NM"/>
-                                    <constraint firstItem="WL9-4Z-Do4" firstAttribute="leading" secondItem="hR6-Rq-jJC" secondAttribute="trailing" constant="8" id="lUB-8T-EaK"/>
+                                    <constraint firstItem="WL9-4Z-Do4" firstAttribute="leading" secondItem="hR6-Rq-jJC" secondAttribute="trailing" constant="8" id="lUB-8T-EaK">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="14"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="WL9-4Z-Do4"/>
                                         <exclude reference="Pss-9I-Axz"/>
                                         <exclude reference="7k9-vr-gPU"/>
                                         <exclude reference="hR6-Rq-jJC"/>
+                                        <exclude reference="WL9-4Z-Do4"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="0id-PK-A6Y"/>
+                                        <exclude reference="QU4-JX-2kP"/>
+                                        <exclude reference="ecG-22-M0D"/>
+                                        <exclude reference="esa-Bt-Nya"/>
                                         <exclude reference="2M3-cd-gzI"/>
-                                        <exclude reference="aNZ-rx-Ng2"/>
+                                        <exclude reference="Hnj-3J-frc"/>
+                                        <exclude reference="e4t-KX-3uz"/>
                                         <exclude reference="CtR-Pw-f7h"/>
                                         <exclude reference="J4Y-eo-SGY"/>
                                         <exclude reference="gvh-bq-8NM"/>
                                         <exclude reference="lUB-8T-EaK"/>
-                                        <exclude reference="M0L-V4-F7j"/>
-                                        <exclude reference="QU4-JX-2kP"/>
-                                        <exclude reference="ecG-22-M0D"/>
-                                        <exclude reference="esa-Bt-Nya"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
-                                        <include reference="WL9-4Z-Do4"/>
                                         <include reference="Pss-9I-Axz"/>
                                         <include reference="7k9-vr-gPU"/>
                                         <include reference="hR6-Rq-jJC"/>
+                                        <include reference="WL9-4Z-Do4"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="0id-PK-A6Y"/>
+                                        <include reference="QU4-JX-2kP"/>
+                                        <include reference="ecG-22-M0D"/>
+                                        <include reference="esa-Bt-Nya"/>
                                         <include reference="2M3-cd-gzI"/>
-                                        <include reference="aNZ-rx-Ng2"/>
+                                        <include reference="Hnj-3J-frc"/>
+                                        <include reference="e4t-KX-3uz"/>
                                         <exclude reference="CtR-Pw-f7h"/>
                                         <include reference="J4Y-eo-SGY"/>
                                         <include reference="gvh-bq-8NM"/>
                                         <include reference="lUB-8T-EaK"/>
-                                        <include reference="M0L-V4-F7j"/>
-                                        <include reference="QU4-JX-2kP"/>
-                                        <include reference="ecG-22-M0D"/>
-                                        <include reference="esa-Bt-Nya"/>
                                     </mask>
                                 </variation>
                             </view>

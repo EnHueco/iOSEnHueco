@@ -53,6 +53,7 @@
 		F15209671BA9135A00D05154 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = F15209661BA9135A00D05154 /* whatsapp.png */; settings = {ASSET_TAGS = (); }; };
 		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F197BFD31BAA043E00DEDE0D /* EHObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHObject.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -145,6 +146,7 @@
 		F15209661BA9135A00D05154 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
 		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
+		F197BFD21BAA043E00DEDE0D /* EHObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHObject.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
 		F1B343621B9BBFAE00EED205 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1B343631B9BBFAE00EED205 /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 		F1229C2C1A7495A200C4FDE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F197BFD21BAA043E00DEDE0D /* EHObject.swift */,
 				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
 				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
 				F113D1611B7CDD3A00325209 /* User.swift */,
@@ -573,6 +576,7 @@
 				F1FAFF9F1B9FBB8000E8CCDD /* GapsViewController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */,
+				F197BFD31BAA043E00DEDE0D /* EHObject.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,

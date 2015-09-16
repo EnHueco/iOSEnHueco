@@ -29,7 +29,6 @@ class FriendDetailViewController: UIViewController
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
 
         setRecordId()
-        
     }
     
     override func viewWillAppear(animated: Bool)
