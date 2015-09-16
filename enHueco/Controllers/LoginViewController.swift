@@ -23,20 +23,19 @@ class LoginViewController : UIViewController
     
     @IBAction func login(sender: AnyObject)
     {
-        guard let username = usernameTextField.text, password = passwordTextField.text else { /* TODO: Mostrar error */ return  }
         
-//        system.login(username, password: password)
+        guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
+        {
+            // Test
+            let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+            navigationController!.pushViewController(mainViewController, animated: true)
+            return
+            /////////
+        }
         
         //TODO: Show loading indicator
-        
-        
-        
-        // Test
-        
-        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-        navigationController!.pushViewController(mainViewController, animated: true)
-        
-        /////////
+        system.login(username, password: password)
+
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -56,6 +55,7 @@ class LoginViewController : UIViewController
     
     func systemCouldNotLoginWithError (notification: NSNotification)
     {
+
         //TODO: Mostrar error
     }
 }

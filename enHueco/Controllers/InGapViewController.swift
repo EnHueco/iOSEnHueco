@@ -25,10 +25,23 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
         self.tableView.reloadData()
+        
+        var emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        emptyLabel.text = "No tienes amigos en hueco"
+        emptyLabel.textColor = UIColor.grayColor()
+        emptyLabel.textAlignment = NSTextAlignment.Center
+        
+        if(friendsAndGaps.count == 0 ){
+            self.tableView.backgroundView = emptyLabel
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        } else {
+
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+
         return self.friendsAndGaps.count
     }
     

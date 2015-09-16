@@ -19,6 +19,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
+        
     }
     
     override func viewWillAppear(animated: Bool)
@@ -27,6 +28,20 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendsTableView.reloadData()
         
         navigationController?.navigationBarHidden = true
+        
+        let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
+        emptyLabel.lineBreakMode = .ByWordWrapping
+        emptyLabel.numberOfLines = 0
+        emptyLabel.textColor = UIColor.grayColor()
+        emptyLabel.textAlignment = NSTextAlignment.Center
+        
+        if(system.appUser.friends.count == 0 ){
+            self.friendsTableView.backgroundView = emptyLabel
+            self.friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        } else {
+            
+        }
         
     }
     

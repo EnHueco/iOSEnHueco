@@ -44,12 +44,13 @@ class System
         //Pruebas
         
         appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: "", firstNames: "Pepito Alberto", lastNames: "Perez Uribe", phoneNumber: "94189", imageURL: nil)
-        let friend = User(username: "amiguito123", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "1234567", imageURL: nil)
-        let start = NSDateComponents(); start.hour = 0; start.minute = 00
-        let end = NSDateComponents(); end.hour = 1; end.minute = 00
-        let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
-        friend.schedule.weekDays[6].addGap(gap)
-        appUser.friends.append(friend)
+
+//        let friend = User(username: "amiguito123", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "1234567", imageURL: nil)
+//        let start = NSDateComponents(); start.hour = 0; start.minute = 00
+//        let end = NSDateComponents(); end.hour = 1; end.minute = 00
+//        let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
+//        friend.schedule.weekDays[6].addGap(gap)
+//        appUser.friends.append(friend)
         
         //////////
     }

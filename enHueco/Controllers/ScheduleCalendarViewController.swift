@@ -2,7 +2,7 @@
 //  ScheduleViewController.swift
 //  enHueco
 //
-//  Created by Diego on 9/12/15.
+//  Created by Diego on 9/12/15./Users/Diego/Dropbox/Proyectos/EH/iOSEnHueco/enHueco/Controllers/ScheduleCalendarViewController.swift
 //  Copyright © 2015 Diego Gómez. All rights reserved.
 //
 
@@ -31,7 +31,6 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
         currentDate = NSDate()
     }
     
@@ -74,6 +73,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
-        
+        print("ENTRA")
     }
+    
+    
 }

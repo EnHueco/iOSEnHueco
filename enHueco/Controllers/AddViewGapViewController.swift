@@ -16,37 +16,14 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     var gapToEdit : Gap?
     
-    @IBAction func save(sender: UIButton)
-    {
-        let calendar = NSCalendar.currentCalendar()
-        calendar.timeZone = NSTimeZone(name: "UTC")!
-
-        let hourMinute: NSCalendarUnit = [.Hour, .Minute]
-        let startHour = calendar.components(hourMinute, fromDate: startHourDatePicker.date)
-        let endHour = calendar.components(hourMinute, fromDate: endHourDatePicker.date)
-        
-        let daySchedule = system.appUser.schedule.weekDays[dayPicker.selectedRowInComponent(0)+2]
     
-        if let gapToEdit = gapToEdit
-        {
-            daySchedule.removeGap(gapToEdit)
-        }
-
-        let gap = Gap(daySchedule: daySchedule, startHour: startHour, endHour: endHour)
-        daySchedule.addGap(gap)
-
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func cancel(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.dayPicker.dataSource = self
         self.dayPicker.delegate = self
+        
         
         if gapToEdit != nil
         {
@@ -58,7 +35,8 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             endHourDatePicker.setDate(cal.dateFromComponents(gapToEdit!.endHour)!, animated: true)
         }
 
-        // Do any additional setup after loading the view.
+        // Set end datepicker min to startdatepicker+1
+        endHourDatePicker.minimumDate = startHourDatePicker.date
     }
 
     override func didReceiveMemoryWarning()
@@ -82,6 +60,37 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         return system.appUser.schedule.weekDays[row+2].weekDayName
+    }
+    
+    @IBAction func startHourChanged(sender: UIDatePicker)
+    {
+        endHourDatePicker.minimumDate = startHourDatePicker.date
+    }
+    
+    @IBAction func save(sender: UIButton)
+    {
+        let calendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let hourMinute: NSCalendarUnit = [.Hour, .Minute]
+        let startHour = calendar.components(hourMinute, fromDate: startHourDatePicker.date)
+        let endHour = calendar.components(hourMinute, fromDate: endHourDatePicker.date)
+        
+        let daySchedule = system.appUser.schedule.weekDays[dayPicker.selectedRowInComponent(0)+2]
+        
+        if let gapToEdit = gapToEdit
+        {
+            daySchedule.removeGap(gapToEdit)
+        }
+        
+        let gap = Gap(daySchedule: daySchedule, startHour: startHour, endHour: endHour)
+        daySchedule.addGap(gap)
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*
