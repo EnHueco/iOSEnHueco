@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController
     override func viewDidLoad()
     {
         firstNamesLabel.text = system.appUser.firstNames
-        firstNamesLabel.text = system.appUser.lastNames
+        lastNamesLabel.text = system.appUser.lastNames
         usernameLabel.text = system.appUser.username
 
         editScheduleButton.clipsToBounds = true
