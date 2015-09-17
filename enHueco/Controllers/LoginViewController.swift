@@ -8,11 +8,13 @@
 
 import UIKit
 
-class LoginViewController : UIViewController
+
+@IBDesignable class LoginViewController : UIViewController
 {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad()
     {
@@ -20,6 +22,9 @@ class LoginViewController : UIViewController
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin.rawValue, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: system)
+        
+        loginButton.clipsToBounds = true
+        loginButton.layer.cornerRadius = loginButton.frame.height/2
     }
     
     @IBAction func login(sender: AnyObject)

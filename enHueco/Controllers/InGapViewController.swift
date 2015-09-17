@@ -67,6 +67,9 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.friendNameLabel.text = friendAndGap.friend.name
         cell.friendUsernameLabel.text = self.friendsAndGaps[indexPath.row].friend.username
         
+        cell.friendImageImageView.clipsToBounds = true
+        cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
+        
         // TODO: Update InGapFriendCell image to match friend.
         
         return cell

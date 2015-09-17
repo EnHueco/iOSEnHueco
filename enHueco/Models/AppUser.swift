@@ -78,7 +78,7 @@ class AppUser: User
         
         let username = mainComponents[0]
         
-        let fullNameComponents = mainComponents[1].componentsSeparatedByString(",")
+        let fullNameComponents = mainComponents[1].componentsSeparatedByString("&")
         let firstNames = fullNameComponents[0]
         let lastNames = fullNameComponents[1]
         
@@ -94,7 +94,7 @@ class AppUser: User
             var classes = [Class]()
 
             let encodedWeekDayComponents = encodedWeekDay.componentsSeparatedByString("#")
-            let encodedGaps = encodedWeekDayComponents[0].componentsSeparatedByString(",")
+            let encodedGaps = encodedWeekDayComponents[0].componentsSeparatedByString("&")
             
             if encodedWeekDayComponents[0] != ""
             {
@@ -118,7 +118,7 @@ class AppUser: User
             
             if encodedWeekDayComponents[1] != ""
             {
-                let encodedClasses = encodedWeekDayComponents[1].componentsSeparatedByString(",")
+                let encodedClasses = encodedWeekDayComponents[1].componentsSeparatedByString("&")
                 
                 for encodedClass in encodedClasses
                 {
@@ -169,7 +169,7 @@ class AppUser: User
     func stringEncodedUserRepresentation () -> String
     {
         var encodedSchedule = username
-        encodedSchedule += "/" + firstNames + "," + lastNames
+        encodedSchedule += "/" + firstNames + "&" + lastNames
         encodedSchedule += "/" + String(phoneNumber)
         encodedSchedule += "/ /"
         
@@ -181,7 +181,7 @@ class AppUser: User
                 encodedSchedule += "-"
                 encodedSchedule += "\(gap.endHour.hour):\(gap.endHour.minute)"
 
-                if j != daySchedule.gaps.count-1 { encodedSchedule += "," }
+                if j != daySchedule.gaps.count-1 { encodedSchedule += "&" }
             }
             
             encodedSchedule += "#"
@@ -195,7 +195,7 @@ class AppUser: User
                 encodedSchedule += "\(aClass.endHour.hour):\(aClass.endHour.minute)"
                 if let location = aClass.location { encodedSchedule += "-" + location }
                 
-                if j != daySchedule.classes.count-1 { encodedSchedule += "," }
+                if j != daySchedule.classes.count-1 { encodedSchedule += "&" }
             }
             
             if i != schedule.weekDays.count-1 { encodedSchedule += "|" }
