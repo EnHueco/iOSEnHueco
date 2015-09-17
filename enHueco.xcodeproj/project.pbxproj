@@ -51,6 +51,8 @@
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
 		F15209651BA912D600D05154 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F15209641BA912D600D05154 /* search.png */; settings = {ASSET_TAGS = (); }; };
 		F15209671BA9135A00D05154 /* whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = F15209661BA9135A00D05154 /* whatsapp.png */; settings = {ASSET_TAGS = (); }; };
+		F1673E381BAA38C70010A410 /* FriendAddQR.png in Resources */ = {isa = PBXBuildFile; fileRef = F1673E361BAA38C70010A410 /* FriendAddQR.png */; settings = {ASSET_TAGS = (); }; };
+		F1673E391BAA38C70010A410 /* FriendAddSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = F1673E371BAA38C70010A410 /* FriendAddSearch.png */; settings = {ASSET_TAGS = (); }; };
 		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F197BFD31BAA043E00DEDE0D /* EHObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHObject.swift */; settings = {ASSET_TAGS = (); }; };
@@ -144,6 +146,8 @@
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F15209641BA912D600D05154 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		F15209661BA9135A00D05154 /* whatsapp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whatsapp.png; sourceTree = "<group>"; };
+		F1673E361BAA38C70010A410 /* FriendAddQR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FriendAddQR.png; sourceTree = "<group>"; };
+		F1673E371BAA38C70010A410 /* FriendAddSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FriendAddSearch.png; sourceTree = "<group>"; };
 		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		F197BFD21BAA043E00DEDE0D /* EHObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHObject.swift; sourceTree = "<group>"; };
@@ -340,6 +344,8 @@
 		F1229C231A7495A200C4FDE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F1673E361BAA38C70010A410 /* FriendAddQR.png */,
+				F1673E371BAA38C70010A410 /* FriendAddSearch.png */,
 				F15209641BA912D600D05154 /* search.png */,
 				F15209661BA9135A00D05154 /* whatsapp.png */,
 				F1179E711B9BB5F500B04400 /* Cells */,
@@ -455,7 +461,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -492,6 +498,8 @@
 				F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */,
 				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
 				F1B343671B9BBFAE00EED205 /* Info.plist in Resources */,
+				F1673E391BAA38C70010A410 /* FriendAddSearch.png in Resources */,
+				F1673E381BAA38C70010A410 /* FriendAddQR.png in Resources */,
 				F15209651BA912D600D05154 /* search.png in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
@@ -740,6 +748,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Debug;
@@ -770,6 +779,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Release;

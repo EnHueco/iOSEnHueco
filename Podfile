@@ -18,6 +18,8 @@ pod 'APAddressBook'
 # TS Messages (Notifications)
 pod 'TSMessages'
 
+# MR Progress
+pod 'MRProgress'
 
 target 'enHuecoTests' do
  
