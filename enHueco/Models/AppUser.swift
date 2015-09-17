@@ -146,7 +146,15 @@ class AppUser: User
             friend.schedule.weekDays[i].setClasses(classes)
         }
         
-        friends.append(friend)
+
+        for (index, aFriend) in friends.enumerate()
+        {
+            if aFriend.username == friend.username
+            {
+                friends[index] = friend
+                break
+            }
+        }
         
         NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend.rawValue, object: system, userInfo: nil)
     }
