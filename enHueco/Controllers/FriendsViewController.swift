@@ -13,12 +13,20 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     
+    var emptyLabel : UILabel?
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
 
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
+        
+        emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+        emptyLabel!.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
+        emptyLabel!.lineBreakMode = .ByWordWrapping
+        emptyLabel!.numberOfLines = 0
+        emptyLabel!.textColor = UIColor.grayColor()
+        emptyLabel!.textAlignment = NSTextAlignment.Center
         
     }
     
@@ -29,13 +37,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         navigationController?.navigationBarHidden = true
         
-        let emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
-        emptyLabel.lineBreakMode = .ByWordWrapping
-        emptyLabel.numberOfLines = 0
-        emptyLabel.textColor = UIColor.grayColor()
-        emptyLabel.textAlignment = NSTextAlignment.Center
-        
         if system.appUser.friends.count == 0
         {
             self.friendsTableView.backgroundView = emptyLabel
@@ -43,6 +44,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         else
         {
+            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            friendsTableView.backgroundView = nil
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
         

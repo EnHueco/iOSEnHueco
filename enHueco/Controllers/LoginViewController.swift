@@ -48,6 +48,7 @@ import UIKit
     
     @IBAction func login(sender: AnyObject)
     {
+        view.endEditing(true)
         guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
         {
             if usernameTextField.text == "" { TSMessage.showNotificationWithTitle("El login se encuentra vacío", type: TSMessageNotificationType.Warning) }

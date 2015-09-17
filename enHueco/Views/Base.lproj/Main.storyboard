@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -732,7 +732,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="En Hueco" id="fM2-fE-HDl"/>
+                    <tabBarItem key="tabBarItem" title="En Hueco" image="EnHuecoB50" selectedImage="EnHuecoV50" id="fM2-fE-HDl"/>
                     <toolbarItems>
                         <barButtonItem title="Item" id="nws-94-r19"/>
                         <barButtonItem title="Item" id="o8V-b9-6jO"/>
@@ -1637,7 +1637,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Mi Perfil" id="27q-QX-vEE"/>
+                    <tabBarItem key="tabBarItem" title="Mi Perfil" image="UsuarioB50" selectedImage="UsuarioV50" id="27q-QX-vEE"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="appUserQRImageView" destination="orn-qt-bTs" id="SVS-qq-TFm"/>
@@ -3446,7 +3446,7 @@
         <scene sceneID="QFT-td-djh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3NJ-y1-ZTa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Amigos" id="Vxa-4A-TC8"/>
+                    <tabBarItem key="tabBarItem" title="Amigos" image="Agregar AmigosB50" selectedImage="Agregar AmigosV50" id="Vxa-4A-TC8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xHF-y5-utq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3987,8 +3987,14 @@
     </scenes>
     <resources>
         <image name="AddByQR" width="283" height="269"/>
+        <image name="Agregar AmigosB50" width="25" height="24"/>
+        <image name="Agregar AmigosV50" width="25" height="24"/>
+        <image name="EnHuecoB50" width="25" height="27"/>
+        <image name="EnHuecoV50" width="25" height="27"/>
         <image name="Phone" width="253" height="255"/>
         <image name="Search" width="160" height="160"/>
+        <image name="UsuarioB50" width="25" height="25"/>
+        <image name="UsuarioV50" width="25" height="25"/>
         <image name="Whatsapp" width="158" height="157"/>
     </resources>
     <inferredMetricsTieBreakers>

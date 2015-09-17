@@ -39,8 +39,12 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         else
         {
+<<<<<<< HEAD
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            self.tableView.backgroundView = nil
+=======
             tableView.backgroundView = nil
+>>>>>>> origin/Development
             tableView.tableFooterView = UIView(frame: CGRectZero)
         }
     }
