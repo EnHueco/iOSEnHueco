@@ -36,26 +36,37 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendsTableView.reloadData()
         
         navigationController?.navigationBarHidden = true
-        
         if system.appUser.friends.count == 0
         {
-            self.friendsTableView.backgroundView = emptyLabel
-            self.friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            friendsTableView.backgroundView = emptyLabel
+            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         }
         else
         {
-            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             friendsTableView.backgroundView = nil
+            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
-        
     }
     
     override func viewDidAppear(animated: Bool)
     {
+
+        
         if let selectedIndex = friendsTableView.indexPathForSelectedRow
         {
             friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+        }
+        if system.appUser.friends.count == 0
+        {
+            friendsTableView.backgroundView = emptyLabel
+            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        }
+        else
+        {
+            friendsTableView.backgroundView = nil
+            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
     }
 
