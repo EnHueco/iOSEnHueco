@@ -45,7 +45,7 @@ class System
         
         if !loadDataFromPersistence()
         {
-            createTestAppUser()
+            
         }
     }
     

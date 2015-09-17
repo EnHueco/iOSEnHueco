@@ -33,6 +33,12 @@ import UIKit
         
         loginButton.clipsToBounds = true
         loginButton.layer.cornerRadius = loginButton.frame.height/2
+        
+        if system.appUser != nil
+        {
+            let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+            self.presentViewController(mainViewController, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(animated: Bool)
@@ -52,12 +58,13 @@ import UIKit
         if usernameTextField.text == "test" && passwordTextField.text == "test"
         {
             // Test
+            system.createTestAppUser()
+            
             let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
             navigationController!.pushViewController(mainViewController, animated: true)
             return
             /////////
         }
-        
         
         MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
         
@@ -74,13 +81,12 @@ import UIKit
     {
         NSThread.sleepForTimeInterval(0.5)
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+        
         dispatch_async(dispatch_get_main_queue())
         {
             self.presentViewController(mainViewController, animated: true, completion: nil)
             MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
         }
-        
-
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)
