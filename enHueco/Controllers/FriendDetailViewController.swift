@@ -11,7 +11,8 @@ import UIKit
 class FriendDetailViewController: UIViewController
 {
     @IBOutlet weak var imageImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var firstNamesLabel: UILabel!
+    @IBOutlet weak var lastNamesLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var viewScheduleButton: UIButton!
    
@@ -28,7 +29,8 @@ class FriendDetailViewController: UIViewController
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height/2
         
-        nameLabel.text = friend.firstNames
+        firstNamesLabel.text = friend.firstNames
+        lastNamesLabel.text = friend.lastNames
         userNameLabel.text = friend.username
         
         navigationController!.navigationBar.barStyle = UIBarStyle.Black

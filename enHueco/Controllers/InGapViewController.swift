@@ -76,7 +76,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let timeLeftUntilNextEvent = gapEndHourWithTodaysDate - currentDate
         
-        cell.timeLeftUntilNextEventLabel.text = "🕖 \(timeLeftUntilNextEvent.hour):\(timeLeftUntilNextEvent.minute)"
+        cell.timeLeftUntilNextEventLabel.text = "🕖 \(timeLeftUntilNextEvent.hour):\(timeLeftUntilNextEvent.minute) hrs"
         
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
