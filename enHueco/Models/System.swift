@@ -41,7 +41,7 @@ class System
     
     private init()
     {
-        persistancePath = documents + "appState.state"
+        persistancePath = documents + "/appState.state"
         
         if !loadDataFromPersistence()
         {
@@ -53,7 +53,7 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: nil)
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "http://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg")!)
 
         let friend = User(username: "amiguito123", firstNames: "Pepito", lastNames: "Sefair", phoneNumber: "3176694189", imageURL: nil)
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
@@ -114,7 +114,17 @@ class System
     
     func logOut()
     {
-        // TODO: Persist information, send logout notification to server so token is deleted.
+        // TODO: Delete persistence information, send logout notification to server so token is deleted.
+        
+        do
+        {
+            appUser = nil
+            try NSFileManager.defaultManager().removeItemAtPath(persistancePath)
+        }
+        catch
+        {
+            
+        }
     }
     
     func updateFriendsAndFriendsSchedules ()

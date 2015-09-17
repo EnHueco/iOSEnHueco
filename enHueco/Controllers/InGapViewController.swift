@@ -81,6 +81,19 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
         
+        if let imageURL = friendAndGap.friend.imageURL
+        {
+            dispatch_async(dispatch_get_main_queue())
+            {
+                let image = UIImage(data: NSData(contentsOfURL: imageURL)!)
+                
+                if let image = image
+                {
+                    cell.imageView?.image = image
+                }
+            }
+        }
+        
         // TODO: Update InGapFriendCell image to match friend.
         
         return cell

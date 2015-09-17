@@ -26,9 +26,6 @@ class FriendDetailViewController: UIViewController
         viewScheduleButton.clipsToBounds = true
         viewScheduleButton.layer.cornerRadius = 4
         
-        imageImageView.clipsToBounds = true
-        imageImageView.layer.cornerRadius = imageImageView.frame.height/2
-        
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
         userNameLabel.text = friend.username
@@ -38,6 +35,27 @@ class FriendDetailViewController: UIViewController
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
 
         setRecordId()
+        
+        if let imageURL = system.appUser.imageURL
+        {
+            dispatch_async(dispatch_get_main_queue())
+                {
+                    let image = UIImage(data: NSData(contentsOfURL: imageURL)!)
+                    
+                    if let image = image
+                    {
+                        self.imageImageView.image = image
+                    }
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        imageImageView.clipsToBounds = true
+        imageImageView.layer.cornerRadius = imageImageView.frame.height/2
     }
     
     override func viewWillAppear(animated: Bool)
