@@ -12,5 +12,5 @@ class InGapFriendCell: UITableViewCell
 {
     @IBOutlet weak var friendImageImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
-    @IBOutlet weak var friendUsernameLabel: UILabel!
+    @IBOutlet weak var timeLeftUntilNextEventLabel: UILabel!
 }

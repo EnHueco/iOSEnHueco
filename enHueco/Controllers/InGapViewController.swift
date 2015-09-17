@@ -29,17 +29,17 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
-        self.tableView.reloadData()
+        friendsAndGaps = system.appUser.friendsCurrentlyInGap()
+        tableView.reloadData()
         
         if friendsAndGaps.count == 0
         {
-            self.tableView.backgroundView = emptyLabel
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.backgroundView = emptyLabel
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         }
         else
         {
-            self.tableView.backgroundView = nil
+            tableView.backgroundView = nil
             tableView.tableFooterView = UIView(frame: CGRectZero)
         }
     }
@@ -65,7 +65,17 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
         cell.friendNameLabel.text = friendAndGap.friend.name
-        cell.friendUsernameLabel.text = self.friendsAndGaps[indexPath.row].friend.username
+        
+        let globalCalendar = NSCalendar.currentCalendar()
+        globalCalendar.timeZone = NSTimeZone(abbreviation: "GMT")!
+        
+        let currentDate = NSDate()
+        let gapEndHour = friendAndGap.gap.endHour
+        let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gapEndHour.hour, minute: gapEndHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
+        
+        let timeLeftUntilNextEvent = gapEndHourWithTodaysDate - currentDate
+        
+        cell.timeLeftUntilNextEventLabel.text = "🕖 \(timeLeftUntilNextEvent.hour):\(timeLeftUntilNextEvent.minute)"
         
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
