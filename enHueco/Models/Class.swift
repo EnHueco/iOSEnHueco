@@ -12,13 +12,13 @@ class Class: NSObject
 {
     unowned let daySchedule: DaySchedule
 
-    let name:String
+    let name:String?
     let startHour: NSDateComponents
     let endHour: NSDateComponents
     
     var location: String?
     
-    init(daySchedule: DaySchedule, name:String, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
+    init(daySchedule: DaySchedule, name:String?, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
     {
         self.daySchedule = daySchedule
         self.name = name
@@ -34,7 +34,6 @@ class Class: NSObject
     {
         guard
             let daySchedule = decoder.decodeObjectForKey("daySchedule") as? DaySchedule,
-            let name = decoder.decodeObjectForKey("name") as? String,
             let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
             let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
         else
@@ -49,7 +48,7 @@ class Class: NSObject
         }
         
         self.daySchedule = daySchedule
-        self.name = name
+        self.name = decoder.decodeObjectForKey("name") as? String
         self.startHour = startHour
         self.endHour = endHour
         self.location = decoder.decodeObjectForKey("location") as? String

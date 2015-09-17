@@ -118,20 +118,21 @@ class AppUser: User
                 {
                     let classComponents = encodedClass.componentsSeparatedByString("-")
                     
-                    let startHourComponents = classComponents[0].componentsSeparatedByString(":")
+                    let name: String? = classComponents[0] != "" ? classComponents[0] : nil
+                    
+                    let startHourComponents = classComponents[1].componentsSeparatedByString(":")
                     let startHourDateComponents = NSDateComponents()
                     startHourDateComponents.hour = Int(startHourComponents[0])!
                     startHourDateComponents.minute = Int(startHourComponents[1])!
                     
-                    let endHourComponents = classComponents[1].componentsSeparatedByString(":")
+                    let endHourComponents = classComponents[2].componentsSeparatedByString(":")
                     let endHourDateComponents = NSDateComponents()
                     endHourDateComponents.hour = Int(endHourComponents[0])!
                     endHourDateComponents.minute = Int(endHourComponents[1])!
                     
-                    let location = classComponents[2]
+                    let location = classComponents[3]
                     
-                    //TODO: Add name to the class
-                    classes.append(Class(daySchedule: schedule.weekDays[i], name:"", startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
+                    classes.append(Class(daySchedule: schedule.weekDays[i], name:name, startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
                 }
             }
             
@@ -181,12 +182,12 @@ class AppUser: User
             
             for (j, aClass) in daySchedule.classes.enumerate()
             {
-                // Add name to the class
-                
+                if let name = aClass.name { encodedSchedule += name }
+                encodedSchedule += "-"
                 encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
                 encodedSchedule += "-"
                 encodedSchedule += "\(aClass.endHour.hour):\(aClass.endHour.minute)"
-                if aClass.location != nil { encodedSchedule += "-"+aClass.location! }
+                if let location = aClass.location { encodedSchedule += "-" + location }
                 
                 if j != daySchedule.classes.count-1 { encodedSchedule += "," }
             }
@@ -197,7 +198,11 @@ class AppUser: User
         return encodedSchedule
     }
     
-    func importScheduleFromCalendar(calendar: EKCalendar) -> Bool
+    /** 
+        Imports an schedule of classes from a device's calendar.
+        - Parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added.
+    */
+    func importScheduleFromCalendar(calendar: EKCalendar, generateGapsBetweenClasses:Bool) -> Bool
     {
         let today = NSDate()
         let eventStore = EKEventStore()
@@ -244,7 +249,10 @@ class AppUser: User
             weekDayDaySchedule.addClass(aClass)
         }
         
-        //TODO: Calculate Gaps and add them
+        if generateGapsBetweenClasses
+        {
+            //TODO: Calculate Gaps and add them
+        }
         
         return true
     }

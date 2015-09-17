@@ -19,10 +19,6 @@ class ProfileViewController: UIViewController
     
     override func viewDidLoad()
     {
-        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
-        
-        appUserQRImageView.image = code?.image
-        
         firstNamesLabel.text = system.appUser.firstNames
         firstNamesLabel.text = system.appUser.lastNames
         usernameLabel.text = system.appUser.username
@@ -31,11 +27,14 @@ class ProfileViewController: UIViewController
         editScheduleButton.layer.cornerRadius = 4
     }
     
+    override func viewDidAppear(animated: Bool)
+    {
+        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+        appUserQRImageView.image = code?.image
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
-    
-    
-    
 }
