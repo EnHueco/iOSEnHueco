@@ -74,11 +74,14 @@ class FriendDetailViewController: UIViewController
             self.recordId = nil
             return
         }
+        
         let addressBook = APAddressBook()
         addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
         addressBook.loadContacts(
             { (contacts: [AnyObject]!, error: NSError!) in
-                if contacts != nil {
+                
+                if contacts != nil
+                {
                     for contact in contacts
                     {
                         if let contactAP = contact as? APContact
@@ -93,8 +96,9 @@ class FriendDetailViewController: UIViewController
                                     phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
                                     phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
                                     phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                                    print(phoneString)
-                                    if phoneString.rangeOfString(self.friend.phoneNumber) != nil{
+                                    
+                                    if phoneString.rangeOfString(self.friend.phoneNumber) != nil
+                                    {
                                         self.recordId = contactAP.recordID
                                         return
                                     }
@@ -103,12 +107,14 @@ class FriendDetailViewController: UIViewController
                         }
                     }
                 }
-                else if (error != nil) {
+                else if (error != nil)
+                {
                     self.recordId = nil
                 }
                 self.recordId = nil
         })
     }
+    
     /*
     // MARK: - Navigation
 
@@ -118,5 +124,4 @@ class FriendDetailViewController: UIViewController
         // Pass the selected object to the new view controller.
     }
     */
-
 }

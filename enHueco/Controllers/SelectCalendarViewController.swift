@@ -19,6 +19,9 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
     
     var calendars: [EKCalendar]?
     
+    var importScheduleQuestionAlertView: UIAlertView?
+    var generateGapsQuestionAlertView: UIAlertView?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -106,7 +109,8 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
     {
         selectedCalendar = calendars![indexPath.row]
         
-        UIAlertView(title: "Importar horario", message: "¿Estás seguro que deseas importar tu horario del calendario \"\(selectedCalendar.title)\"?", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Importar").show()
+        importScheduleQuestionAlertView = UIAlertView(title: "Importar horario", message: "¿Estás seguro que deseas importar tu horario del calendario \"\(selectedCalendar.title)\"?", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Importar")
+        importScheduleQuestionAlertView!.show()
         
         /*let controller = storyboard!.instantiateViewControllerWithIdentifier("ImportScheduleFromLocalCalendarViewController") as! ImportScheduleFromLocalCalendarViewController
         controller.calendar = calendar
@@ -116,13 +120,21 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
     {
-        if system.appUser.importScheduleFromCalendar(selectedCalendar)
+        if alertView === importScheduleQuestionAlertView
         {
-            navigationController!.popViewControllerAnimated(true)
+            generateGapsQuestionAlertView = UIAlertView(title: "Generar huecos", message: "¿Deseas que generemos los huecos que detectemos entre clases por ti? \n Recuerda que a menos de que agregues huecos a tu tiempo libre tus amigos no verán que estás en hueco.", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "No, Gracias", "Si")
+            generateGapsQuestionAlertView!.show()
         }
         else
         {
-            UIAlertView(title: "Error", message: "Lo sentimos, hubo un error importando el calendario", delegate: nil, cancelButtonTitle: "Que raro").show()
+            if system.appUser.importScheduleFromCalendar(selectedCalendar, generateGapsBetweenClasses: buttonIndex == 1)
+            {
+                navigationController!.popViewControllerAnimated(true)
+            }
+            else
+            {
+                UIAlertView(title: "Error", message: "Lo sentimos, hubo un error importando el calendario", delegate: nil, cancelButtonTitle: "Que raro").show()
+            }
         }
     }
 }

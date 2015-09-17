@@ -32,16 +32,20 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
         self.tableView.reloadData()
         
-        if(friendsAndGaps.count == 0 ){
+        if friendsAndGaps.count == 0
+        {
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        } else {
+        }
+        else
+        {
             self.tableView.backgroundView = nil
             tableView.tableFooterView = UIView(frame: CGRectZero)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool)
+    {
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)

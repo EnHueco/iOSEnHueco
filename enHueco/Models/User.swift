@@ -34,6 +34,9 @@ class User: NSObject, NSCoding
         super.init()
     }
     
+    /**
+        Returns user current gap, or nil if user is not in a gap.
+    */
     func currentGap () -> Gap?
     {
         let currentDate = NSDate()
@@ -66,6 +69,9 @@ class User: NSObject, NSCoding
         return nil
     }
     
+    /**
+        Returns user's next gap or class
+    */
     func nextGapOrClass () -> Either<Gap, Class>?
     {
         return nil //TODO

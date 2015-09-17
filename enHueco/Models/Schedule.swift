@@ -10,6 +10,9 @@ import Foundation
 
 class Schedule: NSObject, NSCoding
 {
+    /**
+        DaySchedule array that makes the days of the week
+    */
     let weekDays:[DaySchedule]
     
     override init()

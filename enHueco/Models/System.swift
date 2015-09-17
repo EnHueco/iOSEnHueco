@@ -24,14 +24,24 @@ class System
         case CouldNotPersistData
     }
     
+    /**
+        Path to the documents folder
+    */
     let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    
+    /** 
+        Path where data will be persisted
+    */
     let persistancePath: String
     
+    /**
+        User of the app
+    */
     var appUser: AppUser!
     
     private init()
     {
-        persistancePath = documents + "appUser.persistence"
+        persistancePath = documents + "appState.state"
         
         if !loadDataFromPersistence()
         {
@@ -102,7 +112,6 @@ class System
         }
     }
     
-    
     func logOut()
     {
         // TODO: Persist information, send logout notification to server so token is deleted.
@@ -113,6 +122,9 @@ class System
         appUser.updateFriendsAndFriendsSchedules()
     }
     
+    /**
+        Persists all pertinent application data
+    */
     func persistData () throws
     {
         guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistancePath) else
@@ -121,6 +133,9 @@ class System
         }
     }
     
+    /**
+        Restores all pertinent application data to memory
+    */
     func loadDataFromPersistence () -> Bool
     {
         appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistancePath) as? AppUser

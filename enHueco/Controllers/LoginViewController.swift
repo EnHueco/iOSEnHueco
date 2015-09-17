@@ -23,7 +23,6 @@ class LoginViewController : UIViewController
     
     @IBAction func login(sender: AnyObject)
     {
-        
         guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
         {
             // Test

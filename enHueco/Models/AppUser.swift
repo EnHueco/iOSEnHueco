@@ -11,10 +11,12 @@ import EventKit
 
 class AppUser: User
 {
+    /**
+        Session token
+    */
     var token : String
     
     var friends = [User]()
-    
     var friendRequests = [String]()
     
     init(username: String, token : String, lastUpdatedOn: NSDate!, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?)
@@ -24,6 +26,10 @@ class AppUser: User
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
     }
     
+    /**
+        Returns all friends that are currently in gap.
+        - returns: Friend in gap with their current gap
+    */
     func friendsCurrentlyInGap() -> [(friend: User, gap: Gap)]
     {
         var friendsAndGaps = [(friend: User, gap: Gap)]()
@@ -200,7 +206,7 @@ class AppUser: User
     
     /** 
         Imports an schedule of classes from a device's calendar.
-        - Parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added.
+        - parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
     */
     func importScheduleFromCalendar(calendar: EKCalendar, generateGapsBetweenClasses:Bool) -> Bool
     {
