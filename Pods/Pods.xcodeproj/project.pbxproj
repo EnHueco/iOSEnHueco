@@ -8,248 +8,319 @@
 
 /* Begin PBXBuildFile section */
 		03C583DCA759F352D404CD91C7449248 /* QRCodeReaderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC34EC45000E216808A33EE1DFECE53 /* QRCodeReaderDelegate.h */; };
-		05710EB72C9B768D66C5A5E3CC13F43E /* APSocialProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 49C45D8A223AAD606F62DF13D7C0A202 /* APSocialProfile.h */; };
+		04DA3D322F16C06E17B95496F0B094D0 /* APAddressBook-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BDD99818FF6D1DA635D197200D83FA /* APAddressBook-dummy.m */; };
 		083BA24319DC18F6E7B9A4FE8AF4BBBF /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA07630265556F1448A84A469507F33A /* QRCodeReader.m */; };
-		08FB4392A36B6E0AE22A3F2D5E9BB631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
 		0A3A3A320F9566360182121CE04FA2F4 /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EE2D1911B8A17F76246D8E88C94D8 /* TSBlurView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0BC4E0C41A1F75B4F0D0AB00A4922273 /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A882E7F44DB8EA0C676878FEBBF5DE1 /* MCSwipeTableViewCell.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0E6088502AFCB95698B2FAC15EAC76E6 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 887B29FC537C606F24317233B6A21283 /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1DBFCAC64EE7DA5478848D1553F9C443 /* APContact.h in Headers */ = {isa = PBXBuildFile; fileRef = D5CC1F20A3190A83EA4BD243CEE2C987 /* APContact.h */; };
+		0C5C9701B9DF7BD1FED2AD4891A2A50B /* Pods-enHuecoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D88CB805ADC08AC0DDA909010995177 /* Pods-enHuecoTests-dummy.m */; };
+		1384F3395D802E45C02A20E64EDE7B62 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F66677FDAD359F95669883B08C72869 /* CoreGraphics.framework */; };
+		13F0CBE9B2E0552A02A45F9F48891734 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D04508B992C724565476DC1DE7EC6F61 /* Accelerate.framework */; };
+		1CEDC29ECFB775B61E81E94297175A0D /* MRCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E61B2C377F57F14C0798E48AF6764F /* MRCircularProgressView.m */; };
 		1DCACFD79257CAAE5817DEFC03651802 /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = A485D3CA1BEE11E510231A6A246BF3DF /* TSBlurView.h */; };
-		22A6EA1A297E6D77CE340390B842BA6E /* APPhoneWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = F8CF1FE1D9AFA5B6B2B613EA242D49B2 /* APPhoneWithLabel.h */; };
+		25F17923017E720B799B4CC73C817974 /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A2F6C3B6122B5A71E25E42BD7BB537 /* MRActivityIndicatorView.m */; };
+		26B36EC1D430BEBF0E997C25FEC4CD30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		2F4FAFB11D8AB00BD4E8BBDD26F815A5 /* APPhoneWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E37D737E1F9866E40834DE36AB6C0803 /* APPhoneWithLabel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		316AF174BF44B6B16800B0732F0B2DF5 /* QRCameraSwitchButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 582A9366C241DE0842B521FE84A066CA /* QRCameraSwitchButton.h */; };
 		32D2F8497A6C5B0A0B05FF6D90019688 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23B60E6EF4AC1363F0EF0F106A25E158 /* AVFoundation.framework */; };
-		37D1C0CEF964D6E1BDB55C301715B333 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6701BA59A3634DF329C895BAB96ABF8 /* AddressBook.framework */; };
+		368970179250AC90D52D17B195940FDC /* MRIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = B9DBEBC91939959CAA5CD12E31A20F64 /* MRIconView.h */; };
 		39A899706021DE20DD3AB257B8CCBF34 /* QRCodeReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 60792A940354BF6BACBC04125597C236 /* QRCodeReader.h */; };
-		47FA73C9DE2005E991FF26D7485AABBD /* APAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 60A78EEA635FF587949F67590D809642 /* APAddress.h */; };
-		4878D4F066CC594D1E5597F0A2EDF396 /* MCSwipeTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B154CF4B2CDCAF6F986C5959E140EF94 /* MCSwipeTableViewCell.h */; };
+		3AF08D6815CCA2265AD0E8425D57001E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		3C58ECD09A10B5EA6BA61A557140CF09 /* MCSwipeTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E20E5FDFDBE8D12705F293583208CAE /* MCSwipeTableViewCell.h */; };
+		404A346E113B57873FDBEEA1662F0FF1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB2368A3F7F94A0FBE28D0AA3EC33D6 /* AddressBook.framework */; };
+		4CD2900F18A0EDABE916EF2380CD409D /* MRProgressHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 180F19CBF73E820DF77408FA88457E2E /* MRProgressHelper.h */; };
 		4DF38CA5CF83A97A055FB7C6F5D058A5 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FA66E639ABD65108A9E1FA3F4BDD565E /* QRCameraSwitchButton.m */; };
-		5315079AAF63C00A4E8AF2B10F22DFF3 /* APAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 493D856B738D5C312D1722E7B8FA4545 /* APAddress.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		5B684EED599C8671411F1B733734839D /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C6524691A5652F5E3B6DED2912AB6E /* TSMessageView.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5C8216EE7CF2AD5C748FF355A284FF14 /* MCSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A30A6EE07C87A1509D8668B7D3F28 /* MCSwipeTableViewCell.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		604E7EACA5FB85BDAA877B48D7949F2C /* QRCodeReaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1164E44791E5F157503C8953C0BE77EB /* QRCodeReaderView.h */; };
-		62C3E83A0B7DA821276F355050A5D926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
-		6E893C5ABBD62207DDBBDCEF8E7BAB94 /* MCSwipeTableViewCell-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FC450C32E0EF3480E268E305710116 /* MCSwipeTableViewCell-dummy.m */; };
-		741A32BC5CE4EFE6D098C51DF74630C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
+		62C3E83A0B7DA821276F355050A5D926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		69A21F7076287A1AF2B2C722AEBBEE37 /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C53EDE18B0EFD004BF711DC5FFB3097 /* APContact.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6F5331F7631BB80F0843CEDE03D64DD9 /* MRCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 427FCF95DC6CE9A5BAB1A6C4DE12A546 /* MRCircularProgressView.h */; };
+		71B0BC80AC45C9778D22DCE662CEBDF0 /* UIImage+MRImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 25A5859FDFF0CD10EB742AE9D6D0C28C /* UIImage+MRImageEffects.h */; };
+		73232A06F0BACDFCF7AEBBC3C4AA943F /* APAddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 51923B11845834AD4D3B5472F28E1DA4 /* APAddressBook.h */; };
+		745B55ACB04EEAFB5A8EE6A11BD98947 /* MRBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = B688FFB3371C66564576384FD9612B81 /* MRBlurView.h */; };
+		77084DF27B5E7129649AC7F78354616B /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A46F61BED16F4012B565BD4ABD3B1376 /* Pods-dummy.m */; };
 		770D1565405C1356E5E11D5F64389DC4 /* QRCodeReaderViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9E96E6D9DDE157B6AE8F0BE2E195D /* QRCodeReaderViewController-dummy.m */; };
-		7E80A24907B52F8946CAAC84CF63C178 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
+		79145F2B158B72A14965ACC5BA2919AB /* MSCollectionViewCalendarLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E3768DDD6B3A73715539AAA379633745 /* MSCollectionViewCalendarLayout-dummy.m */; };
 		7F33BC4D534996BB66FA75AC1EA47F99 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C452BBFE6EA4F45AE10A742A95E253F /* TSMessage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8666E435D19F4A2F56797B01C2663587 /* APContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8036DD4A26FF21D7D70513300541C4 /* APContact.h */; };
+		885D0CE96380086CA6FCF9E44D4F80E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
 		8873758E73E8C0DDFC1B1B030F00C020 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F91DC2679BEC681F42BF28FCFA80B5A /* QRCodeReaderViewController.m */; };
-		8C459E0DB335881AA9EE7848E4CF039B /* Pods-enHuecoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 915CF676E4CEAECB958B6C5EB3244BC0 /* Pods-enHuecoTests-dummy.m */; };
-		8D2D2955870861369DECCA7948AB3BF6 /* APPhoneWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC98E804A866E71735D3D24FA0E740A7 /* APPhoneWithLabel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		952DA668378D305D890EC5E8FD705A5F /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 360583FF2133355DB927B035E3B742C7 /* HexColor.h */; };
-		95829D4A79892AB602228508F4D1E313 /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA49C2335D8386F5F352DA149AE7AC2 /* APAddressBook.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8B84F5B8A4CED0ED27324F750727AEB8 /* MRIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = F439483B363567F4D7140523118E3EA7 /* MRIconView.m */; };
 		963743FF40E6D2328AE474F2C5576F79 /* TSMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 40AFC1B7930D45B52AF2CBACF01F70A4 /* TSMessageView.h */; };
-		9B104C838AC857C8BD3C3CE70277BF14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
+		97C0973C73FCEF28D85EFB4DC08054FA /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 892A5118C254F3F3AF2073A2C3AFDA99 /* HexColors-dummy.m */; };
+		9BCBCDDF30641D24BE4C91D0C9FEBB80 /* MRProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 108B9528E1863183A90E2739BA57F7A1 /* MRProgressOverlayView.h */; };
+		A31F430ABC873D4168AF80EAEEE0F21A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
 		A375AB4A2A9643B4814A450E04383354 /* QRCodeReaderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C946D4F6F193DFA2F16550EF28427BAF /* QRCodeReaderViewController.h */; };
-		A406E4F19980369B5C5EC01C7071EFF4 /* APAddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FD13C94E39CB4D4E7B63CE3A7A8D1F9 /* APAddressBook.h */; };
-		A4EBB5729D736A6B19438CA88D8793A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
 		A5AC500E71FB583EECB8C683B10D45EC /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDA8EC776F28F5BC87A88D341D058F2 /* QRCodeReaderView.m */; };
-		ADEEDCA3F2040812945BD4B852EC4E65 /* MSCollectionViewCalendarLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6543D22795B34A0F155678E5D959C89C /* MSCollectionViewCalendarLayout.h */; };
-		B2E8DFCB35C316EBCCE4F765F1E19A16 /* APTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AD815D5DBDA0AF0B74A19DB8AF680D7 /* APTypes.h */; };
-		BCB7B3DE7D5F90803A77210E017A9C6A /* APContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B83589D60F108BAD85BEC5E636A06CF /* APContact.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CD4762F6E277891F48A13F6EF85217CA /* APAddressBook-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0DBB96CC6ED0D833D3915574E904FB /* APAddressBook-dummy.m */; };
+		A7CB37FC9EB7FC93A7735E40B7FFC54A /* APPhoneWithLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = AC9B28830D544F01B36244B1029F9CF4 /* APPhoneWithLabel.h */; };
+		AD1DEE148D6551502D61C9656C0AB4D7 /* MSCollectionViewCalendarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5471EA06909ED16A7980771F796DCB06 /* MSCollectionViewCalendarLayout.m */; };
+		B0595DEF371AFA3172F17511FF9A1396 /* MRActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2DE4CF60B79E1349DBA12E8658AA0700 /* MRActivityIndicatorView.h */; };
+		B96F4A93AB9FFF5C1653FE0FE65BD527 /* MCSwipeTableViewCell-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F594D70829C24A6EFA8AE84717AC7CE /* MCSwipeTableViewCell-dummy.m */; };
+		BDA6759D3939558EA90A6F846620E593 /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F86979B3C24F5A4D8D61E0742AC03B4 /* HexColor.h */; };
+		C0D7B433B285A7D31C347225D879C5C4 /* MRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E59084D224B6CC05FD778E61D7DC8E0 /* MRProgressView.m */; };
+		C5AD3FDFEE44DA08F105FA62960A0322 /* MRProgress-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B7DD04493CA522D3CFB47DCE20F6D9 /* MRProgress-dummy.m */; };
+		C6CD7C33BE04F0D9B43FA01DB41E0CCB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2BE77385EE8C4942C6D2029A9E0FE6 /* UIKit.framework */; };
 		CF502E0C925FDFD25418FD3D0AB219E6 /* TSMessages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A72A74658CFFD3ED37922D2B6C002A62 /* TSMessages-dummy.m */; };
-		D2AE102B26EA279DE56D9A1FE35B24E9 /* APSocialProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = B1927873BFC937441958533E639E9DD8 /* APSocialProfile.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D5F0B57C178C843F0994DD61B1C158A9 /* MSCollectionViewCalendarLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3B84E8BE88DFCB56E3150334D76CE4E /* MSCollectionViewCalendarLayout-dummy.m */; };
-		D7153166105568BF5C61BDBA9725F803 /* MSCollectionViewCalendarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F928799268C73C95BEF1DB2B76DBFF89 /* MSCollectionViewCalendarLayout.m */; };
-		D89C958EC24EC391CD12325E80674678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
-		DE1578EF4A66A65061211050966C4708 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D18A7652C62C559EA7F995F2719CAC8 /* HexColors-dummy.m */; };
-		E6E91CE55F50862751BB1CAA7983F952 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 588FAB2DD2FEC237292F233AF7C15178 /* Pods-dummy.m */; };
-		F74EA5F5A269B794100369F3D4F9A304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */; };
+		D2DF8A24285D3A39D8F34B8A14AE8F14 /* MRProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = E208E4B2D824BE3DFA4E9A13CB5A5B94 /* MRProgress.h */; };
+		D3A5607A92B4C432BBD517ACA2BDEA06 /* MRNavigationBarProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 132501B4C6D3055AAEEE17A84AC10D97 /* MRNavigationBarProgressView.m */; };
+		D579376B7F7DA5250760788583DD5280 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		D6A165F30C77692F182B26BE43053FF4 /* MRStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A63C2F2C4A20ABA66CEAEDDE8A04A69 /* MRStopButton.m */; };
+		D72C7C38A0AA2E78BFB56B9DE710B56C /* APAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 61443F6DAA9ED7892885FE6C35019080 /* APAddress.h */; };
+		D89C958EC24EC391CD12325E80674678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		DB8C34B0D69A8CEBA2D31C578FBF09DB /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF05743C4EB0A6022B33B2A62C7DA73 /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DBCF74FC6A72EBB5BE51294D26EB813C /* APSocialProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D44F8AA15D8D1ADC48D1B45EC3D71D /* APSocialProfile.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E57C52CFD25FD60252D7D5E5DDA9696E /* MRStopButton.h in Headers */ = {isa = PBXBuildFile; fileRef = F3E7BEFBDF91A7DF979055C29C40FBA7 /* MRStopButton.h */; };
+		E584EFA055437F272A87579AC9C5410B /* MRProgressOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B3F2C349525CC9113B6B1329F41650 /* MRProgressOverlayView.m */; };
+		EB2D818E726B27E311C0ED51BF14A9C0 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FFF237313B27D8F6E607B7116F708F /* UIImage+MRImageEffects.m */; };
+		EB4474FDB3B11D55E7162AC51A25C137 /* APSocialProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = C0FB270799FEB7DE8626CF21360A0769 /* APSocialProfile.h */; };
+		EB9DA492B92167944DFE0BA166EDB69D /* MRNavigationBarProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CA2C02C8F26186006FCFED4D67A3F0 /* MRNavigationBarProgressView.h */; };
+		ECB8192E2EC0A9C2A6BB20ECD565ECDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		F376919202C96352C1EB1F2BAFCEEBFD /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE19BDC1C870DB96E0E6CB2892C5A66 /* MRBlurView.m */; };
+		F3D9A212B8AB81671B1A58A7DFBE5145 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3A56F6164039ED56829E0A04CAF7C3 /* QuartzCore.framework */; };
+		F461ED5193E58A3A31A1E8CA93FE627F /* APAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACD70347A84B82EB5E531F9112B25E6 /* APAddress.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F53F399621A5D6CAAC3E4CD50081C0FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */; };
+		F63087D0402175758B862274B1709ADC /* APAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA36493829DD4670C479ECC1942E4F1 /* APAddressBook.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F91DC68B0B140272DA14DB9F38585AFA /* APTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = A4F2468FFC00C021498C84813F9281E9 /* APTypes.h */; };
+		F92D44E9AA092A9EEC19214573A6A3BC /* MRStopableView.h in Headers */ = {isa = PBXBuildFile; fileRef = E1A4D439AEACA1128D9138D9A52839B7 /* MRStopableView.h */; };
 		F9D316B150FE5DD9116E98F56EDE6C67 /* TSMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B1695ECE4BC33E800E822E2BFCC72CF /* TSMessage.h */; };
+		F9E6C538BBF791B3DAB8B86E5BFDF3D7 /* MRProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D1885E92803FA5899D49FD9854168969 /* MRProgressView.h */; };
+		FD3927E1032A96288C0AD0BECD77D908 /* MSCollectionViewCalendarLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C3FE0BCFA89F9CE36113E541C25FD27 /* MSCollectionViewCalendarLayout.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0494A174562A6747CEE842B365029588 /* PBXContainerItemProxy */ = {
+		00896126FCCFF41F657A1DBF914293D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 330653C35688D237F1201C8292F00641;
+			remoteGlobalIDString = 60703AD7DB6892AADA8070F58B2D611F;
 			remoteInfo = MCSwipeTableViewCell;
 		};
-		0E78C84F90D7B4A36F26A0085F4BE2FF /* PBXContainerItemProxy */ = {
+		33BA080C9CE70934754A13A101BF49B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0E476257F0ECF239F0630681FE46BA0C;
+			remoteGlobalIDString = 2A625F43ECBE37FC366BF9ADBA94CDCD;
 			remoteInfo = HexColors;
 		};
-		2C3E8F255E462429527E6E0891AD52BC /* PBXContainerItemProxy */ = {
+		3570801521CA06B9C5AAFD63155E10E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A625F43ECBE37FC366BF9ADBA94CDCD;
+			remoteInfo = HexColors;
+		};
+		3ACC13FFD449D706ED0012E31A863EFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDF8CAFD69C535CA51F6FCA5FC7237B5;
+			remoteInfo = MSCollectionViewCalendarLayout;
+		};
+		52EFF77DE1DAF1EB533B19304ACDDF7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9680FE47FC3A3A2DADCE2C1CFC7FEB8;
+			remoteInfo = APAddressBook;
+		};
+		719EE89FF219F5B3B115E6E3055F0376 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8139426284DB15FF69CB9A9C8EDADA61;
 			remoteInfo = QRCodeReaderViewController;
 		};
-		38B80479143FC7A4BD0BEB0F722A190A /* PBXContainerItemProxy */ = {
+		73E07BF1EB20886C1E14D6E0C582AAC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18A4BA8BFD66F76A5A3AE5290D46B994;
+			remoteInfo = TSMessages;
+		};
+		87D1719E8E0D6D8B62D2D605F3B1BC92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BDAAB9891F4BC470207A9AAF4F4ED8D;
+			remoteInfo = MRProgress;
+		};
+		AD1FDAA8C5C07A069CBFF2577118EC78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDF8CAFD69C535CA51F6FCA5FC7237B5;
+			remoteInfo = MSCollectionViewCalendarLayout;
+		};
+		CCA2786765FDE52E67AA6CDB064A46A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9680FE47FC3A3A2DADCE2C1CFC7FEB8;
+			remoteInfo = APAddressBook;
+		};
+		D63E456966AB1945B3CF9E943C498C21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A625F43ECBE37FC366BF9ADBA94CDCD;
+			remoteInfo = HexColors;
+		};
+		DFDD1D9516687BFD30639B065A388AFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BDAAB9891F4BC470207A9AAF4F4ED8D;
+			remoteInfo = MRProgress;
+		};
+		E894220F8F436B57202B4EA55343F7CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8139426284DB15FF69CB9A9C8EDADA61;
 			remoteInfo = QRCodeReaderViewController;
 		};
-		3980ECC4D24092418FDE31E52B7A869E /* PBXContainerItemProxy */ = {
+		F4FEDEF70CC60DAE75F9ED92AE60BDB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 330653C35688D237F1201C8292F00641;
+			remoteGlobalIDString = 18A4BA8BFD66F76A5A3AE5290D46B994;
+			remoteInfo = TSMessages;
+		};
+		FAC8D49B04B7F24EDDBFD90CDBD405E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60703AD7DB6892AADA8070F58B2D611F;
 			remoteInfo = MCSwipeTableViewCell;
-		};
-		43583EB6EDB23203725F4C21C883F88F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 18A4BA8BFD66F76A5A3AE5290D46B994;
-			remoteInfo = TSMessages;
-		};
-		5AFCC2C43ED8CF9A5B21C0D7E3F18E89 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2FFDFF7BA7864E5D364917E19D997237;
-			remoteInfo = APAddressBook;
-		};
-		6A9E1B91ADCBEC25083084C972E489F8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0E476257F0ECF239F0630681FE46BA0C;
-			remoteInfo = HexColors;
-		};
-		78622B65C593397E357CB39A0423DFB1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0E476257F0ECF239F0630681FE46BA0C;
-			remoteInfo = HexColors;
-		};
-		8FCB623239BDF76384DC793508AA8D16 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2E1BFB6809A1543F9837EED9F9289704;
-			remoteInfo = MSCollectionViewCalendarLayout;
-		};
-		9F036D226AA22EF8CD48D19D2709A4FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2FFDFF7BA7864E5D364917E19D997237;
-			remoteInfo = APAddressBook;
-		};
-		A4E89EBF5513C94D5BF394113A89AF1A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 18A4BA8BFD66F76A5A3AE5290D46B994;
-			remoteInfo = TSMessages;
-		};
-		D50FBCB6931431DE8492CB94DA0B55C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2E1BFB6809A1543F9837EED9F9289704;
-			remoteInfo = MSCollectionViewCalendarLayout;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08AC3EB71A20EBE70F66C124712D6D12 /* APAddressBook-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "APAddressBook-Private.xcconfig"; sourceTree = "<group>"; };
+		0AF05743C4EB0A6022B33B2A62C7DA73 /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
+		0F48956E2A7E748434E46A2A1D451579 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = TSMessagesDefaultDesign.json; path = Pod/Assets/TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		108B9528E1863183A90E2739BA57F7A1 /* MRProgressOverlayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressOverlayView.h; path = src/Components/MRProgressOverlayView.h; sourceTree = "<group>"; };
+		10E310AA50E49C1808DD8E06C9A72C3E /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccess.png; path = Pod/Assets/NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
 		1164E44791E5F157503C8953C0BE77EB /* QRCodeReaderView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderView.h; path = QRCodeReaderViewController/QRCodeReaderView.h; sourceTree = "<group>"; };
+		132501B4C6D3055AAEEE17A84AC10D97 /* MRNavigationBarProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRNavigationBarProgressView.m; path = src/Components/MRNavigationBarProgressView.m; sourceTree = "<group>"; };
 		14C6524691A5652F5E3B6DED2912AB6E /* TSMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSMessageView.m; path = Pod/Classes/TSMessageView.m; sourceTree = "<group>"; };
-		1AD815D5DBDA0AF0B74A19DB8AF680D7 /* APTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APTypes.h; path = Pod/Core/APTypes.h; sourceTree = "<group>"; };
-		1B6000A855F3EB65EBE1BDA8035A107F /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
+		17D44F8AA15D8D1ADC48D1B45EC3D71D /* APSocialProfile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APSocialProfile.m; path = Pod/Core/APSocialProfile.m; sourceTree = "<group>"; };
+		180F19CBF73E820DF77408FA88457E2E /* MRProgressHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressHelper.h; path = src/Utils/MRProgressHelper.h; sourceTree = "<group>"; };
+		1F4A30A6EE07C87A1509D8668B7D3F28 /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MCSwipeTableViewCell.m; path = MCSwipeTableViewCell/MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		23B60E6EF4AC1363F0EF0F106A25E158 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		2988596A74D7A2C75AAC9533935D082D /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundMessage.png; path = Pod/Assets/NotificationBackgroundMessage.png; sourceTree = "<group>"; };
-		2A243652104B261267FD8620D637E468 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccess@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
-		2AE13B627E186D7633745322FAC6F34F /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundErrorIcon.png; path = Pod/Assets/NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
-		2B83589D60F108BAD85BEC5E636A06CF /* APContact.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APContact.m; path = Pod/Core/APContact.m; sourceTree = "<group>"; };
-		2C1E111E9007C0A8B70176A6849EA137 /* MCSwipeTableViewCell-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MCSwipeTableViewCell-Private.xcconfig"; sourceTree = "<group>"; };
-		2E0DBB96CC6ED0D833D3915574E904FB /* APAddressBook-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "APAddressBook-dummy.m"; sourceTree = "<group>"; };
-		315AF8A26C6263227A73D2B6B16EF503 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarningIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
-		3389213A961E6CC31939DC0D75B68C62 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundError@2x.png"; path = "Pod/Assets/NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
-		360583FF2133355DB927B035E3B742C7 /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
-		3813BED13CC3715A3ED8EF85F5B6A99A /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundMessage@2x.png"; path = "Pod/Assets/NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
-		3910AF2E8FE9E30AF8067EC6BF9417F1 /* MSCollectionViewCalendarLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MSCollectionViewCalendarLayout-prefix.pch"; sourceTree = "<group>"; };
-		3AF51D78635D22E29CC6B365FD0188F5 /* libMCSwipeTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMCSwipeTableViewCell.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F95FEFDDB3E8D7152437AC10084474 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccess@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		25A5859FDFF0CD10EB742AE9D6D0C28C /* UIImage+MRImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MRImageEffects.h"; path = "src/Blur/UIImage+MRImageEffects.h"; sourceTree = "<group>"; };
+		29B9977BA6D9AE669F31555F1FF7735F /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundErrorIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		2A7FF323E086525C1B166E07C33D07AB /* Pods-enHuecoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-enHuecoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2B37B70D80D429250E2A83B13E1E8F2D /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarning.png; path = Pod/Assets/NotificationBackgroundWarning.png; sourceTree = "<group>"; };
+		2DE4CF60B79E1349DBA12E8658AA0700 /* MRActivityIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRActivityIndicatorView.h; path = src/Components/MRActivityIndicatorView.h; sourceTree = "<group>"; };
+		2E59084D224B6CC05FD778E61D7DC8E0 /* MRProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRProgressView.m; path = src/Components/MRProgressView.m; sourceTree = "<group>"; };
+		2F2BE77385EE8C4942C6D2029A9E0FE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2F3A56F6164039ED56829E0A04CAF7C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		2FE19BDC1C870DB96E0E6CB2892C5A66 /* MRBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRBlurView.m; path = src/Blur/MRBlurView.m; sourceTree = "<group>"; };
+		38777D2F8CF79E2CC99257177D06EFAA /* libAPAddressBook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPAddressBook.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C452BBFE6EA4F45AE10A742A95E253F /* TSMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSMessage.m; path = Pod/Classes/TSMessage.m; sourceTree = "<group>"; };
-		3EC41633CF76E879B8422F4F877398F8 /* MCSwipeTableViewCell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MCSwipeTableViewCell.xcconfig; sourceTree = "<group>"; };
+		3E8036DD4A26FF21D7D70513300541C4 /* APContact.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APContact.h; path = Pod/Core/APContact.h; sourceTree = "<group>"; };
+		3F4F0FAE7180E12CA05693C27AE0D9EB /* TSMessages.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TSMessages.xcconfig; sourceTree = "<group>"; };
 		40AFC1B7930D45B52AF2CBACF01F70A4 /* TSMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSMessageView.h; path = Pod/Classes/TSMessageView.h; sourceTree = "<group>"; };
+		427FCF95DC6CE9A5BAB1A6C4DE12A546 /* MRCircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRCircularProgressView.h; path = src/Components/MRCircularProgressView.h; sourceTree = "<group>"; };
+		46BDD99818FF6D1DA635D197200D83FA /* APAddressBook-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "APAddressBook-dummy.m"; sourceTree = "<group>"; };
 		485CAB4F0EA94FBBD0B2788D19461AF5 /* libQRCodeReaderViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQRCodeReaderViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		493D856B738D5C312D1722E7B8FA4545 /* APAddress.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APAddress.m; path = Pod/Core/APAddress.m; sourceTree = "<group>"; };
-		49C45D8A223AAD606F62DF13D7C0A202 /* APSocialProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APSocialProfile.h; path = Pod/Core/APSocialProfile.h; sourceTree = "<group>"; };
-		4A882E7F44DB8EA0C676878FEBBF5DE1 /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MCSwipeTableViewCell.m; path = MCSwipeTableViewCell/MCSwipeTableViewCell.m; sourceTree = "<group>"; };
-		4FD13C94E39CB4D4E7B63CE3A7A8D1F9 /* APAddressBook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APAddressBook.h; path = Pod/Core/APAddressBook.h; sourceTree = "<group>"; };
+		4C3FE0BCFA89F9CE36113E541C25FD27 /* MSCollectionViewCalendarLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MSCollectionViewCalendarLayout.h; path = MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout.h; sourceTree = "<group>"; };
+		4CA40BD1093FBA0E41B63A406ECDAA7C /* MRProgress-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MRProgress-Private.xcconfig"; sourceTree = "<group>"; };
 		5170F8DBB9BE4EEA448D3B83E3B2B169 /* Pods-enHuecoTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-enHuecoTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		53F59EEBF3CDD8FFBC34B4FA8F57E7E9 /* QRCodeReaderViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCodeReaderViewController.xcconfig; sourceTree = "<group>"; };
+		51923B11845834AD4D3B5472F28E1DA4 /* APAddressBook.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APAddressBook.h; path = Pod/Core/APAddressBook.h; sourceTree = "<group>"; };
+		5471EA06909ED16A7980771F796DCB06 /* MSCollectionViewCalendarLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MSCollectionViewCalendarLayout.m; path = MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout.m; sourceTree = "<group>"; };
+		57851C8350A895E2C16A3801194318BE /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundMessage.png; path = Pod/Assets/NotificationBackgroundMessage.png; sourceTree = "<group>"; };
 		582A9366C241DE0842B521FE84A066CA /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCameraSwitchButton.h; path = QRCodeReaderViewController/QRCameraSwitchButton.h; sourceTree = "<group>"; };
-		588FAB2DD2FEC237292F233AF7C15178 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		5DF91BF5CA866F958CA2CA23853168B1 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E2D96ECB8715F6FD35F53BA10E7C209 /* HexColors-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "HexColors-Private.xcconfig"; sourceTree = "<group>"; };
+		5A63C2F2C4A20ABA66CEAEDDE8A04A69 /* MRStopButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRStopButton.m; path = src/Components/MRStopButton.m; sourceTree = "<group>"; };
+		5B762B8AD6BA293A6E71891936910530 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationButtonBackground@2x.png"; path = "Pod/Assets/NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		602B8707D100606B7831E13E69AAC6E8 /* Pods-enHuecoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-enHuecoTests.release.xcconfig"; sourceTree = "<group>"; };
+		603AA7E3C8D1C2C285C41304490D1548 /* libMSCollectionViewCalendarLayout.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMSCollectionViewCalendarLayout.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6049D1071A337D243BE51B0AE597E43E /* MSCollectionViewCalendarLayout-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MSCollectionViewCalendarLayout-Private.xcconfig"; sourceTree = "<group>"; };
 		60792A940354BF6BACBC04125597C236 /* QRCodeReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCodeReader.h; path = QRCodeReaderViewController/QRCodeReader.h; sourceTree = "<group>"; };
-		60A78EEA635FF587949F67590D809642 /* APAddress.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APAddress.h; path = Pod/Core/APAddress.h; sourceTree = "<group>"; };
-		6543D22795B34A0F155678E5D959C89C /* MSCollectionViewCalendarLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MSCollectionViewCalendarLayout.h; path = MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout.h; sourceTree = "<group>"; };
-		66AB78F09BA2E575AFAA8B1A66336B9B /* QRCodeReaderViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCodeReaderViewController-prefix.pch"; sourceTree = "<group>"; };
-		67A8487FEEC368D04698A49A96D3553E /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccessIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
-		690089FBB65DFBF2B83562E9AC28F356 /* libPods-enHuecoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-enHuecoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61443F6DAA9ED7892885FE6C35019080 /* APAddress.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APAddress.h; path = Pod/Core/APAddress.h; sourceTree = "<group>"; };
+		621EA4A9A80CAF4E3DCE3E729299AD8D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		633D0154A91CAB58DB076F4CD1974D69 /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarning@2x.png"; path = "Pod/Assets/NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		6B94F76419177331E64F6519BBDD351F /* APAddressBook-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "APAddressBook-Private.xcconfig"; sourceTree = "<group>"; };
 		6DDA8EC776F28F5BC87A88D341D058F2 /* QRCodeReaderView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = QRCodeReaderViewController/QRCodeReaderView.m; sourceTree = "<group>"; };
-		6EA49C2335D8386F5F352DA149AE7AC2 /* APAddressBook.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APAddressBook.m; path = Pod/Core/APAddressBook.m; sourceTree = "<group>"; };
-		75FC450C32E0EF3480E268E305710116 /* MCSwipeTableViewCell-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MCSwipeTableViewCell-dummy.m"; sourceTree = "<group>"; };
+		6F594D70829C24A6EFA8AE84717AC7CE /* MCSwipeTableViewCell-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MCSwipeTableViewCell-dummy.m"; sourceTree = "<group>"; };
+		71387A42B09358E9A91BE0DC79AC2726 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarningIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
+		721B138A2E3712E8B1DB37F6B059A453 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundSuccessIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		74138E6FF966C60CAB8E40A552E56BDC /* MSCollectionViewCalendarLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MSCollectionViewCalendarLayout-prefix.pch"; sourceTree = "<group>"; };
+		769E6D598AD2FCBE3AFEFC94E5A3EF42 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccessIcon.png; path = Pod/Assets/NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
 		7B535FA10BC947558D0C4C32D5082230 /* QRCodeReaderViewController-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "QRCodeReaderViewController-Private.xcconfig"; sourceTree = "<group>"; };
-		7BB150E9DFA65E0201866DF821227197 /* Pods-enHuecoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-enHuecoTests.release.xcconfig"; sourceTree = "<group>"; };
-		887B29FC537C606F24317233B6A21283 /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
+		7C53EDE18B0EFD004BF711DC5FFB3097 /* APContact.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APContact.m; path = Pod/Core/APContact.m; sourceTree = "<group>"; };
+		7CA110EB4E3E27825519C6D0CB4C498B /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationButtonBackground.png; path = Pod/Assets/NotificationButtonBackground.png; sourceTree = "<group>"; };
+		7CA36493829DD4670C479ECC1942E4F1 /* APAddressBook.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APAddressBook.m; path = Pod/Core/APAddressBook.m; sourceTree = "<group>"; };
+		7D88CB805ADC08AC0DDA909010995177 /* Pods-enHuecoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-enHuecoTests-dummy.m"; sourceTree = "<group>"; };
+		819905632915B363FF84D52D4179A9F7 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundError@2x.png"; path = "Pod/Assets/NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
+		84CA2C02C8F26186006FCFED4D67A3F0 /* MRNavigationBarProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRNavigationBarProgressView.h; path = src/Components/MRNavigationBarProgressView.h; sourceTree = "<group>"; };
+		892A5118C254F3F3AF2073A2C3AFDA99 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
 		8B1695ECE4BC33E800E822E2BFCC72CF /* TSMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSMessage.h; path = Pod/Classes/TSMessage.h; sourceTree = "<group>"; };
+		8E20E5FDFDBE8D12705F293583208CAE /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MCSwipeTableViewCell.h; path = MCSwipeTableViewCell/MCSwipeTableViewCell.h; sourceTree = "<group>"; };
+		8E3877749D8D802EB8F567EBEF043BD5 /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundMessage@2x.png"; path = "Pod/Assets/NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
 		8EC34EC45000E216808A33EE1DFECE53 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderDelegate.h; path = QRCodeReaderViewController/QRCodeReaderDelegate.h; sourceTree = "<group>"; };
-		915CF676E4CEAECB958B6C5EB3244BC0 /* Pods-enHuecoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-enHuecoTests-dummy.m"; sourceTree = "<group>"; };
-		916517D9D2D0389DF2D1A6057307F7E5 /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccess.png; path = Pod/Assets/NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
-		91E3C2FD2D35E6C24EC86CBF4A4516EC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		926059FF0561291A1642C5DA9598A18D /* MRProgress.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MRProgress.xcconfig; sourceTree = "<group>"; };
 		94D9C285D5C6CB25FB8AABD9CAC3242A /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		980547AC3211B7DB0500DB8FE366D2EC /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundErrorIcon@2x.png"; path = "Pod/Assets/NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
-		9A521E43C975829794C4D06B8CCE24E6 /* Pods-enHuecoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-enHuecoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9ACD70347A84B82EB5E531F9112B25E6 /* APAddress.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APAddress.m; path = Pod/Core/APAddress.m; sourceTree = "<group>"; };
 		9C21389542B4AA2958B209389383CEF3 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D18A7652C62C559EA7F995F2719CAC8 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
-		9EFC9630D80F53153B3BE11A1C2D77EF /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationBackgroundWarning@2x.png"; path = "Pod/Assets/NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		9F66677FDAD359F95669883B08C72869 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		9F86979B3C24F5A4D8D61E0742AC03B4 /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
 		9F91DC2679BEC681F42BF28FCFA80B5A /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = QRCodeReaderViewController/QRCodeReaderViewController.m; sourceTree = "<group>"; };
-		A17AD793179B83752827A7BDC5C3517B /* TSMessages.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TSMessages.xcconfig; sourceTree = "<group>"; };
+		A143A2A24BA2B7E7DDFC071F28FFB973 /* APAddressBook-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "APAddressBook-prefix.pch"; sourceTree = "<group>"; };
+		A154A238B4E5130C9261BFF9E0C8A959 /* QRCodeReaderViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCodeReaderViewController-prefix.pch"; sourceTree = "<group>"; };
+		A46F61BED16F4012B565BD4ABD3B1376 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		A485D3CA1BEE11E510231A6A246BF3DF /* TSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSBlurView.h; path = Pod/Classes/TSBlurView.h; sourceTree = "<group>"; };
-		A6701BA59A3634DF329C895BAB96ABF8 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
+		A4F2468FFC00C021498C84813F9281E9 /* APTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APTypes.h; path = Pod/Core/APTypes.h; sourceTree = "<group>"; };
 		A72A74658CFFD3ED37922D2B6C002A62 /* TSMessages-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TSMessages-dummy.m"; sourceTree = "<group>"; };
+		A85C88DCC400DF8241BB133834CB5DD6 /* MSCollectionViewCalendarLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MSCollectionViewCalendarLayout.xcconfig; sourceTree = "<group>"; };
+		A861862A166E8CED402F2F839AF9E54A /* MRProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRProgress-prefix.pch"; sourceTree = "<group>"; };
+		A9E218AB609357B26FC2A417C20A60A5 /* MCSwipeTableViewCell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MCSwipeTableViewCell.xcconfig; sourceTree = "<group>"; };
 		AA3752CE2F01E399E7F02F28BEFB702B /* Pods-enHuecoTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-enHuecoTests-resources.sh"; sourceTree = "<group>"; };
-		B154CF4B2CDCAF6F986C5959E140EF94 /* MCSwipeTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MCSwipeTableViewCell.h; path = MCSwipeTableViewCell/MCSwipeTableViewCell.h; sourceTree = "<group>"; };
-		B188F1E95793AFBED9F24A26D5936F92 /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarning.png; path = Pod/Assets/NotificationBackgroundWarning.png; sourceTree = "<group>"; };
-		B1927873BFC937441958533E639E9DD8 /* APSocialProfile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APSocialProfile.m; path = Pod/Core/APSocialProfile.m; sourceTree = "<group>"; };
+		ABBD3195A6CF525DF52D9DE1B244F7D1 /* libPods-enHuecoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-enHuecoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC1668DF80FD17DB998EB63725F95192 /* QRCodeReaderViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCodeReaderViewController.xcconfig; sourceTree = "<group>"; };
+		AC9B28830D544F01B36244B1029F9CF4 /* APPhoneWithLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APPhoneWithLabel.h; path = Pod/Core/APPhoneWithLabel.h; sourceTree = "<group>"; };
+		ADCF139C84EF765CEA15BB6D30A1AB54 /* TSMessages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-prefix.pch"; sourceTree = "<group>"; };
+		AF3AE56FEA3AD91E35E7288A8F993D32 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarningIcon.png; path = Pod/Assets/NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		B688FFB3371C66564576384FD9612B81 /* MRBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRBlurView.h; path = src/Blur/MRBlurView.h; sourceTree = "<group>"; };
+		B9A2F6C3B6122B5A71E25E42BD7BB537 /* MRActivityIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRActivityIndicatorView.m; path = src/Components/MRActivityIndicatorView.m; sourceTree = "<group>"; };
+		B9DBEBC91939959CAA5CD12E31A20F64 /* MRIconView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRIconView.h; path = src/Components/MRIconView.h; sourceTree = "<group>"; };
 		BA07630265556F1448A84A469507F33A /* QRCodeReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReader.m; path = QRCodeReaderViewController/QRCodeReader.m; sourceTree = "<group>"; };
+		BA127282708583B09B25072E771B1B79 /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C379E6F0DECEDE251130B258C3318556 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		C493F00857387C809326139AB39CCEA2 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationButtonBackground@2x.png"; path = "Pod/Assets/NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		BD083EDF6FBD26FFD50D84470342676F /* APAddressBook.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = APAddressBook.xcconfig; sourceTree = "<group>"; };
+		C0FB270799FEB7DE8626CF21360A0769 /* APSocialProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APSocialProfile.h; path = Pod/Core/APSocialProfile.h; sourceTree = "<group>"; };
+		C3B8AB99E551FF9EEC00880DD02613E7 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundErrorIcon.png; path = Pod/Assets/NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		C5E61B2C377F57F14C0798E48AF6764F /* MRCircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRCircularProgressView.m; path = src/Components/MRCircularProgressView.m; sourceTree = "<group>"; };
+		C819E661F901FA00CF4123814BB17718 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 		C946D4F6F193DFA2F16550EF28427BAF /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCodeReaderViewController.h; path = QRCodeReaderViewController/QRCodeReaderViewController.h; sourceTree = "<group>"; };
-		CB48380AB0EE71D08C57EB68994299C1 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = TSMessagesDefaultDesign.json; path = Pod/Assets/TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
-		CE31203536E77B1831D9CF16144D06E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		CE92293DE0BDECF56113C40EAFFBA3BF /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
+		CFF5F7420DBA5361FFDB1EA77055D853 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		D04508B992C724565476DC1DE7EC6F61 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		D105E5F48E89A57372DBD75AEEA6AC52 /* Pods-enHuecoTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-enHuecoTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D3B84E8BE88DFCB56E3150334D76CE4E /* MSCollectionViewCalendarLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MSCollectionViewCalendarLayout-dummy.m"; sourceTree = "<group>"; };
-		D5CC1F20A3190A83EA4BD243CEE2C987 /* APContact.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APContact.h; path = Pod/Core/APContact.h; sourceTree = "<group>"; };
-		D79A6AD531F0B4F4966CE10C02D6A989 /* APAddressBook-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "APAddressBook-prefix.pch"; sourceTree = "<group>"; };
+		D1885E92803FA5899D49FD9854168969 /* MRProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressView.h; path = src/Components/MRProgressView.h; sourceTree = "<group>"; };
+		D1B7DD04493CA522D3CFB47DCE20F6D9 /* MRProgress-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MRProgress-dummy.m"; sourceTree = "<group>"; };
+		D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D7898DD878E7644CCD340AA959182279 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7FFF237313B27D8F6E607B7116F708F /* UIImage+MRImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MRImageEffects.m"; path = "src/Blur/UIImage+MRImageEffects.m"; sourceTree = "<group>"; };
 		D81EE2D1911B8A17F76246D8E88C94D8 /* TSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSBlurView.m; path = Pod/Classes/TSBlurView.m; sourceTree = "<group>"; };
-		E1177742C2D5E69F8C3CE191128189A0 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundError.png; path = Pod/Assets/NotificationBackgroundError.png; sourceTree = "<group>"; };
-		E19BDB3685933EFEC88087C03B76398A /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationButtonBackground.png; path = Pod/Assets/NotificationButtonBackground.png; sourceTree = "<group>"; };
-		E4EBDFB7489D78EA60C91F2C99A80B49 /* TSMessages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-prefix.pch"; sourceTree = "<group>"; };
-		E583DC4427A306AAA652AE272ABFDB6C /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarningIcon.png; path = Pod/Assets/NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
-		E588DE5971E8875E39871A8A2EC8A782 /* MSCollectionViewCalendarLayout-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MSCollectionViewCalendarLayout-Private.xcconfig"; sourceTree = "<group>"; };
-		E781C6EA2C913F89114DD9E60D28AA3D /* APAddressBook.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = APAddressBook.xcconfig; sourceTree = "<group>"; };
+		E01BB3F0087E373FABB3EC3B038FC824 /* MCSwipeTableViewCell-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "MCSwipeTableViewCell-Private.xcconfig"; sourceTree = "<group>"; };
+		E03B570FB96808283B983DA0D281D109 /* libMCSwipeTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMCSwipeTableViewCell.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0E9543CAEF41B91A6477FEA93627ED0 /* MCSwipeTableViewCell-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MCSwipeTableViewCell-prefix.pch"; sourceTree = "<group>"; };
+		E1A4D439AEACA1128D9138D9A52839B7 /* MRStopableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopableView.h; path = src/Components/MRStopableView.h; sourceTree = "<group>"; };
+		E208E4B2D824BE3DFA4E9A13CB5A5B94 /* MRProgress.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgress.h; path = src/MRProgress.h; sourceTree = "<group>"; };
+		E3768DDD6B3A73715539AAA379633745 /* MSCollectionViewCalendarLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MSCollectionViewCalendarLayout-dummy.m"; sourceTree = "<group>"; };
+		E37D737E1F9866E40834DE36AB6C0803 /* APPhoneWithLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APPhoneWithLabel.m; path = Pod/Core/APPhoneWithLabel.m; sourceTree = "<group>"; };
 		E8C8D096A5C2057DB1928AA0E5D09632 /* libTSMessages.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTSMessages.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA90876520FC686CE75A908B1C578EB8 /* libAPAddressBook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAPAddressBook.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC98E804A866E71735D3D24FA0E740A7 /* APPhoneWithLabel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = APPhoneWithLabel.m; path = Pod/Core/APPhoneWithLabel.m; sourceTree = "<group>"; };
+		EAB2368A3F7F94A0FBE28D0AA3EC33D6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
 		EDC75B25D6455925B9F39D7EDACD8D69 /* TSMessages-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TSMessages-Private.xcconfig"; sourceTree = "<group>"; };
-		EEFF77C2D40F66836386EB896A8C087B /* MSCollectionViewCalendarLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MSCollectionViewCalendarLayout.xcconfig; sourceTree = "<group>"; };
 		F08AE4762FB06D8476B34D603515E0D4 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		F7E75FE56D8153C5817B0BEE9DBB8011 /* MCSwipeTableViewCell-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MCSwipeTableViewCell-prefix.pch"; sourceTree = "<group>"; };
-		F8CF1FE1D9AFA5B6B2B613EA242D49B2 /* APPhoneWithLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APPhoneWithLabel.h; path = Pod/Core/APPhoneWithLabel.h; sourceTree = "<group>"; };
-		F928799268C73C95BEF1DB2B76DBFF89 /* MSCollectionViewCalendarLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MSCollectionViewCalendarLayout.m; path = MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout.m; sourceTree = "<group>"; };
+		F3E7BEFBDF91A7DF979055C29C40FBA7 /* MRStopButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopButton.h; path = src/Components/MRStopButton.h; sourceTree = "<group>"; };
+		F439483B363567F4D7140523118E3EA7 /* MRIconView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRIconView.m; path = src/Components/MRIconView.m; sourceTree = "<group>"; };
+		F5A92828BB670333B7A17CFC4E4AB3F7 /* HexColors-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "HexColors-Private.xcconfig"; sourceTree = "<group>"; };
+		F5B3F2C349525CC9113B6B1329F41650 /* MRProgressOverlayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRProgressOverlayView.m; path = src/Components/MRProgressOverlayView.m; sourceTree = "<group>"; };
 		FA66E639ABD65108A9E1FA3F4BDD565E /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = QRCodeReaderViewController/QRCameraSwitchButton.m; sourceTree = "<group>"; };
-		FF8CAE53AFE5924D48A05509F10A8F24 /* libMSCollectionViewCalendarLayout.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMSCollectionViewCalendarLayout.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF9887C7C0679AE18302DF59DF2E95D0 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccessIcon.png; path = Pod/Assets/NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		FB289BB06BF618C6D78C6E14271F878F /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundError.png; path = Pod/Assets/NotificationBackgroundError.png; sourceTree = "<group>"; };
+		FDA0283ED9FC3FB4390FE7EF26A9BCA3 /* libMRProgress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMRProgress.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE724D28CA96E7D698254CE567D53F7B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
 		FFE9E96E6D9DDE157B6AE8F0BE2E195D /* QRCodeReaderViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "QRCodeReaderViewController-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,6 +334,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		16125EB021B89841D27B161206A19FB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECB8192E2EC0A9C2A6BB20ECD565ECDE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C0959061119514C1E9C065A460E7A3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26B36EC1D430BEBF0E997C25FEC4CD30 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29859B952AE7BEA122B11825BF54BB65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				885D0CE96380086CA6FCF9E44D4F80E6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D2F816A1FF41FAD1F87DC008699508E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				404A346E113B57873FDBEEA1662F0FF1 /* AddressBook.framework in Frameworks */,
+				3AF08D6815CCA2265AD0E8425D57001E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		853F6FE25DD24C93F7DE5C901EA9BED7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53F399621A5D6CAAC3E4CD50081C0FA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86D86A895553B8356F95E6920A9923F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,66 +383,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8FACEDCCB93D059159E207EEADBA9EE3 /* Frameworks */ = {
+		8FA868D9F829804086C597A0B969A364 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37D1C0CEF964D6E1BDB55C301715B333 /* AddressBook.framework in Frameworks */,
-				7E80A24907B52F8946CAAC84CF63C178 /* Foundation.framework in Frameworks */,
+				D579376B7F7DA5250760788583DD5280 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9CD3BF063725C8DC59D18A26F2AF416F /* Frameworks */ = {
+		ABCEC7CA5196E70F603E85FF38D8AEFC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4EBB5729D736A6B19438CA88D8793A8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C07110F6D7ACE1773C59FCCA704A042C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9B104C838AC857C8BD3C3CE70277BF14 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C3289E06C5409EDC12E22F97C89296A2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				741A32BC5CE4EFE6D098C51DF74630C4 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DEF237182A87EFEC192A084226BA6FF2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08FB4392A36B6E0AE22A3F2D5E9BB631 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F31BE2653FE67F304DC084ECE6BA91F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F74EA5F5A269B794100369F3D4F9A304 /* Foundation.framework in Frameworks */,
+				13F0CBE9B2E0552A02A45F9F48891734 /* Accelerate.framework in Frameworks */,
+				1384F3395D802E45C02A20E64EDE7B62 /* CoreGraphics.framework in Frameworks */,
+				A31F430ABC873D4168AF80EAEEE0F21A /* Foundation.framework in Frameworks */,
+				F3D9A212B8AB81671B1A58A7DFBE5145 /* QuartzCore.framework in Frameworks */,
+				C6CD7C33BE04F0D9B43FA01DB41E0CCB /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B647A05033F9F6E0AC4655062C67351 /* iOS */ = {
+		09B5DCE0724B72582731216C3DAC79FE /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				23B60E6EF4AC1363F0EF0F106A25E158 /* AVFoundation.framework */,
-				A6701BA59A3634DF329C895BAB96ABF8 /* AddressBook.framework */,
-				D150C65EB1C8BE44C55AF23169F1BD10 /* Foundation.framework */,
+				61443F6DAA9ED7892885FE6C35019080 /* APAddress.h */,
+				9ACD70347A84B82EB5E531F9112B25E6 /* APAddress.m */,
+				51923B11845834AD4D3B5472F28E1DA4 /* APAddressBook.h */,
+				7CA36493829DD4670C479ECC1942E4F1 /* APAddressBook.m */,
+				3E8036DD4A26FF21D7D70513300541C4 /* APContact.h */,
+				7C53EDE18B0EFD004BF711DC5FFB3097 /* APContact.m */,
+				AC9B28830D544F01B36244B1029F9CF4 /* APPhoneWithLabel.h */,
+				E37D737E1F9866E40834DE36AB6C0803 /* APPhoneWithLabel.m */,
+				C0FB270799FEB7DE8626CF21360A0769 /* APSocialProfile.h */,
+				17D44F8AA15D8D1ADC48D1B45EC3D71D /* APSocialProfile.m */,
+				A4F2468FFC00C021498C84813F9281E9 /* APTypes.h */,
 			);
-			name = iOS;
+			name = Core;
+			sourceTree = "<group>";
+		};
+		09F28F4888B6AD7A510E742DFDBDAC74 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				2DE4CF60B79E1349DBA12E8658AA0700 /* MRActivityIndicatorView.h */,
+				B9A2F6C3B6122B5A71E25E42BD7BB537 /* MRActivityIndicatorView.m */,
+			);
+			name = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 		10A5E275DD3774EE22D49A8CD0E30E1B /* Targets Support Files */ = {
@@ -342,172 +442,123 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
+		154D4B50CEAFFF38B0CDD53DED7E734B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0B647A05033F9F6E0AC4655062C67351 /* iOS */,
+				FB289BB06BF618C6D78C6E14271F878F /* NotificationBackgroundError.png */,
+				819905632915B363FF84D52D4179A9F7 /* NotificationBackgroundError@2x.png */,
+				C3B8AB99E551FF9EEC00880DD02613E7 /* NotificationBackgroundErrorIcon.png */,
+				29B9977BA6D9AE669F31555F1FF7735F /* NotificationBackgroundErrorIcon@2x.png */,
+				57851C8350A895E2C16A3801194318BE /* NotificationBackgroundMessage.png */,
+				8E3877749D8D802EB8F567EBEF043BD5 /* NotificationBackgroundMessage@2x.png */,
+				10E310AA50E49C1808DD8E06C9A72C3E /* NotificationBackgroundSuccess.png */,
+				23F95FEFDDB3E8D7152437AC10084474 /* NotificationBackgroundSuccess@2x.png */,
+				769E6D598AD2FCBE3AFEFC94E5A3EF42 /* NotificationBackgroundSuccessIcon.png */,
+				721B138A2E3712E8B1DB37F6B059A453 /* NotificationBackgroundSuccessIcon@2x.png */,
+				2B37B70D80D429250E2A83B13E1E8F2D /* NotificationBackgroundWarning.png */,
+				633D0154A91CAB58DB076F4CD1974D69 /* NotificationBackgroundWarning@2x.png */,
+				AF3AE56FEA3AD91E35E7288A8F993D32 /* NotificationBackgroundWarningIcon.png */,
+				71387A42B09358E9A91BE0DC79AC2726 /* NotificationBackgroundWarningIcon@2x.png */,
+				7CA110EB4E3E27825519C6D0CB4C498B /* NotificationButtonBackground.png */,
+				5B762B8AD6BA293A6E71891936910530 /* NotificationButtonBackground@2x.png */,
+				0F48956E2A7E748434E46A2A1D451579 /* TSMessagesDefaultDesign.json */,
 			);
-			name = Frameworks;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		12F5826539B53B9139218610E0773AB8 /* Support Files */ = {
+		209A933F6EB0D64510A11C80309517A4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EEFF77C2D40F66836386EB896A8C087B /* MSCollectionViewCalendarLayout.xcconfig */,
-				E588DE5971E8875E39871A8A2EC8A782 /* MSCollectionViewCalendarLayout-Private.xcconfig */,
-				D3B84E8BE88DFCB56E3150334D76CE4E /* MSCollectionViewCalendarLayout-dummy.m */,
-				3910AF2E8FE9E30AF8067EC6BF9417F1 /* MSCollectionViewCalendarLayout-prefix.pch */,
+				42C62F1D6916A7CDE512F6162EA653A7 /* APAddressBook */,
+				F0394E6764AA92816CA9D087EBFEB257 /* HexColors */,
+				428330915968160B2C3AEF8055CED491 /* MCSwipeTableViewCell */,
+				9CF5425E4C3E9D067180C0B05227F7A0 /* MRProgress */,
+				69567EC3DC942C459DDA87828AF682FB /* MSCollectionViewCalendarLayout */,
+				65214389596EA5B4CB8CFB1EBBEA3119 /* QRCodeReaderViewController */,
+				97C8D4E5829F28926972AE0CCA851CE8 /* TSMessages */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/MSCollectionViewCalendarLayout";
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		17BF10E136D8B337E599AC4BC50B2DE0 /* MSCollectionViewCalendarLayout */ = {
+		22936F68CCF5AA7596617827F03F6690 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				6543D22795B34A0F155678E5D959C89C /* MSCollectionViewCalendarLayout.h */,
-				F928799268C73C95BEF1DB2B76DBFF89 /* MSCollectionViewCalendarLayout.m */,
-				12F5826539B53B9139218610E0773AB8 /* Support Files */,
+				B9DBEBC91939959CAA5CD12E31A20F64 /* MRIconView.h */,
+				F439483B363567F4D7140523118E3EA7 /* MRIconView.m */,
 			);
-			path = MSCollectionViewCalendarLayout;
+			name = Icons;
 			sourceTree = "<group>";
 		};
-		27E9C8393212631A01A002AA7A24CFD1 /* Support Files */ = {
+		2A76712E604B1EAA4611E2BAADA9FC20 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E781C6EA2C913F89114DD9E60D28AA3D /* APAddressBook.xcconfig */,
-				08AC3EB71A20EBE70F66C124712D6D12 /* APAddressBook-Private.xcconfig */,
-				2E0DBB96CC6ED0D833D3915574E904FB /* APAddressBook-dummy.m */,
-				D79A6AD531F0B4F4966CE10C02D6A989 /* APAddressBook-prefix.pch */,
+				BD083EDF6FBD26FFD50D84470342676F /* APAddressBook.xcconfig */,
+				6B94F76419177331E64F6519BBDD351F /* APAddressBook-Private.xcconfig */,
+				46BDD99818FF6D1DA635D197200D83FA /* APAddressBook-dummy.m */,
+				A143A2A24BA2B7E7DDFC071F28FFB973 /* APAddressBook-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/APAddressBook";
 			sourceTree = "<group>";
 		};
-		2C5D603153A8D70067CE294D8268AAB6 /* HexColors */ = {
+		30D38200C81FA00D9BEE01238BE83402 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				360583FF2133355DB927B035E3B742C7 /* HexColor.h */,
-				887B29FC537C606F24317233B6A21283 /* HexColor.m */,
-				53913B233EB45ED80077BD3387B1AE08 /* Support Files */,
+				23B60E6EF4AC1363F0EF0F106A25E158 /* AVFoundation.framework */,
+				D04508B992C724565476DC1DE7EC6F61 /* Accelerate.framework */,
+				EAB2368A3F7F94A0FBE28D0AA3EC33D6 /* AddressBook.framework */,
+				9F66677FDAD359F95669883B08C72869 /* CoreGraphics.framework */,
+				D4452584A98B77514AB3640DC96A99D9 /* Foundation.framework */,
+				2F3A56F6164039ED56829E0A04CAF7C3 /* QuartzCore.framework */,
+				2F2BE77385EE8C4942C6D2029A9E0FE6 /* UIKit.framework */,
 			);
-			path = HexColors;
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		2D73D25BB6ED1D0BF640090FDE12F0FF /* TSMessages */ = {
+		3BF69CE4CB45C5C6E231C0BFA47CFC56 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A485D3CA1BEE11E510231A6A246BF3DF /* TSBlurView.h */,
-				D81EE2D1911B8A17F76246D8E88C94D8 /* TSBlurView.m */,
-				8B1695ECE4BC33E800E822E2BFCC72CF /* TSMessage.h */,
-				3C452BBFE6EA4F45AE10A742A95E253F /* TSMessage.m */,
-				40AFC1B7930D45B52AF2CBACF01F70A4 /* TSMessageView.h */,
-				14C6524691A5652F5E3B6DED2912AB6E /* TSMessageView.m */,
-				37F9AB97AE4B6E08770C87BC2BCA3E70 /* Resources */,
-				FC8D21882472EE6EE4D44621DD35579E /* Support Files */,
-			);
-			path = TSMessages;
-			sourceTree = "<group>";
-		};
-		37F9AB97AE4B6E08770C87BC2BCA3E70 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E1177742C2D5E69F8C3CE191128189A0 /* NotificationBackgroundError.png */,
-				3389213A961E6CC31939DC0D75B68C62 /* NotificationBackgroundError@2x.png */,
-				2AE13B627E186D7633745322FAC6F34F /* NotificationBackgroundErrorIcon.png */,
-				980547AC3211B7DB0500DB8FE366D2EC /* NotificationBackgroundErrorIcon@2x.png */,
-				2988596A74D7A2C75AAC9533935D082D /* NotificationBackgroundMessage.png */,
-				3813BED13CC3715A3ED8EF85F5B6A99A /* NotificationBackgroundMessage@2x.png */,
-				916517D9D2D0389DF2D1A6057307F7E5 /* NotificationBackgroundSuccess.png */,
-				2A243652104B261267FD8620D637E468 /* NotificationBackgroundSuccess@2x.png */,
-				FF9887C7C0679AE18302DF59DF2E95D0 /* NotificationBackgroundSuccessIcon.png */,
-				67A8487FEEC368D04698A49A96D3553E /* NotificationBackgroundSuccessIcon@2x.png */,
-				B188F1E95793AFBED9F24A26D5936F92 /* NotificationBackgroundWarning.png */,
-				9EFC9630D80F53153B3BE11A1C2D77EF /* NotificationBackgroundWarning@2x.png */,
-				E583DC4427A306AAA652AE272ABFDB6C /* NotificationBackgroundWarningIcon.png */,
-				315AF8A26C6263227A73D2B6B16EF503 /* NotificationBackgroundWarningIcon@2x.png */,
-				E19BDB3685933EFEC88087C03B76398A /* NotificationButtonBackground.png */,
-				C493F00857387C809326139AB39CCEA2 /* NotificationButtonBackground@2x.png */,
-				CB48380AB0EE71D08C57EB68994299C1 /* TSMessagesDefaultDesign.json */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		53913B233EB45ED80077BD3387B1AE08 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				CE92293DE0BDECF56113C40EAFFBA3BF /* HexColors.xcconfig */,
-				5E2D96ECB8715F6FD35F53BA10E7C209 /* HexColors-Private.xcconfig */,
-				9D18A7652C62C559EA7F995F2719CAC8 /* HexColors-dummy.m */,
-				1B6000A855F3EB65EBE1BDA8035A107F /* HexColors-prefix.pch */,
+				AC1668DF80FD17DB998EB63725F95192 /* QRCodeReaderViewController.xcconfig */,
+				7B535FA10BC947558D0C4C32D5082230 /* QRCodeReaderViewController-Private.xcconfig */,
+				FFE9E96E6D9DDE157B6AE8F0BE2E195D /* QRCodeReaderViewController-dummy.m */,
+				A154A238B4E5130C9261BFF9E0C8A959 /* QRCodeReaderViewController-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/HexColors";
+			path = "../Target Support Files/QRCodeReaderViewController";
 			sourceTree = "<group>";
 		};
-		5969E01A43DCCE5D49EA3CBF4B643AA3 /* MCSwipeTableViewCell */ = {
+		3F099EED1939A9A76CDB960888EA3CF7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B154CF4B2CDCAF6F986C5959E140EF94 /* MCSwipeTableViewCell.h */,
-				4A882E7F44DB8EA0C676878FEBBF5DE1 /* MCSwipeTableViewCell.m */,
-				F3DDD0364DE2BB3CFCB5BD0E77FBC041 /* Support Files */,
+				3F4F0FAE7180E12CA05693C27AE0D9EB /* TSMessages.xcconfig */,
+				EDC75B25D6455925B9F39D7EDACD8D69 /* TSMessages-Private.xcconfig */,
+				A72A74658CFFD3ED37922D2B6C002A62 /* TSMessages-dummy.m */,
+				ADCF139C84EF765CEA15BB6D30A1AB54 /* TSMessages-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TSMessages";
+			sourceTree = "<group>";
+		};
+		428330915968160B2C3AEF8055CED491 /* MCSwipeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8E20E5FDFDBE8D12705F293583208CAE /* MCSwipeTableViewCell.h */,
+				1F4A30A6EE07C87A1509D8668B7D3F28 /* MCSwipeTableViewCell.m */,
+				8F589A7C286235ECE721A209D8E82D8C /* Support Files */,
 			);
 			path = MCSwipeTableViewCell;
 			sourceTree = "<group>";
 		};
-		7AE7A7C275543D2B17FA257A01529052 /* Pods */ = {
+		42C62F1D6916A7CDE512F6162EA653A7 /* APAddressBook */ = {
 			isa = PBXGroup;
 			children = (
-				9C21389542B4AA2958B209389383CEF3 /* Pods-acknowledgements.markdown */,
-				94D9C285D5C6CB25FB8AABD9CAC3242A /* Pods-acknowledgements.plist */,
-				588FAB2DD2FEC237292F233AF7C15178 /* Pods-dummy.m */,
-				F08AE4762FB06D8476B34D603515E0D4 /* Pods-resources.sh */,
-				CE31203536E77B1831D9CF16144D06E7 /* Pods.debug.xcconfig */,
-				C379E6F0DECEDE251130B258C3318556 /* Pods.release.xcconfig */,
+				09B5DCE0724B72582731216C3DAC79FE /* Core */,
+				2A76712E604B1EAA4611E2BAADA9FC20 /* Support Files */,
 			);
-			name = Pods;
-			path = "Target Support Files/Pods";
+			path = APAddressBook;
 			sourceTree = "<group>";
 		};
-		7BD039FF7EE45750C4047B2CB908B716 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CA2FCC75331DF74B10EB96FBFE47C1AE /* APAddressBook */,
-				2C5D603153A8D70067CE294D8268AAB6 /* HexColors */,
-				5969E01A43DCCE5D49EA3CBF4B643AA3 /* MCSwipeTableViewCell */,
-				17BF10E136D8B337E599AC4BC50B2DE0 /* MSCollectionViewCalendarLayout */,
-				B3F96F644DA32214492CAC8E963627E6 /* QRCodeReaderViewController */,
-				2D73D25BB6ED1D0BF640090FDE12F0FF /* TSMessages */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				7BD039FF7EE45750C4047B2CB908B716 /* Pods */,
-				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
-				10A5E275DD3774EE22D49A8CD0E30E1B /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		907FA2567F0F72F133590C60CBC8919C /* Pods-enHuecoTests */ = {
-			isa = PBXGroup;
-			children = (
-				5170F8DBB9BE4EEA448D3B83E3B2B169 /* Pods-enHuecoTests-acknowledgements.markdown */,
-				D105E5F48E89A57372DBD75AEEA6AC52 /* Pods-enHuecoTests-acknowledgements.plist */,
-				915CF676E4CEAECB958B6C5EB3244BC0 /* Pods-enHuecoTests-dummy.m */,
-				AA3752CE2F01E399E7F02F28BEFB702B /* Pods-enHuecoTests-resources.sh */,
-				9A521E43C975829794C4D06B8CCE24E6 /* Pods-enHuecoTests.debug.xcconfig */,
-				7BB150E9DFA65E0201866DF821227197 /* Pods-enHuecoTests.release.xcconfig */,
-			);
-			name = "Pods-enHuecoTests";
-			path = "Target Support Files/Pods-enHuecoTests";
-			sourceTree = "<group>";
-		};
-		B3F96F644DA32214492CAC8E963627E6 /* QRCodeReaderViewController */ = {
+		65214389596EA5B4CB8CFB1EBBEA3119 /* QRCodeReaderViewController */ = {
 			isa = PBXGroup;
 			children = (
 				582A9366C241DE0842B521FE84A066CA /* QRCameraSwitchButton.h */,
@@ -519,97 +570,280 @@
 				6DDA8EC776F28F5BC87A88D341D058F2 /* QRCodeReaderView.m */,
 				C946D4F6F193DFA2F16550EF28427BAF /* QRCodeReaderViewController.h */,
 				9F91DC2679BEC681F42BF28FCFA80B5A /* QRCodeReaderViewController.m */,
-				D9804DC356B1C3EE824F3F4550E01791 /* Support Files */,
+				3BF69CE4CB45C5C6E231C0BFA47CFC56 /* Support Files */,
 			);
 			path = QRCodeReaderViewController;
 			sourceTree = "<group>";
 		};
-		CA2FCC75331DF74B10EB96FBFE47C1AE /* APAddressBook */ = {
+		69567EC3DC942C459DDA87828AF682FB /* MSCollectionViewCalendarLayout */ = {
 			isa = PBXGroup;
 			children = (
-				D23451C4CB8605EFCC5DF0F8DD285483 /* Core */,
-				27E9C8393212631A01A002AA7A24CFD1 /* Support Files */,
+				4C3FE0BCFA89F9CE36113E541C25FD27 /* MSCollectionViewCalendarLayout.h */,
+				5471EA06909ED16A7980771F796DCB06 /* MSCollectionViewCalendarLayout.m */,
+				E02B73332B9C873F4CDE9BC82DF79891 /* Support Files */,
 			);
-			path = APAddressBook;
+			path = MSCollectionViewCalendarLayout;
+			sourceTree = "<group>";
+		};
+		70E14407F525CFAEE2B4F9E94ECA3CDE /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				108B9528E1863183A90E2739BA57F7A1 /* MRProgressOverlayView.h */,
+				F5B3F2C349525CC9113B6B1329F41650 /* MRProgressOverlayView.m */,
+			);
+			name = Overlay;
+			sourceTree = "<group>";
+		};
+		7AE7A7C275543D2B17FA257A01529052 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C21389542B4AA2958B209389383CEF3 /* Pods-acknowledgements.markdown */,
+				94D9C285D5C6CB25FB8AABD9CAC3242A /* Pods-acknowledgements.plist */,
+				A46F61BED16F4012B565BD4ABD3B1376 /* Pods-dummy.m */,
+				F08AE4762FB06D8476B34D603515E0D4 /* Pods-resources.sh */,
+				FE724D28CA96E7D698254CE567D53F7B /* Pods.debug.xcconfig */,
+				CFF5F7420DBA5361FFDB1EA77055D853 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		7B4D60A0B4D734D3C9B365F033815FF3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C819E661F901FA00CF4123814BB17718 /* HexColors.xcconfig */,
+				F5A92828BB670333B7A17CFC4E4AB3F7 /* HexColors-Private.xcconfig */,
+				892A5118C254F3F3AF2073A2C3AFDA99 /* HexColors-dummy.m */,
+				BA127282708583B09B25072E771B1B79 /* HexColors-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HexColors";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				F4CDA5FA9197A41E0081E84F932906EB /* Frameworks */,
+				209A933F6EB0D64510A11C80309517A4 /* Pods */,
+				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
+				10A5E275DD3774EE22D49A8CD0E30E1B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8F589A7C286235ECE721A209D8E82D8C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9E218AB609357B26FC2A417C20A60A5 /* MCSwipeTableViewCell.xcconfig */,
+				E01BB3F0087E373FABB3EC3B038FC824 /* MCSwipeTableViewCell-Private.xcconfig */,
+				6F594D70829C24A6EFA8AE84717AC7CE /* MCSwipeTableViewCell-dummy.m */,
+				E0E9543CAEF41B91A6477FEA93627ED0 /* MCSwipeTableViewCell-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MCSwipeTableViewCell";
+			sourceTree = "<group>";
+		};
+		907FA2567F0F72F133590C60CBC8919C /* Pods-enHuecoTests */ = {
+			isa = PBXGroup;
+			children = (
+				5170F8DBB9BE4EEA448D3B83E3B2B169 /* Pods-enHuecoTests-acknowledgements.markdown */,
+				D105E5F48E89A57372DBD75AEEA6AC52 /* Pods-enHuecoTests-acknowledgements.plist */,
+				7D88CB805ADC08AC0DDA909010995177 /* Pods-enHuecoTests-dummy.m */,
+				AA3752CE2F01E399E7F02F28BEFB702B /* Pods-enHuecoTests-resources.sh */,
+				2A7FF323E086525C1B166E07C33D07AB /* Pods-enHuecoTests.debug.xcconfig */,
+				602B8707D100606B7831E13E69AAC6E8 /* Pods-enHuecoTests.release.xcconfig */,
+			);
+			name = "Pods-enHuecoTests";
+			path = "Target Support Files/Pods-enHuecoTests";
+			sourceTree = "<group>";
+		};
+		93FED2CEF9A66B5543537A933CF94E7B /* Blur */ = {
+			isa = PBXGroup;
+			children = (
+				B688FFB3371C66564576384FD9612B81 /* MRBlurView.h */,
+				2FE19BDC1C870DB96E0E6CB2892C5A66 /* MRBlurView.m */,
+				25A5859FDFF0CD10EB742AE9D6D0C28C /* UIImage+MRImageEffects.h */,
+				D7FFF237313B27D8F6E607B7116F708F /* UIImage+MRImageEffects.m */,
+			);
+			name = Blur;
+			sourceTree = "<group>";
+		};
+		97C8D4E5829F28926972AE0CCA851CE8 /* TSMessages */ = {
+			isa = PBXGroup;
+			children = (
+				A485D3CA1BEE11E510231A6A246BF3DF /* TSBlurView.h */,
+				D81EE2D1911B8A17F76246D8E88C94D8 /* TSBlurView.m */,
+				8B1695ECE4BC33E800E822E2BFCC72CF /* TSMessage.h */,
+				3C452BBFE6EA4F45AE10A742A95E253F /* TSMessage.m */,
+				40AFC1B7930D45B52AF2CBACF01F70A4 /* TSMessageView.h */,
+				14C6524691A5652F5E3B6DED2912AB6E /* TSMessageView.m */,
+				154D4B50CEAFFF38B0CDD53DED7E734B /* Resources */,
+				3F099EED1939A9A76CDB960888EA3CF7 /* Support Files */,
+			);
+			path = TSMessages;
+			sourceTree = "<group>";
+		};
+		9CF5425E4C3E9D067180C0B05227F7A0 /* MRProgress */ = {
+			isa = PBXGroup;
+			children = (
+				E208E4B2D824BE3DFA4E9A13CB5A5B94 /* MRProgress.h */,
+				09F28F4888B6AD7A510E742DFDBDAC74 /* ActivityIndicator */,
+				93FED2CEF9A66B5543537A933CF94E7B /* Blur */,
+				DF4A888DC448B0A026CA7A8B954EB49D /* Circular */,
+				DF08623FBB1A7386B798755E69D71761 /* Helper */,
+				22936F68CCF5AA7596617827F03F6690 /* Icons */,
+				C5CA374A6BF9CD9FF39426BA030E3709 /* NavigationBarProgress */,
+				70E14407F525CFAEE2B4F9E94ECA3CDE /* Overlay */,
+				EF4C14DEB1157BE8149E9DC6E52B6F17 /* ProgressBaseClass */,
+				AE0655B7B41F65DDB2DD260A234485F0 /* Stopable */,
+				F81958B773991145F689E1FF434F1BC2 /* Support Files */,
+			);
+			path = MRProgress;
+			sourceTree = "<group>";
+		};
+		AE0655B7B41F65DDB2DD260A234485F0 /* Stopable */ = {
+			isa = PBXGroup;
+			children = (
+				F3E7BEFBDF91A7DF979055C29C40FBA7 /* MRStopButton.h */,
+				5A63C2F2C4A20ABA66CEAEDDE8A04A69 /* MRStopButton.m */,
+				E1A4D439AEACA1128D9138D9A52839B7 /* MRStopableView.h */,
+			);
+			name = Stopable;
+			sourceTree = "<group>";
+		};
+		C5CA374A6BF9CD9FF39426BA030E3709 /* NavigationBarProgress */ = {
+			isa = PBXGroup;
+			children = (
+				84CA2C02C8F26186006FCFED4D67A3F0 /* MRNavigationBarProgressView.h */,
+				132501B4C6D3055AAEEE17A84AC10D97 /* MRNavigationBarProgressView.m */,
+			);
+			name = NavigationBarProgress;
 			sourceTree = "<group>";
 		};
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA90876520FC686CE75A908B1C578EB8 /* libAPAddressBook.a */,
-				5DF91BF5CA866F958CA2CA23853168B1 /* libHexColors.a */,
-				3AF51D78635D22E29CC6B365FD0188F5 /* libMCSwipeTableViewCell.a */,
-				FF8CAE53AFE5924D48A05509F10A8F24 /* libMSCollectionViewCalendarLayout.a */,
-				91E3C2FD2D35E6C24EC86CBF4A4516EC /* libPods.a */,
-				690089FBB65DFBF2B83562E9AC28F356 /* libPods-enHuecoTests.a */,
+				38777D2F8CF79E2CC99257177D06EFAA /* libAPAddressBook.a */,
+				D7898DD878E7644CCD340AA959182279 /* libHexColors.a */,
+				E03B570FB96808283B983DA0D281D109 /* libMCSwipeTableViewCell.a */,
+				FDA0283ED9FC3FB4390FE7EF26A9BCA3 /* libMRProgress.a */,
+				603AA7E3C8D1C2C285C41304490D1548 /* libMSCollectionViewCalendarLayout.a */,
+				621EA4A9A80CAF4E3DCE3E729299AD8D /* libPods.a */,
+				ABBD3195A6CF525DF52D9DE1B244F7D1 /* libPods-enHuecoTests.a */,
 				485CAB4F0EA94FBBD0B2788D19461AF5 /* libQRCodeReaderViewController.a */,
 				E8C8D096A5C2057DB1928AA0E5D09632 /* libTSMessages.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D23451C4CB8605EFCC5DF0F8DD285483 /* Core */ = {
+		DF08623FBB1A7386B798755E69D71761 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				60A78EEA635FF587949F67590D809642 /* APAddress.h */,
-				493D856B738D5C312D1722E7B8FA4545 /* APAddress.m */,
-				4FD13C94E39CB4D4E7B63CE3A7A8D1F9 /* APAddressBook.h */,
-				6EA49C2335D8386F5F352DA149AE7AC2 /* APAddressBook.m */,
-				D5CC1F20A3190A83EA4BD243CEE2C987 /* APContact.h */,
-				2B83589D60F108BAD85BEC5E636A06CF /* APContact.m */,
-				F8CF1FE1D9AFA5B6B2B613EA242D49B2 /* APPhoneWithLabel.h */,
-				EC98E804A866E71735D3D24FA0E740A7 /* APPhoneWithLabel.m */,
-				49C45D8A223AAD606F62DF13D7C0A202 /* APSocialProfile.h */,
-				B1927873BFC937441958533E639E9DD8 /* APSocialProfile.m */,
-				1AD815D5DBDA0AF0B74A19DB8AF680D7 /* APTypes.h */,
+				180F19CBF73E820DF77408FA88457E2E /* MRProgressHelper.h */,
 			);
-			name = Core;
+			name = Helper;
 			sourceTree = "<group>";
 		};
-		D9804DC356B1C3EE824F3F4550E01791 /* Support Files */ = {
+		DF4A888DC448B0A026CA7A8B954EB49D /* Circular */ = {
 			isa = PBXGroup;
 			children = (
-				53F59EEBF3CDD8FFBC34B4FA8F57E7E9 /* QRCodeReaderViewController.xcconfig */,
-				7B535FA10BC947558D0C4C32D5082230 /* QRCodeReaderViewController-Private.xcconfig */,
-				FFE9E96E6D9DDE157B6AE8F0BE2E195D /* QRCodeReaderViewController-dummy.m */,
-				66AB78F09BA2E575AFAA8B1A66336B9B /* QRCodeReaderViewController-prefix.pch */,
+				427FCF95DC6CE9A5BAB1A6C4DE12A546 /* MRCircularProgressView.h */,
+				C5E61B2C377F57F14C0798E48AF6764F /* MRCircularProgressView.m */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/QRCodeReaderViewController";
+			name = Circular;
 			sourceTree = "<group>";
 		};
-		F3DDD0364DE2BB3CFCB5BD0E77FBC041 /* Support Files */ = {
+		E02B73332B9C873F4CDE9BC82DF79891 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3EC41633CF76E879B8422F4F877398F8 /* MCSwipeTableViewCell.xcconfig */,
-				2C1E111E9007C0A8B70176A6849EA137 /* MCSwipeTableViewCell-Private.xcconfig */,
-				75FC450C32E0EF3480E268E305710116 /* MCSwipeTableViewCell-dummy.m */,
-				F7E75FE56D8153C5817B0BEE9DBB8011 /* MCSwipeTableViewCell-prefix.pch */,
+				A85C88DCC400DF8241BB133834CB5DD6 /* MSCollectionViewCalendarLayout.xcconfig */,
+				6049D1071A337D243BE51B0AE597E43E /* MSCollectionViewCalendarLayout-Private.xcconfig */,
+				E3768DDD6B3A73715539AAA379633745 /* MSCollectionViewCalendarLayout-dummy.m */,
+				74138E6FF966C60CAB8E40A552E56BDC /* MSCollectionViewCalendarLayout-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/MCSwipeTableViewCell";
+			path = "../Target Support Files/MSCollectionViewCalendarLayout";
 			sourceTree = "<group>";
 		};
-		FC8D21882472EE6EE4D44621DD35579E /* Support Files */ = {
+		EF4C14DEB1157BE8149E9DC6E52B6F17 /* ProgressBaseClass */ = {
 			isa = PBXGroup;
 			children = (
-				A17AD793179B83752827A7BDC5C3517B /* TSMessages.xcconfig */,
-				EDC75B25D6455925B9F39D7EDACD8D69 /* TSMessages-Private.xcconfig */,
-				A72A74658CFFD3ED37922D2B6C002A62 /* TSMessages-dummy.m */,
-				E4EBDFB7489D78EA60C91F2C99A80B49 /* TSMessages-prefix.pch */,
+				D1885E92803FA5899D49FD9854168969 /* MRProgressView.h */,
+				2E59084D224B6CC05FD778E61D7DC8E0 /* MRProgressView.m */,
+			);
+			name = ProgressBaseClass;
+			sourceTree = "<group>";
+		};
+		F0394E6764AA92816CA9D087EBFEB257 /* HexColors */ = {
+			isa = PBXGroup;
+			children = (
+				9F86979B3C24F5A4D8D61E0742AC03B4 /* HexColor.h */,
+				0AF05743C4EB0A6022B33B2A62C7DA73 /* HexColor.m */,
+				7B4D60A0B4D734D3C9B365F033815FF3 /* Support Files */,
+			);
+			path = HexColors;
+			sourceTree = "<group>";
+		};
+		F4CDA5FA9197A41E0081E84F932906EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30D38200C81FA00D9BEE01238BE83402 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F81958B773991145F689E1FF434F1BC2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				926059FF0561291A1642C5DA9598A18D /* MRProgress.xcconfig */,
+				4CA40BD1093FBA0E41B63A406ECDAA7C /* MRProgress-Private.xcconfig */,
+				D1B7DD04493CA522D3CFB47DCE20F6D9 /* MRProgress-dummy.m */,
+				A861862A166E8CED402F2F839AF9E54A /* MRProgress-prefix.pch */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/TSMessages";
+			path = "../Target Support Files/MRProgress";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		36B9365A1807AE8A660C1EEC0F9701F5 /* Headers */ = {
+		007DA094BE255A4ACF7AB624DC1438FE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADEEDCA3F2040812945BD4B852EC4E65 /* MSCollectionViewCalendarLayout.h in Headers */,
+				B0595DEF371AFA3172F17511FF9A1396 /* MRActivityIndicatorView.h in Headers */,
+				745B55ACB04EEAFB5A8EE6A11BD98947 /* MRBlurView.h in Headers */,
+				6F5331F7631BB80F0843CEDE03D64DD9 /* MRCircularProgressView.h in Headers */,
+				368970179250AC90D52D17B195940FDC /* MRIconView.h in Headers */,
+				EB9DA492B92167944DFE0BA166EDB69D /* MRNavigationBarProgressView.h in Headers */,
+				D2DF8A24285D3A39D8F34B8A14AE8F14 /* MRProgress.h in Headers */,
+				4CD2900F18A0EDABE916EF2380CD409D /* MRProgressHelper.h in Headers */,
+				9BCBCDDF30641D24BE4C91D0C9FEBB80 /* MRProgressOverlayView.h in Headers */,
+				F9E6C538BBF791B3DAB8B86E5BFDF3D7 /* MRProgressView.h in Headers */,
+				E57C52CFD25FD60252D7D5E5DDA9696E /* MRStopButton.h in Headers */,
+				F92D44E9AA092A9EEC19214573A6A3BC /* MRStopableView.h in Headers */,
+				71B0BC80AC45C9778D22DCE662CEBDF0 /* UIImage+MRImageEffects.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		454B7BB478188229E68C143C0A663663 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDA6759D3939558EA90A6F846620E593 /* HexColor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62D38995869E1B10B3BFB0AF441EAF0D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D72C7C38A0AA2E78BFB56B9DE710B56C /* APAddress.h in Headers */,
+				73232A06F0BACDFCF7AEBBC3C4AA943F /* APAddressBook.h in Headers */,
+				8666E435D19F4A2F56797B01C2663587 /* APContact.h in Headers */,
+				A7CB37FC9EB7FC93A7735E40B7FFC54A /* APPhoneWithLabel.h in Headers */,
+				EB4474FDB3B11D55E7162AC51A25C137 /* APSocialProfile.h in Headers */,
+				F91DC68B0B140272DA14DB9F38585AFA /* APTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,32 +859,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD362D7878FB3F97CA755FEF72ECA764 /* Headers */ = {
+		77F5BC9D4DF5560A8CC95C7628A7B2E9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4878D4F066CC594D1E5597F0A2EDF396 /* MCSwipeTableViewCell.h in Headers */,
+				FD3927E1032A96288C0AD0BECD77D908 /* MSCollectionViewCalendarLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CB758A48B9F5FA095CE9CDFE67FE66DF /* Headers */ = {
+		EB8ED04CE5E255C4FAD908F0446B41E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47FA73C9DE2005E991FF26D7485AABBD /* APAddress.h in Headers */,
-				A406E4F19980369B5C5EC01C7071EFF4 /* APAddressBook.h in Headers */,
-				1DBFCAC64EE7DA5478848D1553F9C443 /* APContact.h in Headers */,
-				22A6EA1A297E6D77CE340390B842BA6E /* APPhoneWithLabel.h in Headers */,
-				05710EB72C9B768D66C5A5E3CC13F43E /* APSocialProfile.h in Headers */,
-				B2E8DFCB35C316EBCCE4F765F1E19A16 /* APTypes.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E135F5B25D16903C8D8FB3222D92FB5A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				952DA668378D305D890EC5E8FD705A5F /* HexColor.h in Headers */,
+				3C58ECD09A10B5EA6BA61A557140CF09 /* MCSwipeTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,45 +888,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0A81B9543D56770A33FD5F764D2A4E3C /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43969461ACB95A1AD8BB5EE7828F855E /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				B97AF7B8C9F61068207D7AF326CF1F32 /* Sources */,
-				9CD3BF063725C8DC59D18A26F2AF416F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BD790534FE94A55A195447E68D860B72 /* PBXTargetDependency */,
-				7E0CC3006589908075CDBE41251C66F5 /* PBXTargetDependency */,
-				5929985335814C193C43A935794B086A /* PBXTargetDependency */,
-				6158AB82296D87C8499C2E1D4FA3D19B /* PBXTargetDependency */,
-				DC7C09E2BB1942AA61D419CBBD2B9197 /* PBXTargetDependency */,
-				B1E64AA377B645829A8C4C772DED4252 /* PBXTargetDependency */,
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = 91E3C2FD2D35E6C24EC86CBF4A4516EC /* libPods.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		0E476257F0ECF239F0630681FE46BA0C /* HexColors */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B2A0C88C553936F550F79E40A45FA7D4 /* Build configuration list for PBXNativeTarget "HexColors" */;
-			buildPhases = (
-				B3A177188E7B9977EFC5D340E6940F87 /* Sources */,
-				F31BE2653FE67F304DC084ECE6BA91F0 /* Frameworks */,
-				E135F5B25D16903C8D8FB3222D92FB5A /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HexColors;
-			productName = HexColors;
-			productReference = 5DF91BF5CA866F958CA2CA23853168B1 /* libHexColors.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		18A4BA8BFD66F76A5A3AE5290D46B994 /* TSMessages */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 669E5C2FAEE7AF8402F351FCEAE7535E /* Build configuration list for PBXNativeTarget "TSMessages" */;
@@ -717,54 +899,54 @@
 			buildRules = (
 			);
 			dependencies = (
-				E2FE24097591E311281BE00D6AC18D3A /* PBXTargetDependency */,
+				07CB54DD9D2D2816D53F29B68DAF1545 /* PBXTargetDependency */,
 			);
 			name = TSMessages;
 			productName = TSMessages;
 			productReference = E8C8D096A5C2057DB1928AA0E5D09632 /* libTSMessages.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		2E1BFB6809A1543F9837EED9F9289704 /* MSCollectionViewCalendarLayout */ = {
+		1BDAAB9891F4BC470207A9AAF4F4ED8D /* MRProgress */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E2D462C497664370C716A72CEC9DB063 /* Build configuration list for PBXNativeTarget "MSCollectionViewCalendarLayout" */;
+			buildConfigurationList = B6E761AC42BB978F163F2E96322F0C67 /* Build configuration list for PBXNativeTarget "MRProgress" */;
 			buildPhases = (
-				57305F8A1E51C09AEEF0FC4669DA7126 /* Sources */,
-				C3289E06C5409EDC12E22F97C89296A2 /* Frameworks */,
-				36B9365A1807AE8A660C1EEC0F9701F5 /* Headers */,
+				8D39FD9C68C2B1037779C7123A3B89B0 /* Sources */,
+				ABCEC7CA5196E70F603E85FF38D8AEFC /* Frameworks */,
+				007DA094BE255A4ACF7AB624DC1438FE /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MSCollectionViewCalendarLayout;
-			productName = MSCollectionViewCalendarLayout;
-			productReference = FF8CAE53AFE5924D48A05509F10A8F24 /* libMSCollectionViewCalendarLayout.a */;
+			name = MRProgress;
+			productName = MRProgress;
+			productReference = FDA0283ED9FC3FB4390FE7EF26A9BCA3 /* libMRProgress.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		2FFDFF7BA7864E5D364917E19D997237 /* APAddressBook */ = {
+		2A625F43ECBE37FC366BF9ADBA94CDCD /* HexColors */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0DD39EC8B4A528224476AEE08D15E5B9 /* Build configuration list for PBXNativeTarget "APAddressBook" */;
+			buildConfigurationList = 8569C7FA79C75AE85E229160E772DC43 /* Build configuration list for PBXNativeTarget "HexColors" */;
 			buildPhases = (
-				771991A8DB262C429E20A6736D824A8A /* Sources */,
-				8FACEDCCB93D059159E207EEADBA9EE3 /* Frameworks */,
-				CB758A48B9F5FA095CE9CDFE67FE66DF /* Headers */,
+				F96E85CE10D19CF3201F46ACE0560312 /* Sources */,
+				853F6FE25DD24C93F7DE5C901EA9BED7 /* Frameworks */,
+				454B7BB478188229E68C143C0A663663 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = APAddressBook;
-			productName = APAddressBook;
-			productReference = EA90876520FC686CE75A908B1C578EB8 /* libAPAddressBook.a */;
+			name = HexColors;
+			productName = HexColors;
+			productReference = D7898DD878E7644CCD340AA959182279 /* libHexColors.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		330653C35688D237F1201C8292F00641 /* MCSwipeTableViewCell */ = {
+		60703AD7DB6892AADA8070F58B2D611F /* MCSwipeTableViewCell */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 869A342F93D6CD6E42B0FF12E86D4469 /* Build configuration list for PBXNativeTarget "MCSwipeTableViewCell" */;
+			buildConfigurationList = B2979940D18C968A1D006D7D825A5E23 /* Build configuration list for PBXNativeTarget "MCSwipeTableViewCell" */;
 			buildPhases = (
-				DCC8616694E91C00D5AED54C3E4577EC /* Sources */,
-				DEF237182A87EFEC192A084226BA6FF2 /* Frameworks */,
-				AD362D7878FB3F97CA755FEF72ECA764 /* Headers */,
+				7EEE9E67329E5195560687E939A1A131 /* Sources */,
+				16125EB021B89841D27B161206A19FB0 /* Frameworks */,
+				EB8ED04CE5E255C4FAD908F0446B41E0 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -772,7 +954,7 @@
 			);
 			name = MCSwipeTableViewCell;
 			productName = MCSwipeTableViewCell;
-			productReference = 3AF51D78635D22E29CC6B365FD0188F5 /* libMCSwipeTableViewCell.a */;
+			productReference = E03B570FB96808283B983DA0D281D109 /* libMCSwipeTableViewCell.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		8139426284DB15FF69CB9A9C8EDADA61 /* QRCodeReaderViewController */ = {
@@ -792,26 +974,84 @@
 			productReference = 485CAB4F0EA94FBBD0B2788D19461AF5 /* libQRCodeReaderViewController.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		AEABC7112B4B6B9C2789718249E8766A /* Pods-enHuecoTests */ = {
+		85216E6DA23FE35616F74E0FF15D42B0 /* Pods-enHuecoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBE7A71EACA91BF4C99F47763A4761BB /* Build configuration list for PBXNativeTarget "Pods-enHuecoTests" */;
+			buildConfigurationList = 59398B4E52250209C01DBC24C1533E03 /* Build configuration list for PBXNativeTarget "Pods-enHuecoTests" */;
 			buildPhases = (
-				F35C46C7A5B709468A3BA5BA9D3E3AB9 /* Sources */,
-				C07110F6D7ACE1773C59FCCA704A042C /* Frameworks */,
+				A463A6A92E46564298DCDFA53204B5B1 /* Sources */,
+				29859B952AE7BEA122B11825BF54BB65 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F328B1BACE5DB75C78226E49F5EDB905 /* PBXTargetDependency */,
-				2A22F549F87D1981A09FA313EFA21048 /* PBXTargetDependency */,
-				8D1619ACE801CA942C0DEF2E72748642 /* PBXTargetDependency */,
-				CEE24727DAB1CED1FD09F6ABDDEDC920 /* PBXTargetDependency */,
-				434D2D891BEBF0A977B059C1F8F3BDC2 /* PBXTargetDependency */,
-				6EF1F2A818F79F07C69BE908ACDBD105 /* PBXTargetDependency */,
+				88C069409113538D76E5248215402B0B /* PBXTargetDependency */,
+				311C98D0A30D4666AB1E99901BFD00CD /* PBXTargetDependency */,
+				28078FD15F87AF7A663E3A49FC250487 /* PBXTargetDependency */,
+				72DAFF790A75E3F4FE213B0DA70C33BD /* PBXTargetDependency */,
+				0AC9C71740F061A5E94B5EA4121B87A1 /* PBXTargetDependency */,
+				FDD4F0C769FEF66CC2EB8421CC73B9D1 /* PBXTargetDependency */,
+				0582E3AD7BEADE625C9AD6CE9A033474 /* PBXTargetDependency */,
 			);
 			name = "Pods-enHuecoTests";
 			productName = "Pods-enHuecoTests";
-			productReference = 690089FBB65DFBF2B83562E9AC28F356 /* libPods-enHuecoTests.a */;
+			productReference = ABBD3195A6CF525DF52D9DE1B244F7D1 /* libPods-enHuecoTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B9680FE47FC3A3A2DADCE2C1CFC7FEB8 /* APAddressBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3AC149EE36EC5210B337A88A6C93FC4 /* Build configuration list for PBXNativeTarget "APAddressBook" */;
+			buildPhases = (
+				3878BA6FC169A1FEBB39656CB83B9C02 /* Sources */,
+				5D2F816A1FF41FAD1F87DC008699508E /* Frameworks */,
+				62D38995869E1B10B3BFB0AF441EAF0D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = APAddressBook;
+			productName = APAddressBook;
+			productReference = 38777D2F8CF79E2CC99257177D06EFAA /* libAPAddressBook.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BDF8CAFD69C535CA51F6FCA5FC7237B5 /* MSCollectionViewCalendarLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 880C2C104D1196FC54E905524AB89B72 /* Build configuration list for PBXNativeTarget "MSCollectionViewCalendarLayout" */;
+			buildPhases = (
+				898933AF1F0B8EFE46A8854B41F90F06 /* Sources */,
+				1C0959061119514C1E9C065A460E7A3E /* Frameworks */,
+				77F5BC9D4DF5560A8CC95C7628A7B2E9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MSCollectionViewCalendarLayout;
+			productName = MSCollectionViewCalendarLayout;
+			productReference = 603AA7E3C8D1C2C285C41304490D1548 /* libMSCollectionViewCalendarLayout.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F8F413D4570597BF4D456F7B931B4329 /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54D6AF71EEA886CA871FC0B2A29DF29B /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				06F9880385C5837E222A84C256F8968E /* Sources */,
+				8FA868D9F829804086C597A0B969A364 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A7021EED0C6C8E66CFAC89B89780FAE /* PBXTargetDependency */,
+				B434D16471E0485653EB4C4D2649B350 /* PBXTargetDependency */,
+				8D307EEDB7DBAA05A49337CBDBD23ED3 /* PBXTargetDependency */,
+				D16736029AFFB5ABDA75AF47B8C333F4 /* PBXTargetDependency */,
+				433118B968A7473F0B1E4191DC40A6E9 /* PBXTargetDependency */,
+				0B48C2ED279C297E67E110C56B99ACEF /* PBXTargetDependency */,
+				13A8B17CBA500A8AECDAF491A0E7E298 /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = 621EA4A9A80CAF4E3DCE3E729299AD8D /* libPods.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -835,12 +1075,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2FFDFF7BA7864E5D364917E19D997237 /* APAddressBook */,
-				0E476257F0ECF239F0630681FE46BA0C /* HexColors */,
-				330653C35688D237F1201C8292F00641 /* MCSwipeTableViewCell */,
-				2E1BFB6809A1543F9837EED9F9289704 /* MSCollectionViewCalendarLayout */,
-				0A81B9543D56770A33FD5F764D2A4E3C /* Pods */,
-				AEABC7112B4B6B9C2789718249E8766A /* Pods-enHuecoTests */,
+				B9680FE47FC3A3A2DADCE2C1CFC7FEB8 /* APAddressBook */,
+				2A625F43ECBE37FC366BF9ADBA94CDCD /* HexColors */,
+				60703AD7DB6892AADA8070F58B2D611F /* MCSwipeTableViewCell */,
+				1BDAAB9891F4BC470207A9AAF4F4ED8D /* MRProgress */,
+				BDF8CAFD69C535CA51F6FCA5FC7237B5 /* MSCollectionViewCalendarLayout */,
+				F8F413D4570597BF4D456F7B931B4329 /* Pods */,
+				85216E6DA23FE35616F74E0FF15D42B0 /* Pods-enHuecoTests */,
 				8139426284DB15FF69CB9A9C8EDADA61 /* QRCodeReaderViewController */,
 				18A4BA8BFD66F76A5A3AE5290D46B994 /* TSMessages */,
 			);
@@ -848,6 +1089,14 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		06F9880385C5837E222A84C256F8968E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77084DF27B5E7129649AC7F78354616B /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		078A0E51D56C35C0888BE26024DBD072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -859,59 +1108,68 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		57305F8A1E51C09AEEF0FC4669DA7126 /* Sources */ = {
+		3878BA6FC169A1FEBB39656CB83B9C02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5F0B57C178C843F0994DD61B1C158A9 /* MSCollectionViewCalendarLayout-dummy.m in Sources */,
-				D7153166105568BF5C61BDBA9725F803 /* MSCollectionViewCalendarLayout.m in Sources */,
+				F461ED5193E58A3A31A1E8CA93FE627F /* APAddress.m in Sources */,
+				04DA3D322F16C06E17B95496F0B094D0 /* APAddressBook-dummy.m in Sources */,
+				F63087D0402175758B862274B1709ADC /* APAddressBook.m in Sources */,
+				69A21F7076287A1AF2B2C722AEBBEE37 /* APContact.m in Sources */,
+				2F4FAFB11D8AB00BD4E8BBDD26F815A5 /* APPhoneWithLabel.m in Sources */,
+				DBCF74FC6A72EBB5BE51294D26EB813C /* APSocialProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		771991A8DB262C429E20A6736D824A8A /* Sources */ = {
+		7EEE9E67329E5195560687E939A1A131 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5315079AAF63C00A4E8AF2B10F22DFF3 /* APAddress.m in Sources */,
-				CD4762F6E277891F48A13F6EF85217CA /* APAddressBook-dummy.m in Sources */,
-				95829D4A79892AB602228508F4D1E313 /* APAddressBook.m in Sources */,
-				BCB7B3DE7D5F90803A77210E017A9C6A /* APContact.m in Sources */,
-				8D2D2955870861369DECCA7948AB3BF6 /* APPhoneWithLabel.m in Sources */,
-				D2AE102B26EA279DE56D9A1FE35B24E9 /* APSocialProfile.m in Sources */,
+				B96F4A93AB9FFF5C1653FE0FE65BD527 /* MCSwipeTableViewCell-dummy.m in Sources */,
+				5C8216EE7CF2AD5C748FF355A284FF14 /* MCSwipeTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3A177188E7B9977EFC5D340E6940F87 /* Sources */ = {
+		898933AF1F0B8EFE46A8854B41F90F06 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E6088502AFCB95698B2FAC15EAC76E6 /* HexColor.m in Sources */,
-				DE1578EF4A66A65061211050966C4708 /* HexColors-dummy.m in Sources */,
+				79145F2B158B72A14965ACC5BA2919AB /* MSCollectionViewCalendarLayout-dummy.m in Sources */,
+				AD1DEE148D6551502D61C9656C0AB4D7 /* MSCollectionViewCalendarLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B97AF7B8C9F61068207D7AF326CF1F32 /* Sources */ = {
+		8D39FD9C68C2B1037779C7123A3B89B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6E91CE55F50862751BB1CAA7983F952 /* Pods-dummy.m in Sources */,
+				25F17923017E720B799B4CC73C817974 /* MRActivityIndicatorView.m in Sources */,
+				F376919202C96352C1EB1F2BAFCEEBFD /* MRBlurView.m in Sources */,
+				1CEDC29ECFB775B61E81E94297175A0D /* MRCircularProgressView.m in Sources */,
+				8B84F5B8A4CED0ED27324F750727AEB8 /* MRIconView.m in Sources */,
+				D3A5607A92B4C432BBD517ACA2BDEA06 /* MRNavigationBarProgressView.m in Sources */,
+				C5AD3FDFEE44DA08F105FA62960A0322 /* MRProgress-dummy.m in Sources */,
+				E584EFA055437F272A87579AC9C5410B /* MRProgressOverlayView.m in Sources */,
+				C0D7B433B285A7D31C347225D879C5C4 /* MRProgressView.m in Sources */,
+				D6A165F30C77692F182B26BE43053FF4 /* MRStopButton.m in Sources */,
+				EB2D818E726B27E311C0ED51BF14A9C0 /* UIImage+MRImageEffects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCC8616694E91C00D5AED54C3E4577EC /* Sources */ = {
+		A463A6A92E46564298DCDFA53204B5B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E893C5ABBD62207DDBBDCEF8E7BAB94 /* MCSwipeTableViewCell-dummy.m in Sources */,
-				0BC4E0C41A1F75B4F0D0AB00A4922273 /* MCSwipeTableViewCell.m in Sources */,
+				0C5C9701B9DF7BD1FED2AD4891A2A50B /* Pods-enHuecoTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F35C46C7A5B709468A3BA5BA9D3E3AB9 /* Sources */ = {
+		F96E85CE10D19CF3201F46ACE0560312 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C459E0DB335881AA9EE7848E4CF039B /* Pods-enHuecoTests-dummy.m in Sources */,
+				DB8C34B0D69A8CEBA2D31C578FBF09DB /* HexColor.m in Sources */,
+				97C0973C73FCEF28D85EFB4DC08054FA /* HexColors-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -930,90 +1188,118 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2A22F549F87D1981A09FA313EFA21048 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HexColors;
-			target = 0E476257F0ECF239F0630681FE46BA0C /* HexColors */;
-			targetProxy = 0E78C84F90D7B4A36F26A0085F4BE2FF /* PBXContainerItemProxy */;
-		};
-		434D2D891BEBF0A977B059C1F8F3BDC2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = QRCodeReaderViewController;
-			target = 8139426284DB15FF69CB9A9C8EDADA61 /* QRCodeReaderViewController */;
-			targetProxy = 38B80479143FC7A4BD0BEB0F722A190A /* PBXContainerItemProxy */;
-		};
-		5929985335814C193C43A935794B086A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MCSwipeTableViewCell;
-			target = 330653C35688D237F1201C8292F00641 /* MCSwipeTableViewCell */;
-			targetProxy = 3980ECC4D24092418FDE31E52B7A869E /* PBXContainerItemProxy */;
-		};
-		6158AB82296D87C8499C2E1D4FA3D19B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MSCollectionViewCalendarLayout;
-			target = 2E1BFB6809A1543F9837EED9F9289704 /* MSCollectionViewCalendarLayout */;
-			targetProxy = D50FBCB6931431DE8492CB94DA0B55C4 /* PBXContainerItemProxy */;
-		};
-		6EF1F2A818F79F07C69BE908ACDBD105 /* PBXTargetDependency */ = {
+		0582E3AD7BEADE625C9AD6CE9A033474 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TSMessages;
 			target = 18A4BA8BFD66F76A5A3AE5290D46B994 /* TSMessages */;
-			targetProxy = A4E89EBF5513C94D5BF394113A89AF1A /* PBXContainerItemProxy */;
+			targetProxy = 73E07BF1EB20886C1E14D6E0C582AAC1 /* PBXContainerItemProxy */;
 		};
-		7E0CC3006589908075CDBE41251C66F5 /* PBXTargetDependency */ = {
+		07CB54DD9D2D2816D53F29B68DAF1545 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HexColors;
-			target = 0E476257F0ECF239F0630681FE46BA0C /* HexColors */;
-			targetProxy = 6A9E1B91ADCBEC25083084C972E489F8 /* PBXContainerItemProxy */;
+			target = 2A625F43ECBE37FC366BF9ADBA94CDCD /* HexColors */;
+			targetProxy = D63E456966AB1945B3CF9E943C498C21 /* PBXContainerItemProxy */;
 		};
-		8D1619ACE801CA942C0DEF2E72748642 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MCSwipeTableViewCell;
-			target = 330653C35688D237F1201C8292F00641 /* MCSwipeTableViewCell */;
-			targetProxy = 0494A174562A6747CEE842B365029588 /* PBXContainerItemProxy */;
-		};
-		B1E64AA377B645829A8C4C772DED4252 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TSMessages;
-			target = 18A4BA8BFD66F76A5A3AE5290D46B994 /* TSMessages */;
-			targetProxy = 43583EB6EDB23203725F4C21C883F88F /* PBXContainerItemProxy */;
-		};
-		BD790534FE94A55A195447E68D860B72 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = APAddressBook;
-			target = 2FFDFF7BA7864E5D364917E19D997237 /* APAddressBook */;
-			targetProxy = 5AFCC2C43ED8CF9A5B21C0D7E3F18E89 /* PBXContainerItemProxy */;
-		};
-		CEE24727DAB1CED1FD09F6ABDDEDC920 /* PBXTargetDependency */ = {
+		0AC9C71740F061A5E94B5EA4121B87A1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MSCollectionViewCalendarLayout;
-			target = 2E1BFB6809A1543F9837EED9F9289704 /* MSCollectionViewCalendarLayout */;
-			targetProxy = 8FCB623239BDF76384DC793508AA8D16 /* PBXContainerItemProxy */;
+			target = BDF8CAFD69C535CA51F6FCA5FC7237B5 /* MSCollectionViewCalendarLayout */;
+			targetProxy = AD1FDAA8C5C07A069CBFF2577118EC78 /* PBXContainerItemProxy */;
 		};
-		DC7C09E2BB1942AA61D419CBBD2B9197 /* PBXTargetDependency */ = {
+		0B48C2ED279C297E67E110C56B99ACEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = QRCodeReaderViewController;
 			target = 8139426284DB15FF69CB9A9C8EDADA61 /* QRCodeReaderViewController */;
-			targetProxy = 2C3E8F255E462429527E6E0891AD52BC /* PBXContainerItemProxy */;
+			targetProxy = 719EE89FF219F5B3B115E6E3055F0376 /* PBXContainerItemProxy */;
 		};
-		E2FE24097591E311281BE00D6AC18D3A /* PBXTargetDependency */ = {
+		13A8B17CBA500A8AECDAF491A0E7E298 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TSMessages;
+			target = 18A4BA8BFD66F76A5A3AE5290D46B994 /* TSMessages */;
+			targetProxy = F4FEDEF70CC60DAE75F9ED92AE60BDB2 /* PBXContainerItemProxy */;
+		};
+		28078FD15F87AF7A663E3A49FC250487 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MCSwipeTableViewCell;
+			target = 60703AD7DB6892AADA8070F58B2D611F /* MCSwipeTableViewCell */;
+			targetProxy = 00896126FCCFF41F657A1DBF914293D4 /* PBXContainerItemProxy */;
+		};
+		311C98D0A30D4666AB1E99901BFD00CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HexColors;
-			target = 0E476257F0ECF239F0630681FE46BA0C /* HexColors */;
-			targetProxy = 78622B65C593397E357CB39A0423DFB1 /* PBXContainerItemProxy */;
+			target = 2A625F43ECBE37FC366BF9ADBA94CDCD /* HexColors */;
+			targetProxy = 33BA080C9CE70934754A13A101BF49B7 /* PBXContainerItemProxy */;
 		};
-		F328B1BACE5DB75C78226E49F5EDB905 /* PBXTargetDependency */ = {
+		433118B968A7473F0B1E4191DC40A6E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MSCollectionViewCalendarLayout;
+			target = BDF8CAFD69C535CA51F6FCA5FC7237B5 /* MSCollectionViewCalendarLayout */;
+			targetProxy = 3ACC13FFD449D706ED0012E31A863EFA /* PBXContainerItemProxy */;
+		};
+		72DAFF790A75E3F4FE213B0DA70C33BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MRProgress;
+			target = 1BDAAB9891F4BC470207A9AAF4F4ED8D /* MRProgress */;
+			targetProxy = 87D1719E8E0D6D8B62D2D605F3B1BC92 /* PBXContainerItemProxy */;
+		};
+		88C069409113538D76E5248215402B0B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = APAddressBook;
-			target = 2FFDFF7BA7864E5D364917E19D997237 /* APAddressBook */;
-			targetProxy = 9F036D226AA22EF8CD48D19D2709A4FA /* PBXContainerItemProxy */;
+			target = B9680FE47FC3A3A2DADCE2C1CFC7FEB8 /* APAddressBook */;
+			targetProxy = 52EFF77DE1DAF1EB533B19304ACDDF7E /* PBXContainerItemProxy */;
+		};
+		8A7021EED0C6C8E66CFAC89B89780FAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = APAddressBook;
+			target = B9680FE47FC3A3A2DADCE2C1CFC7FEB8 /* APAddressBook */;
+			targetProxy = CCA2786765FDE52E67AA6CDB064A46A5 /* PBXContainerItemProxy */;
+		};
+		8D307EEDB7DBAA05A49337CBDBD23ED3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MCSwipeTableViewCell;
+			target = 60703AD7DB6892AADA8070F58B2D611F /* MCSwipeTableViewCell */;
+			targetProxy = FAC8D49B04B7F24EDDBFD90CDBD405E9 /* PBXContainerItemProxy */;
+		};
+		B434D16471E0485653EB4C4D2649B350 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HexColors;
+			target = 2A625F43ECBE37FC366BF9ADBA94CDCD /* HexColors */;
+			targetProxy = 3570801521CA06B9C5AAFD63155E10E1 /* PBXContainerItemProxy */;
+		};
+		D16736029AFFB5ABDA75AF47B8C333F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MRProgress;
+			target = 1BDAAB9891F4BC470207A9AAF4F4ED8D /* MRProgress */;
+			targetProxy = DFDD1D9516687BFD30639B065A388AFF /* PBXContainerItemProxy */;
+		};
+		FDD4F0C769FEF66CC2EB8421CC73B9D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QRCodeReaderViewController;
+			target = 8139426284DB15FF69CB9A9C8EDADA61 /* QRCodeReaderViewController */;
+			targetProxy = E894220F8F436B57202B4EA55343F7CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		04F00F9C8EFC3EEF790A68557CE9C0EE /* Debug */ = {
+		04EF6E37614FB446DB96DD37297619E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08AC3EB71A20EBE70F66C124712D6D12 /* APAddressBook-Private.xcconfig */;
+			baseConfigurationReference = 4CA40BD1093FBA0E41B63A406ECDAA7C /* MRProgress-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MRProgress/MRProgress-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		18A32CB38FADE3E3E6F94B766BF9003B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B94F76419177331E64F6519BBDD351F /* APAddressBook-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/APAddressBook/APAddressBook-prefix.pch";
@@ -1027,32 +1313,16 @@
 			};
 			name = Debug;
 		};
-		1479D80D3FDBA693482CF67ADA15A833 /* Debug */ = {
+		1EF7F0EB91DA44F7A2DF329CFB5F6147 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E2D96ECB8715F6FD35F53BA10E7C209 /* HexColors-Private.xcconfig */;
+			baseConfigurationReference = 4CA40BD1093FBA0E41B63A406ECDAA7C /* MRProgress-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		1AD8C7037AF90D2349E7C9E0FD5C4944 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C379E6F0DECEDE251130B258C3318556 /* Pods.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MRProgress/MRProgress-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1091,12 +1361,12 @@
 			};
 			name = Release;
 		};
-		35E22355BA8ADFB460AC0A87380B01B6 /* Release */ = {
+		3710000B67FB071A374273E3F343683D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E2D96ECB8715F6FD35F53BA10E7C209 /* HexColors-Private.xcconfig */;
+			baseConfigurationReference = 6049D1071A337D243BE51B0AE597E43E /* MSCollectionViewCalendarLayout-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -1123,21 +1393,21 @@
 			};
 			name = Debug;
 		};
-		4CA0BFF8EB8A512D21835386AE4CADA2 /* Release */ = {
+		56C61664CCA87006948E9FA4E67498B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BB150E9DFA65E0201866DF821227197 /* Pods-enHuecoTests.release.xcconfig */;
+			baseConfigurationReference = E01BB3F0087E373FABB3EC3B038FC824 /* MCSwipeTableViewCell-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MCSwipeTableViewCell/MCSwipeTableViewCell-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		5F40745A0EA60FC33ABE41CF500A2966 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1155,25 +1425,9 @@
 			};
 			name = Debug;
 		};
-		8D49BA67A76C06FE959CD61704B9F657 /* Release */ = {
+		8D0839B26EC48CCC9FDDEA74D8754C20 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E588DE5971E8875E39871A8A2EC8A782 /* MSCollectionViewCalendarLayout-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		9E6F8400C60236D49DFFA7254D79FA1B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A521E43C975829794C4D06B8CCE24E6 /* Pods-enHuecoTests.debug.xcconfig */;
+			baseConfigurationReference = 2A7FF323E086525C1B166E07C33D07AB /* Pods-enHuecoTests.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1186,6 +1440,38 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
+		};
+		9EAFAEF130B88FC196DEF8C4C775C4DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E01BB3F0087E373FABB3EC3B038FC824 /* MCSwipeTableViewCell-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MCSwipeTableViewCell/MCSwipeTableViewCell-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A4471D3F6979C814C76C98F0E15C65CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B94F76419177331E64F6519BBDD351F /* APAddressBook-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/APAddressBook/APAddressBook-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
 		};
 		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1226,12 +1512,28 @@
 			};
 			name = Debug;
 		};
-		B8F1705B3B58B07237D14C0B267AE8E6 /* Release */ = {
+		AAD55B2642D65978038338C2FF95E805 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08AC3EB71A20EBE70F66C124712D6D12 /* APAddressBook-Private.xcconfig */;
+			baseConfigurationReference = CFF5F7420DBA5361FFDB1EA77055D853 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/APAddressBook/APAddressBook-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AE229B2B90D665831BFEC689C69CA38D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5A92828BB670333B7A17CFC4E4AB3F7 /* HexColors-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -1242,41 +1544,9 @@
 			};
 			name = Release;
 		};
-		CFBFE007069BB281415C188DC0453105 /* Debug */ = {
+		BB2144AA518B1FB93C1B1195ADBDB3C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E588DE5971E8875E39871A8A2EC8A782 /* MSCollectionViewCalendarLayout-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		D2CAB3D4DE9536872228B9E1BB6A111C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1E111E9007C0A8B70176A6849EA137 /* MCSwipeTableViewCell-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MCSwipeTableViewCell/MCSwipeTableViewCell-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		DFF984A389CA6FB1DD7D1B0922EAD5D7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE31203536E77B1831D9CF16144D06E7 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = FE724D28CA96E7D698254CE567D53F7B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1290,16 +1560,32 @@
 			};
 			name = Debug;
 		};
-		E6322F4AE6295FFC6A724B090B09F134 /* Release */ = {
+		D129A0F95B6EF81516E36C3614647B0D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1E111E9007C0A8B70176A6849EA137 /* MCSwipeTableViewCell-Private.xcconfig */;
+			baseConfigurationReference = 6049D1071A337D243BE51B0AE597E43E /* MSCollectionViewCalendarLayout-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MCSwipeTableViewCell/MCSwipeTableViewCell-prefix.pch";
+				GCC_PREFIX_HEADER = "Target Support Files/MSCollectionViewCalendarLayout/MSCollectionViewCalendarLayout-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E318F06506BFBEC797848F86EDAA3CAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 602B8707D100606B7831E13E69AAC6E8 /* Pods-enHuecoTests.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1340,18 +1626,25 @@
 			};
 			name = Release;
 		};
+		FE578DDA350BC1D0E7453187F2E8F5B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5A92828BB670333B7A17CFC4E4AB3F7 /* HexColors-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0DD39EC8B4A528224476AEE08D15E5B9 /* Build configuration list for PBXNativeTarget "APAddressBook" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				04F00F9C8EFC3EEF790A68557CE9C0EE /* Debug */,
-				B8F1705B3B58B07237D14C0B267AE8E6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1361,11 +1654,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		43969461ACB95A1AD8BB5EE7828F855E /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		54D6AF71EEA886CA871FC0B2A29DF29B /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DFF984A389CA6FB1DD7D1B0922EAD5D7 /* Debug */,
-				1AD8C7037AF90D2349E7C9E0FD5C4944 /* Release */,
+				BB2144AA518B1FB93C1B1195ADBDB3C0 /* Debug */,
+				AAD55B2642D65978038338C2FF95E805 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59398B4E52250209C01DBC24C1533E03 /* Build configuration list for PBXNativeTarget "Pods-enHuecoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D0839B26EC48CCC9FDDEA74D8754C20 /* Debug */,
+				E318F06506BFBEC797848F86EDAA3CAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1388,38 +1690,47 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		869A342F93D6CD6E42B0FF12E86D4469 /* Build configuration list for PBXNativeTarget "MCSwipeTableViewCell" */ = {
+		8569C7FA79C75AE85E229160E772DC43 /* Build configuration list for PBXNativeTarget "HexColors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2CAB3D4DE9536872228B9E1BB6A111C /* Debug */,
-				E6322F4AE6295FFC6A724B090B09F134 /* Release */,
+				FE578DDA350BC1D0E7453187F2E8F5B0 /* Debug */,
+				AE229B2B90D665831BFEC689C69CA38D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2A0C88C553936F550F79E40A45FA7D4 /* Build configuration list for PBXNativeTarget "HexColors" */ = {
+		880C2C104D1196FC54E905524AB89B72 /* Build configuration list for PBXNativeTarget "MSCollectionViewCalendarLayout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1479D80D3FDBA693482CF67ADA15A833 /* Debug */,
-				35E22355BA8ADFB460AC0A87380B01B6 /* Release */,
+				D129A0F95B6EF81516E36C3614647B0D /* Debug */,
+				3710000B67FB071A374273E3F343683D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBE7A71EACA91BF4C99F47763A4761BB /* Build configuration list for PBXNativeTarget "Pods-enHuecoTests" */ = {
+		B2979940D18C968A1D006D7D825A5E23 /* Build configuration list for PBXNativeTarget "MCSwipeTableViewCell" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9E6F8400C60236D49DFFA7254D79FA1B /* Debug */,
-				4CA0BFF8EB8A512D21835386AE4CADA2 /* Release */,
+				56C61664CCA87006948E9FA4E67498B9 /* Debug */,
+				9EAFAEF130B88FC196DEF8C4C775C4DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E2D462C497664370C716A72CEC9DB063 /* Build configuration list for PBXNativeTarget "MSCollectionViewCalendarLayout" */ = {
+		B6E761AC42BB978F163F2E96322F0C67 /* Build configuration list for PBXNativeTarget "MRProgress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFBFE007069BB281415C188DC0453105 /* Debug */,
-				8D49BA67A76C06FE959CD61704B9F657 /* Release */,
+				04EF6E37614FB446DB96DD37297619E9 /* Debug */,
+				1EF7F0EB91DA44F7A2DF329CFB5F6147 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3AC149EE36EC5210B337A88A6C93FC4 /* Build configuration list for PBXNativeTarget "APAddressBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A32CB38FADE3E3E6F94B766BF9003B /* Debug */,
+				A4471D3F6979C814C76C98F0E15C65CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

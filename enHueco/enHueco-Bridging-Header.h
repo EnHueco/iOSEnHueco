@@ -21,7 +21,9 @@
 #import "APSocialProfile.h"
 #import "APAddress.h"
 #import "APPhoneWithLabel.h"
-
 // TSMessages
 
 #import "TSMessage.h"
+
+// MRProgress
+#import "MRProgress.h"

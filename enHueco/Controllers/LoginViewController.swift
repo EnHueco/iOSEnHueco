@@ -13,6 +13,7 @@ class LoginViewController : UIViewController
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    
     override func viewDidLoad()
     {
         navigationController?.navigationBarHidden = true
@@ -26,6 +27,13 @@ class LoginViewController : UIViewController
         
         guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
         {
+            if usernameTextField.text == "" { TSMessage.showNotificationWithTitle("El login se encuentra vacío", type: TSMessageNotificationType.Warning) }
+            else if passwordTextField.text == "" { TSMessage.showNotificationWithTitle("La contraseña se encuentra vacía", type: TSMessageNotificationType.Warning) }
+            return
+        }
+            
+        if usernameTextField.text == "test" && passwordTextField.text == "test"
+        {
             // Test
             let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
             navigationController!.pushViewController(mainViewController, animated: true)
@@ -33,9 +41,11 @@ class LoginViewController : UIViewController
             /////////
         }
         
-        //TODO: Show loading indicator
+        
+        MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        
         system.login(username, password: password)
-
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -45,20 +55,25 @@ class LoginViewController : UIViewController
     
     func systemDidLogin (notification: NSNotification)
     {
+        NSThread.sleepForTimeInterval(0.5)
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         dispatch_async(dispatch_get_main_queue())
         {
             self.presentViewController(mainViewController, animated: true, completion: nil)
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
         }
+        
 
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)
     {
         //TODO: Show error
+        NSThread.sleepForTimeInterval(0.5)
         dispatch_async(dispatch_get_main_queue())
         {
             TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
         }
     }
 }
