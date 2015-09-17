@@ -11,7 +11,7 @@ import UIKit
 class FriendsCell: UITableViewCell
 {
     @IBOutlet weak var friendNameLabel: UILabel!
-    @IBOutlet weak var gapStartOrEndHour: UILabel!
+    @IBOutlet weak var gapStartOrEndHourLabel: UILabel!
     
     override func awakeFromNib()
     {

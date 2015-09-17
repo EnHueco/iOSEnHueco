@@ -10,9 +10,10 @@ import UIKit
 
 class FriendDetailViewController: UIViewController
 {
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var viewScheduleButton: UIButton!
    
     var friend : User!
     var recordId : NSNumber?
@@ -20,6 +21,12 @@ class FriendDetailViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        viewScheduleButton.clipsToBounds = true
+        viewScheduleButton.layer.cornerRadius = 4
+        
+        imageImageView.clipsToBounds = true
+        imageImageView.layer.cornerRadius = imageImageView.frame.height/2
         
         nameLabel.text = friend.firstNames
         userNameLabel.text = friend.username
