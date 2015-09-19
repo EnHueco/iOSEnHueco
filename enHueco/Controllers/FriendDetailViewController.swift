@@ -34,20 +34,7 @@ class FriendDetailViewController: UIViewController
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
 
-        setRecordId()
-        
-        if let imageURL = system.appUser.imageURL
-        {
-            dispatch_async(dispatch_get_main_queue())
-                {
-                    let image = UIImage(data: NSData(contentsOfURL: imageURL)!)
-                    
-                    if let image = image
-                    {
-                        self.imageImageView.image = image
-                    }
-            }
-        }
+        setRecordId()        
     }
     
     override func viewDidLayoutSubviews()

@@ -25,20 +25,7 @@ class ProfileViewController: UIViewController
         usernameLabel.text = system.appUser.username
 
         editScheduleButton.clipsToBounds = true
-        editScheduleButton.layer.cornerRadius = 4
-        
-        if let imageURL = system.appUser.imageURL
-        {
-            dispatch_async(dispatch_get_main_queue())
-                {
-                    let image = UIImage(data: NSData(contentsOfURL: imageURL)!)
-                    
-                    if let image = image
-                    {
-                        self.imageImageView.image = image
-                    }
-            }
-        }
+        editScheduleButton.layer.cornerRadius = 4        
     }
     
     override func viewDidLayoutSubviews()
