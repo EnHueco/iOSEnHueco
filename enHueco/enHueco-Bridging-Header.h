@@ -27,3 +27,6 @@
 
 // MRProgress
 #import "MRProgress.h"
+
+#import "MultiSelectSegmentedControl.h"
+#import "UIView+Shadow.h"

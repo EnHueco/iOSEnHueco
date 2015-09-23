@@ -224,10 +224,9 @@ class AppUser: User
         let eventStore = EKEventStore()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        localCalendar.locale = NSLocale.currentLocale()
         
         let componentUnits: NSCalendarUnit = [.Year, .WeekOfYear, .Weekday, .Hour, .Minute, .Second]
-        var components = NSCalendar.currentCalendar().components(componentUnits, fromDate:today)
+        var components = localCalendar.components(componentUnits, fromDate:today)
         
         components.weekday = 6
         components.hour = 23
@@ -236,7 +235,7 @@ class AppUser: User
         
         let nextFridayAtEndOfDay = localCalendar.dateFromComponents(components)!
         
-        components = NSCalendar.currentCalendar().components(componentUnits, fromDate:today)
+        components = localCalendar.components(componentUnits, fromDate:today)
         
         components.weekday = 2
         components.hour = 0
@@ -255,11 +254,14 @@ class AppUser: User
         
         for event in fetchedEvents
         {
+            let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: event.startDate)
+
             let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+            
             let startDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.startDate)
             let endDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.endDate)
 
-            let weekDayDaySchedule = schedule.weekDays[startDateComponents.weekday]
+            let weekDayDaySchedule = schedule.weekDays[localWeekDayNumber]
             let aClass = Class(daySchedule: weekDayDaySchedule, name:event.title, startHour: startDateComponents, endHour: endDateComponents, location: event.location)
             
             weekDayDaySchedule.addClass(aClass)

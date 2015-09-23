@@ -32,12 +32,13 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     {
         super.viewWillAppear(animated)
         currentDate = NSDate()
+        dayView.reloadData()
     }
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]!
     {
-        let weekDayNumber = localCalendar.component(.Weekday, fromDate: date)
-        let weekDayDaySchedule = user.schedule.weekDays[weekDayNumber]
+        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
+        let weekDayDaySchedule = user.schedule.weekDays[localWeekDayNumber]
         
         var events = [TKCalendarDayEventView]()
         
@@ -46,10 +47,11 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
             var event = calendarDay.dequeueReusableEventView
             if event == nil { event = TKCalendarDayEventView() }
             
-            event.titleLabel.text = "Hueco"
+            event.titleLabel.text = gap.name
             event.backgroundColor = UIColor(red: 0/255.0, green: 150/255.0, blue: 245/255.0, alpha: 0.15)
-            event.startDate = globalCalendar.dateBySettingHour(gap.startHour.hour, minute: gap.startHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
-            event.endDate = globalCalendar.dateBySettingHour(gap.endHour.hour, minute: gap.endHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
+            
+            event.startDate = gap.startHourInUTCEquivalentOfLocalDate(date)
+            event.endDate = gap.endHourInUTCEquivalentOfLocalDate(date)
             
             events.append(event)
         }
@@ -62,8 +64,9 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
             event.titleLabel.text = aClass.name
             //event.titleLabel.textColor
             event.backgroundColor = UIColor(red: 255/255.0, green: 213/255.0, blue: 0/255.0, alpha: 0.15)
-            event.startDate = globalCalendar.dateBySettingHour(aClass.startHour.hour, minute: aClass.startHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
-            event.endDate = globalCalendar.dateBySettingHour(aClass.endHour.hour, minute: aClass.endHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
+            
+            event.startDate = aClass.startHourInUTCEquivalentOfLocalDate(date)
+            event.endDate = aClass.endHourInUTCEquivalentOfLocalDate(date)
             
             events.append(event)
         }
@@ -73,8 +76,16 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
+        let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddViewGapViewController") as! AddViewGapViewController
+        
+        let weekDayNumber = localCalendar.component(.Weekday, fromDate: eventView.startDate)
+        let weekDayDaySchedule = user.schedule.weekDays[weekDayNumber]
+        
+        let componentUnits: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+        let startHour = globalCalendar.components(componentUnits, fromDate: eventView.startDate)
 
+        viewController.eventToEdit = weekDayDaySchedule.gapOrClassWithStartHour(startHour)!
+        
+        presentViewController(viewController, animated: true, completion: nil)
     }
-    
-    
 }

@@ -106,7 +106,7 @@ class GapsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         let gap = system.appUser.schedule.weekDays[indexPath.section].gaps[indexPath.row]
         let gapEditView  = storyboard?.instantiateViewControllerWithIdentifier("AddViewGapViewController") as! AddViewGapViewController
-        gapEditView.gapToEdit = gap
+        gapEditView.eventToEdit = gap
         
         navigationController!.pushViewController(gapEditView, animated: true)
     }

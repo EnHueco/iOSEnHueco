@@ -8,50 +8,20 @@
 
 import Foundation
 
-class Gap: NSObject, NSCoding
+class Gap: Event
 {
-    unowned let daySchedule: DaySchedule
-    
-    let startHour: NSDateComponents
-    let endHour: NSDateComponents
-    
-    init(daySchedule: DaySchedule, startHour: NSDateComponents, endHour: NSDateComponents)
+    override init(daySchedule: DaySchedule, name:String? = "Hueco", startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
     {
-        self.daySchedule = daySchedule
-        
-        self.startHour = startHour
-        self.endHour = endHour
+        super.init(daySchedule: daySchedule, name: name ?? "Hueco", startHour: startHour, endHour: endHour, location: location)
     }
     
     required init?(coder decoder: NSCoder)
     {
-        guard
-            let daySchedule = decoder.decodeObjectForKey("daySchedule") as? DaySchedule,
-            let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
-            let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
-        else
-        {
-            self.daySchedule = DaySchedule(weekDayName: "")
-            self.startHour = NSDateComponents()
-            self.endHour = NSDateComponents()
-            
-            super.init()
-            return nil
-        }
-        
-        self.daySchedule = daySchedule
-        self.startHour = startHour
-        self.endHour = endHour
-        
-        super.init()
+        super.init(coder: decoder)
     }
     
-    func encodeWithCoder(coder: NSCoder)
+    override func encodeWithCoder(coder: NSCoder)
     {
-        coder.encodeObject(startHour, forKey: "startHour")
-        coder.encodeObject(endHour, forKey: "endHour")
-        coder.encodeObject(daySchedule, forKey: "daySchedule")
+        super.encodeWithCoder(coder)
     }
-    
-    //TODO: Implement Equatable protocol
 }

@@ -14,11 +14,39 @@ enum Either<T1, T2>
     case Right(T2)
 }
 
+func >(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.compare(rhs) == .OrderedDescending
+}
+
+func <(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.compare(rhs) == .OrderedAscending
+}
+
 extension NSDate
 {    
     func isBetween(startDate:NSDate, and endDate:NSDate) -> Bool
     {
         return startDate.compare(self) == .OrderedAscending && endDate.compare(self) == .OrderedDescending
+    }
+    
+    func addDays(daysToAdd : Int) -> NSDate
+    {
+        let secondsInDays : NSTimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded : NSDate = self.dateByAddingTimeInterval(secondsInDays)
+        
+        //Return Result
+        return dateWithDaysAdded
+    }
+    
+    func addHours(hoursToAdd : Int) -> NSDate
+    {
+        let secondsInHours : NSTimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded : NSDate = self.dateByAddingTimeInterval(secondsInHours)
+        
+        //Return Result
+        return dateWithHoursAdded
     }
 }
 
@@ -31,9 +59,10 @@ func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents
 
 extension Array
 {
-    mutating func removeObject<U: Equatable>(object: U)
+    mutating func removeObject<U: Equatable>(object: U) -> Bool
     {
         var index: Int?
+        
         for (idx, objectToCompare) in self.enumerate()
         {
             if let to = objectToCompare as? U
@@ -48,6 +77,9 @@ extension Array
         if(index != nil)
         {
             self.removeAtIndex(index!)
+            return true
         }
+        
+        return false
     }
 }
