@@ -3259,6 +3259,7 @@
                         <outlet property="locationTextField" destination="ea5-ms-wH8" id="wt9-xJ-ffr"/>
                         <outlet property="nameLocationBackgroundView" destination="mqp-uD-AOo" id="sDY-32-P2l"/>
                         <outlet property="nameTextField" destination="PuK-V6-Zhi" id="c7P-Af-Ar0"/>
+                        <outlet property="scrollView" destination="28N-oe-CBx" id="ItG-Cg-W7q"/>
                         <outlet property="startHourDatePicker" destination="8WT-4M-orz" id="14k-XA-9fJ"/>
                         <outlet property="titleLabel" destination="Gip-M7-utg" id="EKo-CR-x7b"/>
                         <outlet property="weekDaysSegmentedControl" destination="ghP-Ae-lbN" id="4Wz-6m-kLk"/>

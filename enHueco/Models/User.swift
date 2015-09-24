@@ -49,7 +49,7 @@ class User: NSObject, NSCoding
             let startHourInCurrentDate = gap.startHourInUTCEquivalentOfLocalDate(currentDate)
             let endHourInCurrentDate = gap.endHourInUTCEquivalentOfLocalDate(currentDate)
             
-            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
+            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHoursAndMinutesThan(currentDate)
             {
                 return gap
             }

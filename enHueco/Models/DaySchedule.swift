@@ -94,6 +94,7 @@ class DaySchedule: NSObject, NSCoding
                 || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
             {
                 return false
             }
@@ -108,6 +109,7 @@ class DaySchedule: NSObject, NSCoding
                 || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
             {
                 return false
             }
@@ -135,6 +137,7 @@ class DaySchedule: NSObject, NSCoding
                 || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
             {
                 return false
             }
@@ -149,6 +152,7 @@ class DaySchedule: NSObject, NSCoding
                 || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
             {
                 return false
             }

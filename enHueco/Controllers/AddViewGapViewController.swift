@@ -20,6 +20,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var endHourDatePicker: UIDatePicker!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var deleteButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var eventToEdit: Event?
     
@@ -56,9 +57,6 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
                 gapOrClassSegmentedControl.selectedSegmentIndex = 1
             }
             
-            weekDaysSegmentedControl.alpha = 0.3
-            weekDaysSegmentedControl.userInteractionEnabled = false
-            
             let currentDate = NSDate()
             
             startHourDatePicker.setDate(eventToEdit.startHourInUTCEquivalentOfLocalDate(currentDate), animated: true)
@@ -84,6 +82,13 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        scrollView.flashScrollIndicators()
     }
 
     override func didReceiveMemoryWarning()
