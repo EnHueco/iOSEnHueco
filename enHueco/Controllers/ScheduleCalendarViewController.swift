@@ -48,6 +48,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
             if event == nil { event = TKCalendarDayEventView() }
             
             event.titleLabel.text = gap.name
+            event.locationLabel.text = gap.location
             event.backgroundColor = UIColor(red: 0/255.0, green: 150/255.0, blue: 245/255.0, alpha: 0.15)
             
             event.startDate = gap.startHourInUTCEquivalentOfLocalDate(date)
@@ -62,7 +63,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
             if event == nil { event = TKCalendarDayEventView() }
             
             event.titleLabel.text = aClass.name
-            //event.titleLabel.textColor
+            event.locationLabel.text = aClass.location
             event.backgroundColor = UIColor(red: 255/255.0, green: 213/255.0, blue: 0/255.0, alpha: 0.15)
             
             event.startDate = aClass.startHourInUTCEquivalentOfLocalDate(date)

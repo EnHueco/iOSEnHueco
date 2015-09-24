@@ -34,6 +34,9 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         {
             titleLabel.text = "Editar hueco"
             
+            nameTextField.text = eventToEdit.name
+            locationTextField.text = eventToEdit.location
+            
             deleteButton.clipsToBounds = true
             deleteButton.layer.cornerRadius = 5
             deleteButton.hidden = false
@@ -140,7 +143,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             
             if gapOrClassSegmentedControl.selectedSegmentIndex == 0 //Gap selected
             {
-                var name: String?
+                var name = nameTextField.text
                 
                 if name != nil && name! == "" { name = nil }
                 
