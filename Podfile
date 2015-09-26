@@ -21,6 +21,10 @@ pod 'TSMessages'
 # MR Progress
 pod 'MRProgress'
 
+pod 'SDWebImage', '~>3.7'
+
+pod 'ASMediaFocusManager'
+
 target 'enHuecoTests' do
  
 end

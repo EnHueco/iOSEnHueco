@@ -22,6 +22,7 @@ class GapsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let start = NSDateComponents();
         start.hour = 10
         start.minute = 30
+        
         let end = NSDateComponents();
         end.hour = 1
         end.minute = 30

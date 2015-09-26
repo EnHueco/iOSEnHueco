@@ -70,41 +70,57 @@ class Event: NSObject
     }
     
     /**
-        Returns the start hour (Weekday, Hour, Minute) by setting the components to the local date provided,
+        Returns the start hour (Weekday, Hour, Minute) by setting the components to the date provided,
         but offsetting it to its global UTC Date equivalent.
     */
-    func startHourInUTCEquivalentOfLocalDate(date: NSDate) -> NSDate
+    func startHourInUTCEquivalentOfDate(date: NSDate) -> NSDate
     {
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let components = NSDateComponents()
+        components.year = globalCalendar.component(.Year, fromDate: date)
+        components.month = globalCalendar.component(.Month, fromDate: date)
+        components.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: date)
+        components.weekday = startHour.weekday
+        components.hour = startHour.hour
+        components.minute = startHour.minute
+        components.second = 0
 
-        var startHourWithDate = globalCalendar.dateBySettingHour(startHour.hour, minute: startHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
+        /*var startHourWithDate = globalCalendar.dateBySettingHour(startHour.hour, minute: startHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
 
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
         let dayOffset = Double(localWeekDayNumber-startHour.weekday)
-        startHourWithDate = startHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))
+        startHourWithDate = startHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))*/
 
-        return startHourWithDate
+        return globalCalendar.dateFromComponents(components)!
     }
     
     /**
-        Returns the end hour (Weekday, Hour, Minute) by setting the components to the local date provided,
+        Returns the end hour (Weekday, Hour, Minute) by setting the components to the date provided,
         but offsetting it to its global UTC Date equivalent.
     */
-    func endHourInUTCEquivalentOfLocalDate(date: NSDate) -> NSDate
+    func endHourInUTCEquivalentOfDate(date: NSDate) -> NSDate
     {
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        var endHourWithDate = globalCalendar.dateBySettingHour(endHour.hour, minute: endHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
+        let components = NSDateComponents()
+        components.year = globalCalendar.component(.Year, fromDate: date)
+        components.month = globalCalendar.component(.Month, fromDate: date)
+        components.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: date)
+        components.weekday = endHour.weekday
+        components.hour = endHour.hour
+        components.minute = endHour.minute
+        components.second = 0
+        
+        /*var endHourWithDate = globalCalendar.dateBySettingHour(endHour.hour, minute: endHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
 
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
         let dayOffset = Double(localWeekDayNumber-endHour.weekday)
-        endHourWithDate = endHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))
+        endHourWithDate = endHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))*/
         
-        return endHourWithDate
+        return globalCalendar.dateFromComponents(components)!
     }
     
     //TODO: Implement Equatable protocol

@@ -82,18 +82,19 @@ class DaySchedule: NSObject, NSCoding
     {
         let currentDate = NSDate()
         
-        let newGapStartHourInCurrentDate = newGap.startHourInUTCEquivalentOfLocalDate(currentDate)
-        let newGapEndHourInCurrentDate = newGap.endHourInUTCEquivalentOfLocalDate(currentDate)
+        let newGapStartHourInCurrentDate = newGap.startHourInUTCEquivalentOfDate(currentDate)
+        let newGapEndHourInCurrentDate = newGap.endHourInUTCEquivalentOfDate(currentDate)
         
         for gap in mutableGaps where eventToExclude == nil || gap !== eventToExclude
         {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfLocalDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfLocalDate(currentDate)
+            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
+            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
             
             if newGapStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
             {
                 return false
             }
@@ -101,13 +102,14 @@ class DaySchedule: NSObject, NSCoding
         
         for aClass in mutableClasses where eventToExclude == nil || aClass !== eventToExclude
         {
-            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfLocalDate(currentDate)
-            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfLocalDate(currentDate)
+            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfDate(currentDate)
+            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfDate(currentDate)
             
             if newGapStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
             {
                 return false
             }
@@ -123,18 +125,19 @@ class DaySchedule: NSObject, NSCoding
     {
         let currentDate = NSDate()
         
-        let newClassStartHourInCurrentDate = newClass.startHourInUTCEquivalentOfLocalDate(currentDate)
-        let newClassEndHourInCurrentDate = newClass.endHourInUTCEquivalentOfLocalDate(currentDate)
+        let newClassStartHourInCurrentDate = newClass.startHourInUTCEquivalentOfDate(currentDate)
+        let newClassEndHourInCurrentDate = newClass.endHourInUTCEquivalentOfDate(currentDate)
         
         for gap in mutableGaps where eventToExclude == nil || gap !== eventToExclude
         {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfLocalDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfLocalDate(currentDate)
+            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
+            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
             
             if newClassStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
             {
                 return false
             }
@@ -142,13 +145,14 @@ class DaySchedule: NSObject, NSCoding
         
         for aClass in mutableClasses where eventToExclude == nil || aClass !== eventToExclude
         {
-            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfLocalDate(currentDate)
-            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfLocalDate(currentDate)
+            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfDate(currentDate)
+            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfDate(currentDate)
             
             if newClassStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
                 || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
                 || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
+                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
             {
                 return false
             }

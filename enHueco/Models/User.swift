@@ -46,10 +46,10 @@ class User: NSObject, NSCoding
         
         for gap in schedule.weekDays[localWeekDayNumber].gaps
         {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfLocalDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfLocalDate(currentDate)
+            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
+            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
             
-            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
+            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHoursAndMinutesThan(currentDate)
             {
                 return gap
             }

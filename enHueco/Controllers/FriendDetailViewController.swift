@@ -34,7 +34,9 @@ class FriendDetailViewController: UIViewController
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
 
-        setRecordId()        
+        setRecordId()
+        
+        imageImageView.sd_setImageWithURL(friend.imageURL)
     }
     
     override func viewDidLayoutSubviews()
@@ -48,7 +50,6 @@ class FriendDetailViewController: UIViewController
     override func viewWillAppear(animated: Bool)
     {
         navigationController!.navigationBarHidden = false
-        
     }
 
     override func didReceiveMemoryWarning()

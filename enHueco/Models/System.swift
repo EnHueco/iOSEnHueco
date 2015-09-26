@@ -55,12 +55,14 @@ class System
         
         appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "http://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg")!)
 
-        let friend = User(username: "amiguito123", firstNames: "Pepito", lastNames: "Sefair", phoneNumber: "3176694189", imageURL: nil)
+        let friend = User(username: "amiguito123", firstNames: "Pepito", lastNames: "Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "http://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg")!)
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
         friend.schedule.weekDays[6].addGap(gap)
-        //appUser.friends.append(friend)
+        appUser.friends.append(friend)
+        
+        appUser.friends.append(appUser)
         
         //////////
     }
