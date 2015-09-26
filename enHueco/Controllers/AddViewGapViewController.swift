@@ -59,8 +59,8 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             
             let currentDate = NSDate()
             
-            startHourDatePicker.setDate(eventToEdit.startHourInUTCEquivalentOfLocalDate(currentDate), animated: true)
-            endHourDatePicker.setDate(eventToEdit.endHourInUTCEquivalentOfLocalDate(currentDate), animated: true)
+            startHourDatePicker.setDate(eventToEdit.startHourInUTCEquivalentOfDate(currentDate), animated: true)
+            endHourDatePicker.setDate(eventToEdit.endHourInUTCEquivalentOfDate(currentDate), animated: true)
         }
         else
         {
@@ -131,18 +131,27 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         for index in weekDaysSegmentedControl.selectedSegmentIndexes
         {
-            let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+            let components: NSCalendarUnit = [.Year, .Month, .WeekOfMonth, .Weekday, .Hour, .Minute]
             
-            let startHour = globalCalendar.components(weekdayHourMinute, fromDate: startHourDatePicker.date)
-            let endHour = globalCalendar.components(weekdayHourMinute, fromDate: endHourDatePicker.date)
+            let localStartHourComponents = localCalendar.components(components, fromDate: startHourDatePicker.date)
+            let localEndHourComponents = localCalendar.components(components, fromDate: endHourDatePicker.date)
             
-            var localWeekDayNumber = localCalendar.component(.Weekday, fromDate: startHourDatePicker.date)
+            localStartHourComponents.weekday = index+1
+            localEndHourComponents.weekday = index+1
+            
+            let globalStartHourDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
+            let globalEndHourDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
+            
+            let globalStartHourComponentsInWeekday = globalCalendar.components(components, fromDate: globalStartHourDateInWeekday)
+            let globalEndHourComponentsInWeekday = globalCalendar.components(components, fromDate: globalEndHourDateInWeekday)
+            
+            /*var localWeekDayNumber = localCalendar.component(.Weekday, fromDate: startHourDatePicker.date)
             var dayOffset = Int(localWeekDayNumber-startHour.weekday)
             startHour.weekday = index+1 - dayOffset
             
             localWeekDayNumber = localCalendar.component(.Weekday, fromDate: endHourDatePicker.date)
             dayOffset = Int(localWeekDayNumber-endHour.weekday)
-            endHour.weekday = index+1 - dayOffset
+            endHour.weekday = index+1 - dayOffset*/
             
             let daySchedule = system.appUser.schedule.weekDays[index+1]
             
@@ -152,7 +161,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
                 
                 if name != nil && name! == "" { name = nil }
                 
-                let newGap = Gap(daySchedule: daySchedule, name: name, startHour: startHour, endHour: endHour, location: locationTextField.text)
+                let newGap = Gap(daySchedule: daySchedule, name: name, startHour: globalStartHourComponentsInWeekday, endHour: globalEndHourComponentsInWeekday, location: locationTextField.text)
                 
                 if !daySchedule.canAddGap(newGap, excludingEvent: eventToEdit)
                 {
@@ -169,7 +178,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
                 
                 if name != nil && name! == "" { name = nil }
                 
-                let newClass = Class(daySchedule: daySchedule, name: nameTextField.text, startHour: startHour, endHour: endHour, location: locationTextField.text)
+                let newClass = Class(daySchedule: daySchedule, name: nameTextField.text, startHour: globalStartHourComponentsInWeekday, endHour: globalEndHourComponentsInWeekday, location: locationTextField.text)
                 
                 if !daySchedule.canAddClass(newClass, excludingEvent: eventToEdit)
                 {

@@ -27,7 +27,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         emptyLabel!.numberOfLines = 0
         emptyLabel!.textColor = UIColor.grayColor()
         emptyLabel!.textAlignment = NSTextAlignment.Center
-        
     }
     
     override func viewWillAppear(animated: Bool)
@@ -51,12 +50,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(animated: Bool)
     {
-
-        
         if let selectedIndex = friendsTableView.indexPathForSelectedRow
         {
             friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
+        
         if system.appUser.friends.count == 0
         {
             friendsTableView.backgroundView = emptyLabel
@@ -73,7 +71,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func addFriendButtonPressed(sender: AnyObject)
     {
         let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddFriendViewController") as! AddFriendViewController
-        
     }
     
     func systemDidAddFriend(notification: NSNotification)
@@ -91,7 +88,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let friend = system.appUser.friends[indexPath.row]
         
         let cell = friendsTableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
-        cell.friendNameLabel.text = friend.firstNames
+        cell.friendNameLabel.text = friend.name
         
         return cell
     }

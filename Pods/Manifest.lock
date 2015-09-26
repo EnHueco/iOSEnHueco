@@ -2,6 +2,9 @@ PODS:
   - APAddressBook (0.1.11):
     - APAddressBook/Core (= 0.1.11)
   - APAddressBook/Core (0.1.11)
+  - ASBPlayerScrubbing (0.1)
+  - ASMediaFocusManager (0.5):
+    - ASBPlayerScrubbing (~> 0.1)
   - HexColors (2.2.1)
   - MCSwipeTableViewCell (2.1.4)
   - MRProgress (0.8.2):
@@ -34,24 +37,32 @@ PODS:
     - MRProgress/Helper
   - MSCollectionViewCalendarLayout (0.1.5)
   - QRCodeReaderViewController (3.5.2)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
 
 DEPENDENCIES:
   - APAddressBook
+  - ASMediaFocusManager
   - MCSwipeTableViewCell (~> 2.1.4)
   - MRProgress
   - MSCollectionViewCalendarLayout
   - QRCodeReaderViewController (~> 3.5.2)
+  - SDWebImage (~> 3.7)
   - TSMessages
 
 SPEC CHECKSUMS:
   APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
+  ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MRProgress: f4cfe862082418e8f542f077772283f425d6c699
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
 COCOAPODS: 0.38.2

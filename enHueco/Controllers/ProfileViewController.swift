@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController
+class ProfileViewController: UIViewController, ASMediasFocusDelegate
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -17,6 +17,9 @@ class ProfileViewController: UIViewController
     @IBOutlet weak var imageImageView: UIImageView!
     
     @IBOutlet weak var appUserQRImageView: UIImageView!
+    let QRTmpPath = NSTemporaryDirectory() + "AppUser_QR"
+    
+    var mediaFocusManager = ASMediaFocusManager()
     
     override func viewDidLoad()
     {
@@ -25,7 +28,14 @@ class ProfileViewController: UIViewController
         usernameLabel.text = system.appUser.username
 
         editScheduleButton.clipsToBounds = true
-        editScheduleButton.layer.cornerRadius = 4        
+        editScheduleButton.layer.cornerRadius = 4
+        
+        mediaFocusManager.delegate = self
+        mediaFocusManager.installOnView(appUserQRImageView)
+        mediaFocusManager.animationDuration = 0.2
+        mediaFocusManager.elasticAnimation = false
+        
+        imageImageView.sd_setImageWithURL(system.appUser.imageURL)
     }
     
     override func viewDidLayoutSubviews()
@@ -41,6 +51,12 @@ class ProfileViewController: UIViewController
         let code = QRCode(system.appUser.stringEncodedUserRepresentation())
         appUserQRImageView.image = code?.image
         
+        UIGraphicsBeginImageContext(appUserQRImageView.image!.size)
+        appUserQRImageView.image!.drawInRect(CGRectMake(0, 0, appUserQRImageView.image!.size.width, appUserQRImageView.image!.size.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIImagePNGRepresentation(newImage)!.writeToFile(QRTmpPath, atomically: true)
     }
     
     override func viewWillAppear(animated: Bool)
@@ -48,12 +64,28 @@ class ProfileViewController: UIViewController
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
-    
     @IBAction func settingsButtonPressed(sender: AnyObject)
     {
         system.logOut()
         
         let controller = storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController")
         presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    //mark: ASMediaFocusManager delegate
+    
+    func parentViewControllerForMediaFocusManager(mediaFocusManager: ASMediaFocusManager!) -> UIViewController!
+    {
+        return self
+    }
+    
+    func mediaFocusManager(mediaFocusManager: ASMediaFocusManager!, mediaURLForView view: UIView!) -> NSURL!
+    {
+        return NSURL(fileURLWithPath: QRTmpPath)
+    }
+    
+    func mediaFocusManager(mediaFocusManager: ASMediaFocusManager!, titleForView view: UIView!) -> String!
+    {
+        return "Tu QR"
     }
 }
