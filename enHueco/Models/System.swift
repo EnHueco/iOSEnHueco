@@ -53,9 +53,9 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "http://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg")!)
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/1498135_821566567860780_1633731954_o.jpg")!)
 
-        let friend = User(username: "amiguito123", firstNames: "Pepito", lastNames: "Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "http://www.morganstanley.com/assets/images/people/tiles/adam-parker-large.jpg")!)
+        let friend = User(username: "da.gomez11", firstNames: "Diego Alejandro", lastNames: "Gómez Mosquera", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xat1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=89245c25c3ddaa4f7d1341f7788de261&oe=56925447&__gda__=1448954703_30d0fe175a8ab0b665dc074d63a087d6")!)
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)

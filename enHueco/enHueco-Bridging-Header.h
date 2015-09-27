@@ -32,3 +32,4 @@
 #import "UIView+Shadow.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ASMediaFocusManager.h"
+#import "UIImage+ImageEffects.h"

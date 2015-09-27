@@ -34,7 +34,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         friendsTableView.reloadData()
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
         if system.appUser.friends.count == 0
         {
             friendsTableView.backgroundView = emptyLabel
@@ -104,7 +105,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
-        friendDetailViewController.hidesBottomBarWhenPushed = true
+        //friendDetailViewController.hidesBottomBarWhenPushed = true
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }

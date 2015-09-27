@@ -15,6 +15,7 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var lastNamesLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var viewScheduleButton: UIButton!
+    @IBOutlet weak var backgroundImageView: UIImageView!
    
     var friend : User!
     var recordId : NSNumber?
@@ -23,8 +24,7 @@ class FriendDetailViewController: UIViewController
     {
         super.viewDidLoad()
         
-        viewScheduleButton.clipsToBounds = true
-        viewScheduleButton.layer.cornerRadius = 4
+        title = friend.firstNames
         
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
@@ -36,12 +36,30 @@ class FriendDetailViewController: UIViewController
 
         setRecordId()
         
+        backgroundImageView.alpha = 0
+        
         imageImageView.sd_setImageWithURL(friend.imageURL)
+        backgroundImageView.sd_setImageWithURL(friend.imageURL)
+        { (_, _, _, _) -> Void in
+            
+            UIView.animateWithDuration(0.4)
+            {
+                self.backgroundImageView.image = self.backgroundImageView.image!.applyDarkEffect()
+                self.backgroundImageView.alpha = 1
+            }
+        }
+        
+        imageImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.clipsToBounds = true
     }
     
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
+        
+        viewScheduleButton.clipsToBounds = true
+        viewScheduleButton.layer.cornerRadius = viewScheduleButton.frame.height/2
         
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height/2
