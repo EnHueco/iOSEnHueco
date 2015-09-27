@@ -23,9 +23,11 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var scrollView: UIScrollView!
     
     var eventToEdit: Event?
+
     
     override func viewDidLoad()
     {
+
         super.viewDidLoad()
         
         nameTextField.delegate = self
@@ -121,6 +123,11 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     @IBAction func save(sender: UIButton)
     {
+        if(!weekDaysSegmentedControl.selected)
+        {
+            TSMessage.showNotificationInViewController(self, title: "Selecciona por lo menos un día", subtitle: "Los huecos y clases tienen que pertenecer a al menos un día", type: TSMessageNotificationType.Warning)
+            return
+        }
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 
         let globalCalendar = NSCalendar.currentCalendar()
