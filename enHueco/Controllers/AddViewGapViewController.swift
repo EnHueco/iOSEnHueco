@@ -149,8 +149,10 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             let globalStartHourDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
             let globalEndHourDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
             
-            let globalStartHourComponentsInWeekday = globalCalendar.components(components, fromDate: globalStartHourDateInWeekday)
-            let globalEndHourComponentsInWeekday = globalCalendar.components(components, fromDate: globalEndHourDateInWeekday)
+            let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+            
+            let globalStartHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalStartHourDateInWeekday)
+            let globalEndHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalEndHourDateInWeekday)
             
             /*var localWeekDayNumber = localCalendar.component(.Weekday, fromDate: startHourDatePicker.date)
             var dayOffset = Int(localWeekDayNumber-startHour.weekday)
