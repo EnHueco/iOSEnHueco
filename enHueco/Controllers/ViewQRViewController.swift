@@ -31,11 +31,6 @@ class ViewQRViewController: UIViewController
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-        
-        UIView.animateWithDuration(0.5)
-        {
-            self.view.backgroundColor = UIColor.blackColor()
-        }
     }
     
     override func viewWillAppear(animated: Bool)
@@ -44,6 +39,12 @@ class ViewQRViewController: UIViewController
         
         let code = QRCode(system.appUser.stringEncodedUserRepresentation())
         QRImageView.image = code?.image
+        
+        UIView.animateWithDuration(0.5)
+        {
+            self.view.backgroundColor = UIColor.blackColor()
+        }
+
     }
 
     override func didReceiveMemoryWarning()

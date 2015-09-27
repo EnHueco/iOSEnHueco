@@ -38,14 +38,17 @@ class FriendDetailViewController: UIViewController
         
         backgroundImageView.alpha = 0
         
-        imageImageView.sd_setImageWithURL(friend.imageURL)
-        backgroundImageView.sd_setImageWithURL(friend.imageURL)
-        { (_, _, _, _) -> Void in
-            
-            UIView.animateWithDuration(0.4)
-            {
-                self.backgroundImageView.image = self.backgroundImageView.image!.applyDarkEffect()
-                self.backgroundImageView.alpha = 1
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.imageImageView.sd_setImageWithURL(self.friend.imageURL)
+            self.backgroundImageView.sd_setImageWithURL(self.friend.imageURL)
+            { (_, _, _, _) -> Void in
+                
+                UIView.animateWithDuration(0.4)
+                {
+                    self.backgroundImageView.image = self.backgroundImageView.image!.applyDarkEffect()
+                    self.backgroundImageView.alpha = 1
+                }
             }
         }
         
@@ -67,7 +70,7 @@ class FriendDetailViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
-        navigationController!.navigationBarHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning()
