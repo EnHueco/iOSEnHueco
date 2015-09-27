@@ -80,7 +80,8 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
-        
+
+        cell.friendImageImageView.contentMode = .ScaleAspectFill
         cell.friendImageImageView.sd_setImageWithURL(friendAndGap.friend.imageURL)
         
         // TODO: Update InGapFriendCell image to match friend.

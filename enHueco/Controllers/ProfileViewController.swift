@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController
             
             UIView.animateWithDuration(0.4)
             {
-                self.backgroundImageView.image = self.backgroundImageView.image!.applyDarkEffect()
+                self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
                 self.backgroundImageView.alpha = 1
             }
         }

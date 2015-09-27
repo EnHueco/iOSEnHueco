@@ -331,7 +331,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ax7-yd-Icu">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.73748944256756754" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.93768475506756754" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="LSw-OR-kb2">
                                         <variation key="heightClass=regular-widthClass=compact" constant="44"/>
@@ -1480,7 +1480,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-rX-ZiU">
                                 <rect key="frame" x="242" y="421" width="116" height="76"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.74060388513513509" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.92805109797297303" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="W3k-Uj-tBU"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="XvK-Ka-uOi"/>
@@ -1519,7 +1519,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSt-5M-VMJ">
                                 <rect key="frame" x="242" y="421" width="116" height="76"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.74060388513513509" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="0.92805109797297303" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="116" id="APE-zA-oL1"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="EV1-cO-9QM"/>
@@ -1758,13 +1758,13 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="0.65764885979729726" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="jKE-Uq-UBg">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="85"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="38"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="30" id="kpg-gU-O5P">
                                         <variation key="heightClass=regular-widthClass=compact" constant="38"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" title="Atrás">
+                                <state key="normal" title="X">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -1854,7 +1854,7 @@
             </objects>
             <point key="canvasLocation" x="175.5" y="847.5"/>
         </scene>
-        <!--Nuevo Amigo-->
+        <!--Agregar Amigo-->
         <scene sceneID="yuI-kO-1EN">
             <objects>
                 <viewController storyboardIdentifier="AddFriendViewController" id="wCO-Ge-iXC" customClass="AddFriendViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
@@ -2085,7 +2085,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Nuevo Amigo" id="WEz-eO-8FT"/>
+                    <navigationItem key="navigationItem" title="Agregar Amigo" id="WEz-eO-8FT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmH-iA-bpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3875,7 +3875,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepito Fernando Perez Uribe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weU-T0-BNa">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
