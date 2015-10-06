@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		7C45B5F126167956BBDA2144 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F782758D75200AB0BA9BB83 /* libPods.a */; };
-		F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */; };
+		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1641B7CDD4C00325209 /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1631B7CDD4C00325209 /* Gap.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
@@ -53,9 +53,10 @@
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
 		F16C613B1BB222EF00703782 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C613A1BB222EF00703782 /* Event.swift */; settings = {ASSET_TAGS = (); }; };
 		F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F16C613E1BB30A0100703782 /* UIView+Shadow.m */; settings = {ASSET_TAGS = (); }; };
+		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F197BFD31BAA043E00DEDE0D /* EHObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHObject.swift */; settings = {ASSET_TAGS = (); }; };
+		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -88,7 +89,7 @@
 		0F782758D75200AB0BA9BB83 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D4B3B9D0DC94DB4A2EE2562 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
-		F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestResponseManager.swift; sourceTree = "<group>"; };
+		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Other/ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F113D1631B7CDD4C00325209 /* Gap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -144,16 +145,17 @@
 		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalConstants.swift; path = Other/GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
-		F134AE5D1A800BB200E6E9AB /* APIURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIURLS.swift; sourceTree = "<group>"; };
+		F134AE5D1A800BB200E6E9AB /* APIURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIURLS.swift; path = Other/APIURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F16C613A1BB222EF00703782 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F16C613D1BB30A0100703782 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
 		F16C613E1BB30A0100703782 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
+		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynchronizationManager.swift; path = Other/SynchronizationManager.swift; sourceTree = "<group>"; };
 		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
-		F197BFD21BAA043E00DEDE0D /* EHObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHObject.swift; sourceTree = "<group>"; };
+		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
 		F1B343621B9BBFAE00EED205 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1B343631B9BBFAE00EED205 /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
@@ -166,7 +168,7 @@
 		F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiSelectSegmentedControl.m; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.m; sourceTree = "<group>"; };
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
 		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
-		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
+		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAndUtilities.swift; path = Other/ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
 		F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
 		F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapsViewController.swift; sourceTree = "<group>"; };
 		F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewGapViewController.swift; sourceTree = "<group>"; };
@@ -324,11 +326,7 @@
 		F1229BD91A74947200C4FDE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
-				F134AE5D1A800BB200E6E9AB /* APIURLS.swift */,
-				F10FCDFB1A8020EC0011CD62 /* HTTPRequestResponseManager.swift */,
 				F1229BDA1A74947200C4FDE2 /* Info.plist */,
-				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -367,15 +365,8 @@
 		F1229C2C1A7495A200C4FDE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F197BFD21BAA043E00DEDE0D /* EHObject.swift */,
-				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
-				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
-				F113D1611B7CDD3A00325209 /* User.swift */,
-				F113D1651B7CDD6200325209 /* Schedule.swift */,
-				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
-				F16C613A1BB222EF00703782 /* Event.swift */,
-				F113D1631B7CDD4C00325209 /* Gap.swift */,
-				F113D1671B7CDDA000325209 /* Class.swift */,
+				F1827F6D1BC35D91002ECB64 /* Main Classes */,
+				F1827F6E1BC35DAC002ECB64 /* Other */,
 			);
 			name = Model;
 			path = Models;
@@ -410,6 +401,34 @@
 				F16C613E1BB30A0100703782 /* UIView+Shadow.m */,
 			);
 			name = "UIView+Shadow";
+			sourceTree = "<group>";
+		};
+		F1827F6D1BC35D91002ECB64 /* Main Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */,
+				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
+				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
+				F113D1611B7CDD3A00325209 /* User.swift */,
+				F113D1651B7CDD6200325209 /* Schedule.swift */,
+				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
+				F16C613A1BB222EF00703782 /* Event.swift */,
+				F113D1631B7CDD4C00325209 /* Gap.swift */,
+				F113D1671B7CDDA000325209 /* Class.swift */,
+			);
+			name = "Main Classes";
+			sourceTree = "<group>";
+		};
+		F1827F6E1BC35DAC002ECB64 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				F134AE5D1A800BB200E6E9AB /* APIURLS.swift */,
+				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
+				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
+				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
+				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		F1B343601B9BBFAE00EED205 /* QRCode */ = {
@@ -606,9 +625,9 @@
 				F1FAFF9F1B9FBB8000E8CCDD /* GapsViewController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */,
-				F197BFD31BAA043E00DEDE0D /* EHObject.swift in Sources */,
+				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
-				F10FCDFC1A8020EC0011CD62 /* HTTPRequestResponseManager.swift in Sources */,
+				F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */,
 				F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */,
@@ -621,6 +640,7 @@
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
 				F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
+				F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
 				F113D1641B7CDD4C00325209 /* Gap.swift in Sources */,

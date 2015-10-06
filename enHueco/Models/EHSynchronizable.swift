@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EHObject: NSObject, NSCoding
+class EHSynchronizable: NSObject, NSCoding
 {
     let ID: String
     let lastUpdatedOn: NSDate

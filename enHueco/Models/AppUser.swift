@@ -47,7 +47,7 @@ class AppUser: User
         let params = []
         let URL = NSURL(string: APIURLS.URLS.base.rawValue)!
         
-        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: nil, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: nil, onSuccess: { (response) -> () in
             
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)

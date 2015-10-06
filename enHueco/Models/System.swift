@@ -83,7 +83,7 @@ class System
         let params = ["user_id":username, "password":password]
         let URL = NSURL(string: APIURLS.URLS.base.rawValue + APIURLS.URLS.authSegment.rawValue)!
         
-        HTTPRequestResponseManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
             
             guard let token = response["value"] as? String else
             {
@@ -133,7 +133,7 @@ class System
     {
         appUser.updateFriendsAndFriendsSchedules()
     }
-    
+
     /**
         Persists all pertinent application data
     */
