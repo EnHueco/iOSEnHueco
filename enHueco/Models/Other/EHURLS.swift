@@ -8,15 +8,24 @@
 
 import Foundation
 
-public class APIURLS
+enum EHURLS: String
 {
-    enum URLS: String
-    {
-        case base = "http://enhueco.uniandes.edu.co"
-        case authSegment = "/auth/"
-    }
+    case Base = "http://enhueco.uniandes.edu.co"
+    case AuthSegment = "/auth/"
+    case FriendSegment = "/friends/"
+    case OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
+}
+
+enum EHParameters: String
+{
+    case UserID = "X-USER-ID"
+    case Token = "X-USER-TOKEN"
+}
+
+/*public class APIURLS
+{
     
-    /*// BASIC Settings
+    // BASIC Settings
     let TESTDOMAIN : String = "http://enhueco.virtual.uniandes.edu.co"
     let PRODUCTION_DOMAIN: String = "enhueco.uniandes.edu.co"
     let PORT = "80"
@@ -46,5 +55,5 @@ public class APIURLS
         let baseURL = DOMAIN+":"+PORT+"/api"
         self.AUTHENTICATIONURL = NSURL(string: baseURL + AUTHENTICATIONURI)!
         self.GETAPPUSERURL = NSURL(string: baseURL + GETAPPUSERURI)!
-    }*/
-}
+    }
+}*/

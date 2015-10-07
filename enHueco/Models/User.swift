@@ -8,7 +8,7 @@
 
 import Foundation
 
-class User: NSObject, NSCoding
+class User: EHSynchronizable
 {
     let username: String
     
@@ -22,7 +22,7 @@ class User: NSObject, NSCoding
     
     let schedule = Schedule()
     
-    init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?)
+    init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.username = username
         
@@ -31,7 +31,7 @@ class User: NSObject, NSCoding
         self.phoneNumber = phoneNumber
         self.imageURL = imageURL
         
-        super.init()
+        super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
     /**
@@ -81,7 +81,7 @@ class User: NSObject, NSCoding
             self.lastNames = ""
             self.phoneNumber = ""
 
-            super.init()
+            super.init(coder: decoder)
             return nil
         }
         
@@ -92,10 +92,10 @@ class User: NSObject, NSCoding
         self.phoneNumber = decoder.decodeObjectForKey("phoneNumber") as? String
         self.imageURL = decoder.decodeObjectForKey("imageURL") as? NSURL
         
-        super.init()
+        super.init(coder: decoder)
     }
     
-    func encodeWithCoder(coder: NSCoder)
+    override func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(username, forKey: "username")
         coder.encodeObject(firstNames, forKey: "firstNames")

@@ -8,6 +8,6 @@
 
 import Foundation
 
-class Class: Event, NSCoding
+class Class: Event
 {
 }

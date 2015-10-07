@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Event: NSObject
+class Event: NSObject, NSCoding
 {
     unowned let daySchedule: DaySchedule
     

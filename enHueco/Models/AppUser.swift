@@ -17,13 +17,13 @@ class AppUser: User
     var token : String
     
     var friends = [User]()
-    var friendRequests = [String]()
+    var friendRequests = [User]()
     
-    init(username: String, token : String, lastUpdatedOn: NSDate!, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?)
+    init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.token = token
         
-        super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL)
+        super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
     /**
@@ -42,30 +42,93 @@ class AppUser: User
         return friendsAndGaps
     }
     
-    func updateFriendsAndFriendsSchedules ()
+    /**
+        Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
+    */
+    func fetchUpdates ()
     {
-        let params = []
-        let URL = NSURL(string: APIURLS.URLS.base.rawValue)!
+        fetchUpdatesForFriendRequests()
+        fetchUpdatesForFriendsAndFriendSchedules()
+    }
+    
+    /**
+        Fectches updates for outgoing both outgoing and incoming friend requests on the server
+    */
+    func fetchUpdatesForFriendRequests()
+    {
+        let params = [EHParameters.UserID.rawValue: username, EHParameters.Token.rawValue: token]
+        let outgoingRequestsURL = NSURL(string: EHURLS.Base.rawValue + EHURLS.OutgoingFriendRequestsSegment.rawValue)!
         
-        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: nil, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequestToURL(outgoingRequestsURL, usingMethod: .GET, withJSONParams: params, onSuccess: { (outgoingRequestsResponseDictionary) -> () in
             
+            let incomingRequestsURL = NSURL(string: EHURLS.Base.rawValue + EHURLS.IncomingFriendRequestsSegment.rawValue)!
+            
+            guard let incomingRequestsResponseDictionary = try? ConnectionManager.sendSyncRequestToURL(incomingRequestsURL, usingMethod: .GET, withJSONParams: params)
+            else { return }
+            
+            // TODO: Finish
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates.rawValue, object: self, userInfo: nil)
+            
+        }) { (error) -> () in
+                
+            
+        }
+    }
+    
+    func fetchUpdatesForFriendsAndFriendSchedules()
+    {
+        let params = [EHParameters.UserID.rawValue: username, EHParameters.Token.rawValue: token]
+        let URL = NSURL(string: EHURLS.Base.rawValue + EHURLS.FriendSegment.rawValue)!
+        
+        var newFriends = [User]()
+        
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .GET, withJSONParams: params, onSuccess: { (response) -> () in
+            
+            for friendDictionary in response["data"] as! [[String: AnyObject]]
+            {
+                let username = friendDictionary["login"]! as! String
+                let firstNames = friendDictionary["firstNames"]! as! String
+                let lastNames = friendDictionary["lastNames"]! as! String
+                let imageURL = NSURL(string: friendDictionary["imageURL"]! as! String)!
+                let phoneNumber = friendDictionary["phoneNumber"] as! String
+                let lastUpdatedOn = NSDate(serverFormattedString: friendDictionary["lastUpdated_on"]! as! String)!
+                
+                let newFriend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+                
+                newFriends.append(newFriend)
+            }
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)
             
         }) { (error) -> () in
                 
-                
+            
         }
-    }
-    
-    func sendFriendRequest ()
-    {
-        
     }
     
     func sendFriendRequestToUserWithUsername (username: String)
     {
+        let URL = NSURL(string: EHURLS.Base.rawValue + EHURLS.FriendSegment.rawValue + "/" + username + "/")!
         
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
+            
+            let username = JSONResponse["login"]! as! String
+            let firstNames = JSONResponse["firstNames"]! as! String
+            let lastNames = JSONResponse["lastNames"]! as! String
+            let imageURL = NSURL(string: JSONResponse["imageURL"]! as! String)!
+            let phoneNumber = JSONResponse["phoneNumber"] as! String
+            let lastUpdatedOn = NSDate(serverFormattedString: JSONResponse["lastUpdated_on"]! as! String)!
+            
+            let requestFriend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+            self.friendRequests.append(requestFriend)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest.rawValue, object: self, userInfo: nil)
+            
+        }) { (error) -> () in
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToSendFriendRequest.rawValue, object: self, userInfo: nil)
+        }
     }
     
     /**
@@ -84,7 +147,7 @@ class AppUser: User
         
         let phoneNumber = mainComponents[2]
         
-        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil)
+        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil, ID: username, lastUpdatedOn: NSDate())
 
         let encodedWeekDays = mainComponents[4].componentsSeparatedByString("|")
         
@@ -283,12 +346,12 @@ class AppUser: User
             let token = decoder.decodeObjectForKey("token") as? String,
             //let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? NSDate,
             let friends = decoder.decodeObjectForKey("friends") as? [User],
-            let friendRequests = decoder.decodeObjectForKey("friendRequests") as? [String]
+            let friendRequests = decoder.decodeObjectForKey("friendRequests") as? [User]
         else
         {
             self.token = ""
             self.friends = [User]()
-            self.friendRequests = [String]()
+            self.friendRequests = [User]()
             super.init(coder: decoder)
             
             return nil

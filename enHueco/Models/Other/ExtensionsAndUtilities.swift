@@ -59,6 +59,17 @@ extension NSDate
         //Return Result
         return dateWithHoursAdded
     }
+    
+    convenience init?(serverFormattedString: String)
+    {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "dd/MM/yyyy"
+        let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
+        
+        guard let date = possibleDate else { return nil }
+        
+        self.init(timeInterval:0, sinceDate:date)
+    }
 }
 
 func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents

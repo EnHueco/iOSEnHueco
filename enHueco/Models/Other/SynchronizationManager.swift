@@ -22,6 +22,16 @@ class SynchronizationManager: NSObject
         - associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
     private var pendingRequestsQueue = [(request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock, failureRequestBlock:ConnectionManagerFailureRequestBlock, associatedObject: EHSynchronizable)]()
+    
+    let retryQueue = NSOperationQueue()
+    
+    override init()
+    {
+        retryQueue.maxConcurrentOperationCount = 1
+        retryQueue.qualityOfService = .Background
+        
+        super.init()
+    }
 
     private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock, failureRequestBlock:ConnectionManagerFailureRequestBlock, associatedObject: EHSynchronizable)
     {
@@ -30,7 +40,10 @@ class SynchronizationManager: NSObject
     
     func retryPendingRequests()
     {
-        // TODO:
+        retryQueue.addOperationWithBlock()
+        {
+            while self.trySendingSyncRequestInQueue() {}
+        }
     }
     
     /**
@@ -42,11 +55,11 @@ class SynchronizationManager: NSObject
         - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
         - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
-    func trySendingAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock, associatedObject:EHSynchronizable)
+    func trySendingAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock, associatedObject:EHSynchronizable)
     {
-        let synchronizationFailureRequestBlock = {(error: ConnectionManagerError) -> () in
+        let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
             
-            failureRequestBlock(error: ConnectionManagerError(error:error.error, request:error.request))
+            failureRequestBlock(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
             
             self.addFailedRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
         }
@@ -54,8 +67,7 @@ class SynchronizationManager: NSObject
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: method, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
     }
     
-    
-    /*/**
+    /**
         Tries the given request and adds the request to the queue in case it fails.
     
         - parameter request: NSURLRequest that was attempted
@@ -64,17 +76,30 @@ class SynchronizationManager: NSObject
         - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
         - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
-    func trySendingSyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:Dictionary<String, AnyObject>?, associatedObject:EHSynchronizable) throws -> Dictionary<String, AnyObject>?
+    private func trySendingSyncRequestInQueue() -> Bool
     {
+        guard let (request, successfulRequestBlock, failureRequestBlock, associatedObject) = pendingRequestsQueue.first else { return false }
+        
         do
         {
-            return try ConnectionManager.sendSyncRequestToURL(URL, usingMethod: method, withJSONParams: params)
+            let responseDictionary = try ConnectionManager.sendSyncRequest(request)
+           
+            pendingRequestsQueue.removeFirst()
+    
+            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["lastUpdatedOn"] as! String)!
+            
+            if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
+            
+            successfulRequestBlock(JSONResponse: responseDictionary)
+            return true
         }
-        catch let error as ConnectionManagerError
+        catch
         {
-            addFailedRequestToQueue(request: error.request, successfulRequestBlock: , failureRequestBlock: <#T##ConnectionManagerFailureRequestBlock##ConnectionManagerFailureRequestBlock##(error: ConnectionManagerError) -> ()#>, associatedObject: <#T##EHSynchronizable#>)
+            failureRequestBlock(error: ConnectionManagerCompoundError(error:error, request:request))
+            
+            addFailedRequestToQueue(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
+            
+            return false
         }
-        
-        return nil
-    }*/
+    }
 }

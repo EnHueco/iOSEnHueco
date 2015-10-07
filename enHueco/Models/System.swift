@@ -14,7 +14,9 @@ enum EHSystemNotification: String
 {
     case SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
     case SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
+    case SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
     case SystemDidAddFriend = "SystemDidAddFriend"
+    case SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
 }
 
 class System
@@ -53,9 +55,9 @@ class System
     {
         //Pruebas
         
-        appUser = AppUser(username: "pa.perez10", token: "adfsdf", lastUpdatedOn: nil, firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/1498135_821566567860780_1633731954_o.jpg")!)
+        appUser = AppUser(username: "pa.perez10", token: "adfsdf", firstNames: "Diego", lastNames: "Montoya Sefair", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xap1/t31.0-8/1498135_821566567860780_1633731954_o.jpg")!, ID:"pa.perez10", lastUpdatedOn: NSDate())
 
-        let friend = User(username: "da.gomez11", firstNames: "Diego Alejandro", lastNames: "Gómez Mosquera", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xat1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=89245c25c3ddaa4f7d1341f7788de261&oe=56925447&__gda__=1448954703_30d0fe175a8ab0b665dc074d63a087d6")!)
+        let friend = User(username: "da.gomez11", firstNames: "Diego Alejandro", lastNames: "Gómez Mosquera", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xat1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=89245c25c3ddaa4f7d1341f7788de261&oe=56925447&__gda__=1448954703_30d0fe175a8ab0b665dc074d63a087d6")!, ID:"da.gomez11", lastUpdatedOn: NSDate())
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
@@ -68,7 +70,7 @@ class System
     }
     
     /**
-        Checks for updates on the server including Session Status, Friend list, Friends Schedule, Users Info
+        Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
     */
     func checkForUpdates ()
     {
@@ -81,7 +83,7 @@ class System
     func login (username: String, password: String)
     {
         let params = ["user_id":username, "password":password]
-        let URL = NSURL(string: APIURLS.URLS.base.rawValue + APIURLS.URLS.authSegment.rawValue)!
+        let URL = NSURL(string: EHURLS.Base.rawValue + EHURLS.AuthSegment.rawValue)!
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
             
@@ -91,20 +93,20 @@ class System
                 return
             }
             
-            let user = response["user"] as! Dictionary<String, String>
+            let user = response["user"] as! [String : String]
             let username = user["login"] as String!
             let firstNames = user["firstNames"] as String!
             let lastNames = user["lastNames"] as String!
             let imageURL = NSURL(string: user["imageURL"] as String!)
-            let lastUpdatedOn = user["lastUpdated_on"] as String!
+            let lastUpdatedOn = NSDate(serverFormattedString: user["lastUpdated_on"] as String!)!
             
             //TODO: Asign lastUpdatedOn
             
-            let appUser = AppUser(username: username, token: token, lastUpdatedOn: nil, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL)
+            let appUser = AppUser(username: username, token: token, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL, ID: username, lastUpdatedOn: lastUpdatedOn)
             
             self.appUser = appUser
             
-            self.updateFriendsAndFriendsSchedules()
+            //self.updateFriendsAndFriendsSchedules()
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin.rawValue, object: self, userInfo: nil)
             
@@ -127,11 +129,6 @@ class System
         {
             
         }
-    }
-    
-    func updateFriendsAndFriendsSchedules ()
-    {
-        appUser.updateFriendsAndFriendsSchedules()
     }
 
     /**
