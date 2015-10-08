@@ -30,10 +30,6 @@ class FriendDetailViewController: UIViewController
         lastNamesLabel.text = friend.lastNames
         userNameLabel.text = friend.username
         
-        navigationController!.navigationBar.barStyle = UIBarStyle.Black
-        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-
         setRecordId()
         
         backgroundImageView.alpha = 0
@@ -71,6 +67,10 @@ class FriendDetailViewController: UIViewController
     override func viewWillAppear(animated: Bool)
     {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        navigationController!.navigationBar.barStyle = UIBarStyle.Black
+        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning()

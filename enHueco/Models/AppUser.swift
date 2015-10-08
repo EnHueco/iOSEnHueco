@@ -17,7 +17,8 @@ class AppUser: User
     var token : String
     
     var friends = [User]()
-    var friendRequests = [User]()
+    var outgoingFriendRequests = [User]()
+    var incomingFriendRequests = [User]()
     
     init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
@@ -36,7 +37,7 @@ class AppUser: User
         
         for friend in friends
         {
-            if let gap = friend.currentGap()  { friendsAndGaps.append((friend, gap))}
+            if let gap = friend.currentGap()  {friendsAndGaps.append((friend, gap))}
         }
         
         return friendsAndGaps
@@ -99,6 +100,8 @@ class AppUser: User
                 newFriends.append(newFriend)
             }
             
+            self.friends = newFriends
+            
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates.rawValue, object: self, userInfo: nil)
             
         }) { (error) -> () in
@@ -121,7 +124,7 @@ class AppUser: User
             let lastUpdatedOn = NSDate(serverFormattedString: JSONResponse["lastUpdated_on"]! as! String)!
             
             let requestFriend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
-            self.friendRequests.append(requestFriend)
+            self.outgoingFriendRequests.append(requestFriend)
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest.rawValue, object: self, userInfo: nil)
             
@@ -344,23 +347,24 @@ class AppUser: User
     {
         guard
             let token = decoder.decodeObjectForKey("token") as? String,
-            //let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? NSDate,
             let friends = decoder.decodeObjectForKey("friends") as? [User],
-            let friendRequests = decoder.decodeObjectForKey("friendRequests") as? [User]
+            let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
+            let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
         else
         {
             self.token = ""
             self.friends = [User]()
-            self.friendRequests = [User]()
+            self.incomingFriendRequests = [User]()
+            self.outgoingFriendRequests = [User]()
             super.init(coder: decoder)
             
             return nil
         }
         
         self.token = token
-        //self.lastUpdatedOn = lastUpdatedOn
         self.friends = friends
-        self.friendRequests = friendRequests
+        self.incomingFriendRequests = incomingFriendRequests
+        self.outgoingFriendRequests = outgoingFriendRequests
         
         super.init(coder: decoder)
     }
@@ -372,7 +376,8 @@ class AppUser: User
         coder.encodeObject(token, forKey: "token")
         //coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
         coder.encodeObject(friends, forKey: "friends")
-        coder.encodeObject(friendRequests, forKey: "friendRequests")
+        coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
+        coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
     }
 }
 

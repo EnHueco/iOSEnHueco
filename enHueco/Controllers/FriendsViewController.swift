@@ -10,10 +10,14 @@ import UIKit
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     
     var emptyLabel : UILabel?
+    
+    let searchBar = UISearchBar()
+    
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
@@ -21,12 +25,23 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
         
+        searchBar.sizeToFit()
+        friendsTableView.tableHeaderView = searchBar
+        
         emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
         emptyLabel!.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
         emptyLabel!.lineBreakMode = .ByWordWrapping
         emptyLabel!.numberOfLines = 0
         emptyLabel!.textColor = UIColor.grayColor()
         emptyLabel!.textAlignment = NSTextAlignment.Center
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        friendRequestsNotificationsIndicator.clipsToBounds = true
+        friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height/2
     }
     
     override func viewWillAppear(animated: Bool)

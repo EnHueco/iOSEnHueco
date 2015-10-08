@@ -28,6 +28,8 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         
         friendsAndGaps = system.appUser.friendsCurrentlyInGap()
         tableView.reloadData()

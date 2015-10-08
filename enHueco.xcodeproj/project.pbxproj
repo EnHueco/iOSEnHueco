@@ -51,10 +51,14 @@
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
+		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
+		F165BC4D1BC6066400AA9248 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
+		F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F16C613B1BB222EF00703782 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C613A1BB222EF00703782 /* Event.swift */; settings = {ASSET_TAGS = (); }; };
 		F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F16C613E1BB30A0100703782 /* UIView+Shadow.m */; settings = {ASSET_TAGS = (); }; };
 		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; settings = {ASSET_TAGS = (); }; };
-		F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
@@ -149,11 +153,15 @@
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
+		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
+		F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
+		F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
+		F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingFriendRequestCell.swift; sourceTree = "<group>"; };
+		F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingFriendRequestCell.swift; sourceTree = "<group>"; };
 		F16C613A1BB222EF00703782 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F16C613D1BB30A0100703782 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
 		F16C613E1BB30A0100703782 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
 		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynchronizationManager.swift; path = Other/SynchronizationManager.swift; sourceTree = "<group>"; };
-		F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportScheduleFromLocalCalendarViewController.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
@@ -230,6 +238,9 @@
 				F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */,
 				F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */,
 				F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */,
+				F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */,
+				F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */,
+				F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -385,11 +396,12 @@
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */,
 				F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */,
-				F184D2661BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 				F119309F1BB84B570031EB58 /* ViewQRViewController.swift */,
+				F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */,
+				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -602,6 +614,7 @@
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,
 				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
 				F11B03511BA52B9D00ADD580 /* UIImage+TKCategory.m in Sources */,
+				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
 				F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */,
 				F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */,
@@ -611,10 +624,10 @@
 				F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */,
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
 				F11B034E1BA52B5600ADD580 /* NSDate+TKCategory.m in Sources */,
+				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
 				F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddViewGapViewController.swift in Sources */,
-				F184D2671BA40CBC00D6129F /* ImportScheduleFromLocalCalendarViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */,
@@ -626,6 +639,7 @@
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */,
 				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
+				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */,
 				F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */,
@@ -635,7 +649,9 @@
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F11B035C1BA52BBE00ADD580 /* UIColor+TKCategory.m in Sources */,
+				F165BC4D1BC6066400AA9248 /* SearchFriendViewController.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
+				F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */,
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
 				F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */,
