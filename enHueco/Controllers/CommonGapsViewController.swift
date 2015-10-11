@@ -35,14 +35,45 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
         commonGapsSearchFriendViewController.delegate = self
         
         scheduleViewController = storyboard!.instantiateViewControllerWithIdentifier("ScheduleCalendarViewController") as! ScheduleCalendarViewController
+        scheduleViewController.schedule = Schedule()
         
         switchToSchedule()
+        addFriendToSelectedFriendsAndReloadData(system.appUser)
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func prepareInfoAndReloadScheduleData()
+    {
+        let commonGapsSchedule = system.appUser.commonGapsScheduleForUsers(selectedFriends)
+        scheduleViewController.schedule = commonGapsSchedule
+        scheduleViewController.dayView.reloadData()
+    }
+    
+    func addFriendToSelectedFriendsAndReloadData(friend: User)
+    {
+        if friend is AppUser
+        {
+            selectedFriends.insert(friend, atIndex: 0)
+        }
+        else
+        {
+            selectedFriends.append(friend)
+        }
+        
+        selectedFriendsCollectionView.reloadData()
+        prepareInfoAndReloadScheduleData()
     }
     
     // MARK: Collection View Delegate
@@ -120,8 +151,7 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     
     func commonGapsSearchFriendToAddViewController(controller: CommonGapsSearchFriendToAddViewController, didSelectFriend friend: User)
     {
-        selectedFriends.append(friend)
-        selectedFriendsCollectionView.reloadData()
+        addFriendToSelectedFriendsAndReloadData(friend)
     }
     
     // MARK: Controller switching

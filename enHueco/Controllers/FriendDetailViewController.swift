@@ -100,6 +100,10 @@ class FriendDetailViewController: UIViewController
     
     @IBAction func commonGapsButtonPressed(sender: AnyObject)
     {
+        let commonGapsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonGapsViewController") as!CommonGapsViewController
+        commonGapsViewController.selectedFriends.append(friend)
+      
+        navigationController?.pushViewController(commonGapsViewController, animated: true)
     }
 
     @IBAction func call(sender: UIButton)

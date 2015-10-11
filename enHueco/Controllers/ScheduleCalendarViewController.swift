@@ -15,7 +15,6 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     */
     var schedule: Schedule! = system.appUser.schedule
     
-    var currentDate: NSDate!
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 
@@ -31,7 +30,6 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        currentDate = NSDate()
         dayView.reloadData()
     }
     

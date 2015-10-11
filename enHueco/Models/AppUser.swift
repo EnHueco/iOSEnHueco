@@ -138,7 +138,7 @@ class AppUser: User
         
         guard users.count >= 2 else { return commonGapsSchedule }
         
-        for i in 0..<schedule.weekDays.count-1
+        for i in 1..<schedule.weekDays.count
         {
             var currentCommonGaps = users.first!.schedule.weekDays[i].events.filter { $0.type == .Gap }
             
