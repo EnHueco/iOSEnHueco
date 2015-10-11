@@ -89,10 +89,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddFriendViewController") as! AddFriendViewController
     }
     
+    // MARK: Notification Center
+    
     func systemDidAddFriend(notification: NSNotification)
     {
         friendsTableView.reloadData()
     }
+    
+    // MARK: TableView Delegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {

@@ -11,9 +11,9 @@ import UIKit
 class ScheduleCalendarViewController: TKCalendarDayViewController
 {
     /**
-        User who's schedule will be displayed. Defaults to AppUser
+        Schedule to be displayed. Defaults to AppUser's
     */
-    var user: User! = system.appUser
+    var schedule: Schedule! = system.appUser.schedule
     
     var currentDate: NSDate!
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -38,54 +38,39 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]!
     {
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
-        let weekDayDaySchedule = user.schedule.weekDays[localWeekDayNumber]
+        let weekDayDaySchedule = schedule.weekDays[localWeekDayNumber]
         
-        var events = [TKCalendarDayEventView]()
+        var eventViews = [TKCalendarDayEventView]()
         
-        for gap in weekDayDaySchedule.gaps
+        for event in weekDayDaySchedule.events
         {
-            var event = calendarDay.dequeueReusableEventView
-            if event == nil { event = TKCalendarDayEventView() }
+            var eventView = calendarDay.dequeueReusableEventView
+            if eventView == nil { eventView = TKCalendarDayEventView() }
             
-            event.titleLabel.text = gap.name
-            event.locationLabel.text = gap.location
-            event.backgroundColor = UIColor(red: 0/255.0, green: 150/255.0, blue: 245/255.0, alpha: 0.15)
+            eventView.titleLabel.text = event.name
+            eventView.locationLabel.text = event.location
+            eventView.backgroundColor = (event.type == .Gap ? UIColor(red: 0/255.0, green: 150/255.0, blue: 245/255.0, alpha: 0.15) : UIColor(red: 255/255.0, green: 213/255.0, blue: 0/255.0, alpha: 0.15))
             
-            event.startDate = gap.startHourInUTCEquivalentOfDate(date)
-            event.endDate = gap.endHourInUTCEquivalentOfDate(date)
+            eventView.startDate = event.startHourInDate(date)
+            eventView.endDate = event.endHourInDate(date)
             
-            events.append(event)
+            eventViews.append(eventView)
         }
         
-        for aClass in weekDayDaySchedule.classes
-        {
-            var event = calendarDay.dequeueReusableEventView
-            if event == nil { event = TKCalendarDayEventView() }
-            
-            event.titleLabel.text = aClass.name
-            event.locationLabel.text = aClass.location
-            event.backgroundColor = UIColor(red: 255/255.0, green: 213/255.0, blue: 0/255.0, alpha: 0.15)
-            
-            event.startDate = aClass.startHourInUTCEquivalentOfDate(date)
-            event.endDate = aClass.endHourInUTCEquivalentOfDate(date)
-            
-            events.append(event)
-        }
-        
-        return events
+        return eventViews
     }
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddViewGapViewController") as! AddViewGapViewController
+        let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditEventViewController") as! AddEditEventViewController
         
         let weekDayNumber = localCalendar.component(.Weekday, fromDate: eventView.startDate)
-        let weekDayDaySchedule = user.schedule.weekDays[weekDayNumber]
+        let weekDayDaySchedule = schedule.weekDays[weekDayNumber]
         
         let componentUnits: NSCalendarUnit = [.Weekday, .Hour, .Minute]
         let startHour = globalCalendar.components(componentUnits, fromDate: eventView.startDate)
 
-        viewController.eventToEdit = weekDayDaySchedule.gapOrClassWithStartHour(startHour)!
+        viewController.eventToEdit = weekDayDaySchedule.eventWithStartHour(startHour)!
         
         presentViewController(viewController, animated: true, completion: nil)
     }

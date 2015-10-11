@@ -15,6 +15,7 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var lastNamesLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var viewScheduleButton: UIButton!
+    @IBOutlet weak var commonGapsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
    
     var friend : User!
@@ -60,6 +61,9 @@ class FriendDetailViewController: UIViewController
         viewScheduleButton.clipsToBounds = true
         viewScheduleButton.layer.cornerRadius = viewScheduleButton.frame.height/2
         
+        commonGapsButton.clipsToBounds = true
+        commonGapsButton.layer.cornerRadius = viewScheduleButton.frame.height/2
+        
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height/2
     }
@@ -90,10 +94,14 @@ class FriendDetailViewController: UIViewController
     @IBAction func viewSchedule(sender: UIButton)
     {
         let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as!ScheduleViewController
-        scheduleCalendar.user = friend
+        scheduleCalendar.schedule = friend.schedule
         presentViewController(scheduleCalendar, animated: true, completion: nil)
     }
     
+    @IBAction func commonGapsButtonPressed(sender: AnyObject)
+    {
+    }
+
     @IBAction func call(sender: UIButton)
     {
         if let num = friend.phoneNumber

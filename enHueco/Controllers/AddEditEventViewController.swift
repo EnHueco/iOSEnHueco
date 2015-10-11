@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
+class AddEditEventViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
 {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var gapOrClassSegmentedControl: UISegmentedControl!
@@ -24,6 +24,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     var eventToEdit: Event?
 
+    // MARK: View Controller
     
     override func viewDidLoad()
     {
@@ -50,7 +51,7 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             let indexSet = NSIndexSet(index: system.appUser.schedule.weekDays.indexOf(eventToEdit.daySchedule)!-1)
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
             
-            if eventToEdit is Gap
+            if eventToEdit.type == .Gap
             {
                 gapOrClassSegmentedControl.selectedSegmentIndex = 0
             }
@@ -61,8 +62,8 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             
             let currentDate = NSDate()
             
-            startHourDatePicker.setDate(eventToEdit.startHourInUTCEquivalentOfDate(currentDate), animated: true)
-            endHourDatePicker.setDate(eventToEdit.endHourInUTCEquivalentOfDate(currentDate), animated: true)
+            startHourDatePicker.setDate(eventToEdit.startHourInDate(currentDate), animated: true)
+            endHourDatePicker.setDate(eventToEdit.endHourInDate(currentDate), animated: true)
         }
         else
         {
@@ -99,12 +100,17 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
+    }
+    
+    // MARK: PickerView Delegate
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
     {
         return 1
     }
-
-    // returns the # of rows in each component..
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
@@ -115,6 +121,8 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
     {
         return system.appUser.schedule.weekDays[row+2].weekDayName
     }
+    
+    // MARK Buttons
     
     @IBAction func startHourChanged(sender: UIDatePicker)
     {
@@ -134,8 +142,9 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         let globalCalendar = NSCalendar.currentCalendar()
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        var eventsToAdd = [Event]()
         var canAddEvents = true
+        
+        var daySchedulesAndEventToAdd = [(daySchedule: DaySchedule, event: Event)]()
         
         for index in weekDaysSegmentedControl.selectedSegmentIndexes
         {
@@ -155,73 +164,34 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             let globalStartHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalStartHourDateInWeekday)
             let globalEndHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalEndHourDateInWeekday)
             
-            /*var localWeekDayNumber = localCalendar.component(.Weekday, fromDate: startHourDatePicker.date)
-            var dayOffset = Int(localWeekDayNumber-startHour.weekday)
-            startHour.weekday = index+1 - dayOffset
-            
-            localWeekDayNumber = localCalendar.component(.Weekday, fromDate: endHourDatePicker.date)
-            dayOffset = Int(localWeekDayNumber-endHour.weekday)
-            endHour.weekday = index+1 - dayOffset*/
-            
             let daySchedule = system.appUser.schedule.weekDays[index+1]
             
-            if gapOrClassSegmentedControl.selectedSegmentIndex == 0 //Gap selected
+            
+            let type: EventType = (gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? .Gap : .Class)
+                
+            var name = nameTextField.text
+                
+            if name != nil && name! == "" { name = nil }
+                
+            let newEvent = Event(type: type, name: name, startHour: globalStartHourComponentsInWeekday, endHour: globalEndHourComponentsInWeekday, location: locationTextField.text)
+                
+            if !daySchedule.canAddEvent(newEvent, excludingEvent: eventToEdit)
             {
-                var name = nameTextField.text
-                
-                if name != nil && name! == "" { name = nil }
-                
-                let newGap = Gap(daySchedule: daySchedule, name: name, startHour: globalStartHourComponentsInWeekday, endHour: globalEndHourComponentsInWeekday, location: locationTextField.text)
-                
-                if !daySchedule.canAddGap(newGap, excludingEvent: eventToEdit)
-                {
-                    canAddEvents = false
-                }
-                else
-                {
-                    eventsToAdd.append(newGap)
-                }
+                canAddEvents = false
             }
-            else //Class selected
+            else
             {
-                var name: String?
-                
-                if name != nil && name! == "" { name = nil }
-                
-                let newClass = Class(daySchedule: daySchedule, name: nameTextField.text, startHour: globalStartHourComponentsInWeekday, endHour: globalEndHourComponentsInWeekday, location: locationTextField.text)
-                
-                if !daySchedule.canAddClass(newClass, excludingEvent: eventToEdit)
-                {
-                    canAddEvents = false
-                }
-                else
-                {
-                    eventsToAdd.append(newClass)
-                }
+                daySchedulesAndEventToAdd.append((daySchedule, newEvent))
             }
         }
         
         if canAddEvents
         {
-            if let gapToEdit = eventToEdit as? Gap
-            {
-                gapToEdit.daySchedule.removeGap(gapToEdit)
-            }
-            else if let classToEdit = eventToEdit as? Class
-            {
-                classToEdit.daySchedule.removeClass(classToEdit)
-            }
+            eventToEdit?.daySchedule.removeEvent(eventToEdit!)
 
-            for event in eventsToAdd
+            for (daySchedule, event) in daySchedulesAndEventToAdd
             {
-                if let newGap = event as? Gap
-                {
-                    newGap.daySchedule.addGap(newGap)
-                }
-                else if let newClass = event as? Class
-                {
-                    newClass.daySchedule.addClass(newClass)
-                }
+                daySchedule.addEvent(event)
             }
             
             dismissViewControllerAnimated(true, completion: nil)
@@ -237,17 +207,19 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
         UIAlertView(title: "Eliminar "+(gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? "Hueco":"Clase"), message: "¿Estás seguro que quieres eliminar " + (gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? "este hueco":"esta clase")+"?", delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
     }
     
+    @IBAction func cancel(sender: AnyObject)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: Methods
+    
     func deleteEvent()
     {
-        if let gapToEdit = eventToEdit as? Gap
-        {
-            gapToEdit.daySchedule.removeGap(gapToEdit)
-        }
-        else if let classToEdit = eventToEdit as? Class
-        {
-            classToEdit.daySchedule.removeClass(classToEdit)
-        }
+        eventToEdit?.daySchedule.removeEvent(eventToEdit!)
     }
+    
+    // MARK: Other Delegates
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
     {
@@ -256,16 +228,6 @@ class AddViewGapViewController: UIViewController, UIPickerViewDataSource, UIPick
             deleteEvent()
             dismissViewControllerAnimated(true, completion: nil)
         }
-    }
-    
-    @IBAction func cancel(sender: AnyObject)
-    {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        view.endEditing(true)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool

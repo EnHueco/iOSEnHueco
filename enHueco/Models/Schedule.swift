@@ -26,7 +26,6 @@ class Schedule: NSObject, NSCoding
         weekDays.append(DaySchedule(weekDayName: "Jueves"))
         weekDays.append(DaySchedule(weekDayName: "Viernes"))
         weekDays.append(DaySchedule(weekDayName: "Sábado"))
-
         
         self.weekDays = weekDays
     }

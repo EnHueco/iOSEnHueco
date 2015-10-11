@@ -11,9 +11,9 @@ import UIKit
 class ScheduleViewController: UIViewController
 {
     /**
-    User who's schedule will be displayed. Defaults to AppUser
+        Schedule to be displayed. Defaults to AppUser's
     */
-    var user: User = system.appUser
+    var schedule: Schedule = system.appUser.schedule
 
     @IBOutlet weak var importCalendarButton: UIButton!
     @IBOutlet weak var addGapOrClassButton: UIButton!
@@ -30,7 +30,7 @@ class ScheduleViewController: UIViewController
     {
         navigationController?.navigationBarHidden = true
        
-        if user != system.appUser
+        if schedule !== system.appUser.schedule
         {
             importCalendarButton.hidden = true
             addGapOrClassButton.hidden = true
@@ -53,7 +53,7 @@ class ScheduleViewController: UIViewController
     {
         if let controller = segue.destinationViewController as? ScheduleCalendarViewController
         {
-            controller.user = user
+            controller.schedule = schedule
         }
     }
 }

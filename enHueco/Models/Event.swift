@@ -8,11 +8,18 @@
 
 import UIKit
 
+enum EventType: String
+{
+    case Gap = "Gap", Class = "Class"
+}
+
 class Event: NSObject, NSCoding
 {
-    unowned let daySchedule: DaySchedule
+    weak var daySchedule: DaySchedule!
     
     let name:String?
+    
+    let type: EventType
     
     /** UTC weekday, hour and minute time components of the event's start hour */
     let startHour: NSDateComponents
@@ -22,10 +29,10 @@ class Event: NSObject, NSCoding
     
     var location: String?
     
-    init(daySchedule: DaySchedule, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
+    init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
     {
-        self.daySchedule = daySchedule
-        self.name = name
+        self.type = type
+        self.name = name ?? (type == .Gap ? "Hueco" : "Clase")
         self.startHour = startHour
         self.endHour = endHour
         
@@ -38,10 +45,12 @@ class Event: NSObject, NSCoding
     {
         guard
             let daySchedule = decoder.decodeObjectForKey("daySchedule") as? DaySchedule,
+            let type = decoder.decodeObjectForKey("type") as? String,
             let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
             let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
             else
         {
+            self.type = .Gap
             self.name = ""
             self.startHour = NSDateComponents()
             self.endHour = NSDateComponents()
@@ -51,6 +60,7 @@ class Event: NSObject, NSCoding
             return nil
         }
         
+        self.type = EventType(rawValue: type)!
         self.daySchedule = daySchedule
         self.name = decoder.decodeObjectForKey("name") as? String
         self.startHour = startHour
@@ -60,8 +70,31 @@ class Event: NSObject, NSCoding
         super.init()
     }
     
+    convenience init(JSONDictionary: [String : AnyObject?])
+    {
+        let type = JSONDictionary["type"] as? String
+        let name = JSONDictionary["day"] as? String
+        let location = JSONDictionary ["location"] as? String
+        
+        let startHourStringComponents = (JSONDictionary["start_hour"] as! String).componentsSeparatedByString(":")
+        let globalStartHourWeekDay = Int(startHourStringComponents[0])!
+        let startHour = Int(startHourStringComponents[1])!
+        let startMinute = Int(startHourStringComponents[2])!
+        
+        let endHourStringComponents = (JSONDictionary["end_hour"] as! String).componentsSeparatedByString(":")
+        let globalEndHourWeekDay = Int(endHourStringComponents[0])!
+        let endHour = Int(endHourStringComponents[1])!
+        let endMinute = Int(endHourStringComponents[2])!
+        
+        let startHourComponents = NSDateComponents(weekday: globalStartHourWeekDay, hour: startHour, minute: startMinute)
+        let endHourComponents = NSDateComponents(weekday: globalEndHourWeekDay, hour: endHour, minute: endMinute)
+        
+        self.init(type: EventType(rawValue: type!)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location)
+    }
+    
     func encodeWithCoder(coder: NSCoder)
     {
+        coder.encodeObject(type.rawValue, forKey: "type")
         coder.encodeObject(name, forKey: "name")
         coder.encodeObject(startHour, forKey: "startHour")
         coder.encodeObject(endHour, forKey: "endHour")
@@ -69,11 +102,8 @@ class Event: NSObject, NSCoding
         coder.encodeObject(daySchedule, forKey: "daySchedule")
     }
     
-    /**
-        Returns the start hour (Weekday, Hour, Minute) by setting the components to the date provided,
-        but offsetting it to its global UTC Date equivalent.
-    */
-    func startHourInUTCEquivalentOfDate(date: NSDate) -> NSDate
+    /// Returns the start hour (Weekday, Hour, Minute) by setting the components to the date provided.
+    func startHourInDate(date: NSDate) -> NSDate
     {
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -87,20 +117,12 @@ class Event: NSObject, NSCoding
         components.minute = startHour.minute
         components.second = 0
 
-        /*var startHourWithDate = globalCalendar.dateBySettingHour(startHour.hour, minute: startHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
-
-        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
-        let dayOffset = Double(localWeekDayNumber-startHour.weekday)
-        startHourWithDate = startHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))*/
-
         return globalCalendar.dateFromComponents(components)!
     }
     
-    /**
-        Returns the end hour (Weekday, Hour, Minute) by setting the components to the date provided,
-        but offsetting it to its global UTC Date equivalent.
-    */
-    func endHourInUTCEquivalentOfDate(date: NSDate) -> NSDate
+    
+    /// Returns the end hour (Weekday, Hour, Minute) by setting the components to the date provided.
+    func endHourInDate(date: NSDate) -> NSDate
     {
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -113,12 +135,6 @@ class Event: NSObject, NSCoding
         components.hour = endHour.hour
         components.minute = endHour.minute
         components.second = 0
-        
-        /*var endHourWithDate = globalCalendar.dateBySettingHour(endHour.hour, minute: endHour.minute, second: 0, ofDate: date, options: NSCalendarOptions())!
-
-        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
-        let dayOffset = Double(localWeekDayNumber-endHour.weekday)
-        endHourWithDate = endHourWithDate.dateByAddingTimeInterval(60*60*24*(-dayOffset))*/
         
         return globalCalendar.dateFromComponents(components)!
     }

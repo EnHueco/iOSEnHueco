@@ -26,19 +26,16 @@ class System
         case CouldNotPersistData
     }
     
-    /**
-        Path to the documents folder
-    */
+    
+    /// Path to the documents folder
     let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
     
-    /** 
-        Path where data will be persisted
-    */
+    
+    /// Path where data will be persisted
     let persistancePath: String
     
-    /**
-        User of the app
-    */
+
+    /// User of the app
     var appUser: AppUser!
     
     private init()
@@ -60,8 +57,8 @@ class System
         let friend = User(username: "da.gomez11", firstNames: "Diego Alejandro", lastNames: "Gómez Mosquera", phoneNumber: "3176694189", imageURL: NSURL(string: "https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xat1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=89245c25c3ddaa4f7d1341f7788de261&oe=56925447&__gda__=1448954703_30d0fe175a8ab0b665dc074d63a087d6")!, ID:"da.gomez11", lastUpdatedOn: NSDate())
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
-        let gap = Gap(daySchedule: friend.schedule.weekDays[6], startHour: start, endHour: end)
-        friend.schedule.weekDays[6].addGap(gap)
+        let gap = Event(type:.Gap, startHour: start, endHour: end)
+        friend.schedule.weekDays[6].addEvent(gap)
         appUser.friends.append(friend)
         
         appUser.friends.append(appUser)
@@ -70,15 +67,19 @@ class System
     }
     
     /**
-        Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
+    Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
     */
     func checkForUpdates ()
     {
         
     }
     
-    /*
-        Logs user in for the first time or when session expires. Creates or replaces the AppUser.
+    /** 
+    Logs user in for the first time or when session expires. Creates or replaces the AppUser. Notifies the result via Notification Center.
+    
+    ### Notifications
+    - EHSystemNotification.SystemDidLogin in case of success
+    - EHSystemNotification.SystemCouldNotLoginWithError in case of failure
     */
     func login (username: String, password: String)
     {
@@ -131,9 +132,7 @@ class System
         }
     }
 
-    /**
-        Persists all pertinent application data
-    */
+    /// Persists all pertinent application data
     func persistData () throws
     {
         guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistancePath) else
@@ -142,9 +141,7 @@ class System
         }
     }
     
-    /**
-        Restores all pertinent application data to memory
-    */
+    /// Restores all pertinent application data to memory
     func loadDataFromPersistence () -> Bool
     {
         appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistancePath) as? AppUser

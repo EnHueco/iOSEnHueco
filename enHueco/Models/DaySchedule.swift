@@ -12,25 +12,15 @@ class DaySchedule: NSObject, NSCoding
 {
     let weekDayName: String
     
-    private var mutableGaps = [Gap]()
-    private var mutableClasses = [Class]()
+    private var mutableEvents = [Event]()
     
-    var gaps:[Gap]
+    var events:[Event]
     {
         get
         {
-            return mutableGaps
+            return mutableEvents
         }
     }
-    
-    var classes:[Class]
-    {
-        get
-        {
-            return mutableClasses
-        }
-    }
-
     
     init(weekDayName:String)
     {
@@ -41,8 +31,7 @@ class DaySchedule: NSObject, NSCoding
     {
         guard
             let weekDayName = decoder.decodeObjectForKey("weekDayName") as? String,
-            let mutableGaps = decoder.decodeObjectForKey("mutableGaps") as? [Gap],
-            let mutableClasses = decoder.decodeObjectForKey("mutableClasses") as? [Class]
+            let mutableEvents = decoder.decodeObjectForKey("mutableEvents") as? [Event]
         else
         {
             self.weekDayName = ""
@@ -52,8 +41,7 @@ class DaySchedule: NSObject, NSCoding
         }
         
         self.weekDayName = weekDayName
-        self.mutableGaps = mutableGaps
-        self.mutableClasses = mutableClasses
+        self.mutableEvents = mutableEvents
         
         super.init()
     }
@@ -61,98 +49,33 @@ class DaySchedule: NSObject, NSCoding
     func encodeWithCoder(coder: NSCoder)
     {
         coder.encodeObject(weekDayName, forKey: "weekDayName")
-        coder.encodeObject(mutableGaps, forKey: "mutableGaps")
-        coder.encodeObject(mutableClasses, forKey: "mutableGaps")
+        coder.encodeObject(mutableEvents, forKey: "mutableEvents")
     }
     
-    func setGaps(gaps: [Gap])
+    func setEvents(events: [Event])
     {
-        mutableGaps = gaps
+        for event in events
+        {
+            event.daySchedule = self
+        }
+        
+        mutableEvents = events
     }
-    
-    func setClasses(classes: [Class])
-    {
-        mutableClasses = classes
-    }
-    
-    /**
-        Returns true if gap doesn't overlap with any gap or class, excluding eventToExclude.
-    */
-    func canAddGap(newGap: Gap, excludingEvent eventToExclude:Event? = nil) -> Bool
+   
+    /// Returns true if event doesn't overlap with any gap or class, excluding eventToExclude.
+    func canAddEvent(newEvent: Event, excludingEvent eventToExclude:Event? = nil) -> Bool
     {
         let currentDate = NSDate()
         
-        let newGapStartHourInCurrentDate = newGap.startHourInUTCEquivalentOfDate(currentDate)
-        let newGapEndHourInCurrentDate = newGap.endHourInUTCEquivalentOfDate(currentDate)
+        let newEventStartHourInCurrentDate = newEvent.startHourInDate(currentDate)
+        let newEventEndHourInCurrentDate = newEvent.endHourInDate(currentDate)
         
-        for gap in mutableGaps where eventToExclude == nil || gap !== eventToExclude
+        for event in mutableEvents where eventToExclude == nil || event !== eventToExclude
         {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
+            let startHourInCurrentDate = event.startHourInDate(currentDate)
+            let endHourInCurrentDate = event.endHourInDate(currentDate)
             
-            if newGapStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
-                || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
-                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
-            {
-                return false
-            }
-        }
-        
-        for aClass in mutableClasses where eventToExclude == nil || aClass !== eventToExclude
-        {
-            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfDate(currentDate)
-            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfDate(currentDate)
-            
-            if newGapStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || newGapEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || startHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
-                || endHourInCurrentDate.isBetween(newGapStartHourInCurrentDate, and: newGapEndHourInCurrentDate)
-                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newGapStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newGapEndHourInCurrentDate))
-            {
-                return false
-            }
-        }
-        
-        return true
-    }
-
-    /**
-        Returns true if class doesn't overlap with any gap or class,  excluding eventToExclude.
-    */
-    func canAddClass(newClass: Class, excludingEvent eventToExclude:Event? = nil) -> Bool
-    {
-        let currentDate = NSDate()
-        
-        let newClassStartHourInCurrentDate = newClass.startHourInUTCEquivalentOfDate(currentDate)
-        let newClassEndHourInCurrentDate = newClass.endHourInUTCEquivalentOfDate(currentDate)
-        
-        for gap in mutableGaps where eventToExclude == nil || gap !== eventToExclude
-        {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
-            
-            if newClassStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
-                || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
-                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
-            {
-                return false
-            }
-        }
-        
-        for aClass in mutableClasses where eventToExclude == nil || aClass !== eventToExclude
-        {
-            let startHourInCurrentDate = aClass.startHourInUTCEquivalentOfDate(currentDate)
-            let endHourInCurrentDate = aClass.endHourInUTCEquivalentOfDate(currentDate)
-            
-            if newClassStartHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || newClassEndHourInCurrentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate)
-                || startHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
-                || endHourInCurrentDate.isBetween(newClassStartHourInCurrentDate, and: newClassEndHourInCurrentDate)
-                || (startHourInCurrentDate.hasSameHoursAndMinutesThan(newClassStartHourInCurrentDate) && endHourInCurrentDate.hasSameHoursAndMinutesThan(newClassEndHourInCurrentDate))
+            if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
             {
                 return false
             }
@@ -161,62 +84,46 @@ class DaySchedule: NSObject, NSCoding
         return true
     }
     
-    /**
-        Adds gap if it doesn't overlap with any gap or class
-    */
-    func addGap(newGap: Gap) -> Bool
+    /// Adds event if it doesn't overlap with any other event
+    func addEvent(newEvent: Event) -> Bool
     {
-        if canAddGap(newGap)
+        if canAddEvent(newEvent)
         {
-            mutableGaps.append(newGap)
+            newEvent.daySchedule = self
+            mutableEvents.append(newEvent)
             return true
         }
         return false
     }
     
     /**
-        Adds class if it doesn't overlap with any gap or class
+        Adds all events if they don't overlap with any other event. The new events *must* not overlap with themselves, otherwise the method will not be
+        able to add them all.
+        
+        - returns: True if all events could be added correctly
     */
-    func addClass(newClass: Class) -> Bool
+    func addEvents(newEvents: [Event]) -> Bool
     {
-        if canAddClass(newClass)
+        for newEvent in newEvents
         {
-            mutableClasses.append(newClass)
-            return true
+            if !addEvent(newEvent) { return false }
         }
-        return false
+        return true
     }
     
-    func removeGap(gap: Gap) -> Bool
+    func removeEvent(event: Event) -> Bool
     {
-        return mutableGaps.removeObject(gap)
+        return mutableEvents.removeObject(event)
     }
     
-    func removeClass(aClass: Class) -> Bool
+    func eventWithStartHour(startHour: NSDateComponents) -> Event?
     {
-        return mutableClasses.removeObject(aClass)
-    }
-    
-    func gapOrClassWithStartHour(startHour: NSDateComponents) -> Event?
-    {
-        for gap in gaps
+        for event in mutableEvents where event.startHour == startHour
         {
-            if gap.startHour == startHour
-            {
-                return gap
-            }
+            return event
         }
-        
-        for aClass in classes
-        {
-            if aClass.startHour == startHour
-            {
-                return aClass
-            }
-        }
-        
         return nil
     }
     
-    //TODO: Implement Equatable protocol
+    // TODO: Implement Equatable protocol
 }

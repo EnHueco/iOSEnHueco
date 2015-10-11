@@ -11,7 +11,7 @@ import UIKit
 class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
-    var friendsAndGaps = [(friend: User, gap: Gap)]()
+    var friendsAndGaps = [(friend: User, gap: Event)]()
     var emptyLabel : UILabel?
     
     override func viewDidLoad()
@@ -54,6 +54,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
+    }
+    
+    // MARK: TableView Delegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -98,10 +105,5 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         friendDetailViewController.friend = friend
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
-        view.endEditing(true)
     }
 }

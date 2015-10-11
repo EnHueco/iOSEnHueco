@@ -20,8 +20,8 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         super.viewDidLoad()
         
-        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
-        appUserQRImageView.image = code?.image
+//        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+//        appUserQRImageView.image = code?.image
         
         scanQRButton.clipsToBounds = true
         scanQRButton.layer.cornerRadius = 4
@@ -43,7 +43,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         dismissViewControllerAnimated(true, completion: nil)
         
-        try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
+//        try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
         
         navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }

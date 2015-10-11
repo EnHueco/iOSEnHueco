@@ -11,9 +11,7 @@
 		7C45B5F126167956BBDA2144 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F782758D75200AB0BA9BB83 /* libPods.a */; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
-		F113D1641B7CDD4C00325209 /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1631B7CDD4C00325209 /* Gap.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
-		F113D1681B7CDDA000325209 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1671B7CDDA000325209 /* Class.swift */; };
 		F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1691B7CDDEB00325209 /* DaySchedule.swift */; };
 		F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E691B9BB10C00B04400 /* FriendsViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -65,16 +63,19 @@
 		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; settings = {ASSET_TAGS = (); }; };
 		F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343651B9BBFAE00EED205 /* UIImageViewExtension.swift */; settings = {ASSET_TAGS = (); }; };
+		F1B8AD5C1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1B8AD5E1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */; settings = {ASSET_TAGS = (); }; };
+		F1B8AD601BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
 		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */; settings = {ASSET_TAGS = (); }; };
+		F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; settings = {ASSET_TAGS = (); }; };
 		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; settings = {ASSET_TAGS = (); }; };
 		F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F1FAFF9F1B9FBB8000E8CCDD /* GapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1FAFFA11B9FD49700E8CCDD /* AddViewGapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -95,9 +96,7 @@
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Other/ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		F113D1631B7CDD4C00325209 /* Gap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
-		F113D1671B7CDDA000325209 /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		F113D1691B7CDDEB00325209 /* DaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
 		F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F1179E691B9BB10C00B04400 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -169,17 +168,20 @@
 		F1B343631B9BBFAE00EED205 /* QRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCode.h; sourceTree = "<group>"; };
 		F1B343641B9BBFAE00EED205 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
 		F1B343651B9BBFAE00EED205 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonGapsSearchFriendToAddViewController.swift; sourceTree = "<group>"; };
+		F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonGapsSearchFriendToAddResultsCell.swift; sourceTree = "<group>"; };
+		F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonGapsSelectedFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F1BA030A1B570BFC00DEF9C5 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1CA00B81BB20CD90050D710 /* MultiSelectSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiSelectSegmentedControl.h; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.h; sourceTree = "<group>"; };
 		F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiSelectSegmentedControl.m; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.m; sourceTree = "<group>"; };
+		F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonGapsViewController.swift; sourceTree = "<group>"; };
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
 		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAndUtilities.swift; path = Other/ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
 		F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
-		F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapsViewController.swift; sourceTree = "<group>"; };
-		F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewGapViewController.swift; sourceTree = "<group>"; };
+		F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditEventViewController.swift; sourceTree = "<group>"; };
 		F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,8 @@
 				F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */,
 				F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */,
 				F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */,
+				F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */,
+				F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -394,14 +398,15 @@
 				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
-				F1FAFF9E1B9FBB8000E8CCDD /* GapsViewController.swift */,
-				F1FAFFA01B9FD49700E8CCDD /* AddViewGapViewController.swift */,
+				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 				F119309F1BB84B570031EB58 /* ViewQRViewController.swift */,
 				F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */,
 				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
+				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
+				F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -425,8 +430,6 @@
 				F113D1651B7CDD6200325209 /* Schedule.swift */,
 				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
 				F16C613A1BB222EF00703782 /* Event.swift */,
-				F113D1631B7CDD4C00325209 /* Gap.swift */,
-				F113D1671B7CDDA000325209 /* Class.swift */,
 			);
 			name = "Main Classes";
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */,
+				F1B8AD601BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift in Sources */,
 				F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
@@ -620,6 +624,7 @@
 				F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */,
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
+				F1B8AD5C1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift in Sources */,
 				F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */,
 				F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */,
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
@@ -627,7 +632,7 @@
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
 				F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
-				F1FAFFA11B9FD49700E8CCDD /* AddViewGapViewController.swift in Sources */,
+				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */,
@@ -635,7 +640,6 @@
 				F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */,
 				F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */,
 				F1179E6E1B9BB3F100B04400 /* InGapViewController.swift in Sources */,
-				F1FAFF9F1B9FBB8000E8CCDD /* GapsViewController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */,
 				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
@@ -658,12 +662,12 @@
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
 				F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
-				F113D1681B7CDDA000325209 /* Class.swift in Sources */,
-				F113D1641B7CDD4C00325209 /* Gap.swift in Sources */,
 				F11B02371BA5241200ADD580 /* TKCalendarDayView.m in Sources */,
 				F11B02381BA5241200ADD580 /* TKCalendarDayViewController.m in Sources */,
+				F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */,
 				F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */,
 				F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */,
+				F1B8AD5E1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

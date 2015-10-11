@@ -34,39 +34,47 @@ class User: EHSynchronizable
         super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    /**
-        Returns user current gap, or nil if user is not in a gap.
-    */
-    func currentGap () -> Gap?
+    convenience init(JSONDictionary: [String : AnyObject?])
+    {
+        let username = JSONDictionary["login"]! as! String
+        let firstNames = JSONDictionary["firstNames"]! as! String
+        let lastNames = JSONDictionary["lastNames"]! as! String
+        let imageURL = NSURL(string: JSONDictionary["imageURL"]! as! String)!
+        let phoneNumber = JSONDictionary["phoneNumber"] as! String
+        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["lastUpdated_on"]! as! String)!
+
+        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+    }
+    
+    /// Returns user current gap, or nil if user is not in a gap.
+    func currentGap () -> Event?
     {
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!        
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
         
-        for gap in schedule.weekDays[localWeekDayNumber].gaps
+        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .Gap
         {
-            let startHourInCurrentDate = gap.startHourInUTCEquivalentOfDate(currentDate)
-            let endHourInCurrentDate = gap.endHourInUTCEquivalentOfDate(currentDate)
+            let startHourInCurrentDate = event.startHourInDate(currentDate)
+            let endHourInCurrentDate = event.endHourInDate(currentDate)
             
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHoursAndMinutesThan(currentDate)
             {
-                return gap
+                return event
             }
         }
 
         return nil
     }
     
-    /**
-        Returns user's next gap or class
-    */
-    func nextGapOrClass () -> Either<Gap, Class>?
+    /// Returns user's next gap or class
+    func nextEvent () -> Event?
     {
-        return nil //TODO
+        return nil //TODO: 
     }
     
-    //Mark: NSCoding
+    // MARK: NSCoding
     
     required init?(coder decoder: NSCoder)
     {

@@ -72,6 +72,21 @@ extension NSDate
     }
 }
 
+extension NSDateComponents
+{
+    /**
+        Returns a new instance of NSDateComponents with all its components set to 0 except for the ones provided.
+    */
+    convenience init(weekday: Int, hour: Int, minute: Int)
+    {
+        self.init()
+
+        self.weekday = weekday
+        self.hour = hour
+        self.minute = minute
+    }
+}
+
 func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents
 {
     let dayHourMinuteSecond: NSCalendarUnit = [.Day, .Hour, .Minute, .Second]

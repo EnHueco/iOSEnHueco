@@ -23,6 +23,13 @@ class SearchFriendViewController: UIViewController, UITableViewDataSource, UITab
         searchResultsTableView.delegate = self
         searchBar.delegate = self
     }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
     override func didReceiveMemoryWarning()
     {
@@ -44,6 +51,23 @@ class SearchFriendViewController: UIViewController, UITableViewDataSource, UITab
         
         return cell
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        searchBar.endEditing(true)
+    }
+    
+    /*func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool
+    {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        return true
+    }*/
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {

@@ -78,6 +78,8 @@ import UIKit
         self.view.endEditing(true)
     }
     
+    // MARK: Notification Center
+    
     func systemDidLogin (notification: NSNotification)
     {
         NSThread.sleepForTimeInterval(0.5)
@@ -100,6 +102,8 @@ import UIKit
             MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
         }
     }
+    
+    // MARK: Keyboard
     
     func keyboardWillShow (notification: NSNotification)
     {
