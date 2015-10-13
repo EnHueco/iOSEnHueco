@@ -10,7 +10,7 @@ import Foundation
 
 class SynchronizationManager: NSObject
 {
-    let sharedManager = SynchronizationManager()
+    static private var instance = SynchronizationManager()
     
     /**
         FIFO queue containing pending requests that failed because of a network error.
@@ -32,12 +32,23 @@ class SynchronizationManager: NSObject
         
         super.init()
     }
+    
+    static func sharedManager() -> SynchronizationManager
+    {
+        return instance
+    }
 
     private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock, failureRequestBlock:ConnectionManagerFailureRequestBlock, associatedObject: EHSynchronizable)
     {
         pendingRequestsQueue.append((request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
     }
     
+    /**
+    Attempts to retry every request in the pending requests queue in order.
+      
+    If every request could be executed successfully the queue is emptied, if
+    any request fails the queue is emptied only partially.
+    */
     func retryPendingRequests()
     {
         retryQueue.addOperationWithBlock()
@@ -69,12 +80,6 @@ class SynchronizationManager: NSObject
     
     /**
         Tries the given request and adds the request to the queue in case it fails.
-    
-        - parameter request: NSURLRequest that was attempted
-    
-        - parameter successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
-        - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-        - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
     private func trySendingSyncRequestInQueue() -> Bool
     {
@@ -96,8 +101,6 @@ class SynchronizationManager: NSObject
         catch
         {
             failureRequestBlock(error: ConnectionManagerCompoundError(error:error, request:request))
-            
-            addFailedRequestToQueue(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
             
             return false
         }
