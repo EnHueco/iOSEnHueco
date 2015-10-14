@@ -20,6 +20,8 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         super.viewDidLoad()
         
+        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
+        
 //        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
 //        appUserQRImageView.image = code?.image
         
@@ -29,6 +31,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     
     override func viewWillAppear(animated: Bool)
     {
+        super.viewWillAppear(animated)
     }
 
     @IBAction func scanQRButtonPressed(sender: AnyObject)

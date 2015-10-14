@@ -25,6 +25,8 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     {
         super.viewDidLoad()
 
+        title = "Huecos en común"
+        
         searchBar.delegate = self
         
         selectedFriendsCollectionView.delegate = self

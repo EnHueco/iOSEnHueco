@@ -20,6 +20,9 @@ class ProfileViewController: UIViewController
     
     override func viewDidLoad()
     {
+        editScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        myQRButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        
         firstNamesLabel.text = system.appUser.firstNames
         lastNamesLabel.text = system.appUser.lastNames
         usernameLabel.text = system.appUser.username

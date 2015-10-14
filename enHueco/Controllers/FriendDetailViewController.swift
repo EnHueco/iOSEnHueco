@@ -27,6 +27,9 @@ class FriendDetailViewController: UIViewController
         
         title = friend.firstNames
         
+        viewScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        commonGapsButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
         userNameLabel.text = friend.username
@@ -70,11 +73,7 @@ class FriendDetailViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        navigationController!.navigationBar.barStyle = UIBarStyle.Black
-        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.setNavigationBarHidden(false, animated: true)        
     }
 
     override func didReceiveMemoryWarning()

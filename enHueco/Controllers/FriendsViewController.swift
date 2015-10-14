@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
@@ -22,6 +23,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
 
+        topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
+        
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
         

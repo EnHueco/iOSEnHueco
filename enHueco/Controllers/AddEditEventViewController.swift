@@ -10,7 +10,10 @@ import UIKit
 
 class AddEditEventViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
 {
+    @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var gapOrClassSegmentedControl: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -28,8 +31,15 @@ class AddEditEventViewController: UIViewController, UIPickerViewDataSource, UIPi
     
     override func viewDidLoad()
     {
-
         super.viewDidLoad()
+        
+        topBarBackgroundView.backgroundColor = EHIntefaceColor.defaultTopBarsColor
+        
+        cancelButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        saveButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        
+        gapOrClassSegmentedControl.tintColor = EHIntefaceColor.mainInterfaceColor
+        weekDaysSegmentedControl.tintColor = EHIntefaceColor.mainInterfaceColor
         
         nameTextField.delegate = self
         locationTextField.delegate = self

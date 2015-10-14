@@ -18,6 +18,8 @@ class SearchFriendViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
 
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self

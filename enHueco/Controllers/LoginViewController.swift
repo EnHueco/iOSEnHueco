@@ -31,6 +31,8 @@ import UIKit
         
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
         
+        loginButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        
         loginButton.clipsToBounds = true
         loginButton.layer.cornerRadius = loginButton.frame.height/2
         

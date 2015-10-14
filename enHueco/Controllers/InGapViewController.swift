@@ -10,12 +10,15 @@ import UIKit
 
 class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var friendsAndGaps = [(friend: User, gap: Event)]()
     var emptyLabel : UILabel?
     
     override func viewDidLoad()
     {
+        topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
+        
         tableView.dataSource = self
         tableView.delegate = self
         

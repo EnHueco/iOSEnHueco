@@ -10,6 +10,11 @@ import UIKit
 
 class ScheduleViewController: UIViewController
 {
+    @IBOutlet weak var topBarBackgroundView: UIView!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var importButton: UIButton!
+    @IBOutlet weak var addEventButton: UIButton!
+    
     /**
         Schedule to be displayed. Defaults to AppUser's
     */
@@ -21,6 +26,11 @@ class ScheduleViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        topBarBackgroundView.backgroundColor = EHIntefaceColor.defaultTopBarsColor
+        closeButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        importButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        addEventButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
         
         addGapOrClassButton.clipsToBounds = true
         addGapOrClassButton.layer.cornerRadius = addGapOrClassButton.frame.size.height/2

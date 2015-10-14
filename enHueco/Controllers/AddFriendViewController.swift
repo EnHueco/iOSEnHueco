@@ -10,6 +10,13 @@ import UIKit
 
 class AddFriendViewController: UIViewController
 {
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         navigationController!.navigationBarHidden = false

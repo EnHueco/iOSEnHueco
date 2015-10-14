@@ -775,8 +775,11 @@
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="8" width="224" height="27.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -1131,6 +1134,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="jgc-Qh-xHN" id="rnm-DX-lbc"/>
+                        <outlet property="topBarBackgroundView" destination="Itw-db-KJt" id="9Rf-55-aAl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1HD-8a-T4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1706,6 +1710,7 @@
                         <outlet property="addFriendButton" destination="wl8-I3-bNF" id="jVa-94-ZQ0"/>
                         <outlet property="friendRequestsNotificationsIndicator" destination="sgf-Rt-UlZ" id="9hY-WB-NQa"/>
                         <outlet property="friendsTableView" destination="16l-Wy-NoV" id="Veg-3M-2qx"/>
+                        <outlet property="topBarBackgroundView" destination="FGy-G1-EPz" id="7E9-CE-ZJJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2l-qc-M8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3341,8 +3346,12 @@
                     <navigationItem key="navigationItem" id="npg-KA-iXj"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="addEventButton" destination="WL9-4Z-Do4" id="oWP-v8-bFV"/>
                         <outlet property="addGapOrClassButton" destination="WL9-4Z-Do4" id="yBM-gb-JG1"/>
+                        <outlet property="closeButton" destination="7k9-vr-gPU" id="Egl-MG-7Uw"/>
+                        <outlet property="importButton" destination="hR6-Rq-jJC" id="fc6-cg-KX6"/>
                         <outlet property="importCalendarButton" destination="hR6-Rq-jJC" id="Ylx-2v-cnI"/>
+                        <outlet property="topBarBackgroundView" destination="gJX-tP-vgi" id="QWi-i9-01m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="waQ-kJ-qn3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4105,6 +4114,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="Vbc-hx-cZ5" id="YqC-Fs-khY"/>
                         <outlet property="deleteButton" destination="ixU-vp-FFk" id="udL-il-DKq"/>
                         <outlet property="deleteButtonHeightConstraint" destination="g0u-JG-q7r" id="EeH-Jt-76q"/>
                         <outlet property="endHourDatePicker" destination="VBS-Zf-xBv" id="mdE-0w-GpA"/>
@@ -4112,9 +4122,11 @@
                         <outlet property="locationTextField" destination="ea5-ms-wH8" id="wt9-xJ-ffr"/>
                         <outlet property="nameLocationBackgroundView" destination="mqp-uD-AOo" id="sDY-32-P2l"/>
                         <outlet property="nameTextField" destination="PuK-V6-Zhi" id="c7P-Af-Ar0"/>
+                        <outlet property="saveButton" destination="Qa3-pv-faO" id="cpD-uo-Km4"/>
                         <outlet property="scrollView" destination="28N-oe-CBx" id="ItG-Cg-W7q"/>
                         <outlet property="startHourDatePicker" destination="8WT-4M-orz" id="14k-XA-9fJ"/>
                         <outlet property="titleLabel" destination="Gip-M7-utg" id="EKo-CR-x7b"/>
+                        <outlet property="topBarBackgroundView" destination="TYm-aa-FNZ" id="hZy-2E-lKb"/>
                         <outlet property="weekDaysSegmentedControl" destination="ghP-Ae-lbN" id="4Wz-6m-kLk"/>
                     </connections>
                 </viewController>
@@ -4563,7 +4575,7 @@
         <!--Amigos-->
         <scene sceneID="QFT-td-djh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3NJ-y1-ZTa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3NJ-y1-ZTa" customClass="FriendsNavigationViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Amigos" image="Agregar AmigosB50" selectedImage="Agregar AmigosV50" id="Vxa-4A-TC8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xHF-y5-utq">
@@ -4583,7 +4595,7 @@
         <!--En Hueco-->
         <scene sceneID="LcG-aS-LXs">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZZK-Pq-bcY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZZK-Pq-bcY" customClass="InGapNavigationViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="En Hueco" image="EnHuecoB50" selectedImage="EnHuecoV50" id="fM2-fE-HDl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pkb-xU-30f">

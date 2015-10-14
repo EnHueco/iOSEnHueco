@@ -17,6 +17,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
     {
         super.viewDidLoad()
 
+        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
+        
         requestsTableView.dataSource = self        
     }
     
