@@ -158,8 +158,8 @@ class AppUser: User
                         
                         if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2)
                         {
-                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate1, and: endHourInCurrentDate2) ? gap1.startHour : gap2.startHour)
-                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate1, and: endHourInCurrentDate2) ? gap1.endHour : gap2.endHour)
+                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.startHour : gap2.startHour)
+                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.endHour : gap2.endHour)
                             
                             newCommonGaps.append(Event(type: .Gap, startHour: newStartHour, endHour: newEndHour))
                         }
