@@ -37,7 +37,7 @@ class AppUser: User
     }
     
     /**
-    Fectches updates for outgoing both outgoing and incoming friend requests on the server and notifies the result via Notification Center.
+    Fetches updates for both outgoing and incoming friend requests on the server and notifies the result via Notification Center.
     
     ### Notifications
     - EHSystemNotification.SystemDidReceiveFriendRequestUpdates in case of success
@@ -73,7 +73,7 @@ class AppUser: User
     func fetchUpdatesForFriendsAndFriendSchedules()
     {
         let params = [EHParameters.UserID: username, EHParameters.Token: token]
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendSegment)!
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!
         
         var newFriends = [User]()
         
@@ -86,7 +86,7 @@ class AppUser: User
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
             
-            for friendJSON in response as! [[String: AnyObject]]
+            for friendJSON in response["data"] as! [[String: AnyObject]]
             {
                 let newFriend = User(JSONDictionary: friendJSON)
                 
@@ -262,7 +262,7 @@ class AppUser: User
     */
     func sendFriendRequestToUserWithUsername (username: String)
     {
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendSegment + "/" + username + "/")!
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + username + "/")!
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             

@@ -12,7 +12,7 @@ class EHURLS
 {
     static let Base = "http://enhueco.uniandes.edu.co"
     static let AuthSegment = "/auth/"
-    static let FriendSegment = "/friends/"
+    static let FriendsSegment = "/friends/"
     static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
 }
 
