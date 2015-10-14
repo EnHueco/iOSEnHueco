@@ -21,7 +21,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend.rawValue, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: system)
 
         topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
         

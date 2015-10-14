@@ -10,13 +10,13 @@ import Foundation
 
 let system = System()
 
-enum EHSystemNotification: String
+class EHSystemNotification
 {
-    case SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
-    case SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
-    case SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
-    case SystemDidAddFriend = "SystemDidAddFriend"
-    case SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
+    static let SystemDidLogin = "SystemDidLogin", SystemCouldNotLoginWithError = "SystemCouldNotLoginWithError"
+    static let SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
+    static let SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
+    static let SystemDidAddFriend = "SystemDidAddFriend"
+    static let SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
 }
 
 class System
@@ -84,13 +84,13 @@ class System
     func login (username: String, password: String)
     {
         let params = ["user_id":username, "password":password]
-        let URL = NSURL(string: EHURLS.Base.rawValue + EHURLS.AuthSegment.rawValue)!
+        let URL = NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
             
             guard let token = response["value"] as? String else
             {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: self, userInfo: ["error": "Response received but token missing"])
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": "Response received but token missing"])
                 return
             }
             
@@ -109,11 +109,11 @@ class System
             
             //self.updateFriendsAndFriendsSchedules()
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin.rawValue, object: self, userInfo: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin, object: self, userInfo: nil)
             
         }) { (error) -> () in
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError.rawValue, object: self, userInfo: ["error": error as! AnyObject])
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": error as! AnyObject])
         }
     }
     

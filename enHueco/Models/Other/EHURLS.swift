@@ -8,18 +8,18 @@
 
 import Foundation
 
-enum EHURLS: String
+class EHURLS
 {
-    case Base = "http://enhueco.uniandes.edu.co"
-    case AuthSegment = "/auth/"
-    case FriendSegment = "/friends/"
-    case OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
+    static let Base = "http://enhueco.uniandes.edu.co"
+    static let AuthSegment = "/auth/"
+    static let FriendSegment = "/friends/"
+    static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
 }
 
-enum EHParameters: String
+class EHParameters
 {
-    case UserID = "X-USER-ID"
-    case Token = "X-USER-TOKEN"
+    static let UserID = "X-USER-ID"
+    static let Token = "X-USER-TOKEN"
 }
 
 /*public class APIURLS
