@@ -93,7 +93,7 @@ class System
             let imageURL = NSURL(string: user["imageURL"] as String!)
             let lastUpdatedOn = NSDate(serverFormattedString: user["lastUpdated_on"] as String!)!
             
-            //TODO: Asign lastUpdatedOn
+            //TODO: Assign lastUpdatedOn
             
             let appUser = AppUser(username: username, token: token, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL, ID: username, lastUpdatedOn: lastUpdatedOn)
             

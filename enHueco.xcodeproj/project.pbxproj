@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		7C45B5F126167956BBDA2144 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F782758D75200AB0BA9BB83 /* libPods.a */; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
@@ -100,8 +100,8 @@
 
 /* Begin PBXFileReference section */
 		0B9D2A664916D69DF79667B4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		0F782758D75200AB0BA9BB83 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D4B3B9D0DC94DB4A2EE2562 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B71A5595C1513C38D1D1797E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Other/ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 			files = (
 				F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */,
 				F11B02001BA5226A00ADD580 /* MapKit.framework in Frameworks */,
-				7C45B5F126167956BBDA2144 /* libPods.a in Frameworks */,
+				5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +239,7 @@
 				F14A72BC1BA3786700D70BD1 /* AutoCoding */,
 				F1B343601B9BBFAE00EED205 /* QRCode */,
 				F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */,
-				0F782758D75200AB0BA9BB83 /* libPods.a */,
+				B71A5595C1513C38D1D1797E /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -522,6 +522,7 @@
 				F1229BD31A74947200C4FDE2 /* Frameworks */,
 				F1229BD41A74947200C4FDE2 /* Resources */,
 				0B79295842BD16B663ED9488 /* Copy Pods Resources */,
+				ACA374B7403B95FFEE952D1E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -629,6 +630,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ACA374B7403B95FFEE952D1E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFB18091F967DE92E2D20088 /* Check Pods Manifest.lock */ = {

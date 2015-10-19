@@ -57,60 +57,10 @@ install_resource()
       ;;
   esac
 }
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.xib"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.xib"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_pause.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_pause@2x.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundMessage.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundMessage@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccess.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccess@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarning.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarning@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarningIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarningIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationButtonBackground.png"
-  install_resource "TSMessages/Pod/Assets/NotificationButtonBackground@2x.png"
-  install_resource "TSMessages/Pod/Assets/TSMessagesDefaultDesign.json"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.xib"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.xib"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_pause.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_pause@2x.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play.png"
-  install_resource "ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundMessage.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundMessage@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccess.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccess@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarning.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarning@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarningIcon.png"
-  install_resource "TSMessages/Pod/Assets/NotificationBackgroundWarningIcon@2x.png"
-  install_resource "TSMessages/Pod/Assets/NotificationButtonBackground.png"
-  install_resource "TSMessages/Pod/Assets/NotificationButtonBackground@2x.png"
-  install_resource "TSMessages/Pod/Assets/TSMessagesDefaultDesign.json"
-fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-if [[ "${ACTION}" == "install" ]]; then
+if [[ "${ACTION}" == "install" ]] && [[ "${SKIP_INSTALL}" == "NO" ]]; then
   mkdir -p "${INSTALL_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
   rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${INSTALL_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 fi

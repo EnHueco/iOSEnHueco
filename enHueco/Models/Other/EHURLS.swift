@@ -10,7 +10,8 @@ import Foundation
 
 class EHURLS
 {
-    static let Base = "http://enhueco.uniandes.edu.co"
+    static let Domain = "enhueco.uniandes.edu.co"
+    static let Base = "https://enhueco.uniandes.edu.co"
     static let AuthSegment = "/auth/"
     static let FriendsSegment = "/friends/"
     static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"

@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (3.0.0)
   - APAddressBook (0.1.11):
     - APAddressBook/Core (= 0.1.11)
   - APAddressBook/Core (0.1.11)
@@ -44,6 +45,7 @@ PODS:
     - HexColors (~> 2.2.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.0)
   - APAddressBook
   - ASMediaFocusManager
   - MCSwipeTableViewCell (~> 2.1.4)
@@ -54,6 +56,7 @@ DEPENDENCIES:
   - TSMessages
 
 SPEC CHECKSUMS:
+  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
   APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
   ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
   ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
@@ -65,4 +68,4 @@ SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

@@ -74,7 +74,7 @@ extension NSDate
     convenience init?(serverFormattedString: String)
     {
         let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateFormat = "dd/MM/yyyy"
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
         let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
         
         guard let date = possibleDate else { return nil }

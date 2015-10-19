@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 xcodeproj 'enHueco.xcodeproj'
 platform :ios, '8.0'
+use_frameworks!
 
 # QR Code Reader
 pod 'QRCodeReaderViewController', '~> 3.5.2'
@@ -24,6 +25,8 @@ pod 'MRProgress'
 pod 'SDWebImage', '~>3.7'
 
 pod 'ASMediaFocusManager'
+
+pod 'Alamofire', '~> 3.0'
 
 target 'enHuecoTests' do
  

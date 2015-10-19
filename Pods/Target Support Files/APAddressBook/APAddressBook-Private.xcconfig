@@ -1,6 +1,0 @@
-#include "APAddressBook.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/APAddressBook" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/APAddressBook" "${PODS_ROOT}/Headers/Public/ASBPlayerScrubbing" "${PODS_ROOT}/Headers/Public/ASMediaFocusManager" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/MCSwipeTableViewCell" "${PODS_ROOT}/Headers/Public/MRProgress" "${PODS_ROOT}/Headers/Public/MSCollectionViewCalendarLayout" "${PODS_ROOT}/Headers/Public/QRCodeReaderViewController" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/TSMessages"
-OTHER_LDFLAGS = ${APADDRESSBOOK_OTHER_LDFLAGS}
-PODS_ROOT = ${SRCROOT}
-SKIP_INSTALL = YES

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum HTTPMethod: String
 {
@@ -24,6 +25,16 @@ typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompou
 
 class ConnectionManager: NSObject
 {
+    private static let alamoManager: Alamofire.Manager =
+    {
+        let serverTrustPolicies: [String: ServerTrustPolicy] = [EHURLS.Domain: .DisableEvaluation]
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+        
+        return Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
+    }()
+    
     class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock)
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
@@ -50,7 +61,7 @@ class ConnectionManager: NSObject
     
     class func sendAsyncRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock )
     {
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+        alamoManager.request(request).response { (_, response, data, error) -> Void in
             
             if let data = data where error == nil
             {

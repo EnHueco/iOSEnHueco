@@ -29,14 +29,17 @@ class ProfileViewController: UIViewController
         
         backgroundImageView.alpha = 0
         
-        imageImageView.sd_setImageWithURL(system.appUser.imageURL)
-        backgroundImageView.sd_setImageWithURL(system.appUser.imageURL)
-        { (_, _, _, _) -> Void in
-            
-            UIView.animateWithDuration(0.4)
-            {
-                self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                self.backgroundImageView.alpha = 1
+        if let imageURL = system.appUser.imageURL
+        {
+            imageImageView.sd_setImageWithURL(system.appUser.imageURL)
+            backgroundImageView.sd_setImageWithURL(system.appUser.imageURL)
+            { (_, _, _, _) -> Void in
+                    
+                UIView.animateWithDuration(0.4)
+                {
+                    self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                    self.backgroundImageView.alpha = 1
+                }
             }
         }
         

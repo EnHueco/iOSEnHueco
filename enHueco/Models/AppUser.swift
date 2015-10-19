@@ -25,9 +25,6 @@ class AppUser: User
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    
-    
-    
     // Encoding characters
     
     let splitCharacter = "\\"
@@ -96,7 +93,7 @@ class AppUser: User
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
             
-            for friendJSON in response["data"] as! [[String: AnyObject]]
+            for friendJSON in response as! [[String: AnyObject]]
             {
                 let newFriend = User(JSONDictionary: friendJSON)
                 
