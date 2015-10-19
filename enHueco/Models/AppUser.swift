@@ -25,6 +25,16 @@ class AppUser: User
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
+    
+    
+    
+    // Encoding characters
+    
+    let splitCharacter = "\\"
+    let separationCharacter = "-"
+    let multipleElementsCharacter = ","
+    let hourMinuteSeparationCharacter = ":"
+    
     // MARK: Updates
     
     /**
@@ -278,7 +288,7 @@ class AppUser: User
     }
     
     /*
-    /**
+
     Adds friend from their string encoded representation and notifies via Notification Center.
     The AppUser user is also added as a friend of the friend they are adding, without any approvals from either side.
     
@@ -287,76 +297,55 @@ class AppUser: User
     */
     func addFriendFromStringEncodedFriendRepresentation (encodedFriend: String) throws
     {
-        let mainComponents = encodedFriend.componentsSeparatedByString("/")
         
+        let mainComponents = encodedFriend.componentsSeparatedByString("\\")
+        
+        // Get username
         let username = mainComponents[0]
         
-        let fullNameComponents = mainComponents[1].componentsSeparatedByString("&")
+        // Get names
+        let fullNameComponents = mainComponents[1].componentsSeparatedByString(separationCharacter)
         let firstNames = fullNameComponents[0]
         let lastNames = fullNameComponents[1]
         
+        // Get phone number
         let phoneNumber = mainComponents[2]
         
-        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: nil, ID: username, lastUpdatedOn: NSDate())
-
-        let encodedWeekDays = mainComponents[4].componentsSeparatedByString("|")
+        // Get image
+        let imageURL : NSURL? = mainComponents[3].isEmpty ? nil : NSURL(fileURLWithPath: mainComponents[3])
         
-        for (i, encodedWeekDay) in encodedWeekDays.enumerate()
-        {
-            var gaps = [Gap]()
-            var classes = [Class]()
+        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: username, lastUpdatedOn: NSDate())
 
-            let encodedWeekDayComponents = encodedWeekDay.componentsSeparatedByString("#")
-            let encodedGaps = encodedWeekDayComponents[0].componentsSeparatedByString("&")
+        let events = mainComponents[4].isEmpty ? [String]() : mainComponents[4].componentsSeparatedByString(multipleElementsCharacter)
+        
+        for (i, encodedEvent) in events.enumerate()
+        {
+            let encodedEventsComponents = encodedEvent.componentsSeparatedByString("-")
             
-            if encodedWeekDayComponents[0] != ""
-            {
-                for encodedGap in encodedGaps
-                {
-                    let hoursComponents = encodedGap.componentsSeparatedByString("-")
-                    
-                    let startHourComponents = hoursComponents[0].componentsSeparatedByString(":")
-                    let startHourDateComponents = NSDateComponents()
-                    startHourDateComponents.hour = Int(startHourComponents[0])!
-                    startHourDateComponents.minute = Int(startHourComponents[1])!
-                    
-                    let endHourComponents = hoursComponents[1].componentsSeparatedByString(":")
-                    let endHourDateComponents = NSDateComponents()
-                    endHourDateComponents.hour = Int(endHourComponents[0])!
-                    endHourDateComponents.minute = Int(endHourComponents[1])!
-                    
-                    gaps.append(Gap(startHour: startHourDateComponents, endHour: endHourDateComponents))
-                }
-            }
+            // Get event type and weekday
+            let eventType : EventType = encodedEventsComponents[0] == "G" ? EventType.Gap : EventType.Class
+            let weekDay = Int(encodedEventsComponents[1])
             
-            if encodedWeekDayComponents[1] != ""
-            {
-                let encodedClasses = encodedWeekDayComponents[1].componentsSeparatedByString("&")
-                
-                for encodedClass in encodedClasses
-                {
-                    let classComponents = encodedClass.componentsSeparatedByString("-")
-                    
-                    let name: String? = classComponents[0] != "" ? classComponents[0] : nil
-                    
-                    let startHourComponents = classComponents[1].componentsSeparatedByString(":")
-                    let startHourDateComponents = NSDateComponents()
-                    startHourDateComponents.hour = Int(startHourComponents[0])!
-                    startHourDateComponents.minute = Int(startHourComponents[1])!
-                    
-                    let endHourComponents = classComponents[2].componentsSeparatedByString(":")
-                    let endHourDateComponents = NSDateComponents()
-                    endHourDateComponents.hour = Int(endHourComponents[0])!
-                    endHourDateComponents.minute = Int(endHourComponents[1])!
-                    
-                    let location = classComponents[3]
-                    
-                    classes.append(Class(name:name, startHour: startHourDateComponents, endHour: endHourDateComponents, location: (location != "" ? location:nil) ))
-                }
-            }
+            // Get Start Date
+            let startTimeValues = encodedEventsComponents[2].componentsSeparatedByString(hourMinuteSeparationCharacter)
+            let startHourDateComponents = NSDateComponents()
             
-            friend.schedule.weekDays[i].setGaps(gaps)
-            friend.schedule.weekDays[i].setClasses(classes)
+            startHourDateComponents.hour = Int(startTimeValues[0])!
+            startHourDateComponents.minute = Int(startTimeValues[1])!
+            startHourDateComponents.weekday = weekDay!
+
+            // Get End Date
+            let endTimeValues = encodedEventsComponents[3].componentsSeparatedByString(hourMinuteSeparationCharacter)
+            let endHourDateComponents = NSDateComponents()
+            
+            endHourDateComponents.hour = Int(endTimeValues[0])!
+            endHourDateComponents.minute = Int(endTimeValues[1])!
+            endHourDateComponents.weekday = weekDay!
+            
+            let event = Event(type: eventType, startHour: startHourDateComponents, endHour: endHourDateComponents)
+            
+            friend.schedule.weekDays[weekDay!].addEvent(event)
+
         }
         
         var existingFriend = false
@@ -371,9 +360,8 @@ class AppUser: User
         }
         if !existingFriend { friends.append(friend)}
         
-        NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend.rawValue, object: system, userInfo: nil)
-    }*/
-    
+        NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
+    }
     /**
     Adds the AppUser as a friend of the friend they just added by string encoded representation (QR)
     App user is added as a friend on the server directly (without friends confirmation)
@@ -385,48 +373,50 @@ class AppUser: User
     }
     
     /*
-    /**
-    Resturns the string encoded representation of the user, to be decoded by "addFriendFromStringEncodedFriendRepresentation:"
+
+    Returns the string encoded representation of the user, to be decoded by "addFriendFromStringEncodedFriendRepresentation:"
     Formatted as follows:
     username/first names, last names/phone number/imageURL/00:00-00:10,00:30-01:30/00:00-00:10,00:30-01:30
     */
     func stringEncodedUserRepresentation () -> String
     {
-        var encodedSchedule = username
-        encodedSchedule += "/" + firstNames + "&" + lastNames
-        encodedSchedule += "/" + String(phoneNumber)
-        encodedSchedule += "/ /"
-        
-        for (i, daySchedule) in schedule.weekDays.enumerate()
-        {
-            for (j, gap) in daySchedule.gaps.enumerate()
-            {
-                encodedSchedule += "\(gap.startHour.hour):\(gap.startHour.minute)"
-                encodedSchedule += "-"
-                encodedSchedule += "\(gap.endHour.hour):\(gap.endHour.minute)"
 
-                if j != daySchedule.gaps.count-1 { encodedSchedule += "&" }
-            }
-            
-            encodedSchedule += "#"
-            
-            for (j, aClass) in daySchedule.classes.enumerate()
+        var encodedSchedule = ""
+        // Add username
+        encodedSchedule += username + splitCharacter
+        // Add names
+        encodedSchedule += firstNames + separationCharacter + lastNames + splitCharacter
+        // Add phone
+        encodedSchedule += String(phoneNumber) + splitCharacter
+        // Add image
+        encodedSchedule += (imageURL?.absoluteString)! + splitCharacter
+        
+        var firstEvent = true;
+        
+        // Add events
+        for (i, daySchedule) in schedule.weekDays.enumerate() where i > 0
+        {
+            for (j, event) in daySchedule.events.enumerate()
             {
-                if let name = aClass.name { encodedSchedule += name }
-                encodedSchedule += "-"
-                encodedSchedule += "\(aClass.startHour.hour):\(aClass.startHour.minute)"
-                encodedSchedule += "-"
-                encodedSchedule += "\(aClass.endHour.hour):\(aClass.endHour.minute)"
-                if let location = aClass.location { encodedSchedule += "-" + location }
+                if(firstEvent) { firstEvent = false }
+                else { encodedSchedule += multipleElementsCharacter}
                 
-                if j != daySchedule.classes.count-1 { encodedSchedule += "&" }
+                var eventType = event.type == EventType.Gap ? "G" : "C"
+                
+                // Add event type
+                encodedSchedule += eventType + separationCharacter
+                // Add event weekday
+                encodedSchedule += String(i) + separationCharacter
+                // Add hours
+                encodedSchedule += "\(event.startHour.hour)\(hourMinuteSeparationCharacter)\(event.startHour.minute)"
+                encodedSchedule += separationCharacter
+                encodedSchedule += "\(event.endHour.hour)\(hourMinuteSeparationCharacter)\(event.endHour.minute)"
             }
-            
-            if i != schedule.weekDays.count-1 { encodedSchedule += "|" }
         }
         
+        encodedSchedule += splitCharacter
         return encodedSchedule
-    }*/
+    }
     
     // MARK: NSCoding
     
