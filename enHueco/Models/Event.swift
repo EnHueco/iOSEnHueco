@@ -13,7 +13,7 @@ enum EventType: String
     case Gap = "Gap", Class = "Class"
 }
 
-class Event: NSObject, NSCoding
+class Event: NSObject, NSCoding, Comparable
 {
     weak var daySchedule: DaySchedule!
     
@@ -138,6 +138,16 @@ class Event: NSObject, NSCoding
         
         return globalCalendar.dateFromComponents(components)!
     }
-    
-    //TODO: Implement Equatable protocol
+}
+
+func < (lhs: Event, rhs: Event) -> Bool
+{
+    let currentDate = NSDate()
+    return lhs.startHourInDate(currentDate) < rhs.startHourInDate(currentDate)
+}
+
+func == (lhs: Event, rhs: Event) -> Bool
+{
+    let currentDate = NSDate()
+    return lhs.startHourInDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.startHourInDate(currentDate)) && lhs.endHourInDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.endHourInDate(currentDate))
 }

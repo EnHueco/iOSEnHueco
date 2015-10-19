@@ -31,7 +31,7 @@ extension NSDate
         return startDate.compare(self) == .OrderedAscending && endDate.compare(self) == .OrderedDescending
     }
     
-    func hasSameHoursAndMinutesThan(date:NSDate) -> Bool
+    func hasSameHourAndMinutesThan(date:NSDate) -> Bool
     {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let hourMinute: NSCalendarUnit = [.Hour, .Minute]
@@ -40,6 +40,17 @@ extension NSDate
         let rhsComp = calendar!.components(hourMinute, fromDate: date)
         
         return lhsComp.hour == rhsComp.hour && lhsComp.minute == rhsComp.minute
+    }
+    
+    func hasSameWeekdayHourAndMinutesThan(date:NSDate) -> Bool
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+        
+        let lhsComp = calendar!.components(weekdayHourMinute, fromDate: self)
+        let rhsComp = calendar!.components(weekdayHourMinute, fromDate: date)
+        
+        return lhsComp.weekday == rhsComp.weekday && lhsComp.hour == rhsComp.hour && lhsComp.minute == rhsComp.minute
     }
     
     func addDays(daysToAdd : Int) -> NSDate

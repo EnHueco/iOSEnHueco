@@ -59,7 +59,7 @@ class User: EHSynchronizable
             let startHourInCurrentDate = event.startHourInDate(currentDate)
             let endHourInCurrentDate = event.endHourInDate(currentDate)
             
-            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHoursAndMinutesThan(currentDate)
+            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
             {
                 return event
             }
