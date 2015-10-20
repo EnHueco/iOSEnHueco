@@ -87,7 +87,7 @@ class SynchronizationManager: NSObject
         
         do
         {
-            let responseDictionary = try ConnectionManager.sendSyncRequest(request)
+            let responseDictionary = try ConnectionManager.sendSyncRequest(request)!
            
             pendingRequestsQueue.removeFirst()
     

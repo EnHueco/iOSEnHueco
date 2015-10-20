@@ -276,7 +276,7 @@ class AppUser: User
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             
-            let requestFriend = User(JSONDictionary: JSONResponse)
+            let requestFriend = User(JSONDictionary: JSONResponse as! [String : AnyObject])
             self.outgoingFriendRequests.append(requestFriend)
             
             dispatch_async(dispatch_get_main_queue())

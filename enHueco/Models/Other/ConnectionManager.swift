@@ -20,7 +20,7 @@ struct ConnectionManagerCompoundError: ErrorType
     var request: NSURLRequest
 }
 
-typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: [String : AnyObject]) -> ()
+typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
 typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompoundError) -> ()
 
 class ConnectionManager: NSObject
@@ -47,7 +47,7 @@ class ConnectionManager: NSObject
         sendAsyncRequest(request, onSuccess: successfulRequestBlock, onFailure: failureRequestBlock)
     }
     
-    class func sendSyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?) throws -> [String : AnyObject]
+    class func sendSyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?) throws -> AnyObject?
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
         let request = NSMutableURLRequest(URL: url)
@@ -69,7 +69,7 @@ class ConnectionManager: NSObject
                 {
                     let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
                     
-                    successfulRequestBlock(JSONResponse: JSONResponse as! [String : AnyObject])
+                    successfulRequestBlock(JSONResponse: JSONResponse)
                 }
                 catch
                 {
@@ -83,14 +83,14 @@ class ConnectionManager: NSObject
         }
     }
     
-    class func sendSyncRequest(request: NSURLRequest) throws -> [String : AnyObject]
+    class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
     {
         var response: NSURLResponse?
         let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
         
         let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
         
-        return JSONResponse as! [String : AnyObject]
+        return JSONResponse
     }
 }
 
