@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum Either<T1, T2>
+struct Either<T1, T2>
 {
-    case Left(T1)
-    case Right(T2)
+    let left: T1?
+    let right: T2?
 }
 
 func >(lhs: NSDate, rhs: NSDate) -> Bool

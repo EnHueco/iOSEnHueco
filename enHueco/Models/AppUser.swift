@@ -61,8 +61,6 @@ class AppUser: User
             guard let incomingRequestsResponseDictionary = try? ConnectionManager.sendSyncRequestToURL(incomingRequestsURL, usingMethod: .GET, withJSONParams: params)
             else { return }
             
-            
-            
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: self, userInfo: nil)
             
         }) { (error) -> () in
@@ -273,7 +271,7 @@ class AppUser: User
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             
-            let requestFriend = User(JSONDictionary: JSONResponse)
+            let requestFriend = User(JSONDictionary: JSONResponse as! [String : AnyObject])
             self.outgoingFriendRequests.append(requestFriend)
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest, object: self, userInfo: nil)
