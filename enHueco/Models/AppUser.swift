@@ -51,19 +51,17 @@ class AppUser: User
     */
     func fetchUpdatesForFriendRequests()
     {
-        let params = [EHParameters.UserID: username, EHParameters.Token: token]
-        let outgoingRequestsURL = NSURL(string: EHURLS.Base + EHURLS.OutgoingFriendRequestsSegment)!
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
+        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequestToURL(outgoingRequestsURL, usingMethod: .GET, withJSONParams: params, onSuccess: { (outgoingRequestsResponseDictionary) -> () in
+        ConnectionManager.sendAsyncRequest(request, onSuccess: { (outgoingRequestsResponseDictionary) -> () in
             
-            let incomingRequestsURL = NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!
-            
-            guard let incomingRequestsResponseDictionary = try? ConnectionManager.sendSyncRequestToURL(incomingRequestsURL, usingMethod: .GET, withJSONParams: params)
-            else { return }
-            
-            
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: self, userInfo: nil)
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: self, userInfo: nil)
+            }
             
         }) { (error) -> () in
                 
@@ -79,12 +77,14 @@ class AppUser: User
     */
     func fetchUpdatesForFriendsAndFriendSchedules()
     {
-        let params = [EHParameters.UserID: username, EHParameters.Token: token]
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
+        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "GET"
         
         var newFriends = [User]()
         
-        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .GET, withJSONParams: params, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
             
             let currentDate = NSDate()
             
@@ -125,7 +125,10 @@ class AppUser: User
             
             self.friends = newFriends
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
+            }
             
         }) { (error) -> () in
                 
@@ -276,11 +279,44 @@ class AppUser: User
             let requestFriend = User(JSONDictionary: JSONResponse)
             self.outgoingFriendRequests.append(requestFriend)
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest, object: self, userInfo: nil)
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest, object: system, userInfo: nil)
+            }
             
         }) { (error) -> () in
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToSendFriendRequest, object: self, userInfo: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToSendFriendRequest, object: system, userInfo: nil)
+        }
+    }
+    
+    /**
+    Accepts friend request from the username provided and notifies the result via Notification Center.
+    
+    ### Notifications
+    - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
+    - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
+    */
+    func acceptFriendRequestFromFriend (requestFriend: User)
+    {
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + username + "/")!
+        
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
+            
+            self.incomingFriendRequests.removeObject(requestFriend)
+            self.fetchUpdatesForFriendsAndFriendSchedules()
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAcceptFriendRequest, object: system, userInfo: nil)
+            }
+            
+        }) { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: system, userInfo: nil)
+            }
         }
     }
     
@@ -357,7 +393,10 @@ class AppUser: User
         }
         if !existingFriend { friends.append(friend)}
         
-        NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
+        dispatch_async(dispatch_get_main_queue())
+        {
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
+        }
     }
     /**
     Adds the AppUser as a friend of the friend they just added by string encoded representation (QR)

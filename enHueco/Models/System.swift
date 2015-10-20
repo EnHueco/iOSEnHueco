@@ -17,6 +17,7 @@ class EHSystemNotification
     static let SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
     static let SystemDidAddFriend = "SystemDidAddFriend"
     static let SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
+    static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
 }
 
 class System
@@ -101,11 +102,17 @@ class System
             
             //self.updateFriendsAndFriendsSchedules()
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin, object: self, userInfo: nil)
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin, object: self, userInfo: nil)
+            }
             
         }) { (error) -> () in
             
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": error as! AnyObject])
+            dispatch_async(dispatch_get_main_queue())
+            {
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": error as! AnyObject])
+            }
         }
     }
     

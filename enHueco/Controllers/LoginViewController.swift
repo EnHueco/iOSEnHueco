@@ -26,8 +26,8 @@ import UIKit
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError, object: system)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
         
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
         
@@ -87,22 +87,17 @@ import UIKit
         NSThread.sleepForTimeInterval(0.5)
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         
-        dispatch_async(dispatch_get_main_queue())
-        {
-            self.presentViewController(mainViewController, animated: true, completion: nil)
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
-        }
+        presentViewController(mainViewController, animated: true, completion: nil)
+        MRProgressOverlayView.dismissOverlayForView(self.view, animated:true)
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)
     {
         //TODO: Show error
         NSThread.sleepForTimeInterval(0.5)
-        dispatch_async(dispatch_get_main_queue())
-        {
-            TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated:true);
-        }
+        
+        TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
+        MRProgressOverlayView.dismissOverlayForView(self.view, animated:true)
     }
     
     // MARK: Keyboard
@@ -112,7 +107,7 @@ import UIKit
         var info = notification.userInfo!
         var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
      
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
 
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             
@@ -124,7 +119,7 @@ import UIKit
     
     func keyboardWillHide (notification: NSNotification)
     {
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
 
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             

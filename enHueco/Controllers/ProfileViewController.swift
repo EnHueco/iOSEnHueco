@@ -31,16 +31,18 @@ class ProfileViewController: UIViewController
         
         if let imageURL = system.appUser.imageURL
         {
-            imageImageView.sd_setImageWithURL(system.appUser.imageURL)
-            backgroundImageView.sd_setImageWithURL(system.appUser.imageURL)
-            { (_, _, _, _) -> Void in
-                    
-                UIView.animateWithDuration(0.4)
+            imageImageView.sd_setImageWithURL(imageURL)
+            backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+                
+                if error == nil
                 {
-                    self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                    self.backgroundImageView.alpha = 1
+                    UIView.animateWithDuration(0.4)
+                    {
+                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                    }
                 }
-            }
+            })
         }
         
         imageImageView.contentMode = .ScaleAspectFill

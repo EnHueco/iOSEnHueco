@@ -16,10 +16,15 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAcceptFriendRequest:"), name:EHSystemNotification.SystemDidAcceptFriendRequest, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToAcceptFriendRequest:"), name:EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
+
 
         view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
         
-        requestsTableView.dataSource = self        
+        requestsTableView.dataSource = self
     }
     
     override func viewWillAppear(animated: Bool)
@@ -30,7 +35,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-
+        
+        system.appUser.fetchUpdatesForFriendRequests()
     }
 
     override func didReceiveMemoryWarning()
@@ -57,6 +63,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         {
             let cell = requestsTableView.dequeueReusableCellWithIdentifier("IncomingFriendRequestCell") as! IncomingFriendRequestCell
             
+            let requestFriend = system.appUser.incomingFriendRequests[indexPath.row]
+            
+            cell.friendNameLabel.text = requestFriend.name
             cell.delegate = self
             
             return cell
@@ -76,9 +85,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
     
     func didPressAcceptButtonOnIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
     {
-        let indexPath = requestsTableView.indexPathForCell(cell)
-        
-        // TODO:
+        let indexPath = requestsTableView.indexPathForCell(cell)!
+        let requestFriend = system.appUser.incomingFriendRequests[indexPath.row]
+
+        MRProgressOverlayView.showOverlayAddedTo(view, title: nil, mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+
+        system.appUser.sendFriendRequestToUserWithUsername(requestFriend.username)
     }
     
     func didPressDiscardButtonOnIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
@@ -86,5 +98,22 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         let indexPath = requestsTableView.indexPathForCell(cell)
         
         // TODO:
+    }
+    
+    func systemDidAcceptFriendRequest(notification: NSNotification)
+    {
+        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
+        requestsTableView.reloadData()
+    }
+    
+    func systemDidFailToAcceptFriendRequest(notification: NSNotification)
+    {
+        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
+        requestsTableView.reloadData()
+    }
+    
+    func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
+    {
+        requestsTableView.reloadData()
     }
 }
