@@ -70,26 +70,26 @@ class Event: NSObject, NSCoding, Comparable
         super.init()
     }
     
-    convenience init(JSONDictionary: [String : AnyObject?])
+    convenience init(JSONDictionary: [String : AnyObject])
     {
-        let type = JSONDictionary["type"] as? String
-        let name = JSONDictionary["day"] as? String
+        let type = JSONDictionary["type"] as! String
+        let name = JSONDictionary["name"] as? String
         let location = JSONDictionary ["location"] as? String
         
+        let startHourWeekDay = Int(JSONDictionary ["start_hour_weekday"] as! String)!
         let startHourStringComponents = (JSONDictionary["start_hour"] as! String).componentsSeparatedByString(":")
-        let globalStartHourWeekDay = Int(startHourStringComponents[0])!
-        let startHour = Int(startHourStringComponents[1])!
-        let startMinute = Int(startHourStringComponents[2])!
+        let startHour = Int(startHourStringComponents[0])!
+        let startMinute = Int(startHourStringComponents[1])!
         
+        let endHourWeekDay = Int(JSONDictionary ["end_hour_weekday"] as! String)!
         let endHourStringComponents = (JSONDictionary["end_hour"] as! String).componentsSeparatedByString(":")
-        let globalEndHourWeekDay = Int(endHourStringComponents[0])!
-        let endHour = Int(endHourStringComponents[1])!
-        let endMinute = Int(endHourStringComponents[2])!
+        let endHour = Int(endHourStringComponents[0])!
+        let endMinute = Int(endHourStringComponents[1])!
         
-        let startHourComponents = NSDateComponents(weekday: globalStartHourWeekDay, hour: startHour, minute: startMinute)
-        let endHourComponents = NSDateComponents(weekday: globalEndHourWeekDay, hour: endHour, minute: endMinute)
+        let startHourComponents = NSDateComponents(weekday: startHourWeekDay, hour: startHour, minute: startMinute)
+        let endHourComponents = NSDateComponents(weekday: endHourWeekDay, hour: endHour, minute: endMinute)
         
-        self.init(type: EventType(rawValue: type!)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location)
+        self.init(type: EventType(rawValue: type)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location)
     }
     
     func encodeWithCoder(coder: NSCoder)
@@ -137,6 +137,19 @@ class Event: NSObject, NSCoding, Comparable
         components.second = 0
         
         return globalCalendar.dateFromComponents(components)!
+    }
+    
+    func toJSONObject () -> [String : AnyObject]
+    {
+        var dictionary = [String:AnyObject]()
+        
+        dictionary["type"] = type.rawValue
+        dictionary["start_hour_weekday"] = String(startHour.weekday)
+        dictionary["end_hour_weekday"] = String(endHour.weekday)
+        dictionary["start_hour"] = "\(startHour.hour):\(startHour.minute)"
+        dictionary["end_hour"] = "\(endHour.hour):\(endHour.minute)"
+        
+        return dictionary
     }
 }
 

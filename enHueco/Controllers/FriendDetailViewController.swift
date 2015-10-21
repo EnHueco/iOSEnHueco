@@ -19,6 +19,7 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var backgroundImageView: UIImageView!
    
     var friend : User!
+
     var recordId : NSNumber?
     
     override func viewDidLoad()

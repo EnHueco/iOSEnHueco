@@ -13,41 +13,60 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var friendsAndGaps = [(friend: User, gap: Event)]()
-    var emptyLabel : UILabel?
+    var emptyLabel : UILabel!
+    
+    let searchBar = UISearchBar()
     
     override func viewDidLoad()
     {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
+        
         topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        emptyLabel!.text = "No tienes amigos en hueco"
-        emptyLabel!.textColor = UIColor.grayColor()
-        emptyLabel!.textAlignment = NSTextAlignment.Center
+        emptyLabel = UILabel()
+        emptyLabel.text = "No tienes amigos en hueco"
+        emptyLabel.textColor = UIColor.grayColor()
+        emptyLabel.textAlignment = .Center
+        emptyLabel.sizeToFit()
+        
+        searchBar.sizeToFit()
+        tableView.tableHeaderView = searchBar
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        emptyLabel.center = tableView.center
     }
 
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
-
         
+        updateGapsDataAndReloadTableView()
+    }
+    
+    func updateGapsDataAndReloadTableView()
+    {
         friendsAndGaps = system.appUser.friendsCurrentlyInGap()
-        tableView.reloadData()
         
-        if friendsAndGaps.count == 0
+        if friendsAndGaps.isEmpty
         {
-            tableView.backgroundView = emptyLabel
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.hidden = true
+            view.addSubview(emptyLabel)
         }
         else
         {
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            tableView.backgroundView = nil
-            tableView.tableFooterView = UIView(frame: CGRectZero)
+            tableView.hidden = false
+            emptyLabel.removeFromSuperview()
         }
+        
+        tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool)
@@ -108,5 +127,10 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         friendDetailViewController.friend = friend
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
+    }
+    
+    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
+    {
+        updateGapsDataAndReloadTableView()
     }
 }

@@ -21,7 +21,7 @@ class SynchronizationManager: NSObject
         - failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
         - associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
-    private var pendingRequestsQueue = [(request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock, failureRequestBlock:ConnectionManagerFailureRequestBlock, associatedObject: EHSynchronizable)]()
+    private var pendingRequestsQueue = [(request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)]()
     
     let retryQueue = NSOperationQueue()
     
@@ -38,7 +38,7 @@ class SynchronizationManager: NSObject
         return instance
     }
 
-    private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock, failureRequestBlock:ConnectionManagerFailureRequestBlock, associatedObject: EHSynchronizable)
+    private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
     {
         pendingRequestsQueue.append((request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
     }
@@ -53,7 +53,7 @@ class SynchronizationManager: NSObject
     {
         retryQueue.addOperationWithBlock()
         {
-            while self.trySendingSyncRequestInQueue() {}
+            while self.trySendingNextSyncRequestInQueue() {}
         }
     }
     
@@ -66,11 +66,11 @@ class SynchronizationManager: NSObject
         - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
         - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
     */
-    func trySendingAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock, associatedObject:EHSynchronizable)
+    func sendAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {
         let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
             
-            failureRequestBlock(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
+            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
             
             self.addFailedRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
         }
@@ -79,9 +79,30 @@ class SynchronizationManager: NSObject
     }
     
     /**
+    Tries the given request and adds the request to the queue in case it fails.
+    
+    - parameter request: NSURLRequest that was attempted
+    
+    - parameter successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
+    - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
+    - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
+    */
+    func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
+    {
+        let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
+            
+            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
+            
+            self.addFailedRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
+        }
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
+    }
+    
+    /**
         Tries the given request and adds the request to the queue in case it fails.
     */
-    private func trySendingSyncRequestInQueue() -> Bool
+    private func trySendingNextSyncRequestInQueue() -> Bool
     {
         guard let (request, successfulRequestBlock, failureRequestBlock, associatedObject) = pendingRequestsQueue.first else { return false }
         
@@ -95,12 +116,12 @@ class SynchronizationManager: NSObject
             
             if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
             
-            successfulRequestBlock(JSONResponse: responseDictionary)
+            successfulRequestBlock?(JSONResponse: responseDictionary)
             return true
         }
         catch
         {
-            failureRequestBlock(error: ConnectionManagerCompoundError(error:error, request:request))
+            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
             
             return false
         }

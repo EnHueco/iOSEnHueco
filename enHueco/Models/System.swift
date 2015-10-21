@@ -20,6 +20,11 @@ class EHSystemNotification
     static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
 }
 
+protocol SystemUsersSearchDelegate
+{
+    func systemDidReceiveUserSearchResults(results: [User])
+}
+
 class System
 {
     enum SystemError: ErrorType
@@ -33,7 +38,7 @@ class System
     
     
     /// Path where data will be persisted
-    let persistancePath: String
+    let persistencePath: String
     
 
     /// User of the app
@@ -41,12 +46,9 @@ class System
     
     private init()
     {
-        persistancePath = documents + "/appState.state"
+        persistencePath = documents + "/appState.state"
         
-        if !loadDataFromPersistence()
-        {
-            
-        }
+        loadDataFromPersistence()
     }
     
     func createTestAppUser ()
@@ -88,27 +90,12 @@ class System
         let URL = NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
-                        
-            guard let token = response["value"] as? String else
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": "Response received but token missing"])
-                return
-            }
             
-            let user = response["user"] as! [String : String]
-            let username = user["login"] as String!
-            let firstNames = user["firstNames"] as String!
-            let lastNames = user["lastNames"] as String!
-            let imageURL = NSURL(string: user["imageURL"] as String!)
-            let lastUpdatedOn = NSDate(serverFormattedString: user["lastUpdated_on"] as String!)!
-            
-            //TODO: Assign lastUpdatedOn
-            
-            let appUser = AppUser(username: username, token: token, firstNames: firstNames, lastNames: lastNames, phoneNumber: nil, imageURL: imageURL, ID: username, lastUpdatedOn: lastUpdatedOn)
+            let appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
             self.appUser = appUser
             
-            //self.updateFriendsAndFriendsSchedules()
+            self.appUser.fetchUpdatesForFriendsAndFriendSchedules()
             
             dispatch_async(dispatch_get_main_queue())
             {
@@ -119,7 +106,9 @@ class System
             
             dispatch_async(dispatch_get_main_queue())
             {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: ["error": error as! AnyObject])
+                print(error.error)
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemCouldNotLoginWithError, object: self, userInfo: nil)
             }
         }
     }
@@ -131,10 +120,38 @@ class System
         do
         {
             appUser = nil
-            try NSFileManager.defaultManager().removeItemAtPath(persistancePath)
+            try NSFileManager.defaultManager().removeItemAtPath(persistencePath)
         }
         catch
         {
+            
+        }
+    }
+    
+    func searchUsersWithText (searchText: String, delegate: SystemUsersSearchDelegate)
+    {
+        guard searchText != " " else { return }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
+        request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "GET"
+
+        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+            
+            var userSearchResults = [User]()
+            
+            for userJSON in JSONResponse as! [[String : AnyObject]]
+            {
+                userSearchResults.append(User(JSONDictionary: userJSON))
+            }
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                delegate.systemDidReceiveUserSearchResults(userSearchResults)
+            }
+            
+        }) { (error) -> () in
             
         }
     }
@@ -142,7 +159,7 @@ class System
     /// Persists all pertinent application data
     func persistData () throws
     {
-        guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistancePath) else
+        guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistencePath) else
         {
             throw SystemError.CouldNotPersistData
         }
@@ -151,7 +168,12 @@ class System
     /// Restores all pertinent application data to memory
     func loadDataFromPersistence () -> Bool
     {
-        appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistancePath) as? AppUser
+        appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistencePath) as? AppUser
+        
+        if appUser == nil
+        {
+            try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
+        }
         
         return appUser != nil
     }

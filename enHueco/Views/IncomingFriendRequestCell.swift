@@ -10,8 +10,8 @@ import UIKit
 
 @objc protocol IncomingFriendRequestCellDelegate: class
 {
-    optional func didPressDiscardButtonOnIncomingFriendRequestCell(cell:IncomingFriendRequestCell)
-    optional func didPressAcceptButtonOnIncomingFriendRequestCell(cell:IncomingFriendRequestCell)
+    optional func didPressDiscardButtonInIncomingFriendRequestCell(cell:IncomingFriendRequestCell)
+    optional func didPressAcceptButtonInIncomingFriendRequestCell(cell:IncomingFriendRequestCell)
 }
 
 class IncomingFriendRequestCell: UITableViewCell
@@ -37,7 +37,7 @@ class IncomingFriendRequestCell: UITableViewCell
     {
         if let delegate = delegate
         {
-            delegate.didPressDiscardButtonOnIncomingFriendRequestCell?(self)
+            delegate.didPressDiscardButtonInIncomingFriendRequestCell?(self)
         }
     }
     
@@ -45,7 +45,7 @@ class IncomingFriendRequestCell: UITableViewCell
     {
         if let delegate = delegate
         {
-            delegate.didPressAcceptButtonOnIncomingFriendRequestCell?(self)
+            delegate.didPressAcceptButtonInIncomingFriendRequestCell?(self)
         }
     }
 }

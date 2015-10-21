@@ -17,7 +17,7 @@ pod 'MCSwipeTableViewCell', '~> 2.1.4'
 pod 'APAddressBook'
 
 # TS Messages (Notifications)
-pod 'TSMessages'
+pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
 
 # MR Progress
 pod 'MRProgress'

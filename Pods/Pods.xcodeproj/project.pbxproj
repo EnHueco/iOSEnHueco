@@ -16,7 +16,6 @@
 		0A743F4B0766BA036A794561D9265C9C /* ASMediaFocusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41374FD972716ADF2F4980CC1A8DF257 /* ASMediaFocusController.xib */; };
 		0B87AEED887108FF3FDA89B00E048E1B /* MRCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C217119A1FB0A23E1A4FB0D30D5C400 /* MRCircularProgressView.m */; };
 		0EC2302370F1A39FAFFD456A4E0B425E /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C786C9C90B9D00F9A3556FF1E03C27 /* UIView+WebCacheOperation.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0F09B9486ECFAFED088754AF63EBDA9E /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = AB033A16E7DF465F7FC1AE8453374052 /* HexColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0FD472863C8DF3FB01A2872994041BA0 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 344098C9EFD47F0AC8EA43B2F0DB9699 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		10D25C6EE51B0BA427B8B78D1ED4CF45 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4282ED76463248CDD945E82667C8F6 /* AddressBook.framework */; };
 		131E9B1D3838105FC0DAF6385C3EE845 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067035F2A2529E1FE3A8416472B95E4 /* Foundation.framework */; };
@@ -52,6 +51,7 @@
 		494111E76CC803AAA43806764673E601 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 09627EA0FDC9324C2BC32334494A5829 /* SDWebImageCompat.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		4C2DD650836DE45DEA92F010FC1622DF /* asmedia_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4EEEDFA78C90FA635128E541DE8582 /* asmedia_play.png */; };
 		4DE5FCC41D100B113B6645EA64410F16 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B468E39A395BB92525C5F2A6F4CDD89 /* ParameterEncoding.swift */; };
+		4E5B4EEA50BEF0B4D0FE2394D3EB119A /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = EC464D935CF240C588063E6BD0B72E9B /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		516E304340DC75A1EA6F7B147AB58BCB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067035F2A2529E1FE3A8416472B95E4 /* Foundation.framework */; };
 		52A5E8263E7C91DDAB94F66A5364369B /* MRProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = CA5B188E5A7C5B74214C06E1A8F160C3 /* MRProgressOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5461ADC272A62D9A5C96FBBEF8BA06E8 /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = FB3FF782DC2F2662B478CED070C38901 /* NotificationBackgroundError.png */; };
@@ -59,6 +59,7 @@
 		55751E77F85EE78EFB32B127543B6001 /* NotificationBackgroundSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BB7E16353BAD3581D35D204E4D49BF1 /* NotificationBackgroundSuccess@2x.png */; };
 		56ADA6A9B8D18E5C4D40A9593E90AEC9 /* ASVideoControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F889330C58A331100BCC148A2076341 /* ASVideoControlView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57E011CC9479CEBECF703249AD310E94 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 103FD60FEF1E09E68E0191C6195F6824 /* QRCodeReader.m */; };
+		596758BBEC68789E6C8928ECE3FC341C /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 111C8E61F9A2151B675B7C88FE8B2112 /* HexColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5984CAE0001F1E7DD368735BADD43AD7 /* APAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = CAF7FC000A328D474FAFC42BE85CB838 /* APAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AC53D476A9BA1FD1F0B574171DB707F /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C708372FA1601D29679403A39C577659 /* UIImage+MultiFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AF4A469F594F17AC4E1246788D53C30 /* NotificationBackgroundWarning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ABE7DE86A464376EBC729B7EE868417 /* NotificationBackgroundWarning@2x.png */; };
@@ -98,7 +99,7 @@
 		88814724BC4FAD11452F77F9CCF8C3B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067035F2A2529E1FE3A8416472B95E4 /* Foundation.framework */; };
 		89CE4E0D4BEDD88C4B05A9D54526CE7E /* MRIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BC87DC451194658D99B38BEA4603E8B /* MRIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A51D48CD8A1446C4C4AF467947AB43D /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A20CB2C3C3BAF11D276DE8F085A54A4B /* TSMessage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8C91BF53C3EF19AD26723EA56AD4B184 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C06A14CAC4CDE86219620AFE27F698C /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DCF5C0EE6AC7543935C51AA756864C0 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E4FEA595B8561B1E052B63CDA6D75 /* HexColors-dummy.m */; };
 		8F1624F249F8F10B155A5FB7A5519719 /* ASMediaFocusManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 07CA172A6CA5C8EDE15CAB7EFBB3D14E /* ASMediaFocusManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F9BE48E07B740A2E7D898924D2171B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067035F2A2529E1FE3A8416472B95E4 /* Foundation.framework */; };
 		90A741CE88575ABC3869949794114915 /* asmedia_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFF986A89C058EC1B3D5F01FE30BA43D /* asmedia_play@2x.png */; };
@@ -151,9 +152,9 @@
 		CAD2BD392A0E291A4EACD84E32015CDB /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4248EA271CD4EB3A78A72FD732DA9E /* UIImageView+HighlightedWebCache.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		CD3C1E8D1BAFF179B13FDDDD6118D146 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398DC840B89409DBF7B147B75ABD392 /* MRBlurView.m */; };
 		CE01FDF70EF217997138E58E69277726 /* TSMessages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8E89DE9B84DDAB31A5D9CBFC4A817E /* TSMessages-dummy.m */; };
-		CE984CB467CBD3D2E2F6F06CBB4E408C /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9897925829F1DD1775693B7D878246 /* HexColors-dummy.m */; };
 		CF6E6FAA4C309EB8C48F3D61A7F7553B /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D7F038F5CDA3437C1FC55EA14F9FA3 /* NotificationBackgroundWarningIcon.png */; };
 		D0258D673A33C80341F2E8A6AE4F81C9 /* ASMediaFocusController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C0BB4AF182EAE515545C8CA8D00FFA3 /* ASMediaFocusController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1E92AEC9F093E10C69F2B89A14F49F5 /* HexColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5736925BE67A30678C94E349B0C68AA1 /* HexColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D21B7325B3642887BFBE977E021F2D26 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4813E629C800A630BD220754750976B5 /* ResponseSerialization.swift */; };
 		D352670411C260F0E27B345C0CCE9C31 /* UIImageView+HighlightedWebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CAC4ACF3FFB44BA76B157B3868E4C71 /* UIImageView+HighlightedWebCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D73B8680105CB4274B2BCC6A632312B6 /* MSCollectionViewCalendarLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B322A9D070C58AEAF249CC659FFF4A0 /* MSCollectionViewCalendarLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -187,7 +188,6 @@
 		FB7167CFE60AA4F5903A4019DE4C22B6 /* ASImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79784196CDCF977E02ED6AE7D610E591 /* ASImageScrollView.m */; };
 		FBAC89E6BE2E52759BB17D50D0626BBC /* Pods-enHuecoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6456CF623C6C4A7A2E1FFEA553A872E /* Pods-enHuecoTests-dummy.m */; };
 		FBDA08AC46AFCDEE74B3B67F848B1287 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9067035F2A2529E1FE3A8416472B95E4 /* Foundation.framework */; };
-		FBDCA85F7CFBC3DFA5134DB59A680242 /* HexColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E67321688526E5D42C416766A065D5 /* HexColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC14480CECE872865A9C6E584F886DA3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC5142A13ED5B465B74E9AFAC003810 /* Request.swift */; };
 		FCB47D203B93A6E4DE4C06959741155D /* SDWebImageOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 18F8080439153DF1C4A2B1E7EC6516F9 /* SDWebImageOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FCFBF9FD6B598A50EE24E8C3602FDEB5 /* ASMediaFocusManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D678D20A17F7C5C6AC69AFDA6E741F79 /* ASMediaFocusManager-dummy.m */; };
@@ -376,7 +376,6 @@
 		0A4EEEDFA78C90FA635128E541DE8582 /* asmedia_play.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = asmedia_play.png; path = ASMediaFocusManager/Resources/asmedia_play.png; sourceTree = "<group>"; };
 		0A700F8E53F9AF17888C0E84CAC1B8F7 /* UIImage+GIF.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+GIF.m"; path = "SDWebImage/UIImage+GIF.m"; sourceTree = "<group>"; };
 		0BD158CD66340925779064CE4CC7E1B1 /* MCSwipeTableViewCell-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MCSwipeTableViewCell-dummy.m"; sourceTree = "<group>"; };
-		0C06A14CAC4CDE86219620AFE27F698C /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
 		0CA710B96DA14C9CA8220265821AA88B /* MRProgress.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MRProgress.modulemap; sourceTree = "<group>"; };
 		0D5BBB859B1F70381A1A487AC5FCF399 /* MRProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRProgressView.m; path = src/Components/MRProgressView.m; sourceTree = "<group>"; };
 		0E2838983ADF5769B8E02285E69EAAA2 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,6 +383,7 @@
 		103FD60FEF1E09E68E0191C6195F6824 /* QRCodeReader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReader.m; path = QRCodeReaderViewController/QRCodeReader.m; sourceTree = "<group>"; };
 		10789434C583ECBC5F8A44D44AE36F6A /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		10A88557E607BC8B0929220730E431A1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		111C8E61F9A2151B675B7C88FE8B2112 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
 		11C786C9C90B9D00F9A3556FF1E03C27 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "SDWebImage/UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		13FA7DD9789C3026ED681D9CEF7EEF04 /* ASBPlayerScrubbing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ASBPlayerScrubbing.xcconfig; sourceTree = "<group>"; };
 		1562E52986CCC59DDE2960F171BF9205 /* QRCodeReaderViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "QRCodeReaderViewController-prefix.pch"; sourceTree = "<group>"; };
@@ -442,13 +442,12 @@
 		498CFD5DD61D8A4EEBD411CF0465608B /* Pods_enHuecoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_enHuecoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BB2338F1E842FDDF606BA2CC554373D /* QRCodeReader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = QRCodeReader.h; path = QRCodeReaderViewController/QRCodeReader.h; sourceTree = "<group>"; };
 		4BC87DC451194658D99B38BEA4603E8B /* MRIconView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRIconView.h; path = src/Components/MRIconView.h; sourceTree = "<group>"; };
-		4E9166AC5118C1476E62A73D9AE3E8CB /* HexColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HexColors.modulemap; sourceTree = "<group>"; };
 		4FC5142A13ED5B465B74E9AFAC003810 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		500313FE7BDE19ABAB9AB12A51858F14 /* HexColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HexColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5173CFA2372D7C42A93E04A78FF9AC4B /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
 		5241D24EC20DBD70823FDCD0FB86631D /* ASMediaFocusManager-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ASMediaFocusManager-umbrella.h"; sourceTree = "<group>"; };
 		534798F4F06F78FD1BC535548969DF5F /* SDImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCache.m; path = SDWebImage/SDImageCache.m; sourceTree = "<group>"; };
 		54645D8D21D3EF256E5B3772045E58FC /* ASMediaFocusManager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ASMediaFocusManager.xcconfig; sourceTree = "<group>"; };
+		5736925BE67A30678C94E349B0C68AA1 /* HexColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-umbrella.h"; sourceTree = "<group>"; };
 		577CE14ACF75493179966BF45CB0E2BE /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = QRCodeReaderViewController/QRCodeReaderViewController.m; sourceTree = "<group>"; };
 		58395B8F0A0F94517DD8D60F68028564 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		596589B46DDD428B138830148CA4EADB /* ASImageScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASImageScrollView.h; path = ASMediaFocusManager/ASImageScrollView.h; sourceTree = "<group>"; };
@@ -459,13 +458,13 @@
 		5C217119A1FB0A23E1A4FB0D30D5C400 /* MRCircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRCircularProgressView.m; path = src/Components/MRCircularProgressView.m; sourceTree = "<group>"; };
 		5C6567D19FF0A61F3F7DE222B7A980B1 /* APPhoneWithLabel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APPhoneWithLabel.h; path = Pod/Core/APPhoneWithLabel.h; sourceTree = "<group>"; };
 		5C874725C1DE0CED702C289EDB21ACF7 /* HexColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HexColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E2E4FEA595B8561B1E052B63CDA6D75 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
 		5EC1C70D09293A810EE3CA2CBD1DB081 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		5FCBBA792888FDDF77AEB1B00D463525 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		62A9B4E0FA101196853F6D8BD556F1A4 /* MRProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRProgress-prefix.pch"; sourceTree = "<group>"; };
 		631F1B3E53BF2063945294B6BA4163FD /* Pods-enHuecoTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-enHuecoTests-frameworks.sh"; sourceTree = "<group>"; };
 		636E2364999B694561DF095806D11528 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		646FC0A9DA8898B0AF273C5C0911CE6C /* MSCollectionViewCalendarLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MSCollectionViewCalendarLayout.modulemap; sourceTree = "<group>"; };
-		654F9CF90BD3A6731C3F48927984C316 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6665AF48894C32DC86605FFD98D9493D /* ASMediaFocusManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASMediaFocusManager.m; path = ASMediaFocusManager/ASMediaFocusManager.m; sourceTree = "<group>"; };
 		6691446F7D5027851DCC55637E92B20E /* QRCodeReaderView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = QRCodeReaderViewController/QRCodeReaderView.m; sourceTree = "<group>"; };
 		682658CC208B818E0392EBAEABC75D03 /* SDWebImage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SDWebImage-umbrella.h"; sourceTree = "<group>"; };
@@ -489,7 +488,6 @@
 		837A65582C4F83DA33CA1729EC6B62E9 /* SDWebImage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage-dummy.m"; sourceTree = "<group>"; };
 		838A977543301A5BEFED2A7ED94D2C37 /* TSMessages-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TSMessages-prefix.pch"; sourceTree = "<group>"; };
 		8398DC840B89409DBF7B147B75ABD392 /* MRBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRBlurView.m; path = src/Blur/MRBlurView.m; sourceTree = "<group>"; };
-		83E67321688526E5D42C416766A065D5 /* HexColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-umbrella.h"; sourceTree = "<group>"; };
 		845F2281F9EAC20FCAFA47490B1B17EA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85B85A53907DA3EE24304DFBCFFCD29B /* APTypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = APTypes.h; path = Pod/Core/APTypes.h; sourceTree = "<group>"; };
 		8606E4C6A1E00BF50E4B89529CF5D5AB /* MRStopableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopableView.h; path = src/Components/MRStopableView.h; sourceTree = "<group>"; };
@@ -512,6 +510,7 @@
 		95BEDE2A87A693C0AF3B29FF5BFCDB71 /* ASMediaFocusController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASMediaFocusController.m; path = ASMediaFocusManager/ASMediaFocusController.m; sourceTree = "<group>"; };
 		970EFBB0BE96461CC84BED597F96E611 /* MCSwipeTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MCSwipeTableViewCell.m; path = MCSwipeTableViewCell/MCSwipeTableViewCell.m; sourceTree = "<group>"; };
 		97BACF5EE1D529E42B2F90E9D321199E /* SDWebImageDecoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDecoder.m; path = SDWebImage/SDWebImageDecoder.m; sourceTree = "<group>"; };
+		9832C7F4EAC4DB8CD993758642D18DC2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9892D2E746D8188C598F0C7013E6FAE2 /* ASTransparentView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASTransparentView.m; path = ASMediaFocusManager/ASTransparentView.m; sourceTree = "<group>"; };
 		9898337D7A4AD88A365B6F2C8FE9B07D /* MRStopButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopButton.h; path = src/Components/MRStopButton.h; sourceTree = "<group>"; };
 		9975DF3F0443271A6A8CAD54CCED15AD /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundSuccessIcon.png; path = Pod/Assets/NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
@@ -526,7 +525,6 @@
 		A7B9E2293EEF50C3C4AAABCD384493EC /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		A861CB3C4A3F11541C03FFCEF6FD8E85 /* SDWebImageManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageManager.m; path = SDWebImage/SDWebImageManager.m; sourceTree = "<group>"; };
 		A8D14E49CE58AC311063CF79B663BCAB /* MSCollectionViewCalendarLayout.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MSCollectionViewCalendarLayout.xcconfig; sourceTree = "<group>"; };
-		AB033A16E7DF465F7FC1AE8453374052 /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
 		AB5645F37CE90AD2369B7EC8E770B234 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QRCameraSwitchButton.m; path = QRCodeReaderViewController/QRCameraSwitchButton.m; sourceTree = "<group>"; };
 		ABE72874365E1547812BA95889CD8061 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		ACAF1B9C47656E71D4582F5757A6AA39 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
@@ -535,6 +533,7 @@
 		AF2E37C19AC790076B8542BDFC0B9CD3 /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Source/Stream.swift; sourceTree = "<group>"; };
 		B2D7376D837D1B6ECCB77547BBF16835 /* MRProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressView.h; path = src/Components/MRProgressView.h; sourceTree = "<group>"; };
 		B38C7A836677D533819CB17AC74D856C /* SDWebImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageDownloader.m; path = SDWebImage/SDWebImageDownloader.m; sourceTree = "<group>"; };
+		B4C99FD04C38A130850EAE95EC54BB4C /* HexColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HexColors.modulemap; sourceTree = "<group>"; };
 		B545B64717F6F3CA9D98547350EFD325 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		B77D14132F626617151B1AAA2C63E715 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		B8EDFB627E04CFD55A3E89EB49E0DBB1 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
@@ -582,17 +581,16 @@
 		DA5567F9E08AC5691A1D21DFCC207F73 /* MCSwipeTableViewCell.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MCSwipeTableViewCell.modulemap; sourceTree = "<group>"; };
 		DB4BB1F3A97424471CAC78B83111C2F1 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundMessage.png; path = Pod/Assets/NotificationBackgroundMessage.png; sourceTree = "<group>"; };
 		DC7CB2F8B293E80660192B77B56ED771 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC9897925829F1DD1775693B7D878246 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
 		DE989F26A5C73870F4AB9B607487A3B6 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		DFF986A89C058EC1B3D5F01FE30BA43D /* asmedia_play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "asmedia_play@2x.png"; path = "ASMediaFocusManager/Resources/asmedia_play@2x.png"; sourceTree = "<group>"; };
 		E2BC3CD98A58AC143BE059C50345C50F /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		E38E0419F231C8EFDFC779D26DFC2F22 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 		E3FE37E255B82E6B92AF80CFCB7726F7 /* ASBPlayerScrubbing-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ASBPlayerScrubbing-prefix.pch"; sourceTree = "<group>"; };
 		E594886C9F189AF9D0086FD15B9EA1C9 /* MSCollectionViewCalendarLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSCollectionViewCalendarLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81CC9FC56FF5A63101D91FB1C60EDA7 /* TSMessages.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TSMessages.xcconfig; sourceTree = "<group>"; };
 		E8D7F038F5CDA3437C1FC55EA14F9FA3 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundWarningIcon.png; path = Pod/Assets/NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
 		E9FC0511549CA52C819E2E02D7298054 /* ASMediaFocusManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASMediaFocusManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA5AF77E0376651CE7D9F192BA6AB21E /* APAddressBook-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "APAddressBook-dummy.m"; sourceTree = "<group>"; };
+		EC464D935CF240C588063E6BD0B72E9B /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
 		ECAEA2D9D0A00974931E20AA3ABBDB96 /* Pods-enHuecoTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-enHuecoTests.modulemap"; sourceTree = "<group>"; };
 		F1F4224BD167649083A5FBB2D4065E8F /* Pods-enHuecoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-enHuecoTests.release.xcconfig"; sourceTree = "<group>"; };
 		F3D45EB9F70D9A21B32EAAC593F72FEC /* MRNavigationBarProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRNavigationBarProgressView.h; path = src/Components/MRNavigationBarProgressView.h; sourceTree = "<group>"; };
@@ -604,7 +602,9 @@
 		F9BC2D4E3CA8D74AF1E6F53BBEB19F65 /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageDownloaderOperation.h; path = SDWebImage/SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
 		FB3FF782DC2F2662B478CED070C38901 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = NotificationBackgroundError.png; path = Pod/Assets/NotificationBackgroundError.png; sourceTree = "<group>"; };
 		FBD0EF2F8A8A755A4D83ABFD5B4CA54A /* MCSwipeTableViewCell-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MCSwipeTableViewCell-umbrella.h"; sourceTree = "<group>"; };
+		FC5028641FE69EA7FE0EBEB736C05B29 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 		FD16F0FE64B2099FC1D3677BD685C026 /* QRCodeReaderViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = QRCodeReaderViewController.xcconfig; sourceTree = "<group>"; };
+		FDC4DC2CE00EDF6EF92BE47A5D18758F /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
 		FF99F1FFA7A45049F225AF1F1CD66BBC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFD3B7BB8039C9A9B94DEE2C75440C38 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -980,7 +980,7 @@
 				776E5717F5726EE13F085C76BEEC6479 /* APAddressBook */,
 				204D273ABC186B97AF9D032F4E0BCF4A /* ASBPlayerScrubbing */,
 				4E31AD2975AB0398122D0F4F4428E096 /* ASMediaFocusManager */,
-				676386EAB2071C55AFE949F553FDFD64 /* HexColors */,
+				C67E3AA9978C8C4E1C50DEED7D03E873 /* HexColors */,
 				0A6C4BBB35E5D964BA7F5B795039A1C7 /* MCSwipeTableViewCell */,
 				134B087DD604EA3E185D4924DE27CCE0 /* MRProgress */,
 				9A5F2043F474905975D2C894BC883FFA /* MSCollectionViewCalendarLayout */,
@@ -1036,16 +1036,6 @@
 				D9AC80F95DB849F3381D92AC7E8F3026 /* TSMessagesDefaultDesign.json */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		676386EAB2071C55AFE949F553FDFD64 /* HexColors */ = {
-			isa = PBXGroup;
-			children = (
-				AB033A16E7DF465F7FC1AE8453374052 /* HexColor.h */,
-				0C06A14CAC4CDE86219620AFE27F698C /* HexColor.m */,
-				C880DD7E5BBA2C87D6537C71E69D07DA /* Support Files */,
-			);
-			path = HexColors;
 			sourceTree = "<group>";
 		};
 		7314D01A9C646AB1FC731DF3AFC9CD42 /* Icons */ = {
@@ -1208,6 +1198,20 @@
 			name = NavigationBarProgress;
 			sourceTree = "<group>";
 		};
+		B3451E70C0A151F789CA8D5D6A7E3DFC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B4C99FD04C38A130850EAE95EC54BB4C /* HexColors.modulemap */,
+				FC5028641FE69EA7FE0EBEB736C05B29 /* HexColors.xcconfig */,
+				5E2E4FEA595B8561B1E052B63CDA6D75 /* HexColors-dummy.m */,
+				FDC4DC2CE00EDF6EF92BE47A5D18758F /* HexColors-prefix.pch */,
+				5736925BE67A30678C94E349B0C68AA1 /* HexColors-umbrella.h */,
+				9832C7F4EAC4DB8CD993758642D18DC2 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HexColors";
+			sourceTree = "<group>";
+		};
 		B6BF5A38A50C346EACCF9616DF39D666 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,18 +1242,14 @@
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
-		C880DD7E5BBA2C87D6537C71E69D07DA /* Support Files */ = {
+		C67E3AA9978C8C4E1C50DEED7D03E873 /* HexColors */ = {
 			isa = PBXGroup;
 			children = (
-				4E9166AC5118C1476E62A73D9AE3E8CB /* HexColors.modulemap */,
-				E38E0419F231C8EFDFC779D26DFC2F22 /* HexColors.xcconfig */,
-				DC9897925829F1DD1775693B7D878246 /* HexColors-dummy.m */,
-				5173CFA2372D7C42A93E04A78FF9AC4B /* HexColors-prefix.pch */,
-				83E67321688526E5D42C416766A065D5 /* HexColors-umbrella.h */,
-				654F9CF90BD3A6731C3F48927984C316 /* Info.plist */,
+				111C8E61F9A2151B675B7C88FE8B2112 /* HexColors.h */,
+				EC464D935CF240C588063E6BD0B72E9B /* HexColors.m */,
+				B3451E70C0A151F789CA8D5D6A7E3DFC /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/HexColors";
+			path = HexColors;
 			sourceTree = "<group>";
 		};
 		CDA365D51F11E1B07EB6E5298DCEF01A /* Products */ = {
@@ -1359,15 +1359,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		25BBFC5180BA4CD0F4067A4E1058A01F /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F09B9486ECFAFED088754AF63EBDA9E /* HexColor.h in Headers */,
-				FBDCA85F7CFBC3DFA5134DB59A680242 /* HexColors-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5F7B61281F714E2A64A51E80A2C9C062 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1450,6 +1441,15 @@
 				D352670411C260F0E27B345C0CCE9C31 /* UIImageView+HighlightedWebCache.h in Headers */,
 				6A6C58B5A4176B084F0F40BE26CD466F /* UIImageView+WebCache.h in Headers */,
 				3FF9BC33F27B29AED030146B4891DCEC /* UIView+WebCacheOperation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D17BEB90EB4C27B46F1BB2CD8FF0C542 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1E92AEC9F093E10C69F2B89A14F49F5 /* HexColors-umbrella.h in Headers */,
+				596758BBEC68789E6C8928ECE3FC341C /* HexColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1705,9 +1705,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 120D0B17EB9DEF64F2E1BC979F24A556 /* Build configuration list for PBXNativeTarget "HexColors" */;
 			buildPhases = (
-				525846ACE59F44A9D0EB6B9BA8391444 /* Sources */,
+				67EF9044B76E629170DD09EE2E94E76D /* Sources */,
 				4BA155DC3466C96A26E2FED0479F99BA /* Frameworks */,
-				25BBFC5180BA4CD0F4067A4E1058A01F /* Headers */,
+				D17BEB90EB4C27B46F1BB2CD8FF0C542 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1860,12 +1860,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		525846ACE59F44A9D0EB6B9BA8391444 /* Sources */ = {
+		67EF9044B76E629170DD09EE2E94E76D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C91BF53C3EF19AD26723EA56AD4B184 /* HexColor.m in Sources */,
-				CE984CB467CBD3D2E2F6F06CBB4E408C /* HexColors-dummy.m in Sources */,
+				8DCF5C0EE6AC7543935C51AA756864C0 /* HexColors-dummy.m in Sources */,
+				4E5B4EEA50BEF0B4D0FE2394D3EB119A /* HexColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2803,7 +2803,7 @@
 		};
 		E10B75F4FD9BE5631AEBE3B699CB24D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E38E0419F231C8EFDFC779D26DFC2F22 /* HexColors.xcconfig */;
+			baseConfigurationReference = FC5028641FE69EA7FE0EBEB736C05B29 /* HexColors.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -2830,7 +2830,7 @@
 		};
 		E5D2448F42F9B1B54F9B3FA3A2E605F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E38E0419F231C8EFDFC779D26DFC2F22 /* HexColors.xcconfig */;
+			baseConfigurationReference = FC5028641FE69EA7FE0EBEB736C05B29 /* HexColors.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;

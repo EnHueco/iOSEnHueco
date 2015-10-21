@@ -35,12 +35,21 @@ class ConnectionManager: NSObject
         return Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
     }()
     
-    class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock)
+    class func sendAsyncRequestToURL(url: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?)
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
         let request = NSMutableURLRequest(URL: url)
         
         request.HTTPMethod = HTTPMethod.POST.rawValue
+        request.HTTPBody = dictionaryJSONData
+        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        
+        sendAsyncRequest(request, onSuccess: successfulRequestBlock, onFailure: failureRequestBlock)
+    }
+    
+    class func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    {
+        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
         request.HTTPBody = dictionaryJSONData
         request.setValue("application/json", forHTTPHeaderField: "Content-type")
         
@@ -59,7 +68,7 @@ class ConnectionManager: NSObject
         return try sendSyncRequest(request)
     }
     
-    class func sendAsyncRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock )
+    class func sendAsyncRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
         alamoManager.request(request).response { (_, response, data, error) -> Void in
             
@@ -69,16 +78,19 @@ class ConnectionManager: NSObject
                 {
                     let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
                     
-                    successfulRequestBlock(JSONResponse: JSONResponse)
+                    successfulRequestBlock?(JSONResponse: JSONResponse)
                 }
                 catch
                 {
-                    failureRequestBlock(error: ConnectionManagerCompoundError(error:error, request:request))
+                    print(NSString(data: data, encoding: NSUTF8StringEncoding))
+                    print(error)
+                    failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
                 }
             }
             else if let error = error
             {
-                failureRequestBlock(error: ConnectionManagerCompoundError(error:error, request:request))
+                print("\(error.code) : \(error)")
+                failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
             }
         }
     }
@@ -86,11 +98,19 @@ class ConnectionManager: NSObject
     class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
     {
         var response: NSURLResponse?
-        let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
         
-        let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-        
-        return JSONResponse
+        do
+        {
+            let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+            
+            let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+            
+            return JSONResponse
+        }
+        catch
+        {
+            return nil
+        }
     }
 }
 

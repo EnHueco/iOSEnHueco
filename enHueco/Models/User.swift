@@ -18,9 +18,9 @@ class User: EHSynchronizable
     var name: String { return "\(firstNames) \(lastNames)" }
     
     var imageURL: NSURL?
-    var phoneNumber: String!
+    var phoneNumber: String! = ""
     
-    let schedule = Schedule()
+    var schedule: Schedule
     
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
@@ -31,19 +31,21 @@ class User: EHSynchronizable
         self.phoneNumber = phoneNumber
         self.imageURL = imageURL
         
+        schedule = Schedule()
+        
         super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    convenience init(JSONDictionary: [String : AnyObject?])
+    convenience init(JSONDictionary: [String : AnyObject])
     {
-        let username = JSONDictionary["login"]! as! String
-        let firstNames = JSONDictionary["firstNames"]! as! String
-        let lastNames = JSONDictionary["lastNames"]! as! String
-        let imageURL = NSURL(string: JSONDictionary["imageURL"]! as! String)!
-        let phoneNumber = JSONDictionary["phoneNumber"] as! String
-        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["lastUpdated_on"]! as! String)!
+        let username = JSONDictionary["login"] as! String
+        let firstNames = JSONDictionary["firstNames"] as! String
+        let lastNames = JSONDictionary["lastNames"] as! String
+        let imageURL:NSURL? = (JSONDictionary["imageURL"] != nil ? NSURL(string: JSONDictionary["imageURL"]! as! String)! : nil)
+        let phoneNumber = JSONDictionary["phoneNumber"] as? String
+        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["lastUpdated_on"] as! String)!
 
-        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
     }
     
     /// Returns user current gap, or nil if user is not in a gap.
@@ -81,13 +83,15 @@ class User: EHSynchronizable
         guard
             let username = decoder.decodeObjectForKey("username") as? String,
             let firstNames = decoder.decodeObjectForKey("firstNames") as? String,
-            let lastNames = decoder.decodeObjectForKey("lastNames") as? String
+            let lastNames = decoder.decodeObjectForKey("lastNames") as? String,
+            let schedule = decoder.decodeObjectForKey("schedule") as? Schedule
         else
         {
             self.username = ""
             self.firstNames = ""
             self.lastNames = ""
             self.phoneNumber = ""
+            self.schedule = Schedule()
 
             super.init(coder: decoder)
             return nil
@@ -99,6 +103,7 @@ class User: EHSynchronizable
         self.lastNames = lastNames
         self.phoneNumber = decoder.decodeObjectForKey("phoneNumber") as? String
         self.imageURL = decoder.decodeObjectForKey("imageURL") as? NSURL
+        self.schedule = schedule
         
         super.init(coder: decoder)
     }
@@ -110,5 +115,8 @@ class User: EHSynchronizable
         coder.encodeObject(lastNames, forKey: "lastNames")
         coder.encodeObject(phoneNumber, forKey: "phoneNumber")
         coder.encodeObject(imageURL, forKey: "imageURL")
+        coder.encodeObject(schedule, forKey: "schedule")
+        
+        super.encodeWithCoder(coder)
     }
 }

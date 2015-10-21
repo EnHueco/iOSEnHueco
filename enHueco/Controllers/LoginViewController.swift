@@ -69,7 +69,7 @@ import UIKit
             /////////
         }
         
-        MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
         
         system.login(username, password: password)
         
@@ -88,7 +88,7 @@ import UIKit
         let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         
         presentViewController(mainViewController, animated: true, completion: nil)
-        MRProgressOverlayView.dismissOverlayForView(self.view, animated:true)
+        MRProgressOverlayView.dismissOverlayForView(view, animated:true)
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)
@@ -97,7 +97,7 @@ import UIKit
         NSThread.sleepForTimeInterval(0.5)
         
         TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
-        MRProgressOverlayView.dismissOverlayForView(self.view, animated:true)
+        MRProgressOverlayView.dismissOverlayForView(view, animated:true)
     }
     
     // MARK: Keyboard

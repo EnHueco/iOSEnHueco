@@ -50,7 +50,7 @@
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
 		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F165BC4D1BC6066400AA9248 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
 		F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -162,7 +162,7 @@
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
-		F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
+		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; };
 		F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
 		F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncomingFriendRequestCell.swift; sourceTree = "<group>"; };
 		F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingFriendRequestCell.swift; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
-				F165BC4C1BC6066400AA9248 /* SearchFriendViewController.swift */,
+				F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
@@ -564,7 +564,6 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 4R547J5575;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -717,7 +716,7 @@
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F11B035C1BA52BBE00ADD580 /* UIColor+TKCategory.m in Sources */,
-				F165BC4D1BC6066400AA9248 /* SearchFriendViewController.swift in Sources */,
+				F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
 				F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */,
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,

@@ -18,13 +18,6 @@ class AppUser: User
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
     
-    // Encoding characters
-    
-    let splitCharacter = "\\"
-    let separationCharacter = "-"
-    let multipleElementsCharacter = ","
-    let hourMinuteSeparationCharacter = ":"
-    
     init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.token = token
@@ -32,51 +25,12 @@ class AppUser: User
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    convenience init(JSONDictionary: [String : AnyObject])
-    {
-        let token = JSONDictionary["value"] as? String
-        let user = User(JSONDictionary: JSONDictionary["user"] as! [String : AnyObject])
-        
-        self.init(username: user.username, token: token ?? system.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, ID: user.ID, lastUpdatedOn: user.lastUpdatedOn)
-    }
+    // Encoding characters
     
-    // MARK: NSCoding
-    
-    required init?(coder decoder: NSCoder)
-    {
-        guard
-            let token = decoder.decodeObjectForKey("token") as? String,
-            let friends = decoder.decodeObjectForKey("friends") as? [User],
-            let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
-            let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
-            else
-        {
-            self.token = ""
-            self.friends = [User]()
-            self.incomingFriendRequests = [User]()
-            self.outgoingFriendRequests = [User]()
-            super.init(coder: decoder)
-            
-            return nil
-        }
-        
-        self.token = token
-        self.friends = friends
-        self.incomingFriendRequests = incomingFriendRequests
-        self.outgoingFriendRequests = outgoingFriendRequests
-        
-        super.init(coder: decoder)
-    }
-    
-    override func encodeWithCoder(coder: NSCoder)
-    {
-        super.encodeWithCoder(coder)
-        
-        coder.encodeObject(token, forKey: "token")
-        coder.encodeObject(friends, forKey: "friends")
-        coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
-        coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
-    }
+    let splitCharacter = "\\"
+    let separationCharacter = "-"
+    let multipleElementsCharacter = ","
+    let hourMinuteSeparationCharacter = ":"
     
     // MARK: Updates
     
@@ -89,55 +43,6 @@ class AppUser: User
         fetchUpdatesForFriendsAndFriendSchedules()
     }
     
-    func fetchUpdatesForAppUserAndSchedule ()
-    {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "GET"
-
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
-            
-            let user = User(JSONDictionary: JSONResponse as! [String : AnyObject])
-            
-            //self.token = JSONResponse["value"] as! String
-            self.imageURL = user.imageURL
-            self.phoneNumber = user.phoneNumber
-
-            let currentDate = NSDate()
-            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-            let globalCalendar = NSCalendar.currentCalendar()
-            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-
-            self.schedule = Schedule()
-            
-            let eventsJSON = JSONResponse["gap_set"] as! [[String: AnyObject]]
-            
-            for eventJSON in eventsJSON
-            {
-                let newEvent = Event(JSONDictionary: eventJSON)
-                
-                let startHourWeekDayConversionComponents = NSDateComponents()
-                startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-                startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-                startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
-                startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
-                startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
-                startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-                startHourWeekDayConversionComponents.second = 0
-                
-                let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-                let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
-                
-                let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
-                daySchedule.addEvent(newEvent)
-            }
-            
-        }) { (error) -> () in
-            
-        }
-    }
-    
     /**
     Fetches updates for both outgoing and incoming friend requests on the server and notifies the result via Notification Center.
     
@@ -146,26 +51,17 @@ class AppUser: User
     */
     func fetchUpdatesForFriendRequests()
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "GET"
+        let params = [EHParameters.UserID: username, EHParameters.Token: token]
+        let outgoingRequestsURL = NSURL(string: EHURLS.Base + EHURLS.OutgoingFriendRequestsSegment)!
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (incomingRequestsResponseDictionary) -> () in
+        ConnectionManager.sendAsyncRequestToURL(outgoingRequestsURL, usingMethod: .GET, withJSONParams: params, onSuccess: { (outgoingRequestsResponseDictionary) -> () in
             
-            var requestFriends = [User]()
+            let incomingRequestsURL = NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!
             
-            for friendJSON in incomingRequestsResponseDictionary as! [[String : AnyObject]]
-            {
-                requestFriends.append(User(JSONDictionary: friendJSON))
-            }
+            guard let incomingRequestsResponseDictionary = try? ConnectionManager.sendSyncRequestToURL(incomingRequestsURL, usingMethod: .GET, withJSONParams: params)
+            else { return }
             
-            self.incomingFriendRequests = requestFriends
-            
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system, userInfo: nil)
-            }
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: self, userInfo: nil)
             
         }) { (error) -> () in
                 
@@ -181,14 +77,12 @@ class AppUser: User
     */
     func fetchUpdatesForFriendsAndFriendSchedules()
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "GET"
+        let params = [EHParameters.UserID: username, EHParameters.Token: token]
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!
         
         var newFriends = [User]()
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .GET, withJSONParams: params, onSuccess: { (response) -> () in
             
             let currentDate = NSDate()
             
@@ -201,7 +95,8 @@ class AppUser: User
             {
                 let newFriend = User(JSONDictionary: friendJSON)
                 
-                let eventsJSON = friendJSON["gap_set"] as! [[String: AnyObject]]
+                let scheduleJSON = friendJSON["schedule"] as! [String: AnyObject]
+                let eventsJSON = scheduleJSON["events"] as! [[String: AnyObject]]
                 
                 for eventJSON in eventsJSON
                 {
@@ -228,10 +123,7 @@ class AppUser: User
             
             self.friends = newFriends
             
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
-            }
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
             
         }) { (error) -> () in
                 
@@ -373,64 +265,20 @@ class AppUser: User
     - EHSystemNotification.SystemDidSendFriendRequest in case of success
     - EHSystemNotification.SystemDidFailToSendFriendRequest in case of failure
     */
-    func sendFriendRequestToUser(user: User)
+    func sendFriendRequestToUserWithUsername (username: String)
     {
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.username + "/")!
-        let request = NSMutableURLRequest(URL: URL)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "POST"
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + username + "/")!
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: HTTPMethod.POST, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             
-            let requestFriend = //User(JSONDictionary: JSONResponse as! [String : AnyObject])
-            self.outgoingFriendRequests.append(user)
+            let requestFriend = User(JSONDictionary: JSONResponse as! [String : AnyObject])
+            self.outgoingFriendRequests.append(requestFriend)
             
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest, object: system, userInfo: nil)
-            }
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidSendFriendRequest, object: self, userInfo: nil)
             
         }) { (error) -> () in
             
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToSendFriendRequest, object: system, userInfo: nil)
-            }
-        }
-    }
-    
-    /**
-    Accepts friend request from the username provided and notifies the result via Notification Center.
-    
-    ### Notifications
-    - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
-    - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
-    */
-    func acceptFriendRequestFromFriend (requestFriend: User)
-    {
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.username + "/")!
-        let request = NSMutableURLRequest(URL: URL)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "POST"
-        
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
-            
-            self.incomingFriendRequests.removeObject(requestFriend)
-            self.fetchUpdatesForFriendsAndFriendSchedules()
-            
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAcceptFriendRequest, object: system, userInfo: nil)
-            }
-            
-        }) { (error) -> () in
-            
-            dispatch_async(dispatch_get_main_queue())
-            {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: system, userInfo: nil)
-            }
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidFailToSendFriendRequest, object: self, userInfo: nil)
         }
     }
     
@@ -507,10 +355,7 @@ class AppUser: User
         }
         if !existingFriend { friends.append(friend)}
         
-        dispatch_async(dispatch_get_main_queue())
-        {
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
-        }
+        NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
     }
     /**
     Adds the AppUser as a friend of the friend they just added by string encoded representation (QR)
@@ -566,6 +411,45 @@ class AppUser: User
         
         encodedSchedule += splitCharacter
         return encodedSchedule
+    }
+    
+    // MARK: NSCoding
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard
+            let token = decoder.decodeObjectForKey("token") as? String,
+            let friends = decoder.decodeObjectForKey("friends") as? [User],
+            let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
+            let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
+        else
+        {
+            self.token = ""
+            self.friends = [User]()
+            self.incomingFriendRequests = [User]()
+            self.outgoingFriendRequests = [User]()
+            super.init(coder: decoder)
+            
+            return nil
+        }
+        
+        self.token = token
+        self.friends = friends
+        self.incomingFriendRequests = incomingFriendRequests
+        self.outgoingFriendRequests = outgoingFriendRequests
+        
+        super.init(coder: decoder)
+    }
+    
+    override func encodeWithCoder(coder: NSCoder)
+    {
+        super.encodeWithCoder(coder)
+        
+        coder.encodeObject(token, forKey: "token")
+        //coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
+        coder.encodeObject(friends, forKey: "friends")
+        coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
+        coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
     }
 }
 

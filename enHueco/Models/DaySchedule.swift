@@ -91,6 +91,19 @@ class DaySchedule: NSObject, NSCoding
         {
             newEvent.daySchedule = self
             mutableEvents.append(newEvent)
+            
+            let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+            request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+            request.HTTPMethod = "POST"
+
+            var params = newEvent.toJSONObject()
+            params["user"] = system.appUser.username
+            
+            SynchronizationManager.sharedManager().sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+            
+            //TODO: Change associated object
+            
             return true
         }
         return false

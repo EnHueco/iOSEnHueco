@@ -22,6 +22,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
 
         topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
         
@@ -65,6 +68,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
+        
+        friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
     
     override func viewDidAppear(animated: Bool)
@@ -85,6 +90,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
+        
+        system.appUser.fetchUpdatesForFriendRequests()
+        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
     }
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -97,6 +105,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func systemDidAddFriend(notification: NSNotification)
     {
         friendsTableView.reloadData()
+    }
+    
+    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
+    {
+        friendsTableView.reloadData()
+    }
+    
+    func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
+    {
+        friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
     
     // MARK: TableView Delegate

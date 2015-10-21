@@ -28,24 +28,10 @@ class ProfileViewController: UIViewController
         usernameLabel.text = system.appUser.username
         
         backgroundImageView.alpha = 0
-        imageImageView.alpha = 1
         
         if let imageURL = system.appUser.imageURL
         {
-            imageImageView.hidden = true
-            backgroundImageView.hidden = true
-           
-            imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-                
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
-                    {
-                        self.imageImageView.alpha = 1
-                    }
-                }
-            })
-            
+            imageImageView.sd_setImageWithURL(imageURL)
             backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
                 
                 if error == nil
@@ -57,11 +43,6 @@ class ProfileViewController: UIViewController
                     }
                 }
             })
-        }
-        else
-        {
-            imageImageView.hidden = true
-            backgroundImageView.hidden = true
         }
         
         imageImageView.contentMode = .ScaleAspectFill
@@ -85,15 +66,8 @@ class ProfileViewController: UIViewController
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-                
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-        super.viewDidAppear(animated)
         
-        system.appUser.fetchUpdatesForAppUserAndSchedule()
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
     
     @IBAction func settingsButtonPressed(sender: AnyObject)
