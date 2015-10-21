@@ -84,6 +84,15 @@ class DaySchedule: NSObject, NSCoding
         return true
     }
     
+    /**
+    **Caution** Adds the events with no checks for overlapping or notifications to the server.
+    Should **only** be used during initialization.
+    */
+    func _addEventForInitialization(newEvent: Event)
+    {
+        mutableEvents.append(newEvent)
+    }
+    
     /// Adds event if it doesn't overlap with any other event
     func addEvent(newEvent: Event) -> Bool
     {

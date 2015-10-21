@@ -30,43 +30,46 @@ class ProfileViewController: UIViewController
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
         
-        if let imageURL = system.appUser.imageURL
+        dispatch_async(dispatch_get_main_queue())
         {
-            imageImageView.hidden = false
-            backgroundImageView.hidden = false
-            
-            imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+            if let imageURL = system.appUser.imageURL
+            {
+                self.imageImageView.hidden = false
+                self.backgroundImageView.hidden = false
                 
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
+                self.imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+                    
+                    if error == nil
                     {
-                        self.imageImageView.alpha = 1
+                        UIView.animateWithDuration(0.4)
+                        {
+                            self.imageImageView.alpha = 1
+                        }
                     }
-                }
-            })
-            
-            backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+                })
                 
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
+                self.backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+                    
+                    if error == nil
                     {
-                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                        self.backgroundImageView.alpha = 1
+                        UIView.animateWithDuration(0.4)
+                        {
+                            self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                            self.backgroundImageView.alpha = 1
+                        }
                     }
-                }
-            })
+                })
+            }
+            else
+            {
+                self.imageImageView.hidden = true
+                self.backgroundImageView.hidden = true
+            }
+            
+            self.imageImageView.contentMode = .ScaleAspectFill
+            self.backgroundImageView.contentMode = .ScaleAspectFill
+            self.backgroundImageView.clipsToBounds = true
         }
-        else
-        {
-            imageImageView.hidden = true
-            backgroundImageView.hidden = true
-        }
-        
-        imageImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.clipsToBounds = true
     }
     
     override func viewDidLayoutSubviews()
@@ -125,9 +128,7 @@ class ProfileViewController: UIViewController
         {
             imageImageView.hidden = true
             backgroundImageView.hidden = true
-        }*/
-        
-        //system.appUser.fetchUpdatesForAppUserAndSchedule()
+        }*/        
     }
     
     @IBAction func settingsButtonPressed(sender: AnyObject)

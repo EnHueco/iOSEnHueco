@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B38b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -600,7 +600,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="29"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepito Alberto Perez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xc-k2-gHS">
@@ -2000,13 +2000,13 @@
                                 <exclude reference="qVh-jC-JG7"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="C7B-uk-P9K"/>
                                 <exclude reference="PI3-RE-PLO"/>
                                 <exclude reference="ZDu-2v-a5X"/>
                                 <exclude reference="xVi-cm-1w0"/>
                                 <exclude reference="BaA-45-xjR"/>
                                 <exclude reference="Eyi-UL-Fqp"/>
                                 <exclude reference="oZZ-ti-JzR"/>
-                                <exclude reference="C7B-uk-P9K"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2015,13 +2015,13 @@
                                 <include reference="qVh-jC-JG7"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="C7B-uk-P9K"/>
                                 <include reference="PI3-RE-PLO"/>
                                 <include reference="ZDu-2v-a5X"/>
                                 <include reference="xVi-cm-1w0"/>
                                 <include reference="BaA-45-xjR"/>
                                 <include reference="Eyi-UL-Fqp"/>
                                 <include reference="oZZ-ti-JzR"/>
-                                <include reference="C7B-uk-P9K"/>
                             </mask>
                         </variation>
                     </view>

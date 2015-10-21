@@ -16,8 +16,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var addFriendButton: UIButton!
     
     var emptyLabel : UILabel?
-    
     let searchBar = UISearchBar()
+    
+    var lastUpdatesFetchDate = NSDate()
     
     override func viewDidLoad()
     {
@@ -91,8 +92,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendsTableView.tableFooterView = UIView(frame: CGRectZero)
         }
         
-        system.appUser.fetchUpdatesForFriendRequests()
-        //system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
+        let timeSinceLastUpdatesFetch = NSDate().timeIntervalSinceDate(lastUpdatesFetchDate)
+        
+        if timeSinceLastUpdatesFetch > 3 //3 seconds
+        {
+            lastUpdatesFetchDate = NSDate()
+            system.appUser.fetchUpdatesForFriendRequests()
+        }
     }
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)

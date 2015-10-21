@@ -130,9 +130,9 @@ class AppUser: User
                 let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
                 
                 let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
-                daySchedule.addEvent(newEvent)
+                daySchedule._addEventForInitialization(newEvent)
             }
-            
+                        
         }) { (error) -> () in
             
         }
@@ -220,7 +220,7 @@ class AppUser: User
                     let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
                     
                     let daySchedule = newFriend.schedule.weekDays[localStartHourWeekDay]
-                    daySchedule.addEvent(newEvent)
+                    daySchedule._addEventForInitialization(newEvent)
                 }
                 
                 newFriends.append(newFriend)
@@ -435,7 +435,6 @@ class AppUser: User
     }
     
     /*
-
     Adds friend from their string encoded representation and notifies via Notification Center.
     The AppUser user is also added as a friend of the friend they are adding, without any approvals from either side.
     
@@ -492,7 +491,6 @@ class AppUser: User
             let event = Event(type: eventType, startHour: startHourDateComponents, endHour: endHourDateComponents)
             
             friend.schedule.weekDays[weekDay!].addEvent(event)
-
         }
         
         var existingFriend = false

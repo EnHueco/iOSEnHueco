@@ -53,20 +53,23 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func updateGapsDataAndReloadTableView()
     {
-        friendsAndGaps = system.appUser.friendsCurrentlyInGap()
-        
-        if friendsAndGaps.isEmpty
+        dispatch_async(dispatch_get_main_queue())
         {
-            tableView.hidden = true
-            view.addSubview(emptyLabel)
+            self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
+            
+            if self.friendsAndGaps.isEmpty
+            {
+                self.tableView.hidden = true
+                self.view.addSubview(self.emptyLabel)
+            }
+            else
+            {
+                self.tableView.hidden = false
+                self.emptyLabel.removeFromSuperview()
+            }
+            
+            self.tableView.reloadData()
         }
-        else
-        {
-            tableView.hidden = false
-            emptyLabel.removeFromSuperview()
-        }
-        
-        tableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool)

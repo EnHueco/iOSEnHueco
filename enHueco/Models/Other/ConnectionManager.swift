@@ -25,6 +25,13 @@ typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompou
 
 class ConnectionManager: NSObject
 {
+    static let completionQueue: NSOperationQueue =
+    {
+        let queue = NSOperationQueue()
+        queue.qualityOfService = .Default
+        return queue
+    }()
+
     private static let alamoManager: Alamofire.Manager =
     {
         let serverTrustPolicies: [String: ServerTrustPolicy] = [EHURLS.Domain: .DisableEvaluation]
@@ -72,25 +79,28 @@ class ConnectionManager: NSObject
     {
         alamoManager.request(request).response { (_, response, data, error) -> Void in
             
-            if let data = data where error == nil
+            completionQueue.addOperationWithBlock
             {
-                do
+                if let data = data where error == nil
                 {
-                    let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-                    
-                    successfulRequestBlock?(JSONResponse: JSONResponse)
+                    do
+                    {
+                        let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                        
+                        successfulRequestBlock?(JSONResponse: JSONResponse)
+                    }
+                    catch
+                    {
+                        print(NSString(data: data, encoding: NSUTF8StringEncoding))
+                        print(error)
+                        failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+                    }
                 }
-                catch
+                else if let error = error
                 {
-                    print(NSString(data: data, encoding: NSUTF8StringEncoding))
-                    print(error)
+                    print("\(error.code) : \(error)")
                     failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
                 }
-            }
-            else if let error = error
-            {
-                print("\(error.code) : \(error)")
-                failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
             }
         }
     }
