@@ -10,7 +10,7 @@ import UIKit
 
 enum EventType: String
 {
-    case Gap = "Gap", Class = "Class"
+    case Gap = "GAP", Class = "CLASS"
 }
 
 class Event: NSObject, NSCoding, Comparable
