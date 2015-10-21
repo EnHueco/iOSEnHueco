@@ -1053,18 +1053,13 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jgc-Qh-xHN" secondAttribute="trailing" id="0bV-3o-SxF"/>
                             <constraint firstAttribute="trailing" secondItem="Itw-db-KJt" secondAttribute="trailing" id="2FI-eX-oin"/>
-                            <constraint firstAttribute="trailing" secondItem="jgc-Qh-xHN" secondAttribute="trailing" id="G0i-QK-i12"/>
+                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="top" secondItem="Itw-db-KJt" secondAttribute="bottom" id="F2j-nH-f1S"/>
                             <constraint firstItem="Itw-db-KJt" firstAttribute="top" secondItem="mZz-YO-Avo" secondAttribute="top" id="IZU-L1-39p"/>
-                            <constraint firstAttribute="trailing" secondItem="jgc-Qh-xHN" secondAttribute="trailing" id="MC9-iC-Dyk"/>
-                            <constraint firstItem="Y9a-M6-QAF" firstAttribute="top" secondItem="jgc-Qh-xHN" secondAttribute="bottom" id="W6I-gp-CbI"/>
-                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="leading" secondItem="mZz-YO-Avo" secondAttribute="leading" id="jFs-Yn-P1k"/>
+                            <constraint firstItem="Y9a-M6-QAF" firstAttribute="top" secondItem="jgc-Qh-xHN" secondAttribute="bottom" id="VEb-R9-PgV"/>
+                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="leading" secondItem="mZz-YO-Avo" secondAttribute="leading" id="hcM-km-sTu"/>
                             <constraint firstItem="Itw-db-KJt" firstAttribute="leading" secondItem="mZz-YO-Avo" secondAttribute="leading" id="mjR-Z2-d6L"/>
-                            <constraint firstItem="Y9a-M6-QAF" firstAttribute="top" secondItem="jgc-Qh-xHN" secondAttribute="bottom" id="rNb-Jv-RTE"/>
-                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="top" secondItem="Itw-db-KJt" secondAttribute="bottom" constant="-1" id="tuG-ec-vNl">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="jgc-Qh-xHN" firstAttribute="leading" secondItem="mZz-YO-Avo" secondAttribute="leading" id="v7h-ek-ffP"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1074,13 +1069,10 @@
                                 <exclude reference="2FI-eX-oin"/>
                                 <exclude reference="IZU-L1-39p"/>
                                 <exclude reference="mjR-Z2-d6L"/>
-                                <exclude reference="G0i-QK-i12"/>
-                                <exclude reference="MC9-iC-Dyk"/>
-                                <exclude reference="jFs-Yn-P1k"/>
-                                <exclude reference="tuG-ec-vNl"/>
-                                <exclude reference="v7h-ek-ffP"/>
-                                <exclude reference="W6I-gp-CbI"/>
-                                <exclude reference="rNb-Jv-RTE"/>
+                                <exclude reference="0bV-3o-SxF"/>
+                                <exclude reference="F2j-nH-f1S"/>
+                                <exclude reference="hcM-km-sTu"/>
+                                <exclude reference="VEb-R9-PgV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1091,13 +1083,10 @@
                                 <include reference="2FI-eX-oin"/>
                                 <include reference="IZU-L1-39p"/>
                                 <include reference="mjR-Z2-d6L"/>
-                                <include reference="G0i-QK-i12"/>
-                                <include reference="MC9-iC-Dyk"/>
-                                <include reference="jFs-Yn-P1k"/>
-                                <include reference="tuG-ec-vNl"/>
-                                <include reference="v7h-ek-ffP"/>
-                                <include reference="W6I-gp-CbI"/>
-                                <include reference="rNb-Jv-RTE"/>
+                                <include reference="0bV-3o-SxF"/>
+                                <include reference="F2j-nH-f1S"/>
+                                <include reference="hcM-km-sTu"/>
+                                <include reference="VEb-R9-PgV"/>
                             </mask>
                         </variation>
                     </view>

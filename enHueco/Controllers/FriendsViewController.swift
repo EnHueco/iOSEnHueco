@@ -92,7 +92,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         system.appUser.fetchUpdatesForFriendRequests()
-        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
+        //system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
     }
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
