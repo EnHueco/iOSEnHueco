@@ -15,7 +15,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     
-    var emptyLabel : UILabel?
+    var emptyLabel : UILabel!
     let searchBar = UISearchBar()
     
     var lastUpdatesFetchDate = NSDate()
@@ -35,17 +35,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         searchBar.sizeToFit()
         friendsTableView.tableHeaderView = searchBar
         
-        emptyLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-        emptyLabel!.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
-        emptyLabel!.lineBreakMode = .ByWordWrapping
-        emptyLabel!.numberOfLines = 0
-        emptyLabel!.textColor = UIColor.grayColor()
-        emptyLabel!.textAlignment = NSTextAlignment.Center
+        emptyLabel = UILabel()
+        emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
+        emptyLabel.textColor = UIColor.grayColor()
+        emptyLabel.textAlignment = .Center
+        emptyLabel.lineBreakMode = .ByWordWrapping
+        emptyLabel.numberOfLines = 0
     }
     
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
+        
+        emptyLabel.center = friendsTableView.center
         
         friendRequestsNotificationsIndicator.clipsToBounds = true
         friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height/2
@@ -80,16 +82,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
         
-        if system.appUser.friends.count == 0
+        if system.appUser.friends.isEmpty
         {
-            friendsTableView.backgroundView = emptyLabel
-            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            friendsTableView.hidden = true
+            view.addSubview(self.emptyLabel)
         }
         else
         {
-            friendsTableView.backgroundView = nil
-            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            friendsTableView.tableFooterView = UIView(frame: CGRectZero)
+            friendsTableView.hidden = false
+            emptyLabel.removeFromSuperview()
         }
         
         let timeSinceLastUpdatesFetch = NSDate().timeIntervalSinceDate(lastUpdatesFetchDate)
@@ -97,6 +98,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if timeSinceLastUpdatesFetch > 3 //3 seconds
         {
             lastUpdatesFetchDate = NSDate()
+            system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
             system.appUser.fetchUpdatesForFriendRequests()
         }
     }

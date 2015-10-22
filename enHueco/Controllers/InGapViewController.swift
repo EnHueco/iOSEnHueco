@@ -47,8 +47,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        updateGapsDataAndReloadTableView()
     }
     
     func updateGapsDataAndReloadTableView()
@@ -78,6 +76,9 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
+        
+        updateGapsDataAndReloadTableView()
+        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -113,7 +114,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.timeLeftUntilNextEventLabel.text = "🕖 \(timeLeftUntilNextEvent.hour):\(timeLeftUntilNextEvent.minute) hrs"
         
         cell.friendImageImageView.clipsToBounds = true
-        cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
 
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         cell.friendImageImageView.sd_setImageWithURL(friendAndGap.friend.imageURL)
@@ -123,9 +123,15 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let cell = cell as! InGapFriendCell
+        cell.friendImageImageView.layer.cornerRadius = cell.friendImageImageView.frame.height/2
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let friend = system.appUser.friends[indexPath.row]
+        let friend = friendsAndGaps[indexPath.row].friend
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
         

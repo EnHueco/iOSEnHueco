@@ -600,7 +600,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="29"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepito Alberto Perez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xc-k2-gHS">
@@ -874,7 +874,7 @@
         <!--In Gap View Controller-->
         <scene sceneID="k5K-16-jyE">
             <objects>
-                <viewController id="YQy-MY-fW4" customClass="InGapViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YQy-MY-fW4" customClass="InGapViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JaV-a0-PZS"/>
                         <viewControllerLayoutGuide type="bottom" id="Y9a-M6-QAF"/>
@@ -1110,7 +1110,7 @@
         <!--Friends View Controller-->
         <scene sceneID="EZN-Z8-WCM">
             <objects>
-                <viewController storyboardIdentifier="FriendsViewController" id="53Q-rn-P9C" customClass="FriendsViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsViewController" automaticallyAdjustsScrollViewInsets="NO" id="53Q-rn-P9C" customClass="FriendsViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rf9-2R-AYB"/>
                         <viewControllerLayoutGuide type="bottom" id="8x0-6m-xGa"/>
@@ -1864,6 +1864,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="0.89880701009999997" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="20" y="10" width="124" height="21"/>
+                                                    </variation>
                                                 </label>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lJ-du-6KU">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1881,7 +1884,8 @@
                                                             <exclude reference="i2D-vV-s12"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="152" y="6" width="30" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="Pye-Ee-PEn"/>
                                                             <include reference="i2D-vV-s12"/>
@@ -1911,7 +1915,8 @@
                                                             <exclude reference="WOt-C8-bix"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="190" y="8" width="26" height="26"/>
                                                         <mask key="constraints">
                                                             <include reference="25F-2J-B2Z"/>
                                                             <include reference="WOt-C8-bix"/>

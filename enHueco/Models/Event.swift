@@ -144,6 +144,8 @@ class Event: NSObject, NSCoding, Comparable
         var dictionary = [String:AnyObject]()
         
         dictionary["type"] = type.rawValue
+        dictionary["name"] = name
+        dictionary["location"] = location
         dictionary["start_hour_weekday"] = String(startHour.weekday)
         dictionary["end_hour_weekday"] = String(endHour.weekday)
         dictionary["start_hour"] = "\(startHour.hour):\(startHour.minute)"

@@ -90,6 +90,7 @@ class DaySchedule: NSObject, NSCoding
     */
     func _addEventForInitialization(newEvent: Event)
     {
+        newEvent.daySchedule = self
         mutableEvents.append(newEvent)
     }
     
