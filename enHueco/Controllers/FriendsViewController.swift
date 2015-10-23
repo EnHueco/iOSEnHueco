@@ -32,6 +32,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendsTableView.dataSource = self
         friendsTableView.delegate = self
         
+        
         searchBar.sizeToFit()
         friendsTableView.tableHeaderView = searchBar
         

@@ -32,6 +32,8 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
         searchBar.delegate = self
+        searchBar.becomeFirstResponder()
+
     }
     
     override func viewWillAppear(animated: Bool)
@@ -44,6 +46,13 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.translucent = true
         navigationController?.navigationBar.barTintColor = UIColor.clearColor()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        if let navController = self.navigationController {
+            navController.dismissViewControllerAnimated(true, completion: nil) 
+        }
     }
 
     override func didReceiveMemoryWarning()

@@ -47,6 +47,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if let selectedIndex = tableView.indexPathForSelectedRow
+        {
+            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+        }
+        
+        updateGapsDataAndReloadTableView()
     }
     
     func updateGapsDataAndReloadTableView()
@@ -72,12 +79,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidAppear(animated: Bool)
     {
-        if let selectedIndex = tableView.indexPathForSelectedRow
-        {
-            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
-        }
-        
-        updateGapsDataAndReloadTableView()
         system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
     }
     
