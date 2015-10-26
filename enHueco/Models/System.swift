@@ -61,7 +61,7 @@ class System
         let start = NSDateComponents(); start.hour = 0; start.minute = 00
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Event(type:.Gap, startHour: start, endHour: end)
-        friend.schedule.weekDays[6]._addEventForInitialization(gap)
+        friend.schedule.weekDays[6].addEvent(gap)
         appUser.friends.append(friend)
         
         appUser.friends.append(appUser)

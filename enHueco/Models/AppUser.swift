@@ -130,7 +130,7 @@ class AppUser: User
                 let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
                 
                 let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
-                daySchedule._addEventForInitialization(newEvent)
+                daySchedule.addEvent(newEvent)
             }
                         
         }) { (error) -> () in
@@ -220,7 +220,7 @@ class AppUser: User
                     let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
                     
                     let daySchedule = newFriend.schedule.weekDays[localStartHourWeekDay]
-                    daySchedule._addEventForInitialization(newEvent)
+                    daySchedule.addEvent(newEvent)
                 }
                 
                 newFriends.append(newFriend)

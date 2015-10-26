@@ -202,6 +202,7 @@ class AddEditEventViewController: UIViewController, UIPickerViewDataSource, UIPi
             for (daySchedule, event) in daySchedulesAndEventToAdd
             {
                 daySchedule.addEvent(event)
+                SynchronizationManager.sharedManager().reportNewEvent(event)
             }
             
             dismissViewControllerAnimated(true, completion: nil)
