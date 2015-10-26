@@ -41,6 +41,7 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - SimpleAlert (1.3.1)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
 
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - MSCollectionViewCalendarLayout
   - QRCodeReaderViewController (~> 3.5.2)
   - SDWebImage (~> 3.7)
+  - SimpleAlert
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
@@ -75,6 +77,7 @@ SPEC CHECKSUMS:
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SimpleAlert: 05215ee656e1da1428998e76a76bb153a16c7a21
   TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
 
 COCOAPODS: 0.39.0

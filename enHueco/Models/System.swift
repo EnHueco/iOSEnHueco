@@ -159,7 +159,7 @@ class System
     /// Persists all pertinent application data
     func persistData () throws
     {
-        guard NSKeyedArchiver.archiveRootObject(appUser, toFile: persistencePath) else
+        guard appUser != nil && NSKeyedArchiver.archiveRootObject(appUser, toFile: persistencePath) else
         {
             throw SystemError.CouldNotPersistData
         }

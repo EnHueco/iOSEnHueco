@@ -94,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-enHuecoTests/MSCollectionViewCalendarLayout.framework"
   install_framework "Pods-enHuecoTests/QRCodeReaderViewController.framework"
   install_framework "Pods-enHuecoTests/SDWebImage.framework"
+  install_framework "Pods-enHuecoTests/SimpleAlert.framework"
   install_framework "Pods-enHuecoTests/TSMessages.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -107,5 +108,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-enHuecoTests/MSCollectionViewCalendarLayout.framework"
   install_framework "Pods-enHuecoTests/QRCodeReaderViewController.framework"
   install_framework "Pods-enHuecoTests/SDWebImage.framework"
+  install_framework "Pods-enHuecoTests/SimpleAlert.framework"
   install_framework "Pods-enHuecoTests/TSMessages.framework"
 fi

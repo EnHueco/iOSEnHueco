@@ -37,6 +37,8 @@ class SynchronizationManager: NSObject
     {
         return instance
     }
+    
+    // MARK: Synchronization
 
     private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
     {
@@ -56,6 +58,37 @@ class SynchronizationManager: NSObject
             while self.trySendingNextSyncRequestInQueue() {}
         }
     }
+    
+    
+    /**
+     Tries the given request and adds the request to the queue in case it fails.
+     */
+    private func trySendingNextSyncRequestInQueue() -> Bool
+    {
+        guard let (request, successfulRequestBlock, failureRequestBlock, associatedObject) = pendingRequestsQueue.first else { return false }
+        
+        do
+        {
+            let responseDictionary = try ConnectionManager.sendSyncRequest(request)!
+            
+            pendingRequestsQueue.removeFirst()
+            
+            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["lastUpdatedOn"] as! String)!
+            
+            if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
+            
+            successfulRequestBlock?(JSONResponse: responseDictionary)
+            return true
+        }
+        catch
+        {
+            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+            
+            return false
+        }
+    }
+    
+    // MARK: Requests
     
     /**
         Tries the given request and adds the request to the queue in case it fails.
@@ -99,31 +132,20 @@ class SynchronizationManager: NSObject
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
     }
     
-    /**
-        Tries the given request and adds the request to the queue in case it fails.
-    */
-    private func trySendingNextSyncRequestInQueue() -> Bool
-    {
-        guard let (request, successfulRequestBlock, failureRequestBlock, associatedObject) = pendingRequestsQueue.first else { return false }
-        
-        do
-        {
-            let responseDictionary = try ConnectionManager.sendSyncRequest(request)!
-           
-            pendingRequestsQueue.removeFirst()
+    // MARK: Reporting
     
-            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["lastUpdatedOn"] as! String)!
-            
-            if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
-            
-            successfulRequestBlock?(JSONResponse: responseDictionary)
-            return true
-        }
-        catch
-        {
-            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
-            
-            return false
-        }
+    func reportNewEvent(newEvent: Event)
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "POST"
+        
+        var params = newEvent.toJSONObject()
+        params["user"] = system.appUser.username
+        
+        sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+        
+        //TODO: Change associated object
     }
 }

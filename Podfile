@@ -28,6 +28,8 @@ pod 'ASMediaFocusManager'
 
 pod 'Alamofire', '~> 3.0'
 
+pod 'SimpleAlert'
+
 target 'enHuecoTests' do
  
 end

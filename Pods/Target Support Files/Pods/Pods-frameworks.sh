@@ -94,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/MSCollectionViewCalendarLayout.framework"
   install_framework "Pods/QRCodeReaderViewController.framework"
   install_framework "Pods/SDWebImage.framework"
+  install_framework "Pods/SimpleAlert.framework"
   install_framework "Pods/TSMessages.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -107,5 +108,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/MSCollectionViewCalendarLayout.framework"
   install_framework "Pods/QRCodeReaderViewController.framework"
   install_framework "Pods/SDWebImage.framework"
+  install_framework "Pods/SimpleAlert.framework"
   install_framework "Pods/TSMessages.framework"
 fi

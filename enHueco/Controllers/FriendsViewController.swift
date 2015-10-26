@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SimpleAlert
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -106,7 +107,27 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
     {
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddFriendViewController") as! AddFriendViewController
+        let actionSheet = SimpleAlert.Controller(title: nil, message: nil, style: .ActionSheet)
+        
+        actionSheet.configContentView = {(view: UIView!) -> Void in
+         
+            view.backgroundColor = EHIntefaceColor.mainInterfaceColor
+        }
+                
+        actionSheet.addAction(SimpleAlert.Action(title: "Buscar usuario", style: .Default) { (action) -> Void in
+            
+            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
+            self.presentViewController(viewController, animated: true, completion: nil)
+        })
+        
+        actionSheet.addAction(SimpleAlert.Action(title: "Agregar por QR", style: .Default, handler: { (action) -> Void in
+            
+            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController
+            self.presentViewController(viewController, animated: true, completion: nil)
+
+        }))
+        
+        //presentViewController(actionSheet, animated: true, completion: nil)
     }
     
     // MARK: Notification Center

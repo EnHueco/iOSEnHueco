@@ -19,11 +19,11 @@ class AddFriendViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
-        navigationController!.navigationBarHidden = false
-        navigationController!.navigationBar.barStyle = UIBarStyle.Black
-        navigationController!.navigationBar.barTintColor = UIColor(red: 40/255.0, green: 100/255.0, blue: 90/255.0, alpha: 1)
-        navigationController!.navigationBar.translucent = true
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBarHidden = true
+        navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        navigationController?.navigationBar.barTintColor = UIColor(red: 40/255.0, green: 100/255.0, blue: 90/255.0, alpha: 1)
+        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "dismissViewController:")
         doneItem.tintColor = UIColor.whiteColor()
@@ -33,7 +33,6 @@ class AddFriendViewController: UIViewController
     @IBAction func addByQRButtonPressed(sender: AnyObject)
     {
         let viewController = storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController
-        
         navigationController!.pushViewController(viewController, animated: true)
     }
     
