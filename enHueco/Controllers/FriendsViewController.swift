@@ -62,18 +62,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         navigationController?.setNavigationBarHidden(true, animated: true)
         
-        if system.appUser.friends.count == 0
-        {
-            friendsTableView.backgroundView = emptyLabel
-            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        }
-        else
-        {
-            friendsTableView.backgroundView = nil
-            friendsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            friendsTableView.tableFooterView = UIView(frame: CGRectZero)
-        }
-        
         friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
     
@@ -87,7 +75,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if system.appUser.friends.isEmpty
         {
             friendsTableView.hidden = true
-            view.addSubview(self.emptyLabel)
+            view.addSubview(emptyLabel)
         }
         else
         {

@@ -43,7 +43,7 @@ class User: EHSynchronizable
         let lastNames = JSONDictionary["lastNames"] as! String
         let imageURL:NSURL? = (JSONDictionary["imageURL"] != nil ? NSURL(string: JSONDictionary["imageURL"]! as! String)! : nil)
         let phoneNumber = JSONDictionary["phoneNumber"] as? String
-        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["lastUpdated_on"] as! String)!
+        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
 
         self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
     }

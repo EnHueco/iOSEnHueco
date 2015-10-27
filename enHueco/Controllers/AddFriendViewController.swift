@@ -19,7 +19,7 @@ class AddFriendViewController: UIViewController
     
     override func viewWillAppear(animated: Bool)
     {
-        navigationController?.navigationBarHidden = true
+        navigationController?.navigationBarHidden = false
         navigationController?.navigationBar.barStyle = UIBarStyle.Black
         navigationController?.navigationBar.barTintColor = UIColor(red: 40/255.0, green: 100/255.0, blue: 90/255.0, alpha: 1)
         navigationController?.navigationBar.translucent = true

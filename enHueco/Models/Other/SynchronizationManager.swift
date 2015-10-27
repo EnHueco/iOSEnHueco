@@ -73,7 +73,7 @@ class SynchronizationManager: NSObject
             
             pendingRequestsQueue.removeFirst()
             
-            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["lastUpdatedOn"] as! String)!
+            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["updated_on"] as! String)!
             
             if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
             

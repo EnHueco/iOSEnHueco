@@ -140,6 +140,8 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     {
         TSMessage.showNotificationWithTitle("¡Solicitud enviada!", type: TSMessageNotificationType.Success)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
+        
+        navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func systemDidFailToSendFriendRequest(notification: NSNotification)

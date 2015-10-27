@@ -354,7 +354,10 @@ class AppUser: User
             let weekDayDaySchedule = schedule.weekDays[localWeekDayNumber]
             let aClass = Event(type:.Class, name:event.title, startHour: startDateComponents, endHour: endDateComponents, location: event.location)
             
-            weekDayDaySchedule.addEvent(aClass)
+            if weekDayDaySchedule.addEvent(aClass)
+            {
+                SynchronizationManager.sharedManager().reportNewEvent(aClass)
+            }
         }
         
         if generateGapsBetweenClasses
@@ -443,7 +446,6 @@ class AppUser: User
     */
     func addFriendFromStringEncodedFriendRepresentation (encodedFriend: String) throws
     {
-        
         let mainComponents = encodedFriend.componentsSeparatedByString("\\")
         
         // Get username
@@ -528,7 +530,6 @@ class AppUser: User
     */
     func stringEncodedUserRepresentation () -> String
     {
-
         var encodedSchedule = ""
         // Add username
         encodedSchedule += username + splitCharacter
