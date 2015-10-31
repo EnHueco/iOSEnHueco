@@ -31,6 +31,11 @@ class ScheduleViewController: UIViewController
         closeButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
         importButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
         addEventButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
         
         addGapOrClassButton.clipsToBounds = true
         addGapOrClassButton.layer.cornerRadius = addGapOrClassButton.frame.size.height/2

@@ -48,9 +48,10 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         navigationController?.navigationBar.barTintColor = UIColor.clearColor()
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        
-        if let navController = self.navigationController {
+    override func viewWillDisappear(animated: Bool)
+    {
+        if let navController = self.navigationController
+        {
             navController.dismissViewControllerAnimated(true, completion: nil) 
         }
     }
@@ -85,6 +86,11 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         //let controller = storyboard!.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         //controller.friend = friend
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     func didPressAddButtonInSearchFriendCell(cell: SearchFriendCell)

@@ -79,6 +79,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         }
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        cell.backgroundColor = UIColor.clearColor()
+    }
+    
     @IBAction func incomingOutgoingSegmentedControlDidChangeValue(sender: AnyObject)
     {
         requestsTableView.reloadData()

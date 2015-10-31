@@ -30,6 +30,8 @@ pod 'Alamofire', '~> 3.0'
 
 pod 'SimpleAlert'
 
+pod 'StaticDataTableViewController', :git => 'https://github.com/peterpaulis/StaticDataTableViewController.git'
+
 target 'enHuecoTests' do
  
 end

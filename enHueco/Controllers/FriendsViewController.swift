@@ -165,6 +165,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendDetailViewController.friend = friend
         //friendDetailViewController.hidesBottomBarWhenPushed = true
         
-        navigationController!.pushViewController(friendDetailViewController, animated: true)
+        splitViewController?.showDetailViewController(friendDetailViewController, sender: self)
     }
 }

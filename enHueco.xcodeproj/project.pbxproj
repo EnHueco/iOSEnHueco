@@ -13,30 +13,30 @@
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
 		F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1691B7CDDEB00325209 /* DaySchedule.swift */; };
-		F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E691B9BB10C00B04400 /* FriendsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1179E6E1B9BB3F100B04400 /* InGapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F119309D1BB7AFD70031EB58 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
-		F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F119309F1BB84B570031EB58 /* ViewQRViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */; };
+		F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E691B9BB10C00B04400 /* FriendsViewController.swift */; };
+		F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */; };
+		F1179E6E1B9BB3F100B04400 /* InGapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */; };
+		F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */; };
+		F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F119309D1BB7AFD70031EB58 /* UIImage+ImageEffects.m */; };
+		F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F119309F1BB84B570031EB58 /* ViewQRViewController.swift */; };
+		F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */; };
 		F11B02001BA5226A00ADD580 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11B01FF1BA5226A00ADD580 /* MapKit.framework */; };
 		F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11B02011BA5226F00ADD580 /* QuartzCore.framework */; };
-		F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02311BA5241200ADD580 /* TKCalendarDayEventView.m */; settings = {ASSET_TAGS = (); }; };
-		F11B02371BA5241200ADD580 /* TKCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02331BA5241200ADD580 /* TKCalendarDayView.m */; settings = {ASSET_TAGS = (); }; };
-		F11B02381BA5241200ADD580 /* TKCalendarDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02351BA5241200ADD580 /* TKCalendarDayViewController.m */; settings = {ASSET_TAGS = (); }; };
-		F11B034E1BA52B5600ADD580 /* NSDate+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B034D1BA52B5600ADD580 /* NSDate+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03511BA52B9D00ADD580 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03501BA52B9D00ADD580 /* UIImage+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03531BA52BAD00ADD580 /* TKGlobal.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03561BA52BB400ADD580 /* TKGradientView.m */; settings = {ASSET_TAGS = (); }; };
-		F11B035C1BA52BBE00ADD580 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03591BA52BBE00ADD580 /* UIColor+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B035B1BA52BBE00ADD580 /* UIDevice+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03601BA52BCA00ADD580 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B035F1BA52BCA00ADD580 /* UIView+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03621BA52BD200ADD580 /* UIScreen+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03651BA52BD900ADD580 /* UILabel+TKCategory.m */; settings = {ASSET_TAGS = (); }; };
-		F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; settings = {ASSET_TAGS = (); }; };
+		F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02311BA5241200ADD580 /* TKCalendarDayEventView.m */; };
+		F11B02371BA5241200ADD580 /* TKCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02331BA5241200ADD580 /* TKCalendarDayView.m */; };
+		F11B02381BA5241200ADD580 /* TKCalendarDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02351BA5241200ADD580 /* TKCalendarDayViewController.m */; };
+		F11B034E1BA52B5600ADD580 /* NSDate+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B034D1BA52B5600ADD580 /* NSDate+TKCategory.m */; };
+		F11B03511BA52B9D00ADD580 /* UIImage+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03501BA52B9D00ADD580 /* UIImage+TKCategory.m */; };
+		F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03531BA52BAD00ADD580 /* TKGlobal.m */; };
+		F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03561BA52BB400ADD580 /* TKGradientView.m */; };
+		F11B035C1BA52BBE00ADD580 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03591BA52BBE00ADD580 /* UIColor+TKCategory.m */; };
+		F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B035B1BA52BBE00ADD580 /* UIDevice+TKCategory.m */; };
+		F11B03601BA52BCA00ADD580 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B035F1BA52BCA00ADD580 /* UIView+TKCategory.m */; };
+		F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03621BA52BD200ADD580 /* UIScreen+TKCategory.m */; };
+		F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03651BA52BD900ADD580 /* UILabel+TKCategory.m */; };
+		F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */; };
+		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; };
 		F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
 		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
@@ -48,44 +48,47 @@
 		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
-		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; settings = {ASSET_TAGS = (); }; };
-		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F16C613B1BB222EF00703782 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C613A1BB222EF00703782 /* Event.swift */; settings = {ASSET_TAGS = (); }; };
-		F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F16C613E1BB30A0100703782 /* UIView+Shadow.m */; settings = {ASSET_TAGS = (); }; };
-		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; settings = {ASSET_TAGS = (); }; };
-		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343651B9BBFAE00EED205 /* UIImageViewExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B8AD5C1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B8AD5E1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B8AD601BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B8AD631BCADD8600BB879B /* InGapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* InGapNavigationViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; };
+		F14DC5101BE447E40046CD48 /* InGapSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */; };
+		F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */; };
+		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; };
+		F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */; };
+		F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */; };
+		F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC501BC6123400AA9248 /* IncomingFriendRequestCell.swift */; };
+		F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */; };
+		F16C613B1BB222EF00703782 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C613A1BB222EF00703782 /* Event.swift */; };
+		F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F16C613E1BB30A0100703782 /* UIView+Shadow.m */; };
+		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; };
+		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
+		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
+		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; };
+		F1B343671B9BBFAE00EED205 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1B343621B9BBFAE00EED205 /* Info.plist */; };
+		F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343641B9BBFAE00EED205 /* QRCode.swift */; };
+		F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343651B9BBFAE00EED205 /* UIImageViewExtension.swift */; };
+		F1B8AD5C1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */; };
+		F1B8AD5E1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */; };
+		F1B8AD601BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */; };
+		F1B8AD631BCADD8600BB879B /* InGapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* InGapNavigationViewController.swift */; };
+		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
 		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
-		F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */; settings = {ASSET_TAGS = (); }; };
-		F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B901BD1CA3E00D5DF01 /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8A1BD1CA3E00D5DF01 /* Deque.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B911BD1CA3E00D5DF01 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8B1BD1CA3E00D5DF01 /* List.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B921BD1CA3E00D5DF01 /* ListMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8C1BD1CA3E00D5DF01 /* ListMethods.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B931BD1CA3E00D5DF01 /* SetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8D1BD1CA3E00D5DF01 /* SetType.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B941BD1CA3E00D5DF01 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8E1BD1CA3E00D5DF01 /* Tree.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B951BD1CA3E00D5DF01 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8F1BD1CA3E00D5DF01 /* Trie.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EB0B971BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; settings = {ASSET_TAGS = (); }; };
-		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; settings = {ASSET_TAGS = (); }; };
-		F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */; settings = {ASSET_TAGS = (); }; };
-		F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */; };
+		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
+		F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */; };
+		F1EB0B901BD1CA3E00D5DF01 /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8A1BD1CA3E00D5DF01 /* Deque.swift */; };
+		F1EB0B911BD1CA3E00D5DF01 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8B1BD1CA3E00D5DF01 /* List.swift */; };
+		F1EB0B921BD1CA3E00D5DF01 /* ListMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8C1BD1CA3E00D5DF01 /* ListMethods.swift */; };
+		F1EB0B931BD1CA3E00D5DF01 /* SetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8D1BD1CA3E00D5DF01 /* SetType.swift */; };
+		F1EB0B941BD1CA3E00D5DF01 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8E1BD1CA3E00D5DF01 /* Tree.swift */; };
+		F1EB0B951BD1CA3E00D5DF01 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8F1BD1CA3E00D5DF01 /* Trie.swift */; };
+		F1EB0B971BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */; };
+		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; };
+		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; };
+		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; };
+		F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */; };
+		F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */; };
+		F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +164,8 @@
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
+		F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapSplitViewController.swift; sourceTree = "<group>"; };
+		F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsSplitViewController.swift; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
 		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; };
 		F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +192,7 @@
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1CA00B81BB20CD90050D710 /* MultiSelectSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiSelectSegmentedControl.h; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.h; sourceTree = "<group>"; };
 		F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiSelectSegmentedControl.m; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.m; sourceTree = "<group>"; };
+		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
 		F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonGapsViewController.swift; sourceTree = "<group>"; };
 		F1EB0B8A1BD1CA3E00D5DF01 /* Deque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deque.swift; path = DataStructures/Deque.swift; sourceTree = "<group>"; };
 		F1EB0B8B1BD1CA3E00D5DF01 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = List.swift; path = DataStructures/List.swift; sourceTree = "<group>"; };
@@ -409,7 +415,7 @@
 		F1229C371A7495A200C4FDE2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F1B8AD611BCADD6700BB879B /* NavigationControllers */,
+				F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */,
 				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
 				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
 				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
@@ -419,6 +425,7 @@
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
+				F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */,
 				F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
@@ -479,13 +486,15 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
-		F1B8AD611BCADD6700BB879B /* NavigationControllers */ = {
+		F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				F1B8AD621BCADD8600BB879B /* InGapNavigationViewController.swift */,
 				F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */,
+				F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */,
+				F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */,
 			);
-			name = NavigationControllers;
+			name = "Navigation and Split View Controllers";
 			sourceTree = "<group>";
 		};
 		F1CA00B41BB20C900050D710 /* MultiSelectSegmentedControl */ = {
@@ -564,7 +573,6 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -672,6 +680,7 @@
 				F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */,
 				F1B8AD601BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift in Sources */,
 				F1B8AD631BCADD8600BB879B /* InGapNavigationViewController.swift in Sources */,
+				F14DC5101BE447E40046CD48 /* InGapSplitViewController.swift in Sources */,
 				F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
@@ -680,6 +689,7 @@
 				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
 				F11B03511BA52B9D00ADD580 /* UIImage+TKCategory.m in Sources */,
 				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
+				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
 				F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */,
 				F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */,
@@ -693,6 +703,7 @@
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
 				F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
+				F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
@@ -882,7 +893,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Debug;
@@ -913,7 +924,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 			};
 			name = Release;
