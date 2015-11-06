@@ -47,10 +47,22 @@
 		F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */; };
 		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
+		F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFA1BE4836800AE561D /* Interface.storyboard */; };
+		F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFD1BE4836800AE561D /* Assets.xcassets */; };
+		F126AE051BE4836900AE561D /* enHueco watchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F126AE041BE4836900AE561D /* enHueco watchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F126AE0C1BE4836900AE561D /* InGapInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE0B1BE4836900AE561D /* InGapInterfaceController.swift */; };
+		F126AE0E1BE4836900AE561D /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE0D1BE4836900AE561D /* ExtensionDelegate.swift */; };
+		F126AE101BE4836900AE561D /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE0F1BE4836900AE561D /* NotificationController.swift */; };
+		F126AE121BE4836900AE561D /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE111BE4836900AE561D /* GlanceController.swift */; };
+		F126AE141BE4836900AE561D /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE131BE4836900AE561D /* ComplicationController.swift */; };
+		F126AE161BE4836900AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126AE151BE4836900AE561D /* Assets.xcassets */; };
+		F126AE1A1BE4836900AE561D /* enHueco watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F126ADF81BE4836800AE561D /* enHueco watchOS.app */; };
+		F126AE251BE58CE600AE561D /* InGapRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE241BE58CE600AE561D /* InGapRowController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; };
 		F14DC5101BE447E40046CD48 /* InGapSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */; };
 		F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */; };
+		F156646C1BE5EA7800823AEE /* FriendDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */; };
 		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; };
 		F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */; };
 		F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */; };
@@ -83,6 +95,10 @@
 		F1EB0B941BD1CA3E00D5DF01 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8E1BD1CA3E00D5DF01 /* Tree.swift */; };
 		F1EB0B951BD1CA3E00D5DF01 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B8F1BD1CA3E00D5DF01 /* Trie.swift */; };
 		F1EB0B971BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */; };
+		F1ED50C21BE9A44A00533557 /* ProximityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C11BE9A44A00533557 /* ProximityManager.swift */; };
+		F1ED50C41BE9AFD500533557 /* SwiftGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */; };
+		F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */; };
+		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
 		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; };
 		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; };
@@ -99,7 +115,46 @@
 			remoteGlobalIDString = F1229BD51A74947200C4FDE2;
 			remoteInfo = enHueco;
 		};
+		F126AE061BE4836900AE561D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1229BCE1A74947200C4FDE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F126AE031BE4836900AE561D;
+			remoteInfo = "enHueco watchOS Extension";
+		};
+		F126AE181BE4836900AE561D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1229BCE1A74947200C4FDE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F126ADF71BE4836800AE561D;
+			remoteInfo = "enHueco watchOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F126AE201BE4836900AE561D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F126AE051BE4836900AE561D /* enHueco watchOS Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F126AE221BE4836900AE561D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				F126AE1A1BE4836900AE561D /* enHueco watchOS.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B9D2A664916D69DF79667B4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,10 +217,25 @@
 		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalConstants.swift; path = Other/GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
+		F126ADF81BE4836800AE561D /* enHueco watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "enHueco watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F126ADFB1BE4836800AE561D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		F126ADFD1BE4836800AE561D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F126ADFF1BE4836800AE561D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F126AE041BE4836900AE561D /* enHueco watchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "enHueco watchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F126AE0A1BE4836900AE561D /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		F126AE0B1BE4836900AE561D /* InGapInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGapInterfaceController.swift; sourceTree = "<group>"; };
+		F126AE0D1BE4836900AE561D /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		F126AE0F1BE4836900AE561D /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		F126AE111BE4836900AE561D /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		F126AE131BE4836900AE561D /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		F126AE151BE4836900AE561D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F126AE171BE4836900AE561D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F126AE241BE58CE600AE561D /* InGapRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InGapRowController.swift; path = Views/InGapRowController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapSplitViewController.swift; sourceTree = "<group>"; };
 		F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsSplitViewController.swift; sourceTree = "<group>"; };
+		F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailInterfaceController.swift; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
 		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; };
 		F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +271,10 @@
 		F1EB0B8E1BD1CA3E00D5DF01 /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tree.swift; path = DataStructures/Tree.swift; sourceTree = "<group>"; };
 		F1EB0B8F1BD1CA3E00D5DF01 /* Trie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trie.swift; path = DataStructures/Trie.swift; sourceTree = "<group>"; };
 		F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailViewController2ViewController.swift; sourceTree = "<group>"; };
+		F1ED50C11BE9A44A00533557 /* ProximityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProximityManager.swift; sourceTree = "<group>"; };
+		F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGraph.swift; sourceTree = "<group>"; };
+		F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
+		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
 		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAndUtilities.swift; path = Other/ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
@@ -228,12 +302,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F126AE011BE4836900AE561D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */,
 				F1EB0B891BD1CA2500D5DF01 /* Data Structures */,
 				F119309C1BB7AFD70031EB58 /* UIImage+ImageEffects.h */,
 				F119309D1BB7AFD70031EB58 /* UIImage+ImageEffects.m */,
@@ -334,6 +416,8 @@
 			children = (
 				F1229BD81A74947200C4FDE2 /* enHueco */,
 				F1229BF11A74947200C4FDE2 /* enHuecoTests */,
+				F126ADF91BE4836800AE561D /* enHueco watchOS */,
+				F126AE081BE4836900AE561D /* enHueco watchOS Extension */,
 				F1229BD71A74947200C4FDE2 /* Products */,
 				7925AF665DEA52F357FF8A87 /* Frameworks */,
 				DD1796788F747C50B1E7DB40 /* Pods */,
@@ -345,6 +429,8 @@
 			children = (
 				F1229BD61A74947200C4FDE2 /* enHueco.app */,
 				F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */,
+				F126ADF81BE4836800AE561D /* enHueco watchOS.app */,
+				F126AE041BE4836900AE561D /* enHueco watchOS Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,6 +452,7 @@
 		F1229BD91A74947200C4FDE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F1ED50C71BEAFCA700533557 /* accessPoints.csv */,
 				F1229BDA1A74947200C4FDE2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -406,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				F1827F6D1BC35D91002ECB64 /* Main Classes */,
+				F1C8E5351BEBCA35007673BC /* Managers */,
 				F1827F6E1BC35DAC002ECB64 /* Other */,
 			);
 			name = Model;
@@ -439,6 +527,49 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		F126ADF91BE4836800AE561D /* enHueco watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				F126ADFA1BE4836800AE561D /* Interface.storyboard */,
+				F126ADFD1BE4836800AE561D /* Assets.xcassets */,
+				F126ADFF1BE4836800AE561D /* Info.plist */,
+			);
+			path = "enHueco watchOS";
+			sourceTree = "<group>";
+		};
+		F126AE081BE4836900AE561D /* enHueco watchOS Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F126AE231BE58CB800AE561D /* Views */,
+				F126AE0B1BE4836900AE561D /* InGapInterfaceController.swift */,
+				F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */,
+				F126AE0D1BE4836900AE561D /* ExtensionDelegate.swift */,
+				F126AE0F1BE4836900AE561D /* NotificationController.swift */,
+				F126AE111BE4836900AE561D /* GlanceController.swift */,
+				F126AE131BE4836900AE561D /* ComplicationController.swift */,
+				F126AE151BE4836900AE561D /* Assets.xcassets */,
+				F126AE171BE4836900AE561D /* Info.plist */,
+				F126AE091BE4836900AE561D /* Supporting Files */,
+			);
+			path = "enHueco watchOS Extension";
+			sourceTree = "<group>";
+		};
+		F126AE091BE4836900AE561D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F126AE0A1BE4836900AE561D /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F126AE231BE58CB800AE561D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F126AE241BE58CE600AE561D /* InGapRowController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		F16C613C1BB309F600703782 /* UIView+Shadow */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,8 +599,6 @@
 				F134AE5D1A800BB200E6E9AB /* EHURLS.swift */,
 				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
 				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
-				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
-				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -497,6 +626,16 @@
 			name = "Navigation and Split View Controllers";
 			sourceTree = "<group>";
 		};
+		F1C8E5351BEBCA35007673BC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
+				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
+				F1ED50C11BE9A44A00533557 /* ProximityManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		F1CA00B41BB20C900050D710 /* MultiSelectSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +648,7 @@
 		F1EB0B891BD1CA2500D5DF01 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
+				F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */,
 				F1EB0B8A1BD1CA3E00D5DF01 /* Deque.swift */,
 				F1EB0B8B1BD1CA3E00D5DF01 /* List.swift */,
 				F1EB0B8C1BD1CA3E00D5DF01 /* ListMethods.swift */,
@@ -532,10 +672,12 @@
 				F1229BD41A74947200C4FDE2 /* Resources */,
 				0B79295842BD16B663ED9488 /* Copy Pods Resources */,
 				ACA374B7403B95FFEE952D1E /* Embed Pods Frameworks */,
+				F126AE221BE4836900AE561D /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F126AE191BE4836900AE561D /* PBXTargetDependency */,
 			);
 			name = enHueco;
 			productName = enHueco;
@@ -560,6 +702,40 @@
 			productReference = F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F126ADF71BE4836800AE561D /* enHueco watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F126AE211BE4836900AE561D /* Build configuration list for PBXNativeTarget "enHueco watchOS" */;
+			buildPhases = (
+				F126ADF61BE4836800AE561D /* Resources */,
+				F126AE201BE4836900AE561D /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F126AE071BE4836900AE561D /* PBXTargetDependency */,
+			);
+			name = "enHueco watchOS";
+			productName = "enHueco watchOS";
+			productReference = F126ADF81BE4836800AE561D /* enHueco watchOS.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		F126AE031BE4836900AE561D /* enHueco watchOS Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F126AE1F1BE4836900AE561D /* Build configuration list for PBXNativeTarget "enHueco watchOS Extension" */;
+			buildPhases = (
+				F126AE001BE4836900AE561D /* Sources */,
+				F126AE011BE4836900AE561D /* Frameworks */,
+				F126AE021BE4836900AE561D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "enHueco watchOS Extension";
+			productName = "enHueco watchOS Extension";
+			productReference = F126AE041BE4836900AE561D /* enHueco watchOS Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -567,17 +743,26 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Diego Gómez";
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 29G7CN67XL;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 29G7CN67XL;
 						TestTargetID = F1229BD51A74947200C4FDE2;
+					};
+					F126ADF71BE4836800AE561D = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 29G7CN67XL;
+					};
+					F126AE031BE4836900AE561D = {
+						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 29G7CN67XL;
 					};
 				};
 			};
@@ -596,6 +781,8 @@
 			targets = (
 				F1229BD51A74947200C4FDE2 /* enHueco */,
 				F1229BED1A74947200C4FDE2 /* enHuecoTests */,
+				F126ADF71BE4836800AE561D /* enHueco watchOS */,
+				F126AE031BE4836900AE561D /* enHueco watchOS Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -606,6 +793,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */,
+				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
 				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
 				F1B343671B9BBFAE00EED205 /* Info.plist in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
@@ -619,6 +807,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F126ADF61BE4836800AE561D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */,
+				F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F126AE021BE4836900AE561D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F126AE161BE4836900AE561D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,8 +922,10 @@
 				F1EB0B951BD1CA3E00D5DF01 /* Trie.swift in Sources */,
 				F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */,
 				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
+				F1ED50C21BE9A44A00533557 /* ProximityManager.swift in Sources */,
 				F1EB0B901BD1CA3E00D5DF01 /* Deque.swift in Sources */,
 				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
+				F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */,
 				F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */,
@@ -726,6 +933,7 @@
 				F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */,
 				F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */,
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
+				F1ED50C41BE9AFD500533557 /* SwiftGraph.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F11B035C1BA52BBE00ADD580 /* UIColor+TKCategory.m in Sources */,
 				F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */,
@@ -758,6 +966,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F126AE001BE4836900AE561D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F156646C1BE5EA7800823AEE /* FriendDetailInterfaceController.swift in Sources */,
+				F126AE101BE4836900AE561D /* NotificationController.swift in Sources */,
+				F126AE0E1BE4836900AE561D /* ExtensionDelegate.swift in Sources */,
+				F126AE141BE4836900AE561D /* ComplicationController.swift in Sources */,
+				F126AE0C1BE4836900AE561D /* InGapInterfaceController.swift in Sources */,
+				F126AE121BE4836900AE561D /* GlanceController.swift in Sources */,
+				F126AE251BE58CE600AE561D /* InGapRowController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -765,6 +987,16 @@
 			isa = PBXTargetDependency;
 			target = F1229BD51A74947200C4FDE2 /* enHueco */;
 			targetProxy = F1229BEF1A74947200C4FDE2 /* PBXContainerItemProxy */;
+		};
+		F126AE071BE4836900AE561D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F126AE031BE4836900AE561D /* enHueco watchOS Extension */;
+			targetProxy = F126AE061BE4836900AE561D /* PBXContainerItemProxy */;
+		};
+		F126AE191BE4836900AE561D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F126ADF71BE4836800AE561D /* enHueco watchOS */;
+			targetProxy = F126AE181BE4836900AE561D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -783,6 +1015,14 @@
 				F1229C271A7495A200C4FDE2 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F126ADFA1BE4836800AE561D /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F126ADFB1BE4836800AE561D /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -971,6 +1211,84 @@
 			};
 			name = Release;
 		};
+		F126AE1B1BE4836900AE561D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = enHueco_watchOS_Extension;
+				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		F126AE1C1BE4836900AE561D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = enHueco_watchOS_Extension;
+				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		F126AE1D1BE4836900AE561D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		F126AE1E1BE4836900AE561D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -997,6 +1315,24 @@
 			buildConfigurations = (
 				F1229BFC1A74947200C4FDE2 /* Debug */,
 				F1229BFD1A74947200C4FDE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F126AE1F1BE4836900AE561D /* Build configuration list for PBXNativeTarget "enHueco watchOS Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F126AE1D1BE4836900AE561D /* Debug */,
+				F126AE1E1BE4836900AE561D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F126AE211BE4836900AE561D /* Build configuration list for PBXNativeTarget "enHueco watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F126AE1B1BE4836900AE561D /* Debug */,
+				F126AE1C1BE4836900AE561D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

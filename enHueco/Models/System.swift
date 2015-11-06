@@ -50,7 +50,7 @@ class System
     {
         persistencePath = documents + "/appState.state"
         
-        loadDataFromPersistence()
+        loadDataFromPersistence()        
     }
     
     func createTestAppUser ()

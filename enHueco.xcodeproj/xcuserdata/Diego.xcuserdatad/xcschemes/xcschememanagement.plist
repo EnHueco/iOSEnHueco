@@ -4,6 +4,46 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Complication - enHueco WatchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>Complication - enHueco watchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
+		<key>Glance - enHueco WatchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>Glance - enHueco watchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>Notification - enHueco WatchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
+		<key>Notification - enHueco watchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>enHueco WatchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>enHueco watchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
 		<key>enHueco.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +58,11 @@
 			<true/>
 		</dict>
 		<key>F1229BED1A74947200C4FDE2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F126ADF71BE4836800AE561D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
