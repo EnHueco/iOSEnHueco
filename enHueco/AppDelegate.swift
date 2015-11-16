@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         // Override point for customization after application launch.
-        
+                
         if #available(iOS 9.0, *)
         {
             if WCSession.isSupported()
@@ -67,6 +67,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+    }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
+    {
+        ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+            
+            completionHandler(.NewData)
+            
+        }, networkFailureHandler: { () -> () in
+            
+            completionHandler(.Failed)
+            
+        }, notConnectedToWifiHandler: { () -> () in
+            
+            completionHandler(.NoData)
+        })
+    }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
+    {
+        if UI_USER_INTERFACE_IDIOM() == .Phone
+        {
+            return .Portrait
+        }
+        else
+        {
+            return .All
+        }
     }
     
     @available(iOS 9.0, *)

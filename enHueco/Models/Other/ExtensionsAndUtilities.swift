@@ -131,3 +131,12 @@ extension Array
         return false
     }
 }
+
+class Wrapper<T>
+{
+    let element : T
+    init(element : T)
+    {
+        self.element = element
+    }
+}

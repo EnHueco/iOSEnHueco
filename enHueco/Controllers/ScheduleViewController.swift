@@ -14,14 +14,15 @@ class ScheduleViewController: UIViewController
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var addEventButton: UIButton!
+    @IBOutlet weak var importCalendarButton: UIButton!
     
     /**
-        Schedule to be displayed. Defaults to AppUser's
-    */
+     Schedule to be displayed. Defaults to AppUser's
+     */
     var schedule: Schedule = system.appUser.schedule
-
-    @IBOutlet weak var importCalendarButton: UIButton!
-    @IBOutlet weak var addGapOrClassButton: UIButton!
+    
+    ///Reference to the embeded calendar view controller
+    var scheduleCalendarViewController: ScheduleCalendarViewController!
     
     override func viewDidLoad()
     {
@@ -37,8 +38,8 @@ class ScheduleViewController: UIViewController
     {
         super.viewDidLayoutSubviews()
         
-        addGapOrClassButton.clipsToBounds = true
-        addGapOrClassButton.layer.cornerRadius = addGapOrClassButton.frame.size.height/2
+        addEventButton.clipsToBounds = true
+        addEventButton.layer.cornerRadius = addEventButton.frame.size.height/2
     }
     
     override func viewWillAppear(animated: Bool)
@@ -48,13 +49,68 @@ class ScheduleViewController: UIViewController
         if schedule !== system.appUser.schedule
         {
             importCalendarButton.hidden = true
-            addGapOrClassButton.hidden = true
+            addEventButton.hidden = true
         }
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        if schedule === system.appUser.schedule
+        {
+            becomeFirstResponder()
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool)
+    {
+        resignFirstResponder()
+    }
+    
+    override func canBecomeFirstResponder() -> Bool
+    {
+        return schedule === system.appUser.schedule
+    }
+    
+    ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
+    func addEvents(eventsToAdd: [Event])
+    {
+        for event in eventsToAdd
+        {
+            event.daySchedule.addEvent(event)
+            SynchronizationManager.sharedManager().reportNewEvent(event)
+        }
+        
+        undoManager!.registerUndoWithTarget(self, selector: Selector("deleteEvents:"), object: eventsToAdd)
+        
+        if !undoManager!.undoing
+        {
+            undoManager!.setActionName("Agregar Eventos")
+        }
+        
+        scheduleCalendarViewController.reloadData()
+    }
+    
+    ///Deletes the events from their assigned daySchedules, giving the ability to undo and redo the actions.
+    func deleteEvents(events: [Event])
+    {
+        for event in events
+        {
+            event.daySchedule.removeEvent(event)
+            SynchronizationManager.sharedManager().reportEventDeleted(event)
+        }
+        
+        undoManager!.registerUndoWithTarget(self, selector: Selector("addEvents:"), object: events)
+        
+        if !undoManager!.undoing
+        {
+            undoManager!.setActionName("Borrar Eventos")
+        }
+        
+        scheduleCalendarViewController.reloadData()
     }
     
     @IBAction func importScheduleButtonPressed(sender: AnyObject)
     {
-        
         let controller = storyboard!.instantiateViewControllerWithIdentifier("SelectCalendarViewController") as! SelectCalendarViewController
         navigationController!.pushViewController(controller, animated: true)
     }
@@ -63,12 +119,17 @@ class ScheduleViewController: UIViewController
     {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if let controller = segue.destinationViewController as? ScheduleCalendarViewController
         {
+            scheduleCalendarViewController = controller
             controller.schedule = schedule
+        }
+        else if let controller = segue.destinationViewController as? AddEditEventViewController
+        {
+            controller.scheduleViewController = self
         }
     }
 }

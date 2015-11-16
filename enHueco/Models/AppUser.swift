@@ -239,6 +239,11 @@ class AppUser: User
         }
     }
     
+    func fetchUpdatesForFriendLocations (successHandler: () -> (), failureHandler: () -> ())
+    {
+        
+    }
+    
     // MARK: Functions
     
     /**
@@ -365,6 +370,15 @@ class AppUser: User
             //TODO: Calculate Gaps and add them
         }
         return true
+    }
+    
+    /// When currentBSSID is set, refreshes the isNearby property for all friends.
+    override func refreshIsNearby()
+    {
+        for friend in friends
+        {
+            friend.refreshIsNearby()
+        }
     }
     
     // MARK: Friend Requests
@@ -550,7 +564,7 @@ class AppUser: User
                 if(firstEvent) { firstEvent = false }
                 else { encodedSchedule += multipleElementsCharacter}
                 
-                var eventType = event.type == EventType.Gap ? "G" : "C"
+                let eventType = event.type == EventType.Gap ? "G" : "C"
                 
                 // Add event type
                 encodedSchedule += eventType + separationCharacter

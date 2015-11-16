@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EVy-Ep-XAz">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -304,7 +304,7 @@
                                     <constraint firstAttribute="width" constant="50" id="sbu-6Q-QNe"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.63425268310000005" blue="0.52588851120000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" backgroundImage="Whatsapp"/>
+                                <state key="normal" backgroundImage="whatsapp"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="H71-41-ZZ0"/>
@@ -1097,7 +1097,8 @@
                                                     <variation key="widthClass=regular" misplaced="YES">
                                                         <rect key="frame" x="8" y="28" width="66" height="21"/>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="28" width="66" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="IIX-P4-XG8"/>
                                                             <include reference="Voa-2T-j06"/>
@@ -1760,7 +1761,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RdA-Mt-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172.5" y="831"/>
+            <point key="canvasLocation" x="172" y="891"/>
         </scene>
         <!--Amigos-->
         <scene sceneID="49Z-6k-t4d">
@@ -2139,7 +2140,7 @@
                                         </state>
                                         <connections>
                                             <action selector="addFriendButtonPressed:" destination="53Q-rn-P9C" eventType="touchUpInside" id="vM0-gh-rBl"/>
-                                            <segue destination="2iU-cR-3ET" kind="presentation" id="7xr-oj-ohZ"/>
+                                            <segue destination="2iU-cR-3ET" kind="presentation" modalPresentationStyle="currentContext" id="0sh-MZ-Lzv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2207,7 +2208,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="addEventButton" destination="WL9-4Z-Do4" id="oWP-v8-bFV"/>
-                        <outlet property="addGapOrClassButton" destination="WL9-4Z-Do4" id="yBM-gb-JG1"/>
                         <outlet property="closeButton" destination="7k9-vr-gPU" id="Egl-MG-7Uw"/>
                         <outlet property="importButton" destination="hR6-Rq-jJC" id="fc6-cg-KX6"/>
                         <outlet property="importCalendarButton" destination="hR6-Rq-jJC" id="Ylx-2v-cnI"/>
@@ -2314,7 +2314,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qa3-pv-faO">
-                                        <rect key="frame" x="486" y="25" width="96" height="30"/>
+                                        <rect key="frame" x="486" y="26" width="96" height="30"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="0oB-US-WUP"/>
@@ -2461,6 +2461,9 @@
                                                     <variation key="heightClass=regular" misplaced="YES">
                                                         <rect key="frame" x="28" y="17" width="544" height="30"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="28" y="17" width="544" height="30"/>
+                                                    </variation>
                                                 </textField>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ubicación (opcional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CTC-1Q-Qga">
                                                     <rect key="frame" x="49" y="47" width="523" height="30"/>
@@ -2472,6 +2475,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <variation key="heightClass=regular" misplaced="YES">
+                                                        <rect key="frame" x="49" y="47" width="523" height="30"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="49" y="47" width="523" height="30"/>
                                                     </variation>
                                                 </textField>
@@ -2488,6 +2494,9 @@
                                                     <variation key="heightClass=regular" misplaced="YES">
                                                         <rect key="frame" x="22" y="52" width="22" height="21"/>
                                                     </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="22" y="52" width="22" height="21"/>
+                                                    </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ALG-HM-EZU">
                                                     <rect key="frame" x="23" y="44" width="554" height="1"/>
@@ -2497,6 +2506,9 @@
                                                         <constraint firstAttribute="height" constant="1" id="rN5-V4-sVZ"/>
                                                     </constraints>
                                                     <variation key="heightClass=regular" misplaced="YES">
+                                                        <rect key="frame" x="23" y="44" width="554" height="1"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="23" y="44" width="554" height="1"/>
                                                     </variation>
                                                 </view>
@@ -2705,6 +2717,9 @@
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <variation key="heightClass=regular" misplaced="YES">
+                                                        <rect key="frame" x="8" y="14" width="584" height="37"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="8" y="14" width="584" height="37"/>
                                                     </variation>
                                                     <connections>
@@ -2930,6 +2945,7 @@
                         <outlet property="passwordTextField" destination="vcH-iL-dbG" id="Quv-Bi-uFM"/>
                         <outlet property="usernameTextField" destination="dKZ-Cl-i2z" id="ZBo-Mh-64G"/>
                         <outlet property="verticalSpaceToBottomConstraint" destination="InU-1h-Uae" id="P8A-of-DLV"/>
+                        <segue destination="R39-0i-VSi" kind="presentation" identifier="PresentMainTabViewController" id="kV4-FX-SYc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0de-ww-DFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3465,5 +3481,6 @@
         <image name="UsuarioV50" width="25" height="25"/>
         <image name="Whatsapp" width="158" height="157"/>
         <image name="icon-circle-checkmark-grey" width="150" height="150"/>
+        <image name="whatsapp" width="158" height="157"/>
     </resources>
 </document>

@@ -18,6 +18,9 @@ class AddEditEventViewController: UIViewController
     var embeddedTableViewController: EmbeddedAddEditEventTableViewController!
     
     var eventToEdit: Event?
+    
+    ///Parent schedule view controller
+    var scheduleViewController: ScheduleViewController!
 
     // MARK: View Controller
     
@@ -67,7 +70,7 @@ class AddEditEventViewController: UIViewController
         
         var canAddEvents = true
         
-        var daySchedulesAndEventToAdd = [(daySchedule: DaySchedule, event: Event)]()
+        var eventsToAdd = [Event]()
         
         for index in embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes
         {
@@ -104,19 +107,15 @@ class AddEditEventViewController: UIViewController
             }
             else
             {
-                daySchedulesAndEventToAdd.append((daySchedule, newEvent))
+                newEvent.daySchedule = daySchedule
+                eventsToAdd.append(newEvent)
             }
         }
         
         if canAddEvents
         {
-            eventToEdit?.daySchedule.removeEvent(eventToEdit!)
-
-            for (daySchedule, event) in daySchedulesAndEventToAdd
-            {
-                daySchedule.addEvent(event)
-                SynchronizationManager.sharedManager().reportNewEvent(event)
-            }
+            deleteEventToEdit()
+            scheduleViewController.addEvents(eventsToAdd)
             
             dismissViewControllerAnimated(true, completion: nil)
         }
@@ -135,7 +134,10 @@ class AddEditEventViewController: UIViewController
     
     func deleteEventToEdit()
     {
-        eventToEdit?.daySchedule.removeEvent(eventToEdit!)
+        if let eventToEdit = eventToEdit
+        {
+            scheduleViewController.deleteEvents([eventToEdit])
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

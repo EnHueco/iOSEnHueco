@@ -21,7 +21,6 @@
 		F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = F119309D1BB7AFD70031EB58 /* UIImage+ImageEffects.m */; };
 		F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F119309F1BB84B570031EB58 /* ViewQRViewController.swift */; };
 		F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */; };
-		F11B02001BA5226A00ADD580 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11B01FF1BA5226A00ADD580 /* MapKit.framework */; };
 		F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11B02011BA5226F00ADD580 /* QuartzCore.framework */; };
 		F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02311BA5241200ADD580 /* TKCalendarDayEventView.m */; };
 		F11B02371BA5241200ADD580 /* TKCalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B02331BA5241200ADD580 /* TKCalendarDayView.m */; };
@@ -36,6 +35,7 @@
 		F11B03631BA52BD200ADD580 /* UIScreen+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03621BA52BD200ADD580 /* UIScreen+TKCategory.m */; };
 		F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F11B03651BA52BD900ADD580 /* UILabel+TKCategory.m */; };
 		F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */; };
+		F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */; };
 		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; };
 		F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
@@ -174,7 +174,6 @@
 		F119309D1BB7AFD70031EB58 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		F119309F1BB84B570031EB58 /* ViewQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewQRViewController.swift; sourceTree = "<group>"; };
 		F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCalendarViewController.swift; sourceTree = "<group>"; };
-		F11B01FF1BA5226A00ADD580 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F11B02011BA5226F00ADD580 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F11B02301BA5241200ADD580 /* TKCalendarDayEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TKCalendarDayEventView.h; path = Tapku/TKCalendarDayEventView.h; sourceTree = "<group>"; };
 		F11B02311BA5241200ADD580 /* TKCalendarDayEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TKCalendarDayEventView.m; path = Tapku/TKCalendarDayEventView.m; sourceTree = "<group>"; };
@@ -201,6 +200,7 @@
 		F11B03641BA52BD900ADD580 /* UILabel+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+TKCategory.h"; path = "Tapku/Core/UILabel+TKCategory.h"; sourceTree = "<group>"; };
 		F11B03651BA52BD900ADD580 /* UILabel+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+TKCategory.m"; path = "Tapku/Core/UILabel+TKCategory.m"; sourceTree = "<group>"; };
 		F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		F11D6FA31BA3BE1500206B9A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendByQRViewController.swift; sourceTree = "<group>"; };
 		F1229BD61A74947200C4FDE2 /* enHueco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = enHueco.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */,
-				F11B02001BA5226A00ADD580 /* MapKit.framework in Frameworks */,
 				5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +322,6 @@
 				F1CA00B41BB20C900050D710 /* MultiSelectSegmentedControl */,
 				F11B02031BA5238900ADD580 /* Tapku */,
 				F11B02011BA5226F00ADD580 /* QuartzCore.framework */,
-				F11B01FF1BA5226A00ADD580 /* MapKit.framework */,
 				F14A72BC1BA3786700D70BD1 /* AutoCoding */,
 				F1B343601B9BBFAE00EED205 /* QRCode */,
 				F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */,
@@ -512,11 +510,11 @@
 				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
-				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
-				F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */,
 				F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
+				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
+				F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 				F119309F1BB84B570031EB58 /* ViewQRViewController.swift */,
 				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
@@ -648,6 +646,7 @@
 		F1EB0B891BD1CA2500D5DF01 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
+				F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */,
 				F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */,
 				F1EB0B8A1BD1CA3E00D5DF01 /* Deque.swift */,
 				F1EB0B8B1BD1CA3E00D5DF01 /* List.swift */,
@@ -742,7 +741,7 @@
 		F1229BCE1A74947200C4FDE2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftMigration = 0700;
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Diego Gómez";
@@ -750,6 +749,17 @@
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 29G7CN67XL;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -914,6 +924,7 @@
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F11B02361BA5241200ADD580 /* TKCalendarDayEventView.m in Sources */,
 				F11B03601BA52BCA00ADD580 /* UIView+TKCategory.m in Sources */,
+				F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */,
 				F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */,
 				F1EB0B911BD1CA3E00D5DF01 /* List.swift in Sources */,
 				F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */,

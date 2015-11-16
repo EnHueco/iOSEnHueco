@@ -35,17 +35,16 @@ import UIKit
         
         loginButton.clipsToBounds = true
         loginButton.layer.cornerRadius = loginButton.frame.height/2
-        
-        if system.appUser != nil
-        {
-            let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-            self.presentViewController(mainViewController, animated: true, completion: nil)
-        }
     }
     
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
+        
+        if system.appUser != nil
+        {
+            goToMainTabViewController()
+        }
     }
     
     @IBAction func login(sender: AnyObject)
@@ -63,8 +62,7 @@ import UIKit
             // Test
             system.createTestAppUser()
             
-            let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-            navigationController!.pushViewController(mainViewController, animated: true)
+            goToMainTabViewController()
             return
             /////////
         }
@@ -72,7 +70,11 @@ import UIKit
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
         
         system.login(username, password: password)
-        
+    }
+    
+    func goToMainTabViewController()
+    {
+        performSegueWithIdentifier("PresentMainTabViewController", sender: self)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -85,10 +87,8 @@ import UIKit
     func systemDidLogin (notification: NSNotification)
     {
         NSThread.sleepForTimeInterval(0.5)
-        let mainViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
-        
-        presentViewController(mainViewController, animated: true, completion: nil)
         MRProgressOverlayView.dismissOverlayForView(view, animated:true)
+        goToMainTabViewController()
     }
     
     func systemCouldNotLoginWithError (notification: NSNotification)
@@ -105,7 +105,7 @@ import UIKit
     func keyboardWillShow (notification: NSNotification)
     {
         var info = notification.userInfo!
-        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
      
         view.layoutIfNeeded()
 

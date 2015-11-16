@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import SystemConfiguration.CaptiveNetwork
 
+/// Universally accessible singleton instance
 let system = System()
 
 class EHSystemNotification

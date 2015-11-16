@@ -9,6 +9,7 @@
 import Foundation
 import NetworkExtension
 import SystemConfiguration.CaptiveNetwork
+import ReachabilitySwift
 
 class ProximityManager: NSObject
 {
@@ -17,12 +18,12 @@ class ProximityManager: NSObject
     ///Graph with BSSIDs of the access points
     private let wifiAccessPointsGraph = UnweightedGraph<String>()
     
-    override init()
+    private override init()
     {
         super.init()
     }
     
-    static func sharedInstance() -> ProximityManager
+    static func sharedManager() -> ProximityManager
     {
         return instance
     }
@@ -97,6 +98,8 @@ class ProximityManager: NSObject
     
     static func currentBSSID() -> String?
     {
+        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi else { return nil }
+        
         if let interfaces:CFArray! = CNCopySupportedInterfaces() where CFArrayGetCount(interfaces) > 0
         {
             let interfaceName: UnsafePointer<Void> = CFArrayGetValueAtIndex(interfaces, 0)
@@ -105,14 +108,15 @@ class ProximityManager: NSObject
             if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec))
             {
                 let interfaceData = unsafeInterfaceData as Dictionary!
-                return interfaceData["BSSID"] as! String
+                return interfaceData["BSSID"] as? String
             }
         }
         
         return nil
     }
     
-    func reportCurrentBSSID()
+    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(successHandler: () -> (), networkFailureHandler: () -> (), notConnectedToWifiHandler: () -> ())
     {
+        
     }
 }

@@ -38,6 +38,7 @@ PODS:
     - MRProgress/Helper
   - MSCollectionViewCalendarLayout (0.1.5)
   - QRCodeReaderViewController (3.5.2)
+  - ReachabilitySwift (2.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -54,18 +55,24 @@ DEPENDENCIES:
   - MRProgress
   - MSCollectionViewCalendarLayout
   - QRCodeReaderViewController (~> 3.5.2)
+  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
   - SDWebImage (~> 3.7)
   - SimpleAlert
   - StaticDataTableViewController (from `https://github.com/peterpaulis/StaticDataTableViewController.git`)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
+  ReachabilitySwift:
+    :git: https://github.com/ashleymills/Reachability.swift
   StaticDataTableViewController:
     :git: https://github.com/peterpaulis/StaticDataTableViewController.git
   TSMessages:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
+  ReachabilitySwift:
+    :commit: 89b2431fe262bc5915972472e36d04c067f686bc
+    :git: https://github.com/ashleymills/Reachability.swift
   StaticDataTableViewController:
     :commit: e032eca1f3e5ef9a8462cda4cb9c1260f57bb1c6
     :git: https://github.com/peterpaulis/StaticDataTableViewController.git
@@ -83,6 +90,7 @@ SPEC CHECKSUMS:
   MRProgress: f4cfe862082418e8f542f077772283f425d6c699
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
+  ReachabilitySwift: 99bb7acceebb90b2048b4a8fd6539be96454dcb2
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SimpleAlert: 05215ee656e1da1428998e76a76bb153a16c7a21
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
