@@ -33,6 +33,11 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
         dayView.reloadData()
     }
     
+    func reloadData()
+    {
+        dayView.reloadData()
+    }
+    
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]!
     {
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
@@ -60,6 +65,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
+        guard schedule === system.appUser.schedule else { return }
+        
         let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditEventViewController") as! AddEditEventViewController
         
         let weekDayNumber = localCalendar.component(.Weekday, fromDate: eventView.startDate)
@@ -67,9 +74,9 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
         
         let componentUnits: NSCalendarUnit = [.Weekday, .Hour, .Minute]
         let startHour = globalCalendar.components(componentUnits, fromDate: eventView.startDate)
-
-        viewController.eventToEdit = weekDayDaySchedule.eventWithStartHour(startHour)!
         
+        viewController.eventToEdit = weekDayDaySchedule.eventWithStartHour(startHour)!
+        viewController.scheduleViewController = parentViewController as! ScheduleViewController
         presentViewController(viewController, animated: true, completion: nil)
     }
 }

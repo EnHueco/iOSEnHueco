@@ -22,6 +22,20 @@ class User: EHSynchronizable
     
     var schedule: Schedule
     
+    /// (For efficiency) True if the user is near the App User at the current time, given the currentBSSID values.
+    private(set) var isNearby = false
+    
+    var currentBSSID: String?
+    {
+        didSet
+        {
+            if oldValue != currentBSSID
+            {
+                refreshIsNearby()
+            }
+        }
+    }
+    
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.username = username
@@ -74,6 +88,35 @@ class User: EHSynchronizable
     func nextEvent () -> Event?
     {
         return nil //TODO: 
+    }
+    
+    func hasNextGap () -> Bool
+    {
+        let currentDate = NSDate()
+        
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
+
+        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .Gap && event.startHourInDate(currentDate) > currentDate
+        {
+            // TODO: This implementation could return the actual current gap if events were sorted
+            return true
+        }
+        
+        return false
+    }
+    
+    /// When current BSSID is set, checks if user is near the App User and updates the value of the isNearby property.
+    func refreshIsNearby()
+    {
+        if let appUserBSSID = system.appUser.currentBSSID, currentBSSID = currentBSSID
+        {
+            isNearby = ProximityManager.sharedManager().wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
+        }
+        else
+        {
+            isNearby = false
+        }
     }
     
     // MARK: NSCoding

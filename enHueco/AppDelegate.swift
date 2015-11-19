@@ -8,16 +8,26 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 {
-
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         // Override point for customization after application launch.
+                
+        if #available(iOS 9.0, *)
+        {
+            if WCSession.isSupported()
+            {
+                let session = WCSession.defaultSession()
+                session.delegate = self
+                session.activateSession()
+            }
+        }
         
         let defaults =
         [
@@ -65,5 +75,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Saves changes in the application's managed object context before the application terminates.
     }
     
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
+    {
+        ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+            
+            completionHandler(.NewData)
+            
+        }, networkFailureHandler: { () -> () in
+            
+            completionHandler(.Failed)
+            
+        }, notConnectedToWifiHandler: { () -> () in
+            
+            completionHandler(.NoData)
+        })
+    }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
+    {
+        if UI_USER_INTERFACE_IDIOM() == .Phone
+        {
+            return .Portrait
+        }
+        else
+        {
+            return .All
+        }
+    }
+    
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
+    {
+        if message["request"] as! String == "friendsCurrentlyInGap"
+        {
+            var responseDictionary = [String : AnyObject]()
+            let friendsInGapAndGaps = system.appUser.friendsCurrentlyInGap()
+            
+            var friendsArray = [[String : AnyObject]]()
+            
+            for (friend, gap) in friendsInGapAndGaps
+            {
+                var friendDictionary = [String : AnyObject]()
+                
+                friendDictionary["name"] = friend.name
+                friendDictionary["imageURL"] = friend.imageURL?.absoluteString
+                friendDictionary["gapEndDate"] = gap.endHourInDate(NSDate())
+                
+                friendsArray.append(friendDictionary)
+            }
+            
+            responseDictionary["friends"] = friendsArray
+            
+            replyHandler(responseDictionary)
+        }
+    }
 }
 

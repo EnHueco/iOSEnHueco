@@ -32,6 +32,8 @@ pod 'SimpleAlert'
 
 pod 'StaticDataTableViewController', :git => 'https://github.com/peterpaulis/StaticDataTableViewController.git'
 
+pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
+
 target 'enHuecoTests' do
  
 end

@@ -54,12 +54,13 @@ class DaySchedule: NSObject, NSCoding
     
     func setEvents(events: [Event])
     {
+        mutableEvents = []
+        
         for event in events
         {
             event.daySchedule = self
+            mutableEvents.insertInSortedArray(event)
         }
-        
-        mutableEvents = events
     }
    
     /// Returns true if event doesn't overlap with any gap or class, excluding eventToExclude.
@@ -90,7 +91,7 @@ class DaySchedule: NSObject, NSCoding
         if canAddEvent(newEvent)
         {
             newEvent.daySchedule = self
-            mutableEvents.append(newEvent)
+            mutableEvents.insertInSortedArray(newEvent)
             
             return true
         }
@@ -119,11 +120,7 @@ class DaySchedule: NSObject, NSCoding
     
     func eventWithStartHour(startHour: NSDateComponents) -> Event?
     {
-        for event in mutableEvents where event.startHour == startHour
-        {
-            return event
-        }
-        return nil
+        return mutableEvents.filter { $0.startHour == startHour }.first
     }
     
     // TODO: Implement Equatable protocol

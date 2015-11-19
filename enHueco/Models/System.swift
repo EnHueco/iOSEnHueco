@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import SystemConfiguration.CaptiveNetwork
 
+/// Universally accessible singleton instance
 let system = System()
 
 class EHSystemNotification
@@ -50,7 +51,7 @@ class System
     {
         persistencePath = documents + "/appState.state"
         
-        loadDataFromPersistence()
+        loadDataFromPersistence()        
     }
     
     func createTestAppUser ()

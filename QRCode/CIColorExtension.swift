@@ -18,7 +18,7 @@ public extension CIColor {
     ///     `bb00ff`
     ///     `aabbccff`
     ///
-    /// :param: rgba    The hex string to parse in rgba format
+    /// - parameter rgba:    The hex string to parse in rgba format
     public convenience init(rgba: String) {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
@@ -55,7 +55,7 @@ public extension CIColor {
             }
             
         } else {
-            print("Invalid HEX value: \(rgba)")
+            print("Invalid HEX value: \(rgba)", terminator: "")
         }
         
         self.init(red: r, green: g, blue: b, alpha: a)

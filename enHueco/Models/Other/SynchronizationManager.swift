@@ -25,7 +25,7 @@ class SynchronizationManager: NSObject
     
     let retryQueue = NSOperationQueue()
     
-    override init()
+    private override init()
     {
         retryQueue.maxConcurrentOperationCount = 1
         retryQueue.qualityOfService = .Background
@@ -144,8 +144,13 @@ class SynchronizationManager: NSObject
         var params = newEvent.toJSONObject()
         params["user"] = system.appUser.username
         
-        sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+        //sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
         
         //TODO: Change associated object
+    }
+    
+    func reportEventDeleted(eventDeleted: Event)
+    {
+        //TODO:
     }
 }
