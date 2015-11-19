@@ -1,6 +1,0 @@
-framework module ASMediaFocusManager {
-  umbrella header "ASMediaFocusManager-umbrella.h"
-
-  export *
-  module * { export * }
-}

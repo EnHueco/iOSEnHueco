@@ -10,8 +10,29 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var logoutCell: UITableViewCell!
+    @IBOutlet weak var authTouchIDSwitch: UISwitch!
+
+    @IBAction func authenticateWithTIDChanged(sender: UISwitch)
+    {
+        var isOn = NSUserDefaults.standardUserDefaults().boolForKey("authTouchID")
+        isOn = !isOn
+        
+        NSUserDefaults.standardUserDefaults().setBool(isOn, forKey: "authTouchID")
+        
+        authTouchIDSwitch.on = isOn
+    }
+    
+    
+    @IBAction func exitButtonPressed(sender: AnyObject)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
+
         super.viewDidLoad()
+        authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("authTouchID")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -19,23 +40,41 @@ class SettingsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let cell = tableView.cellForRowAtIndexPath(indexPath);
+        if(cell ==  logoutCell)
+        {
+            system.logOut()
+            if let loginViewController = storyboard?.instantiateViewControllerWithIdentifier("MainNavigationController")
+            {
+                presentViewController(loginViewController, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
+    
+
+    
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -91,5 +130,6 @@ class SettingsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
 }

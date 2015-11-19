@@ -1,6 +1,0 @@
-framework module Pods_enHuecoTests {
-  umbrella header "Pods-enHuecoTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

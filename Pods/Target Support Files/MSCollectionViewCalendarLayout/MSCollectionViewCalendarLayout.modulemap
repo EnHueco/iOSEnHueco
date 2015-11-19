@@ -1,6 +1,0 @@
-framework module MSCollectionViewCalendarLayout {
-  umbrella header "MSCollectionViewCalendarLayout-umbrella.h"
-
-  export *
-  module * { export * }
-}

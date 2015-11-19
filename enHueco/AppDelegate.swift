@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     {
         // Override point for customization after application launch.
         
+        let defaults =
+        [
+            "authTouchID" : false,
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        
         return true
     }
 

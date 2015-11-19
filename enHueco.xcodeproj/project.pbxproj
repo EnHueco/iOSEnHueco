@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
+		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
@@ -47,6 +47,7 @@
 		F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */; };
 		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
+		F1299DE61BE9235B006AB811 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1299DE51BE9235B006AB811 /* SettingsTableViewController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; };
 		F14DC5101BE447E40046CD48 /* InGapSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */; };
@@ -162,6 +163,7 @@
 		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalConstants.swift; path = Other/GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
+		F1299DE51BE9235B006AB811 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapSplitViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		F1179E711B9BB5F500B04400 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
 				F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */,
 				F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */,
 				F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */,
@@ -395,7 +398,6 @@
 				F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */,
 				F1229C261A7495A200C4FDE2 /* Main.storyboard */,
 				F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */,
-				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
 				F1229C2B1A7495A200C4FDE2 /* Images.xcassets */,
 				F11D6FA31BA3BE1500206B9A /* Colors.swift */,
 			);
@@ -416,25 +418,25 @@
 			isa = PBXGroup;
 			children = (
 				F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */,
-				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
-				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
-				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
-				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
-				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
-				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
+				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
-				F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */,
+				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
 				F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */,
+				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
+				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
+				F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */,
+				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
+				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
+				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
+				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
+				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
 				F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */,
 				F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */,
 				F11B01D61BA520BB00ADD580 /* ScheduleCalendarViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
+				F1299DE51BE9235B006AB811 /* SettingsTableViewController.swift */,
 				F119309F1BB84B570031EB58 /* ViewQRViewController.swift */,
-				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
-				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
-				F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */,
-				F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -489,6 +491,7 @@
 		F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */,
 				F1B8AD621BCADD8600BB879B /* InGapNavigationViewController.swift */,
 				F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */,
 				F14DC50F1BE447E40046CD48 /* InGapSplitViewController.swift */,
@@ -573,6 +576,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 4R547J5575;
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -734,6 +738,7 @@
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,
 				F1EB0B941BD1CA3E00D5DF01 /* Tree.swift in Sources */,
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
+				F1299DE61BE9235B006AB811 /* SettingsTableViewController.swift in Sources */,
 				F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */,
 				F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
@@ -888,7 +893,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
@@ -920,7 +925,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";

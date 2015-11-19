@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class ProfileViewController: UIViewController
 {
@@ -130,14 +131,7 @@ class ProfileViewController: UIViewController
             backgroundImageView.hidden = true
         }*/        
     }
-    
-    @IBAction func settingsButtonPressed(sender: AnyObject)
-    {
-        system.logOut()
         
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController")
-        presentViewController(controller, animated: true, completion: nil)
-    }
     
     @IBAction func myQRButtonPressed(sender: AnyObject)
     {
@@ -149,4 +143,99 @@ class ProfileViewController: UIViewController
         viewController.modalPresentationStyle = .OverCurrentContext
         presentViewController(viewController, animated: true, completion: nil)
     }
+    
+    @IBAction func settingsButtonPressed(sender: UIButton)
+    {
+        if NSUserDefaults.standardUserDefaults().boolForKey("authTouchID")
+        {
+            authenticateUser()
+        }
+        else
+        {
+            showSettings()            
+        }
+
+    }
+    
+    private func showSettings()
+    {
+        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
+        presentViewController(viewController, animated: true, completion: nil)
+    }
+    
+    
+    
+    enum LAError : Int {
+        case AuthenticationFailed
+        case UserCancel
+        case UserFallback
+        case SystemCancel
+        case PasscodeNotSet
+        case TouchIDNotAvailable
+        case TouchIDNotEnrolled
+    }
+    
+    func authenticateUser()
+    {
+        // Get the local authentication context.
+        let context = LAContext()
+        
+        // Declare a NSError variable.
+        var error: NSError?
+        
+        // Set the reason string that will appear on the authentication alert.
+        let reasonString = "Authentication is needed to access your settings."
+        
+        // Check if the device can evaluate the policy.
+        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success: Bool, evalPolicyError: NSError?) -> Void in
+                
+                if success {
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.showSettings()
+                    })
+                }
+                else{
+                    //                    println(evalPolicyError?.localizedDescription)
+                    switch evalPolicyError!.code
+                    {
+                        case LAError.SystemCancel.rawValue:
+                            break
+                        case LAError.UserCancel.rawValue:
+                            break
+                        case LAError.UserFallback.rawValue:
+                            break
+                        //                        println("User selected to enter custom password")
+                        //                        self.showPasswordAlert()
+                        
+                        default:
+                            break
+                        //                        println("Authentication failed")
+                        //                        self.showPasswordAlert()
+                    }
+                }
+            })
+        }
+        else{
+            // If the security policy cannot be evaluated then show a short message depending on the error.
+            switch error!.code{
+                
+            case LAError.TouchIDNotEnrolled.rawValue:
+                break
+                
+            case LAError.PasscodeNotSet.rawValue:
+                break
+                
+            default:
+                break
+                // The LAError.TouchIDNotAvailable case.
+            }
+            
+            //            println(error?.localizedDescription)
+            
+            // Allow users to enter the password.
+            //            self.showPasswordAlert()
+        }
+    }
+    
 }
