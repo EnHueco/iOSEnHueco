@@ -38,6 +38,7 @@ class AppUser: User
         let user = User(JSONDictionary: JSONDictionary["user"] as! [String : AnyObject])
         
         self.init(username: user.username, token: token ?? system.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, ID: user.ID, lastUpdatedOn: user.lastUpdatedOn)
+    
     }
     
     // MARK: NSCoding
@@ -95,7 +96,7 @@ class AppUser: User
         request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
         request.setValue(token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "GET"
-
+        
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
             
             let user = User(JSONDictionary: JSONResponse as! [String : AnyObject])
@@ -523,6 +524,7 @@ class AppUser: User
         
         dispatch_async(dispatch_get_main_queue())
         {
+            system.appUser.sendFriendRequestToUser(friend)
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidAddFriend, object: system, userInfo: nil)
         }
     }
@@ -579,6 +581,55 @@ class AppUser: User
         
         encodedSchedule += splitCharacter
         return encodedSchedule
+    }
+    
+    func hasBeenUpdated(date: String) -> Bool
+    {
+        let serverDate = NSDate(serverFormattedString: date)!
+        return (serverDate.compare(self.lastUpdatedOn).rawValue > 0)
+    }
+    
+    func updateProfilePicture(image: UIImage)
+    {
+//        let imageData = UIImageJPEGRepresentation(image, 100)
+        let url = NSURL(string: "https://enhueco.uniandes.edu.co/me/")
+        let request = NSMutableURLRequest(URL: url!)
+        
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "PUT"
+        request.setValue("attachment; filename=upload.jpg", forHTTPHeaderField: "Content-Disposition")
+        let jpegData = NSData(data: UIImageJPEGRepresentation(image, 100)!)
+        request.HTTPBody = jpegData
+        
+        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+            system.updateUser()
+            self.persistProfilePicture(jpegData)
+            }, onFailure: { (error) -> () in
+                print(error)
+        })
+    }
+    
+    func downloadProfilePicture()
+    {
+        if let url = imageURL
+        {
+            let request = NSMutableURLRequest(URL: url)
+            request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+            request.HTTPMethod = "GET"
+            ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+                self.persistProfilePicture(data)
+                }) { (error) -> () in
+                    print(error)
+            }
+        }
+    }
+    
+    func persistProfilePicture(data : NSData)
+    {
+        let path = ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")
+        ImagePersistenceManager.saveImage(data, path: path)
     }
 }
 

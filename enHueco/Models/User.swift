@@ -10,10 +10,10 @@ import Foundation
 
 class User: EHSynchronizable
 {
-    let username: String
+    var username: String
     
-    let firstNames: String
-    let lastNames: String
+    var firstNames: String
+    var lastNames: String
     
     var name: String { return "\(firstNames) \(lastNames)" }
     
@@ -55,11 +55,21 @@ class User: EHSynchronizable
         let username = JSONDictionary["login"] as! String
         let firstNames = JSONDictionary["firstNames"] as! String
         let lastNames = JSONDictionary["lastNames"] as! String
-        let imageURL:NSURL? = (JSONDictionary["imageURL"] != nil ? NSURL(string: JSONDictionary["imageURL"]! as! String)! : nil)
+        let imageURL:NSURL? = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         let phoneNumber = JSONDictionary["phoneNumber"] as? String
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
 
         self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+    }
+    
+    func updateUser(JSONDictionary: [String : AnyObject])
+    {
+        self.username = JSONDictionary["login"] as! String
+        self.firstNames = JSONDictionary["firstNames"] as! String
+        self.lastNames = JSONDictionary["lastNames"] as! String
+        self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
+        self.phoneNumber = JSONDictionary["phoneNumber"] as? String
+        self.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
     }
     
     /// Returns user current gap, or nil if user is not in a gap.
@@ -162,4 +172,13 @@ class User: EHSynchronizable
         
         super.encodeWithCoder(coder)
     }
+    
 }
+extension String
+{
+    func replace(target: String, withString: String) -> String
+    {
+        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+}
+

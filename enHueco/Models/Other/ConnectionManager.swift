@@ -21,6 +21,7 @@ struct ConnectionManagerCompoundError: ErrorType
 }
 
 typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
+typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompoundError) -> ()
 
 class ConnectionManager: NSObject
@@ -75,7 +76,7 @@ class ConnectionManager: NSObject
         return try sendSyncRequest(request)
     }
     
-    class func sendAsyncRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    class func sendAsyncDataRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
         alamoManager.request(request).response { (_, response, data, error) -> Void in
             
@@ -85,13 +86,12 @@ class ConnectionManager: NSObject
                 {
                     do
                     {
-                        let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-                        
-                        successfulRequestBlock?(JSONResponse: JSONResponse)
+                        print(response?.statusCode)
+                        successfulRequestBlock?(data: data)
                     }
                     catch
                     {
-                        print(NSString(data: data, encoding: NSUTF8StringEncoding))
+                        print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
                         print(error)
                         failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
                     }
@@ -104,6 +104,37 @@ class ConnectionManager: NSObject
             }
         }
     }
+    
+    class func sendAsyncRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    {
+        alamoManager.request(request).response { (_, response, data, error) -> Void in
+            
+            completionQueue.addOperationWithBlock
+                {
+                    if let data = data where error == nil
+                    {
+                        do
+                        {
+                            print(response?.statusCode)
+                            let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                            successfulRequestBlock?(JSONResponse: JSONResponse )
+                        }
+                        catch
+                        {
+                            print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
+                            print(error)
+                            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+                        }
+                    }
+                    else if let error = error
+                    {
+                        print("\(error.code) : \(error)")
+                        failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+                    }
+            }
+        }
+    }
+    
     
     class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
     {

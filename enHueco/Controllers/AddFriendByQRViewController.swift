@@ -22,8 +22,8 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
         
         view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
         
-//        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
-//        appUserQRImageView.image = code?.image
+        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+        appUserQRImageView.image = code?.image
         
         scanQRButton.clipsToBounds = true
         scanQRButton.layer.cornerRadius = 4
@@ -47,6 +47,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
         dismissViewControllerAnimated(true, completion: nil)
         
         try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
+        
         
         navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
+		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
@@ -101,6 +101,8 @@
 		F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */; };
 		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
 		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; };
+		F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */; };
+		F1F0CF1C1C029FB8004C50A1 /* ImagePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */; };
 		F1F54B321B9CE1470087C30E /* InGapFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; };
 		F1FAFF9D1B9FBAFB00E8CCDD /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */; };
@@ -278,6 +280,8 @@
 		F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
 		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
 		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
+		F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePersistenceManager.swift; sourceTree = "<group>"; };
 		F1F54B311B9CE1470087C30E /* InGapFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InGapFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsAndUtilities.swift; path = Other/ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
 		F1FAFF9C1B9FBAFB00E8CCDD /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */,
 				F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */,
 				5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */,
 			);
@@ -316,6 +321,7 @@
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */,
 				F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */,
 				F1EB0B891BD1CA2500D5DF01 /* Data Structures */,
 				F119309C1BB7AFD70031EB58 /* UIImage+ImageEffects.h */,
@@ -633,6 +639,7 @@
 				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
 				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityManager.swift */,
+				F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -751,7 +758,6 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -766,16 +772,15 @@
 					};
 					F1229BED1A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 						TestTargetID = F1229BD51A74947200C4FDE2;
 					};
 					F126ADF71BE4836800AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
 					};
 					F126AE031BE4836900AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 					};
 				};
 			};
@@ -954,6 +959,7 @@
 				F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
 				F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */,
+				F1F0CF1C1C029FB8004C50A1 /* ImagePersistenceManager.swift in Sources */,
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,
 				F1EB0B941BD1CA3E00D5DF01 /* Tree.swift in Sources */,
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
@@ -1143,7 +1149,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
@@ -1175,7 +1181,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
@@ -1237,7 +1243,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = enHueco_watchOS_Extension;
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1258,7 +1264,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = enHueco_watchOS_Extension;
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1272,12 +1278,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1290,13 +1298,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = deego.enHueco.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;

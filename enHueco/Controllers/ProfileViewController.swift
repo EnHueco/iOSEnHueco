@@ -8,8 +8,9 @@
 
 import UIKit
 import LocalAuthentication
+import MobileCoreServices
 
-class ProfileViewController: UIViewController
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -19,6 +20,7 @@ class ProfileViewController: UIViewController
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
+    
     override func viewDidLoad()
     {
         editScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
@@ -26,50 +28,73 @@ class ProfileViewController: UIViewController
         
         firstNamesLabel.text = system.appUser.firstNames
         lastNamesLabel.text = system.appUser.lastNames
-        usernameLabel.text = system.appUser.username
+//        usernameLabel.text = system.appUser.username
         
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUser, object: system)
+        
+        self.assignImages()
+
+    }
+    
+    func assignImages()
+    {
         dispatch_async(dispatch_get_main_queue())
-        {
-            if let imageURL = system.appUser.imageURL
             {
-                self.imageImageView.hidden = false
-                self.backgroundImageView.hidden = false
-                
-                self.imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+                if let image = ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg"))
+                {
+                    self.imageImageView.hidden = false
+                    self.backgroundImageView.hidden = false
                     
-                    if error == nil
+                    
+                    if(self.imageImageView.image != nil)
                     {
+                        UIView.transitionWithView(self.imageImageView,
+                            duration:1,
+                            options: UIViewAnimationOptions.TransitionFlipFromTop,
+                            animations: { self.imageImageView.image = image },
+                            completion: nil)
+                    }
+                    else
+                    {
+                        self.imageImageView.image = image
+                        
                         UIView.animateWithDuration(0.4)
                         {
                             self.imageImageView.alpha = 1
                         }
                     }
-                })
-                
-                self.backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-                    
-                    if error == nil
+      
+                    if self.backgroundImageView.image != nil
                     {
+                        UIView.transitionWithView(self.backgroundImageView,
+                            duration:1, options: UIViewAnimationOptions.TransitionCrossDissolve,
+                            animations: {
+                                self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                                self.backgroundImageView.alpha = 1
+                            },completion: nil)
+                    }
+                    else
+                    {
+                        self.backgroundImageView.image = image
                         UIView.animateWithDuration(0.4)
-                        {
-                            self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                            self.backgroundImageView.alpha = 1
+                            {
+                                self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                                self.backgroundImageView.alpha = 1
                         }
                     }
-                })
-            }
-            else
-            {
-                self.imageImageView.hidden = true
-                self.backgroundImageView.hidden = true
-            }
-            
-            self.imageImageView.contentMode = .ScaleAspectFill
-            self.backgroundImageView.contentMode = .ScaleAspectFill
-            self.backgroundImageView.clipsToBounds = true
+                }
+                else
+                {
+                    self.imageImageView.hidden = true
+                    self.backgroundImageView.hidden = true
+                }
+                
+                self.imageImageView.contentMode = .ScaleAspectFill
+                self.backgroundImageView.contentMode = .ScaleAspectFill
+                self.backgroundImageView.clipsToBounds = true
         }
     }
     
@@ -89,47 +114,53 @@ class ProfileViewController: UIViewController
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-                
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        system.updateUser()
     }
     
     override func viewDidAppear(animated: Bool)
     {
-        super.viewDidAppear(animated)
-        
-        /*if let imageURL = system.appUser.imageURL
-        {
-            imageImageView.hidden = false
-            backgroundImageView.hidden = false
-            
-            imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-                
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
-                    {
-                        self.imageImageView.alpha = 1
-                    }
-                }
-            })
-            
-            backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-                
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
-                    {
-                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                        self.backgroundImageView.alpha = 1
-                    }
-                }
-            })
-        }
-        else
-        {
-            imageImageView.hidden = true
-            backgroundImageView.hidden = true
-        }*/        
+//        super.viewDidAppear(animated)
+//        
+//        if let imageURL = system.appUser.imageURL
+//        {
+//            imageImageView.hidden = false
+//            backgroundImageView.hidden = false
+//            
+//            imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+//                
+//                if error == nil
+//                {
+//                    UIView.animateWithDuration(0.4)
+//                    {
+//                        self.imageImageView.alpha = 1
+//                    }
+//                }
+//                else
+//                {
+//                    print(error)
+//                }
+//            })
+//
+//            backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
+//                
+//                if error == nil
+//                {
+//                    UIView.animateWithDuration(0.4)
+//                    {
+//                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+//                        self.backgroundImageView.alpha = 1
+//                    }
+//                }
+//            })
+//
+//        }
+//        else
+//        {
+//            imageImageView.hidden = true
+//            backgroundImageView.hidden = true
+//        }
+
     }
         
     
@@ -207,7 +238,6 @@ class ProfileViewController: UIViewController
                             break
                         //                        println("User selected to enter custom password")
                         //                        self.showPasswordAlert()
-                        
                         default:
                             break
                         //                        println("Authentication failed")
@@ -237,5 +267,31 @@ class ProfileViewController: UIViewController
             //            self.showPasswordAlert()
         }
     }
+    @IBAction func imageViewClicked(sender: AnyObject)
+    {
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.mediaTypes = [kUTTypeImage as String]
+        imagePicker.allowsEditing = false
+        
+        self.presentViewController(imagePicker, animated: true,
+            completion: nil)
+    }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        system.appUser.updateProfilePicture(image)
+        
+    }
+    
+    func appUserRefreshed(notification: NSNotification)
+    {
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.assignImages()
+        }
+    }
 }

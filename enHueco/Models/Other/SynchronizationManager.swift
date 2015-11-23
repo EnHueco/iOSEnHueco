@@ -154,3 +154,4 @@ class SynchronizationManager: NSObject
         //TODO:
     }
 }
+

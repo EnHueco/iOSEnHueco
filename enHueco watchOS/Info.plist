@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>deego.enHueco</string>
+	<string>diegoalejogm.enHueco</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

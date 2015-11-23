@@ -21,6 +21,8 @@ class EHSystemNotification
     static let SystemDidAddFriend = "SystemDidAddFriend"
     static let SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
     static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
+    
+    static let SystemDidReceiveAppUser = "SystemDidReceiveAppUser"
 }
 
 protocol SystemUsersSearchDelegate
@@ -94,9 +96,11 @@ class System
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
             
-            let appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
+
             
-            self.appUser = appUser
+            self.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
+            
+            self.appUser.downloadProfilePicture()
             
             self.appUser.fetchUpdatesForFriendsAndFriendSchedules()
             
@@ -123,6 +127,7 @@ class System
         do
         {
             appUser = nil
+            ImagePersistenceManager.deleteImage(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg"))
             try NSFileManager.defaultManager().removeItemAtPath(persistencePath)
         }
         catch
@@ -156,6 +161,30 @@ class System
             
         }) { (error) -> () in
             
+        }
+    }
+    
+    
+    func updateUser ()
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "GET"
+        
+        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+            
+            let downloadedUser : [String : AnyObject]
+            downloadedUser = JSONResponse as! [String : AnyObject]
+            
+            if self.appUser.hasBeenUpdated(downloadedUser["updated_on"] as! String)
+            {
+                self.appUser.updateUser(downloadedUser)
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUser, object: system)
+            }
+            
+            }) { (error) -> () in
+                
         }
     }
 
