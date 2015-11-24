@@ -2743,6 +2743,7 @@
                         <outlet property="startHourCell" destination="jes-0l-l6J" id="TXP-eT-IsG"/>
                         <outlet property="startHourDatePicker" destination="E2M-VW-wno" id="jYa-zq-eKA"/>
                         <outlet property="startHourDatePickerCell" destination="MmB-88-Ueu" id="v1h-EL-2gv"/>
+                        <outlet property="weekDaysCell" destination="lpX-Oa-64e" id="Lo9-XN-xcr"/>
                         <outlet property="weekDaysSegmentedControl" destination="A5d-kZ-IBt" id="pSJ-PM-EZD"/>
                     </connections>
                 </tableViewController>

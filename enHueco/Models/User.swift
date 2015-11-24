@@ -58,8 +58,18 @@ class User: EHSynchronizable
         let imageURL:NSURL? = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         let phoneNumber = JSONDictionary["phoneNumber"] as? String
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-
+        
         self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+    }
+    
+    func addEvents(JSONDictionary: [String: AnyObject])
+    {
+        let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
+        for eventJSON in eventSet
+        {
+            let event = Event(JSONDictionary: eventJSON)
+            schedule.weekDays[event.generateLocalWeekDay()].addEvent(event)
+        }
     }
     
     func updateUser(JSONDictionary: [String : AnyObject])

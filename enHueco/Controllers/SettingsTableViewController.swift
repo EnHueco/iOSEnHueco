@@ -26,7 +26,6 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func exitButtonPressed(sender: AnyObject)
     {
-        system.logOut()
         dismissViewControllerAnimated(true, completion: nil)
     }
     

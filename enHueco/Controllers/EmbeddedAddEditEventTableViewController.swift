@@ -26,12 +26,16 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     @IBOutlet weak var endHourCell: UITableViewCell!
     @IBOutlet weak var startHourDatePickerCell: UITableViewCell!
     @IBOutlet weak var endHourDatePickerCell: UITableViewCell!
+    @IBOutlet weak var weekDaysCell: UITableViewCell!
     
     let datePickerHeight: CGFloat = 167
+
+    let weekDaysIndexPath = NSIndexPath(forRow: 2, inSection: 0)
     let startHourDatePickerCellIndexPath = NSIndexPath(forRow: 4, inSection: 0)
     let endHourDatePickerCellIndexPath = NSIndexPath(forRow: 6, inSection: 0)
     
     var datePickerViewIndexPathToDisplay: NSIndexPath?
+    
     
     override func didMoveToParentViewController(parent: UIViewController?)
     {
@@ -163,7 +167,12 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath == startHourDatePickerCellIndexPath || indexPath == endHourDatePickerCellIndexPath
+        if indexPath == weekDaysIndexPath && weekDaysCell.hidden
+        {
+            return 0
+        }
+        
+        else if indexPath == startHourDatePickerCellIndexPath || indexPath == endHourDatePickerCellIndexPath
         {
             if datePickerViewIndexPathToDisplay != nil && datePickerViewIndexPathToDisplay! == indexPath
             {

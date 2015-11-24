@@ -99,43 +99,49 @@ class AppUser: User
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
             
-            let user = User(JSONDictionary: JSONResponse as! [String : AnyObject])
+            let JSONDictionary = JSONResponse as! [String : AnyObject]
+            self.updateUser(JSONDictionary)
             
-            //self.token = JSONResponse["value"] as! String
-            self.imageURL = user.imageURL
-            self.phoneNumber = user.phoneNumber
-
-            let currentDate = NSDate()
-            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-            let globalCalendar = NSCalendar.currentCalendar()
-            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-
             self.schedule = Schedule()
-            
-            let eventsJSON = JSONResponse["gap_set"] as! [[String: AnyObject]]
-            
-            for eventJSON in eventsJSON
+            let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
+            for eventJSON in eventSet
             {
-                let newEvent = Event(JSONDictionary: eventJSON)
-                
-                let startHourWeekDayConversionComponents = NSDateComponents()
-                startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-                startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-                startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
-                startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
-                startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
-                startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-                startHourWeekDayConversionComponents.second = 0
-                
-                let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-                let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
-                
-                let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
-                daySchedule.addEvent(newEvent)
+                let event = Event(JSONDictionary: eventJSON)
+                self.schedule.weekDays[event.generateLocalWeekDay()].addEvent(event)
+                print(event.ID)
             }
-                        
-        }) { (error) -> () in
             
+//            let currentDate = NSDate()
+//            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+//            let globalCalendar = NSCalendar.currentCalendar()
+//            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+//
+//            self.schedule = Schedule()
+//            
+//            let eventsJSON = JSONResponse["gap_set"] as! [[String: AnyObject]]
+//            
+//            for eventJSON in eventsJSON
+//            {
+//                let newEvent = Event(JSONDictionary: eventJSON)
+//                
+//                let startHourWeekDayConversionComponents = NSDateComponents()
+//                startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
+//                startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
+//                startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
+//                startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
+//                startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
+//                startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
+//                startHourWeekDayConversionComponents.second = 0
+//                
+//                let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
+//                let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
+//                
+//                let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
+//                daySchedule.addEvent(newEvent)
+//            }
+            
+        }) { (error) -> () in
+            print(error)
         }
     }
     
@@ -362,7 +368,7 @@ class AppUser: User
             
             if weekDayDaySchedule.addEvent(aClass)
             {
-                SynchronizationManager.sharedManager().reportNewEvent(aClass)
+//                SynchronizationManager.sharedManager().reportNewEvent(aClass)
             }
         }
         
@@ -417,6 +423,73 @@ class AppUser: User
             }
         }
     }
+    
+    
+    func addNewEvent(event: Event)
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "POST"
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(self), onSuccess: { (JSONResponse) -> () in
+            
+            let JSONDictionary = (JSONResponse as! [String : AnyObject])
+            event.ID = "\(JSONDictionary["id"] as! Int)"
+            event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+            }) { (error) -> () in
+                print(error)
+        }
+    }
+    
+    
+    func updateEvent(event:Event)
+    {
+        if !event.ID.isEmpty
+        {
+            let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + event.ID + "/")!)
+            request.setValue(self.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(self.token, forHTTPHeaderField: EHParameters.Token)
+            
+            request.HTTPMethod = "PUT"
+            
+            ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(self), onSuccess: { (JSONResponse) -> () in
+                
+                let JSONDictionary = JSONResponse as! [String : AnyObject]
+                event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+                
+                }) { (error) -> () in
+                    print(error)
+            }
+        }
+        else
+        {
+            print("Evento a actualizar sin ID")
+        }
+    }
+    
+    func deleteEvent(event: Event)
+    {
+        if !event.ID.isEmpty
+        {
+            let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + event.ID + "/")!)
+            request.setValue(self.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(self.token, forHTTPHeaderField: EHParameters.Token)
+            
+            request.HTTPMethod = "DELETE"
+            
+            ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (JSONResponse) -> () in
+                print("Evento eliminado")
+                }) { (error) -> () in
+                    print(error)
+            }
+        }
+        else
+        {
+            print("Evento a eliminar sin ID")
+        }
+    }
+    
     
     /**
     Accepts friend request from the username provided and notifies the result via Notification Center.
@@ -589,21 +662,21 @@ class AppUser: User
         return (serverDate.compare(self.lastUpdatedOn).rawValue > 0)
     }
     
-    func updateProfilePicture(image: UIImage)
+    func pushProfilePicture(image: UIImage)
     {
 //        let imageData = UIImageJPEGRepresentation(image, 100)
         let url = NSURL(string: "https://enhueco.uniandes.edu.co/me/")
         let request = NSMutableURLRequest(URL: url!)
-        
         request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
         request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        
         request.HTTPMethod = "PUT"
         request.setValue("attachment; filename=upload.jpg", forHTTPHeaderField: "Content-Disposition")
         let jpegData = NSData(data: UIImageJPEGRepresentation(image, 100)!)
         request.HTTPBody = jpegData
         
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
-            system.updateUser()
+            system.fetchUser()
             self.persistProfilePicture(jpegData)
             }, onFailure: { (error) -> () in
                 print(error)
@@ -619,7 +692,10 @@ class AppUser: User
             request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
             request.HTTPMethod = "GET"
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+                
                 self.persistProfilePicture(data)
+                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
+                
                 }) { (error) -> () in
                     print(error)
             }

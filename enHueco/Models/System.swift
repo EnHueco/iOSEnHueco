@@ -21,6 +21,7 @@ class EHSystemNotification
     static let SystemDidAddFriend = "SystemDidAddFriend"
     static let SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
     static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
+    static let SystemDidReceiveAppUserImage = "SystemDidReceiveAppUserImage"
     
     static let SystemDidReceiveAppUser = "SystemDidReceiveAppUser"
 }
@@ -95,17 +96,20 @@ class System
         let URL = NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!
         
         ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
-            
 
-            
             self.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
             self.appUser.downloadProfilePicture()
             
+            self.appUser.fetchUpdatesForAppUserAndSchedule()
+            
             self.appUser.fetchUpdatesForFriendsAndFriendSchedules()
+            
+            try! self.persistData()
             
             dispatch_async(dispatch_get_main_queue())
             {
+
                 NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidLogin, object: self, userInfo: nil)
             }
             
@@ -165,11 +169,12 @@ class System
     }
     
     
-    func updateUser ()
+    func fetchUser ()
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
         request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        print(appUser.token)
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
@@ -180,11 +185,11 @@ class System
             if self.appUser.hasBeenUpdated(downloadedUser["updated_on"] as! String)
             {
                 self.appUser.updateUser(downloadedUser)
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUser, object: system)
+                self.appUser.downloadProfilePicture()
             }
             
             }) { (error) -> () in
-                
+                print(error)
         }
     }
 

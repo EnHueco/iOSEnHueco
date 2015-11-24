@@ -36,12 +36,15 @@ class AddEditEventViewController: UIViewController
         if eventToEdit != nil
         {
             titleLabel.text = "Editar hueco"
+            embeddedTableViewController.weekDaysCell.hidden = true
+            print(eventToEdit!.ID)
         }
         else
         {
             titleLabel.text = "Agregar Hueco"
         }
     }
+    
     
     override func didReceiveMemoryWarning()
     {
@@ -57,6 +60,7 @@ class AddEditEventViewController: UIViewController
     
     @IBAction func save(sender: UIButton)
     {
+        // If no weekdays selected
         if embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count == 0
         {
             TSMessage.showNotificationInViewController(self, title: "Selecciona por lo menos un día", subtitle: "Los huecos y clases tienen que pertenecer a al menos un día", type: TSMessageNotificationType.Warning)
@@ -112,11 +116,17 @@ class AddEditEventViewController: UIViewController
             }
         }
         
-        if canAddEvents
+        if canAddEvents && eventToEdit != nil
         {
-            deleteEventToEdit()
+//            deleteEventToEdit()
+            eventToEdit?.replaceValues(eventsToAdd.first!)
+            system.appUser.updateEvent(eventToEdit!)
+//            scheduleViewController.addEvents(eventsToAdd)
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+        else if canAddEvents
+        {
             scheduleViewController.addEvents(eventsToAdd)
-            
             dismissViewControllerAnimated(true, completion: nil)
         }
         else

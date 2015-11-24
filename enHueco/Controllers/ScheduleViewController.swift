@@ -77,7 +77,8 @@ class ScheduleViewController: UIViewController
         for event in eventsToAdd
         {
             event.daySchedule.addEvent(event)
-            SynchronizationManager.sharedManager().reportNewEvent(event)
+            system.appUser.addNewEvent(event)
+//            SynchronizationManager.sharedManager().reportNewEvent(event)
         }
         
         undoManager!.registerUndoWithTarget(self, selector: Selector("deleteEvents:"), object: eventsToAdd)
@@ -96,7 +97,8 @@ class ScheduleViewController: UIViewController
         for event in events
         {
             event.daySchedule.removeEvent(event)
-            SynchronizationManager.sharedManager().reportEventDeleted(event)
+            system.appUser.deleteEvent(event)
+//            SynchronizationManager.sharedManager().reportEventDeleted(event)
         }
         
         undoManager!.registerUndoWithTarget(self, selector: Selector("addEvents:"), object: events)

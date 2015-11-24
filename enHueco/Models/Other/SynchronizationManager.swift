@@ -134,20 +134,20 @@ class SynchronizationManager: NSObject
     
     // MARK: Reporting
     
-    func reportNewEvent(newEvent: Event)
-    {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "POST"
-        
-        var params = newEvent.toJSONObject()
-        params["user"] = system.appUser.username
-        
-        //sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
-        
-        //TODO: Change associated object
-    }
+//    func reportNewEvent(newEvent: Event)
+//    {
+//        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+//        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+//        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+//        request.HTTPMethod = "POST"
+//        
+//        var params = newEvent.toJSONObject()
+//        params["user"] = system.appUser.username
+//        
+//        sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+    
+//        TODO: Change associated object
+//    }
     
     func reportEventDeleted(eventDeleted: Event)
     {

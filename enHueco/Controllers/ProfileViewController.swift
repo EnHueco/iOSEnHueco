@@ -32,8 +32,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUser, object: system)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
         
         self.assignImages()
 
@@ -115,7 +115,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        system.updateUser()
+        system.fetchUser()
+        system.appUser.fetchUpdatesForAppUserAndSchedule()
     }
     
     override func viewDidAppear(animated: Bool)
@@ -283,8 +284,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
         picker.dismissViewControllerAnimated(true, completion: nil)
-        system.appUser.updateProfilePicture(image)
-        
+        system.appUser.pushProfilePicture(image)
     }
     
     func appUserRefreshed(notification: NSNotification)
