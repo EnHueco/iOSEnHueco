@@ -134,24 +134,53 @@ class SynchronizationManager: NSObject
     
     // MARK: Reporting
     
-//    func reportNewEvent(newEvent: Event)
-//    {
-//        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-//        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-//        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
-//        request.HTTPMethod = "POST"
-//        
-//        var params = newEvent.toJSONObject()
-//        params["user"] = system.appUser.username
-//        
-//        sendAsyncRequest(request, withJSONParams: params, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
-    
-//        TODO: Change associated object
-//    }
-    
-    func reportEventDeleted(eventDeleted: Event)
+    func reportNewEvent(newEvent: Event)
     {
-        //TODO:
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "POST"
+        
+        let params = newEvent.toJSONObject(associatingUser: system.appUser)
+        
+        sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+            
+            let JSONDictionary = (JSONResponse as! [String : AnyObject])
+            newEvent.ID = "\(JSONDictionary["id"] as! Int)"
+            newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+        }, onFailure: nil, associatedObject: system.appUser)
+    
+        //TODO: Change associated object
     }
+    
+    func reportEventEdited(event: Event)
+    {
+        guard let ID = event.ID else { /* Throw error ? */ return }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "PUT"
+
+        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: system.appUser), onSuccess: { (JSONResponse) -> () in
+            
+            let JSONDictionary = JSONResponse as! [String : AnyObject]
+            event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+        }, onFailure: nil, associatedObject: system.appUser)
+    }
+    
+    func reportEventDeleted(event: Event)
+    {
+        guard let ID = event.ID else { /* Throw error ? */ return }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "DELETE"
+
+        sendAsyncRequest(request, withJSONParams: nil, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+    }    
 }
 

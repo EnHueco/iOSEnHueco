@@ -38,15 +38,12 @@ class System
         case CouldNotPersistData
     }
     
-    
     /// Path to the documents folder
     let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-    
     
     /// Path where data will be persisted
     let persistencePath: String
     
-
     /// User of the app
     var appUser: AppUser!
     
@@ -168,31 +165,6 @@ class System
         }
     }
     
-    
-    func fetchUser ()
-    {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
-        print(appUser.token)
-        request.HTTPMethod = "GET"
-        
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
-            
-            let downloadedUser : [String : AnyObject]
-            downloadedUser = JSONResponse as! [String : AnyObject]
-            
-            if self.appUser.hasBeenUpdated(downloadedUser["updated_on"] as! String)
-            {
-                self.appUser.updateUser(downloadedUser)
-                self.appUser.downloadProfilePicture()
-            }
-            
-            }) { (error) -> () in
-                print(error)
-        }
-    }
-
     /// Persists all pertinent application data
     func persistData () throws
     {

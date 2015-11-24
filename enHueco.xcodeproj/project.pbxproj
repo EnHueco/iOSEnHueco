@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
@@ -758,6 +758,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 29G7CN67XL;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -777,10 +778,11 @@
 					};
 					F126ADF71BE4836800AE561D = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 29G7CN67XL;
 					};
 					F126AE031BE4836900AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 4R547J5575;
+						DevelopmentTeam = 29G7CN67XL;
 					};
 				};
 			};

@@ -37,8 +37,7 @@ class AppUser: User
         let token = JSONDictionary["value"] as? String
         let user = User(JSONDictionary: JSONDictionary["user"] as! [String : AnyObject])
         
-        self.init(username: user.username, token: token ?? system.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, ID: user.ID, lastUpdatedOn: user.lastUpdatedOn)
-    
+        self.init(username: user.username, token: token ?? system.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, ID: user.ID!, lastUpdatedOn: user.lastUpdatedOn)
     }
     
     // MARK: NSCoding
@@ -81,6 +80,30 @@ class AppUser: User
     
     // MARK: Updates
     
+    //TODO: What is this method for?
+    func fetchAppUser ()
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "GET"
+        
+        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+            
+            let downloadedUser = JSONResponse as! [String : AnyObject]
+            
+            if !self.hasBeenUpdatedSinceDate(NSDate(serverFormattedString: downloadedUser["updated_on"] as! String)!)
+            {
+                self.updateUserWithJSONDictionary(downloadedUser)
+                self.downloadProfilePicture()
+            }
+            
+        }) { (error) -> () in
+                
+                print(error)
+        }
+    }
+    
     /**
     Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
     */
@@ -100,14 +123,15 @@ class AppUser: User
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
-            self.updateUser(JSONDictionary)
+            self.updateUserWithJSONDictionary(JSONDictionary)
             
             self.schedule = Schedule()
             let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
+            
             for eventJSON in eventSet
             {
                 let event = Event(JSONDictionary: eventJSON)
-                self.schedule.weekDays[event.generateLocalWeekDay()].addEvent(event)
+                self.schedule.weekDays[event.localWeekDay()].addEvent(event)
                 print(event.ID)
             }
             
@@ -368,7 +392,7 @@ class AppUser: User
             
             if weekDayDaySchedule.addEvent(aClass)
             {
-//                SynchronizationManager.sharedManager().reportNewEvent(aClass)
+                SynchronizationManager.sharedManager().reportNewEvent(aClass)
             }
         }
         
@@ -423,73 +447,6 @@ class AppUser: User
             }
         }
     }
-    
-    
-    func addNewEvent(event: Event)
-    {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
-        request.HTTPMethod = "POST"
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(self), onSuccess: { (JSONResponse) -> () in
-            
-            let JSONDictionary = (JSONResponse as! [String : AnyObject])
-            event.ID = "\(JSONDictionary["id"] as! Int)"
-            event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-            
-            }) { (error) -> () in
-                print(error)
-        }
-    }
-    
-    
-    func updateEvent(event:Event)
-    {
-        if !event.ID.isEmpty
-        {
-            let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + event.ID + "/")!)
-            request.setValue(self.username, forHTTPHeaderField: EHParameters.UserID)
-            request.setValue(self.token, forHTTPHeaderField: EHParameters.Token)
-            
-            request.HTTPMethod = "PUT"
-            
-            ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(self), onSuccess: { (JSONResponse) -> () in
-                
-                let JSONDictionary = JSONResponse as! [String : AnyObject]
-                event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-                
-                }) { (error) -> () in
-                    print(error)
-            }
-        }
-        else
-        {
-            print("Evento a actualizar sin ID")
-        }
-    }
-    
-    func deleteEvent(event: Event)
-    {
-        if !event.ID.isEmpty
-        {
-            let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + event.ID + "/")!)
-            request.setValue(self.username, forHTTPHeaderField: EHParameters.UserID)
-            request.setValue(self.token, forHTTPHeaderField: EHParameters.Token)
-            
-            request.HTTPMethod = "DELETE"
-            
-            ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (JSONResponse) -> () in
-                print("Evento eliminado")
-                }) { (error) -> () in
-                    print(error)
-            }
-        }
-        else
-        {
-            print("Evento a eliminar sin ID")
-        }
-    }
-    
     
     /**
     Accepts friend request from the username provided and notifies the result via Notification Center.
@@ -584,6 +541,7 @@ class AppUser: User
         }
         
         var existingFriend = false
+        
         for (index, aFriend) in friends.enumerate()
         {
             if aFriend.username == friend.username
@@ -593,6 +551,7 @@ class AppUser: User
                 break
             }
         }
+        
         if !existingFriend { friends.append(friend)}
         
         dispatch_async(dispatch_get_main_queue())
@@ -620,12 +579,16 @@ class AppUser: User
     func stringEncodedUserRepresentation () -> String
     {
         var encodedSchedule = ""
+
         // Add username
         encodedSchedule += username + splitCharacter
+        
         // Add names
         encodedSchedule += firstNames + separationCharacter + lastNames + splitCharacter
+        
         // Add phone
         encodedSchedule += String(phoneNumber) + splitCharacter
+        
         // Add image
         encodedSchedule += (imageURL?.absoluteString)! + splitCharacter
         
@@ -636,15 +599,23 @@ class AppUser: User
         {
             for (j, event) in daySchedule.events.enumerate()
             {
-                if(firstEvent) { firstEvent = false }
-                else { encodedSchedule += multipleElementsCharacter}
+                if firstEvent
+                {
+                    firstEvent = false
+                }
+                else
+                {
+                    encodedSchedule += multipleElementsCharacter
+                }
                 
                 let eventType = event.type == EventType.Gap ? "G" : "C"
                 
                 // Add event type
                 encodedSchedule += eventType + separationCharacter
+                
                 // Add event weekday
                 encodedSchedule += String(i) + separationCharacter
+                
                 // Add hours
                 encodedSchedule += "\(event.startHour.hour)\(hourMinuteSeparationCharacter)\(event.startHour.minute)"
                 encodedSchedule += separationCharacter
@@ -653,32 +624,36 @@ class AppUser: User
         }
         
         encodedSchedule += splitCharacter
+        
         return encodedSchedule
     }
     
-    func hasBeenUpdated(date: String) -> Bool
+    func hasBeenUpdatedSinceDate(date: NSDate) -> Bool
     {
-        let serverDate = NSDate(serverFormattedString: date)!
-        return (serverDate.compare(self.lastUpdatedOn).rawValue > 0)
+        return lastUpdatedOn.compare(date).rawValue > 0
     }
     
     func pushProfilePicture(image: UIImage)
     {
 //        let imageData = UIImageJPEGRepresentation(image, 100)
         let url = NSURL(string: "https://enhueco.uniandes.edu.co/me/")
+        
         let request = NSMutableURLRequest(URL: url!)
         request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
         request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
         
         request.HTTPMethod = "PUT"
         request.setValue("attachment; filename=upload.jpg", forHTTPHeaderField: "Content-Disposition")
+        
         let jpegData = NSData(data: UIImageJPEGRepresentation(image, 100)!)
         request.HTTPBody = jpegData
         
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
-            system.fetchUser()
-            self.persistProfilePicture(jpegData)
-            }, onFailure: { (error) -> () in
+        
+            self.fetchAppUser()
+            self.persistProfilePictureWithData(jpegData)
+        
+        }, onFailure: { (error) -> () in
                 print(error)
         })
     }
@@ -691,18 +666,21 @@ class AppUser: User
             request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
             request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
             request.HTTPMethod = "GET"
+            
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
                 
-                self.persistProfilePicture(data)
+                self.persistProfilePictureWithData(data)
+                
                 NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
                 
-                }) { (error) -> () in
-                    print(error)
+            }) { (error) -> () in
+                    
+                print(error)
             }
         }
     }
     
-    func persistProfilePicture(data : NSData)
+    func persistProfilePictureWithData(data : NSData)
     {
         let path = ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")
         ImagePersistenceManager.saveImage(data, path: path)

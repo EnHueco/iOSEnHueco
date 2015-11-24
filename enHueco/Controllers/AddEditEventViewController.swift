@@ -96,7 +96,6 @@ class AddEditEventViewController: UIViewController
             
             let daySchedule = system.appUser.schedule.weekDays[index+1]
             
-            
             let type: EventType = (embeddedTableViewController.gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? .Gap : .Class)
                 
             var name = embeddedTableViewController.nameTextField.text
@@ -116,17 +115,23 @@ class AddEditEventViewController: UIViewController
             }
         }
         
-        if canAddEvents && eventToEdit != nil
+        if let eventToEdit = eventToEdit where canAddEvents
         {
-//            deleteEventToEdit()
-            eventToEdit?.replaceValues(eventsToAdd.first!)
-            system.appUser.updateEvent(eventToEdit!)
-//            scheduleViewController.addEvents(eventsToAdd)
+            eventToEdit.replaceValuesWithThoseOfTheEvent(eventToEdit)
+            SynchronizationManager.sharedManager().reportEventEdited(eventToEdit)
+            scheduleViewController.registerEditedEventForUndo(eventToEdit)
+            
             dismissViewControllerAnimated(true, completion: nil)
         }
         else if canAddEvents
         {
-            scheduleViewController.addEvents(eventsToAdd)
+            for event in eventsToAdd
+            {
+                event.daySchedule.addEvent(event)
+                SynchronizationManager.sharedManager().reportNewEvent(event)
+            }
+
+            scheduleViewController.registerAddedEventsForUndo(eventsToAdd)
             dismissViewControllerAnimated(true, completion: nil)
         }
         else
@@ -146,7 +151,10 @@ class AddEditEventViewController: UIViewController
     {
         if let eventToEdit = eventToEdit
         {
-            scheduleViewController.deleteEvents([eventToEdit])
+            eventToEdit.daySchedule.removeEvent(eventToEdit)
+            SynchronizationManager.sharedManager().reportEventDeleted(eventToEdit)
+
+            scheduleViewController.registerDeletedEventsForUndo([eventToEdit])
         }
     }
     

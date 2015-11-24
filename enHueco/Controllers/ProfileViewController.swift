@@ -115,7 +115,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        system.fetchUser()
+      
+        system.appUser.fetchAppUser()
         system.appUser.fetchUpdatesForAppUserAndSchedule()
     }
     

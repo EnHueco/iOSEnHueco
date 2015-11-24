@@ -10,7 +10,7 @@ import Foundation
 
 class User: EHSynchronizable
 {
-    var username: String
+    let username: String
     
     var firstNames: String
     var lastNames: String
@@ -62,24 +62,24 @@ class User: EHSynchronizable
         self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
     }
     
-    func addEvents(JSONDictionary: [String: AnyObject])
+    func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
     {
-        let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
-        for eventJSON in eventSet
-        {
-            let event = Event(JSONDictionary: eventJSON)
-            schedule.weekDays[event.generateLocalWeekDay()].addEvent(event)
-        }
-    }
-    
-    func updateUser(JSONDictionary: [String : AnyObject])
-    {
-        self.username = JSONDictionary["login"] as! String
         self.firstNames = JSONDictionary["firstNames"] as! String
         self.lastNames = JSONDictionary["lastNames"] as! String
         self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         self.phoneNumber = JSONDictionary["phoneNumber"] as? String
         self.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+    }
+    
+    func addEvents(JSONDictionary: [String: AnyObject])
+    {
+        let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
+       
+        for eventJSON in eventSet
+        {
+            let event = Event(JSONDictionary: eventJSON)
+            schedule.weekDays[event.localWeekDay()].addEvent(event)
+        }
     }
     
     /// Returns user current gap, or nil if user is not in a gap.

@@ -17,9 +17,8 @@ class Event: EHSynchronizable, Comparable
 {
     weak var daySchedule: DaySchedule!
     
-    var name:String
-
-    var location: String
+    var name:String?
+    var location: String?
     
     var type: EventType
     
@@ -29,67 +28,51 @@ class Event: EHSynchronizable, Comparable
     /** UTC weekday, hour and minute time components of the event's end hour */
     var endHour: NSDateComponents
     
-    init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
+    init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
     {
         self.type = type
         self.name = name ?? (type == .Gap ? "Hueco" : "Clase")
         self.startHour = startHour
         self.endHour = endHour
         
-        self.location = location ?? ""
+        self.location = location
         
-        super.init(ID: "", lastUpdatedOn: NSDate())
+        super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
-    
-    init(id: String, updatedOn : NSDate, type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil)
-    {
-        self.type = type
-        self.name = name ?? (type == .Gap ? "Hueco" : "Clase")
-        self.startHour = startHour
-        self.endHour = endHour
         
-        self.location = location ?? ""
-        
-        super.init(ID: id, lastUpdatedOn: updatedOn)
-    }
-    
     required init?(coder decoder: NSCoder)
     {
         guard
             let daySchedule = decoder.decodeObjectForKey("daySchedule") as? DaySchedule,
             let type = decoder.decodeObjectForKey("type") as? String,
             let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
-            let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents,
-            let name = decoder.decodeObjectForKey("name") as? String,
-            let location = decoder.decodeObjectForKey("location") as? String
-            
-            else
+            let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
+        else
         {
             self.type = .Gap
-            self.name = ""
             self.startHour = NSDateComponents()
             self.endHour = NSDateComponents()
             self.daySchedule = DaySchedule(weekDayName: "")
-            self.location = ""
-            
+        
             super.init(coder: decoder)
             return nil
         }
         
         self.type = EventType(rawValue: type)!
         self.daySchedule = daySchedule
-        self.name = name
         self.startHour = startHour
         self.endHour = endHour
-        self.location = location
+        
+        self.name = decoder.decodeObjectForKey("name") as? String
+        self.location = decoder.decodeObjectForKey("location") as? String
         
         super.init(coder: decoder)
     }
     
     convenience init(JSONDictionary: [String : AnyObject])
     {
-        let id = "\(JSONDictionary["id"] as! Int)"
-        let updatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+        let ID = String(JSONDictionary["id"] as! Int)
+        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
         let type = JSONDictionary["type"] as! String
         let name = JSONDictionary["name"] as? String
@@ -108,10 +91,10 @@ class Event: EHSynchronizable, Comparable
         let startHourComponents = NSDateComponents(weekday: startHourWeekDay, hour: startHour, minute: startMinute)
         let endHourComponents = NSDateComponents(weekday: endHourWeekDay, hour: endHour, minute: endMinute)
         
-        self.init(id: id, updatedOn: updatedOn, type: EventType(rawValue: type)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location)
+        self.init(type: EventType(rawValue: type)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    func replaceValues(event: Event)
+    func replaceValuesWithThoseOfTheEvent(event: Event)
     {
         name = event.name
         type = event.type
@@ -119,9 +102,6 @@ class Event: EHSynchronizable, Comparable
         endHour = event.endHour
         location = event.location
         daySchedule = event.daySchedule
-        
-        system.appUser.updateEvent(self)
-        
     }
     
     override func encodeWithCoder(coder: NSCoder)
@@ -132,6 +112,7 @@ class Event: EHSynchronizable, Comparable
         coder.encodeObject(endHour, forKey: "endHour")
         coder.encodeObject(location, forKey: "location")
         coder.encodeObject(daySchedule, forKey: "daySchedule")
+        
         super.encodeWithCoder(coder)
     }
     
@@ -153,7 +134,6 @@ class Event: EHSynchronizable, Comparable
         return globalCalendar.dateFromComponents(components)!
     }
     
-    
     /// Returns the end hour (Weekday, Hour, Minute) by setting the components to the date provided.
     func endHourInDate(date: NSDate) -> NSDate
     {
@@ -172,7 +152,7 @@ class Event: EHSynchronizable, Comparable
         return globalCalendar.dateFromComponents(components)!
     }
     
-    func toJSONObject (user: User?) -> [String : AnyObject]
+    func toJSONObject (associatingUser user: User? = nil) -> [String : AnyObject]
     {
         var dictionary = [String:AnyObject]()
         
@@ -183,7 +163,8 @@ class Event: EHSynchronizable, Comparable
         dictionary["end_hour_weekday"] = String(endHour.weekday)
         dictionary["start_hour"] = "\(startHour.hour):\(startHour.minute)"
         dictionary["end_hour"] = "\(endHour.hour):\(endHour.minute)"
-        if(user != nil)
+        
+        if user != nil
         {
             dictionary["user"] = user!.username
         }
@@ -191,7 +172,7 @@ class Event: EHSynchronizable, Comparable
         return dictionary
     }
     
-    func generateLocalWeekDay() -> Int
+    func localWeekDay() -> Int
     {
         let currentDate = NSDate()
         
