@@ -92,7 +92,7 @@ class AppUser: User
             
             let downloadedUser = JSONResponse as! [String : AnyObject]
             
-            if !self.hasBeenUpdatedSinceDate(NSDate(serverFormattedString: downloadedUser["updated_on"] as! String)!)
+            if self.isOutdatedBasedOnDate(NSDate(serverFormattedString: downloadedUser["updated_on"] as! String)!)
             {
                 self.updateUserWithJSONDictionary(downloadedUser)
                 self.downloadProfilePicture()
@@ -628,9 +628,9 @@ class AppUser: User
         return encodedSchedule
     }
     
-    func hasBeenUpdatedSinceDate(date: NSDate) -> Bool
+    func isOutdatedBasedOnDate(date: NSDate) -> Bool
     {
-        return lastUpdatedOn.compare(date).rawValue > 0
+        return date.compare(lastUpdatedOn).rawValue > 0
     }
     
     func pushProfilePicture(image: UIImage)
