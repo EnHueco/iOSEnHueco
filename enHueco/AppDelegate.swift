@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notFirstLaunch")
         }
-
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( UIApplicationBackgroundFetchIntervalMinimum )
         
         return true
     }

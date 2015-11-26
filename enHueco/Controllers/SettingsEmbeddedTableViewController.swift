@@ -53,8 +53,9 @@ class SettingsEmbeddedTableViewController: UITableViewController
         clearsSelectionOnViewWillAppear = false
         
         let lastBackgroundUpdate = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdate")).descriptionWithLocale(NSLocale.currentLocale())
+        let lastBackgroundUpdateResponse = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdateResponse")).descriptionWithLocale(NSLocale.currentLocale())
         
-        lastBackgroundFetchDateLabel.text = "Last background fetch: \(lastBackgroundUpdate)"
+        lastBackgroundFetchDateLabel.text = "Last background fetch: \(lastBackgroundUpdate). Last response: \(lastBackgroundUpdateResponse)"
     }
     
     override func didReceiveMemoryWarning()

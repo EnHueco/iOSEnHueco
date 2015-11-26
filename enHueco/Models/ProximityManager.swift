@@ -142,6 +142,8 @@ class ProximityManager: NSObject
                 system.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String)
             }
             
+            NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdateResponse")
+            
             successHandler()
             
         }) { (error) -> () in
