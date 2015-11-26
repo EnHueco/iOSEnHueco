@@ -32,7 +32,7 @@ protocol SystemUsersSearchDelegate
 }
 
 class System
-{
+{    
     enum SystemError: ErrorType
     {
         case CouldNotPersistData
@@ -65,9 +65,9 @@ class System
         let end = NSDateComponents(); end.hour = 1; end.minute = 00
         let gap = Event(type:.Gap, startHour: start, endHour: end)
         friend.schedule.weekDays[6].addEvent(gap)
-        appUser.friends.append(friend)
+        appUser.friends[friend.username] = friend
         
-        appUser.friends.append(appUser)
+        appUser.friends[appUser.username] = appUser
 
         //////////
     }
@@ -185,5 +185,5 @@ class System
         }
         
         return appUser != nil
-    }
+    }    
 }

@@ -20,7 +20,7 @@ struct ConnectionManagerCompoundError: ErrorType
     var request: NSURLRequest
 }
 
-typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
+typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject?) -> ()
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompoundError) -> ()
 
@@ -110,27 +110,27 @@ class ConnectionManager: NSObject
         alamoManager.request(request).response { (_, response, data, error) -> Void in
             
             completionQueue.addOperationWithBlock
+            {
+                if let data = data, response = response where error == nil
                 {
-                    if let data = data where error == nil
+                    do
                     {
-                        do
-                        {
-                            print(response?.statusCode)
-                            let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
-                            successfulRequestBlock?(JSONResponse: JSONResponse )
-                        }
-                        catch
-                        {
-                            print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
-                            print(error)
-                            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
-                        }
+                        print("Response status: \(response.statusCode) for \(request.URLString)")
+                        let JSONResponse = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                        successfulRequestBlock?(JSONResponse: JSONResponse )
                     }
-                    else if let error = error
+                    catch
                     {
-                        print("\(error.code) : \(error)")
+                        print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
+                        print(error)
                         failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
                     }
+                }
+                else if let error = error
+                {
+                    print("\(error.code) : \(error)")
+                    failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+                }
             }
         }
     }

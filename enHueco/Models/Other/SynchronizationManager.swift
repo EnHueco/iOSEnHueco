@@ -148,6 +148,7 @@ class SynchronizationManager: NSObject
             let JSONDictionary = (JSONResponse as! [String : AnyObject])
             newEvent.ID = "\(JSONDictionary["id"] as! Int)"
             newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            print("Reported new event")
             
         }, onFailure: nil, associatedObject: system.appUser)
     
@@ -167,7 +168,8 @@ class SynchronizationManager: NSObject
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-            
+            print("Reported event edited")
+
         }, onFailure: nil, associatedObject: system.appUser)
     }
     
@@ -180,7 +182,11 @@ class SynchronizationManager: NSObject
         request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "DELETE"
 
-        sendAsyncRequest(request, withJSONParams: nil, onSuccess: nil, onFailure: nil, associatedObject: system.appUser)
+        sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
+            
+            print("Reported event deleted")
+            
+        }, onFailure: nil, associatedObject: system.appUser)
     }    
 }
 

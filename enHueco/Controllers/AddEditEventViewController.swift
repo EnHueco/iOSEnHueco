@@ -37,7 +37,6 @@ class AddEditEventViewController: UIViewController
         {
             titleLabel.text = "Editar hueco"
             embeddedTableViewController.weekDaysCell.hidden = true
-            print(eventToEdit!.ID)
         }
         else
         {
@@ -117,7 +116,7 @@ class AddEditEventViewController: UIViewController
         
         if let eventToEdit = eventToEdit where canAddEvents
         {
-            eventToEdit.replaceValuesWithThoseOfTheEvent(eventToEdit)
+            eventToEdit.replaceValuesWithThoseOfTheEvent(eventsToAdd.first!)
             SynchronizationManager.sharedManager().reportEventEdited(eventToEdit)
             scheduleViewController.registerEditedEventForUndo(eventToEdit)
             

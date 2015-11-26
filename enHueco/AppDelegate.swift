@@ -29,11 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             }
         }
         
-        let defaults =
-        [
-            "authTouchID" : false,
-        ]
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
+        
+        if notFirstLaunch
+        {
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+        }
+        else
+        {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notFirstLaunch")
+        }
+
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( UIApplicationBackgroundFetchIntervalMinimum )
         
         return true
     }
@@ -77,30 +84,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
     {
-        ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+        let (currentGap, nextGap) = system.appUser.currentAndNextGap()
+        
+        if currentGap != nil
+        {
+            //Ask iOS to kindly try to wake up the app frequently during gaps.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringGaps)
             
-            completionHandler(.NewData)
-            
-        }, networkFailureHandler: { () -> () in
-            
-            completionHandler(.Failed)
-            
-        }, notConnectedToWifiHandler: { () -> () in
+            ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+                
+                completionHandler(.NewData)
+                
+            }, networkFailureHandler: { () -> () in
+                    
+                completionHandler(.Failed)
+                    
+            }, notConnectedToWifiHandler: { () -> () in
+                    
+                completionHandler(.NoData)
+            })
+        }
+        else if let nextGap = nextGap
+        {
+            //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.endHourInDate(NSDate()).timeIntervalSinceNow )
             
             completionHandler(.NoData)
-        })
+        }
+        else
+        {
+            //The day is over, user doesn't have more gaps ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
+            //TODO : Set fetch interval to wait for next gap (for this we must look for the next gap in future days)
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
+            
+            completionHandler(.NoData)
+        }
     }
     
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
     {
-        if UI_USER_INTERFACE_IDIOM() == .Phone
-        {
-            return .Portrait
-        }
-        else
-        {
-            return .All
-        }
+        return UI_USER_INTERFACE_IDIOM() == .Phone ? .Portrait : .All
     }
     
     @available(iOS 9.0, *)

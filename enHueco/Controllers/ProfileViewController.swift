@@ -192,11 +192,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     private func showSettings()
     {
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsTableViewController") as! SettingsTableViewController
+        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
         presentViewController(viewController, animated: true, completion: nil)
     }
-    
-    
     
     enum LAError : Int {
         case AuthenticationFailed

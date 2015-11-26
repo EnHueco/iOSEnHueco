@@ -73,7 +73,7 @@ class InGapInterfaceController: WKInterfaceController
             
         }) { (error) -> Void in
                 
-                print(error)
+            print(error)
         }
     }
     

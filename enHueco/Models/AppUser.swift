@@ -14,7 +14,9 @@ class AppUser: User
     /// Session token
     var token : String
     
-    var friends = [User]()
+    ///Dictionary containing the AppUser's friends with their usernames as their keys
+    var friends = [String : User]()
+    
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
     
@@ -46,13 +48,13 @@ class AppUser: User
     {
         guard
             let token = decoder.decodeObjectForKey("token") as? String,
-            let friends = decoder.decodeObjectForKey("friends") as? [User],
+            let friends = decoder.decodeObjectForKey("friends") as? [String : User],
             let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
             let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
             else
         {
             self.token = ""
-            self.friends = [User]()
+            self.friends = [String : User]()
             self.incomingFriendRequests = [User]()
             self.outgoingFriendRequests = [User]()
             super.init(coder: decoder)
@@ -100,7 +102,7 @@ class AppUser: User
             
         }) { (error) -> () in
                 
-                print(error)
+            print(error)
         }
     }
     
@@ -132,7 +134,6 @@ class AppUser: User
             {
                 let event = Event(JSONDictionary: eventJSON)
                 self.schedule.weekDays[event.localWeekDay()].addEvent(event)
-                print(event.ID)
             }
             
 //            let currentDate = NSDate()
@@ -217,7 +218,7 @@ class AppUser: User
         request.setValue(token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "GET"
         
-        var newFriends = [User]()
+        var newFriends = [String : User]()
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
             
@@ -254,7 +255,7 @@ class AppUser: User
                     daySchedule.addEvent(newEvent)
                 }
                 
-                newFriends.append(newFriend)
+                newFriends[newFriend.username] = newFriend
             }
             
             self.friends = newFriends
@@ -332,7 +333,7 @@ class AppUser: User
     {
         var friendsAndGaps = [(friend: User, gap: Event)]()
         
-        for friend in friends
+        for friend in friends.values
         {
             if let gap = friend.currentGap()  {friendsAndGaps.append((friend, gap))}
         }
@@ -406,7 +407,7 @@ class AppUser: User
     /// When currentBSSID is set, refreshes the isNearby property for all friends.
     override func refreshIsNearby()
     {
-        for friend in friends
+        for friend in friends.values
         {
             friend.refreshIsNearby()
         }
@@ -540,19 +541,7 @@ class AppUser: User
             friend.schedule.weekDays[weekDay!].addEvent(event)
         }
         
-        var existingFriend = false
-        
-        for (index, aFriend) in friends.enumerate()
-        {
-            if aFriend.username == friend.username
-            {
-                existingFriend = true
-                friends[index] = friend
-                break
-            }
-        }
-        
-        if !existingFriend { friends.append(friend)}
+        friends[friend.username] = friend        
         
         dispatch_async(dispatch_get_main_queue())
         {
@@ -654,7 +643,8 @@ class AppUser: User
             self.persistProfilePictureWithData(jpegData)
         
         }, onFailure: { (error) -> () in
-                print(error)
+            
+            print(error)
         })
     }
     

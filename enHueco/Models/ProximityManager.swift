@@ -14,7 +14,10 @@ import ReachabilitySwift
 class ProximityManager: NSObject
 {
     static private var instance = ProximityManager()
-
+    
+    static let backgroundFetchIntervalDuringGaps = 5*60.0
+    static let backgroundFetchIntervalAfterDayOver = 7*3600.0
+    
     ///Graph with BSSIDs of the access points
     private let wifiAccessPointsGraph = UnweightedGraph<String>()
     
@@ -107,7 +110,7 @@ class ProximityManager: NSObject
             
             if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec))
             {
-                let interfaceData = unsafeInterfaceData as Dictionary!
+                let interfaceData = unsafeInterfaceData as Dictionary
                 return interfaceData["BSSID"] as? String
             }
         }
@@ -117,6 +120,61 @@ class ProximityManager: NSObject
     
     func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(successHandler: () -> (), networkFailureHandler: () -> (), notConnectedToWifiHandler: () -> ())
     {
+        NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdate")
         
+        guard let currentBSSID = ProximityManager.currentBSSID() else
+        {
+            notConnectedToWifiHandler()
+            return
+        }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.LocationReportSegment)!)
+        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "PUT"
+        
+        let params = ["location" : currentBSSID]
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+            
+            for friendDictionary in JSONResponse as! [[String : AnyObject]]
+            {
+                system.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["bssid"] as! String)
+            }
+            
+            successHandler()
+            
+        }) { (error) -> () in
+            
+            networkFailureHandler()
+        }
+    }
+    
+    func updateBackgroundFetchIntervalBecauseUserChangedLocationSharingSettings()
+    {
+        if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
+        {
+            let (currentGap, nextGap) = system.appUser.currentAndNextGap()
+            
+            if currentGap != nil
+            {
+                //Ask iOS to kindly try to wake up the app frequently during gaps.
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringGaps)
+            }
+            else if let nextGap = nextGap
+            {
+                //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.endHourInDate(NSDate()).timeIntervalSinceNow )
+            }
+            else
+            {
+                //The day is over, user doesn't have more gaps ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
+            }
+        }
+        else
+        {
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+        }
     }
 }

@@ -20,6 +20,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     let searchBar = UISearchBar()
     
     var lastUpdatesFetchDate = NSDate()
+
+    //For performance
+    var friends = [User]()
     
     override func viewDidLoad()
     {
@@ -58,7 +61,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        friendsTableView.reloadData()
+        refreshInformation()
         
         navigationController?.setNavigationBarHidden(true, animated: true)
         
@@ -118,16 +121,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         //presentViewController(actionSheet, animated: true, completion: nil)
     }
     
+    func refreshInformation()
+    {
+        friends = Array(system.appUser.friends.values)
+        friendsTableView.reloadData()
+    }
+    
     // MARK: Notification Center
     
     func systemDidAddFriend(notification: NSNotification)
     {
-        friendsTableView.reloadData()
+        refreshInformation()
     }
     
     func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
     {
-        friendsTableView.reloadData()
+        refreshInformation()
     }
     
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
@@ -144,7 +153,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let friend = system.appUser.friends[indexPath.row]
+        let friend = friends[indexPath.row]
         
         let cell = friendsTableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
         cell.friendNameLabel.text = friend.name
@@ -159,7 +168,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let friend = system.appUser.friends[indexPath.row]
+        let friend = friends[indexPath.row]
         
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend

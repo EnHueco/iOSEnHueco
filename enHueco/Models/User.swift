@@ -104,13 +104,44 @@ class User: EHSynchronizable
         return nil
     }
     
+    ///For Performance
+    func currentAndNextGap () -> (currentGap: Event?, nextGap: Event?)
+    {
+        let currentDate = NSDate()
+        
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
+        
+        let localWeekdayEvents = schedule.weekDays[localWeekDayNumber].events
+        
+        for (index, event) in localWeekdayEvents.enumerate() where event.type == .Gap
+        {
+            let startHourInCurrentDate = event.startHourInDate(currentDate)
+            let endHourInCurrentDate = event.endHourInDate(currentDate)
+            
+            if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
+            {
+                if index < localWeekdayEvents.count - 1 && localWeekdayEvents[index+1].type == .Gap
+                {
+                    return (event, localWeekdayEvents[index+1])
+                }
+                else
+                {
+                    return (event, nil)
+                }
+            }
+        }
+        
+        return (nil, nil)
+    }
+    
     /// Returns user's next gap or class
     func nextEvent () -> Event?
     {
         return nil //TODO: 
     }
     
-    func hasNextGap () -> Bool
+    func nextGap () -> Event?
     {
         let currentDate = NSDate()
         
@@ -119,11 +150,10 @@ class User: EHSynchronizable
 
         for event in schedule.weekDays[localWeekDayNumber].events where event.type == .Gap && event.startHourInDate(currentDate) > currentDate
         {
-            // TODO: This implementation could return the actual current gap if events were sorted
-            return true
+            return event
         }
         
-        return false
+        return nil
     }
     
     /// When current BSSID is set, checks if user is near the App User and updates the value of the isNearby property.

@@ -27,9 +27,10 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         
         emptyLabel = UILabel()
-        emptyLabel.text = "No tienes amigos en hueco"
+        emptyLabel.text = "Nadie por ahí... \n No tienes amigos en hueco"
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = .Center
+        emptyLabel.numberOfLines = 0
         emptyLabel.sizeToFit()
         
         searchBar.sizeToFit()
@@ -95,7 +96,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return self.friendsAndGaps.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let friendAndGap = self.friendsAndGaps[indexPath.row]
@@ -110,9 +110,15 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let gapEndHour = friendAndGap.gap.endHour
         let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gapEndHour.hour, minute: gapEndHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
         
-        let timeLeftUntilNextEvent = gapEndHourWithTodaysDate - currentDate
+        let (currentGap, nextGap) = friendAndGap.friend.currentAndNextGap()
         
-        cell.timeLeftUntilNextEventLabel.text = "🕖 \(timeLeftUntilNextEvent.hour):\(timeLeftUntilNextEvent.minute) hrs"
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm a"
+
+        if let currentGap = currentGap
+        {
+            cell.timeLeftUntilNextEventLabel.text = "↘ \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
+        }
         
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 70/2

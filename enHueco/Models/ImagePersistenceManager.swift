@@ -52,8 +52,9 @@ class ImagePersistenceManager{
         
         if image == nil {
             
-            print("missing image at: \(path)")
+            print("Missing image at: \(path)")
         }
+        
         print("Loading image from path: \(path)") // this is just for you to see the path in case you want to go to the directory, using Finder.
         return image
         

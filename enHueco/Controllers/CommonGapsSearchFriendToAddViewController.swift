@@ -17,7 +17,7 @@ class CommonGapsSearchFriendToAddViewController: UIViewController, UITableViewDa
 {
     @IBOutlet weak var resultsTableView: UITableView!
     
-    var filteredFriends = system.appUser.friends
+    var filteredFriends = Array(system.appUser.friends.values)
     
     weak var delegate: CommonGapsSearchFriendToAddViewControllerDelegate?
     
@@ -61,11 +61,11 @@ class CommonGapsSearchFriendToAddViewController: UIViewController, UITableViewDa
     {
         if searchText == ""
         {
-            filteredFriends = system.appUser.friends
+            filteredFriends = Array(system.appUser.friends.values)
         }
         else
         {
-            filteredFriends = system.appUser.friends.filter({(user: User) -> Bool in
+            filteredFriends = Array(system.appUser.friends.values).filter({(user: User) -> Bool in
                 
                 return user.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || user.username.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
             })

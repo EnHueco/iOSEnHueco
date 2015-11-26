@@ -18,8 +18,21 @@ class Event: EHSynchronizable, Comparable
     weak var daySchedule: DaySchedule!
     
     var name:String?
-    var location: String?
+    {
+        didSet
+        {
+            if name == "" { name = nil }
+        }
+    }
     
+    var location: String?
+    {
+        didSet
+        {
+            if location == "" { location = nil }
+        }
+    }
+
     var type: EventType
     
     /** UTC weekday, hour and minute time components of the event's start hour */
@@ -157,8 +170,10 @@ class Event: EHSynchronizable, Comparable
         var dictionary = [String:AnyObject]()
         
         dictionary["type"] = type.rawValue
-        dictionary["name"] = name
-        dictionary["location"] = location
+        
+        if name != nil { dictionary["name"] = name }
+        if location != nil { dictionary["location"] = location }
+        
         dictionary["start_hour_weekday"] = String(startHour.weekday)
         dictionary["end_hour_weekday"] = String(endHour.weekday)
         dictionary["start_hour"] = "\(startHour.hour):\(startHour.minute)"
