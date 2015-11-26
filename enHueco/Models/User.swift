@@ -114,25 +114,24 @@ class User: EHSynchronizable
         
         let localWeekdayEvents = schedule.weekDays[localWeekDayNumber].events
         
-        for (index, event) in localWeekdayEvents.enumerate() where event.type == .Gap
+        var currentGap: Event?
+        
+        for event in localWeekdayEvents where event.type == .Gap
         {
             let startHourInCurrentDate = event.startHourInDate(currentDate)
             let endHourInCurrentDate = event.endHourInDate(currentDate)
             
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
             {
-                if index < localWeekdayEvents.count - 1 && localWeekdayEvents[index+1].type == .Gap
-                {
-                    return (event, localWeekdayEvents[index+1])
-                }
-                else
-                {
-                    return (event, nil)
-                }
+                currentGap = event
+            }
+            else if startHourInCurrentDate > currentDate
+            {
+                return (currentGap, event)
             }
         }
         
-        return (nil, nil)
+        return (currentGap, nil)
     }
     
     /// Returns user's next gap or class
