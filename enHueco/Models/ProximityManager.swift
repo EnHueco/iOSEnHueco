@@ -139,7 +139,7 @@ class ProximityManager: NSObject
             
             for friendDictionary in JSONResponse as! [[String : AnyObject]]
             {
-                system.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["bssid"] as! String)
+                system.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String)
             }
             
             successHandler()
