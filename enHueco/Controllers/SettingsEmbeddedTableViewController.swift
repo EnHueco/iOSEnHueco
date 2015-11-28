@@ -8,13 +8,14 @@
 
 import UIKit
 
-class SettingsEmbeddedTableViewController: UITableViewController
+class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDelegate
 {
     @IBOutlet weak var logoutCell: UITableViewCell!
     @IBOutlet weak var authTouchIDSwitch: UISwitch!
     @IBOutlet weak var nearbyFriendsNotificationsSwitch: UISwitch!
     @IBOutlet weak var shareLocationWithCloseFriendsSwitch: UISwitch!
-
+    @IBOutlet weak var phoneNumberCell: UITableViewCell!
+    
     //Temporary
     @IBOutlet weak var lastBackgroundFetchDateLabel: UILabel!
     
@@ -46,9 +47,13 @@ class SettingsEmbeddedTableViewController: UITableViewController
     {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: system)
+        
+        
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         shareLocationWithCloseFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
         nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
+        phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
 
         clearsSelectionOnViewWillAppear = false
         
@@ -78,5 +83,28 @@ class SettingsEmbeddedTableViewController: UITableViewController
                 presentViewController(loginViewController, animated: true, completion: nil)
             }
         }
+        else if cell == phoneNumberCell
+        {
+            let alertView = UIAlertView(title: "Teléfono", message: "Agrega un nuevo número de teléfono", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Agregar")
+            alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
+            alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.PhonePad
+            alertView.show()
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+    {
+        phoneNumberCell.setSelected(false, animated: true)
+        if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty
+        {
+            system.appUser.phoneNumber = newNumber
+            system.appUser.pushPhoneNumber(newNumber)
+        }
+    }
+    func didReceiveAppUserWasUpdated(notification : NSNotification)
+    {
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
+            }, completion: nil)
     }
 }

@@ -13,6 +13,7 @@ class EHURLS
     static let Domain = "enhueco.uniandes.edu.co"
     static let Base = "https://enhueco.uniandes.edu.co/api"
     static let MeSegment = "/me/"
+    static let MeImageSegment = "/me/image/"
     static let AuthSegment = "/auth/"
     static let FriendsSegment = "/friends/"
     static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"

@@ -68,6 +68,15 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         {
             self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
             
+            UIView.transitionWithView(self.tableView,
+                duration:0.35,
+                options:.TransitionCrossDissolve,
+                animations:
+                { () -> Void in
+                    self.tableView.reloadData()
+                },
+                completion: nil);
+            
             if self.friendsAndGaps.isEmpty
             {
                 self.tableView.hidden = true
@@ -78,15 +87,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.tableView.hidden = false
                 self.emptyLabel.removeFromSuperview()
             }
-            
-            UIView.transitionWithView(self.tableView,
-                duration:0.4,
-                options:.TransitionCrossDissolve,
-                animations:
-                { () -> Void in
-                    self.tableView.reloadData()
-                },
-                completion: nil);
         }
     }
     
@@ -131,7 +131,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         if let currentGap = currentGap
         {
-            cell.timeLeftUntilNextEventLabel.text = "↘ \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
+            cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }
         
         cell.friendImageImageView.clipsToBounds = true
@@ -162,7 +162,9 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             switch index
             {
             case 0:
-                system.whatsappMessageTo(system.getFriendABID(friend.username))
+                system.getFriendABID(friend.phoneNumber, onSuccess: { (abid) -> () in
+                    system.whatsappMessageTo(abid)
+                })
                 break
             case 1:
                 system.callFriend(friend.phoneNumber)

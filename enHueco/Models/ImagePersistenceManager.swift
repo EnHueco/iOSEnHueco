@@ -35,14 +35,18 @@ class ImagePersistenceManager{
         return fileURL.path!
     }
     
-    static func saveImage (data: NSData, path: String ) -> Bool{
+    static func saveImage (data: NSData, path: String, onSuccess: () -> ()){
         
 //        let pngImageData = UIImagePNGRepresentation(image)
         //let jpgImageData = UIImageJPEGRepresentation(image, 1.0)   // if you want to save as JPEG
-        let result = data.writeToFile(path, atomically: true)
-        
-        return result
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
+        {
+            let result = data.writeToFile(path, atomically: true)
+            if result
+            {
+                onSuccess()
+            }
+        }
     }
     
     static func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ()) {

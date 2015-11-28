@@ -23,7 +23,7 @@ class EHSystemNotification
     static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
     static let SystemDidReceiveAppUserImage = "SystemDidReceiveAppUserImage"
     
-    static let SystemDidReceiveAppUser = "SystemDidReceiveAppUser"
+    static let SystemDidReceiveAppUserWasUpdated = "SystemDidReceiveAppUserWasUpdated"
 }
 
 protocol SystemUsersSearchDelegate
@@ -199,7 +199,7 @@ class System
         UIApplication.sharedApplication().openURL(url)
     }
     
-    func getFriendABID(phoneNumber : String) -> NSNumber?
+    func getFriendABID(phoneNumber : String, onSuccess : (NSNumber) -> ())
     {
         let addressBook = APAddressBook()
         addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
@@ -227,6 +227,7 @@ class System
                                     if phoneString.rangeOfString(phoneNumber) != nil
                                     {
                                         abid = contactAP.recordID
+                                        onSuccess(abid!)
                                         return
                                     }
                                 }
@@ -235,6 +236,6 @@ class System
                     }
                 }
         })
-        return abid
+        return
     }
 }

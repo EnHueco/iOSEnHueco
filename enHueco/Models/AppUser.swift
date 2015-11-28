@@ -596,7 +596,7 @@ class AppUser: User
     func pushProfilePicture(image: UIImage)
     {
 //        let imageData = UIImageJPEGRepresentation(image, 100)
-        let url = NSURL(string: EHURLS.Base + EHURLS.MeSegment)
+        let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
         let request = NSMutableURLRequest(URL: url!)
         request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
@@ -611,7 +611,9 @@ class AppUser: User
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
         
             self.fetchAppUser()
-            self.persistProfilePictureWithData(jpegData)
+//            self.persistProfilePictureWithData(jpegData, onSuccess: { () -> () in
+//                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
+//            })
         
         }, onFailure: { (error) -> () in
             
@@ -630,9 +632,9 @@ class AppUser: User
             
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
                 
-                self.persistProfilePictureWithData(data)
-                
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
+                self.persistProfilePictureWithData(data, onSuccess: { () -> () in
+                    NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
+                })
                 
             }) { (error) -> () in
                     
@@ -641,10 +643,25 @@ class AppUser: User
         }
     }
     
-    func persistProfilePictureWithData(data : NSData)
+    func persistProfilePictureWithData(data : NSData, onSuccess: () -> ())
     {
         let path = ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")
-        ImagePersistenceManager.saveImage(data, path: path)
+        ImagePersistenceManager.saveImage(data, path: path, onSuccess: onSuccess)
+    }
+    
+    func pushPhoneNumber(newNumber : String)
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
+        request.HTTPMethod = "PUT"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], onSuccess: { (JSONResponse) -> () in
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: system)
+            }) { (error) -> () in
+                print(error)
+        }
     }
 }
 

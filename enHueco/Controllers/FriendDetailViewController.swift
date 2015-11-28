@@ -131,7 +131,9 @@ class FriendDetailViewController: UIViewController
         }
         else
         {
-            self.recordId = system.getFriendABID(self.friend.phoneNumber)
+            system.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
+            self.recordId = abid
+            })
         }
     }
     
