@@ -10,7 +10,7 @@ import UIKit
 import LocalAuthentication
 import MobileCoreServices
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
+    var imageIndicator : UIActivityIndicatorView? = nil
     
     override func viewDidLoad()
     {
@@ -36,18 +37,39 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
         
         self.assignImages()
-
+    }
+    
+    func startImageIndicator()
+    {
+        if imageIndicator == nil
+        {
+            imageIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+            imageIndicator!.center = imageImageView.center
+            view.addSubview(imageIndicator!)
+        }
+        if !imageIndicator!.isAnimating() { imageIndicator!.startAnimating() }
+    }
+    
+    func stopImageIndicator()
+    {
+        if let imageIndicator = imageIndicator
+        {
+            if imageIndicator.isAnimating() { imageIndicator.stopAnimating() }
+            self.imageIndicator!.removeFromSuperview()
+            self.imageIndicator = nil
+        }
     }
     
     func assignImages()
     {
-        dispatch_async(dispatch_get_main_queue())
+        startImageIndicator()
+        ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")) { (image) -> () in
+            dispatch_async(dispatch_get_main_queue())
             {
-                if let image = ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg"))
+                if let image = image
                 {
                     self.imageImageView.hidden = false
                     self.backgroundImageView.hidden = false
-                    
                     
                     if(self.imageImageView.image != nil)
                     {
@@ -60,13 +82,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     else
                     {
                         self.imageImageView.image = image
-                        
                         UIView.animateWithDuration(0.4)
-                        {
-                            self.imageImageView.alpha = 1
+                            {
+                                self.imageImageView.alpha = 1
                         }
                     }
-      
+                    
                     if self.backgroundImageView.image != nil
                     {
                         UIView.transitionWithView(self.backgroundImageView,
@@ -95,6 +116,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.imageImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.clipsToBounds = true
+                self.stopImageIndicator()
+            }
         }
     }
     
@@ -119,52 +142,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         system.appUser.fetchAppUser()
         system.appUser.fetchUpdatesForAppUserAndSchedule()
     }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-//        super.viewDidAppear(animated)
-//        
-//        if let imageURL = system.appUser.imageURL
-//        {
-//            imageImageView.hidden = false
-//            backgroundImageView.hidden = false
-//            
-//            imageImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-//                
-//                if error == nil
-//                {
-//                    UIView.animateWithDuration(0.4)
-//                    {
-//                        self.imageImageView.alpha = 1
-//                    }
-//                }
-//                else
-//                {
-//                    print(error)
-//                }
-//            })
-//
-//            backgroundImageView.sd_setImageWithURL(imageURL, completed: { (_, error, _, _) -> Void in
-//                
-//                if error == nil
-//                {
-//                    UIView.animateWithDuration(0.4)
-//                    {
-//                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-//                        self.backgroundImageView.alpha = 1
-//                    }
-//                }
-//            })
-//
-//        }
-//        else
-//        {
-//            imageImageView.hidden = true
-//            backgroundImageView.hidden = true
-//        }
-
-    }
-        
     
     @IBAction func myQRButtonPressed(sender: AnyObject)
     {
@@ -267,6 +244,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             //            self.showPasswordAlert()
         }
     }
+    
+    // MARK: Image Handlers
+    
     @IBAction func imageViewClicked(sender: AnyObject)
     {
         let imagePicker = UIImagePickerController()
@@ -276,21 +256,34 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.allowsEditing = false
         
-        self.presentViewController(imagePicker, animated: true,
-            completion: nil)
+        self.navigationController?.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
+        let imageCropVC = RSKImageCropViewController(image: image)
+        imageCropVC.delegate = self
         picker.dismissViewControllerAnimated(true, completion: nil)
-        system.appUser.pushProfilePicture(image)
+        self.presentViewController(imageCropVC, animated: true, completion: nil)
     }
     
     func appUserRefreshed(notification: NSNotification)
     {
         dispatch_async(dispatch_get_main_queue())
         {
+            self.stopImageIndicator()
             self.assignImages()
         }
+    }
+    
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        system.appUser.pushProfilePicture(croppedImage)
+        startImageIndicator()
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController)
+    {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }

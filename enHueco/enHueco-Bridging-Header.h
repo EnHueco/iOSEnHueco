@@ -5,23 +5,26 @@
 #import <Foundation/Foundation.h>
 #import "MSCollectionViewCalendarLayout.h"
 
-// MSCollectionCalendarComponents
+// SW Table View Cell
+#import "SWTableViewCell.h"
 
-#import "MCSwipeTableViewCell.h"
+// MSCollectionCalendarComponents
 #import "QRCodeReader.h"
 #import "QRCodeReaderViewController.h"
 #import "QRCodeReaderDelegate.h"
 #import "TKCalendarDayViewController.h"
 
 // APAddressBook
-
 #import "APAddressBook.h"
 #import "APContact.h"
 #import "APSocialProfile.h"
 #import "APAddress.h"
 #import "APPhoneWithLabel.h"
-// TSMessages
 
+// RSK Image Cropper
+#import "RSKImageCropViewController.h"
+
+// TSMessages
 #import "TSMessage.h"
 
 // MRProgress

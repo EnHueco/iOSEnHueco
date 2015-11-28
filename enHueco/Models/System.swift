@@ -185,5 +185,56 @@ class System
         }
         
         return appUser != nil
-    }    
+    }
+    
+    func callFriend(phoneNumber : String)
+    {
+        let url:NSURL = NSURL(string: "tel://\(phoneNumber)")!
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    func whatsappMessageTo(friendABID : NSNumber?)
+    {
+        let url: NSURL = NSURL(string: "whatsapp://send?" + ((friendABID == nil) ? "": "abid=\(friendABID!)"))!
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    func getFriendABID(phoneNumber : String) -> NSNumber?
+    {
+        let addressBook = APAddressBook()
+        addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
+        var abid : NSNumber? = nil
+        addressBook.loadContacts(
+            { (contacts: [AnyObject]!, error: NSError!) in
+                
+                if contacts != nil
+                {
+                    for contact in contacts
+                    {
+                        if let contactAP = contact as? APContact
+                        {
+                            for phone in contactAP.phones
+                            {
+                                if var phoneString = phone as? String
+                                {
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                    
+                                    if phoneString.rangeOfString(phoneNumber) != nil
+                                    {
+                                        abid = contactAP.recordID
+                                        return
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+        })
+        return abid
+    }
 }

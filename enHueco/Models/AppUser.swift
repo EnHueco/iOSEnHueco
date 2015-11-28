@@ -136,35 +136,6 @@ class AppUser: User
                 self.schedule.weekDays[event.localWeekDay()].addEvent(event)
             }
             
-//            let currentDate = NSDate()
-//            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-//            let globalCalendar = NSCalendar.currentCalendar()
-//            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-//
-//            self.schedule = Schedule()
-//            
-//            let eventsJSON = JSONResponse["gap_set"] as! [[String: AnyObject]]
-//            
-//            for eventJSON in eventsJSON
-//            {
-//                let newEvent = Event(JSONDictionary: eventJSON)
-//                
-//                let startHourWeekDayConversionComponents = NSDateComponents()
-//                startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-//                startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-//                startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
-//                startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
-//                startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
-//                startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-//                startHourWeekDayConversionComponents.second = 0
-//                
-//                let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-//                let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
-//                
-//                let daySchedule = self.schedule.weekDays[localStartHourWeekDay]
-//                daySchedule.addEvent(newEvent)
-//            }
-            
         }) { (error) -> () in
             print(error)
         }
@@ -255,10 +226,10 @@ class AppUser: User
                     daySchedule.addEvent(newEvent)
                 }
                 
-                newFriends[newFriend.username] = newFriend
+                self.friends[newFriend.username] = newFriend
             }
             
-            self.friends = newFriends
+//            self.friends = newFriends
             
             dispatch_async(dispatch_get_main_queue())
             {
@@ -267,7 +238,7 @@ class AppUser: User
             
         }) { (error) -> () in
                 
-            
+         print(error)
         }
     }
     
@@ -625,7 +596,7 @@ class AppUser: User
     func pushProfilePicture(image: UIImage)
     {
 //        let imageData = UIImageJPEGRepresentation(image, 100)
-        let url = NSURL(string: "https://enhueco.uniandes.edu.co/me/")
+        let url = NSURL(string: EHURLS.Base + EHURLS.MeSegment)
         
         let request = NSMutableURLRequest(URL: url!)
         request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)

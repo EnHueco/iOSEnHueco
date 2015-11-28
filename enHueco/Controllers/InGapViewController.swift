@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate
 {
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +19,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: nil)
         
         topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
         
@@ -40,7 +40,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
-        
         emptyLabel.center = tableView.center
     }
 
@@ -48,12 +47,18 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(true, animated: false)
+        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
         
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
         
+        updateGapsDataAndReloadTableView()
+    }
+    
+    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
+    {
         updateGapsDataAndReloadTableView()
     }
     
@@ -74,13 +79,19 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.emptyLabel.removeFromSuperview()
             }
             
-            self.tableView.reloadData()
+            UIView.transitionWithView(self.tableView,
+                duration:0.4,
+                options:.TransitionCrossDissolve,
+                animations:
+                { () -> Void in
+                    self.tableView.reloadData()
+                },
+                completion: nil);
         }
     }
     
     override func viewDidAppear(animated: Bool)
     {
-        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -101,7 +112,10 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let friendAndGap = self.friendsAndGaps[indexPath.row]
         
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
+        cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
+        cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
         cell.friendNameLabel.text = friendAndGap.friend.name
+        cell.delegate = self
         
         let globalCalendar = NSCalendar.currentCalendar()
         globalCalendar.timeZone = NSTimeZone(abbreviation: "GMT")!
@@ -140,8 +154,31 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }
     
-    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
+    // MARK: SW Table View
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
-        updateGapsDataAndReloadTableView()
+        if let cell = cell as? InGapFriendCell, friend = system.appUser.friends[cell.friendUsername!]
+        {
+            switch index
+            {
+            case 0:
+                system.whatsappMessageTo(system.getFriendABID(friend.username))
+                break
+            case 1:
+                system.callFriend(friend.phoneNumber)
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func rightButtons() -> NSArray
+    {
+        let rightUtilityButtons = NSMutableArray()
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0/255.0, green: 161.0/255.0, blue: 0, alpha: 1.0), title: "Escribir")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0/255.0, green: 142.0/255.0, blue: 1, alpha: 0.75), title: "Llamar")
+        
+        return rightUtilityButtons
     }
 }

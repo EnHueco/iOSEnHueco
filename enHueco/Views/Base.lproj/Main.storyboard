@@ -685,7 +685,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="↓ 1:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNh-j0-d9r">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNh-j0-d9r">
                                                     <rect key="frame" x="92" y="32" width="500" height="23"/>
                                                     <animations/>
                                                     <constraints>
@@ -1173,7 +1173,7 @@
                     <connections>
                         <outlet property="addFriendButton" destination="wl8-I3-bNF" id="jVa-94-ZQ0"/>
                         <outlet property="friendRequestsNotificationsIndicator" destination="sgf-Rt-UlZ" id="9hY-WB-NQa"/>
-                        <outlet property="friendsTableView" destination="16l-Wy-NoV" id="Veg-3M-2qx"/>
+                        <outlet property="tableView" destination="16l-Wy-NoV" id="ft4-R6-EiP"/>
                         <outlet property="topBarBackgroundView" destination="FGy-G1-EPz" id="7E9-CE-ZJJ"/>
                     </connections>
                 </viewController>
@@ -1370,7 +1370,7 @@
             </objects>
             <point key="canvasLocation" x="2517" y="1988.25"/>
         </scene>
-        <!--Mi Perfil-->
+        <!--Profile View Controller-->
         <scene sceneID="O0A-oe-FNP">
             <objects>
                 <viewController id="CS5-RI-5GR" customClass="ProfileViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
@@ -1626,7 +1626,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Mi Perfil" image="UsuarioB50" selectedImage="UsuarioV50" id="27q-QX-vEE"/>
+                    <navigationItem key="navigationItem" id="84n-Xg-6C1"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="TRB-JB-cAG" id="RuW-i3-zCc"/>
@@ -1639,7 +1639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHq-TM-9oX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4431" y="1605"/>
+            <point key="canvasLocation" x="5243" y="1605"/>
         </scene>
         <!--ViewQR View Controller-->
         <scene sceneID="kHG-mD-lnl">
@@ -1725,7 +1725,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uay-Ho-JNH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5125.5" y="1612.5"/>
+            <point key="canvasLocation" x="5937" y="1612"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="VXA-j6-i5Z">
@@ -1741,7 +1741,7 @@
                     <connections>
                         <segue destination="GFB-Jx-fM0" kind="relationship" relationship="viewControllers" id="ure-6Y-yr8"/>
                         <segue destination="t3d-vC-Kxw" kind="relationship" relationship="viewControllers" id="mgV-dG-FI0"/>
-                        <segue destination="CS5-RI-5GR" kind="relationship" relationship="viewControllers" id="yW0-aU-0Do"/>
+                        <segue destination="Oqw-ts-auw" kind="relationship" relationship="viewControllers" id="yW0-aU-0Do"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RdA-Mt-lYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2630,8 +2630,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Hora Inicio" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wcz-lc-ifs">
-                                                    <rect key="frame" x="15" y="12" width="88" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Hora Fin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wcz-lc-ifs">
+                                                    <rect key="frame" x="15" y="12" width="69" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -3720,6 +3720,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdx-ok-ZP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5124" y="849.75"/>
+        </scene>
+        <!--Mi Perfil-->
+        <scene sceneID="giD-vC-tMh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Oqw-ts-auw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Mi Perfil" image="UsuarioB50" selectedImage="UsuarioV50" id="27q-QX-vEE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xW3-Qh-jte">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CS5-RI-5GR" kind="relationship" relationship="rootViewController" id="XXz-mf-NvD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p68-Kl-js6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4431" y="1605"/>
         </scene>
     </scenes>
     <resources>
