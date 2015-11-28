@@ -313,6 +313,27 @@ class AppUser: User
     }
     
     /**
+     Returns all friends that will soon be in gap.
+     - returns: Friend in gap with their current gap
+     */
+    func friendsSoonInGapWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, gap: Event)]
+    {
+        var friendsAndGaps = [(friend: User, gap: Event)]()
+        
+        let currentDate = NSDate()
+        
+        for friend in friends.values
+        {
+            if let gap = friend.nextGap() where gap.startHourInDate(currentDate).timeIntervalSinceNow <= interval
+            {
+                friendsAndGaps.append((friend, gap))
+            }
+        }
+        
+        return friendsAndGaps
+    }
+    
+    /**
     Imports an schedule of classes from a device's calendar.
     - parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
     */

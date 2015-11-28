@@ -13,6 +13,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var friendsAndGaps = [(friend: User, gap: Event)]()
+    var soonInGapfriendsAndGaps = [(friend: User, gap: Event)]()
     var emptyLabel : UILabel!
     
     let searchBar = UISearchBar()
@@ -42,7 +43,17 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLayoutSubviews()
         emptyLabel.center = tableView.center
     }
-
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0
+        {
+            return "Ahora"
+        }
+        else
+        {
+            return "Próximamente"
+        }
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -67,15 +78,9 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         dispatch_async(dispatch_get_main_queue())
         {
             self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
+            self.soonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
             
-            UIView.transitionWithView(self.tableView,
-                duration:0.35,
-                options:.TransitionCrossDissolve,
-                animations:
-                { () -> Void in
-                    self.tableView.reloadData()
-                },
-                completion: nil);
+            self.tableView.reloadData()
             
             if self.friendsAndGaps.isEmpty
             {
@@ -87,6 +92,15 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self.tableView.hidden = false
                 self.emptyLabel.removeFromSuperview()
             }
+            UIView.transitionWithView(self.tableView,
+                duration:0.35,
+                options:.TransitionCrossDissolve,
+                animations:
+                { () -> Void in
+                    
+                },
+                completion: nil);
+
         }
     }
     
@@ -104,47 +118,79 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
 
-        return self.friendsAndGaps.count
+        if section == 0
+        {
+            return self.friendsAndGaps.count
+        }
+        else if section == 1
+        {
+            return self.soonInGapfriendsAndGaps.count
+        }
+        else
+        {
+            return 0
+        }
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let friendAndGap = self.friendsAndGaps[indexPath.row]
-        
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
-        cell.friendNameLabel.text = friendAndGap.friend.name
         cell.delegate = self
-        
-        let globalCalendar = NSCalendar.currentCalendar()
-        globalCalendar.timeZone = NSTimeZone(abbreviation: "GMT")!
-        
-        let currentDate = NSDate()
-        let gapEndHour = friendAndGap.gap.endHour
-        let gapEndHourWithTodaysDate = globalCalendar.dateBySettingHour(gapEndHour.hour, minute: gapEndHour.minute, second: 0, ofDate: currentDate, options: NSCalendarOptions())!
-        
-        let (currentGap, nextGap) = friendAndGap.friend.currentAndNextGap()
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "hh:mm a"
-
-        if let currentGap = currentGap
+        
+        
+        var (friend, currentGap) : (User, Event)
+        
+        if indexPath.section == 0
         {
+            (friend, currentGap) = self.friendsAndGaps[indexPath.row]
             cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }
+        else
+        {
+            (friend, currentGap) = self.soonInGapfriendsAndGaps[indexPath.row]
+            cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
+        }
+
+        let url = friend.imageURL
         
+        cell.friendNameLabel.text = friend.name
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 70/2
-        
+        cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
-        cell.friendImageImageView.sd_setImageWithURL(friendAndGap.friend.imageURL)
         
-        // TODO: Update InGapFriendCell image to match friend.
         
+        SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: { (image, error, cacheType, bool, url) -> Void in
+            if error == nil
+            {
+                if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk
+                {
+                    cell.friendImageImageView.alpha = 0
+                    cell.friendImageImageView.image = image
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        cell.friendImageImageView.alpha = 1
+                        }, completion: nil)
+                }
+                else if cacheType == SDImageCacheType.Memory
+                {
+                    cell.friendImageImageView.image = image
+                }
+            }
+        })
+
         return cell
     }
-        
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let friend = friendsAndGaps[indexPath.row].friend
@@ -153,6 +199,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }
+    
     
     // MARK: SW Table View
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
@@ -173,7 +220,12 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 break
             }
         }
+        cell.hideUtilityButtonsAnimated(true)
     }
+    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
+        return true
+    }
+
     
     func rightButtons() -> NSArray
     {
