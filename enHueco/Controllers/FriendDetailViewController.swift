@@ -1,0 +1,151 @@
+//
+//  ViewFriendViewController.swift
+//  enHueco
+//
+//  Created by Diego Gómez on 9/8/15.
+//  Copyright © 2015 Diego Gómez. All rights reserved.
+//
+
+import UIKit
+
+class FriendDetailViewController: UIViewController
+{
+    @IBOutlet weak var imageImageView: UIImageView!
+    @IBOutlet weak var firstNamesLabel: UILabel!
+    @IBOutlet weak var lastNamesLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var viewScheduleButton: UIButton!
+    @IBOutlet weak var commonGapsButton: UIButton!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+   
+    var friend : User!
+
+    var recordId : NSNumber?
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        title = friend.firstNames
+        
+        viewScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        commonGapsButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        
+        firstNamesLabel.text = friend.firstNames
+        lastNamesLabel.text = friend.lastNames
+        userNameLabel.text = friend.username
+        
+        setRecordId()
+        
+        backgroundImageView.alpha = 0
+        
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.imageImageView.sd_setImageWithURL(self.friend.imageURL)
+            self.backgroundImageView.sd_setImageWithURL(self.friend.imageURL)
+            { (_, error, _, _) -> Void in
+                
+                if error == nil
+                {
+                    UIView.animateWithDuration(0.4)
+                    {
+                        self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40,tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                    }
+                }
+            }
+        }
+        
+        imageImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.clipsToBounds = true
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        viewScheduleButton.clipsToBounds = true
+        viewScheduleButton.layer.cornerRadius = viewScheduleButton.frame.height/2
+        
+        commonGapsButton.clipsToBounds = true
+        commonGapsButton.layer.cornerRadius = viewScheduleButton.frame.height/2
+        
+        imageImageView.clipsToBounds = true
+        imageImageView.layer.cornerRadius = imageImageView.frame.height/2
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)        
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+    }
+
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func whatsappMessage(sender: UIButton)
+    {
+        system.whatsappMessageTo(self.recordId!)
+        
+    }
+    
+    @IBAction func viewSchedule(sender: UIButton)
+    {
+        let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as!ScheduleViewController
+        scheduleCalendar.schedule = friend.schedule
+        presentViewController(scheduleCalendar, animated: true, completion: nil)
+    }
+    
+    @IBAction func commonGapsButtonPressed(sender: AnyObject)
+    {
+        let commonGapsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonGapsViewController") as!CommonGapsViewController
+        commonGapsViewController.selectedFriends.append(friend)
+      
+        navigationController?.pushViewController(commonGapsViewController, animated: true)
+    }
+
+    @IBAction func call(sender: UIButton)
+    {
+        if let num = friend.phoneNumber
+        {
+            system.callFriend(num)
+        }
+    }
+
+    func setRecordId()
+    {
+        if self.friend.phoneNumber.characters.count < 7
+        {
+            self.recordId = nil
+        }
+        else
+        {
+            system.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
+            self.recordId = abid
+            })
+        }
+    }
+    
+    
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+}

@@ -8,104 +8,211 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
+{
     var window: UIWindow?
 
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
         // Override point for customization after application launch.
+                
+        if #available(iOS 9.0, *)
+        {
+            if WCSession.isSupported()
+            {
+                let session = WCSession.defaultSession()
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+        
+        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
+        
+        if notFirstLaunch
+        {
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+        }
+        else
+        {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notFirstLaunch")
+        }
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityManagerNotification.ProximityManagerDidReceiveProximityUpdates, object: ProximityManager.sharedManager())
+        
+        TSMessageView.appearance().titleFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
+        
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(application: UIApplication)
+    {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        
+        try? system.persistData()
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(application: UIApplication)
+    {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+  
+        ProximityManager.sharedManager().updateBackgroundFetchInterval()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(application: UIApplication)
+    {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(application: UIApplication)
+    {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        if let appUser = system.appUser
+        {
+            appUser.fetchUpdatesForAppUserAndSchedule()
+            appUser.fetchUpdatesForFriendsAndFriendSchedules()
+            SynchronizationManager.sharedManager().retryPendingRequests()
+        }
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(application: UIApplication)
+    {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
     }
-
-    // MARK: - Core Data stack
-
-    lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "deego.enHueco" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
-    }()
-
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("enHueco", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
-
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-        // Create the coordinator and store
-        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("enHueco.sqlite")
-        var error: NSError? = nil
-        var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
-            coordinator = nil
-            // Report any error we got.
-            let dict = NSMutableDictionary()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error!.userInfo)")
-            abort()
-        }
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
+    {
+        let (currentGap, nextGap) = system.appUser.currentAndNextGap()
         
-        return coordinator
-    }()
-
-    lazy var managedObjectContext: NSManagedObjectContext? = {
-        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
-        let coordinator = self.persistentStoreCoordinator
-        if coordinator == nil {
-            return nil
+        if currentGap != nil
+        {
+            //Ask iOS to kindly try to wake up the app frequently during gaps.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringGaps)
+            
+            ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+                
+                completionHandler(.NewData)
+                
+            }, networkFailureHandler: { () -> () in
+                    
+                completionHandler(.Failed)
+                    
+            }, notConnectedToWifiHandler: { () -> () in
+                    
+                completionHandler(.NoData)
+            })
         }
-        var managedObjectContext = NSManagedObjectContext()
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
-    }()
-
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
-        if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+        else if let nextGap = nextGap
+        {
+            //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.startHourInDate(NSDate()).timeIntervalSinceNow )
+            
+            completionHandler(.NoData)
+        }
+        else
+        {
+            //The day is over, user doesn't have more gaps ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
+            //TODO : Set fetch interval to wait for next gap (for this we must look for the next gap in future days)
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
+            
+            completionHandler(.NoData)
+        }
+    }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
+    {
+        return UI_USER_INTERFACE_IDIOM() == .Phone ? .Portrait : .All
+    }
+    
+    @available(iOS 9.0, *)
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void)
+    {
+        if message["request"] as! String == "friendsCurrentlyInGap"
+        {
+            var responseDictionary = [String : AnyObject]()
+            let friendsInGapAndGaps = system.appUser.friendsCurrentlyInGap()
+            
+            var friendsArray = [[String : AnyObject]]()
+            
+            for (friend, gap) in friendsInGapAndGaps
+            {
+                var friendDictionary = [String : AnyObject]()
+                
+                friendDictionary["name"] = friend.name
+                friendDictionary["imageURL"] = friend.imageURL?.absoluteString
+                friendDictionary["gapEndDate"] = gap.endHourInDate(NSDate())
+                
+                friendsArray.append(friendDictionary)
+            }
+            
+            responseDictionary["friends"] = friendsArray
+            
+            replyHandler(responseDictionary)
+        }
+    }
+    
+    func proximityManagerDidReceiveProximityUpdates(notification: NSNotification)
+    {
+        let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
+        
+        let friendsToNotifyToUser = system.appUser.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        
+        let currentDate = NSDate()
+        
+        for friendToNotify in friendsToNotifyToUser
+        {
+            friendToNotify.lastNotifiedNearbyStatusDate = currentDate
+        }
+     
+        if !friendsToNotifyToUser.isEmpty
+        {
+            var notificationText = ""
+            
+            for (i, friend) in friendsToNotifyToUser.enumerate()
+            {
+                if i <= 3
+                {
+                    notificationText += friend.firstNames
+                    
+                    if i == friendsToNotifyToUser.count-1 && friendsToNotifyToUser.count > 1
+                    {
+                        notificationText += " y "
+                    }
+                    else
+                    {
+                        notificationText += (i != 0 ? ", ":"")
+                    }
+                }
+                else { break }
+            }
+            
+            if friendsToNotifyToUser.count > 3
+            {
+                notificationText += " y otros amigos"
+            }
+            
+            if friendsToNotifyToUser.count > 1
+            {
+                notificationText += " parecen estar cerca y en hueco, ¿por qué no les escribes?"
+            }
+            else
+            {
+                notificationText += " parece estar cerca y en hueco, ¿por qué no le escribes?"
+            }
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                TSMessage.showNotificationWithTitle(notificationText, type: .Message)
             }
         }
     }
-
 }
 

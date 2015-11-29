@@ -1,0 +1,105 @@
+PODS:
+  - Alamofire (3.0.0)
+  - APAddressBook (0.1.11):
+    - APAddressBook/Core (= 0.1.11)
+  - APAddressBook/Core (0.1.11)
+  - ASBPlayerScrubbing (0.1)
+  - ASMediaFocusManager (0.5):
+    - ASBPlayerScrubbing (~> 0.1)
+  - CRToast (0.0.9)
+  - HexColors (2.3.0)
+  - MRProgress (0.8.2):
+    - MRProgress/ActivityIndicator (= 0.8.2)
+    - MRProgress/Blur (= 0.8.2)
+    - MRProgress/Circular (= 0.8.2)
+    - MRProgress/Icons (= 0.8.2)
+    - MRProgress/NavigationBarProgress (= 0.8.2)
+    - MRProgress/Overlay (= 0.8.2)
+  - MRProgress/ActivityIndicator (0.8.2):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.8.2):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.8.2):
+    - MRProgress/Helper
+    - MRProgress/ProgressBaseClass
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.8.2)
+  - MRProgress/Icons (0.8.2)
+  - MRProgress/NavigationBarProgress (0.8.2):
+    - MRProgress/ProgressBaseClass
+  - MRProgress/Overlay (0.8.2):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/ProgressBaseClass (0.8.2)
+  - MRProgress/Stopable (0.8.2):
+    - MRProgress/Helper
+  - MSCollectionViewCalendarLayout (0.1.5)
+  - QRCodeReaderViewController (3.5.2)
+  - ReachabilitySwift (2.1)
+  - RSKImageCropper (1.4.1)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - SimpleAlert (1.3.1)
+  - StaticDataTableViewController (2.0.5)
+  - SWTableViewCell (0.3.7)
+  - TSMessages (0.9.13):
+    - HexColors (~> 2.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.0)
+  - APAddressBook
+  - ASMediaFocusManager
+  - CRToast (~> 0.0.7)
+  - MRProgress
+  - MSCollectionViewCalendarLayout
+  - QRCodeReaderViewController (~> 3.5.2)
+  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - RSKImageCropper
+  - SDWebImage (~> 3.7)
+  - SimpleAlert
+  - StaticDataTableViewController (from `https://github.com/peterpaulis/StaticDataTableViewController.git`)
+  - SWTableViewCell (~> 0.3.7)
+  - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
+
+EXTERNAL SOURCES:
+  ReachabilitySwift:
+    :git: https://github.com/ashleymills/Reachability.swift
+  StaticDataTableViewController:
+    :git: https://github.com/peterpaulis/StaticDataTableViewController.git
+  TSMessages:
+    :git: https://github.com/KrauseFx/TSMessages.git
+
+CHECKOUT OPTIONS:
+  ReachabilitySwift:
+    :commit: 89b2431fe262bc5915972472e36d04c067f686bc
+    :git: https://github.com/ashleymills/Reachability.swift
+  StaticDataTableViewController:
+    :commit: e032eca1f3e5ef9a8462cda4cb9c1260f57bb1c6
+    :git: https://github.com/peterpaulis/StaticDataTableViewController.git
+  TSMessages:
+    :commit: f7d0e8cece3ca79852e49807812601e2d89f5719
+    :git: https://github.com/KrauseFx/TSMessages.git
+
+SPEC CHECKSUMS:
+  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
+  ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
+  CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
+  HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
+  MRProgress: f4cfe862082418e8f542f077772283f425d6c699
+  MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
+  QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
+  ReachabilitySwift: 99bb7acceebb90b2048b4a8fd6539be96454dcb2
+  RSKImageCropper: 98ae426eb4eb11b733ff87f8e2542a480f4fa8e6
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SimpleAlert: 05215ee656e1da1428998e76a76bb153a16c7a21
+  StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
+
+COCOAPODS: 0.39.0
