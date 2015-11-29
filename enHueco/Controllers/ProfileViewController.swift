@@ -62,6 +62,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         startImageIndicator()
         ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")) { (image) -> () in
+            
             dispatch_async(dispatch_get_main_queue())
             {
                 if let image = image
@@ -73,7 +74,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     {
                         UIView.transitionWithView(self.imageImageView,
                             duration:1,
-                            options: UIViewAnimationOptions.TransitionFlipFromTop,
+                            options: UIViewAnimationOptions.CurveEaseInOut, //UIViewAnimationOptions.TransitionFlipFromTop,
                             animations: { self.imageImageView.image = image },
                             completion: nil)
                     }

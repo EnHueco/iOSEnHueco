@@ -118,7 +118,9 @@ class ProximityManager: NSObject
     
     func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool
     {
-        for neighbor in wifiAccessPointsGraph.neighborsForVertex(bssidA)!
+        guard let neighbors = wifiAccessPointsGraph.neighborsForVertex(bssidA) else { return false }
+        
+        for neighbor in neighbors
         {
             if neighbor == bssidB { return true }
             
