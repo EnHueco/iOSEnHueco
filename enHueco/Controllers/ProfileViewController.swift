@@ -35,8 +35,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         imageImageView.alpha = 0
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
-        
-        self.assignImages()
     }
     
     func startImageIndicator()
@@ -141,6 +139,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
       
         system.appUser.fetchAppUser()
         system.appUser.fetchUpdatesForAppUserAndSchedule()
+        self.assignImages()
     }
     
     @IBAction func myQRButtonPressed(sender: AnyObject)
