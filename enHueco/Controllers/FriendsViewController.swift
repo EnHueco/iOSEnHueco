@@ -35,36 +35,42 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.delegate = self
         
-        
         searchBar.sizeToFit()
         tableView.tableHeaderView = searchBar
         
+        createEmptyLabel()
+    }
+    
+    func createEmptyLabel()
+    {
         emptyLabel = UILabel()
         emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = .Center
         emptyLabel.lineBreakMode = .ByWordWrapping
         emptyLabel.numberOfLines = 0
+        emptyLabel.sizeToFit()
     }
     
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
         
-        emptyLabel.center = tableView.center
-        
         friendRequestsNotificationsIndicator.clipsToBounds = true
         friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height/2
+        
+        emptyLabel.center = tableView.center
     }
     
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        refreshInformation()
         
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
+        
+        reloadFriendsAndTableView()
     }
     
     override func viewDidAppear(animated: Bool)
@@ -74,26 +80,20 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
         
-        if system.appUser.friends.isEmpty
-        {
-            tableView.hidden = true
-            view.addSubview(emptyLabel)
-        }
-        else
-        {
-            tableView.hidden = false
-            emptyLabel.removeFromSuperview()
-        }
-        
         let timeSinceLastUpdatesFetch = NSDate().timeIntervalSinceDate(lastUpdatesFetchDate)
         
         if timeSinceLastUpdatesFetch > 3 //3 seconds
         {
             lastUpdatesFetchDate = NSDate()
-            
-            system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
-            system.appUser.fetchUpdatesForFriendRequests()
+            fetchUpdates()
         }
+        
+    }
+    
+    func fetchUpdates()
+    {
+        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
+        system.appUser.fetchUpdatesForFriendRequests()
     }
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -121,11 +121,23 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         //presentViewController(actionSheet, animated: true, completion: nil)
     }
     
-    func refreshInformation()
+    func reloadFriendsAndTableView()
     {
-        friends = Array(system.appUser.friends.values)
+        self.friends = Array(system.appUser.friends.values)
+        
+        if friends.isEmpty
+        {
+            tableView.hidden = true
+            view.addSubview(emptyLabel)
+        }
+        else
+        {
+            tableView.hidden = false
+            emptyLabel.removeFromSuperview()
+        }
+        
         UIView.transitionWithView(self.tableView,
-            duration:0.4,
+            duration:0.35,
             options:.TransitionCrossDissolve,
             animations:
             { () -> Void in
@@ -138,12 +150,12 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func systemDidAddFriend(notification: NSNotification)
     {
-        refreshInformation()
+        reloadFriendsAndTableView()
     }
     
     func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
     {
-        refreshInformation()
+        reloadFriendsAndTableView()
     }
     
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
@@ -151,15 +163,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
     
-    // MARK: SW TableView Cell
-    
-    
-    
     // MARK: TableView Delegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return system.appUser.friends.count
+        return self.friends.count
     }
     
     
@@ -174,12 +182,31 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let friend = friends[indexPath.row]
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
-        cell.friendNameLabel.text = friend.name
-        cell.backgroundColor = tableView.backgroundView?.backgroundColor
         
+        if indexPath.row < friends.count
+        {
+            let friend = friends[indexPath.row]
+            cell.friendNameLabel.text = friend.name
+            
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "hh:mm"
+            
+            if let gap = friend.currentGap()
+            {
+                cell.gapStartOrEndHourLabel.text = "↗ "+formatter.stringFromDate(gap.endHourInDate(NSDate()))
+            }
+            else if let gap = friend.nextGap()
+            {
+                cell.gapStartOrEndHourLabel.text = "↘ "+formatter.stringFromDate(gap.startHourInDate(NSDate()))
+            }
+            else
+            {
+                cell.gapStartOrEndHourLabel.text = "   "+"--:--"
+            }
+            
+            cell.backgroundColor = tableView.backgroundView?.backgroundColor
+        }
         return cell
     }
     

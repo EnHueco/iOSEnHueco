@@ -100,7 +100,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                 },
                 completion: nil);
-
         }
     }
     
@@ -141,7 +140,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
-        cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
         cell.delegate = self
         
         let formatter = NSDateFormatter()
@@ -153,11 +151,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if indexPath.section == 0
         {
             (friend, currentGap) = self.friendsAndGaps[indexPath.row]
+            cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
             cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }
         else
         {
             (friend, currentGap) = self.soonInGapfriendsAndGaps[indexPath.row]
+            cell.friendUsername = self.soonInGapfriendsAndGaps[indexPath.row].friend.username
             cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }
 

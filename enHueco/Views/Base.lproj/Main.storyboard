@@ -1033,7 +1033,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="fIL-t7-ppR" secondAttribute="trailing" id="JGn-OC-voG"/>
                                                 <constraint firstItem="fIL-t7-ppR" firstAttribute="top" secondItem="kpP-Dr-eau" secondAttribute="top" constant="8" id="K7V-Cj-lAI"/>
                                                 <constraint firstItem="CUz-HN-pvc" firstAttribute="leading" secondItem="kpP-Dr-eau" secondAttribute="leading" constant="8" id="xZh-S4-bQm"/>
-                                                <constraint firstAttribute="centerY" secondItem="CUz-HN-pvc" secondAttribute="centerY" constant="0.5" id="xio-4a-pza"/>
+                                                <constraint firstAttribute="centerY" secondItem="CUz-HN-pvc" secondAttribute="centerY" id="xio-4a-pza"/>
                                             </constraints>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="subviews">
