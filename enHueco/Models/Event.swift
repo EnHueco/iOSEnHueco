@@ -13,7 +13,7 @@ enum EventType: String
     case Gap = "GAP", Class = "CLASS"
 }
 
-class Event: EHSynchronizable, Comparable
+class Event: EHSynchronizable, Comparable, NSCopying
 {
     weak var daySchedule: DaySchedule!
     
@@ -207,6 +207,14 @@ class Event: EHSynchronizable, Comparable
         
         let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
         return localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject
+    {
+        let event = Event(type: type, name: name, startHour: startHour, endHour: endHour, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)
+        event.daySchedule = daySchedule
+        
+        return event
     }
 }
 

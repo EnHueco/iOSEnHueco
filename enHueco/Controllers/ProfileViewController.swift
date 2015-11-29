@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func startImageIndicator()
     {
-        if imageIndicator == nil
+        if imageIndicator == nil && imageImageView != nil
         {
             imageIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
             imageIndicator!.center = imageImageView.center

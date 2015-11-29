@@ -133,7 +133,7 @@ class ProximityManager: NSObject
     
     static func currentBSSID() -> String?
     {
-        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi else { return nil }
+        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi && TARGET_OS_SIMULATOR == 0 else { return nil }
         
         if let interfaces:CFArray! = CNCopySupportedInterfaces() where CFArrayGetCount(interfaces) > 0
         {

@@ -116,21 +116,12 @@ class AddEditEventViewController: UIViewController
         
         if let eventToEdit = eventToEdit where canAddEvents
         {
-            eventToEdit.replaceValuesWithThoseOfTheEvent(eventsToAdd.first!)
-            SynchronizationManager.sharedManager().reportEventEdited(eventToEdit)
-            scheduleViewController.registerEditedEventForUndo(eventToEdit)
-            
+            scheduleViewController.editEventWithUndoCapability(eventToEdit, withValuesOfEvent: eventsToAdd.first!)
             dismissViewControllerAnimated(true, completion: nil)
         }
         else if canAddEvents
         {
-            for event in eventsToAdd
-            {
-                event.daySchedule.addEvent(event)
-                SynchronizationManager.sharedManager().reportNewEvent(event)
-            }
-
-            scheduleViewController.registerAddedEventsForUndo(eventsToAdd)
+            scheduleViewController.addEventsWithUndoCapability(eventsToAdd)
             dismissViewControllerAnimated(true, completion: nil)
         }
         else
@@ -150,10 +141,7 @@ class AddEditEventViewController: UIViewController
     {
         if let eventToEdit = eventToEdit
         {
-            eventToEdit.daySchedule.removeEvent(eventToEdit)
-            SynchronizationManager.sharedManager().reportEventDeleted(eventToEdit)
-
-            scheduleViewController.registerDeletedEventsForUndo([eventToEdit])
+            scheduleViewController.deleteEventsWithUndoCapability([eventToEdit])
         }
     }
     
