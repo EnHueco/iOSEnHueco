@@ -79,7 +79,7 @@ class FriendDetailViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: true)        
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidAppear(animated: Bool)
@@ -135,41 +135,40 @@ class FriendDetailViewController: UIViewController
         
         let addressBook = APAddressBook()
         addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
-        addressBook.loadContacts(
-            { (contacts: [AnyObject]!, error: NSError!) in
+        addressBook.loadContacts({ (contacts: [AnyObject]!, error: NSError!) in
                 
-                if contacts != nil
+            if contacts != nil
+            {
+                for contact in contacts
                 {
-                    for contact in contacts
+                    if let contactAP = contact as? APContact
                     {
-                        if let contactAP = contact as? APContact
+                        for phone in contactAP.phones
                         {
-                            for phone in contactAP.phones
+                            if var phoneString = phone as? String
                             {
-                                if var phoneString = phone as? String
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+                                phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                                
+                                if phoneString.rangeOfString(self.friend.phoneNumber) != nil
                                 {
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                                    
-                                    if phoneString.rangeOfString(self.friend.phoneNumber) != nil
-                                    {
-                                        self.recordId = contactAP.recordID
-                                        return
-                                    }
+                                    self.recordId = contactAP.recordID
+                                    return
                                 }
                             }
                         }
                     }
                 }
-                else if (error != nil)
-                {
-                    self.recordId = nil
-                }
+            }
+            else if (error != nil)
+            {
                 self.recordId = nil
+            }
+            self.recordId = nil
         })
     }
     

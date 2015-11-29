@@ -326,6 +326,30 @@ class AppUser: User
     }
     
     /**
+     Returns all friends that are currently in gap and nearby.
+     - returns: Friend in gap with their current gap
+     */
+    func friendsCurrentlyInGapAndNearby() -> [(friend: User, gap: Event)]
+    {
+        var friendsAndGaps = [(friend: User, gap: Event)]()
+        
+        for friend in friends.values
+        {
+            if let gap = friend.currentGap() where friend.isNearby
+            {
+                friendsAndGaps.append((friend, gap))
+            }
+        }
+        
+        return friendsAndGaps
+    }
+    
+    func friendsCurrentlyNearby() -> [User]
+    {
+        return friends.values.filter { $0.isNearby }
+    }
+    
+    /**
     Returns all friends that are currently in gap.
     - returns: Friend in gap with their current gap
     */
@@ -340,7 +364,7 @@ class AppUser: User
         
         return friendsAndGaps
     }
-    
+        
     /**
     Imports an schedule of classes from a device's calendar.
     - parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added to the schedule.

@@ -23,13 +23,15 @@
 // TSMessages
 
 #import "TSMessage.h"
+#import "TSMessageView.h"
 
 // MRProgress
 #import "MRProgress.h"
 
 #import "MultiSelectSegmentedControl.h"
 #import "UIView+Shadow.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "SDWebImage/UIImageView+WebCache.h"
+
 #import "ASMediaFocusManager.h"
 #import "UIImage+ImageEffects.h"
 #import "StaticDataTableViewController.h"

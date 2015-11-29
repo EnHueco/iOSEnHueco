@@ -20,7 +20,7 @@ struct ConnectionManagerCompoundError: ErrorType
     var request: NSURLRequest
 }
 
-typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject?) -> ()
+typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompoundError) -> ()
 
@@ -111,12 +111,12 @@ class ConnectionManager: NSObject
             
             completionQueue.addOperationWithBlock
             {
-                if let data = data, response = response where error == nil
+                if let data = data, response = response where error == nil && response.statusCode == 200
                 {
                     do
                     {
                         print("Response status: \(response.statusCode) for \(request.URLString)")
-                        let JSONResponse = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
+                        let JSONResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)
                         successfulRequestBlock?(JSONResponse: JSONResponse )
                     }
                     catch

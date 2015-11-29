@@ -36,7 +36,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
         
         self.assignImages()
-
     }
     
     func assignImages()

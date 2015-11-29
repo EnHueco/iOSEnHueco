@@ -125,7 +125,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         cell.friendImageImageView.sd_setImageWithURL(friendAndGap.friend.imageURL)
-        
         // TODO: Update InGapFriendCell image to match friend.
         
         return cell

@@ -29,12 +29,23 @@ class User: EHSynchronizable
     {
         didSet
         {
-            if oldValue != currentBSSID
+            if currentBSSID != nil
             {
-                refreshIsNearby()
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    NSTimer.scheduledTimerWithTimeInterval(self.currentBSSIDTimeToLive, target: self, selector: Selector("currentBSSIDTimeToLiveReached:"), userInfo: nil, repeats: false)
+                }
             }
+            
+            refreshIsNearby()
         }
     }
+    
+    /// Time until currentBSSID is set back to nil
+    let currentBSSIDTimeToLive: NSTimeInterval = 60*5 //5 minutes
+    
+    ///Gap in which the user was when the app user was notified that they were nearby
+    var lastNotifiedNearbyStatusDate: NSDate?
     
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
@@ -155,6 +166,11 @@ class User: EHSynchronizable
         return nil
     }
     
+    func currentBSSIDTimeToLiveReached (timer: NSTimer)
+    {
+        currentBSSID = nil
+    }
+    
     /// When current BSSID is set, checks if user is near the App User and updates the value of the isNearby property.
     func refreshIsNearby()
     {
@@ -196,6 +212,7 @@ class User: EHSynchronizable
         self.phoneNumber = decoder.decodeObjectForKey("phoneNumber") as? String
         self.imageURL = decoder.decodeObjectForKey("imageURL") as? NSURL
         self.schedule = schedule
+        self.lastNotifiedNearbyStatusDate = decoder.decodeObjectForKey("lastNotifiedNearbyStatusDate") as? NSDate
         
         super.init(coder: decoder)
     }
@@ -208,6 +225,7 @@ class User: EHSynchronizable
         coder.encodeObject(phoneNumber, forKey: "phoneNumber")
         coder.encodeObject(imageURL, forKey: "imageURL")
         coder.encodeObject(schedule, forKey: "schedule")
+        coder.encodeObject(lastNotifiedNearbyStatusDate, forKey: "lastNotifiedNearbyStatusDate")
         
         super.encodeWithCoder(coder)
     }

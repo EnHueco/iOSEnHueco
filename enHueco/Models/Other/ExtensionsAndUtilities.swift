@@ -132,6 +132,15 @@ extension Array
     }
 }
 
+extension String
+{
+    func isBlank() -> Bool
+    {
+        let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return trimmed.isEmpty
+    }
+}
+
 class Wrapper<T>
 {
     let element : T

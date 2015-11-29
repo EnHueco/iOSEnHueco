@@ -22,14 +22,14 @@ class SettingsEmbeddedTableViewController: UITableViewController
     {
         NSUserDefaults.standardUserDefaults().setBool(nearbyFriendsNotificationsSwitch.on, forKey: EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         
-        ProximityManager.sharedManager().updateBackgroundFetchIntervalBecauseUserChangedLocationSharingSettings()
+        ProximityManager.sharedManager().updateBackgroundFetchInterval()
     }
     
     @IBAction func shareLocationWithCloseFriendsToggleChanged(sender: AnyObject)
     {
         NSUserDefaults.standardUserDefaults().setBool(shareLocationWithCloseFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
         
-        ProximityManager.sharedManager().updateBackgroundFetchIntervalBecauseUserChangedLocationSharingSettings()
+        ProximityManager.sharedManager().updateBackgroundFetchInterval()
     }
     
     @IBAction func authenticateWithTIDChanged(sender: UISwitch)
