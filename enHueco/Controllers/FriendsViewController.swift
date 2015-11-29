@@ -9,11 +9,11 @@
 import UIKit
 import SimpleAlert
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate
 {
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
-    @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     
     var emptyLabel : UILabel!
@@ -27,18 +27,17 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
 
         topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
         
-        friendsTableView.dataSource = self
-        friendsTableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         
         
         searchBar.sizeToFit()
-        friendsTableView.tableHeaderView = searchBar
+        tableView.tableHeaderView = searchBar
         
         emptyLabel = UILabel()
         emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
@@ -52,7 +51,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         super.viewDidLayoutSubviews()
         
-        emptyLabel.center = friendsTableView.center
+        emptyLabel.center = tableView.center
         
         friendRequestsNotificationsIndicator.clipsToBounds = true
         friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height/2
@@ -70,19 +69,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(animated: Bool)
     {
-        if let selectedIndex = friendsTableView.indexPathForSelectedRow
+        if let selectedIndex = tableView.indexPathForSelectedRow
         {
-            friendsTableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
         
         if system.appUser.friends.isEmpty
         {
-            friendsTableView.hidden = true
+            tableView.hidden = true
             view.addSubview(emptyLabel)
         }
         else
         {
-            friendsTableView.hidden = false
+            tableView.hidden = false
             emptyLabel.removeFromSuperview()
         }
         
@@ -91,6 +90,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if timeSinceLastUpdatesFetch > 3 //3 seconds
         {
             lastUpdatesFetchDate = NSDate()
+            
             system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
             system.appUser.fetchUpdatesForFriendRequests()
         }
@@ -124,9 +124,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func refreshInformation()
     {
         friends = Array(system.appUser.friends.values)
-        friendsTableView.reloadData()
+        UIView.transitionWithView(self.tableView,
+            duration:0.4,
+            options:.TransitionCrossDissolve,
+            animations:
+            { () -> Void in
+                self.tableView.reloadData()
+            },
+            completion: nil);
     }
-    
+
     // MARK: Notification Center
     
     func systemDidAddFriend(notification: NSNotification)
@@ -144,6 +151,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
     
+    // MARK: SW TableView Cell
+    
+    
+    
     // MARK: TableView Delegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -151,12 +162,23 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return system.appUser.friends.count
     }
     
+    
+//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+//        let more = UITableViewRowAction(style: .Normal, title: "More") { action, index in
+//            print("more button tapped")
+//        }
+//        more.backgroundColor = UIColor.lightGrayColor()
+//        
+//        return [more]
+//    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let friend = friends[indexPath.row]
         
-        let cell = friendsTableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
         cell.friendNameLabel.text = friend.name
+        cell.backgroundColor = tableView.backgroundView?.backgroundColor
         
         return cell
     }
@@ -176,4 +198,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         splitViewController?.showDetailViewController(friendDetailViewController, sender: self)
     }
+    
+
 }

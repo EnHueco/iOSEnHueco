@@ -7,7 +7,6 @@ PODS:
   - ASMediaFocusManager (0.5):
     - ASBPlayerScrubbing (~> 0.1)
   - HexColors (2.3.0)
-  - MCSwipeTableViewCell (2.1.4)
   - MRProgress (0.8.2):
     - MRProgress/ActivityIndicator (= 0.8.2)
     - MRProgress/Blur (= 0.8.2)
@@ -39,11 +38,13 @@ PODS:
   - MSCollectionViewCalendarLayout (0.1.5)
   - QRCodeReaderViewController (3.5.2)
   - ReachabilitySwift (2.1)
+  - RSKImageCropper (1.4.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SimpleAlert (1.3.1)
   - StaticDataTableViewController (2.0.5)
+  - SWTableViewCell (0.3.7)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
 
@@ -51,14 +52,15 @@ DEPENDENCIES:
   - Alamofire (~> 3.0)
   - APAddressBook
   - ASMediaFocusManager
-  - MCSwipeTableViewCell (~> 2.1.4)
   - MRProgress
   - MSCollectionViewCalendarLayout
   - QRCodeReaderViewController (~> 3.5.2)
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - RSKImageCropper
   - SDWebImage (~> 3.7)
   - SimpleAlert
   - StaticDataTableViewController (from `https://github.com/peterpaulis/StaticDataTableViewController.git`)
+  - SWTableViewCell (~> 0.3.7)
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
@@ -86,14 +88,15 @@ SPEC CHECKSUMS:
   ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
   ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
-  MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MRProgress: f4cfe862082418e8f542f077772283f425d6c699
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
   ReachabilitySwift: 99bb7acceebb90b2048b4a8fd6539be96454dcb2
+  RSKImageCropper: 98ae426eb4eb11b733ff87f8e2542a480f4fa8e6
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SimpleAlert: 05215ee656e1da1428998e76a76bb153a16c7a21
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2

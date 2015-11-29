@@ -92,8 +92,6 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
             deleteButtonHeightConstraint.constant = 0
             
             let indexSet = NSMutableIndexSet()
-            indexSet.addIndex(2)
-            indexSet.addIndex(4)
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
         }
         

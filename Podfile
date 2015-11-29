@@ -11,10 +11,14 @@ pod 'QRCodeReaderViewController', '~> 3.5.2'
 pod 'MSCollectionViewCalendarLayout'
 
 # Swipe Cells
-pod 'MCSwipeTableViewCell', '~> 2.1.4'
+pod 'SWTableViewCell', '~> 0.3.7'
+#pod 'MCSwipeTableViewCell', '~> 2.1.4'
 
 # Address Book
 pod 'APAddressBook'
+
+# RSK Image Cropper
+pod 'RSKImageCropper'
 
 # TS Messages (Notifications)
 pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'

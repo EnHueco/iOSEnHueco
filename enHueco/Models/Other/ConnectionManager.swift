@@ -87,6 +87,7 @@ class ConnectionManager: NSObject
                     do
                     {
                         print(response?.statusCode)
+                        print(NSString(data: data, encoding: NSUTF8StringEncoding))
                         successfulRequestBlock?(data: data)
                     }
                     catch

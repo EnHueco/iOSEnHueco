@@ -8,9 +8,12 @@
 
 import UIKit
 
-class InGapFriendCell: UITableViewCell
+class InGapFriendCell: SWTableViewCell
 {
     @IBOutlet weak var friendImageImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var timeLeftUntilNextEventLabel: UILabel!
+    
+    var friendUsername : String? = nil
+    
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
+		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6C23AD65ED86B332C367CF8C /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
@@ -764,7 +764,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -787,11 +787,11 @@
 					};
 					F126ADF71BE4836800AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 					};
 					F126AE031BE4836900AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = 4R547J5575;
 					};
 				};
 			};
@@ -1253,6 +1253,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1260,6 +1261,7 @@
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1273,6 +1275,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1281,6 +1284,7 @@
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
