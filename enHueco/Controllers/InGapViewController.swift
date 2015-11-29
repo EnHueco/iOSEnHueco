@@ -43,7 +43,8 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLayoutSubviews()
         emptyLabel.center = tableView.center
     }
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
         if section == 0
         {
             return "Ahora"
@@ -145,18 +146,19 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let formatter = NSDateFormatter()
         formatter.dateFormat = "hh:mm a"
         
-        
         var (friend, currentGap) : (User, Event)
         
         if indexPath.section == 0
         {
             (friend, currentGap) = self.friendsAndGaps[indexPath.row]
+            
             cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
             cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }
         else
         {
             (friend, currentGap) = self.soonInGapfriendsAndGaps[indexPath.row]
+            
             cell.friendUsername = self.soonInGapfriendsAndGaps[indexPath.row].friend.username
             cell.timeLeftUntilNextEventLabel.text = "🕐 \( formatter.stringFromDate(currentGap.endHourInDate(NSDate())) )"
         }

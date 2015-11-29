@@ -71,32 +71,57 @@ class ScheduleViewController: UIViewController
         return schedule === system.appUser.schedule
     }
     
-    ///Gives the ability to undo and redo the actions.
-    func registerAddedEventsForUndo(eventsAdded: [Event])
+    ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
+    func addEventsWithUndoCapability(eventsToAdd: [Event])
     {
-        undoManager!.registerUndoWithTarget(self, selector: Selector("deleteEvents:"), object: eventsAdded)
-        
-        if !undoManager!.undoing
+        for event in eventsToAdd
         {
-            undoManager!.setActionName("Agregar Eventos")
+            event.daySchedule.addEvent(event)
+            SynchronizationManager.sharedManager().reportNewEvent(event)
+        }
+        
+        undoManager?.registerUndoWithTarget(self, selector: Selector("deleteEventsWithUndoCapability:"), object: eventsToAdd)
+        
+        if undoManager != nil && !undoManager!.undoing
+        {
+            undoManager?.setActionName("Agregar Eventos")
         }
         
         scheduleCalendarViewController.reloadData()
     }
     
-    func registerEditedEventForUndo(eventToEdit: Event)
+    ///Edits the event, giving the ability to undo and redo the actions.
+    func editEventWithUndoCapability(eventToEdit: Event, withValuesOfEvent newEvent: Event)
     {
-        //TODO:
+        let oldEvent = eventToEdit.copy() as! Event
+        
+        eventToEdit.replaceValuesWithThoseOfTheEvent(newEvent)
+        SynchronizationManager.sharedManager().reportEventEdited(eventToEdit)
+        
+        undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withValuesOfEvent: oldEvent)
+        
+        if undoManager != nil && !undoManager!.undoing
+        {
+            undoManager?.setActionName("Editar Evento")
+        }
+        
+        scheduleCalendarViewController.reloadData()
     }
     
-    ///Gives the ability to undo and redo the actions.
-    func registerDeletedEventsForUndo(eventsDeleted: [Event])
+    ///Deletes the events from their assigned daySchedules, giving the ability to undo and redo the actions.
+    func deleteEventsWithUndoCapability(events: [Event])
     {
-        undoManager!.registerUndoWithTarget(self, selector: Selector("addEvents:"), object: eventsDeleted)
-        
-        if !undoManager!.undoing
+        for event in events
         {
-            undoManager!.setActionName("Borrar Eventos")
+            event.daySchedule.removeEvent(event)
+            SynchronizationManager.sharedManager().reportEventDeleted(event)
+        }
+        
+        undoManager?.registerUndoWithTarget(self, selector: Selector("addEventsWithUndoCapability:"), object: events)
+        
+        if undoManager != nil && !undoManager!.undoing
+        {
+            undoManager?.setActionName("Borrar Eventos")
         }
         
         scheduleCalendarViewController.reloadData()
