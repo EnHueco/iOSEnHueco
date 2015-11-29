@@ -74,6 +74,8 @@ import UIKit
     
     func goToMainTabViewController()
     {
+        //ProximityManager.sharedManager().beginProximityUpdates()
+        
         performSegueWithIdentifier("PresentMainTabViewController", sender: self)
     }
     

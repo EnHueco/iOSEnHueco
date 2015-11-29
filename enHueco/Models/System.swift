@@ -26,11 +26,6 @@ class EHSystemNotification
     static let SystemDidReceiveAppUserWasUpdated = "SystemDidReceiveAppUserWasUpdated"
 }
 
-protocol SystemUsersSearchDelegate
-{
-    func systemDidReceiveUserSearchResults(results: [User])
-}
-
 class System
 {    
     enum SystemError: ErrorType
@@ -137,9 +132,17 @@ class System
         }
     }
     
-    func searchUsersWithText (searchText: String, delegate: SystemUsersSearchDelegate)
+    func searchUsersWithText (searchText: String, completionHandler: (results: [User])->())
     {
-        guard searchText != " " else { return }
+        guard !searchText.isBlank() else
+        {
+            dispatch_async(dispatch_get_main_queue())
+            {
+                completionHandler(results: [User]())
+            }
+
+            return
+        }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
         request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
@@ -157,11 +160,15 @@ class System
             
             dispatch_async(dispatch_get_main_queue())
             {
-                delegate.systemDidReceiveUserSearchResults(userSearchResults)
+                completionHandler(results: userSearchResults)
             }
             
         }) { (error) -> () in
             
+            dispatch_async(dispatch_get_main_queue())
+            {
+                completionHandler(results: [User]())
+            }
         }
     }
     

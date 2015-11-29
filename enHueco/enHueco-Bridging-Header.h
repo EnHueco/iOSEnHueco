@@ -26,6 +26,7 @@
 
 // TSMessages
 #import "TSMessage.h"
+#import "TSMessageView.h"
 
 // MRProgress
 #import "MRProgress.h"

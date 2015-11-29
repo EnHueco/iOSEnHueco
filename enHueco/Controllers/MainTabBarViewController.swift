@@ -17,6 +17,8 @@ class MainTabBarViewController: UITabBarController
     
     override func viewWillAppear(animated: Bool)
     {
+        TSMessage.setDefaultViewController(self)
+        
         navigationController?.navigationBarHidden = true
         
         tabBar.barTintColor = UIColor(red: 50/255.0, green: 50/255.0, blue: 50/255.0, alpha: 1)

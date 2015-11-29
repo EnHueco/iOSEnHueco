@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SystemUsersSearchDelegate, SearchFriendCellDelegate
+class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchResultsTableView: UITableView!
@@ -133,13 +133,11 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func timeToSearch(timer: NSTimer)
     {
-        system.searchUsersWithText(searchText, delegate: self)
-    }
-    
-    func systemDidReceiveUserSearchResults(results: [User])
-    {
-        searchResults = results
-        searchResultsTableView.reloadData()
+        system.searchUsersWithText(searchText) { (results) -> () in
+            
+            self.searchResults = results
+            self.searchResultsTableView.reloadData()
+        }
     }
     
     func systemDidSendFriendRequest(notification: NSNotification)

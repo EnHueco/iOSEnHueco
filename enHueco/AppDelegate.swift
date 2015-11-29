@@ -40,6 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notFirstLaunch")
         }
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityManagerNotification.ProximityManagerDidReceiveProximityUpdates, object: ProximityManager.sharedManager())
+        
+        TSMessageView.appearance().titleFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
+        
         return true
     }
 
@@ -55,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+  
+        ProximityManager.sharedManager().updateBackgroundFetchInterval()
     }
 
     func applicationWillEnterForeground(application: UIApplication)
@@ -105,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         else if let nextGap = nextGap
         {
             //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.endHourInDate(NSDate()).timeIntervalSinceNow )
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.startHourInDate(NSDate()).timeIntervalSinceNow )
             
             completionHandler(.NoData)
         }
@@ -148,6 +156,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             responseDictionary["friends"] = friendsArray
             
             replyHandler(responseDictionary)
+        }
+    }
+    
+    func proximityManagerDidReceiveProximityUpdates(notification: NSNotification)
+    {
+        let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
+        
+        let friendsToNotifyToUser = system.appUser.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        
+        let currentDate = NSDate()
+        
+        for friendToNotify in friendsToNotifyToUser
+        {
+            friendToNotify.lastNotifiedNearbyStatusDate = currentDate
+        }
+     
+        if !friendsToNotifyToUser.isEmpty
+        {
+            var notificationText = ""
+            
+            for (i, friend) in friendsToNotifyToUser.enumerate()
+            {
+                if i <= 3
+                {
+                    notificationText += friend.firstNames
+                    
+                    if i == friendsToNotifyToUser.count-1 && friendsToNotifyToUser.count > 1
+                    {
+                        notificationText += " y "
+                    }
+                    else
+                    {
+                        notificationText += (i != 0 ? ", ":"")
+                    }
+                }
+                else { break }
+            }
+            
+            if friendsToNotifyToUser.count > 3
+            {
+                notificationText += " y otros amigos"
+            }
+            
+            if friendsToNotifyToUser.count > 1
+            {
+                notificationText += " parecen estar cerca y en hueco, ¿por qué no les escribes?"
+            }
+            else
+            {
+                notificationText += " parece estar cerca y en hueco, ¿por qué no le escribes?"
+            }
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                TSMessage.showNotificationWithTitle(notificationText, type: .Message)
+            }
         }
     }
 }
