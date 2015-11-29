@@ -19,7 +19,7 @@ class EHURLS
     static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
     static let UsersSegment = "/users/"
     static let EventsSegment = "/gaps/"
-    static let LocationReportSegment = "me/location/friends/"
+    static let LocationReportSegment = "/me/location/friends/"
 }
 
 class EHParameters

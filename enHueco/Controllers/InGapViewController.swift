@@ -82,7 +82,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.tableView.reloadData()
             
-            if self.friendsAndGaps.isEmpty
+            if self.friendsAndGaps.isEmpty && self.soonInGapfriendsAndGaps.isEmpty
             {
                 self.tableView.hidden = true
                 self.view.addSubview(self.emptyLabel)

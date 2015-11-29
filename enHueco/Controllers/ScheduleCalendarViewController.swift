@@ -54,8 +54,21 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .Gap ? UIColor(red: 0/255.0, green: 150/255.0, blue: 245/255.0, alpha: 0.15) : UIColor(red: 255/255.0, green: 213/255.0, blue: 0/255.0, alpha: 0.15))
             
+            let localCalendar2 = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+            
             eventView.startDate = event.startHourInDate(date)
+            if localCalendar.component(.Day, fromDate: date) != localCalendar.component(.Day, fromDate: eventView.startDate)
+            {
+                let diff = localCalendar.component(.WeekOfMonth, fromDate: date) - localCalendar.component(.WeekOfMonth, fromDate: eventView.startDate)
+                eventView.startDate = localCalendar.dateByAddingUnit(.WeekOfMonth, value: diff, toDate: eventView.startDate, options: .MatchStrictly)!
+            }
             eventView.endDate = event.endHourInDate(date)
+            if localCalendar.component(.Day, fromDate: date) != localCalendar.component(.Day, fromDate: eventView.endDate)
+            {
+                let diff = localCalendar.component(.WeekOfMonth, fromDate: date) - localCalendar.component(.WeekOfMonth, fromDate: eventView.endDate)
+                eventView.endDate = localCalendar.dateByAddingUnit(.WeekOfMonth, value: diff, toDate: eventView.endDate, options: .MatchStrictly)!
+            }
             
             eventViews.append(eventView)
         }

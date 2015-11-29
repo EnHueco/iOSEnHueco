@@ -133,7 +133,7 @@ class ProximityManager: NSObject
         request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
         
-        let params = ["location" : currentBSSID]
+        let params = ["bssid" : currentBSSID]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
             
