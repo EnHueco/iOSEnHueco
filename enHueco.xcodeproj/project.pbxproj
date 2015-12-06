@@ -72,6 +72,11 @@
 		F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */; };
 		F16C613B1BB222EF00703782 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C613A1BB222EF00703782 /* Event.swift */; };
 		F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F16C613E1BB30A0100703782 /* UIView+Shadow.m */; };
+		F16E7D111C135757009A3C30 /* PopOverMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16E7D101C135757009A3C30 /* PopOverMenuViewController.swift */; };
+		F16E7D131C13877A009A3C30 /* PopOverMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16E7D121C13877A009A3C30 /* PopOverMenuTableViewCell.swift */; };
+		F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */; };
+		F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */; };
+		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
 		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
@@ -251,6 +256,11 @@
 		F16C613A1BB222EF00703782 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F16C613D1BB30A0100703782 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
 		F16C613E1BB30A0100703782 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
+		F16E7D101C135757009A3C30 /* PopOverMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverMenuViewController.swift; sourceTree = "<group>"; };
+		F16E7D121C13877A009A3C30 /* PopOverMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverMenuTableViewCell.swift; sourceTree = "<group>"; };
+		F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsViewController.swift; sourceTree = "<group>"; };
+		F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsPrivacySettingsViewController.swift; sourceTree = "<group>"; };
+		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
 		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynchronizationManager.swift; path = Other/SynchronizationManager.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
@@ -362,6 +372,7 @@
 				F165BC521BC613E900AA9248 /* OutgoingFriendRequestCell.swift */,
 				F1B8AD5D1BC8D49D00BB879B /* CommonGapsSearchFriendToAddResultsCell.swift */,
 				F1B8AD5F1BC8E13500BB879B /* CommonGapsSelectedFriendsCollectionViewCell.swift */,
+				F16E7D121C13877A009A3C30 /* PopOverMenuTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -514,11 +525,9 @@
 			isa = PBXGroup;
 			children = (
 				F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */,
-				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
-				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
-				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
+				F17AD9B01C10168E001FE56A /* Settings */,
+				F17AD9B11C1016AB001FE56A /* Main Screen View Controllers */,
 				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
-				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
 				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
@@ -533,8 +542,7 @@
 				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
 				F1B8AD5B1BC8D2B600BB879B /* CommonGapsSearchFriendToAddViewController.swift */,
 				F1EB0B961BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift */,
-				F143045B1C061FD9006AAB10 /* SettingsViewController.swift */,
-				F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */,
+				F16E7D101C135757009A3C30 /* PopOverMenuViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -589,6 +597,29 @@
 				F16C613E1BB30A0100703782 /* UIView+Shadow.m */,
 			);
 			name = "UIView+Shadow";
+			sourceTree = "<group>";
+		};
+		F17AD9B01C10168E001FE56A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F143045B1C061FD9006AAB10 /* SettingsViewController.swift */,
+				F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */,
+				F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */,
+				F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */,
+				F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		F17AD9B11C1016AB001FE56A /* Main Screen View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */,
+				F1179E6D1B9BB3F100B04400 /* InGapViewController.swift */,
+				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
+				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
+			);
+			name = "Main Screen View Controllers";
 			sourceTree = "<group>";
 		};
 		F1827F6D1BC35D91002ECB64 /* Main Classes */ = {
@@ -919,6 +950,7 @@
 				F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
 				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
+				F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */,
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,
 				F1EB0B971BD1F1C800D5DF01 /* FriendDetailViewController2ViewController.swift in Sources */,
 				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
@@ -936,6 +968,7 @@
 				F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */,
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
 				F11B034E1BA52B5600ADD580 /* NSDate+TKCategory.m in Sources */,
+				F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */,
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
 				F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
@@ -956,6 +989,7 @@
 				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
 				F1ED50C21BE9A44A00533557 /* ProximityManager.swift in Sources */,
 				F1EB0B901BD1CA3E00D5DF01 /* Deque.swift in Sources */,
+				F16E7D111C135757009A3C30 /* PopOverMenuViewController.swift in Sources */,
 				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
 				F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
@@ -979,9 +1013,11 @@
 				F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */,
 				F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
+				F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */,
 				F1EB0B931BD1CA3E00D5DF01 /* SetType.swift in Sources */,
 				F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
+				F16E7D131C13877A009A3C30 /* PopOverMenuTableViewCell.swift in Sources */,
 				F11B02371BA5241200ADD580 /* TKCalendarDayView.m in Sources */,
 				F11B02381BA5241200ADD580 /* TKCalendarDayViewController.m in Sources */,
 				F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */,
@@ -1163,7 +1199,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
@@ -1196,7 +1232,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "enHueco/enHueco-Bridging-Header.h";
@@ -1259,7 +1295,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = enHueco_watchOS_Extension;
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1282,7 +1318,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = enHueco_watchOS_Extension;
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1302,7 +1338,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1323,7 +1359,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "enHueco watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = diegoalejogm.enHueco.watchkitapp.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diegomontoyas.enHueco.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendDetailViewController: UIViewController
+class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate
 {
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var firstNamesLabel: UILabel!
@@ -18,6 +18,8 @@ class FriendDetailViewController: UIViewController
     @IBOutlet weak var commonGapsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
    
+    var dotsBarButtonItem: UIBarButtonItem!
+    
     var friend : User!
 
     var recordId : NSNumber?
@@ -28,8 +30,8 @@ class FriendDetailViewController: UIViewController
         
         title = friend.firstNames
         
-        viewScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
-        commonGapsButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        commonGapsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
         
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
@@ -52,6 +54,8 @@ class FriendDetailViewController: UIViewController
                         self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40,tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
                         self.backgroundImageView.alpha = 1
                     }
+                    
+                    self.updateButtonColors()
                 }
             }
         }
@@ -79,7 +83,59 @@ class FriendDetailViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(false, animated: true)        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+//        let animation = CATransition()
+//        animation.duration = 0
+//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        animation.type = kCATransitionFade
+//        
+//        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
+//        
+//        UIView.animateWithDuration(0)
+//        {
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+//        }
+        
+        transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+            
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+            self.navigationController?.navigationBar.barTintColor = UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)
+            
+        }, completion: { (context) -> Void in
+            
+            if !context.isCancelled()
+            {
+                UIView.animateWithDuration(0.3)
+                {
+                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+                }
+            }
+        })
+        
+        /*let callButton = UIButton(type: .Custom)
+        callButton.frame.size = CGSize(width: 20, height: 20)
+        callButton.setBackgroundImage(UIImage(named: "Phone"), forState: .Normal)
+        callButton.addTarget(self, action: Selector(), forControlEvents: .TouchUpInside)
+        callButton.tintColor = UIColor.whiteColor()
+        
+        let whatsAppButton = UIButton(type: .Custom)
+        whatsAppButton.frame.size = CGSize(width: 20, height: 20)
+        whatsAppButton.setBackgroundImage(UIImage(named: "WhatsApp"), forState: .Normal)
+        whatsAppButton.addTarget(self, action: Selector(), forControlEvents: .TouchUpInside)
+        whatsAppButton.tintColor = UIColor.whiteColor()
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: callButton), UIBarButtonItem(customView: whatsAppButton)]*/
+        
+        let dotsButton = UIButton(type: .Custom)
+        dotsButton.frame.size = CGSize(width: 20, height: 20)
+        dotsButton.setBackgroundImage(UIImage(named: "Dots")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        dotsButton.addTarget(self, action: Selector("dotsIconPressed:"), forControlEvents: .TouchUpInside)
+        dotsButton.tintColor = UIColor.whiteColor()
+        
+        dotsBarButtonItem = UIBarButtonItem(customView: dotsButton)
+        
+        navigationItem.rightBarButtonItem = dotsBarButtonItem
     }
     
     override func viewDidAppear(animated: Bool)
@@ -93,11 +149,70 @@ class FriendDetailViewController: UIViewController
         // Dispose of any resources that can be recreated.
     }
     
+    func updateButtonColors()
+    {
+        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFromImage: imageImageView.image), isFlat: true, alpha: 0.4)
+        
+        UIView.animateWithDuration(0.8)
+        {
+            self.viewScheduleButton.backgroundColor = averageImageColor
+            self.commonGapsButton.backgroundColor = averageImageColor
+        }
+    }
+    
+    func dotsIconPressed(sender: UIButton)
+    {
+        let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
+        
+        menu.titlesAndIcons = [("LLamar", UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
+        menu.tintColor = UIColor(white: 1, alpha: 0.8)
+        menu.delegate = self
+        
+        menu.modalInPopover = true
+        menu.modalPresentationStyle = .Popover
+        menu.popoverPresentationController?.delegate = self
+        menu.popoverPresentationController?.barButtonItem = dotsBarButtonItem
+        menu.popoverPresentationController?.backgroundColor = UIColor(white: 0.80, alpha: 0.35)
+        
+        presentViewController(menu, animated: true, completion: nil)
+        
+        let actionSheet = AHKActionSheet()
+        
+        actionSheet.addButtonWithTitle("Llamar", image: UIImage(named: "Phone")?.imageWithRenderingMode(.AlwaysTemplate), type: .Default) { (_) -> Void in
+            
+            self.call(sender)
+        }
+        
+        actionSheet.addButtonWithTitle("Whatsapp", image: UIImage(named: "Whatsapp")?.imageWithRenderingMode(.AlwaysTemplate), type: .Default) { (_) -> Void in
+            
+            self.whatsappMessage(sender)
+        }
+        
+        //actionSheet.show()
+    }
+    
+    func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int)
+    {
+        if let number = friend.phoneNumber where index == 0
+        {
+            system.callFriend(number)
+        }
+        else if let recordId = recordId where index == 1
+        {
+            system.whatsappMessageTo(recordId)
+        }
+        
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        return .None
+    }
     
     @IBAction func whatsappMessage(sender: UIButton)
     {
         system.whatsappMessageTo(self.recordId!)
-        
     }
     
     @IBAction func viewSchedule(sender: UIButton)
@@ -136,8 +251,6 @@ class FriendDetailViewController: UIViewController
             })
         }
     }
-    
-    
     
     /*
     // MARK: - Navigation

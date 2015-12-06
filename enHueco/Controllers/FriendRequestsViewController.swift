@@ -21,7 +21,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToAcceptFriendRequest:"), name:EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
 
-        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
+        view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
         
         requestsTableView.dataSource = self
     }
@@ -32,10 +32,10 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
-        navigationController!.navigationBar.barTintColor = EHIntefaceColor.mainInterfaceColor
+        navigationController!.navigationBar.barTintColor = EHInterfaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
         system.appUser.fetchUpdatesForFriendRequests()
     }
@@ -94,7 +94,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, Inc
         let indexPath = requestsTableView.indexPathForCell(cell)!
         let requestFriend = system.appUser.incomingFriendRequests[indexPath.row]
 
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
         system.appUser.acceptFriendRequestFromFriend(requestFriend)
     }

@@ -28,10 +28,10 @@ class AddEditEventViewController: UIViewController
     {
         super.viewDidLoad()
         
-        topBarBackgroundView.backgroundColor = EHIntefaceColor.defaultTopBarsColor
+        topBarBackgroundView.backgroundColor = EHInterfaceColor.defaultTopBarsColor
         
-        cancelButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
-        saveButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        cancelButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
+        saveButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
         
         if eventToEdit != nil
         {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
+class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
 {
     var addEditEventParentViewController: AddEditEventViewController!
     
@@ -29,27 +29,19 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     @IBOutlet weak var weekDaysCell: UITableViewCell!
     
     let datePickerHeight: CGFloat = 167
-
-    let weekDaysIndexPath = NSIndexPath(forRow: 2, inSection: 0)
-    let startHourDatePickerCellIndexPath = NSIndexPath(forRow: 4, inSection: 0)
-    let endHourDatePickerCellIndexPath = NSIndexPath(forRow: 6, inSection: 0)
     
-    var datePickerViewIndexPathToDisplay: NSIndexPath?
-    
+    var datePickerViewCellToDisplay: UITableViewCell?
     
     override func didMoveToParentViewController(parent: UIViewController?)
     {
         super.didMoveToParentViewController(parent)
         
         assert(parent is AddEditEventViewController)
-        
-        insertTableViewRowAnimation = .Middle
-        deleteTableViewRowAnimation = .Middle
-        
+                
         addEditEventParentViewController = parentViewController as! AddEditEventViewController
         
-        gapOrClassSegmentedControl.tintColor = EHIntefaceColor.mainInterfaceColor
-        weekDaysSegmentedControl.tintColor = EHIntefaceColor.mainInterfaceColor
+        gapOrClassSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
+        weekDaysSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
         
         nameTextField.delegate = self
         locationTextField.delegate = self
@@ -99,15 +91,13 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
         endHourDatePicker.minimumDate = startHourDatePicker.date
         
         updateStartAndEndHourCells()
-        
-//        cell(startHourDatePickerCell, setHidden: true)
-//        cell(endHourDatePickerCell, setHidden: true)
-//        reloadDataAnimated(true)
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
     {
-        if indexPath == tableView.indexPathForCell(startHourCell) || indexPath == tableView.indexPathForCell(endHourCell)
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+
+        if cell == startHourCell || cell == endHourCell
         {
             return indexPath
         }
@@ -119,39 +109,35 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if indexPath == tableView.indexPathForCell(startHourCell) || indexPath == tableView.indexPathForCell(endHourCell)
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+
+        if (cell == startHourCell && datePickerViewCellToDisplay != startHourDatePickerCell)
+        || (cell == endHourCell && datePickerViewCellToDisplay != endHourDatePickerCell)
         {
-            let newIndexPath = NSIndexPath(forRow: indexPath.row+1, inSection: 0)
-            
-            if datePickerViewIndexPathToDisplay != newIndexPath
+            if cell == startHourCell
             {
-                datePickerViewIndexPathToDisplay = newIndexPath
+                datePickerViewCellToDisplay = startHourDatePickerCell
             }
-            else
+            else if cell == endHourCell
             {
-                datePickerViewIndexPathToDisplay = nil
+                datePickerViewCellToDisplay = endHourDatePickerCell
             }
-            
-            tableView.beginUpdates()
-            tableView.endUpdates()
-            
-//            cell(startHourDatePickerCell, setHidden: !cellIsHidden(startHourDatePickerCell))
-//            cell(endHourDatePickerCell, setHidden: true)
         }
-//        else if indexPath == tableView.indexPathForCell(endHourCell)
-//        {
-//            cell(endHourDatePickerCell, setHidden: !cellIsHidden(endHourDatePickerCell))
-//            cell(startHourDatePickerCell, setHidden: true)
-//        }
+        else
+        {
+            datePickerViewCellToDisplay = nil
+        }
         
-        reloadDataAnimated(true)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
-        if indexPath == NSIndexPath(forRow: startHourDatePickerCellIndexPath.row-1, inSection: startHourDatePickerCellIndexPath.section) || indexPath == NSIndexPath(forRow: endHourDatePickerCellIndexPath.row-1, inSection: endHourDatePickerCellIndexPath.section)
+        if cell == startHourCell || cell == endHourCell
         {
             cell.selectionStyle = .Blue
         }
@@ -165,14 +151,15 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath == weekDaysIndexPath && weekDaysCell.hidden
+        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        
+        if cell == weekDaysCell && weekDaysCell.hidden
         {
             return 0
         }
-        
-        else if indexPath == startHourDatePickerCellIndexPath || indexPath == endHourDatePickerCellIndexPath
+        else if cell == startHourDatePickerCell || cell == endHourDatePickerCell
         {
-            if datePickerViewIndexPathToDisplay != nil && datePickerViewIndexPathToDisplay! == indexPath
+            if datePickerViewCellToDisplay == cell
             {
                 return datePickerHeight
             }
@@ -228,25 +215,7 @@ class EmbeddedAddEditEventTableViewController: StaticDataTableViewController, UI
     }
     
     // MARK: Methods
-    
-    func changeCurrentlyDisplayedDatePickerViewToPickerViewWithIndexPath(indexPath: NSIndexPath?)
-    {
-        tableView.beginUpdates()
-
-        datePickerViewIndexPathToDisplay = indexPath
         
-        if indexPath == nil
-        {
-            tableView.deleteRowsAtIndexPaths([startHourDatePickerCellIndexPath, endHourDatePickerCellIndexPath], withRowAnimation: .Fade)
-        }
-        else
-        {
-            
-        }
-        
-        tableView.endUpdates()
-    }
-    
     func updateStartAndEndHourCells()
     {
         let formatter = NSDateFormatter()

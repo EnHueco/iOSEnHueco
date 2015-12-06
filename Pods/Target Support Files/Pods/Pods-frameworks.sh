@@ -84,11 +84,13 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/AHKActionSheet.framework"
   install_framework "Pods/APAddressBook.framework"
   install_framework "Pods/ASBPlayerScrubbing.framework"
   install_framework "Pods/ASMediaFocusManager.framework"
   install_framework "Pods/Alamofire.framework"
   install_framework "Pods/CRToast.framework"
+  install_framework "Pods/ChameleonFramework.framework"
   install_framework "Pods/HexColors.framework"
   install_framework "Pods/MRProgress.framework"
   install_framework "Pods/MSCollectionViewCalendarLayout.framework"
@@ -97,16 +99,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/ReachabilitySwift.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SWTableViewCell.framework"
-  install_framework "Pods/SimpleAlert.framework"
-  install_framework "Pods/StaticDataTableViewController.framework"
   install_framework "Pods/TSMessages.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/AHKActionSheet.framework"
   install_framework "Pods/APAddressBook.framework"
   install_framework "Pods/ASBPlayerScrubbing.framework"
   install_framework "Pods/ASMediaFocusManager.framework"
   install_framework "Pods/Alamofire.framework"
   install_framework "Pods/CRToast.framework"
+  install_framework "Pods/ChameleonFramework.framework"
   install_framework "Pods/HexColors.framework"
   install_framework "Pods/MRProgress.framework"
   install_framework "Pods/MSCollectionViewCalendarLayout.framework"
@@ -115,7 +117,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/ReachabilitySwift.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/SWTableViewCell.framework"
-  install_framework "Pods/SimpleAlert.framework"
-  install_framework "Pods/StaticDataTableViewController.framework"
   install_framework "Pods/TSMessages.framework"
 fi

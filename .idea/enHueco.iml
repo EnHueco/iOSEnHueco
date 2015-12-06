@@ -28,6 +28,7 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/AddEditEventViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/AddFriendByQRViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/AddFriendViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/ChooseFriendsPrivacySettingsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/CommonGapsSearchFriendToAddViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/CommonGapsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" isTestSource="false" />
@@ -42,10 +43,12 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/InGapViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/LoginViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/MainTabBarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/PrivacySettingsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/ProfileViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/ScheduleViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/SearchNewFriendViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/SearchSelectFriendsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Controllers/SettingsViewController.swift" isTestSource="false" />
@@ -131,6 +134,36 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon_.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon_.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonConstants.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonConstants.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonEnums.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonMacros.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/NSArray+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/NSArray+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIAppearance+Swift.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIAppearance+Swift.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIButton+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIButton+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UINavigationController+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UINavigationController+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIView+ChameleonPrivate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIView+ChameleonPrivate.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIViewController+Chameleon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIViewController+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Swift/ChameleonShorthand.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Colours/Colours.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Colours/Colours.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/CRToast/CRToast/CRToast.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/CRToast/CRToast/CRToastConfig.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/CRToast/CRToast/CRToastConfig.m" isTestSource="false" />
@@ -265,6 +298,18 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Colours-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Colours-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Colours-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Colours.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Colours.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Colours/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CRToast/CRToast-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CRToast/CRToast-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CRToast/CRToast-umbrella.h" isTestSource="false" />

@@ -31,7 +31,7 @@ import UIKit
 
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
 
-        loginButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        loginButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
         loginButton.clipsToBounds = true
         loginButton.layer.cornerRadius = loginButton.frame.height / 2
@@ -73,7 +73,7 @@ import UIKit
             /////////
         }
 
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
         system.login(username, password: password)
     }

@@ -11,6 +11,7 @@ import AVFoundation
 
 class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
 {
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var appUserQRImageView: UIImageView!
     @IBOutlet weak var scanQRButton: UIButton!
     
@@ -19,21 +20,29 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
-        
+                
         let code = QRCode(system.appUser.stringEncodedUserRepresentation())
         appUserQRImageView.image = code?.image
-        
-        scanQRButton.clipsToBounds = true
-        scanQRButton.layer.cornerRadius = 4
     }
     
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
     }
-
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        scanQRButton.clipsToBounds = true
+        scanQRButton.layer.cornerRadius = scanQRButton.frame.height/2
+    }
+    
+    @IBAction func doneButtonPressed(sender: AnyObject)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func scanQRButtonPressed(sender: AnyObject)
     {
         reader.delegate = self
@@ -47,7 +56,6 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
         dismissViewControllerAnimated(true, completion: nil)
         
         try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
-        
         
         navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }

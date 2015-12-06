@@ -9,6 +9,7 @@
 import UIKit
 import LocalAuthentication
 import MobileCoreServices
+import ChameleonFramework
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
 {
@@ -24,12 +25,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     override func viewDidLoad()
     {
-        editScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
-        myQRButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        myQRButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
         firstNamesLabel.text = system.appUser.firstNames
         lastNamesLabel.text = system.appUser.lastNames
-//        usernameLabel.text = system.appUser.username
 
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
@@ -37,9 +37,44 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
     }
 
-    func startImageIndicator()
+    override func viewDidLayoutSubviews()
     {
-        if imageIndicator == nil && imageImageView != nil
+        super.viewDidLayoutSubviews()
+
+        editScheduleButton.clipsToBounds = true
+        editScheduleButton.layer.cornerRadius = editScheduleButton.frame.height / 2
+        myQRButton.clipsToBounds = true
+        myQRButton.layer.cornerRadius = myQRButton.frame.height / 2
+
+        imageImageView.clipsToBounds = true
+        imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
+        
+        assignImages()
+    }
+
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+
+        system.appUser.fetchAppUser()
+        system.appUser.fetchUpdatesForAppUserAndSchedule()
+    }
+    
+    func updateButtonColors()
+    {
+        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFromImage: imageImageView.image), isFlat: true, alpha: 0.4)
+        
+        UIView.animateWithDuration(0.8)
+        {
+            self.editScheduleButton.backgroundColor = averageImageColor
+            self.myQRButton.backgroundColor = averageImageColor
+        }
+    }
+
+    func startAnimatingImageLoadingIndicator()
+    {
+        if imageIndicator == nil
         {
             imageIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
             imageIndicator!.center = imageImageView.center
@@ -52,7 +87,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
-    func stopImageIndicator()
+    func stopAnimatingImageLoadingIndicator()
     {
         if let imageIndicator = imageIndicator
         {
@@ -60,6 +95,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             {
                 imageIndicator.stopAnimating()
             }
+            
             self.imageIndicator!.removeFromSuperview()
             self.imageIndicator = nil
         }
@@ -67,7 +103,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     func assignImages()
     {
-        startImageIndicator()
+        if imageImageView.image == nil
+        {
+            startAnimatingImageLoadingIndicator()
+        }
+        
         ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")) {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
@@ -76,7 +116,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 {
                     self.imageImageView.hidden = false
                     self.backgroundImageView.hidden = false
-
+                    
                     if (self.imageImageView.image != nil)
                     {
                         UIView.transitionWithView(self.imageImageView,
@@ -88,6 +128,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     else
                     {
                         self.imageImageView.image = image
+                       
                         UIView.animateWithDuration(0.4)
                         {
                             self.imageImageView.alpha = 1
@@ -101,11 +142,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                 animations: {
                                     self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
                                     self.backgroundImageView.alpha = 1
-                                }, completion: nil)
+                        }, completion: nil)
                     }
                     else
                     {
                         self.backgroundImageView.image = image
+                       
                         UIView.animateWithDuration(0.4)
                         {
                             self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
@@ -122,32 +164,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.imageImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.clipsToBounds = true
-                self.stopImageIndicator()
+                self.stopAnimatingImageLoadingIndicator()
+                
+                self.updateButtonColors()
             }
         }
-    }
-
-    override func viewDidLayoutSubviews()
-    {
-        super.viewDidLayoutSubviews()
-
-        editScheduleButton.clipsToBounds = true
-        editScheduleButton.layer.cornerRadius = editScheduleButton.frame.height / 2
-        myQRButton.clipsToBounds = true
-        myQRButton.layer.cornerRadius = myQRButton.frame.height / 2
-
-        imageImageView.clipsToBounds = true
-        imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
-    }
-
-    override func viewWillAppear(animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
-        system.appUser.fetchAppUser()
-        system.appUser.fetchUpdatesForAppUserAndSchedule()
-        self.assignImages()
     }
 
     @IBAction func myQRButtonPressed(sender: AnyObject)
@@ -171,13 +192,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         {
             showSettings()
         }
-
     }
 
     private func showSettings()
     {
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
-        presentViewController(viewController, animated: true, completion: nil)
+        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsNavigationViewController")
+        presentViewController(viewController!, animated: true, completion: nil)
     }
 
     enum LAError: Int
@@ -195,11 +215,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         // Get the local authentication context.
         let context = LAContext()
-
-        // Declare a NSError variable.
         var error: NSError?
-
-        // Set the reason string that will appear on the authentication alert.
         let reasonString = "Authentication is needed to access your settings."
 
         // Check if the device can evaluate the policy.
@@ -217,7 +233,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 }
                 else
                 {
-                    //                    println(evalPolicyError?.localizedDescription)
                     switch evalPolicyError!.code
                     {
                         case LAError.SystemCancel.rawValue:
@@ -226,8 +241,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             break
                         case LAError.UserFallback.rawValue:
                             break
-                            //                        println("User selected to enter custom password")
-                            //                        self.showPasswordAlert()
                         default:
                             break
                             //                        println("Authentication failed")
@@ -241,7 +254,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             // If the security policy cannot be evaluated then show a short message depending on the error.
             switch error!.code
             {
-
                 case LAError.TouchIDNotEnrolled.rawValue:
                     break
 
@@ -287,7 +299,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.stopImageIndicator()
+            self.stopAnimatingImageLoadingIndicator()
             self.assignImages()
         }
     }
@@ -295,7 +307,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
         system.appUser.pushProfilePicture(croppedImage)
-        startImageIndicator()
+        startAnimatingImageLoadingIndicator()
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
 

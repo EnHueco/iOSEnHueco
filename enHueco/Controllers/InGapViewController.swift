@@ -10,7 +10,6 @@ import UIKit
 
 class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate
 {
-    @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var friendsAndGaps = [(friend: User, gap: Event)]()
     var soonInGapfriendsAndGaps = [(friend: User, gap: Event)]()
@@ -21,8 +20,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: nil)
-
-        topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,7 +56,23 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+       
+        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        
+        transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+            
+            self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+            
+        }, completion:{ (context) -> Void in
+                
+            if context.isCancelled()
+            {
+                self.navigationController?.navigationBar.barTintColor = UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)
+                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+            }
+        })
+        
         system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
 
         if let selectedIndex = tableView.indexPathForSelectedRow
@@ -117,11 +130,11 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         if section == 0
         {
-            return self.friendsAndGaps.count
+            return friendsAndGaps.count
         }
         else if section == 1
         {
-            return self.soonInGapfriendsAndGaps.count
+            return soonInGapfriendsAndGaps.count
         }
         else
         {
@@ -164,11 +177,11 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let url = friend.imageURL
 
         cell.friendNameLabel.text = friend.name
+        
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 70 / 2
         cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
-
 
         SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil,
                 completed: {(image, error, cacheType, bool, url) -> Void in
@@ -195,7 +208,17 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let friend = friendsAndGaps[indexPath.row].friend
+        let friend: User
+        
+        if indexPath.section == 0
+        {
+            friend = friendsAndGaps[indexPath.row].friend
+        }
+        else
+        {
+            friend = soonInGapfriendsAndGaps[indexPath.row].friend
+        }
+        
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
 

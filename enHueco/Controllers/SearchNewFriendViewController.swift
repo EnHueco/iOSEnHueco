@@ -10,6 +10,7 @@ import UIKit
 
 class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
 {
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchResultsTableView: UITableView!
     
@@ -21,19 +22,18 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+            
         title = "Buscar amigo"
+        
+        view.backgroundColor = UIColor.clearColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidSendFriendRequest:"), name:EHSystemNotification.SystemDidSendFriendRequest, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToSendFriendRequest:"), name:EHSystemNotification.SystemDidFailToSendFriendRequest, object: system)
         
-        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
-
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
         searchBar.delegate = self
         searchBar.becomeFirstResponder()
-
     }
     
     override func viewWillAppear(animated: Bool)
@@ -46,16 +46,32 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.translucent = true
         navigationController?.navigationBar.barTintColor = UIColor.clearColor()
+        
+        navigationBar.barStyle = .Black
+        navigationBar.tintColor = UIColor.whiteColor()
+        navigationBar.barTintColor = UIColor.whiteColor()
+        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewDidLayoutSubviews()
     {
-        if let navController = self.navigationController
-        {
-            navController.dismissViewControllerAnimated(true, completion: nil) 
-        }
+        super.viewDidLayoutSubviews()
+        
+        let blurEffect = UIBlurEffect(style: .Light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        view.insertSubview(blurView, atIndex: 0)
+        
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
+        vibrancyView.frame = view.bounds
+        blurView.addSubview(vibrancyView)
     }
-
+    
+    @IBAction func cancelButtonPressed(sender: AnyObject)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -98,7 +114,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         let indexPath = searchResultsTableView.indexPathForCell(cell)!
         let friend = searchResults[indexPath.row]
         
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHIntefaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
         
         system.appUser.sendFriendRequestToUser(friend)
     }

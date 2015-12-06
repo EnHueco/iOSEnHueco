@@ -28,10 +28,10 @@ class ScheduleViewController: UIViewController
     {
         super.viewDidLoad()
         
-        topBarBackgroundView.backgroundColor = EHIntefaceColor.defaultTopBarsColor
-        closeButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
-        importButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
-        addEventButton.titleLabel?.textColor = EHIntefaceColor.defaultEmbededTopBarButtonsColor
+        topBarBackgroundView.backgroundColor = EHInterfaceColor.defaultTopBarsColor
+        closeButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
+        importButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
+        addEventButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
     }
     
     override func viewDidLayoutSubviews()

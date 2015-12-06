@@ -28,7 +28,7 @@ class InGapNavigationViewController: UINavigationController
         super.viewWillAppear(animated)
         
         navigationBar.barStyle = UIBarStyle.Black
-        navigationBar.barTintColor = EHIntefaceColor.defaultNavigationBarColor
+        navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
         navigationBar.tintColor = UIColor.whiteColor()
     }
     

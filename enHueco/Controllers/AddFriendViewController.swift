@@ -14,7 +14,7 @@ class AddFriendViewController: UIViewController
     {
         super.viewDidLoad()
         
-        view.backgroundColor = EHIntefaceColor.defaultColoredBackgroundColor
+        view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
     }
     
     override func viewWillAppear(animated: Bool)

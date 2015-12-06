@@ -12,6 +12,20 @@ class FriendsCell: UITableViewCell
 {
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var gapStartOrEndHourLabel: UILabel!
+    @IBOutlet weak var gapStartOrEndHourIconImageView: UIImageView!
+    @IBOutlet weak var eventNameOrLocationLabel: UILabel!
+    @IBOutlet weak var friendImageImageView: UIImageView!
+    @IBOutlet weak var gapStartEndHourIconWidthConstraint: NSLayoutConstraint!
+    
+    func hideGapStartEndHourIcon()
+    {
+        gapStartEndHourIconWidthConstraint.constant = 0
+    }
+    
+    func showGapStartEndHourIcon()
+    {
+        gapStartEndHourIconWidthConstraint.constant = 15
+    }
     
     override func awakeFromNib()
     {

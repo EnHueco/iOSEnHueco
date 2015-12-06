@@ -27,8 +27,8 @@ class FriendDetailViewController2: UIViewController
         
         title = friend.firstNames
         
-        viewScheduleButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
-        commonGapsButton.backgroundColor = EHIntefaceColor.defaultBigRoundedButtonsColor
+        viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        commonGapsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
         
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames

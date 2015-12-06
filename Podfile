@@ -32,13 +32,13 @@ pod 'ASMediaFocusManager'
 
 pod 'Alamofire', '~> 3.0'
 
-pod 'SimpleAlert'
-
-pod 'StaticDataTableViewController', :git => 'https://github.com/peterpaulis/StaticDataTableViewController.git'
-
 pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
 
 pod 'CRToast', '~> 0.0.7'
+
+pod 'ChameleonFramework/Swift'
+
+pod 'AHKActionSheet'
 
 target 'enHuecoTests' do
  

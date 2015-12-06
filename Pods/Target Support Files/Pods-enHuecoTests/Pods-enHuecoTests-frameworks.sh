@@ -84,11 +84,13 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-enHuecoTests/AHKActionSheet.framework"
   install_framework "Pods-enHuecoTests/APAddressBook.framework"
   install_framework "Pods-enHuecoTests/ASBPlayerScrubbing.framework"
   install_framework "Pods-enHuecoTests/ASMediaFocusManager.framework"
   install_framework "Pods-enHuecoTests/Alamofire.framework"
   install_framework "Pods-enHuecoTests/CRToast.framework"
+  install_framework "Pods-enHuecoTests/ChameleonFramework.framework"
   install_framework "Pods-enHuecoTests/HexColors.framework"
   install_framework "Pods-enHuecoTests/MRProgress.framework"
   install_framework "Pods-enHuecoTests/MSCollectionViewCalendarLayout.framework"
@@ -97,16 +99,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-enHuecoTests/ReachabilitySwift.framework"
   install_framework "Pods-enHuecoTests/SDWebImage.framework"
   install_framework "Pods-enHuecoTests/SWTableViewCell.framework"
-  install_framework "Pods-enHuecoTests/SimpleAlert.framework"
-  install_framework "Pods-enHuecoTests/StaticDataTableViewController.framework"
   install_framework "Pods-enHuecoTests/TSMessages.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-enHuecoTests/AHKActionSheet.framework"
   install_framework "Pods-enHuecoTests/APAddressBook.framework"
   install_framework "Pods-enHuecoTests/ASBPlayerScrubbing.framework"
   install_framework "Pods-enHuecoTests/ASMediaFocusManager.framework"
   install_framework "Pods-enHuecoTests/Alamofire.framework"
   install_framework "Pods-enHuecoTests/CRToast.framework"
+  install_framework "Pods-enHuecoTests/ChameleonFramework.framework"
   install_framework "Pods-enHuecoTests/HexColors.framework"
   install_framework "Pods-enHuecoTests/MRProgress.framework"
   install_framework "Pods-enHuecoTests/MSCollectionViewCalendarLayout.framework"
@@ -115,7 +117,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-enHuecoTests/ReachabilitySwift.framework"
   install_framework "Pods-enHuecoTests/SDWebImage.framework"
   install_framework "Pods-enHuecoTests/SWTableViewCell.framework"
-  install_framework "Pods-enHuecoTests/SimpleAlert.framework"
-  install_framework "Pods-enHuecoTests/StaticDataTableViewController.framework"
   install_framework "Pods-enHuecoTests/TSMessages.framework"
 fi

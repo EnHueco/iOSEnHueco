@@ -13,22 +13,43 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     @IBOutlet weak var logoutCell: UITableViewCell!
     @IBOutlet weak var authTouchIDSwitch: UISwitch!
     @IBOutlet weak var nearbyFriendsNotificationsSwitch: UISwitch!
-    @IBOutlet weak var shareLocationWithCloseFriendsSwitch: UISwitch!
     @IBOutlet weak var phoneNumberCell: UITableViewCell!
     
     //Temporary
     @IBOutlet weak var lastBackgroundFetchDateLabel: UILabel!
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        title = "Ajustes"
+        
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barStyle = .BlackTranslucent
+        navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+        
+        clearsSelectionOnViewWillAppear = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: system)
+        
+        authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
+        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
+        phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
+        
+        let lastBackgroundUpdate = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdate")).descriptionWithLocale(NSLocale.currentLocale())
+        let lastBackgroundUpdateResponse = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdateResponse")).descriptionWithLocale(NSLocale.currentLocale())
+        
+        //lastBackgroundFetchDateLabel.text = "Last background fetch: \(lastBackgroundUpdate). Last response: \(lastBackgroundUpdateResponse)"
+    }
+    
+    @IBAction func doneButtonPressed(sender: AnyObject)
+    {
+        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func nearbyFriendsNotificationsToggleChanged(sender: AnyObject)
     {
         NSUserDefaults.standardUserDefaults().setBool(nearbyFriendsNotificationsSwitch.on, forKey: EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
-        
-        ProximityManager.sharedManager().updateBackgroundFetchInterval()
-    }
-    
-    @IBAction func shareLocationWithCloseFriendsToggleChanged(sender: AnyObject)
-    {
-        NSUserDefaults.standardUserDefaults().setBool(shareLocationWithCloseFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
         
         ProximityManager.sharedManager().updateBackgroundFetchInterval()
     }
@@ -43,32 +64,11 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         authTouchIDSwitch.on = isOn
     }
     
-    override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: system)
-        
-        
-        authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
-        shareLocationWithCloseFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
-        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
-        phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
-
-        clearsSelectionOnViewWillAppear = false
-        
-        let lastBackgroundUpdate = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdate")).descriptionWithLocale(NSLocale.currentLocale())
-        let lastBackgroundUpdateResponse = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdateResponse")).descriptionWithLocale(NSLocale.currentLocale())
-        
-//        lastBackgroundFetchDateLabel.text = "Last background fetch: \(lastBackgroundUpdate). Last response: \(lastBackgroundUpdateResponse)"
-    }
-    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {

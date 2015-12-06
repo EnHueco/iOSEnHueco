@@ -9,7 +9,7 @@
 import UIKit
 import SimpleAlert
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, SWTableViewCellDelegate
 {
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
@@ -21,7 +21,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     var lastUpdatesFetchDate = NSDate()
 
-    //For performance
+    //For safety and performance (because friends is originally a dictionary)
     var friends = [User]()
 
     override func viewDidLoad()
@@ -30,13 +30,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
 
-        topBarBackgroundView.backgroundColor = EHIntefaceColor.homeTopBarsColor
+        //topBarBackgroundView.backgroundColor = EHInterfaceColor.homeTopBarsColor
 
         tableView.dataSource = self
         tableView.delegate = self
 
         searchBar.sizeToFit()
         tableView.tableHeaderView = searchBar
+        
+        self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
 
         createEmptyLabel()
     }
@@ -66,13 +68,39 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        navigationController?.setNavigationBarHidden(true, animated: true)
+//        let animation = CATransition()
+//        animation.duration = 0
+//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        animation.type = kCATransitionFade
+//        
+//        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
+//                
+//        UIView.animateWithDuration(0)
+//        {
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: EHInterfaceColor.defaultNavigationBarColor), forBarMetrics: .Default)
+//        }
+
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        
+        transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+            
+            self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+
+        }, completion:{ (context) -> Void in
+                
+            if context.isCancelled()
+            {
+                self.navigationController?.navigationBar.barTintColor = UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)
+                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+            }
+        })
 
         friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
 
         reloadFriendsAndTableView()
     }
-
+    
     override func viewDidAppear(animated: Bool)
     {
         if let selectedIndex = tableView.indexPathForSelectedRow
@@ -98,27 +126,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBAction func addFriendButtonPressed(sender: AnyObject)
     {
-        let actionSheet = SimpleAlert.Controller(title: nil, message: nil, style: .ActionSheet)
-
-        actionSheet.configContentView = {(view: UIView!) -> Void in
-
-            view.backgroundColor = EHIntefaceColor.mainInterfaceColor
-        }
-
-        actionSheet.addAction(SimpleAlert.Action(title: "Buscar usuario", style: .Default) {(action) -> Void in
-
-            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
-            self.presentViewController(viewController, animated: true, completion: nil)
-        })
-
-        actionSheet.addAction(SimpleAlert.Action(title: "Agregar por QR", style: .Default, handler: {(action) -> Void in
-
-            let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController
-            self.presentViewController(viewController, animated: true, completion: nil)
-
-        }))
-
-        //presentViewController(actionSheet, animated: true, completion: nil)
+        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancelar", destructiveButtonTitle: nil)
+        
+        actionSheet.addButtonWithTitle("Buscar Amigo")
+        actionSheet.addButtonWithTitle("Agregar por QR")
+        actionSheet.showFromTabBar(tabBarController!.tabBar)
     }
 
     func reloadFriendsAndTableView()
@@ -142,6 +154,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         }, completion: nil);
     }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+    {
+        if buttonIndex == 1
+        {
+            let viewController = storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
+            viewController.modalPresentationStyle = .OverCurrentContext
+            
+            presentViewController(viewController, animated: true, completion: nil)
+        }
+        else if buttonIndex == 2
+        {
+            let viewController = storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController            
+            presentViewController(viewController, animated: true, completion: nil)
+        }
+    }
 
     // MARK: Notification Center
 
@@ -164,7 +192,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.friends.count
+        return friends.count
     }
 
 
@@ -181,35 +209,70 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
 
-        if indexPath.row < friends.count
+        let friend = friends[indexPath.row]
+        
+        cell.friendNameLabel.text = friend.name
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm"
+        
+        cell.eventNameOrLocationLabel.text = nil
+        
+        cell.showGapStartEndHourIcon()
+        
+        if let gap = friend.currentGap()
         {
-            let friend = friends[indexPath.row]
-            cell.friendNameLabel.text = friend.name
-
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "hh:mm"
-
-            if let gap = friend.currentGap()
-            {
-                cell.gapStartOrEndHourLabel.text = "↗ " + formatter.stringFromDate(gap.endHourInDate(NSDate()))
-            }
-            else if let gap = friend.nextGap()
-            {
-                cell.gapStartOrEndHourLabel.text = "↘ " + formatter.stringFromDate(gap.startHourInDate(NSDate()))
-            }
-            else
-            {
-                cell.gapStartOrEndHourLabel.text = "   " + "--:--"
-            }
-
-            cell.backgroundColor = tableView.backgroundView?.backgroundColor
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.endHourInDate(NSDate()))
+            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
+            cell.eventNameOrLocationLabel.text = gap.name
         }
+        else if let gap = friend.nextGap()
+        {
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.startHourInDate(NSDate()))
+            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
+            cell.eventNameOrLocationLabel.text = gap.name
+        }
+        else
+        {
+            cell.hideGapStartEndHourIcon()
+            cell.gapStartOrEndHourLabel.text = "-- --"
+        }
+        
+        cell.backgroundColor = tableView.backgroundView?.backgroundColor
+        
+        cell.friendImageImageView.clipsToBounds = true
+        cell.friendImageImageView.layer.cornerRadius = 53.0 / 2.0
+        cell.friendImageImageView.image = nil
+        cell.friendImageImageView.contentMode = .ScaleAspectFill
+        
+        SDWebImageManager().downloadImageWithURL(friend.imageURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: {(image, error, cacheType, bool, url) -> Void in
+                
+            if error == nil
+            {
+                if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk
+                {
+                    cell.friendImageImageView.alpha = 0
+                    cell.friendImageImageView.image = image
+                    
+                    UIView.animateWithDuration(0.5, animations: {() -> Void in
+                        
+                        cell.friendImageImageView.alpha = 1
+                        
+                    }, completion: nil)
+                }
+                else if cacheType == SDImageCacheType.Memory
+                {
+                    cell.friendImageImageView.image = image
+                }
+            }
+        })
+
         return cell
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 45
+        return 70
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)

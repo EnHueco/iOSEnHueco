@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EHIntefaceColor : NSObject
+class EHInterfaceColor: NSObject
 {
     static let  mainInterfaceColor = UIColor(red: 0/255.0, green: 162/255.0, blue: 134/255.0, alpha: 1)
     static let  mainComplementaryInterfaceColor = mainInterfaceColor
