@@ -18,6 +18,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var commonGapsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
    
+    @IBOutlet weak var gapStartOrEndHourIconImageView: UIImageView!
+    
     var dotsBarButtonItem: UIBarButtonItem!
     
     var friend : User!
@@ -29,6 +31,9 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         super.viewDidLoad()
         
         title = friend.firstNames
+        
+        gapStartOrEndHourIconImageView.image = gapStartOrEndHourIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+        gapStartOrEndHourIconImageView.tintColor = UIColor.whiteColor()
         
         viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
         commonGapsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
@@ -85,17 +90,17 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-//        let animation = CATransition()
-//        animation.duration = 0
-//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-//        animation.type = kCATransitionFade
-//        
-//        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
-//        
-//        UIView.animateWithDuration(0)
-//        {
-//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
-//        }
+        /*let animation = CATransition()
+        animation.duration = 0
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        
+        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
+        
+        UIView.animateWithDuration(0)
+        {
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+        }*/
         
         transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
             
@@ -112,20 +117,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 }
             }
         })
-        
-        /*let callButton = UIButton(type: .Custom)
-        callButton.frame.size = CGSize(width: 20, height: 20)
-        callButton.setBackgroundImage(UIImage(named: "Phone"), forState: .Normal)
-        callButton.addTarget(self, action: Selector(), forControlEvents: .TouchUpInside)
-        callButton.tintColor = UIColor.whiteColor()
-        
-        let whatsAppButton = UIButton(type: .Custom)
-        whatsAppButton.frame.size = CGSize(width: 20, height: 20)
-        whatsAppButton.setBackgroundImage(UIImage(named: "WhatsApp"), forState: .Normal)
-        whatsAppButton.addTarget(self, action: Selector(), forControlEvents: .TouchUpInside)
-        whatsAppButton.tintColor = UIColor.whiteColor()
-        
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: callButton), UIBarButtonItem(customView: whatsAppButton)]*/
         
         let dotsButton = UIButton(type: .Custom)
         dotsButton.frame.size = CGSize(width: 20, height: 20)
@@ -164,7 +155,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
         
-        menu.titlesAndIcons = [("LLamar", UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
+        menu.titlesAndIcons = [("Llamar", UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
         

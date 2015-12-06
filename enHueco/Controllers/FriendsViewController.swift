@@ -214,23 +214,25 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.friendNameLabel.text = friend.name
         
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "hh:mm"
+        formatter.dateFormat = "hh:mm a"
         
         cell.eventNameOrLocationLabel.text = nil
         
         cell.showGapStartEndHourIcon()
         
-        if let gap = friend.currentGap()
+        let (currentGap, nextGap) = friend.currentAndNextGap()
+        
+        if let currentGap = currentGap
         {
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.endHourInDate(NSDate()))
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(currentGap.endHourInDate(NSDate()))
             cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
-            cell.eventNameOrLocationLabel.text = gap.name
+            //cell.eventNameOrLocationLabel.text = currentGap.name
         }
-        else if let gap = friend.nextGap()
+        else if let nextGap = nextGap
         {
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.startHourInDate(NSDate()))
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(nextGap.startHourInDate(NSDate()))
             cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
-            cell.eventNameOrLocationLabel.text = gap.name
+            cell.eventNameOrLocationLabel.text = nextGap.name
         }
         else
         {

@@ -153,27 +153,33 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.delegate = self
+        
+        cell.gapStartOrEndHourIconImageView.tintColor = cell.gapStartOrEndHourLabel.textColor
 
         let formatter = NSDateFormatter()
         formatter.dateFormat = "hh:mm a"
 
-        var (friend, currentGap): (User, Event)
+        var (friend, gap): (User, Event)
 
         if indexPath.section == 0
         {
-            (friend, currentGap) = self.friendsAndGaps[indexPath.row]
+            (friend, gap) = self.friendsAndGaps[indexPath.row]
 
-            cell.friendUsername = self.friendsAndGaps[indexPath.row].friend.username
-            cell.timeLeftUntilNextEventLabel.text = "🕐 \(formatter.stringFromDate(currentGap.endHourInDate(NSDate())))"
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.endHourInDate(NSDate()))
+            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         else
         {
-            (friend, currentGap) = self.soonInGapfriendsAndGaps[indexPath.row]
-
-            cell.friendUsername = self.soonInGapfriendsAndGaps[indexPath.row].friend.username
-            cell.timeLeftUntilNextEventLabel.text = "🕐 \(formatter.stringFromDate(currentGap.endHourInDate(NSDate())))"
+            (friend, gap) = self.soonInGapfriendsAndGaps[indexPath.row]
+       
+            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.startHourInDate(NSDate()))
+            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
-
+        
+        cell.friendUsername = friend.username
+        
+        cell.gapNameAndLocationLabel.text = gap.name
+        
         let url = friend.imageURL
 
         cell.friendNameLabel.text = friend.name
