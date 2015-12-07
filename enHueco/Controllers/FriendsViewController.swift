@@ -9,7 +9,7 @@
 import UIKit
 import SimpleAlert
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, SWTableViewCellDelegate
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, SWTableViewCellDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
@@ -22,7 +22,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var lastUpdatesFetchDate = NSDate()
 
     //For safety and performance (because friends is originally a dictionary)
-    var friends = [User]()
+    var filteredFriends = Array(system.appUser.friends.values)
+    
+    var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
     override func viewDidLoad()
     {
@@ -38,9 +40,13 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         searchBar.sizeToFit()
         tableView.tableHeaderView = searchBar
         
-        self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+        searchBar.delegate = self
+        
+        navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
 
         createEmptyLabel()
+        
+        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
     }
 
     func createEmptyLabel()
@@ -68,19 +74,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-//        let animation = CATransition()
-//        animation.duration = 0
-//        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-//        animation.type = kCATransitionFade
-//        
-//        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
-//                
-//        UIView.animateWithDuration(0)
-//        {
-//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: EHInterfaceColor.defaultNavigationBarColor), forBarMetrics: .Default)
-//        }
+        /*let animation = CATransition()
+        animation.duration = 0
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionFade
+        
+        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
+                
+        UIView.animateWithDuration(0)
+        {
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: EHInterfaceColor.defaultNavigationBarColor), forBarMetrics: .Default)
+        }*/
 
-        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
         
         transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
             
@@ -132,12 +138,32 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         actionSheet.addButtonWithTitle("Agregar por QR")
         actionSheet.showFromTabBar(tabBarController!.tabBar)
     }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar)
+    {
+        tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        filteredFriends = Array(system.appUser.friends.values)
+        
+        if !searchText.isBlank()
+        {
+            filteredFriends = filteredFriends.filter { $0.name.lowercaseString.containsString(searchText.lowercaseString) }
+        }
+        
+        tableView.reloadData()
+    }
 
     func reloadFriendsAndTableView()
     {
-        self.friends = Array(system.appUser.friends.values)
-
-        if friends.isEmpty
+        if filteredFriends.isEmpty
         {
             tableView.hidden = true
             view.addSubview(emptyLabel)
@@ -152,7 +178,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             self.tableView.reloadData()
 
-        }, completion: nil);
+        }, completion: nil)
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
@@ -192,7 +218,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return friends.count
+        return filteredFriends.count
     }
 
 
@@ -209,7 +235,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
 
-        let friend = friends[indexPath.row]
+        let friend = filteredFriends[indexPath.row]
         
         cell.friendNameLabel.text = friend.name
         
@@ -279,7 +305,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let friend = friends[indexPath.row]
+        let friend = filteredFriends[indexPath.row]
 
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend

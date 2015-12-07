@@ -8,14 +8,18 @@
 
 import UIKit
 
-class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate
+class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var tableView: UITableView!
-    var friendsAndGaps = [(friend: User, gap: Event)]()
-    var soonInGapfriendsAndGaps = [(friend: User, gap: Event)]()
+    
+    var filteredFriendsAndGaps = [(friend: User, gap: Event)]()
+    var filteredSoonInGapfriendsAndGaps = [(friend: User, gap: Event)]()
+    
     var emptyLabel: UILabel!
 
     let searchBar = UISearchBar()
+    
+    var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
     override func viewDidLoad()
     {
@@ -31,8 +35,12 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         emptyLabel.numberOfLines = 0
         emptyLabel.sizeToFit()
 
+        searchBar.delegate = self
+        
         searchBar.sizeToFit()
         tableView.tableHeaderView = searchBar
+        
+        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
     }
 
     override func viewDidLayoutSubviews()
@@ -87,17 +95,20 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         updateGapsDataAndReloadTableView()
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
+    }
 
     func updateGapsDataAndReloadTableView()
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.friendsAndGaps = system.appUser.friendsCurrentlyInGap()
-            self.soonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
+            self.filteredFriendsAndGaps = system.appUser.friendsCurrentlyInGap()
+            self.filteredSoonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
 
-            self.tableView.reloadData()
-
-            if self.friendsAndGaps.isEmpty && self.soonInGapfriendsAndGaps.isEmpty
+            if self.filteredFriendsAndGaps.isEmpty && self.filteredSoonInGapfriendsAndGaps.isEmpty
             {
                 self.tableView.hidden = true
                 self.view.addSubview(self.emptyLabel)
@@ -110,31 +121,50 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
             UIView.transitionWithView(self.tableView, duration: 0.35, options: .TransitionCrossDissolve, animations: {() -> Void in
 
-            }, completion: nil);
+                self.tableView.reloadData()
+
+            }, completion: nil)
         }
     }
-
-    override func viewDidAppear(animated: Bool)
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
+        tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
     }
-
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar)
     {
-        view.endEditing(true)
+        tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        dispatch_async(dispatch_get_main_queue())
+        {
+            self.filteredFriendsAndGaps = system.appUser.friendsCurrentlyInGap()
+            self.filteredSoonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
+            
+            if !searchText.isBlank()
+            {
+                self.filteredFriendsAndGaps = self.filteredFriendsAndGaps.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+                self.filteredSoonInGapfriendsAndGaps = self.filteredSoonInGapfriendsAndGaps.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+            }
+            
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: TableView Delegate
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-
         if section == 0
         {
-            return friendsAndGaps.count
+            return filteredFriendsAndGaps.count
         }
         else if section == 1
         {
-            return soonInGapfriendsAndGaps.count
+            return filteredSoonInGapfriendsAndGaps.count
         }
         else
         {
@@ -146,7 +176,6 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         return 2
     }
-
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
@@ -163,14 +192,14 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         if indexPath.section == 0
         {
-            (friend, gap) = self.friendsAndGaps[indexPath.row]
+            (friend, gap) = self.filteredFriendsAndGaps[indexPath.row]
 
             cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.endHourInDate(NSDate()))
             cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         else
         {
-            (friend, gap) = self.soonInGapfriendsAndGaps[indexPath.row]
+            (friend, gap) = self.filteredSoonInGapfriendsAndGaps[indexPath.row]
        
             cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.startHourInDate(NSDate()))
             cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
@@ -218,11 +247,11 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if indexPath.section == 0
         {
-            friend = friendsAndGaps[indexPath.row].friend
+            friend = filteredFriendsAndGaps[indexPath.row].friend
         }
         else
         {
-            friend = soonInGapfriendsAndGaps[indexPath.row].friend
+            friend = filteredSoonInGapfriendsAndGaps[indexPath.row].friend
         }
         
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController

@@ -326,6 +326,8 @@ class AppUser: User
     */
     func friendsCurrentlyInGap() -> [(friend: User, gap: Event)]
     {
+        return [(friends["da.gomez11"]!, friends["da.gomez11"]!.schedule.weekDays[1].events.first!)]
+        
         var friendsAndGaps = [(friend: User, gap: Event)]()
         
         for friend in friends.values
