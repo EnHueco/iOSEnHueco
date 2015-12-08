@@ -9,12 +9,11 @@
 import UIKit
 import SimpleAlert
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, SWTableViewCellDelegate, UISearchBarDelegate
+class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var topBarBackgroundView: UIView!
     @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addFriendButton: UIButton!
 
     var emptyLabel: UILabel!
     let searchBar = UISearchBar()
@@ -47,6 +46,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         createEmptyLabel()
         
         searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
+        
+        let friendRequestsButton = UIButton(type: .Custom)
+        friendRequestsButton.frame.size = CGSize(width: 20, height: 20)
+        friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        friendRequestsButton.addTarget(self, action: Selector("friendRequestsButtonPressed:"), forControlEvents: .TouchUpInside)
+        friendRequestsButton.tintColor = UIColor.whiteColor()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)
+
+        let commonFreeTimeButton = UIButton(type: .Custom)
+        commonFreeTimeButton.frame.size = CGSize(width: 20, height: 20)
+        commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        commonFreeTimeButton.addTarget(self, action: Selector("commonFreeTimeButtonPressed:"), forControlEvents: .TouchUpInside)
+        commonFreeTimeButton.tintColor = UIColor.whiteColor()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: commonFreeTimeButton)
     }
 
     func createEmptyLabel()
@@ -64,8 +79,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         super.viewDidLayoutSubviews()
 
-        friendRequestsNotificationsIndicator.clipsToBounds = true
-        friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height / 2
+        //friendRequestsNotificationsIndicator.clipsToBounds = true
+        //friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height / 2
 
         emptyLabel.center = tableView.center
     }
@@ -102,7 +117,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         })
 
-        friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
+        //friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
 
         reloadFriendsAndTableView()
     }
@@ -129,14 +144,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
         system.appUser.fetchUpdatesForFriendRequests()
     }
-
-    @IBAction func addFriendButtonPressed(sender: AnyObject)
+    
+    func friendRequestsButtonPressed(sender: UIButton)
     {
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancelar", destructiveButtonTitle: nil)
-        
-        actionSheet.addButtonWithTitle("Buscar Amigo")
-        actionSheet.addButtonWithTitle("Agregar por QR")
-        actionSheet.showFromTabBar(tabBarController!.tabBar)
+        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("FriendRequestsViewController"), sender: self)
+    }
+    
+    func commonFreeTimeButtonPressed(sender: UIButton)
+    {
+        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonGapsViewController"), sender: self)
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
@@ -181,22 +197,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }, completion: nil)
     }
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        if buttonIndex == 1
-        {
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
-            viewController.modalPresentationStyle = .OverCurrentContext
-            
-            presentViewController(viewController, animated: true, completion: nil)
-        }
-        else if buttonIndex == 2
-        {
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController            
-            presentViewController(viewController, animated: true, completion: nil)
-        }
-    }
-
     // MARK: Notification Center
 
     func systemDidAddFriend(notification: NSNotification)
@@ -211,7 +211,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
     {
-        friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
+        //friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
     }
 
     // MARK: TableView Delegate

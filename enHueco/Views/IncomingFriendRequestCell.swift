@@ -19,6 +19,9 @@ class IncomingFriendRequestCell: UITableViewCell
     weak var delegate: IncomingFriendRequestCellDelegate?
     
     @IBOutlet weak var friendNameLabel: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var friendImageImageView: UIImageView!
  
     override func awakeFromNib()
     {
