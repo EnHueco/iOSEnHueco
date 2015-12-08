@@ -179,6 +179,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func reloadFriendsAndTableView()
     {
+        filteredFriends = Array(system.appUser.friends.values)
+
         if filteredFriends.isEmpty
         {
             tableView.hidden = true
