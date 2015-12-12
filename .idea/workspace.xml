@@ -1,56 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Coffee.imageset/noun_28006_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Eye.imageset/noun_122543_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Gap.imageset/noun_11431_cc-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Ghost.imageset/noun_158421_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HandRaised.imageset/noun_217033_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HatMustache.imageset/noun_236198_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Incognito.imageset/noun_7572_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Whistle.imageset/noun_212933_cc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Controllers/InstantFreeTimeViewController.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Coffee.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Eye.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Gap.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Ghost.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HandRaised.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HatMustache.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Incognito.imageset/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Whistle.imageset/Contents.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController2ViewController.swift" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsSearchFriendToAddViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapNavigationViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeNavigationViewController.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/CommonGapsSearchFriendToAddResultsCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/CommonGapsSelectedFriendsCollectionViewCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/GapCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FreeTimeCell.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/InGapFriendCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FreeFriendCell.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/AppDelegate.swift" afterPath="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BACKUP.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BACKUP.91898.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BASE.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BASE.91898.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.LOCAL.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.LOCAL.91898.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.REMOTE.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.REMOTE.91898.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Models/Event.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" afterPath="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/System.swift" afterPath="$PROJECT_DIR$/enHueco/Models/System.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/User.swift" afterPath="$PROJECT_DIR$/enHueco/Models/User.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" />
-    </list>
+    <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="" />
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,18 +34,8 @@
       <file leaf-file-name="FriendDetailViewController.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7381865">
-              <caret line="245" column="6" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InGapSplitViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/InGapSplitViewController.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.64240104">
+              <caret line="235" column="30" selection-start-line="235" selection-start-column="30" selection-end-line="235" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -208,11 +149,11 @@
         <option value="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
-        <option value="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" />
       </list>
     </option>
   </component>
@@ -1137,14 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/InGapSplitViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1187,8 +1120,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7381865">
-          <caret line="245" column="6" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.64240104">
+          <caret line="235" column="30" selection-start-line="235" selection-start-column="30" selection-end-line="235" selection-end-column="30" />
           <folding />
         </state>
       </provider>
