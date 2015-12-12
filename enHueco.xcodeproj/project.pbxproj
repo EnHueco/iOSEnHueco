@@ -790,7 +790,7 @@
 				TargetAttributes = {
 					F1229BD51A74947200C4FDE2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = JWR9F7H7N4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -813,11 +813,11 @@
 					};
 					F126ADF71BE4836800AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = JWR9F7H7N4;
 					};
 					F126AE031BE4836900AE561D = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 29G7CN67XL;
+						DevelopmentTeam = JWR9F7H7N4;
 					};
 				};
 			};

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Spring
 
 class InstantFreeTimeViewController: UIViewController
 {
