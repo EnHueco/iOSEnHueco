@@ -1,5 +1,5 @@
 //
-//  AddGapViewController.swift
+//  AddEditEventViewController.swift
 //  enHueco
 //
 //  Created by Diego Gómez on 9/8/15.
@@ -95,7 +95,7 @@ class AddEditEventViewController: UIViewController
             
             let daySchedule = system.appUser.schedule.weekDays[index+1]
             
-            let type: EventType = (embeddedTableViewController.gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? .Gap : .Class)
+            let type: EventType = (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? .FreeTime : .Class)
                 
             var name = embeddedTableViewController.nameTextField.text
                 
@@ -126,7 +126,7 @@ class AddEditEventViewController: UIViewController
         }
         else
         {
-            UIAlertView(title: "Imposible agregar evento", message: (embeddedTableViewController.gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? "El hueco":"La clase")+" que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...", delegate: nil, cancelButtonTitle: "Ok, lo revisaré.").show()
+            UIAlertView(title: "Imposible agregar evento", message: (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "El hueco" : "La clase") + " que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...", delegate: nil, cancelButtonTitle: "Ok, lo revisaré.").show()
         }
     }
     

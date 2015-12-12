@@ -20,7 +20,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
     var calendars: [EKCalendar]?
     
     var importScheduleQuestionAlertView: UIAlertView?
-    var generateGapsQuestionAlertView: UIAlertView?
+    var generateFreeTimePeriodsQuestionAlertView: UIAlertView?
     
     override func viewDidLoad()
     {
@@ -122,12 +122,12 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
     {
         if alertView === importScheduleQuestionAlertView && buttonIndex == 1
         {
-            generateGapsQuestionAlertView = UIAlertView(title: "Generar huecos", message: "¿Deseas que generemos los huecos que detectemos entre clases por ti? \n Recuerda que a menos de que agregues huecos a tu tiempo libre tus amigos no verán que estás en hueco.", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "No, Gracias", "Si")
-            generateGapsQuestionAlertView!.show()
+            generateFreeTimePeriodsQuestionAlertView = UIAlertView(title: "Generar huecos", message: "¿Deseas que generemos los huecos que detectemos entre clases por ti? \n Recuerda que a menos de que agregues huecos a tu tiempo libre tus amigos no verán que estás en hueco.", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "No, Gracias", "Si")
+            generateFreeTimePeriodsQuestionAlertView!.show()
         }
         else
         {
-            if system.appUser.importScheduleFromCalendar(selectedCalendar, generateGapsBetweenClasses: buttonIndex == 1)
+            if system.appUser.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1)
             {
                 navigationController!.popViewControllerAnimated(true)
             }

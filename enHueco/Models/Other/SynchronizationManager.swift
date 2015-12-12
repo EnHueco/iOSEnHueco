@@ -19,7 +19,7 @@ class SynchronizationManager: NSObject
         
         - successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
         - failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-        - associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
+        - associatedObject: Object associated with the request (For example, the Free time period that was going to be updated).
     */
     private var pendingRequestsQueue = [(request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)]()
     
@@ -97,7 +97,7 @@ class SynchronizationManager: NSObject
     
         - parameter successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
         - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-        - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
+        - parameter associatedObject: Object associated with the request (For example, the free time period that was going to be updated).
     */
     func sendAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {
@@ -118,7 +118,7 @@ class SynchronizationManager: NSObject
     
     - parameter successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
     - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-    - parameter associatedObject: Object associated with the request (For example, the Gap that was going to be updated).
+    - parameter associatedObject: Object associated with the request (For example, the free time period that was going to be updated).
     */
     func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {

@@ -166,7 +166,7 @@ class AppUser: User
                             let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.startHour : gap2.startHour)
                             let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.endHour : gap2.endHour)
                             
-                            newCommonGaps.append(Event(type: .Gap, startHour: newStartHour, endHour: newEndHour))
+                            newCommonGaps.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
                         }
                     }
                 }
@@ -198,7 +198,7 @@ class AppUser: User
     
     /**
     Imports an schedule of classes from a device's calendar.
-    - parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
+    - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
     */
     func importScheduleFromCalendar(calendar: EKCalendar, generateGapsBetweenClasses:Bool) -> Bool
     {
@@ -318,7 +318,7 @@ class AppUser: User
             let encodedEventsComponents = encodedEvent.componentsSeparatedByString("-")
             
             // Get event type and weekday
-            let eventType : EventType = encodedEventsComponents[0] == "G" ? EventType.Gap : EventType.Class
+            let eventType : EventType = encodedEventsComponents[0] == "G" ? EventType.FreeTime : EventType.Class
             let weekDay = Int(encodedEventsComponents[1])
             
             // Get Start Date
@@ -396,7 +396,7 @@ class AppUser: User
                 if(firstEvent) { firstEvent = false }
                 else { encodedSchedule += multipleElementsCharacter}
                 
-                var eventType = event.type == EventType.Gap ? "G" : "C"
+                var eventType = event.type == EventType.FreeTime ? "G" : "C"
                 
                 // Add event type
                 encodedSchedule += eventType + separationCharacter

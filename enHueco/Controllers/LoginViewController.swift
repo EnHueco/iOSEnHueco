@@ -117,12 +117,12 @@ import UIKit
 
         view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1, animations: {() -> Void in
-
+        UIView.animateWithDuration(0.1)
+        {
             self.verticalSpaceToBottomConstraint.constant = keyboardFrame.size.height + 20
             self.view.layoutIfNeeded()
             self.view.setNeedsUpdateConstraints()
-        })
+        }
     }
 
     func keyboardWillHide(notification: NSNotification)

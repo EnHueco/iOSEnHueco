@@ -10,7 +10,7 @@ import UIKit
 
 enum EventType: String
 {
-    case Gap = "GAP", Class = "CLASS"
+    case FreeTime = "GAP", Class = "CLASS"
 }
 
 class Event: EHSynchronizable, Comparable, NSCopying
@@ -44,7 +44,7 @@ class Event: EHSynchronizable, Comparable, NSCopying
     init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
     {
         self.type = type
-        self.name = name ?? (type == .Gap ? "Hueco" : "Clase")
+        self.name = name ?? (type == .FreeTime ? "Hueco" : "Clase")
         self.startHour = startHour
         self.endHour = endHour
         
@@ -62,7 +62,7 @@ class Event: EHSynchronizable, Comparable, NSCopying
             let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
         else
         {
-            self.type = .Gap
+            self.type = .FreeTime
             self.startHour = NSDateComponents()
             self.endHour = NSDateComponents()
             self.daySchedule = DaySchedule(weekDayName: "")

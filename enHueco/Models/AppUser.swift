@@ -20,6 +20,9 @@ class AppUser: User
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
     
+    ///User visibility state
+    var invisible = false
+    
     // Encoding characters
     
     let splitCharacter = "\\"
@@ -250,69 +253,70 @@ class AppUser: User
     // MARK: Functions
     
     /**
-    Returns a schedule with the common gaps of the users provided.
+    Returns a schedule with the common free time periods of the users provided.
     */
-    func commonGapsScheduleForUsers(users:[User]) -> Schedule
+    func commonFreeTimePeriodsScheduleForUsers(users:[User]) -> Schedule
     {
         let currentDate = NSDate()
-        let commonGapsSchedule = Schedule()
+        let commonFreeTimePeriodsSchedule = Schedule()
         
-        guard users.count >= 2 else { return commonGapsSchedule }
+        guard users.count >= 2 else { return commonFreeTimePeriodsSchedule
+        }
         
         for i in 1..<schedule.weekDays.count
         {
-            var currentCommonGaps = users.first!.schedule.weekDays[i].events.filter { $0.type == .Gap }
+            var currentCommonFreeTimePeriods = users.first!.schedule.weekDays[i].events.filter { $0.type == .FreeTime }
             
             for j in 1..<users.count
             {
-                var newCommonGaps = [Event]()
+                var newCommonFreeTimePeriods = [Event]()
                 
-                for gap1 in currentCommonGaps
+                for freeTimePeriod1 in currentCommonFreeTimePeriods
                 {
-                    let startHourInCurrentDate1 = gap1.startHourInDate(currentDate)
-                    let endHourInCurrentDate1 = gap1.endHourInDate(currentDate)
+                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInDate(currentDate)
+                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInDate(currentDate)
                     
-                    for gap2 in users[j].schedule.weekDays[i].events.filter({ $0.type == .Gap })
+                    for freeTimePeriod2 in users[j].schedule.weekDays[i].events.filter({ $0.type == .FreeTime })
                     {
-                        let startHourInCurrentDate2 = gap2.startHourInDate(currentDate)
-                        let endHourInCurrentDate2 = gap2.endHourInDate(currentDate)
+                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInDate(currentDate)
+                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInDate(currentDate)
                         
                         if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2)
                         {
-                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.startHour : gap2.startHour)
-                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? gap1.endHour : gap2.endHour)
+                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.startHour : freeTimePeriod2.startHour)
+                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.endHour : freeTimePeriod2.endHour)
                             
-                            newCommonGaps.append(Event(type: .Gap, startHour: newStartHour, endHour: newEndHour))
+                            newCommonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
                         }
                     }
                 }
                 
-                currentCommonGaps = newCommonGaps
+                currentCommonFreeTimePeriods = newCommonFreeTimePeriods
             }
             
-            commonGapsSchedule.weekDays[i].setEvents(currentCommonGaps)
+            commonFreeTimePeriodsSchedule.weekDays[i].setEvents(currentCommonFreeTimePeriods)
         }
         
-        return commonGapsSchedule
+        return commonFreeTimePeriodsSchedule
     }
     
     /**
-     Returns all friends that are currently in gap and nearby.
-     - returns: Friend in gap with their current gap
+     Returns all friends that are currently free and nearby.
+     - returns: Friend with their current free time period
      */
-    func friendsCurrentlyInGapAndNearby() -> [(friend: User, gap: Event)]
+    func friendsCurrentlyFreeAndNearby() -> [(friend: User, freeTime: Event)]
     {
-        var friendsAndGaps = [(friend: User, gap: Event)]()
+        var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
         for friend in friends.values
         {
-            if let gap = friend.currentGap() where friend.isNearby
+            if let freeTime = friend.currentFreeTimePeriod() where friend.isNearby
             {
-                friendsAndGaps.append((friend, gap))
+                friendsAndFreeTimePeriods.append((friend, freeTime))
             }
         }
         
-        return friendsAndGaps
+        return friendsAndFreeTimePeriods
     }
     
     func friendsCurrentlyNearby() -> [User]
@@ -321,47 +325,50 @@ class AppUser: User
     }
     
     /**
-    Returns all friends that are currently in gap.
-    - returns: Friend in gap with their current gap
+    Returns all friends that are currently free.
+    - returns: Friends with their current free time periods
     */
-    func friendsCurrentlyInGap() -> [(friend: User, gap: Event)]
+    func friendsCurrentlyFree() -> [(friend: User, freeTime: Event)]
     {        
-        var friendsAndGaps = [(friend: User, gap: Event)]()
+        var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
         for friend in friends.values
         {
-            if let gap = friend.currentGap()  {friendsAndGaps.append((friend, gap))}
+            if let freeTime = friend.currentFreeTimePeriod()
+            {
+                friendsAndFreeTimePeriods.append((friend, freeTime))
+            }
         }
         
-        return friendsAndGaps
+        return friendsAndFreeTimePeriods
     }
         
     /**
-     Returns all friends that will soon be in gap.
-     - returns: Friend in gap with their current gap
+     Returns all friends that will soon be free.
+     - returns: Friend with their current free time period
      */
-    func friendsSoonInGapWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, gap: Event)]
+    func friendsSoonFreeWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, freeTime: Event)]
     {
-        var friendsAndGaps = [(friend: User, gap: Event)]()
+        var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
         let currentDate = NSDate()
         
         for friend in friends.values
         {
-            if let gap = friend.nextGap() where gap.startHourInDate(currentDate).timeIntervalSinceNow <= interval
+            if let freeTime = friend.nextFreeTimePeriod() where freeTime.startHourInDate(currentDate).timeIntervalSinceNow <= interval
             {
-                friendsAndGaps.append((friend, gap))
+                friendsAndFreeTimePeriods.append((friend, freeTime))
             }
         }
         
-        return friendsAndGaps
+        return friendsAndFreeTimePeriods
     }
     
     /**
     Imports an schedule of classes from a device's calendar.
-    - parameter generateGapsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
+    - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
     */
-    func importScheduleFromCalendar(calendar: EKCalendar, generateGapsBetweenClasses:Bool) -> Bool
+    func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses:Bool) -> Bool
     {
         let today = NSDate()
         let eventStore = EKEventStore()
@@ -413,7 +420,7 @@ class AppUser: User
             }
         }
         
-        if generateGapsBetweenClasses
+        if generateFreeTimePeriodsBetweenClasses
         {
             //TODO: Calculate Gaps and add them
         }
@@ -533,7 +540,7 @@ class AppUser: User
             let encodedEventsComponents = encodedEvent.componentsSeparatedByString("-")
             
             // Get event type and weekday
-            let eventType : EventType = encodedEventsComponents[0] == "G" ? EventType.Gap : EventType.Class
+            let eventType : EventType = encodedEventsComponents[0] == "G" ? EventType.FreeTime : EventType.Class
             let weekDay = Int(encodedEventsComponents[1])
             
             // Get Start Date
@@ -613,7 +620,7 @@ class AppUser: User
                     encodedSchedule += multipleElementsCharacter
                 }
                 
-                let eventType = event.type == EventType.Gap ? "G" : "C"
+                let eventType = event.type == EventType.FreeTime ? "G" : "C"
                 
                 // Add event type
                 encodedSchedule += eventType + separationCharacter

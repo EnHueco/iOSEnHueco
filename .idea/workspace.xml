@@ -2,44 +2,53 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Controllers/ChooseFriendsPrivacySettingsViewController.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Controllers/PrivacySettingsViewController.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Controllers/SearchSelectFriendsViewController.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Coffee.imageset/noun_28006_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Eye.imageset/noun_122543_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Gap.imageset/noun_11431_cc-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Ghost.imageset/noun_158421_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HandRaised.imageset/noun_217033_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HatMustache.imageset/noun_236198_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Incognito.imageset/noun_7572_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Whistle.imageset/noun_212933_cc.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Controllers/InstantFreeTimeViewController.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Coffee.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Eye.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Gap.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Ghost.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HandRaised.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/HatMustache.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Incognito.imageset/Contents.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Views/Images.xcassets/Whistle.imageset/Contents.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController2ViewController.swift" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsSearchFriendToAddViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapNavigationViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeNavigationViewController.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/CommonGapsSearchFriendToAddResultsCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/CommonGapsSelectedFriendsCollectionViewCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/GapCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FreeTimeCell.swift" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/InGapFriendCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FreeFriendCell.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile" afterPath="$PROJECT_DIR$/Podfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile.lock" afterPath="$PROJECT_DIR$/Podfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Manifest.lock" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.markdown" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.plist" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-frameworks.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-frameworks.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.release.xcconfig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.markdown" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.plist" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-frameworks.sh" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods-frameworks.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods.debug.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods.debug.xcconfig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods.release.xcconfig" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods/Pods.release.xcconfig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/AppDelegate.swift" afterPath="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/AddFriendByQRViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/AddFriendByQRViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/AddFriendViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/AddFriendViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController2ViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController2ViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendRequestsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendRequestsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendsNavigationViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendsNavigationViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapNavigationViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/InGapNavigationViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/ProfileViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/ProfileViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/ScheduleViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/ScheduleViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/SearchNewFriendViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/SearchNewFriendViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BACKUP.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BACKUP.91898.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BASE.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.BASE.91898.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.LOCAL.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.LOCAL.91898.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.REMOTE.91898.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift.REMOTE.91898.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Models/Event.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" afterPath="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/System.swift" afterPath="$PROJECT_DIR$/enHueco/Models/System.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/User.swift" afterPath="$PROJECT_DIR$/enHueco/Models/User.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/Colors.swift" afterPath="$PROJECT_DIR$/enHueco/Views/Colors.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" />
     </list>
     <ignored path="enHueco.iws" />
@@ -55,47 +64,37 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_7347fe4c6ff03a980349e96df9fe3a60c6b1597f" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos" />
   <component name="FavoritesManager">
     <favorites_list name="enHueco" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProfileViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ProfileViewController.swift">
+      <file leaf-file-name="CurrentlyFreeViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+              <caret line="223" column="83" selection-start-line="223" selection-start-column="83" selection-end-line="223" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScheduleCalendarViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift">
+      <file leaf-file-name="FriendDetailViewController.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="10" selection-start-line="71" selection-start-column="10" selection-end-line="71" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.7381865">
+              <caret line="245" column="6" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScheduleViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ScheduleViewController.swift">
+      <file leaf-file-name="InGapSplitViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/InGapSplitViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchNewFriendViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SearchNewFriendViewController.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -105,47 +104,67 @@
         <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+              <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProximityManager.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Models/ProximityManager.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="211" column="76" selection-start-line="211" selection-start-column="76" selection-end-line="211" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="System.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Models/System.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommonFreeTimePeriodsSearchFriendToAddViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="120" selection-start-line="46" selection-start-column="120" selection-end-line="46" selection-end-column="120" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddEditEventViewController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsEmbeddedTableViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift">
+      <file leaf-file-name="AppUser.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Models/AppUser.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+            <state vertical-scroll-proportion="-7.3703704">
+              <caret line="368" column="62" selection-start-line="368" selection-start-column="58" selection-end-line="368" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Colors.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/enHueco/Views/Colors.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39759037">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsViewController.swift">
+      <file leaf-file-name="InGapInterfaceController.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco watchOS Extension/InGapInterfaceController.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewQRViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ViewQRViewController.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -161,8 +180,6 @@
       <list>
         <option value="$PROJECT_DIR$/enHueco/APIConnector.swift" />
         <option value="$PROJECT_DIR$/enHueco/HTTPRequestResponseManager.swift" />
-        <option value="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" />
-        <option value="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/MainTabBarViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" />
@@ -170,6 +187,32 @@
         <option value="$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Views/Colors.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/SearchFriendsPrivacyViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/InFreeTimeViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/FreeViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/FreeTimeCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/InGapFriendCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/FreeFriendCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Models/Event.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Models/User.swift" />
+        <option value="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/CommonGapsSearchFriendToAddViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/CommonGapsSelectedFriendsCollectionViewCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/CommonGapsSearchFriendToAddResultsCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/InGapNavigationViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeNavigationViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Views/FriendsCell.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Models/ProximityManager.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift" />
       </list>
     </option>
   </component>
@@ -179,10 +222,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="47" />
-    <option name="y" value="23" />
-    <option name="width" value="1623" />
-    <option name="height" value="948" />
+    <option name="x" value="145" />
+    <option name="y" value="44" />
+    <option name="width" value="1703" />
+    <option name="height" value="929" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -238,6 +281,20 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Frameworks" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="enHueco" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
@@ -257,6 +314,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Views" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Cells" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -381,6 +460,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Settings" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Navigation and Split View Controllers" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controllers" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main Screen View Controllers" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -567,20 +690,6 @@
       </EXTENSION>
       <method />
     </configuration>
-    <configuration default="false" name="SimpleAlert" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="SimpleAlert" CONFIG_NAME="Debug" SCHEME_NAME="SimpleAlert" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
-      <envs />
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method />
-    </configuration>
-    <configuration default="false" name="StaticDataTableViewController" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="StaticDataTableViewController" CONFIG_NAME="Debug" SCHEME_NAME="StaticDataTableViewController" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
-      <envs />
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method />
-    </configuration>
     <configuration default="false" name="SWTableViewCell" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="SWTableViewCell" CONFIG_NAME="Debug" SCHEME_NAME="SWTableViewCell" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
       <envs />
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
@@ -595,14 +704,14 @@
       </EXTENSION>
       <method />
     </configuration>
-    <configuration default="false" name="Colours" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="Colours" CONFIG_NAME="Debug" SCHEME_NAME="Colours" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+    <configuration default="false" name="AHKActionSheet" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="Pods" TARGET_NAME="AHKActionSheet" CONFIG_NAME="Debug" SCHEME_NAME="AHKActionSheet" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
       <envs />
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
         <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
       </EXTENSION>
       <method />
     </configuration>
-    <list size="25">
+    <list size="23">
       <item index="0" class="java.lang.String" itemvalue="Application.enHueco" />
       <item index="1" class="java.lang.String" itemvalue="Application.Complication - enHueco watchOS" />
       <item index="2" class="java.lang.String" itemvalue="Application.enHueco watchOS" />
@@ -623,11 +732,9 @@
       <item index="17" class="java.lang.String" itemvalue="Application.ReachabilitySwift" />
       <item index="18" class="java.lang.String" itemvalue="Application.RSKImageCropper" />
       <item index="19" class="java.lang.String" itemvalue="Application.SDWebImage" />
-      <item index="20" class="java.lang.String" itemvalue="Application.SimpleAlert" />
-      <item index="21" class="java.lang.String" itemvalue="Application.StaticDataTableViewController" />
-      <item index="22" class="java.lang.String" itemvalue="Application.SWTableViewCell" />
-      <item index="23" class="java.lang.String" itemvalue="Application.TSMessages" />
-      <item index="24" class="java.lang.String" itemvalue="Application.Colours" />
+      <item index="20" class="java.lang.String" itemvalue="Application.SWTableViewCell" />
+      <item index="21" class="java.lang.String" itemvalue="Application.TSMessages" />
+      <item index="22" class="java.lang.String" itemvalue="Application.AHKActionSheet" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -644,14 +751,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="47" y="23" width="1623" height="948" extended-state="0" />
-    <editor active="false" />
+    <frame x="145" y="44" width="1703" height="929" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22908863" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21819262" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3810111" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -663,7 +771,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -684,11 +791,50 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/MainTabBarViewController.swift">
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/Colors.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ViewQRViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/MainTabBarViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -761,13 +907,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -785,59 +924,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CommonGapsSearchFriendToAddViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController2ViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendRequestsViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="41" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/InGapViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="178" column="28" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -852,7 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -880,10 +969,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift">
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ProfileViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/Colors.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -904,26 +1009,186 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ProfileViewController.swift">
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/FreeTimeCell.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="5" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SettingsEmbeddedTableViewController.swift">
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/FreeFriendCell.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Views/Colors.swift">
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/IncomingFriendRequestCell.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39759037">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Models/Event.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Models/User.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="143" column="8" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/AppDelegate.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="144" column="26" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="60" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeNavigationViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Views/FriendsCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33226836">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CommonGapsViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.333333">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendsViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="11.148149">
+          <caret line="264" column="22" selection-start-line="264" selection-start-column="22" selection-end-line="264" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/EmbeddedAddEditEventTableViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3703704">
+          <caret line="45" column="28" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/AddEditEventViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Models/AppUser.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.3703704">
+          <caret line="368" column="62" selection-start-line="368" selection-start-column="58" selection-end-line="368" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco watchOS Extension/InGapInterfaceController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/InGapSplitViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="15" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/SelectCalendarViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="132" column="13" selection-start-line="132" selection-start-column="13" selection-end-line="132" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Models/ProximityManager.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="211" column="76" selection-start-line="211" selection-start-column="76" selection-end-line="211" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Models/System.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="120" selection-start-line="46" selection-start-column="120" selection-end-line="46" selection-end-column="120" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="223" column="83" selection-start-line="223" selection-start-column="83" selection-end-line="223" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendDetailViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7381865">
+          <caret line="245" column="6" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
           <folding />
         </state>
       </provider>

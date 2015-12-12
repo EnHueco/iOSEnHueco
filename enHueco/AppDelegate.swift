@@ -90,12 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
     {
-        let (currentGap, nextGap) = system.appUser.currentAndNextGap()
+        let (currentFreeTimePeriod, nextFreeTimePeriod) = system.appUser.currentAndNextFreeTimePeriods()
         
-        if currentGap != nil
+        if currentFreeTimePeriod != nil
         {
-            //Ask iOS to kindly try to wake up the app frequently during gaps.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringGaps)
+            //Ask iOS to kindly try to wake up the app frequently during free time periods.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringFreeTimePeriods)
             
             ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
                 
@@ -110,17 +110,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
                 completionHandler(.NoData)
             })
         }
-        else if let nextGap = nextGap
+        else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
-            //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.startHourInDate(NSDate()).timeIntervalSinceNow )
+            //If the user is not free ask iOS to try to wake up app as soon as user becomes free.
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow )
             
             completionHandler(.NoData)
         }
         else
         {
-            //The day is over, user doesn't have more gaps ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
-            //TODO : Set fetch interval to wait for next gap (for this we must look for the next gap in future days)
+            //The day is over, user doesn't have more free time periods ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
+            //TODO : Set fetch interval to wait for next free time period (for this we must look for the next free time period in future days)
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
             
             completionHandler(.NoData)
@@ -138,17 +138,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsInGapAndGaps = system.appUser.friendsCurrentlyInGap()
+            let friendsCurrentlyFreeAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
             
             var friendsArray = [[String : AnyObject]]()
             
-            for (friend, gap) in friendsInGapAndGaps
+            for (friend, freeTimePeriod) in friendsCurrentlyFreeAndFreeTimePeriods
             {
                 var friendDictionary = [String : AnyObject]()
                 
                 friendDictionary["name"] = friend.name
                 friendDictionary["imageURL"] = friend.imageURL?.absoluteString
-                friendDictionary["gapEndDate"] = gap.endHourInDate(NSDate())
+                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInDate(NSDate())
                 
                 friendsArray.append(friendDictionary)
             }

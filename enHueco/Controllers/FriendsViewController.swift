@@ -52,7 +52,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         friendRequestsButton.addTarget(self, action: Selector("friendRequestsButtonPressed:"), forControlEvents: .TouchUpInside)
         friendRequestsButton.tintColor = UIColor.whiteColor()
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)
 
         let commonFreeTimeButton = UIButton(type: .Custom)
@@ -60,7 +59,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         commonFreeTimeButton.addTarget(self, action: Selector("commonFreeTimeButtonPressed:"), forControlEvents: .TouchUpInside)
         commonFreeTimeButton.tintColor = UIColor.whiteColor()
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: commonFreeTimeButton)
     }
 
@@ -152,7 +150,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func commonFreeTimeButtonPressed(sender: UIButton)
     {
-        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonGapsViewController"), sender: self)
+        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController"), sender: self)
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
@@ -246,26 +244,26 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.eventNameOrLocationLabel.text = nil
         
-        cell.showGapStartEndHourIcon()
+        cell.showFreeTimeStartEndHourIcon()
         
-        let (currentGap, nextGap) = friend.currentAndNextGap()
+        let (currentFreeTimePeriod, nextFreeTimePeriod) = friend.currentAndNextFreeTimePeriods()
         
-        if let currentGap = currentGap
+        if let currentFreeTimePeriod = currentFreeTimePeriod
         {
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(currentGap.endHourInDate(NSDate()))
-            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriod.endHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
             //cell.eventNameOrLocationLabel.text = currentGap.name
         }
-        else if let nextGap = nextGap
+        else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(nextGap.startHourInDate(NSDate()))
-            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
-            cell.eventNameOrLocationLabel.text = nextGap.name
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
+            cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name
         }
         else
         {
-            cell.hideGapStartEndHourIcon()
-            cell.gapStartOrEndHourLabel.text = "-- --"
+            cell.hideFreeTimeStartEndHourIcon()
+            cell.freeTimeStartOrEndHourLabel.text = "-- --"
         }
         
         cell.backgroundColor = tableView.backgroundView?.backgroundColor

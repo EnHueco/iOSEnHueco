@@ -1,5 +1,5 @@
 //
-//  InGapNavigationViewController.swift
+//  CurrentlyFreeNavigationViewController.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 10/11/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InGapNavigationViewController: UINavigationController
+class CurrentlyFreeNavigationViewController: UINavigationController
 {
     override func viewDidLoad()
     {

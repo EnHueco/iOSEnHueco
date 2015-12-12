@@ -1,5 +1,5 @@
 //
-//  InGapFriendCell.swift
+//  FreeFriendCell.swift
 //  enHueco
 //
 //  Created by Diego on 9/6/15.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class InGapFriendCell: SWTableViewCell
+class FreeFriendCell: SWTableViewCell
 {
     @IBOutlet weak var friendImageImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
-    @IBOutlet weak var gapStartOrEndHourIconImageView: UIImageView!
-    @IBOutlet weak var gapStartOrEndHourLabel: UILabel!
-    @IBOutlet weak var gapNameAndLocationLabel: UILabel!
+    @IBOutlet weak var freeTimeStartOrEndHourIconImageView: UIImageView!
+    @IBOutlet weak var freeTimeStartOrEndHourLabel: UILabel!
+    @IBOutlet weak var freeNameAndLocationLabel: UILabel!
     
     var friendUsername : String? = nil
     

@@ -1,5 +1,5 @@
 //
-//  CommonGapsSearchFriendToAddViewController.swift
+//  CommonFreeTimePeriodsSearchFriendToAddViewController.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 10/9/15.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol CommonGapsSearchFriendToAddViewControllerDelegate: class
+protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class
 {
-    func commonGapsSearchFriendToAddViewController(controller: CommonGapsSearchFriendToAddViewController, didSelectFriend friend: User)
+    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
 }
 
-class CommonGapsSearchFriendToAddViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var resultsTableView: UITableView!
     
     var filteredFriends = Array(system.appUser.friends.values)
     
-    weak var delegate: CommonGapsSearchFriendToAddViewControllerDelegate?
+    weak var delegate: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate?
     
     override func viewDidLoad()
     {
@@ -44,7 +44,7 @@ class CommonGapsSearchFriendToAddViewController: UIViewController, UITableViewDa
     {
         let friend = filteredFriends[indexPath.row]
         
-        let cell = resultsTableView.dequeueReusableCellWithIdentifier("CommonGapsSearchFriendToAddResultsCell") as! CommonGapsSearchFriendToAddResultsCell
+        let cell = resultsTableView.dequeueReusableCellWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddResultsCell") as! CommonFreeTimePeriodsSearchFriendToAddResultsCell
         
         cell.friendNameLabel.text = friend.name
         
@@ -54,7 +54,7 @@ class CommonGapsSearchFriendToAddViewController: UIViewController, UITableViewDa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let friend = filteredFriends[indexPath.row]
-        delegate?.commonGapsSearchFriendToAddViewController(self, didSelectFriend: friend)
+        delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend)
     }
     
     func filterContentForSearchText(searchText: String)

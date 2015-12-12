@@ -1,5 +1,5 @@
 //
-//  InGapViewController.swift
+//  CurrentlyFreeViewController.swift
 //  enHueco
 //
 //  Created by Diego on 9/5/15.
@@ -8,16 +8,19 @@
 
 import UIKit
 
-class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
+class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     
-    var filteredFriendsAndGaps = [(friend: User, gap: Event)]()
-    var filteredSoonInGapfriendsAndGaps = [(friend: User, gap: Event)]()
+    var filteredFriendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
+    var filteredSoonFreefriendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
     
     var emptyLabel: UILabel!
 
     let searchBar = UISearchBar()
+    
+    var imInvisibleBarItem: UIBarButtonItem!
+    var imFreeBarItem: UIBarButtonItem!
     
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
@@ -41,6 +44,22 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.tableHeaderView = searchBar
         
         searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
+        
+        let imInvisibleButton = UIButton(type: .Custom)
+        imInvisibleButton.frame.size = CGSize(width: 20, height: 20)
+        imInvisibleButton.setBackgroundImage(UIImage(named: "Eye")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        imInvisibleButton.addTarget(self, action: Selector("imInvisibleButtonPressed:"), forControlEvents: .TouchUpInside)
+        imInvisibleButton.tintColor = UIColor.whiteColor()
+        imInvisibleBarItem = UIBarButtonItem(customView: imInvisibleButton)
+        navigationItem.leftBarButtonItem = imInvisibleBarItem
+        
+        let imFreeButton = UIButton(type: .Custom)
+        imFreeButton.frame.size = CGSize(width: 20, height: 20)
+        imFreeButton.setBackgroundImage(UIImage(named: "HandRaised")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        imFreeButton.addTarget(self, action: Selector("imFreeButtonPressed:"), forControlEvents: .TouchUpInside)
+        imFreeButton.tintColor = UIColor.whiteColor()
+        imFreeBarItem = UIBarButtonItem(customView: imFreeButton)
+        navigationItem.rightBarButtonItem = imFreeBarItem
     }
 
     override func viewDidLayoutSubviews()
@@ -88,27 +107,50 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
 
-        updateGapsDataAndReloadTableView()
+        updateFreeTimePeriodDataAndReloadTableView()
     }
 
     func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
     {
-        updateGapsDataAndReloadTableView()
+        updateFreeTimePeriodDataAndReloadTableView()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         view.endEditing(true)
     }
+    
+    func imInvisibleButtonPressed(sender: UIButton)
+    {
+        system.appUser.invisible = !system.appUser.invisible
+        
+        UIView.animateWithDuration(0.2)
+        {
+            self.imInvisibleBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+        }
+    }
+    
+    func imFreeButtonPressed(sender: UIButton)
+    {
+        system.appUser.invisible = false
+        
+        UIView.animateWithDuration(0.2)
+        {
+            self.imFreeBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+        }
+        
+        let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
+        instantFreeTimeViewController.showInViewController(navigationController!)
+    }
 
-    func updateGapsDataAndReloadTableView()
+    func updateFreeTimePeriodDataAndReloadTableView()
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndGaps = system.appUser.friendsCurrentlyInGap()
-            self.filteredSoonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
+            self.filteredFriendsAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
+            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.friendsSoonFreeWithinTimeInterval(3600)
 
-            if self.filteredFriendsAndGaps.isEmpty && self.filteredSoonInGapfriendsAndGaps.isEmpty
+            if self.filteredFriendsAndFreeTimePeriods.isEmpty && self.filteredSoonFreefriendsAndFreeTimePeriods.isEmpty
             {
                 self.tableView.hidden = true
                 self.view.addSubview(self.emptyLabel)
@@ -141,13 +183,13 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndGaps = system.appUser.friendsCurrentlyInGap()
-            self.filteredSoonInGapfriendsAndGaps = system.appUser.friendsSoonInGapWithinTimeInterval(3600)
+            self.filteredFriendsAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
+            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.friendsSoonFreeWithinTimeInterval(3600)
             
             if !searchText.isBlank()
             {
-                self.filteredFriendsAndGaps = self.filteredFriendsAndGaps.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
-                self.filteredSoonInGapfriendsAndGaps = self.filteredSoonInGapfriendsAndGaps.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+                self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+                self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
             }
             
             self.tableView.reloadData()
@@ -160,11 +202,11 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if section == 0
         {
-            return filteredFriendsAndGaps.count
+            return filteredFriendsAndFreeTimePeriods.count
         }
         else if section == 1
         {
-            return filteredSoonInGapfriendsAndGaps.count
+            return filteredSoonFreefriendsAndFreeTimePeriods.count
         }
         else
         {
@@ -179,35 +221,35 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("InGapFriendCell") as! InGapFriendCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("FreeFriendCell") as! FreeFriendCell
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.delegate = self
         
-        cell.gapStartOrEndHourIconImageView.tintColor = cell.gapStartOrEndHourLabel.textColor
+        cell.freeTimeStartOrEndHourIconImageView.tintColor = cell.freeTimeStartOrEndHourLabel.textColor
 
         let formatter = NSDateFormatter()
         formatter.dateFormat = "hh:mm a"
 
-        var (friend, gap): (User, Event)
+        var (friend, freeTime): (User, Event)
 
         if indexPath.section == 0
         {
-            (friend, gap) = self.filteredFriendsAndGaps[indexPath.row]
+            (friend, freeTime) = self.filteredFriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.endHourInDate(NSDate()))
-            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         else
         {
-            (friend, gap) = self.filteredSoonInGapfriendsAndGaps[indexPath.row]
+            (friend, freeTime) = self.filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
        
-            cell.gapStartOrEndHourLabel.text = formatter.stringFromDate(gap.startHourInDate(NSDate()))
-            cell.gapStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         
         cell.friendUsername = friend.username
         
-        cell.gapNameAndLocationLabel.text = gap.name
+        cell.freeNameAndLocationLabel.text = freeTime.name
         
         let url = friend.imageURL
 
@@ -247,11 +289,11 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if indexPath.section == 0
         {
-            friend = filteredFriendsAndGaps[indexPath.row].friend
+            friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
         }
         else
         {
-            friend = filteredSoonInGapfriendsAndGaps[indexPath.row].friend
+            friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
         }
         
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
@@ -264,7 +306,7 @@ class InGapViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: SW Table View
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
-        if let cell = cell as? InGapFriendCell, friend = system.appUser.friends[cell.friendUsername!]
+        if let cell = cell as? FreeFriendCell, friend = system.appUser.friends[cell.friendUsername!]
         {
             switch index
             {

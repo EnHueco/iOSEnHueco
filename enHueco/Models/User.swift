@@ -44,7 +44,6 @@ class User: EHSynchronizable
     /// Time until currentBSSID is set back to nil
     let currentBSSIDTimeToLive: NSTimeInterval = 60*5 //5 minutes
     
-    ///Gap in which the user was when the app user was notified that they were nearby
     var lastNotifiedNearbyStatusDate: NSDate?
     
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
@@ -93,15 +92,15 @@ class User: EHSynchronizable
         }
     }
     
-    /// Returns user current gap, or nil if user is not in a gap.
-    func currentGap () -> Event?
+    /// Returns user current free time period, or nil if user is not free.
+    func currentFreeTimePeriod() -> Event?
     {
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!        
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
         
-        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .Gap
+        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime
         {
             let startHourInCurrentDate = event.startHourInDate(currentDate)
             let endHourInCurrentDate = event.endHourInDate(currentDate)
@@ -116,7 +115,7 @@ class User: EHSynchronizable
     }
     
     ///For Performance
-    func currentAndNextGap () -> (currentGap: Event?, nextGap: Event?)
+    func currentAndNextFreeTimePeriods() -> (currentFreeTimePeriod: Event?, nextFreeTimePeriod: Event?)
     {
         let currentDate = NSDate()
         
@@ -125,40 +124,40 @@ class User: EHSynchronizable
         
         let localWeekdayEvents = schedule.weekDays[localWeekDayNumber].events
         
-        var currentGap: Event?
+        var currentFreeTimePeriod: Event?
         
-        for event in localWeekdayEvents where event.type == .Gap
+        for event in localWeekdayEvents where event.type == .FreeTime
         {
             let startHourInCurrentDate = event.startHourInDate(currentDate)
             let endHourInCurrentDate = event.endHourInDate(currentDate)
             
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
             {
-                currentGap = event
+                currentFreeTimePeriod = event
             }
             else if startHourInCurrentDate > currentDate
             {
-                return (currentGap, event)
+                return (currentFreeTimePeriod, event)
             }
         }
         
-        return (currentGap, nil)
+        return (currentFreeTimePeriod, nil)
     }
     
-    /// Returns user's next gap or class
+    /// Returns user's next event
     func nextEvent () -> Event?
     {
         return nil //TODO: 
     }
     
-    func nextGap () -> Event?
+    func nextFreeTimePeriod() -> Event?
     {
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
 
-        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .Gap && event.startHourInDate(currentDate) > currentDate
+        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime && event.startHourInDate(currentDate) > currentDate
         {
             return event
         }

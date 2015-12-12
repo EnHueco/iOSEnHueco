@@ -1,5 +1,5 @@
 //
-//  CommonGapsSearchFriendToAddViewController.swift
+//  CommonFreeTimePeriodsSearchFriendToAddViewController.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 10/8/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CommonGapsSearchFriendToAddViewControllerDelegate
+class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var selectedFriendsCollectionView: UICollectionView!
@@ -16,7 +16,7 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     
     var selectedFriends = [User]()
     
-    var commonGapsSearchFriendViewController: CommonGapsSearchFriendToAddViewController!
+    var commonFreeTimePeriodsSearchFriendViewController: CommonFreeTimePeriodsSearchFriendToAddViewController!
     var scheduleViewController: ScheduleCalendarViewController!
     
     var currentController: UIViewController?
@@ -32,9 +32,9 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
         selectedFriendsCollectionView.delegate = self
         selectedFriendsCollectionView.dataSource = self
         
-        commonGapsSearchFriendViewController = storyboard!.instantiateViewControllerWithIdentifier("CommonGapsSearchFriendToAddViewController") as! CommonGapsSearchFriendToAddViewController
+        commonFreeTimePeriodsSearchFriendViewController = storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddViewController") as! CommonFreeTimePeriodsSearchFriendToAddViewController
         
-        commonGapsSearchFriendViewController.delegate = self
+        commonFreeTimePeriodsSearchFriendViewController.delegate = self
         
         scheduleViewController = storyboard!.instantiateViewControllerWithIdentifier("ScheduleCalendarViewController") as! ScheduleCalendarViewController
         scheduleViewController.schedule = Schedule()
@@ -58,8 +58,8 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     
     func prepareInfoAndReloadScheduleData()
     {
-        let commonGapsSchedule = system.appUser.commonGapsScheduleForUsers(selectedFriends)
-        scheduleViewController.schedule = commonGapsSchedule
+        let commonFreeTimePeriodsSchedule = system.appUser.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
+        scheduleViewController.schedule = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }
     
@@ -89,7 +89,7 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     {
         let friend = selectedFriends[indexPath.item]
         
-        let cell = selectedFriendsCollectionView.dequeueReusableCellWithReuseIdentifier("CommonGapsSelectedFriendsCollectionViewCell", forIndexPath: indexPath) as! CommonGapsSelectedFriendsCollectionViewCell
+        let cell = selectedFriendsCollectionView.dequeueReusableCellWithReuseIdentifier("CommonFreeTimePeriodsSelectedFriendsCollectionViewCell", forIndexPath: indexPath) as! CommonFreeTimePeriodsSelectedFriendsCollectionViewCell
         
         cell.friendNameLabel.text = friend.name
         
@@ -146,16 +146,16 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        commonGapsSearchFriendViewController.filterContentForSearchText(searchText)
+        commonFreeTimePeriodsSearchFriendViewController.filterContentForSearchText(searchText)
     }
     
-    // MARK: commonGapsSearchFriendToAddViewController Delegate
+    // MARK: commonFreeTimePeriodsSearchFriendToAddViewController Delegate
     
-    func commonGapsSearchFriendToAddViewController(controller: CommonGapsSearchFriendToAddViewController, didSelectFriend friend: User)
+    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
     {
         addFriendToSelectedFriendsAndReloadData(friend)
     }
-    
+        
     // MARK: Controller switching
     
     func switchToSchedule()
@@ -180,13 +180,13 @@ class CommonGapsViewController: UIViewController, UISearchBarDelegate, UICollect
     {
         removeCurrentController()
         
-        addChildViewController(commonGapsSearchFriendViewController)
-        commonGapsSearchFriendViewController.view.frame = containerView.bounds
-        containerView.addSubview(commonGapsSearchFriendViewController.view)
-        commonGapsSearchFriendViewController.view.alpha = 0
-        commonGapsSearchFriendViewController.didMoveToParentViewController(self)
+        addChildViewController(commonFreeTimePeriodsSearchFriendViewController)
+        commonFreeTimePeriodsSearchFriendViewController.view.frame = containerView.bounds
+        containerView.addSubview(commonFreeTimePeriodsSearchFriendViewController.view)
+        commonFreeTimePeriodsSearchFriendViewController.view.alpha = 0
+        commonFreeTimePeriodsSearchFriendViewController.didMoveToParentViewController(self)
         
-        currentController = commonGapsSearchFriendViewController
+        currentController = commonFreeTimePeriodsSearchFriendViewController
         
         UIView.animateWithDuration(0.5)
         {

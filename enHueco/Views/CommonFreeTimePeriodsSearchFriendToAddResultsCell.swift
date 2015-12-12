@@ -1,18 +1,17 @@
 //
-//  GapCell.swift
+//  CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift
 //  enHueco
 //
-//  Created by Diego Gómez on 9/8/15.
+//  Created by Diego Montoya Sefair on 10/10/15.
 //  Copyright © 2015 Diego Gómez. All rights reserved.
 //
 
 import UIKit
 
-class GapCell: UITableViewCell
+class CommonFreeTimePeriodsSearchFriendToAddResultsCell: UITableViewCell
 {
-    @IBOutlet weak var startHourLabel: UILabel!
-    @IBOutlet weak var endHourLabel: UILabel!
-    
+    @IBOutlet weak var friendNameLabel: UILabel!
+ 
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -25,4 +24,5 @@ class GapCell: UITableViewCell
 
         // Configure the view for the selected state
     }
+
 }

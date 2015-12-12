@@ -1,5 +1,5 @@
 //
-//  CommonGapsSelectedFriendsCollectionViewCell.swift
+//  CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 10/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonGapsSelectedFriendsCollectionViewCell: UICollectionViewCell
+class CommonFreeTimePeriodsSelectedFriendsCollectionViewCell: UICollectionViewCell
 {    
     @IBOutlet weak var friendNameLabel: UILabel!
 }

@@ -15,11 +15,9 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var lastNamesLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var viewScheduleButton: UIButton!
-    @IBOutlet weak var commonGapsButton: UIButton!
+    @IBOutlet weak var commonFreeTimePeriodsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
-   
-    @IBOutlet weak var gapStartOrEndHourIconImageView: UIImageView!
-    
+       
     var dotsBarButtonItem: UIBarButtonItem!
     
     var friend : User!
@@ -32,11 +30,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         title = friend.firstNames
         
-        gapStartOrEndHourIconImageView.image = gapStartOrEndHourIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
-        gapStartOrEndHourIconImageView.tintColor = UIColor.whiteColor()
-        
         viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-        commonGapsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        commonFreeTimePeriodsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
         
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
@@ -77,8 +72,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         viewScheduleButton.clipsToBounds = true
         viewScheduleButton.layer.cornerRadius = viewScheduleButton.frame.height/2
         
-        commonGapsButton.clipsToBounds = true
-        commonGapsButton.layer.cornerRadius = viewScheduleButton.frame.height/2
+        commonFreeTimePeriodsButton.clipsToBounds = true
+        commonFreeTimePeriodsButton.layer.cornerRadius = viewScheduleButton.frame.height / 2
         
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height/2
@@ -147,7 +142,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         UIView.animateWithDuration(0.8)
         {
             self.viewScheduleButton.backgroundColor = averageImageColor
-            self.commonGapsButton.backgroundColor = averageImageColor
+            self.commonFreeTimePeriodsButton.backgroundColor = averageImageColor
         }
     }
     
@@ -213,12 +208,12 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         presentViewController(scheduleCalendar, animated: true, completion: nil)
     }
     
-    @IBAction func commonGapsButtonPressed(sender: AnyObject)
+    @IBAction func commonFreeTimePeriodsButtonPressed(sender: AnyObject)
     {
-        let commonGapsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonGapsViewController") as!CommonGapsViewController
-        commonGapsViewController.selectedFriends.append(friend)
+        let commonFreeTimePeriodsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
+        commonFreeTimePeriodsViewController.selectedFriends.append(friend)
       
-        navigationController?.pushViewController(commonGapsViewController, animated: true)
+        navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
     }
 
     @IBAction func call(sender: UIButton)

@@ -19,7 +19,7 @@ class ProximityManager: NSObject
 {
     static private var instance = ProximityManager()
     
-    static let backgroundFetchIntervalDuringGaps = 5*60.0
+    static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
     static let backgroundFetchIntervalAfterDayOver = 7*3600.0
     
     ///Graph with BSSIDs of the access points
@@ -197,23 +197,23 @@ class ProximityManager: NSObject
     {
         if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         {
-            let (currentGap, nextGap) = system.appUser.currentAndNextGap()
+            let (currentFreeTimePeriod, nextFreeTimePeriod) = system.appUser.currentAndNextFreeTimePeriods()
             
-            if currentGap != nil
+            if currentFreeTimePeriod != nil
             {
-                //Ask iOS to kindly try to wake up the app frequently during gaps.
-                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringGaps)
+                //Ask iOS to kindly try to wake up the app frequently during free time periods.
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringFreeTimePeriods)
                 print("Reprogramming fetch interval: Continuous")
             }
-            else if let nextGap = nextGap
+            else if let nextFreeTimePeriod = nextFreeTimePeriod
             {
-                //If the user is not in gap ask iOS to try to wake up app as soon as user becomes free.
-                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextGap.startHourInDate(NSDate()).timeIntervalSinceNow )
-                print("Reprogramming fetch interval: In \(nextGap.startHourInDate(NSDate()).timeIntervalSinceNow/60) minutes")
+                //If the user is not free ask iOS to try to wake up app as soon as user becomes free.
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow )
+                print("Reprogramming fetch interval: In \(nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow/60) minutes")
             }
             else
             {
-                //The day is over, user doesn't have more gaps ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
+                //The day is over, user doesn't have more free time periods ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
                 UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
                 print("Reprogramming fetch interval: After day over")
             }

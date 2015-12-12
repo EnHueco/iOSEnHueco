@@ -12,7 +12,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
 {
     var addEditEventParentViewController: AddEditEventViewController!
     
-    @IBOutlet weak var gapOrClassSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var freeTimeOrClassSegmentedControl: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var nameLocationBackgroundView: UIView!
@@ -40,7 +40,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
                 
         addEditEventParentViewController = parentViewController as! AddEditEventViewController
         
-        gapOrClassSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
+        freeTimeOrClassSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
         weekDaysSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
         
         nameTextField.delegate = self
@@ -64,13 +64,13 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             let indexSet = NSIndexSet(index: system.appUser.schedule.weekDays.indexOf(eventToEdit.daySchedule)!-1)
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
             
-            if eventToEdit.type == .Gap
+            if eventToEdit.type == .FreeTime
             {
-                gapOrClassSegmentedControl.selectedSegmentIndex = 0
+                freeTimeOrClassSegmentedControl.selectedSegmentIndex = 0
             }
             else
             {
-                gapOrClassSegmentedControl.selectedSegmentIndex = 1
+                freeTimeOrClassSegmentedControl.selectedSegmentIndex = 1
             }
             
             let currentDate = NSDate()
@@ -211,7 +211,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     
     @IBAction func deleteButtonPressed(sender: AnyObject)
     {
-        UIAlertView(title: "Eliminar "+(gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? "Hueco":"Clase"), message: "¿Estás seguro que quieres eliminar " + (gapOrClassSegmentedControl.selectedSegmentIndex == 0 ? "este hueco":"esta clase")+"?", delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
+        UIAlertView(title: "Eliminar "+(freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "Hueco" : "Clase"), message: "¿Estás seguro que quieres eliminar " + (freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "este hueco" : "esta clase") + "?", delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
     }
     
     // MARK: Methods

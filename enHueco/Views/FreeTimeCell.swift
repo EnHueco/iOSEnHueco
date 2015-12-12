@@ -1,17 +1,18 @@
 //
-//  CommonGapsSearchFriendToAddResultsCell.swift
+//  FreeTimeCell.swift
 //  enHueco
 //
-//  Created by Diego Montoya Sefair on 10/10/15.
+//  Created by Diego Gómez on 9/8/15.
 //  Copyright © 2015 Diego Gómez. All rights reserved.
 //
 
 import UIKit
 
-class CommonGapsSearchFriendToAddResultsCell: UITableViewCell
+class FreeTimeCell: UITableViewCell
 {
-    @IBOutlet weak var friendNameLabel: UILabel!
- 
+    @IBOutlet weak var startHourLabel: UILabel!
+    @IBOutlet weak var endHourLabel: UILabel!
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -24,5 +25,4 @@ class CommonGapsSearchFriendToAddResultsCell: UITableViewCell
 
         // Configure the view for the selected state
     }
-
 }
