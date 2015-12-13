@@ -685,19 +685,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-Qh-xHN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-Qh-xHN">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvailableFriendCell" rowHeight="94" id="BnD-RB-383" customClass="AvailableFriendCell" customModule="enHueco" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="600" height="94"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvailableFriendCell" rowHeight="85" id="BnD-RB-383" customClass="AvailableFriendCell" customModule="enHueco" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="600" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BnD-RB-383" id="wOq-Vt-Rcc">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5G0-gJ-9gj">
-                                                    <rect key="frame" x="13" y="10" width="70" height="70"/>
+                                                    <rect key="frame" x="13" y="10" width="61" height="61"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="5G0-gJ-9gj" secondAttribute="height" multiplier="1:1" id="y2U-3Y-bNT"/>
                                                     </constraints>
@@ -706,16 +706,16 @@
                                                     </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepito Alberto Perez Uribe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eC0-Fo-nWg">
-                                                    <rect key="frame" x="91" y="10" width="501" height="18"/>
+                                                    <rect key="frame" x="82" y="10" width="510" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="48a-xO-KZv"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNh-j0-d9r">
-                                                    <rect key="frame" x="109" y="29" width="483" height="23"/>
+                                                    <rect key="frame" x="100" y="29" width="492" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="23" id="DKO-KN-1sZ">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="21"/>
@@ -726,14 +726,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SouthEastArrow" translatesAutoresizingMaskIntoConstraints="NO" id="slz-bu-a0E">
-                                                    <rect key="frame" x="91" y="33" width="15" height="15"/>
+                                                    <rect key="frame" x="82" y="33" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="Cbh-c5-GUj"/>
                                                         <constraint firstAttribute="width" secondItem="slz-bu-a0E" secondAttribute="height" multiplier="1:1" id="t1q-k2-SyI"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modelado, Simulación y Optimización (AU 312)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGQ-ZZ-md2">
-                                                    <rect key="frame" x="91" y="50" width="501" height="15"/>
+                                                    <rect key="frame" x="82" y="50" width="510" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="tj4-Vy-YaK"/>
                                                     </constraints>
@@ -964,7 +964,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepito Fernando Perez Uribe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ez-YR-Urp">
                                                     <rect key="frame" x="69" y="8" width="490" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -992,12 +992,12 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20g-zb-wXi">
-                                                    <rect key="frame" x="85" y="27" width="104" height="18"/>
+                                                    <rect key="frame" x="85" y="28" width="104" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="Nq2-CQ-DBT"/>
                                                         <constraint firstAttribute="width" constant="104" id="RJI-P1-xn5"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="11"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1014,9 +1014,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="ErN-iy-oGW" secondAttribute="bottom" constant="3" id="iMQ-B8-bbB"/>
                                                 <constraint firstItem="7ez-YR-Urp" firstAttribute="trailing" secondItem="Ceo-Ah-OaY" secondAttribute="trailingMargin" id="ic4-8I-4dj"/>
                                                 <constraint firstItem="4le-Vt-tZl" firstAttribute="leading" secondItem="ewL-y0-qmZ" secondAttribute="trailing" constant="8" id="pB9-fD-Vpu"/>
-                                                <constraint firstItem="20g-zb-wXi" firstAttribute="top" secondItem="7ez-YR-Urp" secondAttribute="bottom" constant="-1" id="us4-Fn-9mh"/>
-                                                <constraint firstItem="ErN-iy-oGW" firstAttribute="top" secondItem="20g-zb-wXi" secondAttribute="bottom" constant="-2" id="v3g-Xs-kjX"/>
-                                                <constraint firstItem="4le-Vt-tZl" firstAttribute="centerY" secondItem="20g-zb-wXi" secondAttribute="centerY" constant="1" id="wyw-ua-cBG"/>
+                                                <constraint firstItem="20g-zb-wXi" firstAttribute="top" secondItem="7ez-YR-Urp" secondAttribute="bottom" id="us4-Fn-9mh"/>
+                                                <constraint firstItem="ErN-iy-oGW" firstAttribute="top" secondItem="20g-zb-wXi" secondAttribute="bottom" constant="-3" id="v3g-Xs-kjX"/>
+                                                <constraint firstItem="4le-Vt-tZl" firstAttribute="centerY" secondItem="20g-zb-wXi" secondAttribute="centerY" id="wyw-ua-cBG"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">

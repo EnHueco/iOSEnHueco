@@ -256,7 +256,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         cell.friendNameLabel.text = friend.name
         
         cell.friendImageImageView.clipsToBounds = true
-        cell.friendImageImageView.layer.cornerRadius = 70 / 2
+        cell.friendImageImageView.layer.cornerRadius = 61 / 2
         cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
 
