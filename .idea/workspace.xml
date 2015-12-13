@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyFreeViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Controllers/CurrentlyAvailableViewController.swift" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Views/FreeFriendCell.swift" afterPath="$PROJECT_DIR$/enHueco/Views/AvailableFriendCell.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/AppDelegate.swift" afterPath="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" afterPath="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/enHueco/Views/Base.lproj/Main.storyboard" />
-    </list>
+    <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="" />
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,7 +24,7 @@
       <file leaf-file-name="CurrentlyAvailableViewController.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CurrentlyAvailableViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07643312">
+            <state vertical-scroll-proportion="0.106571935">
               <caret line="223" column="88" selection-start-line="223" selection-start-column="88" selection-end-line="223" selection-end-column="88" />
               <folding />
             </state>
@@ -184,10 +175,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="145" />
-    <option name="y" value="44" />
-    <option name="width" value="1703" />
-    <option name="height" value="929" />
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="707" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -713,11 +703,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="145" y="44" width="1703" height="929" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="707" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21819262" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2915012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1120,7 +1110,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/CurrentlyAvailableViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07643312">
+        <state vertical-scroll-proportion="0.106571935">
           <caret line="223" column="88" selection-start-line="223" selection-start-column="88" selection-end-line="223" selection-end-column="88" />
           <folding />
         </state>
