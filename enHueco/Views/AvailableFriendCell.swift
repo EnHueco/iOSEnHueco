@@ -1,5 +1,5 @@
 //
-//  FreeFriendCell.swift
+//  AvailableFriendCell.swift
 //  enHueco
 //
 //  Created by Diego on 9/6/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FreeFriendCell: SWTableViewCell
+class AvailableFriendCell: SWTableViewCell
 {
     @IBOutlet weak var friendImageImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!

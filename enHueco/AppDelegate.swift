@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
+            let friendsCurrentlyFreeAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
             
             var friendsArray = [[String : AnyObject]]()
             

@@ -1,5 +1,5 @@
 //
-//  CurrentlyFreeViewController.swift
+//  CurrentlyAvailableViewController.swift
 //  enHueco
 //
 //  Created by Diego on 9/5/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
+class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,7 +20,7 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
     let searchBar = UISearchBar()
     
     var imInvisibleBarItem: UIBarButtonItem!
-    var imFreeBarItem: UIBarButtonItem!
+    var imAvailableBarItem: UIBarButtonItem!
     
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
@@ -56,10 +56,10 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
         let imFreeButton = UIButton(type: .Custom)
         imFreeButton.frame.size = CGSize(width: 20, height: 20)
         imFreeButton.setBackgroundImage(UIImage(named: "HandRaised")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        imFreeButton.addTarget(self, action: Selector("imFreeButtonPressed:"), forControlEvents: .TouchUpInside)
+        imFreeButton.addTarget(self, action: Selector("imAvailableButtonPressed:"), forControlEvents: .TouchUpInside)
         imFreeButton.tintColor = UIColor.whiteColor()
-        imFreeBarItem = UIBarButtonItem(customView: imFreeButton)
-        navigationItem.rightBarButtonItem = imFreeBarItem
+        imAvailableBarItem = UIBarButtonItem(customView: imFreeButton)
+        navigationItem.rightBarButtonItem = imAvailableBarItem
     }
 
     override func viewDidLayoutSubviews()
@@ -130,13 +130,13 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func imFreeButtonPressed(sender: UIButton)
+    func imAvailableButtonPressed(sender: UIButton)
     {
         system.appUser.invisible = false
         
         UIView.animateWithDuration(0.2)
         {
-            self.imFreeBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+            self.imAvailableBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220 / 255.0, green: 170 / 255.0, blue: 10 / 255.0, alpha: 1) : UIColor.whiteColor()
         }
         
         let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
@@ -147,8 +147,8 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
-            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.friendsSoonFreeWithinTimeInterval(3600)
+            self.filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
+            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
 
             if self.filteredFriendsAndFreeTimePeriods.isEmpty && self.filteredSoonFreefriendsAndFreeTimePeriods.isEmpty
             {
@@ -183,8 +183,8 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndFreeTimePeriods = system.appUser.friendsCurrentlyFree()
-            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.friendsSoonFreeWithinTimeInterval(3600)
+            self.filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
+            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
             
             if !searchText.isBlank()
             {
@@ -221,7 +221,7 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("FreeFriendCell") as! FreeFriendCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.delegate = self
         
@@ -306,7 +306,7 @@ class CurrentlyFreeViewController: UIViewController, UITableViewDelegate, UITabl
     // MARK: SW Table View
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
-        if let cell = cell as? FreeFriendCell, friend = system.appUser.friends[cell.friendUsername!]
+        if let cell = cell as? AvailableFriendCell, friend = system.appUser.friends[cell.friendUsername!]
         {
             switch index
             {

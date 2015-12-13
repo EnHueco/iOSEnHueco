@@ -301,10 +301,10 @@ class AppUser: User
     }
     
     /**
-     Returns all friends that are currently free and nearby.
+     Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period
      */
-    func friendsCurrentlyFreeAndNearby() -> [(friend: User, freeTime: Event)]
+    func currentlyAvailableAndNearbyFriends() -> [(friend: User, freeTime: Event)]
     {
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
@@ -325,10 +325,10 @@ class AppUser: User
     }
     
     /**
-    Returns all friends that are currently free.
+    Returns all friends that are currently available.
     - returns: Friends with their current free time periods
     */
-    func friendsCurrentlyFree() -> [(friend: User, freeTime: Event)]
+    func currentlyAvailableFriends() -> [(friend: User, freeTime: Event)]
     {        
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
@@ -344,10 +344,10 @@ class AppUser: User
     }
         
     /**
-     Returns all friends that will soon be free.
-     - returns: Friend with their current free time period
+     Returns all friends that will soon be available.
+     - returns: Friends with their current free time period
      */
-    func friendsSoonFreeWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, freeTime: Event)]
+    func soonAvailableFriendsWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, freeTime: Event)]
     {
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
