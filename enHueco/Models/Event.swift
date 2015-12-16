@@ -10,7 +10,7 @@ import UIKit
 
 enum EventType: String
 {
-    case FreeTime = "GAP", Class = "CLASS"
+    case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
 class Event: EHSynchronizable, Comparable, NSCopying
