@@ -142,14 +142,25 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
         instantFreeTimeViewController.showInViewController(navigationController!)
     }
+    
+    func resetDataArrays()
+    {
+        filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
+        
+        if let instantFreeTimePeriod = system.appUser.schedule.instantFreeTimePeriod
+        {
+            filteredFriendsAndFreeTimePeriods.insert((system.appUser, instantFreeTimePeriod), atIndex: 0)
+        }
+        
+        filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
+    }
 
     func updateFreeTimePeriodDataAndReloadTableView()
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
-            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
-
+            self.resetDataArrays()
+            
             if self.filteredFriendsAndFreeTimePeriods.isEmpty && self.filteredSoonFreefriendsAndFreeTimePeriods.isEmpty
             {
                 self.tableView.hidden = true
@@ -183,8 +194,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     {
         dispatch_async(dispatch_get_main_queue())
         {
-            self.filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
-            self.filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
+            self.resetDataArrays()
             
             if !searchText.isBlank()
             {
@@ -221,8 +231,8 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
-        cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
+        let cell = tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
+
         cell.delegate = self
         
         cell.freeTimeStartOrEndHourIconImageView.tintColor = cell.freeTimeStartOrEndHourLabel.textColor
@@ -234,21 +244,36 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
         if indexPath.section == 0
         {
-            (friend, freeTime) = self.filteredFriendsAndFreeTimePeriods[indexPath.row]
+            (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
 
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         else
         {
-            (friend, freeTime) = self.filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
+            (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
        
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         
-        cell.friendUsername = friend.username
+        if friend === system.appUser
+        {
+            cell.setInstantFreeTimeIconVisibility(visible: true)
+            
+            let array = NSMutableArray()
+            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Eliminar")
+            
+            cell.rightUtilityButtons = array as [AnyObject]
+        }
+        else
+        {
+            cell.setInstantFreeTimeIconVisibility(visible: false)
+            cell.rightUtilityButtons = rightButtons() as [AnyObject]
+
+        }
         
+        cell.friendUsername = friend.username
         cell.freeNameAndLocationLabel.text = freeTime.name
         
         let url = friend.imageURL
@@ -259,6 +284,9 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         cell.friendImageImageView.layer.cornerRadius = 61 / 2
         cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
+        
+        cell.instantFreeTimeIcon.image = cell.instantFreeTimeIcon.image?.imageWithRenderingMode(.AlwaysTemplate)
+        cell.instantFreeTimeIcon.tintColor = UIColor.grayColor()
 
         SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil,
                 completed: {(image, error, cacheType, bool, url) -> Void in
@@ -308,19 +336,22 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     {
         if let cell = cell as? AvailableFriendCell, friend = system.appUser.friends[cell.friendUsername!]
         {
-            switch index
+            if friend === system.appUser
             {
-                case 0:
-                    system.getFriendABID(friend.phoneNumber, onSuccess: {
-                        (abid) -> () in
-                        system.whatsappMessageTo(abid)
-                    })
-                    break
-                case 1:
-                    system.callFriend(friend.phoneNumber)
-                    break
-                default:
-                    break
+                system.appUser.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
+                    
+                })
+            }
+            else if index == 0
+            {
+                system.getFriendABID(friend.phoneNumber, onSuccess: {
+                    (abid) -> () in
+                    system.whatsappMessageTo(abid)
+                })
+            }
+            else if index == 1
+            {
+                system.callFriend(friend.phoneNumber)
             }
         }
         cell.hideUtilityButtonsAnimated(true)
@@ -330,7 +361,6 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     {
         return true
     }
-
 
     func rightButtons() -> NSArray
     {

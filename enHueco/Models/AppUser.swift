@@ -506,7 +506,26 @@ class AppUser: User
         }
     }
     
-    /*
+    /**
+     Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.
+     Network operation must succeed immediately or else the newFreeTimePeriod is discarded
+    */
+    func postInstantFreeTimePeriod(newFreeTimePeriod: Event?, completionHandler: (succeeded: Bool)->Void )
+    {
+        //TODO: Send to server 
+        
+        //Temporary
+        schedule.instantFreeTimePeriod = newFreeTimePeriod
+       
+        dispatch_async(dispatch_get_main_queue())
+        {
+            completionHandler(succeeded: true)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system, userInfo: nil)
+        }
+    }
+    
+    /**
     Adds friend from their string encoded representation and notifies via Notification Center.
     The AppUser user is also added as a friend of the friend they are adding, without any approvals from either side.
     

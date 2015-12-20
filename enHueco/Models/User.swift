@@ -44,6 +44,7 @@ class User: EHSynchronizable
     /// Time until currentBSSID is set back to nil
     let currentBSSIDTimeToLive: NSTimeInterval = 60*5 //5 minutes
     
+    ///Last time we notified the app user that this user was nearby
     var lastNotifiedNearbyStatusDate: NSDate?
     
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
@@ -95,6 +96,8 @@ class User: EHSynchronizable
     /// Returns user current free time period, or nil if user is not free.
     func currentFreeTimePeriod() -> Event?
     {
+        if schedule.instantFreeTimePeriod != nil { return schedule.instantFreeTimePeriod }
+        
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!        

@@ -27,6 +27,8 @@ class InstantFreeTimeViewController: UIViewController
     {
         super.viewDidLoad()
         
+        endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     
@@ -91,7 +93,18 @@ class InstantFreeTimeViewController: UIViewController
 
     @IBAction func postButtonPressed(sender: AnyObject)
     {
-        dismiss()
+        let globalCalendar = NSCalendar.currentCalendar()
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let startHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: NSDate())
+        let endHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: endTimeDatePicker.date)
+        
+        let newFreeTimePeriod = Event(type: .FreeTime, name: nameTextField.text, startHour: startHourComponents, endHour: endHourComponents, location: locationTextField.text, ID: nil, lastUpdatedOn: NSDate())
+        
+        system.appUser.postInstantFreeTimePeriod(newFreeTimePeriod) { succeeded in
+            
+            self.dismiss()
+        }
     }
     
     @IBAction func cancelButtonPressed(sender: AnyObject)

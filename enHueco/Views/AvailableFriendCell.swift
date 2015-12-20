@@ -15,7 +15,14 @@ class AvailableFriendCell: SWTableViewCell
     @IBOutlet weak var freeTimeStartOrEndHourIconImageView: UIImageView!
     @IBOutlet weak var freeTimeStartOrEndHourLabel: UILabel!
     @IBOutlet weak var freeNameAndLocationLabel: UILabel!
+    @IBOutlet weak var instantFreeTimeIcon: UIImageView!
     
+    @IBOutlet weak var instantFreeTimeIconWidthConstraint: NSLayoutConstraint!
+   
     var friendUsername : String? = nil
     
+    func setInstantFreeTimeIconVisibility(visible visible: Bool)
+    {
+        instantFreeTimeIconWidthConstraint.constant = visible ? 25:0
+    }
 }
