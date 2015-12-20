@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
+    </dependencies>
+    <scenes>
+        <!--En Hueco-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="En Hueco" id="AgC-eL-Hgc" customClass="InGapInterfaceController" customModule="enHueco_watchOS_Extension">
+                    <items>
+                        <table alignment="left" id="fhs-g4-Fd1">
+                            <items>
+                                <tableRow identifier="InGapCell" id="tnp-hW-ehF" customClass="InGapRowController" customModule="enHueco_watchOS_Extension">
+                                    <group key="rootItem" width="1" height="37.5" alignment="left" id="WeT-0o-1UD">
+                                        <items>
+                                            <group alignment="left" verticalAlignment="center" contentMode="center" radius="14" id="jdg-r4-5Dx">
+                                                <items>
+                                                    <imageView width="28" height="28" alignment="left" verticalAlignment="center" contentMode="scaleAspectFill" id="8PI-J3-Xsy"/>
+                                                </items>
+                                            </group>
+                                            <group width="1" widthAdjustment="-28" height="31" alignment="left" verticalAlignment="center" layout="vertical" spacing="0.0" id="ZGT-ct-0VU">
+                                                <items>
+                                                    <label width="1" height="15" alignment="left" text="Pepito Perez" numberOfLines="0" id="ufL-GW-iea">
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="14"/>
+                                                    </label>
+                                                    <group width="1" height="14" alignment="left" spacing="0.0" id="cmp-KJ-GMM">
+                                                        <items>
+                                                            <label width="12" height="13" alignment="left" text="↙" id="8oW-ys-vde">
+                                                                <fontDescription key="font" type="system" pointSize="10"/>
+                                                            </label>
+                                                            <label alignment="left" text="10:30 AM" id="qhh-L4-11a">
+                                                                <fontDescription key="font" type="system" pointSize="13"/>
+                                                            </label>
+                                                        </items>
+                                                    </group>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                            </group>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="friendImageImageView" destination="8PI-J3-Xsy" id="uUU-Gn-kVX"/>
+                                        <outlet property="friendNameLabel" destination="ufL-GW-iea" id="9TQ-lf-KM3"/>
+                                        <outlet property="timeLabel" destination="qhh-L4-11a" id="zl8-8l-HCj"/>
+                                        <segue destination="Stw-oD-Fah" kind="push" id="C04-oi-4KQ"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <label width="1" alignment="left" text="Parece que no hay amigos en hueco..." numberOfLines="0" id="DAy-FH-oYM"/>
+                    </items>
+                    <connections>
+                        <outlet property="noFriendsInGapLabel" destination="DAy-FH-oYM" id="oz7-dA-PDW"/>
+                        <outlet property="table" destination="fhs-g4-Fd1" id="jnQ-1z-s5n"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="516"/>
+        </scene>
+        <!--Friend Detail Interface Controller-->
+        <scene sceneID="7C2-lx-Tg2">
+            <objects>
+                <controller id="Stw-oD-Fah" customClass="FriendDetailInterfaceController" customModule="enHueco_watchOS_Extension">
+                    <items>
+                        <group alignment="center" radius="27.5" id="Ifd-gA-BkD">
+                            <items>
+                                <imageView width="55" height="55" alignment="center" contentMode="scaleAspectFill" id="t2r-VE-nIa"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" spacing="0.0" id="hV6-7Y-YjU">
+                            <items>
+                                <label width="1" alignment="left" text="Pepito Perez" textAlignment="center" numberOfLines="0" id="k61-8E-2DK">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <group width="1" height="18" alignment="center" spacing="0.0" id="lOQ-p3-1Pr">
+                                    <items>
+                                        <label width="12" height="13" alignment="center" verticalAlignment="center" text="↙" id="RnG-9f-BlJ">
+                                            <fontDescription key="font" type="system" pointSize="10"/>
+                                        </label>
+                                        <label alignment="center" text="10:30 AM" id="dSE-wu-X5c">
+                                            <fontDescription key="font" type="system" pointSize="14"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="Llamar" id="OD1-Yi-jiG"/>
+                    </items>
+                    <connections>
+                        <outlet property="friendImageImageView" destination="t2r-VE-nIa" id="MFw-XI-ZRk"/>
+                        <outlet property="friendNameLabel" destination="k61-8E-2DK" id="uwf-6r-klr"/>
+                        <outlet property="timeLabel" destination="dSE-wu-X5c" id="xpM-rL-YBP"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="416" y="516"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="enHueco_watchOS" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="t8f-Gd-c4y"/>
+                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="235" y="750"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="enHueco_watchOS" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="1001"/>
+        </scene>
+    </scenes>
+</document>

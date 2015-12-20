@@ -139,6 +139,16 @@ extension String
         let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         return trimmed.isEmpty
     }
+    
+    func localized() -> String
+    {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+    func localizedWithComment(comment: String) -> String
+    {
+        return NSLocalizedString(self, comment: comment)
+    }
 }
 
 extension UIImage

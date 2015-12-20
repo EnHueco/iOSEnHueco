@@ -65,7 +65,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func createEmptyLabel()
     {
         emptyLabel = UILabel()
-        emptyLabel.text = "No tienes amigos. \r\n Selecciona + para agregar uno"
+        emptyLabel.text = "NoFriendsMessage".localized()
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = .Center
         emptyLabel.lineBreakMode = .ByWordWrapping
@@ -258,7 +258,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
-            cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name
+            cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localized()
         }
         else
         {

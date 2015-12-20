@@ -216,7 +216,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Get the local authentication context.
         let context = LAContext()
         var error: NSError?
-        let reasonString = "Authentication is needed to access your settings."
+        let reasonString = "AuthenticationRequired".localized()
 
         // Check if the device can evaluate the policy.
         if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error)

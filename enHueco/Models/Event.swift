@@ -44,7 +44,7 @@ class Event: EHSynchronizable, Comparable, NSCopying
     init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
     {
         self.type = type
-        self.name = name ?? (type == .FreeTime ? "Hueco" : "Clase")
+        self.name = name
         self.startHour = startHour
         self.endHour = endHour
         

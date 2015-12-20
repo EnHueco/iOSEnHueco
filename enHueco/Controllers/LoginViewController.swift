@@ -52,14 +52,7 @@ import UIKit
         view.endEditing(true)
         guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
         {
-            if usernameTextField.text == ""
-            {
-                TSMessage.showNotificationWithTitle("El login se encuentra vacío", type: TSMessageNotificationType.Warning)
-            }
-            else if passwordTextField.text == ""
-            {
-                TSMessage.showNotificationWithTitle("La contraseña se encuentra vacía", type: TSMessageNotificationType.Warning)
-            }
+            //TODO: Shake animation
             return
         }
 
@@ -104,7 +97,7 @@ import UIKit
         //TODO: Show error
         NSThread.sleepForTimeInterval(0.5)
 
-        TSMessage.showNotificationWithTitle("Credenciales Inválidas", type: TSMessageNotificationType.Error)
+        TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localized(), type: TSMessageNotificationType.Error)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
     }
 

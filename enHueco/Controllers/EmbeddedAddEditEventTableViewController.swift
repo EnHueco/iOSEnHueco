@@ -211,7 +211,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     
     @IBAction func deleteButtonPressed(sender: AnyObject)
     {
-        UIAlertView(title: "Eliminar "+(freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "Hueco" : "Clase"), message: "¿Estás seguro que quieres eliminar " + (freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "este hueco" : "esta clase") + "?", delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
+        UIAlertView(title: "Eliminar "+(freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "FreeTime".localized() : "Class".localized()), message: "AreYouSureDeleteEventMessage".localized(), delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
     }
     
     // MARK: Methods

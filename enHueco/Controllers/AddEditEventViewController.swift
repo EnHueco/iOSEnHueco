@@ -35,12 +35,12 @@ class AddEditEventViewController: UIViewController
         
         if eventToEdit != nil
         {
-            titleLabel.text = "Editar hueco"
+            titleLabel.text = "EditEvent".localized()
             embeddedTableViewController.weekDaysCell.hidden = true
         }
         else
         {
-            titleLabel.text = "Agregar Hueco"
+            titleLabel.text = "AddEvent".localized()
         }
     }
     
@@ -62,7 +62,7 @@ class AddEditEventViewController: UIViewController
         // If no weekdays selected
         if embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count == 0
         {
-            TSMessage.showNotificationInViewController(self, title: "Selecciona por lo menos un día", subtitle: "Los huecos y clases tienen que pertenecer a al menos un día", type: TSMessageNotificationType.Warning)
+            TSMessage.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localized(), subtitle: "", type: TSMessageNotificationType.Warning)
             return
         }
         
@@ -126,7 +126,7 @@ class AddEditEventViewController: UIViewController
         }
         else
         {
-            UIAlertView(title: "Imposible agregar evento", message: (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "El hueco" : "La clase") + " que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...", delegate: nil, cancelButtonTitle: "Ok, lo revisaré.").show()
+            UIAlertView(title: "CouldNotAddEventErrorMessage".localized(), message: "EventOverlapExplanation".localized(), delegate: nil, cancelButtonTitle: "OKIwillCheck".localized()).show()
         }
     }
     

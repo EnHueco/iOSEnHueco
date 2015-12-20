@@ -63,6 +63,7 @@
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; };
 		F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */; };
 		F152DE511C1B75EF001C0F72 /* InstantFreeTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */; };
+		F155C81E1C2760E6000EAF96 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F155C8201C2760E6000EAF96 /* Localizable.strings */; };
 		F156646C1BE5EA7800823AEE /* FriendDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */; };
 		F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */; };
 		F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */; };
@@ -105,7 +106,6 @@
 		F1ED50C41BE9AFD500533557 /* SwiftGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */; };
 		F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */; };
 		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
-		F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1EEBAF21B9931C90004291F /* globalStrings.strings */; };
 		F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */; };
 		F1F0CF1C1C029FB8004C50A1 /* ImagePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */; };
 		F1F54B321B9CE1470087C30E /* AvailableFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */; };
@@ -217,8 +217,6 @@
 		F1229BEE1A74947200C4FDE2 /* enHuecoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = enHuecoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1229BF31A74947200C4FDE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enHuecoTests.swift; sourceTree = "<group>"; };
-		F1229C251A7495A200C4FDE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F1229C271A7495A200C4FDE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalConstants.swift; path = Other/GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F126ADF81BE4836800AE561D /* enHueco watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "enHueco watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F126ADFB1BE4836800AE561D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		F126ADFD1BE4836800AE561D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F126ADFF1BE4836800AE561D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F126AE041BE4836900AE561D /* enHueco watchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "enHueco watchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +242,14 @@
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsSplitViewController.swift; sourceTree = "<group>"; };
 		F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantFreeTimeViewController.swift; sourceTree = "<group>"; };
+		F155C81B1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F155C81C1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F155C81D1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		F155C81F1C2760E6000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F155C8211C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F155C8221C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F155C8231C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F155C8241C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailInterfaceController.swift; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
 		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +295,6 @@
 		F1ED50C31BE9AFD500533557 /* SwiftGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGraph.swift; sourceTree = "<group>"; };
 		F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
 		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
-		F1EEBAF21B9931C90004291F /* globalStrings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = globalStrings.strings; path = enHueco/globalStrings.strings; sourceTree = SOURCE_ROOT; };
 		F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePersistenceManager.swift; sourceTree = "<group>"; };
 		F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableFriendCell.swift; sourceTree = "<group>"; };
@@ -456,7 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
-				F1EEBAF21B9931C90004291F /* globalStrings.strings */,
+				F155C8201C2760E6000EAF96 /* Localizable.strings */,
 				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
 				F1229C371A7495A200C4FDE2 /* Controllers */,
 				F1229C2C1A7495A200C4FDE2 /* Model */,
@@ -827,7 +831,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = F1229BCD1A74947200C4FDE2;
 			productRefGroup = F1229BD71A74947200C4FDE2 /* Products */;
@@ -847,7 +850,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1EEBAF31B9931C90004291F /* globalStrings.strings in Resources */,
+				F155C81E1C2760E6000EAF96 /* Localizable.strings in Resources */,
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
 				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
 				F1B343671B9BBFAE00EED205 /* Info.plist in Resources */,
@@ -1068,7 +1071,8 @@
 		F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F1229C251A7495A200C4FDE2 /* Base */,
+				F155C81B1C2760B1000EAF96 /* es */,
+				F155C8211C27612E000EAF96 /* en */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1076,7 +1080,8 @@
 		F1229C261A7495A200C4FDE2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F1229C271A7495A200C4FDE2 /* Base */,
+				F155C81C1C2760B1000EAF96 /* es */,
+				F155C8221C27612E000EAF96 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1084,10 +1089,21 @@
 		F126ADFA1BE4836800AE561D /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F126ADFB1BE4836800AE561D /* Base */,
+				F155C81D1C2760B1000EAF96 /* es */,
+				F155C8241C27612E000EAF96 /* en */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
+		};
+		F155C8201C2760E6000EAF96 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F155C81F1C2760E6000EAF96 /* es */,
+				F155C8231C27612E000EAF96 /* en */,
+			);
+			name = Localizable.strings;
+			path = enHueco;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 

@@ -150,7 +150,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
         
-        menu.titlesAndIcons = [("Llamar", UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
+        menu.titlesAndIcons = [("Call".localized(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
         
@@ -160,21 +160,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         menu.popoverPresentationController?.barButtonItem = dotsBarButtonItem
         menu.popoverPresentationController?.backgroundColor = UIColor(white: 0.80, alpha: 0.35)
         
-        presentViewController(menu, animated: true, completion: nil)
-        
-        let actionSheet = AHKActionSheet()
-        
-        actionSheet.addButtonWithTitle("Llamar", image: UIImage(named: "Phone")?.imageWithRenderingMode(.AlwaysTemplate), type: .Default) { (_) -> Void in
-            
-            self.call(sender)
-        }
-        
-        actionSheet.addButtonWithTitle("Whatsapp", image: UIImage(named: "Whatsapp")?.imageWithRenderingMode(.AlwaysTemplate), type: .Default) { (_) -> Void in
-            
-            self.whatsappMessage(sender)
-        }
-        
-        //actionSheet.show()
+        presentViewController(menu, animated: true, completion: nil)        
     }
     
     func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int)

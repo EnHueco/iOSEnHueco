@@ -22,8 +22,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     override func viewDidLoad()
     {
         super.viewDidLoad()
-            
-        title = "Buscar amigo"
         
         view.backgroundColor = UIColor.clearColor()
         
@@ -158,7 +156,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func systemDidSendFriendRequest(notification: NSNotification)
     {
-        TSMessage.showNotificationWithTitle("¡Solicitud enviada!", type: TSMessageNotificationType.Success)
+        TSMessage.showNotificationWithTitle("RequestSentConfirmation".localized(), type: TSMessageNotificationType.Success)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
         
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
@@ -166,7 +164,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func systemDidFailToSendFriendRequest(notification: NSNotification)
     {
-        TSMessage.showNotificationWithTitle("Hubo un error enviando la solicitud...", type: TSMessageNotificationType.Error)
+        TSMessage.showNotificationWithTitle("ErrorSendingRequest".localized(), type: TSMessageNotificationType.Error)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
     }
 

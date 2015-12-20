@@ -1,0 +1,46 @@
+/*
+  globalStrings.strings
+  enHueco
+
+  Created by Diego Montoya on 9/3/15.
+  Copyright © 2015 Diego Gómez. All rights reserved.
+*/
+
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+
+"FreeTime" = "FreeTime";
+"Class" = "Class";
+
+"NobodyAvailableMessage" = "Nobody around... \n Nobody is currently available";
+"Now" = "Now";
+"Soon" = "Soon";
+"Delete" = "Delete";
+"Call" = "Call";
+
+"NoFriendsMessage" = "No friends. \r\n Tap + to add one!";
+
+"AuthenticationRequired" = "Se necesita autenticación";
+
+"IncorrectCredentialsMessage" = "El usuario o la contraseña son incorrectos";
+
+"RequestSentConfirmation" = "¡Solicitud Enviada!";
+"ErrorSendingRequest" = "Hubo un error enviando la solicitud...";
+
+"AddEvents" = "Agregar Eventos";
+"AddEvent" = "Agregar Evento";
+"EditEvent" = "Editar Evento";
+"DeleteEvents" = "Borrar Eventos";
+
+"SelectAtLeastOneDayErrorMessage" = "Selecciona por lo menos un día";
+
+"CouldNotAddEventErrorMessage" = "Imposible agregar evento";
+"EventOverlapExplanation" = "El evento que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...";
+"OKIwillCheck" = "OK, lo revisaré.";
+
+"AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";

@@ -32,7 +32,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         tableView.delegate = self
 
         emptyLabel = UILabel()
-        emptyLabel.text = "Nadie por ahí... \n No tienes amigos en hueco"
+        emptyLabel.text = "NobodyAvailableMessage".localized()
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = .Center
         emptyLabel.numberOfLines = 0
@@ -72,11 +72,11 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     {
         if section == 0
         {
-            return "Ahora"
+            return "Now".localized()
         }
         else
         {
-            return "Próximamente"
+            return "Soon".localized()
         }
     }
 
@@ -262,7 +262,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             cell.setInstantFreeTimeIconVisibility(visible: true)
             
             let array = NSMutableArray()
-            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Eliminar")
+            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete".localized())
             
             cell.rightUtilityButtons = array as [AnyObject]
         }
@@ -274,7 +274,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         }
         
         cell.friendUsername = friend.username
-        cell.freeNameAndLocationLabel.text = freeTime.name
+        cell.freeNameAndLocationLabel.text = freeTime.name ?? "FreeTime".localized()
         
         let url = friend.imageURL
 
@@ -365,8 +365,8 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     func rightButtons() -> NSArray
     {
         let rightUtilityButtons = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "Escribir")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Llamar")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "WhatsApp")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localized())
 
         return rightUtilityButtons
     }
