@@ -24,8 +24,6 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        title = "Huecos en común"
         
         searchBar.delegate = self
         

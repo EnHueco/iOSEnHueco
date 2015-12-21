@@ -33,9 +33,9 @@
 "ErrorSendingRequest" = "Hubo un error enviando la solicitud...";
 
 "AddEvents" = "Agregar Eventos";
-"AddEvent" = "Agregar Evento";
-"EditEvent" = "Editar Evento";
-"DeleteEvents" = "Borrar Eventos";
+"AddEvent" = "Add Event";
+"EditEvent" = "Edit event";
+"DeleteEvents" = "Delete eventos";
 
 "SelectAtLeastOneDayErrorMessage" = "Selecciona por lo menos un día";
 

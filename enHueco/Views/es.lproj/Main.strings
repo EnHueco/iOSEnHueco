@@ -1,0 +1,342 @@
+
+/* Class = "UILabel"; text = "Pepito Alberto Perez"; ObjectID = "1Xc-k2-gHS"; */
+"1Xc-k2-gHS.text" = "Pepito Alberto Perez";
+
+/* Class = "UILabel"; text = "3:30"; ObjectID = "20g-zb-wXi"; */
+"20g-zb-wXi.text" = "3:30";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "24I-B2-EtX"; */
+"24I-B2-EtX.title" = "Agregar";
+
+/* Class = "UITabBarItem"; title = "My Profile"; ObjectID = "27q-QX-vEE"; */
+"27q-QX-vEE.title" = "Mi Perfil";
+
+/* Class = "UILabel"; text = "Perez Uribe"; ObjectID = "29R-h7-wl5"; */
+"29R-h7-wl5.text" = "Perez Uribe";
+
+/* Class = "UINavigationItem"; title = "Seleccionar"; ObjectID = "2hg-wj-xq4"; */
+"2hg-wj-xq4.title" = "Seleccionar";
+
+/* Class = "UILabel"; text = "Authenticate with Touch ID"; ObjectID = "3M3-ET-klW"; */
+"3M3-ET-klW.text" = "Autenticar con Touch ID";
+
+/* Class = "UILabel"; text = "Share event names"; ObjectID = "4VF-Qd-DKt"; */
+"4VF-Qd-DKt.text" = "Compartir nombres de eventos";
+
+/* Class = "UITextField"; placeholder = "Location (Optional)"; ObjectID = "4jq-yZ-nxj"; */
+"4jq-yZ-nxj.placeholder" = "Ubicación (Opcional)";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "5lJ-du-6KU"; */
+"5lJ-du-6KU.normalTitle" = "Eliminar";
+
+/* Class = "UIButton"; normalTitle = "Eliminar"; ObjectID = "6hE-Hf-w3Q"; */
+"6hE-Hf-w3Q.normalTitle" = "Eliminar";
+
+/* Class = "UILabel"; text = "Pepito Alberto Pérez Uribe"; ObjectID = "6js-7r-CC9"; */
+"6js-7r-CC9.text" = "Pepito Alberto Pérez Uribe";
+
+/* Class = "UILabel"; text = "Pepito Fernando Perez Uribe"; ObjectID = "7ez-YR-Urp"; */
+"7ez-YR-Urp.text" = "Pepito Fernando Perez Uribe";
+
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "7k9-vr-gPU"; */
+"7k9-vr-gPU.normalTitle" = "Close";
+
+/* Class = "UITabBarItem"; title = "En Hueco"; ObjectID = "9Jr-OP-8kt"; */
+"9Jr-OP-8kt.title" = "En Hueco";
+
+/* Class = "UITextField"; placeholder = "login"; ObjectID = "9Uu-HK-yAy"; */
+"9Uu-HK-yAy.placeholder" = "usuario";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[0] = "Sun"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[0]" = "Dom";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[1] = "Mon"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[1]" = "Lun";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[2] = "Tue"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[2]" = "Mar";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[3] = "Wed"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[3]" = "Mie";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[4] = "Thu"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[4]" = "Jue";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[5] = "Fri"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[5]" = "Vie";
+
+/* Class = "UISegmentedControl"; A5d-kZ-IBt.segmentTitles[6] = "Sat"; ObjectID = "A5d-kZ-IBt"; */
+"A5d-kZ-IBt.segmentTitles[6]" = "Sáb";
+
+/* Class = "UIButton"; normalTitle = "Schedule"; ObjectID = "Ax7-yd-Icu"; */
+"Ax7-yd-Icu.normalTitle" = "Horario";
+
+/* Class = "UINavigationItem"; title = "Requests"; ObjectID = "B3W-SN-G51"; */
+"B3W-SN-G51.title" = "Solicitudes";
+
+/* Class = "UILabel"; text = "Select friends"; ObjectID = "B6D-O4-G6d"; */
+"B6D-O4-G6d.text" = "Seleccionar Amigos";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "B9a-uk-LAQ"; */
+"B9a-uk-LAQ.normalTitle" = "Ingresar";
+
+/* Class = "UILabel"; text = "Sin confirmar..."; ObjectID = "BRl-gE-yOd"; */
+"BRl-gE-yOd.text" = "Sin confirmar...";
+
+/* Class = "UINavigationItem"; title = "Privacidad"; ObjectID = "Bzh-tH-ugV"; */
+"Bzh-tH-ugV.title" = "Privacidad";
+
+/* Class = "UITextField"; placeholder = "Location (optional)"; ObjectID = "CTC-1Q-Qga"; */
+"CTC-1Q-Qga.placeholder" = "Ubicación (opcional)";
+
+/* Class = "UILabel"; text = "Help us with the name or username of the person"; ObjectID = "CZM-QN-2Rj"; */
+"CZM-QN-2Rj.text" = "Ayúdanos con el nombre o usuario de la persona";
+
+/* Class = "UIButton"; normalTitle = "Scan QR 📷"; ObjectID = "Cup-I4-ni3"; */
+"Cup-I4-ni3.normalTitle" = "Escanear QR 📷";
+
+/* Class = "UIButton"; normalTitle = "Agregar por QR"; ObjectID = "ENg-fY-TgE"; */
+"ENg-fY-TgE.normalTitle" = "Agregar por QR";
+
+/* Class = "UILabel"; text = "Modelado, Simulación y Optimización (AU 312)"; ObjectID = "ErN-iy-oGW"; */
+"ErN-iy-oGW.text" = "Modelado, Simulación y Optimización (AU 312)";
+
+/* Class = "UILabel"; text = "This is the code that your friends must scan"; ObjectID = "Etg-Mw-znu"; */
+"Etg-Mw-znu.text" = "Este es el código que tus amigos deben escanear";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "Ewh-Qj-NB7"; */
+"Ewh-Qj-NB7.text" = "Cerrar Sesión";
+
+/* Class = "UITableViewSection"; headerTitle = "Security"; ObjectID = "F9H-nQ-7t0"; */
+"F9H-nQ-7t0.headerTitle" = "Seguridad";
+
+/* Class = "UILabel"; text = "Item"; ObjectID = "FNA-8w-lfr"; */
+"FNA-8w-lfr.text" = "Item";
+
+/* Class = "UINavigationItem"; title = "Pepito"; ObjectID = "FXF-rL-ufS"; */
+"FXF-rL-ufS.title" = "Pepito";
+
+/* Class = "UIBarButtonItem"; title = "+"; ObjectID = "GLV-3R-rFt"; */
+"GLV-3R-rFt.title" = "+";
+
+/* Class = "UILabel"; text = "Add Event"; ObjectID = "Gip-M7-utg"; */
+"Gip-M7-utg.text" = "Agregar Evento";
+
+/* Class = "UILabel"; text = "My Profile"; ObjectID = "Gmh-Ms-6ZF"; */
+"Gmh-Ms-6ZF.text" = "Mi Perfil";
+
+/* Class = "UILabel"; text = "Modelado, Simulación y Optimización (AU 312)"; ObjectID = "J2Q-Ks-kxX"; */
+"J2Q-Ks-kxX.text" = "Modelado, Simulación y Optimización (AU 312)";
+
+/* Class = "UILabel"; text = "1:20"; ObjectID = "JZS-HR-9FR"; */
+"JZS-HR-9FR.text" = "1:20";
+
+/* Class = "UISegmentedControl"; L0a-WM-acI.segmentTitles[0] = "Free Time"; ObjectID = "L0a-WM-acI"; */
+"L0a-WM-acI.segmentTitles[0]" = "Hueco";
+
+/* Class = "UISegmentedControl"; L0a-WM-acI.segmentTitles[1] = "Class"; ObjectID = "L0a-WM-acI"; */
+"L0a-WM-acI.segmentTitles[1]" = "Clase";
+
+/* Class = "UIButton"; normalTitle = "Registrarme"; ObjectID = "L50-L8-iCy"; */
+"L50-L8-iCy.normalTitle" = "Registrarme";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "NdW-9o-VW9"; */
+"NdW-9o-VW9.normalTitle" = "Aceptar";
+
+/* Class = "UILabel"; text = "Pepito Alberto Pérez Uribe"; ObjectID = "Nzq-JV-SVp"; */
+"Nzq-JV-SVp.text" = "Pepito Alberto Pérez Uribe";
+
+/* Class = "UILabel"; text = "Groups"; ObjectID = "OCj-b2-yZ8"; */
+"OCj-b2-yZ8.text" = "Grupos";
+
+/* Class = "UILabel"; text = "Pepito Alberto "; ObjectID = "OQX-4g-kTn"; */
+"OQX-4g-kTn.text" = "Pepito Alberto ";
+
+/* Class = "UINavigationItem"; title = "In Common"; ObjectID = "OXV-mv-gVi"; */
+"OXV-mv-gVi.title" = "Huecos en Común";
+
+/* Class = "UILabel"; text = "Schedule"; ObjectID = "Pss-9I-Axz"; */
+"Pss-9I-Axz.text" = "Horario";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "Q3w-G8-chG"; */
+"Q3w-G8-chG.normalTitle" = "Ajustes";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Qa3-pv-faO"; */
+"Qa3-pv-faO.normalTitle" = "Guardar";
+
+/* Class = "UILabel"; text = "Pepito Alberto"; ObjectID = "SHI-vm-BDJ"; */
+"SHI-vm-BDJ.text" = "Pepito Alberto";
+
+/* Class = "UITextField"; placeholder = "password"; ObjectID = "T0c-NN-5P8"; */
+"T0c-NN-5P8.placeholder" = "contraseña";
+
+/* Class = "UILabel"; text = "Select friends"; ObjectID = "TVz-j8-FAL"; */
+"TVz-j8-FAL.text" = "Seleccionar amigos";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Vbc-hx-cZ5"; */
+"Vbc-hx-cZ5.normalTitle" = "Cancelar";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "VtK-e3-2Na"; */
+"VtK-e3-2Na.text" = "Detalle";
+
+/* Class = "UITabBarItem"; title = "Friends"; ObjectID = "Vxa-4A-TC8"; */
+"Vxa-4A-TC8.title" = "Amigos";
+
+/* Class = "UINavigationItem"; title = "Agregar Amigo"; ObjectID = "WEz-eO-8FT"; */
+"WEz-eO-8FT.title" = "Agregar Amigo";
+
+/* Class = "UIButton"; normalTitle = "﹢"; ObjectID = "WL9-4Z-Do4"; */
+"WL9-4Z-Do4.normalTitle" = "﹢";
+
+/* Class = "UIButton"; normalTitle = "My QR"; ObjectID = "WSt-5M-VMJ"; */
+"WSt-5M-VMJ.normalTitle" = "Mi QR";
+
+/* Class = "UILabel"; text = "Pepito Alberto Pérez Uribe"; ObjectID = "YRs-JQ-7m7"; */
+"YRs-JQ-7m7.text" = "Pepito Alberto Pérez Uribe";
+
+/* Class = "UINavigationItem"; title = "Login"; ObjectID = "Yas-Uc-AF7"; */
+"Yas-Uc-AF7.title" = "Login";
+
+/* Class = "UISegmentedControl"; YvP-JQ-eeR.segmentTitles[0] = "↓ Recibidas"; ObjectID = "YvP-JQ-eeR"; */
+"YvP-JQ-eeR.segmentTitles[0]" = "↓ Recibidas";
+
+/* Class = "UISegmentedControl"; YvP-JQ-eeR.segmentTitles[1] = "Enviadas ↑"; ObjectID = "YvP-JQ-eeR"; */
+"YvP-JQ-eeR.segmentTitles[1]" = "Enviadas ↑";
+
+/* Class = "UILabel"; text = "📍"; ObjectID = "Yyf-xm-tbc"; */
+"Yyf-xm-tbc.text" = "📍";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "a7b-TT-nvZ"; */
+"a7b-TT-nvZ.text" = "Label";
+
+/* Class = "UILabel"; text = "Privacy"; ObjectID = "aX5-4b-Zv6"; */
+"aX5-4b-Zv6.text" = "Privacidad";
+
+/* Class = "UITabBarItem"; title = "Friends"; ObjectID = "ag3-Cp-jD2"; */
+"ag3-Cp-jD2.title" = "Amigos";
+
+/* Class = "UILabel"; text = "Perez Uribe"; ObjectID = "alX-40-PUO"; */
+"alX-40-PUO.text" = "Perez Uribe";
+
+/* Class = "UILabel"; text = "Start hour"; ObjectID = "bob-bc-mrP"; */
+"bob-bc-mrP.text" = "Hora Inicio";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "cQS-Pn-JFx"; */
+"cQS-Pn-JFx.text" = "Detalle";
+
+/* Class = "UINavigationItem"; title = "Friends"; ObjectID = "cxs-0W-jzh"; */
+"cxs-0W-jzh.title" = "Amigos";
+
+/* Class = "UITextField"; placeholder = "login"; ObjectID = "dKZ-Cl-i2z"; */
+"dKZ-Cl-i2z.placeholder" = "usuario";
+
+/* Class = "UITextField"; text = "d.montoya10"; ObjectID = "dKZ-Cl-i2z"; */
+"dKZ-Cl-i2z.text" = "d.montoya10";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "e5Z-3p-Mcw"; */
+"e5Z-3p-Mcw.normalTitle" = "Atrás";
+
+/* Class = "UINavigationItem"; title = "Search friend"; ObjectID = "eZV-Y3-aJq"; */
+"eZV-Y3-aJq.title" = "Buscar amigo";
+
+/* Class = "UILabel"; text = "EnHueco"; ObjectID = "eas-tm-Ksb"; */
+"eas-tm-Ksb.text" = "EnHueco";
+
+/* Class = "UILabel"; text = "Pepito Alberto Perez Uribe"; ObjectID = "eza-85-Cuk"; */
+"eza-85-Cuk.text" = "Pepito Alberto Perez Uribe";
+
+/* Class = "UITabBarItem"; title = "Available"; ObjectID = "fM2-fE-HDl"; */
+"fM2-fE-HDl.title" = "En Hueco";
+
+/* Class = "UITableViewSection"; headerTitle = "My phone number"; ObjectID = "fVB-Z0-WLi"; */
+"fVB-Z0-WLi.headerTitle" = "Mi número celular";
+
+/* Class = "UILabel"; text = "Select friends"; ObjectID = "hI7-HK-feg"; */
+"hI7-HK-feg.text" = "Seleccionar Amigos";
+
+/* Class = "UIButton"; normalTitle = "Import"; ObjectID = "hR6-Rq-jJC"; */
+"hR6-Rq-jJC.normalTitle" = "Importar";
+
+/* Class = "UIButton"; normalTitle = "Edit Schedule"; ObjectID = "iIb-rX-ZiU"; */
+"iIb-rX-ZiU.normalTitle" = "Editar Horario";
+
+/* Class = "UITextField"; placeholder = "Name (Optional)"; ObjectID = "iQR-6w-hSd"; */
+"iQR-6w-hSd.placeholder" = "Nombre (Opcional)";
+
+/* Class = "UIButton"; normalTitle = "In Common"; ObjectID = "iS0-jo-jXT"; */
+"iS0-jo-jXT.normalTitle" = "Huecos en común";
+
+/* Class = "UIButton"; normalTitle = "X"; ObjectID = "iTn-JJ-iNG"; */
+"iTn-JJ-iNG.normalTitle" = "X";
+
+/* Class = "UINavigationItem"; title = "Select Friends"; ObjectID = "jfr-FL-sTD"; */
+"jfr-FL-sTD.title" = "Seleccionar Amigos";
+
+/* Class = "UITableViewSection"; footerTitle = "When you are available, do you wish to be notified when friends are also available and nearby? Remember we don't use GPS, so we don't drain your battery."; ObjectID = "k19-yY-I44"; */
+"k19-yY-I44.footerTitle" = "Cuando estás en hueco, ¿Deseas que te avisemos cuando amigos están en hueco también y cerca a ti? Recuerda que no usamos GPS, entonces no agotamos tu batería.";
+
+/* Class = "UITableViewSection"; headerTitle = "Notifications"; ObjectID = "k19-yY-I44"; */
+"k19-yY-I44.headerTitle" = "Notificaciones";
+
+/* Class = "UITextField"; placeholder = "Name (optional)"; ObjectID = "kcM-Ac-PdL"; */
+"kcM-Ac-PdL.placeholder" = "Nombre (opcional)";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "nws-94-r19"; */
+"nws-94-r19.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "o8V-b9-6jO"; */
+"o8V-b9-6jO.title" = "Item";
+
+/* Class = "UILabel"; text = "Nearby friends"; ObjectID = "pH8-eb-a9N"; */
+"pH8-eb-a9N.text" = "Amigos cerca";
+
+/* Class = "UINavigationItem"; title = "EnHueco"; ObjectID = "qgQ-yh-jj7"; */
+"qgQ-yh-jj7.title" = "EnHueco";
+
+/* Class = "UISegmentedControl"; sAg-uC-tku.segmentTitles[0] = "Everyone except"; ObjectID = "sAg-uC-tku"; */
+"sAg-uC-tku.segmentTitles[0]" = "Todos excepto";
+
+/* Class = "UISegmentedControl"; sAg-uC-tku.segmentTitles[1] = "Only"; ObjectID = "sAg-uC-tku"; */
+"sAg-uC-tku.segmentTitles[1]" = "Solo";
+
+/* Class = "UISearchBar"; placeholder = "Search friend to add..."; ObjectID = "tBk-DO-eg0"; */
+"tBk-DO-eg0.placeholder" = "Buscar amigos para agregar...";
+
+/* Class = "UITextField"; placeholder = "confirmar contraseña"; ObjectID = "ues-qc-uQF"; */
+"ues-qc-uQF.placeholder" = "confirmar contraseña";
+
+/* Class = "UILabel"; text = "Share that I'm nearby"; ObjectID = "ujr-Wa-AH5"; */
+"ujr-Wa-AH5.text" = "Compartir que estoy cerca";
+
+/* Class = "UITextField"; placeholder = "contraseña"; ObjectID = "vcH-iL-dbG"; */
+"vcH-iL-dbG.placeholder" = "contraseña";
+
+/* Class = "UITextField"; text = "test"; ObjectID = "vcH-iL-dbG"; */
+"vcH-iL-dbG.text" = "test";
+
+/* Class = "UILabel"; text = "pa.perez11"; ObjectID = "vkT-x8-mV6"; */
+"vkT-x8-mV6.text" = "pa.perez11";
+
+/* Class = "UILabel"; text = "End Hour"; ObjectID = "wcz-lc-ifs"; */
+"wcz-lc-ifs.text" = "Hora fin";
+
+/* Class = "UILabel"; text = "Until:"; ObjectID = "xYx-Ch-kUs"; */
+"xYx-Ch-kUs.text" = "Hasta:";
+
+/* Class = "UIViewController"; title = "Solicitudes"; ObjectID = "xza-nY-TWb"; */
+"xza-nY-TWb.title" = "Solicitudes";
+
+/* Class = "UIButton"; normalTitle = "Buscar amigo"; ObjectID = "zJM-9e-sC3"; */
+"zJM-9e-sC3.normalTitle" = "Buscar amigo";
+
+/* Class = "UINavigationItem"; title = "Ajustes"; ObjectID = "zdI-wm-WW6"; */
+"zdI-wm-WW6.title" = "Ajustes";
+
+/* Class = "UITableViewSection"; footerTitle = "Wish others can know that you are nearby? (they have to have you as a friend and also be available). Remember we don't use GPS, so we don't drain your battery."; ObjectID = "zk6-XS-KkW"; */
+"zk6-XS-KkW.footerTitle" = "¿Deseas que otros puedan ver que estás cerca? (deben tenerte como amigo y también estar en hueco). Recuerda que no usamos GPS, entonces no agotamos tu batería.";
+
+/* Class = "UINavigationItem"; title = "I'm available!"; ObjectID = "zmR-eb-QhG"; */
+"zmR-eb-QhG.title" = "¡Estoy en hueco!";
+
+/* Class = "UILabel"; text = "Share event locations"; ObjectID = "zpj-n7-PWa"; */
+"zpj-n7-PWa.text" = "Compartir ubiaciones de eventos";

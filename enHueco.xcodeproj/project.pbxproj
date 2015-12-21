@@ -59,6 +59,11 @@
 		F126AE251BE58CE600AE561D /* InGapRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE241BE58CE600AE561D /* InGapRowController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
 		F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */; };
+		F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */; };
+		F13DB84D1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */; };
+		F13DB84E1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */; };
+		F13DB8541C27A36600DB11AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F155C8201C2760E6000EAF96 /* Localizable.strings */; };
+		F13DB8551C27A36700DB11AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F155C8201C2760E6000EAF96 /* Localizable.strings */; };
 		F143045C1C061FD9006AAB10 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F143045B1C061FD9006AAB10 /* SettingsViewController.swift */; };
 		F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */ = {isa = PBXBuildFile; fileRef = F14A72BC1BA3786700D70BD1 /* AutoCoding */; };
 		F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */; };
@@ -238,18 +243,18 @@
 		F126AE241BE58CE600AE561D /* InGapRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InGapRowController.swift; path = Views/InGapRowController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EHURLS.swift; path = Other/EHURLS.swift; sourceTree = "<group>"; };
 		F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsEmbeddedTableViewController.swift; sourceTree = "<group>"; };
+		F13DB8451C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F13DB8461C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F13DB8471C27A1F900DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		F13DB84F1C27A2AE00DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/LocalizableInterface.strings; sourceTree = "<group>"; };
+		F13DB8521C27A2BF00DB11AD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LocalizableInterface.strings; sourceTree = "<group>"; };
+		F13DB8531C27A2C400DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F13DB8591C27B52E00DB11AD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		F143045B1C061FD9006AAB10 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F14A72BC1BA3786700D70BD1 /* AutoCoding */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AutoCoding; sourceTree = "<group>"; };
 		F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsSplitViewController.swift; sourceTree = "<group>"; };
 		F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantFreeTimeViewController.swift; sourceTree = "<group>"; };
-		F155C81B1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F155C81C1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F155C81D1C2760B1000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		F155C81F1C2760E6000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F155C8211C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F155C8221C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F155C8231C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F155C8241C27612E000EAF96 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailInterfaceController.swift; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
 		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; };
@@ -461,6 +466,7 @@
 			children = (
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
 				F155C8201C2760E6000EAF96 /* Localizable.strings */,
+				F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */,
 				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
 				F1229C371A7495A200C4FDE2 /* Controllers */,
 				F1229C2C1A7495A200C4FDE2 /* Model */,
@@ -831,6 +837,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
+				Base,
 			);
 			mainGroup = F1229BCD1A74947200C4FDE2;
 			productRefGroup = F1229BD71A74947200C4FDE2 /* Products */;
@@ -854,6 +862,7 @@
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
 				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
 				F1B343671B9BBFAE00EED205 /* Info.plist in Resources */,
+				F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
 				F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */,
@@ -873,6 +882,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */,
+				F13DB8541C27A36600DB11AD /* Localizable.strings in Resources */,
+				F13DB84D1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -882,6 +893,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F126AE161BE4836900AE561D /* Assets.xcassets in Resources */,
+				F13DB8551C27A36700DB11AD /* Localizable.strings in Resources */,
+				F13DB84E1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,8 +1084,7 @@
 		F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F155C81B1C2760B1000EAF96 /* es */,
-				F155C8211C27612E000EAF96 /* en */,
+				F13DB8451C27A1F800DB11AD /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1080,8 +1092,8 @@
 		F1229C261A7495A200C4FDE2 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F155C81C1C2760B1000EAF96 /* es */,
-				F155C8221C27612E000EAF96 /* en */,
+				F13DB8461C27A1F800DB11AD /* Base */,
+				F13DB8591C27B52E00DB11AD /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1089,17 +1101,25 @@
 		F126ADFA1BE4836800AE561D /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F155C81D1C2760B1000EAF96 /* es */,
-				F155C8241C27612E000EAF96 /* en */,
+				F13DB8471C27A1F900DB11AD /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F13DB84F1C27A2AE00DB11AD /* Base */,
+				F13DB8521C27A2BF00DB11AD /* es */,
+			);
+			name = LocalizableInterface.strings;
 			sourceTree = "<group>";
 		};
 		F155C8201C2760E6000EAF96 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F155C81F1C2760E6000EAF96 /* es */,
-				F155C8231C27612E000EAF96 /* en */,
+				F13DB8531C27A2C400DB11AD /* Base */,
 			);
 			name = Localizable.strings;
 			path = enHueco;
