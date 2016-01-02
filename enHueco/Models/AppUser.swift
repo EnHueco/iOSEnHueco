@@ -260,8 +260,7 @@ class AppUser: User
         let currentDate = NSDate()
         let commonFreeTimePeriodsSchedule = Schedule()
         
-        guard users.count >= 2 else { return commonFreeTimePeriodsSchedule
-        }
+        guard users.count >= 2 else { return commonFreeTimePeriodsSchedule }
         
         for i in 1..<schedule.weekDays.count
         {

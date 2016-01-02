@@ -15,6 +15,13 @@ class EHProximityManagerNotification
     static let ProximityManagerDidReceiveProximityUpdates = "ProximityManagerDidReceiveProximityUpdates"
 }
 
+enum ProximityManagerReportingCompletionStatus
+{
+    case NotConnectedToWifi
+    case NetworkFailure
+    case Success
+}
+
 class ProximityManager: NSObject
 {
     static private var instance = ProximityManager()
@@ -46,7 +53,7 @@ class ProximityManager: NSObject
     
     func proximityInformationRefreshTimerTicked(timer:NSTimer)
     {
-        reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in }, networkFailureHandler: { () -> () in }) { () -> () in }
+        reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler { _ -> () in }
     }
     
     ///Temporary
@@ -152,13 +159,13 @@ class ProximityManager: NSObject
         return nil
     }
     
-    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(successHandler: () -> (), networkFailureHandler: () -> (), notConnectedToWifiHandler: () -> ())
+    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status: ProximityManagerReportingCompletionStatus) -> ())
     {
         NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdate")
         
         guard let currentBSSID = ProximityManager.currentBSSID() else
         {
-            notConnectedToWifiHandler()
+            completionHandler(status: .NotConnectedToWifi)
             return
         }
         
@@ -185,11 +192,11 @@ class ProximityManager: NSObject
                 NSNotificationCenter.defaultCenter().postNotificationName(EHProximityManagerNotification.ProximityManagerDidReceiveProximityUpdates, object: self)
             }
             
-            successHandler()
+            completionHandler(status: .Success)
             
         }) { (error) -> () in
             
-            networkFailureHandler()
+            completionHandler(status: .NetworkFailure)
         }
     }
     

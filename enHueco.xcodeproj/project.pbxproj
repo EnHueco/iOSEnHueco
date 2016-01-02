@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71A5595C1513C38D1D1797E /* Pods.framework */; };
+		F10A47441C371EB30066D4DF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10A47411C371EB30066D4DF /* FBSDKCoreKit.framework */; };
+		F10A47451C371EB30066D4DF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10A47421C371EB30066D4DF /* FBSDKLoginKit.framework */; };
+		F10A47461C371EB30066D4DF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F10A47431C371EB30066D4DF /* FBSDKShareKit.framework */; };
+		F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
@@ -173,6 +177,10 @@
 		0B9D2A664916D69DF79667B4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2D4B3B9D0DC94DB4A2EE2562 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B71A5595C1513C38D1D1797E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10A47411C371EB30066D4DF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Developer/Facebook SDK iOS/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		F10A47421C371EB30066D4DF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Developer/Facebook SDK iOS/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		F10A47431C371EB30066D4DF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Developer/Facebook SDK iOS/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportProfileImageViewController.swift; sourceTree = "<group>"; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Other/ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -315,6 +323,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */,
+				F10A47441C371EB30066D4DF /* FBSDKCoreKit.framework in Frameworks */,
+				F10A47461C371EB30066D4DF /* FBSDKShareKit.framework in Frameworks */,
+				F10A47451C371EB30066D4DF /* FBSDKLoginKit.framework in Frameworks */,
 				F11B02021BA5226F00ADD580 /* QuartzCore.framework in Frameworks */,
 				5A60BDEC46CA18F50491C6B6 /* Pods.framework in Frameworks */,
 			);
@@ -340,6 +351,9 @@
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F10A47411C371EB30066D4DF /* FBSDKCoreKit.framework */,
+				F10A47421C371EB30066D4DF /* FBSDKLoginKit.framework */,
+				F10A47431C371EB30066D4DF /* FBSDKShareKit.framework */,
 				F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */,
 				F1ED50C51BEAFBBC00533557 /* CSwiftV.swift */,
 				F1EB0B891BD1CA2500D5DF01 /* Data Structures */,
@@ -364,6 +378,15 @@
 				0B9D2A664916D69DF79667B4 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F10A47471C37253B0066D4DF /* Login and Setup */ = {
+			isa = PBXGroup;
+			children = (
+				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
+				F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */,
+			);
+			name = "Login and Setup";
 			sourceTree = "<group>";
 		};
 		F1179E711B9BB5F500B04400 /* Cells */ = {
@@ -530,11 +553,11 @@
 		F1229C371A7495A200C4FDE2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F10A47471C37253B0066D4DF /* Login and Setup */,
 				F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */,
 				F17AD9B01C10168E001FE56A /* Settings */,
 				F17AD9B11C1016AB001FE56A /* Main Screen View Controllers */,
 				F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */,
-				F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */,
 				F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */,
 				F1179E6B1B9BB1E000B04400 /* AddFriendViewController.swift */,
 				F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */,
@@ -1032,6 +1055,7 @@
 				F11B02381BA5241200ADD580 /* TKCalendarDayViewController.m in Sources */,
 				F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */,
 				F1F54B321B9CE1470087C30E /* AvailableFriendCell.swift in Sources */,
+				F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */,
 				F1EB0B921BD1CA3E00D5DF01 /* ListMethods.swift in Sources */,
 				F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */,
 				F1B8AD5E1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift in Sources */,
@@ -1214,6 +1238,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"/Users/Diego/Developer\"/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1247,6 +1272,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "\"/Users/Diego/Developer\"/**";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

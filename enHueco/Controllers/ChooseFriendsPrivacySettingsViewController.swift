@@ -16,8 +16,6 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
     {
         super.viewDidLoad()
         
-        title = "Seleccionar Amigos"
-
         segmentedControl.tintColor = EHInterfaceColor.defaultNavigationBarColor
     }
 

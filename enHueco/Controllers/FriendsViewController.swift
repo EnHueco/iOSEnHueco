@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SimpleAlert
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {

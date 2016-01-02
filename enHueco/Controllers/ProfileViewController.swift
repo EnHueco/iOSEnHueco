@@ -159,6 +159,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 {
                     self.imageImageView.hidden = true
                     self.backgroundImageView.hidden = true
+                    
+                    system.appUser.downloadProfilePicture()
                 }
 
                 self.imageImageView.contentMode = .ScaleAspectFill

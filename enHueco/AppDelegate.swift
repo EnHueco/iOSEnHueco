@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         // Override point for customization after application launch.
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
                 
         if #available(iOS 9.0, *)
         {
@@ -74,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
+        FBSDKAppEvents.activateApp()
+        
         if let appUser = system.appUser
         {
             appUser.fetchUpdatesForAppUserAndSchedule()
@@ -97,17 +101,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             //Ask iOS to kindly try to wake up the app frequently during free time periods.
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringFreeTimePeriods)
             
-            ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ () -> () in
+            ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ (status) -> () in
                 
-                completionHandler(.NewData)
-                
-            }, networkFailureHandler: { () -> () in
-                    
-                completionHandler(.Failed)
-                    
-            }, notConnectedToWifiHandler: { () -> () in
-                    
-                completionHandler(.NoData)
             })
         }
         else if let nextFreeTimePeriod = nextFreeTimePeriod
@@ -157,6 +152,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             
             replyHandler(responseDictionary)
         }
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func proximityManagerDidReceiveProximityUpdates(notification: NSNotification)

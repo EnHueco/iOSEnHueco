@@ -61,7 +61,15 @@ import UIKit
             // Test
             system.createTestAppUser()
 
-            goToMainTabViewController()
+            if system.appUser.imageURL == nil
+            {
+                navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+            }
+            else
+            {
+                goToMainTabViewController()
+            }
+            
             return
             /////////
         }
@@ -89,7 +97,15 @@ import UIKit
     {
         NSThread.sleepForTimeInterval(0.5)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-        goToMainTabViewController()
+        
+        if system.appUser.imageURL == nil
+        {
+            navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+        }
+        else
+        {
+            goToMainTabViewController()
+        }
     }
 
     func systemCouldNotLoginWithError(notification: NSNotification)

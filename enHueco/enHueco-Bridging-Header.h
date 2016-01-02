@@ -3,6 +3,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "MSCollectionViewCalendarLayout.h"
 
 // SW Table View Cell

@@ -30,8 +30,6 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
     {
         super.viewDidLoad()
         
-        title = "Seleccionar Amigos"
-
         navigationBar.tintColor = UIColor.whiteColor()
         navigationBar.barStyle = .BlackTranslucent
         navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)

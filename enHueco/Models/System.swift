@@ -63,6 +63,8 @@ class System
         appUser.friends[friend.username] = friend
         
         appUser.friends[appUser.username] = appUser
+        
+        appUser.imageURL = nil
 
         //////////
     }
@@ -92,9 +94,7 @@ class System
             self.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
             self.appUser.downloadProfilePicture()
-            
             self.appUser.fetchUpdatesForAppUserAndSchedule()
-            
             self.appUser.fetchUpdatesForFriendsAndFriendSchedules()
             
             try! self.persistData()
