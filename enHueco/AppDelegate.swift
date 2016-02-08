@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         
         try? system.persistData()
+        SynchronizationManager.sharedManager().persistData()
     }
 
     func applicationDidEnterBackground(application: UIApplication)

@@ -8,41 +8,128 @@
 
 import Foundation
 
-class SynchronizationManager: NSObject
+class SynchronizationManager: NSObject, NSCoding
 {
-    static private var instance = SynchronizationManager()
+    // TODO: Should be a struct but NSCoding doesn't let us.
+    class PendingRequest: NSObject, NSCoding
+    {
+        /// NSURLRequest that was attempted
+        let request: NSURLRequest
+        
+        /// Closure to be executed in case of success when reattempting the request.
+        let successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?
+        
+        /// Closure to be executed in case of an error when reattempting the request
+        let failureRequestBlock:ConnectionManagerFailureRequestBlock?
+        
+        /// Object associated with the request (For example, the Free time period that was going to be updated).
+        let associatedObject: EHSynchronizable
+        
+        init(request: NSURLRequest, successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable) {
+            self.request = request
+            self.successfulRequestBlock = successfulRequestBlock
+            self.failureRequestBlock = failureRequestBlock
+            self.associatedObject = associatedObject
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            
+            self.successfulRequestBlock = nil
+            self.failureRequestBlock = nil
+
+            guard let request = aDecoder.decodeObjectForKey("request") as? NSURLRequest,
+                  let associatedObject = aDecoder.decodeObjectForKey("associatedObject") as? EHSynchronizable
+            else
+            {
+                self.request = NSURLRequest()
+                self.associatedObject = EHSynchronizable(ID: nil, lastUpdatedOn: NSDate())
+                
+                super.init()
+                return nil
+            }
+            
+            self.request = request
+            self.associatedObject = associatedObject
+            
+            super.init()
+        }
+        
+        func encodeWithCoder(aCoder: NSCoder) {
+            
+            aCoder.encodeObject(request, forKey: "request")
+            aCoder.encodeObject(associatedObject, forKey: "associatedObject")
+        }
+    }
+    
+    /// Path where data will be persisted
+    private static let persistencePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/synchronizationManager.state"
+
+    private static var instance: SynchronizationManager?
     
     /**
         FIFO queue containing pending requests that failed because of a network error.
-    
-        - request: NSURLRequest that was attempted
-        
-        - successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
-        - failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-        - associatedObject: Object associated with the request (For example, the Free time period that was going to be updated).
     */
-    private var pendingRequestsQueue = [(request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)]()
+    private var pendingRequestsQueue = [PendingRequest]()
     
     let retryQueue = NSOperationQueue()
     
     private override init()
     {
         retryQueue.maxConcurrentOperationCount = 1
-        retryQueue.qualityOfService = .Background
+        retryQueue.qualityOfService = .Background        
+    }
+    
+    required init?(coder decoder: NSCoder)
+    {
+        guard let pendingRequestsQueue = decoder.decodeObjectForKey("pendingRequestsQueue") as? [PendingRequest] else
+        {
+            super.init()
+            return nil
+        }
+        
+        self.pendingRequestsQueue = pendingRequestsQueue
         
         super.init()
     }
     
     static func sharedManager() -> SynchronizationManager
     {
-        return instance
+        if instance == nil
+        {
+            instance = managerFromPersistence() ?? SynchronizationManager()
+        }
+        
+        return instance!
+    }
+    
+    /// Tries to initialize a SynchronizationManager instance from persistence
+    private static func managerFromPersistence () -> SynchronizationManager?
+    {
+        let manager = NSKeyedUnarchiver.unarchiveObjectWithFile(persistencePath) as? SynchronizationManager
+    
+        if manager == nil
+        {
+            try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
+        }
+     
+        return manager
+    }
+    
+    func persistData() -> Bool
+    {
+        return NSKeyedArchiver.archiveRootObject(self, toFile: SynchronizationManager.persistencePath)
+    }
+    
+    func encodeWithCoder(coder: NSCoder)
+    {
+        coder.encodeObject(pendingRequestsQueue, forKey: "pendingRequestsQueue")
     }
     
     // MARK: Synchronization
 
-    private func addFailedRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
+    private func addPendingRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
     {
-        pendingRequestsQueue.append((request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
+        pendingRequestsQueue.append(PendingRequest(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
     }
     
     /**
@@ -65,51 +152,33 @@ class SynchronizationManager: NSObject
      */
     private func trySendingNextSyncRequestInQueue() -> Bool
     {
-        guard let (request, successfulRequestBlock, failureRequestBlock, associatedObject) = pendingRequestsQueue.first else { return false }
+        guard let pendingRequest = pendingRequestsQueue.first else { return false }
         
         do
         {
-            let responseDictionary = try ConnectionManager.sendSyncRequest(request)!
+            guard let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request) else
+            {
+                pendingRequest.failureRequestBlock?(error: ConnectionManagerCompoundError(error:nil, request:pendingRequest.request))
+                return false
+            }
             
             pendingRequestsQueue.removeFirst()
             
             let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["updated_on"] as! String)!
             
-            if serverLastUpdatedOn < associatedObject.lastUpdatedOn { return true }
+            if serverLastUpdatedOn < pendingRequest.associatedObject.lastUpdatedOn { return true }
             
-            successfulRequestBlock?(JSONResponse: responseDictionary)
+            pendingRequest.successfulRequestBlock?(JSONResponse: responseDictionary)
             return true
         }
         catch
         {
-            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
-            
+            pendingRequest.failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:pendingRequest.request))
             return false
         }
     }
     
     // MARK: Requests
-    
-    /**
-        Tries the given request and adds the request to the queue in case it fails.
-    
-        - parameter request: NSURLRequest that was attempted
-    
-        - parameter successfulRequestBlock: Closure to be executed in case of success when reattempting the request.
-        - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
-        - parameter associatedObject: Object associated with the request (For example, the free time period that was going to be updated).
-    */
-    func sendAsyncRequestToURL(URL: NSURL, usingMethod method:HTTPMethod, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
-    {
-        let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
-            
-            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
-            
-            self.addFailedRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
-        }
-        
-        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: method, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
-    }
     
     /**
     Tries the given request and adds the request to the queue in case it fails.
@@ -126,7 +195,15 @@ class SynchronizationManager: NSObject
             
             failureRequestBlock?(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
             
-            self.addFailedRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
+            self.addPendingRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
+        }
+        
+        guard pendingRequestsQueue.isEmpty else
+        {
+            addPendingRequestToQueue(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
+            retryPendingRequests()
+            
+            return
         }
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
@@ -134,6 +211,7 @@ class SynchronizationManager: NSObject
     
     // MARK: Reporting
     
+    ///Reports to the server a new event added
     func reportNewEvent(newEvent: Event)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
@@ -155,6 +233,7 @@ class SynchronizationManager: NSObject
         //TODO: Change associated object
     }
     
+    ///Reports to the server an edit to an event
     func reportEventEdited(event: Event)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }
@@ -173,6 +252,7 @@ class SynchronizationManager: NSObject
         }, onFailure: nil, associatedObject: system.appUser)
     }
     
+    ///Reports to the server a deleted evet
     func reportEventDeleted(event: Event)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }

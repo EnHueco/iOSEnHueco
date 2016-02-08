@@ -87,9 +87,11 @@ class System
     func login (username: String, password: String)
     {
         let params = ["user_id":username, "password":password]
-        let URL = NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!
         
-        ConnectionManager.sendAsyncRequestToURL(URL, usingMethod: .POST, withJSONParams: params, onSuccess: { (response) -> () in
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!)
+        request.HTTPMethod = "POST"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (response) -> () in
 
             self.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             

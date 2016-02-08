@@ -40,6 +40,8 @@ pod 'ChameleonFramework/Swift'
 
 pod 'AHKActionSheet'
 
+pod 'Alamofire-Synchronous', :git => 'https://github.com/zhuangluda/Alamofire-Synchronous.git'
+
 target 'enHuecoTests' do
  
 end
