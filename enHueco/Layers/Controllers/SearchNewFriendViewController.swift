@@ -156,7 +156,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func systemDidSendFriendRequest(notification: NSNotification)
     {
-        TSMessage.showNotificationWithTitle("RequestSentConfirmation".localized(), type: TSMessageNotificationType.Success)
+        TSMessage.showNotificationWithTitle("RequestSentConfirmation".localizedUsingGeneralFile(), type: TSMessageNotificationType.Success)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
         
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
@@ -164,7 +164,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func systemDidFailToSendFriendRequest(notification: NSNotification)
     {
-        TSMessage.showNotificationWithTitle("ErrorSendingRequest".localized(), type: TSMessageNotificationType.Error)
+        TSMessage.showNotificationWithTitle("ErrorSendingRequest".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
         MRProgressOverlayView.dismissOverlayForView(view, animated: true)
     }
 

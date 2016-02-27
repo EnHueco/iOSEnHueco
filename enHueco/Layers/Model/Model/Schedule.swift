@@ -33,13 +33,13 @@ class Schedule: NSObject, NSCoding
     {
         var weekDays = [DaySchedule]()
         weekDays.append(DaySchedule(weekDayName: ""))
-        weekDays.append(DaySchedule(weekDayName: "Sunday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Monday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Tuesday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Wednesday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Thursday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Friday".localized()))
-        weekDays.append(DaySchedule(weekDayName: "Saturday".localized()))
+        weekDays.append(DaySchedule(weekDayName: "Sunday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Monday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Tuesday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Wednesday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Thursday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Friday".localizedUsingGeneralFile()))
+        weekDays.append(DaySchedule(weekDayName: "Saturday".localizedUsingGeneralFile()))
         
         self.weekDays = weekDays
     }

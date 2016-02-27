@@ -140,14 +140,29 @@ extension String
         return trimmed.isEmpty
     }
     
-    func localized() -> String
+    /**
+     Gets the localized string from the specified strings file using *self* as the key
+     
+     - parameter fileName: .strings file that contains the key
+     */
+    func localizedUsingFile(fileName: String) -> String
     {
-        return NSLocalizedString(self, comment: "")
+        return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
     
-    func localizedWithComment(comment: String) -> String
+    func localizedUsingGeneralFile() -> String
     {
-        return NSLocalizedString(self, comment: comment)
+        return localizedUsingFile("General")
+    }
+    
+    /**
+     Gets the localized string from the specified strings file using *self* as the key
+     
+     - parameter fileName: .strings file that contains the key
+     */
+    func localizedUsingFile(fileName: String, withComment comment: String) -> String
+    {
+        return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: comment)
     }
 }
 
@@ -163,6 +178,37 @@ extension UIImage
         UIGraphicsEndImageContext()
         self.init(CGImage: image.CGImage!)
     }  
+}
+
+extension ErrorType {
+    
+    /**
+     Attempts to extract a localized description that is suitable for display to the user. This
+     is determined by the domain of the error.
+     Recognized domains are NSURLErrorDomain, domains whith "com.jinglz" prefixes, and R3LPlatformErrorDomains.defaultDomain.
+     
+     - returns: Localized description or a generic uknown error description.
+     */
+    func localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage() -> String? {
+        
+        if let nserror = self as? NSError
+        {
+            let errorMessage: String
+            
+            if nserror.domain.hasPrefix("com.ncodde") || nserror.domain == NSURLErrorDomain
+            {
+                errorMessage = nserror.localizedDescription
+            }
+            else
+            {
+                errorMessage = "sorry_unknown_error".localizedUsingGeneralFile()
+            }
+            
+            return errorMessage
+        }
+        
+        return nil
+    }
 }
 
 class Wrapper<T>

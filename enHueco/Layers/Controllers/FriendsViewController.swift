@@ -64,7 +64,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func createEmptyLabel()
     {
         emptyLabel = UILabel()
-        emptyLabel.text = "NoFriendsMessage".localized()
+        emptyLabel.text = "NoFriendsMessage".localizedUsingGeneralFile()
         emptyLabel.textColor = UIColor.grayColor()
         emptyLabel.textAlignment = .Center
         emptyLabel.lineBreakMode = .ByWordWrapping
@@ -133,7 +133,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             lastUpdatesFetchDate = NSDate()
             fetchUpdates()
         }
-
     }
 
     func fetchUpdates()
@@ -257,7 +256,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
-            cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localized()
+            cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localizedUsingGeneralFile()
         }
         else
         {

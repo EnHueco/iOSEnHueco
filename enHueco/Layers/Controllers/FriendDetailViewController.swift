@@ -150,7 +150,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
         
-        menu.titlesAndIcons = [("Call".localized(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("Options".localized(), UIImage(named: "sliders")!)]
+        menu.titlesAndIcons = [("Call".localizedUsingGeneralFile(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("Options".localizedUsingGeneralFile(), UIImage(named: "sliders")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
         
@@ -183,9 +183,19 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             
             alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
                 
-                
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
+                FriendsManager.deleteFriend(self.friend, withCompletionHandler: { (success, error) -> () in
+                    
+                    guard success && error == nil else {
+                        
+                        if let message = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                        {
+                            TSMessage.showNotificationInViewController(self, title: message, subtitle: nil, type: .Error)
+                        }
+                        return
+                    }
+                    
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
             }))
             
             alertController.addAction(UIAlertAction(title: "cancel", style: .Cancel, handler: nil))
@@ -237,7 +247,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         else
         {
             enHueco.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
-            self.recordId = abid
+                self.recordId = abid
             })
         }
     }

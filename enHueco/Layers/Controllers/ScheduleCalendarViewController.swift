@@ -54,7 +54,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
                 eventView = TKCalendarDayEventView()
             }
 
-            eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localized() : "Class".localized())
+            eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .FreeTime ? UIColor(red: 0 / 255.0, green: 150 / 255.0, blue: 245 / 255.0, alpha: 0.15) : UIColor(red: 255 / 255.0, green: 213 / 255.0, blue: 0 / 255.0, alpha: 0.15))
 

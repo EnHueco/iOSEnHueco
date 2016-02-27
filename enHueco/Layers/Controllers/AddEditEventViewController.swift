@@ -35,12 +35,12 @@ class AddEditEventViewController: UIViewController
         
         if eventToEdit != nil
         {
-            titleLabel.text = "EditEvent".localized()
+            titleLabel.text = "EditEvent".localizedUsingGeneralFile()
             embeddedTableViewController.weekDaysCell.hidden = true
         }
         else
         {
-            titleLabel.text = "AddEvent".localized()
+            titleLabel.text = "AddEvent".localizedUsingGeneralFile()
         }
     }
     
@@ -62,7 +62,7 @@ class AddEditEventViewController: UIViewController
         // If no weekdays selected
         if embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count == 0
         {
-            TSMessage.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localized(), subtitle: "", type: TSMessageNotificationType.Warning)
+            TSMessage.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), subtitle: "", type: TSMessageNotificationType.Warning)
             return
         }
         
@@ -126,7 +126,7 @@ class AddEditEventViewController: UIViewController
         }
         else
         {
-            UIAlertView(title: "CouldNotAddEventErrorMessage".localized(), message: "EventOverlapExplanation".localized(), delegate: nil, cancelButtonTitle: "OKIwillCheck".localized()).show()
+            UIAlertView(title: "CouldNotAddEventErrorMessage".localizedUsingGeneralFile(), message: "EventOverlapExplanation".localizedUsingGeneralFile(), delegate: nil, cancelButtonTitle: "OKIwillCheck".localizedUsingGeneralFile()).show()
         }
     }
     

@@ -77,7 +77,7 @@ import UIKit
             
             guard success && error == nil else {
                 
-                TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localized(), type: TSMessageNotificationType.Error)
+                TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
                 MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
 
                 return

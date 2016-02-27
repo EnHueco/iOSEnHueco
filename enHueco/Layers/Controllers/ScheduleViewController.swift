@@ -84,7 +84,7 @@ class ScheduleViewController: UIViewController
         
         if undoManager != nil && !undoManager!.undoing
         {
-            undoManager?.setActionName("AddEvents".localized())
+            undoManager?.setActionName("AddEvents".localizedUsingGeneralFile())
         }
         
         scheduleCalendarViewController.reloadData()
@@ -102,7 +102,7 @@ class ScheduleViewController: UIViewController
         
         if undoManager != nil && !undoManager!.undoing
         {
-            undoManager?.setActionName("EditEvent".localized())
+            undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
         }
         
         scheduleCalendarViewController.reloadData()
@@ -121,7 +121,7 @@ class ScheduleViewController: UIViewController
         
         if undoManager != nil && !undoManager!.undoing
         {
-            undoManager?.setActionName("DeleteEvents".localized())
+            undoManager?.setActionName("DeleteEvents".localizedUsingGeneralFile())
         }
         
         scheduleCalendarViewController.reloadData()
