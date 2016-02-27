@@ -88,7 +88,6 @@
 		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
 		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; };
 		F183F83D1C7FF90900390CF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F183F83C1C7FF90900390CF7 /* main.m */; };
-		F183F83F1C80775400390CF7 /* FriendsInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */; };
 		F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */; };
 		F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8421C80781400390CF7 /* PersistenceManager.swift */; };
 		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
@@ -287,7 +286,6 @@
 		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
 		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizationManager.swift; sourceTree = "<group>"; };
 		F183F83C1C7FF90900390CF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInformationManager.swift; sourceTree = "<group>"; };
 		F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserInformationManager.swift; sourceTree = "<group>"; };
 		F183F8421C80781400390CF7 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
@@ -720,7 +718,6 @@
 			children = (
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
-				F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
 				F183F8481C81454C00390CF7 /* EnHuecoStateManager.swift */,
 				F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */,
@@ -1058,7 +1055,6 @@
 				F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */,
-				F183F83F1C80775400390CF7 /* FriendsInformationManager.swift in Sources */,
 				F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */,
 				F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */,
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
