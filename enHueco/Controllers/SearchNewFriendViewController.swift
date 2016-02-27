@@ -25,8 +25,8 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         view.backgroundColor = UIColor.clearColor()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidSendFriendRequest:"), name:EHSystemNotification.SystemDidSendFriendRequest, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToSendFriendRequest:"), name:EHSystemNotification.SystemDidFailToSendFriendRequest, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidSendFriendRequest:"), name:EHSystemNotification.SystemDidSendFriendRequest, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToSendFriendRequest:"), name:EHSystemNotification.SystemDidFailToSendFriendRequest, object: enHueco)
         
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
@@ -114,7 +114,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
         
-        system.appUser.sendFriendRequestToUser(friend)
+        FriendsManager.sendFriendRequestToUser(friend)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -147,7 +147,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func timeToSearch(timer: NSTimer)
     {
-        system.searchUsersWithText(searchText) { (results) -> () in
+        FriendsManager.searchUsersWithText(searchText) { (results) -> () in
             
             self.searchResults = results
             self.searchResultsTableView.reloadData()

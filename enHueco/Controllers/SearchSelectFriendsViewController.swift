@@ -22,7 +22,7 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
     weak var delegate: SearchSelectFriendsViewControllerDelegate?
     
     //For safety and performance (because friends is originally a dictionary)
-    var filteredFriends = Array(system.appUser.friends.values)
+    var filteredFriends = Array(enHueco.appUser.friends.values)
     
     var selectedCells = [NSIndexPath : AnyObject]()
     
@@ -101,7 +101,7 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filteredFriends = Array(system.appUser.friends.values)
+        filteredFriends = Array(enHueco.appUser.friends.values)
         
         if !searchText.isBlank()
         {

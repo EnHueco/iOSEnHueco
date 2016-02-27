@@ -13,7 +13,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     /**
         Schedule to be displayed. Defaults to AppUser's
     */
-    var schedule: Schedule! = system.appUser.schedule
+    var schedule: Schedule! = enHueco.appUser.schedule
 
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -84,7 +84,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
 
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
     {
-        guard schedule === system.appUser.schedule else {
+        guard schedule === enHueco.appUser.schedule else {
             return
         }
 

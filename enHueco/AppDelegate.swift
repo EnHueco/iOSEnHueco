@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         
-        try? system.persistData()
+        try? PersistenceManager.persistData()
         SynchronizationManager.sharedManager().persistData()
     }
 
@@ -79,10 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         
         FBSDKAppEvents.activateApp()
         
-        if let appUser = system.appUser
+        PersistenceManager.loadDataFromPersistence()
+        
+        if enHueco.appUser != nil
         {
-            appUser.fetchUpdatesForAppUserAndSchedule()
-            appUser.fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.fetchUpdatesForAppUserAndSchedule()
+            FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
             SynchronizationManager.sharedManager().retryPendingRequests()
         }
     }
@@ -95,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
     {
-        let (currentFreeTimePeriod, nextFreeTimePeriod) = system.appUser.currentAndNextFreeTimePeriods()
+        let (currentFreeTimePeriod, nextFreeTimePeriod) = enHueco.appUser.currentAndNextFreeTimePeriods()
         
         if currentFreeTimePeriod != nil
         {
@@ -134,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
+            let friendsCurrentlyFreeAndFreeTimePeriods = EnHuecoStateManager.currentlyAvailableFriends()
             
             var friendsArray = [[String : AnyObject]]()
             
@@ -164,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
         
-        let friendsToNotifyToUser = system.appUser.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        let friendsToNotifyToUser = EnHuecoStateManager.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
         
         let currentDate = NSDate()
         

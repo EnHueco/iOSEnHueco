@@ -37,7 +37,7 @@ class ViewQRViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+        let code = QRCode(enHueco.appUser.stringEncodedUserRepresentation())
         QRImageView.image = code?.image
         
         UIView.animateWithDuration(0.5)

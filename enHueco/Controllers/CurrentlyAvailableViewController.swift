@@ -100,7 +100,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             }
         })
         
-        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
 
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
@@ -122,21 +122,21 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func imInvisibleButtonPressed(sender: UIButton)
     {
-        system.appUser.invisible = !system.appUser.invisible
+        enHueco.appUser.invisible = !enHueco.appUser.invisible
         
         UIView.animateWithDuration(0.2)
         {
-            self.imInvisibleBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+            self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
         }
     }
     
     func imAvailableButtonPressed(sender: UIButton)
     {
-        system.appUser.invisible = false
+        enHueco.appUser.invisible = false
         
         UIView.animateWithDuration(0.2)
         {
-            self.imAvailableBarItem.customView!.tintColor = system.appUser.invisible ? UIColor(red: 220 / 255.0, green: 170 / 255.0, blue: 10 / 255.0, alpha: 1) : UIColor.whiteColor()
+            self.imAvailableBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220 / 255.0, green: 170 / 255.0, blue: 10 / 255.0, alpha: 1) : UIColor.whiteColor()
         }
         
         let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
@@ -145,14 +145,14 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func resetDataArrays()
     {
-        filteredFriendsAndFreeTimePeriods = system.appUser.currentlyAvailableFriends()
+        filteredFriendsAndFreeTimePeriods = EnHuecoStateManager.currentlyAvailableFriends()
         
-        if let instantFreeTimePeriod = system.appUser.schedule.instantFreeTimePeriod
+        if let instantFreeTimePeriod = enHueco.appUser.schedule.instantFreeTimePeriod
         {
-            filteredFriendsAndFreeTimePeriods.insert((system.appUser, instantFreeTimePeriod), atIndex: 0)
+            filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }
         
-        filteredSoonFreefriendsAndFreeTimePeriods = system.appUser.soonAvailableFriendsWithinTimeInterval(3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = EnHuecoStateManager.soonAvailableFriendsWithinTimeInterval(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView()
@@ -257,7 +257,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         
-        if friend === system.appUser
+        if friend === enHueco.appUser
         {
             cell.setInstantFreeTimeIconVisibility(visible: true)
             
@@ -334,24 +334,24 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     // MARK: SW Table View
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
-        if let cell = cell as? AvailableFriendCell, friend = system.appUser.friends[cell.friendUsername!]
+        if let cell = cell as? AvailableFriendCell, friend = enHueco.appUser.friends[cell.friendUsername!]
         {
-            if friend === system.appUser
+            if friend === enHueco.appUser
             {
-                system.appUser.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
+                EnHuecoStateManager.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
                     
                 })
             }
             else if index == 0
             {
-                system.getFriendABID(friend.phoneNumber, onSuccess: {
+                enHueco.getFriendABID(friend.phoneNumber, onSuccess: {
                     (abid) -> () in
-                    system.whatsappMessageTo(abid)
+                    enHueco.whatsappMessageTo(abid)
                 })
             }
             else if index == 1
             {
-                system.callFriend(friend.phoneNumber)
+                enHueco.callFriend(friend.phoneNumber)
             }
         }
         cell.hideUtilityButtonsAnimated(true)

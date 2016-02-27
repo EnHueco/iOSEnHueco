@@ -24,21 +24,20 @@ class ImagePersistenceManager{
         
     }
     
-    static func getDocumentsURL() -> NSURL {
+    static func getDocumentsURL() -> NSURL
+    {
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         return documentsURL
     }
     
-    static func fileInDocumentsDirectory(filename: String) -> String {
-        
+    static func fileInDocumentsDirectory(filename: String) -> String
+    {
         let fileURL = ImagePersistenceManager.getDocumentsURL().URLByAppendingPathComponent(filename)
         return fileURL.path!
     }
     
-    static func saveImage (data: NSData, path: String, onSuccess: () -> ()){
-        
-//        let pngImageData = UIImagePNGRepresentation(image)
-        //let jpgImageData = UIImageJPEGRepresentation(image, 1.0)   // if you want to save as JPEG
+    static func saveImage (data: NSData, path: String, onSuccess: () -> ())
+    {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
         {
             let result = data.writeToFile(path, atomically: true)
@@ -49,8 +48,8 @@ class ImagePersistenceManager{
         }
     }
     
-    static func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ()) {
-        
+    static func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ())
+    {
         var image : UIImage? = nil
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
         {

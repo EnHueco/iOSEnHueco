@@ -21,7 +21,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         super.viewDidLoad()
                 
-        let code = QRCode(system.appUser.stringEncodedUserRepresentation())
+        let code = QRCode(enHueco.appUser.stringEncodedUserRepresentation())
         appUserQRImageView.image = code?.image
     }
     
@@ -55,7 +55,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         dismissViewControllerAnimated(true, completion: nil)
         
-        try! system.appUser.addFriendFromStringEncodedFriendRepresentation(result)
+        try! FriendsManager.addFriendFromStringEncodedFriendRepresentation(result)
         
         navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }

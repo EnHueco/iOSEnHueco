@@ -23,7 +23,7 @@ struct ConnectionManagerCompoundError: ErrorType
 
 typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
-typealias ConnectionManagerFailureRequestBlock = (error: ConnectionManagerCompoundError) -> ()
+typealias ConnectionManagerFailureRequestBlock = (compoundError: ConnectionManagerCompoundError) -> ()
 
 class ConnectionManager: NSObject
 {
@@ -67,7 +67,7 @@ class ConnectionManager: NSObject
                 else if let error = error
                 {
                     print("\(error.code) : \(error)")
-                    failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:request))
+                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:request))
                 }
             }
         }
@@ -87,7 +87,7 @@ class ConnectionManager: NSObject
                     
                     if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
                     
-                    failureRequestBlock?(error: ConnectionManagerCompoundError(error:response.result.error, request:request))
+                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:response.result.error, request:request))
                     return
                 }
                 

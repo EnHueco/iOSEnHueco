@@ -42,4 +42,9 @@ class EHSynchronizable: NSObject, NSCoding
         coder.encodeObject(ID, forKey: "ID")
         coder.encodeObject(lastUpdatedOn, forKey: "lastUpdatedOn")
     }
+    
+    func isOutdatedBasedOnDate(date: NSDate) -> Bool
+    {
+        return date.compare(lastUpdatedOn).rawValue > 0
+    }
 }

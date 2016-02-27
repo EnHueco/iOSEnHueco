@@ -20,15 +20,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var lastUpdatesFetchDate = NSDate()
 
     //For safety and performance (because friends is originally a dictionary)
-    var filteredFriends = Array(system.appUser.friends.values)
+    var filteredFriends = Array(enHueco.appUser.friends.values)
     
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
         //topBarBackgroundView.backgroundColor = EHInterfaceColor.homeTopBarsColor
 
@@ -114,7 +114,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         })
 
-        //friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
+        //friendRequestsNotificationsIndicator.hidden = enHueco.appUser.incomingFriendRequests.isEmpty
 
         reloadFriendsAndTableView()
     }
@@ -138,8 +138,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func fetchUpdates()
     {
-        system.appUser.fetchUpdatesForFriendsAndFriendSchedules()
-        system.appUser.fetchUpdatesForFriendRequests()
+        FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.fetchUpdatesForFriendRequests()
     }
     
     func friendRequestsButtonPressed(sender: UIButton)
@@ -164,7 +164,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filteredFriends = Array(system.appUser.friends.values)
+        filteredFriends = Array(enHueco.appUser.friends.values)
         
         if !searchText.isBlank()
         {
@@ -176,7 +176,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func reloadFriendsAndTableView()
     {
-        filteredFriends = Array(system.appUser.friends.values)
+        filteredFriends = Array(enHueco.appUser.friends.values)
 
         if filteredFriends.isEmpty
         {
@@ -210,7 +210,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
     {
-        //friendRequestsNotificationsIndicator.hidden = system.appUser.incomingFriendRequests.isEmpty
+        //friendRequestsNotificationsIndicator.hidden = enHueco.appUser.incomingFriendRequests.isEmpty
     }
 
     // MARK: TableView Delegate

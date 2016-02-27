@@ -169,11 +169,11 @@ class ProximityManager: NSObject
             return
         }
         
-        system.appUser.currentBSSID = currentBSSID
+        enHueco.appUser.currentBSSID = currentBSSID
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.LocationReportSegment)!)
-        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
         
         let params = ["bssid" : currentBSSID]
@@ -182,7 +182,7 @@ class ProximityManager: NSObject
             
             for friendDictionary in JSONResponse as! [[String : AnyObject]]
             {
-                system.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String).uppercaseString
+                enHueco.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String).uppercaseString
             }
                     
             NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdateResponse")
@@ -204,7 +204,7 @@ class ProximityManager: NSObject
     {
         if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         {
-            let (currentFreeTimePeriod, nextFreeTimePeriod) = system.appUser.currentAndNextFreeTimePeriods()
+            let (currentFreeTimePeriod, nextFreeTimePeriod) = enHueco.appUser.currentAndNextFreeTimePeriods()
             
             if currentFreeTimePeriod != nil
             {

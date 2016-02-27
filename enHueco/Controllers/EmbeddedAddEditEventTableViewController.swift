@@ -61,7 +61,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
             
-            let indexSet = NSIndexSet(index: system.appUser.schedule.weekDays.indexOf(eventToEdit.daySchedule)!-1)
+            let indexSet = NSIndexSet(index: enHueco.appUser.schedule.weekDays.indexOf(eventToEdit.daySchedule)!-1)
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
             
             if eventToEdit.type == .FreeTime
@@ -193,7 +193,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        return system.appUser.schedule.weekDays[row+2].weekDayName
+        return enHueco.appUser.schedule.weekDays[row+2].weekDayName
     }
     
     // MARK Buttons

@@ -55,7 +55,7 @@ class ImportProfileImageViewController: UIViewController
                         return
                     }
                     
-                    system.appUser.imageURL = NSURL(string: imageURL)
+                    enHueco.appUser.imageURL = NSURL(string: imageURL)
                     
                     self.goToMainTabViewController()
                 }

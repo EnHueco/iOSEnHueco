@@ -28,13 +28,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
         myQRButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
-        firstNamesLabel.text = system.appUser.firstNames
-        lastNamesLabel.text = system.appUser.lastNames
+        firstNamesLabel.text = enHueco.appUser.firstNames
+        lastNamesLabel.text = enHueco.appUser.lastNames
 
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
     }
 
     override func viewDidLayoutSubviews()
@@ -57,8 +57,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        system.appUser.fetchAppUser()
-        system.appUser.fetchUpdatesForAppUserAndSchedule()
+        AppUserInformationManager.fetchAppUser()
+        AppUserInformationManager.fetchUpdatesForAppUserAndSchedule()
     }
     
     func updateButtonColors()
@@ -160,7 +160,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.imageImageView.hidden = true
                     self.backgroundImageView.hidden = true
                     
-                    system.appUser.downloadProfilePicture()
+                    AppUserInformationManager.downloadProfilePicture()
                 }
 
                 self.imageImageView.contentMode = .ScaleAspectFill
@@ -308,7 +308,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
-        system.appUser.pushProfilePicture(croppedImage)
+        AppUserInformationManager.pushProfilePicture(croppedImage)
         startAnimatingImageLoadingIndicator()
         controller.dismissViewControllerAnimated(true, completion: nil)
     }

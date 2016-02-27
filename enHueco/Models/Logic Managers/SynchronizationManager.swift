@@ -158,7 +158,7 @@ class SynchronizationManager: NSObject, NSCoding
         {
             guard let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request) else
             {
-                pendingRequest.failureRequestBlock?(error: ConnectionManagerCompoundError(error:nil, request:pendingRequest.request))
+                pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:nil, request:pendingRequest.request))
                 return false
             }
             
@@ -173,7 +173,7 @@ class SynchronizationManager: NSObject, NSCoding
         }
         catch
         {
-            pendingRequest.failureRequestBlock?(error: ConnectionManagerCompoundError(error:error, request:pendingRequest.request))
+            pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:pendingRequest.request))
             return false
         }
     }
@@ -193,7 +193,7 @@ class SynchronizationManager: NSObject, NSCoding
     {
         let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
             
-            failureRequestBlock?(error: ConnectionManagerCompoundError(error:error.error, request:error.request))
+            failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error.error, request:error.request))
             
             self.addPendingRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
         }
@@ -215,11 +215,11 @@ class SynchronizationManager: NSObject, NSCoding
     func reportNewEvent(newEvent: Event)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "POST"
         
-        let params = newEvent.toJSONObject(associatingUser: system.appUser)
+        let params = newEvent.toJSONObject(associatingUser: enHueco.appUser)
         
         sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
             
@@ -228,7 +228,7 @@ class SynchronizationManager: NSObject, NSCoding
             newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported new event")
             
-        }, onFailure: nil, associatedObject: system.appUser)
+        }, onFailure: nil, associatedObject: enHueco.appUser)
     
         //TODO: Change associated object
     }
@@ -239,17 +239,17 @@ class SynchronizationManager: NSObject, NSCoding
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
 
-        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: system.appUser), onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), onSuccess: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported event edited")
 
-        }, onFailure: nil, associatedObject: system.appUser)
+        }, onFailure: nil, associatedObject: enHueco.appUser)
     }
     
     ///Reports to the server a deleted evet
@@ -258,15 +258,15 @@ class SynchronizationManager: NSObject, NSCoding
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(system.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(system.appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "DELETE"
 
         sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             
             print("Reported event deleted")
             
-        }, onFailure: nil, associatedObject: system.appUser)
+        }, onFailure: nil, associatedObject: enHueco.appUser)
     }    
 }
 

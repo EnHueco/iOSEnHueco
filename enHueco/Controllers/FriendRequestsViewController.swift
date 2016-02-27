@@ -17,9 +17,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     {
         super.viewDidLoad()
                 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAcceptFriendRequest:"), name:EHSystemNotification.SystemDidAcceptFriendRequest, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToAcceptFriendRequest:"), name:EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAcceptFriendRequest:"), name:EHSystemNotification.SystemDidAcceptFriendRequest, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToAcceptFriendRequest:"), name:EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
         //view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
         
@@ -38,7 +38,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        system.appUser.fetchUpdatesForFriendRequests()
+        FriendsManager.fetchUpdatesForFriendRequests()
     }
     
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -76,11 +76,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     {
         if incomingOutgoingSegmentedControl.selectedSegmentIndex == 0
         {
-            return system.appUser.incomingFriendRequests.count
+            return enHueco.appUser.incomingFriendRequests.count
         }
         else
         {
-            return system.appUser.outgoingFriendRequests.count
+            return enHueco.appUser.outgoingFriendRequests.count
         }
     }
     
@@ -90,7 +90,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         {
             let cell = requestsTableView.dequeueReusableCellWithIdentifier("IncomingFriendRequestCell") as! IncomingFriendRequestCell
             
-            let requestFriend = system.appUser.incomingFriendRequests[indexPath.row]
+            let requestFriend = enHueco.appUser.incomingFriendRequests[indexPath.row]
             
             cell.friendNameLabel.text = requestFriend.name
         
@@ -157,11 +157,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     func didPressAcceptButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
     {
         let indexPath = requestsTableView.indexPathForCell(cell)!
-        let requestFriend = system.appUser.incomingFriendRequests[indexPath.row]
+        let requestFriend = enHueco.appUser.incomingFriendRequests[indexPath.row]
 
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        system.appUser.acceptFriendRequestFromFriend(requestFriend)
+        FriendsManager.acceptFriendRequestFromFriend(requestFriend)
     }
     
     func didPressDiscardButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell)

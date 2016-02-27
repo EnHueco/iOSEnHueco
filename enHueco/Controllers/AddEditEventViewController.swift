@@ -93,7 +93,7 @@ class AddEditEventViewController: UIViewController
             let globalStartHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalStartHourDateInWeekday)
             let globalEndHourComponentsInWeekday = globalCalendar.components(weekdayHourMinute, fromDate: globalEndHourDateInWeekday)
             
-            let daySchedule = system.appUser.schedule.weekDays[index+1]
+            let daySchedule = enHueco.appUser.schedule.weekDays[index+1]
             
             let type: EventType = (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? .FreeTime : .Class)
                 

@@ -176,7 +176,7 @@ class User: EHSynchronizable
     /// When current BSSID is set, checks if user is near the App User and updates the value of the isNearby property.
     func refreshIsNearby()
     {
-        if let appUserBSSID = system.appUser.currentBSSID, currentBSSID = currentBSSID
+        if let appUserBSSID = enHueco.appUser.currentBSSID, currentBSSID = currentBSSID
         {
             isNearby = ProximityManager.sharedManager().wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
         }

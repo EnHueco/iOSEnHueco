@@ -87,6 +87,14 @@
 		F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */; };
 		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
 		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; };
+		F183F83D1C7FF90900390CF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F183F83C1C7FF90900390CF7 /* main.m */; };
+		F183F83F1C80775400390CF7 /* FriendsInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */; };
+		F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */; };
+		F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8421C80781400390CF7 /* PersistenceManager.swift */; };
+		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
+		F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8461C81441600390CF7 /* FriendsManager.swift */; };
+		F183F8491C81454C00390CF7 /* EnHuecoStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* EnHuecoStateManager.swift */; };
+		F183F84D1C814E3A00390CF7 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
 		F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */; };
@@ -99,7 +107,7 @@
 		F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */; };
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
-		F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* System.swift */; };
+		F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
@@ -182,7 +190,7 @@
 		F10A47431C371EB30066D4DF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Developer/Facebook SDK iOS/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportProfileImageViewController.swift; sourceTree = "<group>"; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
-		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = Other/ConnectionManager.swift; sourceTree = "<group>"; };
+		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		F113D1691B7CDDEB00325209 /* DaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
@@ -277,7 +285,15 @@
 		F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettingsViewController.swift; sourceTree = "<group>"; };
 		F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsPrivacySettingsViewController.swift; sourceTree = "<group>"; };
 		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
-		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SynchronizationManager.swift; path = Other/SynchronizationManager.swift; sourceTree = "<group>"; };
+		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizationManager.swift; sourceTree = "<group>"; };
+		F183F83C1C7FF90900390CF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInformationManager.swift; sourceTree = "<group>"; };
+		F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUserInformationManager.swift; sourceTree = "<group>"; };
+		F183F8421C80781400390CF7 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		F183F8461C81441600390CF7 /* FriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsManager.swift; sourceTree = "<group>"; };
+		F183F8481C81454C00390CF7 /* EnHuecoStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoStateManager.swift; sourceTree = "<group>"; };
+		F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
 		F1B343611B9BBFAE00EED205 /* CIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColorExtension.swift; sourceTree = "<group>"; };
@@ -291,7 +307,7 @@
 		F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyFreeNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		F1BA030A1B570BFC00DEF9C5 /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHueco.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1CA00B81BB20CD90050D710 /* MultiSelectSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiSelectSegmentedControl.h; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.h; sourceTree = "<group>"; };
 		F1CA00B91BB20CD90050D710 /* MultiSelectSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiSelectSegmentedControl.m; path = MultiSelectSegmentedControl/MultiSelectSegmentedControl.m; sourceTree = "<group>"; };
@@ -463,6 +479,7 @@
 		F1229BCD1A74947200C4FDE2 = {
 			isa = PBXGroup;
 			children = (
+				F183F83C1C7FF90900390CF7 /* main.m */,
 				F1229BD81A74947200C4FDE2 /* enHueco */,
 				F1229BF11A74947200C4FDE2 /* enHuecoTests */,
 				F126ADF91BE4836800AE561D /* enHueco watchOS */,
@@ -542,8 +559,8 @@
 		F1229C2C1A7495A200C4FDE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F1C8E5351BEBCA35007673BC /* Logic Managers */,
 				F1827F6D1BC35D91002ECB64 /* Main Classes */,
-				F1C8E5351BEBCA35007673BC /* Managers */,
 				F1827F6E1BC35DAC002ECB64 /* Other */,
 			);
 			name = Model;
@@ -655,7 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */,
-				F1BA030A1B570BFC00DEF9C5 /* System.swift */,
+				F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */,
 				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
 				F113D1611B7CDD3A00325209 /* User.swift */,
 				F113D1651B7CDD6200325209 /* Schedule.swift */,
@@ -698,15 +715,22 @@
 			name = "Navigation and Split View Controllers";
 			sourceTree = "<group>";
 		};
-		F1C8E5351BEBCA35007673BC /* Managers */ = {
+		F1C8E5351BEBCA35007673BC /* Logic Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F183F8441C8078F400390CF7 /* AccountManager.swift */,
+				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
+				F183F83E1C80775400390CF7 /* FriendsInformationManager.swift */,
+				F183F8461C81441600390CF7 /* FriendsManager.swift */,
+				F183F8481C81454C00390CF7 /* EnHuecoStateManager.swift */,
+				F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */,
+				F183F8421C80781400390CF7 /* PersistenceManager.swift */,
 				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
 				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityManager.swift */,
 				F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */,
 			);
-			name = Managers;
+			path = "Logic Managers";
 			sourceTree = "<group>";
 		};
 		F1CA00B41BB20C900050D710 /* MultiSelectSegmentedControl */ = {
@@ -995,15 +1019,18 @@
 				F11B03661BA52BD900ADD580 /* UILabel+TKCategory.m in Sources */,
 				F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */,
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
-				F1BA030B1B570BFC00DEF9C5 /* System.swift in Sources */,
+				F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */,
+				F183F83D1C7FF90900390CF7 /* main.m in Sources */,
 				F1B8AD5C1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift in Sources */,
 				F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */,
+				F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */,
 				F11B03571BA52BB400ADD580 /* TKGradientView.m in Sources */,
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
 				F11B034E1BA52B5600ADD580 /* NSDate+TKCategory.m in Sources */,
 				F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */,
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
 				F11B03541BA52BAD00ADD580 /* TKGlobal.m in Sources */,
+				F183F84D1C814E3A00390CF7 /* ScheduleManager.swift in Sources */,
 				F1B343681B9BBFAE00EED205 /* QRCode.swift in Sources */,
 				F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
@@ -1026,10 +1053,12 @@
 				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
 				F1ED50C61BEAFBBC00533557 /* CSwiftV.swift in Sources */,
 				F1B343691B9BBFAE00EED205 /* UIImageViewExtension.swift in Sources */,
+				F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */,
 				F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */,
 				F1CA00BA1BB20CD90050D710 /* MultiSelectSegmentedControl.m in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */,
+				F183F83F1C80775400390CF7 /* FriendsInformationManager.swift in Sources */,
 				F11B035D1BA52BBE00ADD580 /* UIDevice+TKCategory.m in Sources */,
 				F1B343661B9BBFAE00EED205 /* CIColorExtension.swift in Sources */,
 				F1179E6C1B9BB1E000B04400 /* AddFriendViewController.swift in Sources */,
@@ -1059,6 +1088,9 @@
 				F1EB0B921BD1CA3E00D5DF01 /* ListMethods.swift in Sources */,
 				F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */,
 				F1B8AD5E1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift in Sources */,
+				F183F8491C81454C00390CF7 /* EnHuecoStateManager.swift in Sources */,
+				F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */,
+				F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

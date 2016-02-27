@@ -23,9 +23,6 @@ import UIKit
     {
         navigationController?.navigationBarHidden = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidLogin:"), name: EHSystemNotification.SystemDidLogin, object: system)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemCouldNotLoginWithError:"), name: EHSystemNotification.SystemCouldNotLoginWithError, object: system)
-
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
 
@@ -41,7 +38,7 @@ import UIKit
     {
         super.viewDidAppear(animated)
 
-        if system.appUser != nil
+        if enHueco.appUser != nil
         {
             goToMainTabViewController()
         }
@@ -59,9 +56,9 @@ import UIKit
         if usernameTextField.text == "test" && passwordTextField.text == "test"
         {
             // Test
-            system.createTestAppUser()
+            enHueco.createTestAppUser()
 
-            if system.appUser.imageURL == nil
+            if enHueco.appUser.imageURL == nil
             {
                 navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
             }
@@ -76,7 +73,27 @@ import UIKit
 
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        system.login(username, password: password)
+        AccountManager.loginWithUsername(username, password: password) { (success, error) -> Void in
+            
+            guard success && error == nil else {
+                
+                TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localized(), type: TSMessageNotificationType.Error)
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+
+                return
+            }
+            
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            
+            if enHueco.appUser.imageURL == nil
+            {
+                self.navigationController?.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+            }
+            else
+            {
+                self.goToMainTabViewController()
+            }
+        }
     }
 
     func goToMainTabViewController()
@@ -89,32 +106,6 @@ import UIKit
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         self.view.endEditing(true)
-    }
-
-    // MARK: Notification Center
-
-    func systemDidLogin(notification: NSNotification)
-    {
-        NSThread.sleepForTimeInterval(0.5)
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-        
-        if system.appUser.imageURL == nil
-        {
-            navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
-        }
-        else
-        {
-            goToMainTabViewController()
-        }
-    }
-
-    func systemCouldNotLoginWithError(notification: NSNotification)
-    {
-        //TODO: Show error
-        NSThread.sleepForTimeInterval(0.5)
-
-        TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localized(), type: TSMessageNotificationType.Error)
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
     }
 
     // MARK: Keyboard

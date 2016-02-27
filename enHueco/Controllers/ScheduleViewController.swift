@@ -19,7 +19,7 @@ class ScheduleViewController: UIViewController
     /**
      Schedule to be displayed. Defaults to AppUser's
      */
-    var schedule: Schedule = system.appUser.schedule
+    var schedule: Schedule = enHueco.appUser.schedule
     
     ///Reference to the embeded calendar view controller
     var scheduleCalendarViewController: ScheduleCalendarViewController!
@@ -46,7 +46,7 @@ class ScheduleViewController: UIViewController
     {
         navigationController?.navigationBarHidden = true
        
-        if schedule !== system.appUser.schedule
+        if schedule !== enHueco.appUser.schedule
         {
             importCalendarButton.hidden = true
             addEventButton.hidden = true
@@ -55,7 +55,7 @@ class ScheduleViewController: UIViewController
     
     override func viewDidAppear(animated: Bool)
     {
-        if schedule === system.appUser.schedule
+        if schedule === enHueco.appUser.schedule
         {
             becomeFirstResponder()
         }
@@ -68,7 +68,7 @@ class ScheduleViewController: UIViewController
     
     override func canBecomeFirstResponder() -> Bool
     {
-        return schedule === system.appUser.schedule
+        return schedule === enHueco.appUser.schedule
     }
     
     ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.

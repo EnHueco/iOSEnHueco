@@ -167,13 +167,13 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         if let number = friend.phoneNumber where index == 0
         {
-            system.callFriend(number)
+            enHueco.callFriend(number)
             
             controller.dismissViewControllerAnimated(true, completion: nil)
         }
         else if let recordId = recordId where index == 1
         {
-            system.whatsappMessageTo(recordId)
+            enHueco.whatsappMessageTo(recordId)
             
             controller.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -202,7 +202,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     
     @IBAction func whatsappMessage(sender: UIButton)
     {
-        system.whatsappMessageTo(self.recordId!)
+        enHueco.whatsappMessageTo(self.recordId!)
     }
     
     @IBAction func viewSchedule(sender: UIButton)
@@ -224,7 +224,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         if let num = friend.phoneNumber
         {
-            system.callFriend(num)
+            enHueco.callFriend(num)
         }
     }
 
@@ -236,7 +236,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         }
         else
         {
-            system.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
+            enHueco.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
             self.recordId = abid
             })
         }

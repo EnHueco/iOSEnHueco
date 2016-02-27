@@ -30,11 +30,11 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         
         clearsSelectionOnViewWillAppear = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: system)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
         
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
-        phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
+        phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
         
         let lastBackgroundUpdate = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdate")).descriptionWithLocale(NSLocale.currentLocale())
         let lastBackgroundUpdateResponse = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdateResponse")).descriptionWithLocale(NSLocale.currentLocale())
@@ -76,7 +76,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         
         if cell ==  logoutCell
         {
-            system.logOut()
+            AccountManager.logOut()
             
             if let loginViewController = storyboard?.instantiateViewControllerWithIdentifier("MainNavigationController")
             {
@@ -97,14 +97,14 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         phoneNumberCell.setSelected(false, animated: true)
         if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty
         {
-            system.appUser.phoneNumber = newNumber
-            system.appUser.pushPhoneNumber(newNumber)
+            enHueco.appUser.phoneNumber = newNumber
+            enHueco.appUser.pushPhoneNumber(newNumber)
         }
     }
     func didReceiveAppUserWasUpdated(notification : NSNotification)
     {
         UIView.animateWithDuration(0.4, animations: { () -> Void in
-            self.phoneNumberCell.textLabel?.text = system.appUser.phoneNumber
+            self.phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
             }, completion: nil)
     }
 }

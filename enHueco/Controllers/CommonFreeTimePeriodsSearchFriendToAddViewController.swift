@@ -17,7 +17,7 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UI
 {
     @IBOutlet weak var resultsTableView: UITableView!
     
-    var filteredFriends = Array(system.appUser.friends.values)
+    var filteredFriends = Array(enHueco.appUser.friends.values)
     
     weak var delegate: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate?
     
@@ -61,11 +61,11 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UI
     {
         if searchText == ""
         {
-            filteredFriends = Array(system.appUser.friends.values)
+            filteredFriends = Array(enHueco.appUser.friends.values)
         }
         else
         {
-            filteredFriends = Array(system.appUser.friends.values).filter({(user: User) -> Bool in
+            filteredFriends = Array(enHueco.appUser.friends.values).filter({(user: User) -> Bool in
                 
                 return user.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || user.username.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
             })

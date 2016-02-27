@@ -38,7 +38,7 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
         scheduleViewController.schedule = Schedule()
         
         switchToSchedule()
-        addFriendToSelectedFriendsAndReloadData(system.appUser)
+        addFriendToSelectedFriendsAndReloadData(enHueco.appUser)
     }
     
     override func viewWillAppear(animated: Bool)
@@ -56,7 +56,7 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
     
     func prepareInfoAndReloadScheduleData()
     {
-        let commonFreeTimePeriodsSchedule = system.appUser.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
+        let commonFreeTimePeriodsSchedule = ScheduleManager.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
         scheduleViewController.schedule = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }
