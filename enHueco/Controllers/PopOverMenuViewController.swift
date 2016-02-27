@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PureLayout
 
 @objc protocol PopOverMenuViewControllerDelegate: class
 {
@@ -22,11 +23,14 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     var titlesAndIcons = [(String, UIImage)]()
     var tintColor: UIColor?
     
+    private let rowHeight: CGFloat = 44.0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        preferredContentSize = CGSize(width: 160, height: rowHeight * CGFloat(titlesAndIcons.count))
+        view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func viewDidAppear(animated: Bool)
@@ -74,6 +78,11 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
         cell.titleLabel.textColor = tintColor ?? UIColor.blackColor()
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return rowHeight
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)

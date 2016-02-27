@@ -150,7 +150,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
         
-        menu.titlesAndIcons = [("Call".localized(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!)]
+        menu.titlesAndIcons = [("Call".localized(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("Options".localized(), UIImage(named: "sliders")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
         
@@ -168,13 +168,31 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         if let number = friend.phoneNumber where index == 0
         {
             system.callFriend(number)
+            
+            controller.dismissViewControllerAnimated(true, completion: nil)
         }
         else if let recordId = recordId where index == 1
         {
             system.whatsappMessageTo(recordId)
+            
+            controller.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        else if index == 2
+        {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
+                
+                
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "cancel", style: .Cancel, handler: nil))
+            
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle

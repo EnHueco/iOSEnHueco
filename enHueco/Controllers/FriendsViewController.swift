@@ -312,6 +312,4 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         splitViewController?.showDetailViewController(friendDetailViewController, sender: self)
     }
-
-
 }
