@@ -44,3 +44,6 @@
 "OKIwillCheck" = "OK, lo revisaré.";
 
 "AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";
+
+"options" = "Opciones";
+"sorry_unknown_error" = "Lo sentimos, ocurrió un error desconocido";

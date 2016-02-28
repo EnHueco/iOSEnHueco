@@ -180,7 +180,18 @@ extension UIImage
     }  
 }
 
-extension ErrorType {
+extension NSMutableURLRequest
+{
+    func setEHSessionHeaders()
+    {
+        let appUser = enHueco.appUser
+        setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
+        setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+    }
+}
+
+extension ErrorType
+{
     
     /**
      Attempts to extract a localized description that is suitable for display to the user. This

@@ -150,7 +150,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     {
         let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
         
-        menu.titlesAndIcons = [("Call".localizedUsingGeneralFile(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("Options".localizedUsingGeneralFile(), UIImage(named: "sliders")!)]
+        menu.titlesAndIcons = [("Call".localizedUsingGeneralFile(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("options".localizedUsingGeneralFile(), UIImage(named: "sliders")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
         
@@ -183,8 +183,12 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             
             alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
                 
-                FriendsManager.deleteFriend(self.friend, withCompletionHandler: { (success, error) -> () in
+                MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
+                
+                FriendsManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
                     
+                    MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+
                     guard success && error == nil else {
                         
                         if let message = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()

@@ -17,8 +17,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     {
         super.viewDidLoad()
                 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAcceptFriendRequest:"), name:EHSystemNotification.SystemDidAcceptFriendRequest, object: enHueco)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToAcceptFriendRequest:"), name:EHSystemNotification.SystemDidFailToAcceptFriendRequest, object: enHueco)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
         //view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
@@ -161,7 +159,20 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        FriendsManager.acceptFriendRequestFromFriend(requestFriend)
+        FriendsManager.acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
+            
+            guard success && error == nil else {
+                
+                if let message = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                {
+                    TSMessage.showNotificationInViewController(self, title: message, subtitle: nil, type: .Error)
+                }
+                return
+            }
+            
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            self.requestsTableView.reloadData()
+        }
     }
     
     func didPressDiscardButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
@@ -169,18 +180,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let indexPath = requestsTableView.indexPathForCell(cell)
         
         // TODO:
-    }
-    
-    func systemDidAcceptFriendRequest(notification: NSNotification)
-    {
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-        requestsTableView.reloadData()
-    }
-    
-    func systemDidFailToAcceptFriendRequest(notification: NSNotification)
-    {
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-        requestsTableView.reloadData()
     }
     
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)

@@ -16,8 +16,7 @@ class AppUserInformationManager
         let appUser = enHueco.appUser
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
@@ -27,6 +26,9 @@ class AppUserInformationManager
             if appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: downloadedUser["updated_on"] as! String)!)
             {
                 appUser.updateUserWithJSONDictionary(downloadedUser)
+                
+                try? PersistenceManager.persistData()
+
                 AppUserInformationManager.downloadProfilePicture()
             }
             
@@ -50,8 +52,7 @@ class AppUserInformationManager
         let appUser = enHueco.appUser
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
@@ -75,7 +76,6 @@ class AppUserInformationManager
     
     class func pushProfilePicture(image: UIImage)
     {
-        //        let imageData = UIImageJPEGRepresentation(image, 100)
         let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
         let request = NSMutableURLRequest(URL: url!)
@@ -94,7 +94,7 @@ class AppUserInformationManager
             
         }, onFailure: { (error) -> () in
                 
-                print(error)
+            print(error)
         })
     }
     
@@ -117,7 +117,7 @@ class AppUserInformationManager
                 
             }) { (error) -> () in
                     
-                    print(error)
+                print(error)
             }
         }
     }

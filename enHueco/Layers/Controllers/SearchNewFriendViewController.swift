@@ -25,9 +25,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         view.backgroundColor = UIColor.clearColor()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidSendFriendRequest:"), name:EHSystemNotification.SystemDidSendFriendRequest, object: enHueco)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidFailToSendFriendRequest:"), name:EHSystemNotification.SystemDidFailToSendFriendRequest, object: enHueco)
-        
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
         searchBar.delegate = self
@@ -114,7 +111,20 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
         
-        FriendsManager.sendFriendRequestToUser(friend)
+        FriendsManager.sendFriendRequestToUser(friend) { (success, error) -> () in
+            
+            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+
+            guard success && error == nil else
+            {
+                TSMessage.showNotificationWithTitle("ErrorSendingRequest".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
+                return
+            }
+            
+            TSMessage.showNotificationWithTitle("RequestSentConfirmation".localizedUsingGeneralFile(), type: TSMessageNotificationType.Success)
+            
+            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -154,20 +164,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
-    func systemDidSendFriendRequest(notification: NSNotification)
-    {
-        TSMessage.showNotificationWithTitle("RequestSentConfirmation".localizedUsingGeneralFile(), type: TSMessageNotificationType.Success)
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-        
-        navigationController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func systemDidFailToSendFriendRequest(notification: NSNotification)
-    {
-        TSMessage.showNotificationWithTitle("ErrorSendingRequest".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
-        MRProgressOverlayView.dismissOverlayForView(view, animated: true)
-    }
-
     /*
     // MARK: - Navigation
 

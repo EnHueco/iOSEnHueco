@@ -10,10 +10,10 @@ import Foundation
 
 class EHSynchronizable: NSObject, NSCoding
 {
-    var ID: String?
+    var ID: String!
     var lastUpdatedOn: NSDate
     
-    init(ID: String?, lastUpdatedOn: NSDate)
+    init(ID: String!, lastUpdatedOn: NSDate)
     {
         self.ID = ID
         self.lastUpdatedOn = lastUpdatedOn

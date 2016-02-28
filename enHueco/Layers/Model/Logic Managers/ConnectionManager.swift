@@ -12,7 +12,7 @@ import Alamofire_Synchronous
 
 enum HTTPMethod: String
 {
-    case GET="GET", POST="POST"
+    case GET="GET", POST="POST", DELETE="DELETE"
 }
 
 struct ConnectionManagerCompoundError: ErrorType

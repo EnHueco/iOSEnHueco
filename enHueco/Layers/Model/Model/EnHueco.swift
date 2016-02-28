@@ -17,11 +17,7 @@ class EHSystemNotification
 {
     static let SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
     static let SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
-    static let SystemDidAddFriend = "SystemDidAddFriend"
-    static let SystemDidSendFriendRequest = "SystemDidSendFriendRequest", SystemDidFailToSendFriendRequest = "SystemDidFailToSendFriendRequest"
-    static let SystemDidAcceptFriendRequest = "SystemDidAcceptFriendRequest", SystemDidFailToAcceptFriendRequest = "SystemDidFailToAcceptFriendRequest"
     static let SystemDidReceiveAppUserImage = "SystemDidReceiveAppUserImage"
-    
     static let SystemDidReceiveAppUserWasUpdated = "SystemDidReceiveAppUserWasUpdated"
 }
 

@@ -26,7 +26,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidAddFriend:"), name: EHSystemNotification.SystemDidAddFriend, object: enHueco)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
@@ -197,11 +196,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: Notification Center
 
-    func systemDidAddFriend(notification: NSNotification)
-    {
-        reloadFriendsAndTableView()
-    }
-
     func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
     {
         reloadFriendsAndTableView()
@@ -248,9 +242,21 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if let currentFreeTimePeriod = currentFreeTimePeriod
         {
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriod.endHourInDate(NSDate()))
+            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endHourInDate(NSDate())
+            
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriodEndDate)
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
-            //cell.eventNameOrLocationLabel.text = currentGap.name
+            
+            if let nextEvent = friend.nextEvent(), nextEventName = nextEvent.name
+                where nextEvent.type == .Class && nextEvent.startHourInDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60*10000
+            {
+                cell.eventNameOrLocationLabel.text = nextEventName
+                    
+                if let nextEventLocation = nextEvent.location
+                {
+                    cell.eventNameOrLocationLabel.text! += " (" + nextEventLocation + ")"
+                }
+            }
         }
         else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
