@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TSMessages
 
 class MainTabBarViewController: UITabBarController
 {

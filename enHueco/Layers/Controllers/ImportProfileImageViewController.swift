@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class ImportProfileImageViewController: UIViewController
 {
@@ -65,7 +66,7 @@ class ImportProfileImageViewController: UIViewController
     
     func goToMainTabViewController()
     {
-        ProximityManager.sharedManager().beginProximityUpdates()
+        ProximityUpdatesManager.sharedManager().beginProximityUpdates()
         
         presentViewController(storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController"), animated: true, completion: nil)
     }

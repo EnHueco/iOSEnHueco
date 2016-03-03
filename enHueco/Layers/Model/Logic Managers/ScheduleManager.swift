@@ -11,6 +11,8 @@ import EventKit
 
 class ScheduleManager
 {
+    private init() {}
+
     /**
      Returns a schedule with the common free time periods of the users provided.
      */

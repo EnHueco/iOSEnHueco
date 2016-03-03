@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TSMessages
 
 class PrivacySettingsViewController: UITableViewController
 {
@@ -32,7 +33,7 @@ class PrivacySettingsViewController: UITableViewController
     {
         NSUserDefaults.standardUserDefaults().setBool(shareLocationWithBestFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
         
-        ProximityManager.sharedManager().updateBackgroundFetchInterval()
+        ProximityUpdatesManager.sharedManager().updateBackgroundFetchInterval()
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -42,6 +43,29 @@ class PrivacySettingsViewController: UITableViewController
     {
         tableView.beginUpdates()
         tableView.endUpdates()
+        
+        if sender.on
+        {
+            PrivacyManager.turnOffSetting(.ShowEventsNames, withCompletionHandler: { (success, error) -> Void in
+                
+                if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                {
+                    TSMessage.showNotificationWithTitle(errorReason, subtitle: nil, type: .Error)
+                    sender.on = !sender.on
+                }
+            })
+        }
+        else
+        {
+            PrivacyManager.turnOnSetting(.ShowEventsNames, withCompletionHandler: { (success, error) -> Void in
+                
+                if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                {
+                    TSMessage.showNotificationWithTitle(errorReason, subtitle: nil, type: .Error)
+                    sender.on = !sender.on
+                }
+            })
+        }
     }
     
     @IBAction func shareEventLocationsToggleChanged(sender: UISwitch)

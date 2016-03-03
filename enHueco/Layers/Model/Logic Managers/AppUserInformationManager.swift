@@ -10,6 +10,8 @@ import Foundation
 
 class AppUserInformationManager
 {
+    private init() {}
+
     //TODO: What is this method for?
     class func fetchAppUser ()
     {
@@ -37,16 +39,7 @@ class AppUserInformationManager
                 print(error)
         }
     }
-    
-    /**
-     Checks for updates on the server including Session Status, Friend list, Friends Schedule, User's Info
-     */
-    class func fetchUpdates ()
-    {
-//        fetchUpdatesForFriendRequests()
-//        fetchUpdatesForFriendsAndFriendSchedules()
-    }
-    
+
     class func fetchUpdatesForAppUserAndSchedule ()
     {
         let appUser = enHueco.appUser

@@ -101,7 +101,7 @@ class InstantFreeTimeViewController: UIViewController
         
         let newFreeTimePeriod = Event(type: .FreeTime, name: nameTextField.text, startHour: startHourComponents, endHour: endHourComponents, location: locationTextField.text, ID: nil, lastUpdatedOn: NSDate())
         
-        EnHuecoStateManager.postInstantFreeTimePeriod(newFreeTimePeriod) { succeeded in
+        UserStateManager.postInstantFreeTimePeriod(newFreeTimePeriod) { succeeded in
             
             self.dismiss()
         }

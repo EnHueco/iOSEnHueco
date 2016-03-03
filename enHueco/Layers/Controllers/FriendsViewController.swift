@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SWTableViewCell
+import SDWebImage
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {

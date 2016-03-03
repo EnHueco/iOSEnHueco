@@ -10,6 +10,7 @@ import UIKit
 import LocalAuthentication
 import MobileCoreServices
 import ChameleonFramework
+import RSKImageCropper
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
 {

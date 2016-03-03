@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import WatchConnectivity
+import FBSDKCoreKit
+import TSMessages
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -44,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityManagerNotification.ProximityManagerDidReceiveProximityUpdates, object: ProximityManager.sharedManager())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: ProximityUpdatesManager.sharedManager())
         
         TSMessageView.appearance().titleFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
         
@@ -65,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
   
-        ProximityManager.sharedManager().updateBackgroundFetchInterval()
+        ProximityUpdatesManager.sharedManager().updateBackgroundFetchInterval()
     }
 
     func applicationWillEnterForeground(application: UIApplication)
@@ -102,9 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if currentFreeTimePeriod != nil
         {
             //Ask iOS to kindly try to wake up the app frequently during free time periods.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringFreeTimePeriods)
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityUpdatesManager.backgroundFetchIntervalDuringFreeTimePeriods)
             
-            ProximityManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ (status) -> () in
+            ProximityUpdatesManager.sharedManager().reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ (status) -> () in
                 
             })
         }
@@ -119,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         {
             //The day is over, user doesn't have more free time periods ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
             //TODO : Set fetch interval to wait for next free time period (for this we must look for the next free time period in future days)
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityUpdatesManager.backgroundFetchIntervalAfterDayOver)
             
             completionHandler(.NoData)
         }
@@ -136,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = EnHuecoStateManager.currentlyAvailableFriends()
+            let friendsCurrentlyFreeAndFreeTimePeriods = UserStateManager.currentlyAvailableFriends()
             
             var friendsArray = [[String : AnyObject]]()
             
@@ -166,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
         
-        let friendsToNotifyToUser = EnHuecoStateManager.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        let friendsToNotifyToUser = UserStateManager.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
         
         let currentDate = NSDate()
         

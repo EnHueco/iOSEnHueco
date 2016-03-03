@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import QRCodeReaderViewController
+import QRCode
 
 class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
 {

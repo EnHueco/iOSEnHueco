@@ -53,8 +53,12 @@ class ConnectionManager: NSObject
         sendAsyncRequest(request, onSuccess: successfulRequestBlock, onFailure: failureRequestBlock)
     }
     
-    class func sendAsyncDataRequest(request: NSURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    class func sendAsyncDataRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]? = nil, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
+        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
+        request.HTTPBody = dictionaryJSONData
+        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        
         alamoManager.request(request).response { (_, response, data, error) -> Void in
             
             completionQueue.addOperationWithBlock

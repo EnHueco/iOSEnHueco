@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import TSMessages
+import MRProgress
 
 @IBDesignable class LoginViewController: UIViewController
 {
@@ -98,7 +99,7 @@ import UIKit
 
     func goToMainTabViewController()
     {
-        ProximityManager.sharedManager().beginProximityUpdates()
+        ProximityUpdatesManager.sharedManager().beginProximityUpdates()
 
         performSegueWithIdentifier("PresentMainTabViewController", sender: self)
     }

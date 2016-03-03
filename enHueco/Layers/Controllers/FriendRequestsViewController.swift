@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MRProgress
+import TSMessages
+import SDWebImage
 
 class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, IncomingFriendRequestCellDelegate
 {

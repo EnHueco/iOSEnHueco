@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MRProgress
+import TSMessages
 
 class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
 {

@@ -10,6 +10,8 @@ import Foundation
 
 class FriendsManager
 {
+    private init() {}
+
     /**
      Fetches full friends and schedule information from the server and notifies the result via Notification Center.
      

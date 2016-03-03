@@ -10,8 +10,9 @@ import Foundation
 
 class AccountManager
 {
+    private init() {}
     
-    /// Logs user in for the first time or when session expires. Creates or replaces the AppUser.
+    /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
     class func loginWithUsername (username: String, password: String, completionHandler: (success: Bool, error: ErrorType?) -> Void)
     {
         let params = ["user_id":username, "password":password]
@@ -30,16 +31,13 @@ class AccountManager
             try! PersistenceManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
-                
                 completionHandler(success: true, error: nil)
             }
             
         }, onFailure: { (error) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
-                
                 completionHandler(success: false, error: error.error)
-                return
             }
         })
     }

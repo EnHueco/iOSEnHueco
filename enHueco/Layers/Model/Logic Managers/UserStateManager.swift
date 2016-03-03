@@ -8,8 +8,10 @@
 
 import Foundation
 
-class EnHuecoStateManager
+class UserStateManager
 {
+    private init() {}
+
     /**
      Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period

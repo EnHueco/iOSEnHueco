@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SWTableViewCell
+import SDWebImage
 
 class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
 {
@@ -145,14 +147,14 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func resetDataArrays()
     {
-        filteredFriendsAndFreeTimePeriods = EnHuecoStateManager.currentlyAvailableFriends()
+        filteredFriendsAndFreeTimePeriods = UserStateManager.currentlyAvailableFriends()
         
         if let instantFreeTimePeriod = enHueco.appUser.schedule.instantFreeTimePeriod
         {
             filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }
         
-        filteredSoonFreefriendsAndFreeTimePeriods = EnHuecoStateManager.soonAvailableFriendsWithinTimeInterval(3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = UserStateManager.soonAvailableFriendsWithinTimeInterval(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView()
@@ -338,13 +340,13 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         {
             if friend === enHueco.appUser
             {
-                EnHuecoStateManager.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
+                UserStateManager.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
                     
                 })
             }
             else if index == 0
             {
-                enHueco.getFriendABID(friend.phoneNumber, onSuccess: {
+                enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
                     (abid) -> () in
                     enHueco.whatsappMessageTo(abid)
                 })

@@ -1,56 +1,78 @@
 PODS:
-  - AHKActionSheet (0.5.3)
-  - Alamofire (3.0.0)
+  - AHKActionSheet (0.5.4)
+  - Alamofire (3.2.1)
   - Alamofire-Synchronous (0.0.1):
     - Alamofire (~> 3.0)
-  - APAddressBook (0.1.11):
-    - APAddressBook/Core (= 0.1.11)
-  - APAddressBook/Core (0.1.11)
+  - APAddressBook (0.1.14):
+    - APAddressBook/Core (= 0.1.14)
+  - APAddressBook/Core (0.1.14)
   - ASBPlayerScrubbing (0.1)
   - ASMediaFocusManager (0.5):
     - ASBPlayerScrubbing (~> 0.1)
-  - ChameleonFramework/Default (2.0.6)
-  - ChameleonFramework/Swift (2.0.6):
+  - Bolts (1.6.0):
+    - Bolts/AppLinks (= 1.6.0)
+    - Bolts/Tasks (= 1.6.0)
+  - Bolts/AppLinks (1.6.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.6.0)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - CRToast (0.0.9)
+  - CSwiftV (0.0.3)
+  - FBSDKCoreKit (4.10.0):
+    - Bolts (~> 1.5)
+  - FBSDKLoginKit (4.10.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.10.0):
+    - FBSDKCoreKit
+  - Funky (0.3.0):
+    - Regex (= 0.3.0)
   - HexColors (2.3.0)
-  - MRProgress (0.8.2):
-    - MRProgress/ActivityIndicator (= 0.8.2)
-    - MRProgress/Blur (= 0.8.2)
-    - MRProgress/Circular (= 0.8.2)
-    - MRProgress/Icons (= 0.8.2)
-    - MRProgress/NavigationBarProgress (= 0.8.2)
-    - MRProgress/Overlay (= 0.8.2)
-  - MRProgress/ActivityIndicator (0.8.2):
+  - MRProgress (0.8.3):
+    - MRProgress/ActivityIndicator (= 0.8.3)
+    - MRProgress/Blur (= 0.8.3)
+    - MRProgress/Circular (= 0.8.3)
+    - MRProgress/Icons (= 0.8.3)
+    - MRProgress/NavigationBarProgress (= 0.8.3)
+    - MRProgress/Overlay (= 0.8.3)
+  - MRProgress/ActivityIndicator (0.8.3):
     - MRProgress/Stopable
-  - MRProgress/Blur (0.8.2):
+  - MRProgress/Blur (0.8.3):
     - MRProgress/Helper
-  - MRProgress/Circular (0.8.2):
+  - MRProgress/Circular (0.8.3):
     - MRProgress/Helper
     - MRProgress/ProgressBaseClass
     - MRProgress/Stopable
-  - MRProgress/Helper (0.8.2)
-  - MRProgress/Icons (0.8.2)
-  - MRProgress/NavigationBarProgress (0.8.2):
+  - MRProgress/Helper (0.8.3)
+  - MRProgress/Icons (0.8.3)
+  - MRProgress/NavigationBarProgress (0.8.3):
     - MRProgress/ProgressBaseClass
-  - MRProgress/Overlay (0.8.2):
+  - MRProgress/Overlay (0.8.3):
     - MRProgress/ActivityIndicator
     - MRProgress/Blur
     - MRProgress/Circular
     - MRProgress/Helper
     - MRProgress/Icons
-  - MRProgress/ProgressBaseClass (0.8.2)
-  - MRProgress/Stopable (0.8.2):
+  - MRProgress/ProgressBaseClass (0.8.3)
+  - MRProgress/Stopable (0.8.3):
     - MRProgress/Helper
   - MSCollectionViewCalendarLayout (0.1.5)
+  - MultiSelectSegmentedControl (1.0)
   - PureLayout (3.0.1)
+  - QRCode (0.5)
   - QRCodeReaderViewController (3.5.2)
-  - ReachabilitySwift (2.1)
-  - RSKImageCropper (1.4.1)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - ReachabilitySwift (2.3.3)
+  - Regex (0.3.0)
+  - RSKImageCropper (1.5.1)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SwiftDataStructures (0.3.0):
+    - Funky (= 0.3.0)
+  - SwiftGraph (1.0.3)
   - SWTableViewCell (0.3.7)
+  - TapkuLibrary (0.3.8)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
 
@@ -58,18 +80,27 @@ DEPENDENCIES:
   - AHKActionSheet
   - Alamofire (~> 3.0)
   - Alamofire-Synchronous (from `https://github.com/zhuangluda/Alamofire-Synchronous.git`)
-  - APAddressBook
+  - APAddressBook (~> 0.1.11)
   - ASMediaFocusManager
   - ChameleonFramework/Swift
   - CRToast (~> 0.0.7)
+  - CSwiftV
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - MRProgress
   - MSCollectionViewCalendarLayout
+  - MultiSelectSegmentedControl
   - PureLayout
+  - QRCode
   - QRCodeReaderViewController (~> 3.5.2)
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
   - RSKImageCropper
   - SDWebImage (~> 3.7)
+  - SwiftDataStructures
+  - SwiftGraph
   - SWTableViewCell (~> 0.3.7)
+  - TapkuLibrary
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
@@ -85,30 +116,42 @@ CHECKOUT OPTIONS:
     :commit: 4ff1e12abbdbefe4bc8a935475f6b3a2044480ef
     :git: https://github.com/zhuangluda/Alamofire-Synchronous.git
   ReachabilitySwift:
-    :commit: 89b2431fe262bc5915972472e36d04c067f686bc
+    :commit: cf126c0584a209143c75bf1d0f23fd904891e26e
     :git: https://github.com/ashleymills/Reachability.swift
   TSMessages:
-    :commit: f7d0e8cece3ca79852e49807812601e2d89f5719
+    :commit: e63f23304f781dcadbac31e6d338f3105fb3cd78
     :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
-  AHKActionSheet: 0b7d3bc6467dd934441fd82beb3911fc1f7bdfd2
-  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   Alamofire-Synchronous: 1b10de69cc04e75149909455f4d4894a317bc385
-  APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  APAddressBook: 697e88cdf8930e4a4783d813289e95822602e516
   ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
   ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
-  ChameleonFramework: a6b466873ff9a4ce3a5196c20bccf1a97ad9f446
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
+  CSwiftV: 93e3d4e1501f2a9b1eac3ae51d53a5edf41beb5b
+  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
+  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
+  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  Funky: ed6dbc079d41b3e5ad4e0cd87059b925b5641547
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
-  MRProgress: f4cfe862082418e8f542f077772283f425d6c699
+  MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
   MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
+  MultiSelectSegmentedControl: 61389b88420074fc972e61ee9ef3d8bb4c286071
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+  QRCode: a249ed747aeb0f4bf5f9c58b5b001b6b3bc80073
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
-  ReachabilitySwift: 99bb7acceebb90b2048b4a8fd6539be96454dcb2
-  RSKImageCropper: 98ae426eb4eb11b733ff87f8e2542a480f4fa8e6
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  Regex: 6bfb554ad7d5b1be9cfc57ab1fe2fb6cee45a344
+  RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SwiftDataStructures: 472951e4ea87b535a400fe4967427b041be1e313
+  SwiftGraph: e214622d710af96a002b85ce2d1d90bfcca4546d
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  TapkuLibrary: 7a406dac46eff8595e191557eba88959f97f69b7
   TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
 
 COCOAPODS: 0.39.0

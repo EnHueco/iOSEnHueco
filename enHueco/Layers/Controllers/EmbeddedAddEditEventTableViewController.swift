@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultiSelectSegmentedControl
 
 class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
 {

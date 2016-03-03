@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SWTableViewCell
 
 class AvailableFriendCell: SWTableViewCell
 {

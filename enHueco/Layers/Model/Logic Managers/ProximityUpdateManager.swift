@@ -1,5 +1,5 @@
 //
-//  ProximityManager.swift
+//  ProximityUpdatesManager.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 11/3/15.
@@ -9,22 +9,26 @@
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import ReachabilitySwift
+import SwiftGraph
+import CSwiftV
 
-class EHProximityManagerNotification
+class EHProximityUpdatesManagerNotification
 {
-    static let ProximityManagerDidReceiveProximityUpdates = "ProximityManagerDidReceiveProximityUpdates"
+    private init() {}
+
+    static let ProximityUpdatesManagerDidReceiveProximityUpdates = "ProximityUpdatesManagerDidReceiveProximityUpdates"
 }
 
-enum ProximityManagerReportingCompletionStatus
+enum ProximityUpdatesManagerReportingCompletionStatus
 {
     case NotConnectedToWifi
     case NetworkFailure
     case Success
 }
 
-class ProximityManager: NSObject
+class ProximityUpdatesManager: NSObject
 {
-    static private var instance = ProximityManager()
+    static private var instance = ProximityUpdatesManager()
     
     static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
     static let backgroundFetchIntervalAfterDayOver = 7*3600.0
@@ -40,7 +44,7 @@ class ProximityManager: NSObject
         super.init()
     }
     
-    static func sharedManager() -> ProximityManager
+    static func sharedManager() -> ProximityUpdatesManager
     {
         return instance
     }
@@ -159,11 +163,11 @@ class ProximityManager: NSObject
         return nil
     }
     
-    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status: ProximityManagerReportingCompletionStatus) -> ())
+    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status: ProximityUpdatesManagerReportingCompletionStatus) -> ())
     {
         NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdate")
         
-        guard let currentBSSID = ProximityManager.currentBSSID() else
+        guard let currentBSSID = ProximityUpdatesManager.currentBSSID() else
         {
             completionHandler(status: .NotConnectedToWifi)
             return
@@ -189,7 +193,7 @@ class ProximityManager: NSObject
             
             dispatch_async(dispatch_get_main_queue())
             {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHProximityManagerNotification.ProximityManagerDidReceiveProximityUpdates, object: self)
+                NSNotificationCenter.defaultCenter().postNotificationName(EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: self)
             }
             
             completionHandler(status: .Success)
@@ -209,7 +213,7 @@ class ProximityManager: NSObject
             if currentFreeTimePeriod != nil
             {
                 //Ask iOS to kindly try to wake up the app frequently during free time periods.
-                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalDuringFreeTimePeriods)
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityUpdatesManager.backgroundFetchIntervalDuringFreeTimePeriods)
                 print("Reprogramming fetch interval: Continuous")
             }
             else if let nextFreeTimePeriod = nextFreeTimePeriod
@@ -221,7 +225,7 @@ class ProximityManager: NSObject
             else
             {
                 //The day is over, user doesn't have more free time periods ahead, we're going to preserve their battery life by asking iOS to try to wake app less frequently
-                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityManager.backgroundFetchIntervalAfterDayOver)
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityUpdatesManager.backgroundFetchIntervalAfterDayOver)
                 print("Reprogramming fetch interval: After day over")
             }
         }

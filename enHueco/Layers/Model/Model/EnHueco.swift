@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import SystemConfiguration.CaptiveNetwork
+import APAddressBook
 
 /// Universally accessible singleton instance
 let enHueco = EnHueco()
@@ -63,7 +64,7 @@ class EnHueco
         UIApplication.sharedApplication().openURL(url)
     }
     
-    func getFriendABID(phoneNumber : String, onSuccess : (NSNumber) -> ())
+    func getFriendABID(phoneNumber : String, completionHandler : (NSNumber) -> ())
     {
         let addressBook = APAddressBook()
         addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
@@ -91,7 +92,7 @@ class EnHueco
                                     if phoneString.rangeOfString(phoneNumber) != nil
                                     {
                                         abid = contactAP.recordID
-                                        onSuccess(abid!)
+                                        completionHandler(abid!)
                                         return
                                     }
                                 }

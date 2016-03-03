@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MRProgress
+import TSMessages
 
 class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate
 {
@@ -250,7 +252,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         }
         else
         {
-            enHueco.getFriendABID(self.friend.phoneNumber,onSuccess:{ (abid) -> () in
+            enHueco.getFriendABID(self.friend.phoneNumber, completionHandler:{ (abid) -> () in
                 self.recordId = abid
             })
         }

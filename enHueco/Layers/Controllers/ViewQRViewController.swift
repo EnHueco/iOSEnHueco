@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QRCode
 
 class ViewQRViewController: UIViewController
 {

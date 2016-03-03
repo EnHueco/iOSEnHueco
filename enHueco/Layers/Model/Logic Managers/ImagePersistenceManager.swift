@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ImagePersistenceManager{
+class ImagePersistenceManager
+{
+    private init() {}
 
     static func deleteImage(path:String)
     {

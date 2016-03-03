@@ -10,6 +10,8 @@ import Foundation
 
 class PersistenceManager
 {
+    private init() {}
+
     enum PersistenceManagerError: ErrorType
     {
         case CouldNotPersistData
