@@ -46,7 +46,7 @@ class PrivacySettingsViewController: UITableViewController
         
         if sender.on
         {
-            PrivacyManager.turnOffSetting(.ShowEventsNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager().turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
                 {
@@ -57,7 +57,7 @@ class PrivacySettingsViewController: UITableViewController
         }
         else
         {
-            PrivacyManager.turnOnSetting(.ShowEventsNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager().turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
                 {

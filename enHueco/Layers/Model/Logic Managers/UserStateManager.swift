@@ -10,13 +10,20 @@ import Foundation
 
 class UserStateManager
 {
+    private static let instance = UserStateManager()
+
     private init() {}
+    
+    class func sharedManager() -> UserStateManager
+    {
+        return instance
+    }
 
     /**
      Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period
      */
-    class func currentlyAvailableAndNearbyFriends() -> [(friend: User, freeTime: Event)]
+    func currentlyAvailableAndNearbyFriends() -> [(friend: User, freeTime: Event)]
     {
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
@@ -31,7 +38,7 @@ class UserStateManager
         return friendsAndFreeTimePeriods
     }
     
-    class func friendsCurrentlyNearby() -> [User]
+    func friendsCurrentlyNearby() -> [User]
     {
         return enHueco.appUser.friends.values.filter { $0.isNearby }
     }
@@ -40,7 +47,7 @@ class UserStateManager
      Returns all friends that are currently available.
      - returns: Friends with their current free time periods
      */
-    class func currentlyAvailableFriends() -> [(friend: User, freeTime: Event)]
+    func currentlyAvailableFriends() -> [(friend: User, freeTime: Event)]
     {
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
@@ -59,7 +66,7 @@ class UserStateManager
      Returns all friends that will soon be available.
      - returns: Friends with their current free time period
      */
-    class func soonAvailableFriendsWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, freeTime: Event)]
+    func soonAvailableFriendsWithinTimeInterval(interval: NSTimeInterval) -> [(friend: User, freeTime: Event)]
     {
         var friendsAndFreeTimePeriods = [(friend: User, freeTime: Event)]()
         
@@ -80,7 +87,7 @@ class UserStateManager
      Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.
      Network operation must succeed immediately or else the newFreeTimePeriod is discarded
      */
-    class func postInstantFreeTimePeriod(newFreeTimePeriod: Event?, completionHandler: (succeeded: Bool)->Void )
+    func postInstantFreeTimePeriod(newFreeTimePeriod: Event?, completionHandler: (succeeded: Bool)->Void )
     {
         //TODO: Send to server
         

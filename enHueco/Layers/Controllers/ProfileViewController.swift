@@ -58,8 +58,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        AppUserInformationManager.fetchAppUser()
-        AppUserInformationManager.fetchUpdatesForAppUserAndSchedule()
+        AppUserInformationManager.sharedManager().fetchAppUser()
+        AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
     }
     
     func updateButtonColors()
@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             startAnimatingImageLoadingIndicator()
         }
         
-        ImagePersistenceManager.loadImageFromPath(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")) {(image) -> () in
+        ImagePersistenceManager.sharedManager().loadImageFromPath(ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")) {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
             {
@@ -161,7 +161,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.imageImageView.hidden = true
                     self.backgroundImageView.hidden = true
                     
-                    AppUserInformationManager.downloadProfilePicture()
+                    AppUserInformationManager.sharedManager().downloadProfilePicture()
                 }
 
                 self.imageImageView.contentMode = .ScaleAspectFill
@@ -309,7 +309,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
-        AppUserInformationManager.pushProfilePicture(croppedImage)
+        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage)
         startAnimatingImageLoadingIndicator()
         controller.dismissViewControllerAnimated(true, completion: nil)
     }

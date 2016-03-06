@@ -92,7 +92,7 @@ class SynchronizationManager: NSObject, NSCoding
         super.init()
     }
     
-    static func sharedManager() -> SynchronizationManager
+    class func sharedManager() -> SynchronizationManager
     {
         if instance == nil
         {

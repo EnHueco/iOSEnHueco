@@ -138,8 +138,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func fetchUpdates()
     {
-        FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
-        FriendsManager.fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
     }
     
     func friendRequestsButtonPressed(sender: UIButton)

@@ -28,7 +28,7 @@ enum ProximityUpdatesManagerReportingCompletionStatus
 
 class ProximityUpdatesManager: NSObject
 {
-    static private var instance = ProximityUpdatesManager()
+    private static let instance = ProximityUpdatesManager()
     
     static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
     static let backgroundFetchIntervalAfterDayOver = 7*3600.0
@@ -44,7 +44,7 @@ class ProximityUpdatesManager: NSObject
         super.init()
     }
     
-    static func sharedManager() -> ProximityUpdatesManager
+    class func sharedManager() -> ProximityUpdatesManager
     {
         return instance
     }

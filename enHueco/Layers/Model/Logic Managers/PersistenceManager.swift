@@ -10,7 +10,7 @@ import Foundation
 
 class PersistenceManager
 {
-    private init() {}
+    private static let instance = PersistenceManager()
 
     enum PersistenceManagerError: ErrorType
     {
@@ -18,13 +18,23 @@ class PersistenceManager
     }
     
     /// Path to the documents folder
-    static private let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    private let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
     
     /// Path where data will be persisted
-    static private let persistencePath = documents + "/appState.state"
+    private let persistencePath: String!
+    
+    private init() {
+        
+        persistencePath = documents + "/appState.state"
+    }
+    
+    class func sharedManager() -> PersistenceManager
+    {
+        return instance
+    }
     
     /// Persists all pertinent application data
-    class func persistData () throws
+    func persistData () throws
     {
         guard enHueco.appUser != nil && NSKeyedArchiver.archiveRootObject(enHueco.appUser, toFile: persistencePath) else
         {
@@ -33,7 +43,7 @@ class PersistenceManager
     }
     
     /// Restores all pertinent application data to memory
-    class func loadDataFromPersistence () -> Bool
+    func loadDataFromPersistence () -> Bool
     {
         enHueco.appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistencePath) as? AppUser
         
@@ -45,7 +55,7 @@ class PersistenceManager
         return enHueco.appUser != nil
     }
 
-    class func deleteAllPersistenceData()
+    func deleteAllPersistenceData()
     {
         try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
     }

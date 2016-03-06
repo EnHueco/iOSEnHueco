@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         
-        try? PersistenceManager.persistData()
+        try? PersistenceManager.sharedManager().persistData()
         SynchronizationManager.sharedManager().persistData()
     }
 
@@ -81,12 +81,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         
         FBSDKAppEvents.activateApp()
         
-        PersistenceManager.loadDataFromPersistence()
+        PersistenceManager.sharedManager().loadDataFromPersistence()
         
         if enHueco.appUser != nil
         {
-            AppUserInformationManager.fetchUpdatesForAppUserAndSchedule()
-            FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
+            FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
             SynchronizationManager.sharedManager().retryPendingRequests()
         }
     }
@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = UserStateManager.currentlyAvailableFriends()
+            let friendsCurrentlyFreeAndFreeTimePeriods = UserStateManager.sharedManager().currentlyAvailableFriends()
             
             var friendsArray = [[String : AnyObject]]()
             
@@ -168,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
         
-        let friendsToNotifyToUser = UserStateManager.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        let friendsToNotifyToUser = UserStateManager.sharedManager().friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
         
         let currentDate = NSDate()
         

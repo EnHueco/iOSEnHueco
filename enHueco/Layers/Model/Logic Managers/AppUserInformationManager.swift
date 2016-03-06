@@ -10,10 +10,17 @@ import Foundation
 
 class AppUserInformationManager
 {
+    private static let instance = AppUserInformationManager()
+
     private init() {}
+    
+    class func sharedManager() -> AppUserInformationManager
+    {
+        return instance
+    }
 
     //TODO: What is this method for?
-    class func fetchAppUser ()
+    func fetchAppUser ()
     {
         let appUser = enHueco.appUser
         
@@ -29,9 +36,9 @@ class AppUserInformationManager
             {
                 appUser.updateUserWithJSONDictionary(downloadedUser)
                 
-                try? PersistenceManager.persistData()
+                try? PersistenceManager.sharedManager().persistData()
 
-                AppUserInformationManager.downloadProfilePicture()
+                AppUserInformationManager.sharedManager().downloadProfilePicture()
             }
             
             }) { (error) -> () in
@@ -40,7 +47,7 @@ class AppUserInformationManager
         }
     }
 
-    class func fetchUpdatesForAppUserAndSchedule ()
+    func fetchUpdatesForAppUserAndSchedule ()
     {
         let appUser = enHueco.appUser
         
@@ -67,7 +74,7 @@ class AppUserInformationManager
         }
     }
     
-    class func pushProfilePicture(image: UIImage)
+    func pushProfilePicture(image: UIImage)
     {
         let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
@@ -91,7 +98,7 @@ class AppUserInformationManager
         })
     }
     
-    class func downloadProfilePicture()
+    func downloadProfilePicture()
     {
         if let url = enHueco.appUser.imageURL
         {
@@ -102,8 +109,8 @@ class AppUserInformationManager
             
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
                 
-                let path = ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg")
-                ImagePersistenceManager.saveImage(data, path: path, onSuccess: { () -> () in
+                let path = ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")
+                ImagePersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
                 })

@@ -187,7 +187,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 
                 MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
                 
-                FriendsManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
+                FriendsManager.sharedManager().deleteFriend(self.friend, completionHandler: { (success, error) -> () in
                     
                     MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
 

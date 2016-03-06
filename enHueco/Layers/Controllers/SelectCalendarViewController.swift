@@ -127,7 +127,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
         }
         else
         {
-            if ScheduleManager.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1)
+            if ScheduleManager.sharedManager().importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1)
             {
                 navigationController!.popViewControllerAnimated(true)
             }

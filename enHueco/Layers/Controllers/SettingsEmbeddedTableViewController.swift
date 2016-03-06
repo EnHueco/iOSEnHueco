@@ -76,7 +76,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         
         if cell ==  logoutCell
         {
-            AccountManager.logOut()
+            AccountManager.sharedManager().logOut()
             
             if let loginViewController = storyboard?.instantiateViewControllerWithIdentifier("MainNavigationController")
             {

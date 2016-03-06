@@ -56,7 +56,7 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
     
     func prepareInfoAndReloadScheduleData()
     {
-        let commonFreeTimePeriodsSchedule = ScheduleManager.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
+        let commonFreeTimePeriodsSchedule = ScheduleManager.sharedManager().commonFreeTimePeriodsScheduleForUsers(selectedFriends)
         scheduleViewController.schedule = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }

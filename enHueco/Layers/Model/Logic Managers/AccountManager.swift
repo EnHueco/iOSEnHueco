@@ -10,12 +10,22 @@ import Foundation
 
 class AccountManager
 {
+    private static let instance = AccountManager()
+    
     private init() {}
+    
+    class func sharedManager() -> AccountManager
+    {
+        return instance
+    }
     
     /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
     class func loginWithUsername (username: String, password: String, completionHandler: (success: Bool, error: ErrorType?) -> Void)
     {
         let params = ["user_id":username, "password":password]
+        
+        let a = (1..<3)
+        
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!)
         request.HTTPMethod = "POST"
@@ -24,11 +34,11 @@ class AccountManager
             
             enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
-            AppUserInformationManager.downloadProfilePicture()
-            AppUserInformationManager.fetchUpdatesForAppUserAndSchedule()
-            FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.sharedManager().downloadProfilePicture()
+            AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
+            FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
             
-            try! PersistenceManager.persistData()
+            try! PersistenceManager.sharedManager().persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -42,15 +52,15 @@ class AccountManager
         })
     }
     
-    class func logOut()
+    func logOut()
     {
         // TODO: Delete persistence information, send logout notification to server so token is deleted.
         
         do
         {
             enHueco.appUser = nil
-            ImagePersistenceManager.deleteImage(ImagePersistenceManager.fileInDocumentsDirectory("profile.jpg"))
-            try PersistenceManager.deleteAllPersistenceData()
+            ImagePersistenceManager.sharedManager().deleteImage(ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg"))
+            try PersistenceManager.sharedManager().deleteAllPersistenceData()
         }
         catch
         {

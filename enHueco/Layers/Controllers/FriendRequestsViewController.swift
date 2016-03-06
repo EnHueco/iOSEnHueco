@@ -39,7 +39,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        FriendsManager.fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
     }
     
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -162,7 +162,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
 
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
 
-        FriendsManager.acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
+        FriendsManager.sharedManager().acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
             
             guard success && error == nil else {
                 

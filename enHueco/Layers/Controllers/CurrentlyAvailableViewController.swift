@@ -102,7 +102,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             }
         })
         
-        FriendsManager.fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
 
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
@@ -147,14 +147,14 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func resetDataArrays()
     {
-        filteredFriendsAndFreeTimePeriods = UserStateManager.currentlyAvailableFriends()
+        filteredFriendsAndFreeTimePeriods = UserStateManager.sharedManager().currentlyAvailableFriends()
         
         if let instantFreeTimePeriod = enHueco.appUser.schedule.instantFreeTimePeriod
         {
             filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }
         
-        filteredSoonFreefriendsAndFreeTimePeriods = UserStateManager.soonAvailableFriendsWithinTimeInterval(3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = UserStateManager.sharedManager().soonAvailableFriendsWithinTimeInterval(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView()
@@ -340,7 +340,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         {
             if friend === enHueco.appUser
             {
-                UserStateManager.postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
+                UserStateManager.sharedManager().postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
                     
                 })
             }

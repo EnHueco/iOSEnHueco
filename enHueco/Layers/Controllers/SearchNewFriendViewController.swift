@@ -113,7 +113,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
         
-        FriendsManager.sendFriendRequestToUser(friend) { (success, error) -> () in
+        FriendsManager.sharedManager().sendFriendRequestToUser(friend) { (success, error) -> () in
             
             MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
 
@@ -159,7 +159,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func timeToSearch(timer: NSTimer)
     {
-        FriendsManager.searchUsersWithText(searchText) { (results) -> () in
+        FriendsManager.sharedManager().searchUsersWithText(searchText) { (results) -> () in
             
             self.searchResults = results
             self.searchResultsTableView.reloadData()

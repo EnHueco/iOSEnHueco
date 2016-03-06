@@ -10,9 +10,16 @@ import UIKit
 
 class ImagePersistenceManager
 {
-    private init() {}
+    private static let instance = ImagePersistenceManager()
 
-    static func deleteImage(path:String)
+    private init() {}
+    
+    class func sharedManager() -> ImagePersistenceManager
+    {
+        return instance
+    }
+
+    func deleteImage(path:String)
     {
         do
         {
@@ -26,19 +33,19 @@ class ImagePersistenceManager
         
     }
     
-    static func getDocumentsURL() -> NSURL
+    func getDocumentsURL() -> NSURL
     {
         let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         return documentsURL
     }
     
-    static func fileInDocumentsDirectory(filename: String) -> String
+    func fileInDocumentsDirectory(filename: String) -> String
     {
-        let fileURL = ImagePersistenceManager.getDocumentsURL().URLByAppendingPathComponent(filename)
+        let fileURL = ImagePersistenceManager.sharedManager().getDocumentsURL().URLByAppendingPathComponent(filename)
         return fileURL.path!
     }
     
-    static func saveImage (data: NSData, path: String, onSuccess: () -> ())
+    func saveImage (data: NSData, path: String, onSuccess: () -> ())
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
         {
@@ -50,7 +57,7 @@ class ImagePersistenceManager
         }
     }
     
-    static func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ())
+    func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ())
     {
         var image : UIImage? = nil
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))

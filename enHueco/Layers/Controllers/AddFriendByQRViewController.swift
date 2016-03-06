@@ -57,7 +57,7 @@ class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
     {
         dismissViewControllerAnimated(true, completion: nil)
         
-        try! FriendsManager.addFriendFromStringEncodedFriendRepresentation(result)
+        try! FriendsManager.sharedManager().addFriendFromStringEncodedFriendRepresentation(result)
         
         navigationController!.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -11,12 +11,19 @@ import EventKit
 
 class ScheduleManager
 {
+    private static let instance = ScheduleManager()
+
     private init() {}
+    
+    class func sharedManager() -> ScheduleManager
+    {
+        return instance
+    }
 
     /**
      Returns a schedule with the common free time periods of the users provided.
      */
-    class func commonFreeTimePeriodsScheduleForUsers(users:[User]) -> Schedule
+    func commonFreeTimePeriodsScheduleForUsers(users:[User]) -> Schedule
     {
         let currentDate = NSDate()
         let commonFreeTimePeriodsSchedule = Schedule()
@@ -64,7 +71,7 @@ class ScheduleManager
      Imports an schedule of classes from a device's calendar.
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
      */
-    class func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses:Bool) -> Bool
+    func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses:Bool) -> Bool
     {
         let today = NSDate()
         let eventStore = EKEventStore()

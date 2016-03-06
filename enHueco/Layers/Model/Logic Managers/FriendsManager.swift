@@ -10,7 +10,14 @@ import Foundation
 
 class FriendsManager
 {
+    private static let instance = FriendsManager()
+
     private init() {}
+    
+    class func sharedManager() -> FriendsManager
+    {
+        return instance
+    }
 
     /**
      Fetches full friends and schedule information from the server and notifies the result via Notification Center.
@@ -18,7 +25,7 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates in case of success
      */
-    class func fetchUpdatesForFriendsAndFriendSchedules()
+    func fetchUpdatesForFriendsAndFriendSchedules()
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
         request.setEHSessionHeaders()
@@ -62,7 +69,7 @@ class FriendsManager
                 enHueco.appUser.friends[newFriend.username] = newFriend
             }
             
-            try? PersistenceManager.persistData()
+            try? PersistenceManager.sharedManager().persistData()
             
             dispatch_async(dispatch_get_main_queue()){
                 NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
@@ -75,7 +82,7 @@ class FriendsManager
     }
     
     /// Deletes a friend. If the operation fails the friend is not deleted.
-    class func deleteFriend(friend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func deleteFriend(friend: User, completionHandler:(success: Bool, error: ErrorType?)->())
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
         request.setEHSessionHeaders()
@@ -85,7 +92,7 @@ class FriendsManager
             
             enHueco.appUser.friends[friend.username] = nil
             
-            try? PersistenceManager.persistData()
+            try? PersistenceManager.sharedManager().persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -105,7 +112,7 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendRequestUpdates in case of success
      */
-    class func fetchUpdatesForFriendRequests()
+    func fetchUpdatesForFriendRequests()
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
         request.setEHSessionHeaders()
@@ -138,7 +145,7 @@ class FriendsManager
      - EHSystemNotification.SystemDidSendFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToSendFriendRequest in case of failure
      */
-    class func sendFriendRequestToUser(user: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func sendFriendRequestToUser(user: User, completionHandler:(success: Bool, error: ErrorType?)->())
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
@@ -169,7 +176,7 @@ class FriendsManager
      - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
      */
-    class func acceptFriendRequestFromFriend (requestFriend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func acceptFriendRequestFromFriend (requestFriend: User, completionHandler:(success: Bool, error: ErrorType?)->())
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
@@ -179,7 +186,7 @@ class FriendsManager
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
             
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
-            fetchUpdatesForFriendsAndFriendSchedules()
+            self.fetchUpdatesForFriendsAndFriendSchedules()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -198,7 +205,7 @@ class FriendsManager
      
      - parameter searchText:        Text to search
      */
-    class func searchUsersWithText (searchText: String, completionHandler: (results: [User])->())
+    func searchUsersWithText (searchText: String, completionHandler: (results: [User])->())
     {
         guard !searchText.isBlank() else
         {
@@ -242,7 +249,7 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidAddFriend in case of success
      */
-    class func addFriendFromStringEncodedFriendRepresentation (encodedFriend: String) throws
+    func addFriendFromStringEncodedFriendRepresentation (encodedFriend: String) throws
     {
         typealias Characters = UserStringEncodingCharacters
         
@@ -297,12 +304,12 @@ class FriendsManager
         
         enHueco.appUser.friends[friend.username] = friend
         
-        try? PersistenceManager.persistData()
+        try? PersistenceManager.sharedManager().persistData()
         
         dispatch_async(dispatch_get_main_queue()) {
             
             //TODO :
-            //FriendsManager.sendFriendRequestToUser(friend)
+            //FriendsManager.sharedManager().sendFriendRequestToUser(friend)
         }
     }
     
