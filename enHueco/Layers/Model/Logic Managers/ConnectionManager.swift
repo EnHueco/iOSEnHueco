@@ -59,18 +59,26 @@ class ConnectionManager: NSObject
         request.HTTPBody = dictionaryJSONData
         request.setValue("application/json", forHTTPHeaderField: "Content-type")
         
-        alamoManager.request(request).response { (_, response, data, error) -> Void in
+        let alamoRequest = alamoManager.request(request)
+        
+        alamoRequest.response { (_, response, data, error) -> Void in
             
             completionQueue.addOperationWithBlock
             {
+                #if DEBUG
+                    debugPrint(alamoRequest); debugPrint(response)
+                #endif
+                
                 if let data = data where error == nil
                 {
-                    print(response?.statusCode)
                     successfulRequestBlock?(data: data)
                 }
                 else if let error = error
                 {
-                    print("\(error.code) : \(error)")
+                    #if DEBUG
+                        if let data = data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
+                    #endif
+                    
                     failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:request))
                 }
             }
@@ -79,17 +87,21 @@ class ConnectionManager: NSObject
     
     class func sendAsyncRequest(request: NSMutableURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
-        alamoManager.request(request).responseJSON(options: .MutableContainers) { (response) -> Void in
+        let alamoRequest = alamoManager.request(request)
+        
+        alamoRequest.responseJSON(options: .MutableContainers) { (response) -> Void in
             
             completionQueue.addOperationWithBlock
             {
-                print("Response status: \(response.response?.statusCode) for \(request.URLString)")
-                
+                #if DEBUG
+                    debugPrint(alamoRequest); debugPrint(response)
+                #endif
+
                 guard let value = response.result.value where response.result.isSuccess else
                 {
-                    print("\(response.result.error?.code) : \(response.result.error)")
-                    
-                    if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
+                    #if DEBUG
+                        if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
+                    #endif
                     
                     failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:response.result.error, request:request))
                     return
