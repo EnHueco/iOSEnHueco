@@ -81,6 +81,14 @@ extension NSDate
         
         self.init(timeInterval:0, sinceDate:date)
     }
+    
+    func serverFormattedString() -> String
+    {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        return dateStringFormatter.stringFromDate(self)
+    }
 }
 
 extension NSDateComponents

@@ -47,3 +47,8 @@
 
 "options" = "Opciones";
 "sorry_unknown_error" = "Lo sentimos, ocurrió un error desconocido";
+
+"turn_invisible_action_sheet_title" = "Selecciona el periodo";
+"turn_invisible_action_sheet_1_hour_20_minutes" = "1:20 horas";
+"turn_invisible_action_sheet_3_hours" = "3 horas";
+"turn_invisible_action_sheet_rest_of_day" = "Resto del día";

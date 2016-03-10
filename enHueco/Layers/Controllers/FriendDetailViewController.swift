@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import MRProgress
-import TSMessages
+
+
 
 class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate
 {
@@ -185,18 +185,14 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             
             alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
                 
-                MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
-                
+                EHProgressHUD.showSpinnerInView(self.view)
                 FriendsManager.sharedManager().deleteFriend(self.friend, completionHandler: { (success, error) -> () in
                     
-                    MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                    EHProgressHUD.dismissSpinnerForView(self.view)
 
                     guard success && error == nil else {
                         
-                        if let message = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
-                        {
-                            TSMessage.showNotificationInViewController(self, title: message, subtitle: nil, type: .Error)
-                        }
+                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                         return
                     }
                     

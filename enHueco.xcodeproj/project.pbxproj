@@ -77,11 +77,13 @@
 		F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8421C80781400390CF7 /* PersistenceManager.swift */; };
 		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
 		F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8461C81441600390CF7 /* FriendsManager.swift */; };
-		F183F8491C81454C00390CF7 /* UserStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* UserStateManager.swift */; };
+		F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* CurrentStateManager.swift */; };
 		F183F84D1C814E3A00390CF7 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */; };
 		F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8561C837FB500390CF7 /* PrivacyManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
+		F1B54B161C8FB7B40059F855 /* EHNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B54B151C8FB7B40059F855 /* EHNotifications.swift */; };
+		F1B54B181C8FBA6D0059F855 /* EHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B54B171C8FBA6D0059F855 /* EHProgressHUD.swift */; };
 		F1B8AD5C1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */; };
 		F1B8AD5E1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5D1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift */; };
 		F1B8AD601BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5F1BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift */; };
@@ -239,11 +241,13 @@
 		F183F8421C80781400390CF7 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PersistenceManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AccountManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8461C81441600390CF7 /* FriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendsManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F183F8481C81454C00390CF7 /* UserStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F183F8481C81454C00390CF7 /* CurrentStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurrentStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ScheduleManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8561C837FB500390CF7 /* PrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacyManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectCalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
+		F1B54B151C8FB7B40059F855 /* EHNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHNotifications.swift; sourceTree = "<group>"; };
+		F1B54B171C8FBA6D0059F855 /* EHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHProgressHUD.swift; sourceTree = "<group>"; };
 		F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFreeTimePeriodsSearchFriendToAddViewController.swift; sourceTree = "<group>"; };
 		F1B8AD5D1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift; sourceTree = "<group>"; };
 		F1B8AD5F1BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 		F183F84F1C82032100390CF7 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				F1B54B141C8FAD970059F855 /* Other */,
 				F1229C231A7495A200C4FDE2 /* Views */,
 				F1229C371A7495A200C4FDE2 /* Controllers */,
 				F1229C2C1A7495A200C4FDE2 /* Model */,
@@ -603,6 +608,15 @@
 			name = "Generic Managers";
 			sourceTree = "<group>";
 		};
+		F1B54B141C8FAD970059F855 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				F1B54B151C8FB7B40059F855 /* EHNotifications.swift */,
+				F1B54B171C8FBA6D0059F855 /* EHProgressHUD.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,7 +633,7 @@
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
-				F183F8481C81454C00390CF7 /* UserStateManager.swift */,
+				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
 				F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */,
 				F183F8421C80781400390CF7 /* PersistenceManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
@@ -892,6 +906,7 @@
 				F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */,
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,
 				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
+				F1B54B161C8FB7B40059F855 /* EHNotifications.swift in Sources */,
 				F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */,
 				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
@@ -901,6 +916,7 @@
 				F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */,
 				F183F83D1C7FF90900390CF7 /* main.m in Sources */,
 				F1B8AD5C1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift in Sources */,
+				F1B54B181C8FBA6D0059F855 /* EHProgressHUD.swift in Sources */,
 				F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */,
 				F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */,
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
@@ -945,7 +961,7 @@
 				F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */,
 				F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */,
 				F1B8AD5E1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift in Sources */,
-				F183F8491C81454C00390CF7 /* UserStateManager.swift in Sources */,
+				F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */,
 				F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */,
 				F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */,
 			);
@@ -1184,7 +1200,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"\"${PODS_ROOT}/Headers/Public\"",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncodde.enHueco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

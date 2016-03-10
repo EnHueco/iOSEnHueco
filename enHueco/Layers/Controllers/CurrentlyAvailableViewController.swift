@@ -124,11 +124,82 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func imInvisibleButtonPressed(sender: UIButton)
     {
-        enHueco.appUser.invisible = !enHueco.appUser.invisible
-        
-        UIView.animateWithDuration(0.2)
+        if enHueco.appUser.invisible
         {
-            self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+            turnVisible()
+        }
+        else
+        {
+            turnInvisible()
+        }
+    }
+    
+    private func turnInvisible ()
+    {
+        let turnInvisibleForInterval = { (interval: NSTimeInterval) -> Void in
+            
+            EHProgressHUD.showSpinnerInView(self.view)
+            PrivacyManager.sharedManager().turnInvisibleForTimeInterval(interval, completionHandler: { (success, error) -> Void in
+                
+                EHProgressHUD.dismissSpinnerForView(self.view)
+                
+                guard success && error == nil else
+                {
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    return
+                }
+                
+                UIView.animateWithDuration(0.2) {
+                    
+                    self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+                }
+            })
+        }
+
+        let controller = UIAlertController(title: "turn_invisible_action_sheet_title".localizedUsingGeneralFile(), message: nil, preferredStyle: .ActionSheet)
+        
+        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_1_hour_20_minutes".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+            
+            turnInvisibleForInterval(120 * 60)
+        }))
+        
+        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_3_hours".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+            
+            turnInvisibleForInterval(3 * 60 * 60)
+        }))
+        
+        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_rest_of_day".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+            
+            let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+            
+            let tomorrow = globalCalendar.startOfDayForDate(NSDate().addDays(1))
+            
+            turnInvisibleForInterval(tomorrow.timeIntervalSinceNow)
+        }))
+        
+        controller.addAction(UIAlertAction(title: "cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+        
+        presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    private func turnVisible()
+    {
+        EHProgressHUD.showSpinnerInView(self.view)
+        PrivacyManager.sharedManager().turnVisibleWithCompletionHandler { (success, error) -> Void in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
+            
+            guard success && error == nil else
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
+            }
+            
+            UIView.animateWithDuration(0.2) {
+                
+                self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+            }
         }
     }
     
@@ -147,14 +218,14 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func resetDataArrays()
     {
-        filteredFriendsAndFreeTimePeriods = UserStateManager.sharedManager().currentlyAvailableFriends()
+        filteredFriendsAndFreeTimePeriods = CurrentStateManager.sharedManager().currentlyAvailableFriends()
         
         if let instantFreeTimePeriod = enHueco.appUser.schedule.instantFreeTimePeriod
         {
             filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }
         
-        filteredSoonFreefriendsAndFreeTimePeriods = UserStateManager.sharedManager().soonAvailableFriendsWithinTimeInterval(3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = CurrentStateManager.sharedManager().soonAvailableFriendsWithinTimeInterval(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView()
@@ -340,8 +411,17 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         {
             if friend === enHueco.appUser
             {
-                UserStateManager.sharedManager().postInstantFreeTimePeriod(nil, completionHandler: { (succeeded) -> Void in
+                EHProgressHUD.showSpinnerInView(view)
+                CurrentStateManager.sharedManager().deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
                     
+                    EHProgressHUD.dismissSpinnerForView(self.view)
+
+                    guard success && error == nil else {
+                        
+                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                        return
+                    }
+
                 })
             }
             else if index == 0
@@ -371,5 +451,10 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localizedUsingGeneralFile())
 
         return rightUtilityButtons
+    }
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

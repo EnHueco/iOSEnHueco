@@ -193,7 +193,7 @@ class Event: EHSynchronizable, Comparable, NSCopying
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         
-        let globalCalendar = NSCalendar.currentCalendar()
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
         let startHourWeekDayConversionComponents = NSDateComponents()

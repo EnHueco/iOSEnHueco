@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TSMessages
+
 
 class AddEditEventViewController: UIViewController
 {
@@ -63,7 +63,7 @@ class AddEditEventViewController: UIViewController
         // If no weekdays selected
         if embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count == 0
         {
-            TSMessage.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), subtitle: "", type: TSMessageNotificationType.Warning)
+            EHNotifications.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .Warning)
             return
         }
         

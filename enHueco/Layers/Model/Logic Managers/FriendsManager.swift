@@ -75,9 +75,8 @@ class FriendsManager
                 NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
             }
             
-            }) { (error) -> () in
+        }) { (error) -> () in
                 
-                print(error)
         }
     }
     

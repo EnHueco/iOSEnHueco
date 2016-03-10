@@ -47,3 +47,8 @@
 
 "options" = "Options";
 "sorry_unknown_error" = "Sorry, an unknown error has occurred";
+
+"turn_invisible_action_sheet_title" = "Select period";
+"turn_invisible_action_sheet_1_hour_20_minutes" = "1:20 hours";
+"turn_invisible_action_sheet_3_hours" = "3 hours";
+"turn_invisible_action_sheet_rest_of_day" = "Rest of day";

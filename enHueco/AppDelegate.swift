@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import WatchConnectivity
 import FBSDKCoreKit
-import TSMessages
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -47,8 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: ProximityUpdatesManager.sharedManager())
-        
-        TSMessageView.appearance().titleFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
         
         return true
     }
@@ -138,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         if message["request"] as! String == "friendsCurrentlyInGap"
         {
             var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = UserStateManager.sharedManager().currentlyAvailableFriends()
+            let friendsCurrentlyFreeAndFreeTimePeriods = CurrentStateManager.sharedManager().currentlyAvailableFriends()
             
             var friendsArray = [[String : AnyObject]]()
             
@@ -168,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
         
-        let friendsToNotifyToUser = UserStateManager.sharedManager().friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        let friendsToNotifyToUser = CurrentStateManager.sharedManager().friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
         
         let currentDate = NSDate()
         
@@ -215,7 +213,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             
             dispatch_async(dispatch_get_main_queue())
             {
-                TSMessage.showNotificationWithTitle(notificationText, type: .Message)
+                //TODO: FIX
+                //TSMessage.showNotificationWithTitle(notificationText, type: .Message)
             }
         }
     }

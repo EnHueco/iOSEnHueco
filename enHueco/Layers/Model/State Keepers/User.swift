@@ -47,6 +47,9 @@ class User: EHSynchronizable
     ///Last time we notified the app user that this user was nearby
     var lastNotifiedNearbyStatusDate: NSDate?
     
+    ///User visibility state
+    var invisible = false
+    
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.username = username
@@ -71,6 +74,11 @@ class User: EHSynchronizable
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
         self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+        
+        if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
+        {
+            invisible = true
+        }
     }
     
     func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
@@ -80,6 +88,11 @@ class User: EHSynchronizable
         self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         self.phoneNumber = JSONDictionary["phoneNumber"] as? String
         self.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+        
+        if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
+        {
+            invisible = true
+        }
     }
     
     func addEvents(JSONDictionary: [String: AnyObject])

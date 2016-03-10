@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TSMessages
+
 
 class PrivacySettingsViewController: UITableViewController
 {
@@ -46,22 +46,30 @@ class PrivacySettingsViewController: UITableViewController
         
         if sender.on
         {
+            EHProgressHUD.showSpinnerInView(view)
+            
             PrivacyManager.sharedManager().turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
-                if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                EHProgressHUD.dismissSpinnerForView(self.view)
+                
+                if !success
                 {
-                    TSMessage.showNotificationWithTitle(errorReason, subtitle: nil, type: .Error)
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                     sender.on = !sender.on
                 }
             })
         }
         else
         {
+            EHProgressHUD.showSpinnerInView(view)
+
             PrivacyManager.sharedManager().turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
-                if let errorReason = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
+                EHProgressHUD.dismissSpinnerForView(self.view)
+
+                if !success
                 {
-                    TSMessage.showNotificationWithTitle(errorReason, subtitle: nil, type: .Error)
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                     sender.on = !sender.on
                 }
             })

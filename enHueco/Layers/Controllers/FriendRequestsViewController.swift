@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import MRProgress
-import TSMessages
+
+
 import SDWebImage
 
 class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, IncomingFriendRequestCellDelegate
@@ -37,7 +37,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         navigationController!.navigationBar.barTintColor = EHInterfaceColor.mainInterfaceColor
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
+        EHProgressHUD.showSpinnerInView(view)
 
         FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
     }
@@ -160,20 +160,17 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let indexPath = requestsTableView.indexPathForCell(cell)!
         let requestFriend = enHueco.appUser.incomingFriendRequests[indexPath.row]
 
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
-
+        EHProgressHUD.showSpinnerInView(view)
         FriendsManager.sharedManager().acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
             
             guard success && error == nil else {
                 
-                if let message = error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage()
-                {
-                    TSMessage.showNotificationInViewController(self, title: message, subtitle: nil, type: .Error)
-                }
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
             
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             self.requestsTableView.reloadData()
         }
     }
@@ -187,7 +184,8 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
     {
-        MRProgressOverlayView.dismissAllOverlaysForView(view, animated: true)
+        
+        EHProgressHUD.dismissAllSpinnersForView(view)
         requestsTableView.reloadData()
     }
 }

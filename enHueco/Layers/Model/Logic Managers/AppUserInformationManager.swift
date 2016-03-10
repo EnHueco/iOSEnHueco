@@ -41,9 +41,9 @@ class AppUserInformationManager
                 AppUserInformationManager.sharedManager().downloadProfilePicture()
             }
             
-            }) { (error) -> () in
-                
-                print(error)
+        }) { (error) -> () in
+            
+            
         }
     }
 
@@ -69,8 +69,8 @@ class AppUserInformationManager
                 appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
             }
             
-            }) { (error) -> () in
-                print(error)
+        }) { (error) -> () in
+            
         }
     }
     
@@ -94,7 +94,6 @@ class AppUserInformationManager
             
         }, onFailure: { (error) -> () in
                 
-            print(error)
         })
     }
     
@@ -114,10 +113,9 @@ class AppUserInformationManager
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
                 })
-                
+            
             }) { (error) -> () in
                     
-                print(error)
             }
         }
     }

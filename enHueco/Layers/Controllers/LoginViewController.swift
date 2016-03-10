@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import TSMessages
-import MRProgress
+
+
 
 @IBDesignable class LoginViewController: UIViewController
 {
@@ -72,19 +72,17 @@ import MRProgress
             /////////
         }
 
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
+        EHProgressHUD.showSpinnerInView(view)
 
         AccountManager.loginWithUsername(username, password: password) { (success, error) -> Void in
             
+            EHProgressHUD.dismissSpinnerForView(self.view)
+            
             guard success && error == nil else {
                 
-                TSMessage.showNotificationWithTitle("IncorrectCredentialsMessage".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
-                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
-
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: "IncorrectCredentialsMessage".localizedUsingGeneralFile())
                 return
             }
-            
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             
             if enHueco.appUser.imageURL == nil
             {

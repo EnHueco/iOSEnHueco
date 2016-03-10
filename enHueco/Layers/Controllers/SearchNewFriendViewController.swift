@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import MRProgress
-import TSMessages
+
+
 
 class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
 {
@@ -111,19 +111,18 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         let indexPath = searchResultsTableView.indexPathForCell(cell)!
         let friend = searchResults[indexPath.row]
         
-        MRProgressOverlayView.showOverlayAddedTo(view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true).setTintColor(EHInterfaceColor.mainInterfaceColor)
-        
+        EHProgressHUD.showSpinnerInView(view)
         FriendsManager.sharedManager().sendFriendRequestToUser(friend) { (success, error) -> () in
             
-            MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+            EHProgressHUD.dismissSpinnerForView(self.view)
 
             guard success && error == nil else
             {
-                TSMessage.showNotificationWithTitle("ErrorSendingRequest".localizedUsingGeneralFile(), type: TSMessageNotificationType.Error)
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
             
-            TSMessage.showNotificationWithTitle("RequestSentConfirmation".localizedUsingGeneralFile(), type: TSMessageNotificationType.Success)
+            EHNotifications.showNotificationInViewController(self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .Success)
             
             self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }

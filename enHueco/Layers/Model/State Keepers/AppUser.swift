@@ -26,10 +26,7 @@ class AppUser: User
     
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
-    
-    ///User visibility state
-    var invisible = false
-    
+        
     init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.token = token
@@ -171,8 +168,9 @@ class AppUser: User
         ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], onSuccess: { (JSONResponse) -> () in
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
-            }) { (error) -> () in
-                print(error)
+        
+        }) { (error) -> () in
+        
         }
     }
 }

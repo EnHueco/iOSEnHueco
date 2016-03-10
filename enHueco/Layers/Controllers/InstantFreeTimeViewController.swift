@@ -101,7 +101,16 @@ class InstantFreeTimeViewController: UIViewController
         
         let newFreeTimePeriod = Event(type: .FreeTime, name: nameTextField.text, startHour: startHourComponents, endHour: endHourComponents, location: locationTextField.text, ID: nil, lastUpdatedOn: NSDate())
         
-        UserStateManager.sharedManager().postInstantFreeTimePeriod(newFreeTimePeriod) { succeeded in
+        EHProgressHUD.showSpinnerInView(view)
+        CurrentStateManager.sharedManager().postInstantFreeTimePeriod(newFreeTimePeriod) { (success, error) in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
+            
+            guard success && error == nil else {
+                
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
+            }
             
             self.dismiss()
         }
