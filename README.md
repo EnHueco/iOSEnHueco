@@ -24,9 +24,9 @@ This repository contains the iOS mobile version of the platform. It allows iOS u
 
 ### Screenshots
 <img src="https://cloud.githubusercontent.com/assets/8212679/13743726/8791c3e6-e9b1-11e5-87d6-8b4f46208ac2.png" alt="alt text" width="213" height="338">
-<img src="https://cloud.githubusercontent.com/assets/8212679/13743727/87b048fc-e9b1-11e5-89ae-362b24438921.png" alt="alt text" width="213" height="338">
 <img src="https://cloud.githubusercontent.com/assets/8212679/13743730/87b55fa4-e9b1-11e5-8139-34dbc6ab427a.png" alt="alt text" width="213" height="338">
 <img src="https://cloud.githubusercontent.com/assets/8212679/13743729/87b4f6c2-e9b1-11e5-8a52-55677e3e72a1.png" alt="alt text" width="213" height="338">
+<img src="https://cloud.githubusercontent.com/assets/8212679/13743778/c27ff586-e9b1-11e5-889f-935f69d775ce.png" alt="alt text" width="213" height="338">
 
 
 ### Development
