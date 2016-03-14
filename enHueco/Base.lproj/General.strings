@@ -1,0 +1,54 @@
+/*
+  globalStrings.strings
+  enHueco
+
+  Created by Diego Montoya on 9/3/15.
+  Copyright © 2015 Diego Gómez. All rights reserved.
+*/
+
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"Sunday" = "Sunday";
+
+"FreeTime" = "FreeTime";
+"Class" = "Class";
+
+"NobodyAvailableMessage" = "Nobody around... \n Nobody is currently available";
+"Now" = "Now";
+"Soon" = "Soon";
+"Delete" = "Delete";
+"Call" = "Call";
+
+"NoFriendsMessage" = "No friends. \r\n Tap + to add one!";
+
+"AuthenticationRequired" = "Se necesita autenticación";
+
+"IncorrectCredentialsMessage" = "El usuario o la contraseña son incorrectos";
+
+"RequestSentConfirmation" = "¡Solicitud Enviada!";
+"ErrorSendingRequest" = "Hubo un error enviando la solicitud...";
+
+"AddEvents" = "Agregar Eventos";
+"AddEvent" = "Add Event";
+"EditEvent" = "Edit event";
+"DeleteEvents" = "Delete eventos";
+
+"SelectAtLeastOneDayErrorMessage" = "Selecciona por lo menos un día";
+
+"CouldNotAddEventErrorMessage" = "Imposible agregar evento";
+"EventOverlapExplanation" = "El evento que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...";
+"OKIwillCheck" = "OK, lo revisaré.";
+
+"AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";
+
+"options" = "Options";
+"sorry_unknown_error" = "Sorry, an unknown error has occurred";
+
+"turn_invisible_action_sheet_title" = "Select period";
+"turn_invisible_action_sheet_1_hour_20_minutes" = "1:20 hours";
+"turn_invisible_action_sheet_3_hours" = "3 hours";
+"turn_invisible_action_sheet_rest_of_day" = "Rest of day";

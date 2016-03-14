@@ -1,0 +1,54 @@
+/* 
+  globalStrings.strings
+  enHueco
+
+  Created by Diego Montoya on 9/3/15.
+  Copyright © 2015 Diego Gómez. All rights reserved.
+*/
+
+"Monday" = "Lunes";
+"Tuesday" = "Martes";
+"Wednesday" = "Miércoles";
+"Thursday" = "Jueves";
+"Friday" = "Viernes";
+"Saturday" = "Sábado";
+"Sunday" = "Domingo";
+
+"FreeTime" = "Hueco";
+"Class" = "Clase";
+
+"NobodyAvailableMessage" = "Nadie por ahí... \n No tienes amigos en hueco";
+"Now" = "Ahora";
+"Soon" = "Próximamente";
+"Delete" = "Eliminar";
+"Call" = "Llamar";
+
+"NoFriendsMessage" = "No tienes amigos. \r\n Selecciona + para agregar uno";
+
+"AuthenticationRequired" = "Se necesita autenticación";
+
+"IncorrectCredentialsMessage" = "El usuario o la contraseña son incorrectos";
+
+"RequestSentConfirmation" = "¡Solicitud Enviada!";
+"ErrorSendingRequest" = "Hubo un error enviando la solicitud...";
+
+"AddEvents" = "Agregar Eventos";
+"AddEvent" = "Agregar Evento";
+"EditEvent" = "Editar Evento";
+"DeleteEvents" = "Borrar Eventos";
+
+"SelectAtLeastOneDayErrorMessage" = "Selecciona por lo menos un día";
+
+"CouldNotAddEventErrorMessage" = "Imposible agregar evento";
+"EventOverlapExplanation" = "El evento que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...";
+"OKIwillCheck" = "OK, lo revisaré.";
+
+"AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";
+
+"options" = "Opciones";
+"sorry_unknown_error" = "Lo sentimos, ocurrió un error desconocido";
+
+"turn_invisible_action_sheet_title" = "Selecciona el periodo";
+"turn_invisible_action_sheet_1_hour_20_minutes" = "1:20 horas";
+"turn_invisible_action_sheet_3_hours" = "3 horas";
+"turn_invisible_action_sheet_rest_of_day" = "Resto del día";

@@ -22,5 +22,7 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 
+iOSInjectionProject/
+
 ## Pods
 Pods/

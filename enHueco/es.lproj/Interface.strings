@@ -1,0 +1,30 @@
+
+/* Class = "WKInterfaceLabel"; text = "↙"; ObjectID = "8oW-ys-vde"; */
+"8oW-ys-vde.text" = "↙";
+
+/* Class = "WKInterfaceController"; title = "En Hueco"; ObjectID = "AgC-eL-Hgc"; */
+"AgC-eL-Hgc.title" = "En Hueco";
+
+/* Class = "WKInterfaceLabel"; text = "Parece que no hay amigos en hueco..."; ObjectID = "DAy-FH-oYM"; */
+"DAy-FH-oYM.text" = "Parece que no hay amigos en hueco...";
+
+/* Class = "WKInterfaceButton"; title = "Llamar"; ObjectID = "OD1-Yi-jiG"; */
+"OD1-Yi-jiG.title" = "Llamar";
+
+/* Class = "WKInterfaceLabel"; text = "↙"; ObjectID = "RnG-9f-BlJ"; */
+"RnG-9f-BlJ.text" = "↙";
+
+/* Class = "WKInterfaceLabel"; text = "Alert Label"; ObjectID = "XkS-y5-khE"; */
+"XkS-y5-khE.text" = "Alert Label";
+
+/* Class = "WKInterfaceLabel"; text = "10:30 AM"; ObjectID = "dSE-wu-X5c"; */
+"dSE-wu-X5c.text" = "10:30 AM";
+
+/* Class = "WKInterfaceLabel"; text = "Pepito Perez"; ObjectID = "k61-8E-2DK"; */
+"k61-8E-2DK.text" = "Pepito Perez";
+
+/* Class = "WKInterfaceLabel"; text = "10:30 AM"; ObjectID = "qhh-L4-11a"; */
+"qhh-L4-11a.text" = "10:30 AM";
+
+/* Class = "WKInterfaceLabel"; text = "Pepito Perez"; ObjectID = "ufL-GW-iea"; */
+"ufL-GW-iea.text" = "Pepito Perez";
