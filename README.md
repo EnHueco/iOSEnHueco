@@ -31,11 +31,7 @@ This repository contains the iOS mobile version of the platform. It allows iOS u
 
 ### Development
 
-Want to contribute? Great! You are very welcome to fork the repository and help as desired. Current development is being made using AndroidStudio, and it is recommended.
-
-### Todos
- - Write Tests
- - Add View Controllers Documentation
+Want to contribute? Great! You are very welcome to fork the repository and help as desired.
 
 ### License
 MIT
