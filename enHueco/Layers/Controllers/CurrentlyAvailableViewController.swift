@@ -160,7 +160,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         
         controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_1_hour_20_minutes".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
             
-            turnInvisibleForInterval(120 * 60)
+            turnInvisibleForInterval(80 * 60)
         }))
         
         controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_3_hours".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
