@@ -64,6 +64,7 @@ PODS:
   - QRCodeReaderViewController (3.5.2)
   - ReachabilitySwift (2.3.3)
   - Regex (0.3.0)
+  - RKNotificationHub (2.0.1)
   - RSKImageCropper (1.5.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - QRCode
   - QRCodeReaderViewController (~> 3.5.2)
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - RKNotificationHub
   - RSKImageCropper
   - SDWebImage (~> 3.7)
   - SwiftDataStructures
@@ -146,6 +148,7 @@ SPEC CHECKSUMS:
   QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   Regex: 6bfb554ad7d5b1be9cfc57ab1fe2fb6cee45a344
+  RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
   RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SwiftDataStructures: 472951e4ea87b535a400fe4967427b041be1e313

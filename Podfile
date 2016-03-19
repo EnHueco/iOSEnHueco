@@ -29,6 +29,7 @@ target 'enHueco' do
     pod 'SwiftDataStructures'
     pod 'QRCode'
     pod 'CSwiftV'
+    pod 'RKNotificationHub'
 end
 
 target 'enHuecoTests' do

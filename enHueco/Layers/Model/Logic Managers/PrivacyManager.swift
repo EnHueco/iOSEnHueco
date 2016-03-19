@@ -10,9 +10,9 @@ import Foundation
 
 enum PrivacySetting: String
 {
-    case ShowEventNames = "show_event_names"
-    case ShowEventLocation = "show_event_locations"
-    case ShowUserIsNearby = "show_user_is_nearby"
+    case ShowEventNames = "shares_event_names"
+    case ShowEventLocation = "shares_event_locations"
+    case ShowUserIsNearby = "shares_user_nearby"
 }
 
 /// Policy applied to the group of friends it accepts for parameter.
