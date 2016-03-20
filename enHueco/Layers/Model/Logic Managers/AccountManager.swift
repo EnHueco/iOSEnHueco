@@ -24,9 +24,6 @@ class AccountManager
     {
         let params = ["user_id":username, "password":password]
         
-        let a = (1..<3)
-        
-        
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!)
         request.HTTPMethod = "POST"
         

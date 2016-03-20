@@ -41,7 +41,7 @@ class PrivacyManager
         
         let parameters = [setting.rawValue : "false"]
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, onSuccess: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -73,7 +73,7 @@ class PrivacyManager
         
         let parameters = [setting.rawValue : "true"]
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, onSuccess: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -90,7 +90,7 @@ class PrivacyManager
     /// Makes the user invisible to everyone else
     func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: (success: Bool, error: ErrorType?) -> Void)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
@@ -100,7 +100,7 @@ class PrivacyManager
             "valid_until" : NSDate().dateByAddingTimeInterval(timeInterval).serverFormattedString()
         ]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : instantEvent], onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
             enHueco.appUser.invisible = true
             
@@ -119,11 +119,17 @@ class PrivacyManager
     /// Makes the user visible to everyone else
     func turnVisibleWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : ""], onSuccess: { (JSONResponse) -> () in
+        let instantEvent =
+        [
+            "type" : "INVISIBILITY",
+            "valid_until" : NSDate()
+        ]
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
             enHueco.appUser.invisible = false
             

@@ -89,9 +89,9 @@ class CurrentStateManager
      */
     func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: (success: Bool, error: ErrorType?) -> Void )
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
-        request.HTTPMethod = "GET"
+        request.HTTPMethod = "PUT"
         
         var instantEvent : [String : AnyObject] =
         [
@@ -102,7 +102,7 @@ class CurrentStateManager
         instantEvent["name"] = newFreeTimePeriod.name
         instantEvent["location"] = newFreeTimePeriod.location
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : instantEvent], onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
             
@@ -120,21 +120,27 @@ class CurrentStateManager
     
     func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
-        request.HTTPMethod = "GET"
+        request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : ""], onSuccess: { (JSONResponse) -> () in
+        let instantEvent =
+        [
+            "type" : "EVENT",
+            "valid_until" : NSDate()
+        ]
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
                         
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-            }, onFailure: {(compoundError) -> () in
+        }, onFailure: {(compoundError) -> () in
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(success: false, error: compoundError.error)
-                }
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: compoundError.error)
+            }
         })
     }
 }
