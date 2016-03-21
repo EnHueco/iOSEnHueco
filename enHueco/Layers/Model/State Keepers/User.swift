@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A user.
 class User: EHSynchronizable
 {
     let username: String

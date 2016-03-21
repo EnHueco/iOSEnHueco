@@ -16,6 +16,7 @@ class UserStringEncodingCharacters
     static let hourMinuteSeparationCharacter = ":"
 }
 
+/// The user that uses the app.
 class AppUser: User
 {
     /// Session token

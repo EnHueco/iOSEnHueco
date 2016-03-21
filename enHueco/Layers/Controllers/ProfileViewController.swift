@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             startAnimatingImageLoadingIndicator()
         }
         
-        ImagePersistenceManager.sharedManager().loadImageFromPath(ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")) {(image) -> () in
+        PersistenceManager.sharedManager().loadImageFromPath(PersistenceManager.sharedManager().documentsPath + "profile.jpg") {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
             {

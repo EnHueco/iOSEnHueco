@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// URLS
 class EHURLS
 {
     static let Domain = "enhueco.uniandes.edu.co"
@@ -23,6 +24,7 @@ class EHURLS
     static let ImmediateEventsSegment = "/events/immediate"
 }
 
+/// Default parameters
 class EHParameters
 {
     static let UserID = "X-USER-ID"

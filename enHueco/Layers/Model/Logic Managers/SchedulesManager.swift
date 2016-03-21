@@ -1,5 +1,5 @@
 //
-//  EventsManager.swift
+//  SchedulesManager.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 2/26/16.
@@ -9,6 +9,10 @@
 import Foundation
 import EventKit
 
+/** 
+Handles operations related to schedules construction like getting schedules for common free time periods and
+schedules importing from external services
+*/
 class ScheduleManager
 {
     private static let instance = ScheduleManager()

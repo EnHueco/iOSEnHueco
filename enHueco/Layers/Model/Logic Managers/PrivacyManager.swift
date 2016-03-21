@@ -8,6 +8,13 @@
 
 import Foundation
 
+/**
+ Available privacy settings
+ 
+ - ShowEventNames:    If event names will be shown to a given group
+ - ShowEventLocation: If event locations will be shown to a given group
+ - ShowUserIsNearby:  If a given group can find out that the AppUser is nearby
+ */
 enum PrivacySetting: String
 {
     case ShowEventNames = "shares_event_names"
@@ -21,6 +28,7 @@ enum PrivacyPolicy
     case EveryoneExcept([User]), Only([User])
 }
 
+/// Handles privacy settings
 class PrivacyManager
 {
     private static let instance = PrivacyManager()

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A schedule
 class Schedule: NSObject, NSCoding
 {
     ///DaySchedule array that makes the days of the week

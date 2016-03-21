@@ -10,11 +10,14 @@ import Foundation
 import Alamofire
 import Alamofire_Synchronous
 
+/// HTTP Methods
 enum HTTPMethod: String
 {
     case GET="GET", POST="POST", DELETE="DELETE"
 }
 
+/** An error which contains the error that occurred, along with the request
+that triggered it */
 struct ConnectionManagerCompoundError: ErrorType
 {
     var error: ErrorType?
@@ -25,6 +28,7 @@ typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) ->
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (compoundError: ConnectionManagerCompoundError) -> ()
 
+/// Handles all generic network-related operations. **All** network operations should be executed using this manager.
 class ConnectionManager: NSObject
 {
     static let completionQueue: NSOperationQueue =

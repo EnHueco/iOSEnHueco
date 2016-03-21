@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ Handles  synchronization with the server of data that we must ensure is uplodaded when a connection is available in case the upload fails.
+ 
+ The Synchronization Manager maintains a persistent queue to guarantee that operations are executed in order
+ and when a connection is available.
+*/
 class SynchronizationManager: NSObject, NSCoding
 {
     // TODO: Should be a struct but NSCoding doesn't let us.
@@ -163,11 +169,7 @@ class SynchronizationManager: NSObject, NSCoding
             }
             
             pendingRequestsQueue.removeFirst()
-            
-            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["updated_on"] as! String)!
-            
-            if serverLastUpdatedOn < pendingRequest.associatedObject.lastUpdatedOn { return true }
-            
+                        
             pendingRequest.successfulRequestBlock?(JSONResponse: responseDictionary)
             return true
         }

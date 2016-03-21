@@ -158,6 +158,7 @@ extension String
         return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
     
+    /// Localizes the receiver using the General.strings file
     func localizedUsingGeneralFile() -> String
     {
         return localizedUsingFile("General")
@@ -176,6 +177,7 @@ extension String
 
 extension UIImage
 {
+    /// Initializes an image with the given size containing a given color
     convenience init(color: UIColor, size: CGSize = CGSizeMake(1, 1))
     {
         let rect = CGRectMake(0, 0, size.width, size.height)
@@ -190,6 +192,7 @@ extension UIImage
 
 extension NSMutableURLRequest
 {
+    /// Sets the default session headers to a request
     func setEHSessionHeaders()
     {
         let appUser = enHueco.appUser

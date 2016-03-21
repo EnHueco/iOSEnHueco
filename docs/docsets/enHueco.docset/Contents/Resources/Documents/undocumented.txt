@@ -1,0 +1,281 @@
+FreeTimeCell.swift
+	class FreeTimeCell: UITableViewCell
+CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift
+	class CommonFreeTimePeriodsSelectedFriendsCollectionViewCell: UICollectionViewCell
+SettingsViewController.swift
+	class SettingsViewController: UIViewController
+InstantFreeTimeViewController.swift
+	class InstantFreeTimeViewController: UIViewController
+CurrentlyFreeNavigationViewController.swift
+	class CurrentlyFreeNavigationViewController: UINavigationController
+Colors.swift
+	class EHInterfaceColor: NSObject
+LoginViewController.swift
+	@IBDesignable class LoginViewController: UIViewController
+DaySchedule.swift
+	private var mutableEvents = [Event]()
+	var events:[Event]
+	init(weekDayName:String)
+	required init?(coder decoder: NSCoder)
+	func encodeWithCoder(coder: NSCoder)
+	func setEvents(events: [Event])
+	func removeEvent(event: Event) -> Bool
+	func eventWithStartHour(startHour: NSDateComponents) -> Event?
+SearchSelectFriendsViewController.swift
+	protocol SearchSelectFriendsViewControllerDelegate: class
+	class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
+ProfileViewController.swift
+	class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
+User.swift
+	let username: String
+	var firstNames: String
+	var lastNames: String
+	var name: String { return "\(firstNames) \(lastNames)" }
+	var imageURL: NSURL?
+	var phoneNumber: String! = ""
+	var schedule: Schedule
+	var currentBSSID: String?
+	init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+	convenience init(JSONDictionary: [String : AnyObject])
+	func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
+	func addEvents(JSONDictionary: [String: AnyObject])
+	func nextFreeTimePeriod() -> Event?
+	func currentBSSIDTimeToLiveReached (timer: NSTimer)
+	required init?(coder decoder: NSCoder)
+	override func encodeWithCoder(coder: NSCoder)
+	func replace(target: String, withString: String) -> String
+EHNotifications.swift
+	enum EHNotificationsNotificationType
+	enum EHNotificationsNotificationPosition
+	class EHNotifications: NSObject, TSMessageViewProtocol
+SettingsEmbeddedTableViewController.swift
+	class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDelegate
+SearchFriendCell.swift
+	@objc protocol SearchFriendCellDelegate: class
+	class SearchFriendCell: UITableViewCell
+FriendsSplitViewController.swift
+	class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDelegate
+ScheduleViewController.swift
+	class ScheduleViewController: UIViewController
+AddFriendByQRViewController.swift
+	class AddFriendByQRViewController: UIViewController, QRCodeReaderDelegate
+FriendsViewController.swift
+	class FriendsViewController: UIViewController
+	class FriendsViewController : UIViewController
+	class FriendsViewController : UIViewController
+	class FriendsViewController : UIViewController
+EnHueco.swift
+	class EHSystemNotification
+	private init()
+	func createTestAppUser ()
+	func callFriend(phoneNumber : String)
+	func whatsappMessageTo(friendABID : NSNumber?)
+	func getFriendABID(phoneNumber : String, completionHandler : (NSNumber) -> ())
+CommonFreeTimePeriodsSearchFriendToAddViewController.swift
+	protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class
+	class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+EHProgressHUD.swift
+	class EHProgressHUD: NSObject
+ScheduleCalendarViewController.swift
+	class ScheduleCalendarViewController: TKCalendarDayViewController
+AccountManager.swift
+	private static let instance = AccountManager()
+	private init() {}
+	class func sharedManager() -> AccountManager
+	func logOut()
+ViewQRViewController.swift
+	class ViewQRViewController: UIViewController
+PrivacySettingsViewController.swift
+	class PrivacySettingsViewController: UITableViewController
+OutgoingFriendRequestCell.swift
+	class OutgoingFriendRequestCell: UITableViewCell
+SchedulesManager.swift
+	private static let instance = ScheduleManager()
+	private init() {}
+	class func sharedManager() -> ScheduleManager
+EmbeddedAddEditEventTableViewController.swift
+	class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate
+AddEditEventViewController.swift
+	class AddEditEventViewController: UIViewController
+EHURLS.swift
+	static let Domain = "enhueco.uniandes.edu.co"
+	static let Base = "https://enhueco.uniandes.edu.co/api"
+	static let MeSegment = "/me/"
+	static let MeImageSegment = "/me/image/"
+	static let AuthSegment = "/auth/"
+	static let FriendsSegment = "/friends/"
+	static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
+	static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
+	static let UsersSegment = "/users/"
+	static let EventsSegment = "/gaps/"
+	static let LocationReportSegment = "/me/location/friends/"
+	static let ImmediateEventsSegment = "/events/immediate"
+	static let UserID = "X-USER-ID"
+	static let Token = "X-USER-TOKEN"
+Schedule.swift
+	override init()
+	func instantFreeTimePeriodTimeToLiveReached(timer: NSTimer)
+	required init?(coder decoder: NSCoder)
+	func encodeWithCoder(coder: NSCoder)
+Array+Sorting.swift
+	func findValueInSortedArray(value: Element) -> (Int, Bool)
+	mutating func insertInSortedArray(newElement: Element)
+	func getIndexInSortedArray(value: Element) -> Int?
+SelectCalendarViewController.swift
+	class SelectCalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate
+MainTabBarViewController.swift
+	class MainTabBarViewController: UITabBarController
+CurrentlyAvailableViewController.swift
+	class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
+FriendsCell.swift
+	class FriendsCell: UITableViewCell
+EHSynchronizable.swift
+	var ID: String!
+	var lastUpdatedOn: NSDate
+	init(ID: String!, lastUpdatedOn: NSDate)
+	required init?(coder decoder: NSCoder)
+	func encodeWithCoder(coder: NSCoder)
+	func isOutdatedBasedOnDate(date: NSDate) -> Bool
+ProximityUpdateManager.swift
+	private init() {}
+	static let ProximityUpdatesManagerDidReceiveProximityUpdates = "ProximityUpdatesManagerDidReceiveProximityUpdates"
+	enum ProximityUpdatesManagerReportingCompletionStatus
+	private static let instance = ProximityUpdatesManager()
+	static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
+	static let backgroundFetchIntervalAfterDayOver = 7*3600.0
+	private override init()
+	class func sharedManager() -> ProximityUpdatesManager
+	func proximityInformationRefreshTimerTicked(timer:NSTimer)
+	func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool
+	static func currentBSSID() -> String?
+	func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status: ProximityUpdatesManagerReportingCompletionStatus) -> ())
+	func updateBackgroundFetchInterval()
+PopOverMenuViewController.swift
+	@objc protocol PopOverMenuViewControllerDelegate: class
+	class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDelegate
+FriendRequestsViewController.swift
+	class FriendRequestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, IncomingFriendRequestCellDelegate
+PersistenceManager.swift
+	private static let instance = PersistenceManager()
+	enum PersistenceManagerError: ErrorType
+	private init()
+	class func sharedManager() -> PersistenceManager
+	func deleteAllPersistenceData()
+	func saveImage (data: NSData, path: String, onSuccess: () -> ())
+	func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ())
+ConnectionManager.swift
+	case GET="GET", POST="POST", DELETE="DELETE"
+	case GET="GET", POST="POST", DELETE="DELETE"
+	case GET="GET", POST="POST", DELETE="DELETE"
+	var error: ErrorType?
+	var request: NSURLRequest
+	static let completionQueue: NSOperationQueue =
+	private static let alamoManager: Alamofire.Manager =
+	class func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+	class func sendAsyncDataRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]? = nil, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+	class func sendAsyncRequest(request: NSMutableURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+	class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
+	protocol HTTPRequestResponseManagerProtocol
+GlobalConstants.swift
+	public class GlobalConstants
+EHUserDefaultsKeys.swift
+	class EHUserDefaultsKeys: NSObject
+AddFriendViewController.swift
+	class AddFriendViewController: UIViewController
+AppDelegate.swift
+	class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
+SearchNewFriendViewController.swift
+	class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
+AppUser.swift
+	class UserStringEncodingCharacters
+	var outgoingFriendRequests = [User]()
+	var incomingFriendRequests = [User]()
+	init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+	convenience init(JSONDictionary: [String : AnyObject])
+	required init?(coder decoder: NSCoder)
+	override func encodeWithCoder(coder: NSCoder)
+	func fetchUpdatesForFriendLocations (successHandler: () -> (), failureHandler: () -> ())
+	func stringEncodedUserRepresentation () -> String
+	func pushPhoneNumber(newNumber : String)
+IncomingFriendRequestCell.swift
+	@objc protocol IncomingFriendRequestCellDelegate: class
+	class IncomingFriendRequestCell: UITableViewCell
+Event.swift
+	case FreeTime = "FREE_TIME", Class = "CLASS"
+	case FreeTime = "FREE_TIME", Class = "CLASS"
+	weak var daySchedule: DaySchedule!
+	var name:String?
+	var location: String?
+	var type: EventType
+	init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
+	required init?(coder decoder: NSCoder)
+	convenience init(JSONDictionary: [String : AnyObject])
+	func replaceValuesWithThoseOfTheEvent(event: Event)
+	override func encodeWithCoder(coder: NSCoder)
+	func toJSONObject (associatingUser user: User? = nil) -> [String : AnyObject]
+	func localWeekDay() -> Int
+	func copyWithZone(zone: NSZone) -> AnyObject
+	func < (lhs: Event, rhs: Event) -> Bool
+	func == (lhs: Event, rhs: Event) -> Bool
+PrivacyManager.swift
+	case ShowEventNames = "shares_event_names"
+	case ShowEventLocation = "shares_event_locations"
+	case ShowUserIsNearby = "shares_user_nearby"
+	case EveryoneExcept([User]), Only([User])
+	case EveryoneExcept([User]), Only([User])
+	private static let instance = PrivacyManager()
+	private init() {}
+	class func sharedManager() -> PrivacyManager
+FriendDetailViewController.swift
+	class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate
+FriendsNavigationViewController.swift
+	class FriendsNavigationViewController: UINavigationController
+ExtensionsAndUtilities.swift
+	struct Either<T1, T2>
+	func >(lhs: NSDate, rhs: NSDate) -> Bool
+	func <(lhs: NSDate, rhs: NSDate) -> Bool
+	func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents
+	mutating func removeObject<U: Equatable>(object: U) -> Bool
+	func isBlank() -> Bool
+	class Wrapper<T>
+ChooseFriendsPrivacySettingsViewController.swift
+	class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelectFriendsViewControllerDelegate
+SynchronizationManager.swift
+	class PendingRequest: NSObject, NSCoding
+	private static var instance: SynchronizationManager?
+	let retryQueue = NSOperationQueue()
+	private override init()
+	required init?(coder decoder: NSCoder)
+	class func sharedManager() -> SynchronizationManager
+	func persistData() -> Bool
+	func encodeWithCoder(coder: NSCoder)
+	private func addPendingRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
+EnHuecoNowCollectionViewCell.swift
+	class EnHuecoNowCollectionViewCell: UICollectionViewCell
+PopOverMenuTableViewCell.swift
+	class PopOverMenuTableViewCell: UITableViewCell
+CommonGapsViewController.swift
+	class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate
+AvailableFriendCell.swift
+	class AvailableFriendCell: SWTableViewCell
+ImportProfileImageViewController.swift
+	class ImportProfileImageViewController: UIViewController
+CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift
+	class CommonFreeTimePeriodsSearchFriendToAddResultsCell: UITableViewCell
+CurrentStateManager.swift
+	private static let instance = CurrentStateManager()
+	private init() {}
+	class func sharedManager() -> CurrentStateManager
+	func friendsCurrentlyNearby() -> [User]
+	func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
+FriendsManager.swift
+	private static let instance = FriendsManager()
+	private init() {}
+	class func sharedManager() -> FriendsManager
+AppUserInformationManager.swift
+	private static let instance = AppUserInformationManager()
+	private init() {}
+	class func sharedManager() -> AppUserInformationManager
+	func fetchAppUser ()
+	func pushProfilePicture(image: UIImage)
+	func downloadProfilePicture()

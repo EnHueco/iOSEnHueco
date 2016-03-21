@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Handles operations related to the users' current state (i.e. users' availability (EnHueco's core services))
 class CurrentStateManager
 {
     private static let instance = CurrentStateManager()

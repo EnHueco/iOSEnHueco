@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager
 {
     private static let instance = FriendsManager()

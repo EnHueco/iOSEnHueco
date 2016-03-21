@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 public class GlobalConstants
 {
     struct Schedule

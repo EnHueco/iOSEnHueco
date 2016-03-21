@@ -8,6 +8,9 @@
 
 import Foundation
 
+/** Handles fetching and sending of the AppUser's basic information like names, profile picture, username,
+ phone number, and schedule. (Friends are not included)
+*/
 class AppUserInformationManager
 {
     private static let instance = AppUserInformationManager()
@@ -47,6 +50,9 @@ class AppUserInformationManager
         }
     }
 
+    /** Fetches the AppUser's basic information like names, profile picture URL, username,
+     phone number, and schedule. (Friends are not included)
+     */
     func fetchUpdatesForAppUserAndSchedule ()
     {
         let appUser = enHueco.appUser
@@ -108,8 +114,8 @@ class AppUserInformationManager
             
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
                 
-                let path = ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")
-                ImagePersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
+                let path = PersistenceManager.sharedManager().documentsPath + "/profile.jpg"
+                PersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
                     
                     NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
                 })

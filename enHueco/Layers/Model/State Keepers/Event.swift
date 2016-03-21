@@ -8,11 +8,13 @@
 
 import UIKit
 
+/// The type of the event
 enum EventType: String
 {
     case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
+/// A calendar event (class or free time at the moment)
 class Event: EHSynchronizable, Comparable, NSCopying
 {
     weak var daySchedule: DaySchedule!

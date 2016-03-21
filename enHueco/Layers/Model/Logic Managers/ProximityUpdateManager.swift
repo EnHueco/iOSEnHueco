@@ -12,6 +12,7 @@ import ReachabilitySwift
 import SwiftGraph
 import CSwiftV
 
+/// ProximityUpdatesManager Notifications
 class EHProximityUpdatesManagerNotification
 {
     private init() {}
@@ -26,6 +27,7 @@ enum ProximityUpdatesManagerReportingCompletionStatus
     case Success
 }
 
+/// Handles operations related to proximity between users, including location reporting.
 class ProximityUpdatesManager: NSObject
 {
     private static let instance = ProximityUpdatesManager()
@@ -74,7 +76,7 @@ class ProximityUpdatesManager: NSObject
         }
     }
     
-    //Temporary
+    ///Temporary
     func generateGraphFromFile()
     {
         let fileLocation = NSBundle.mainBundle().pathForResource("accessPoints", ofType: "csv")!

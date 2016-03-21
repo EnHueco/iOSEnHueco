@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
 class AccountManager
 {
     private static let instance = AccountManager()
@@ -53,15 +54,7 @@ class AccountManager
     {
         // TODO: Delete persistence information, send logout notification to server so token is deleted.
         
-        do
-        {
-            enHueco.appUser = nil
-            ImagePersistenceManager.sharedManager().deleteImage(ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg"))
-            try PersistenceManager.sharedManager().deleteAllPersistenceData()
-        }
-        catch
-        {
-            
-        }
+        enHueco.appUser = nil
+        try? PersistenceManager.sharedManager().deleteAllPersistenceData()
     }
 }
