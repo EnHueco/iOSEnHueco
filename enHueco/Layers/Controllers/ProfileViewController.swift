@@ -49,8 +49,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
-        
-        assignImages()
     }
 
     override func viewWillAppear(animated: Bool)
@@ -60,6 +58,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         AppUserInformationManager.sharedManager().fetchAppUser()
         AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        assignImages()
     }
     
     func updateButtonColors()
