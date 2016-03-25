@@ -30,8 +30,8 @@ class FriendsViewController: UIViewController
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.systemDidReceiveFriendAndScheduleUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.systemDidReceiveFriendRequestUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -45,12 +45,12 @@ class FriendsViewController: UIViewController
 
         createEmptyLabel()
         
-        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
+        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: #selector(UIResponder.resignFirstResponder))
         
         let friendRequestsButton = UIButton(type: .Custom)
         friendRequestsButton.frame.size = CGSize(width: 20, height: 20)
         friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        friendRequestsButton.addTarget(self, action: Selector("friendRequestsButtonPressed:"), forControlEvents: .TouchUpInside)
+        friendRequestsButton.addTarget(self, action: #selector(FriendsViewController.friendRequestsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         friendRequestsButton.tintColor = UIColor.whiteColor()
         
         friendRequestsNotificationHub = RKNotificationHub(view: friendRequestsButton)
@@ -63,7 +63,7 @@ class FriendsViewController: UIViewController
         let commonFreeTimeButton = UIButton(type: .Custom)
         commonFreeTimeButton.frame.size = CGSize(width: 20, height: 20)
         commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        commonFreeTimeButton.addTarget(self, action: Selector("commonFreeTimeButtonPressed:"), forControlEvents: .TouchUpInside)
+        commonFreeTimeButton.addTarget(self, action: #selector(FriendsViewController.commonFreeTimeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         commonFreeTimeButton.tintColor = UIColor.whiteColor()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: commonFreeTimeButton)
     }

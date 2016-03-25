@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileViewController.appUserRefreshed(_:)), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
     }
 
     override func viewDidLayoutSubviews()

@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("proximityManagerDidReceiveProximityUpdates:"), name: EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: ProximityUpdatesManager.sharedManager())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.proximityManagerDidReceiveProximityUpdates(_:)), name: EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: ProximityUpdatesManager.sharedManager())
         
         return true
     }

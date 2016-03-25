@@ -29,8 +29,8 @@ class InstantFreeTimeViewController: UIViewController
         
         endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     
         navigationBar.barStyle = .Black
         navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
@@ -54,7 +54,7 @@ class InstantFreeTimeViewController: UIViewController
         backgroundView.backgroundColor = UIColor.clearColor()
         controller.view.insertSubview(backgroundView, belowSubview: view)
         
-        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("hideKeyboard")))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(InstantFreeTimeViewController.hideKeyboard)))
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1.6, options: .CurveEaseInOut, animations: {
         

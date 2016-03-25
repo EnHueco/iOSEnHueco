@@ -54,7 +54,7 @@ class ProximityUpdatesManager: NSObject
     ///Temporary
     private func scheduleProximityInformationRefreshTimer()
     {
-        proximityInformationRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("proximityInformationRefreshTimerTicked:"), userInfo: nil, repeats: true)
+        proximityInformationRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ProximityUpdatesManager.proximityInformationRefreshTimerTicked(_:)), userInfo: nil, repeats: true)
     }
     
     func proximityInformationRefreshTimerTicked(timer:NSTimer)

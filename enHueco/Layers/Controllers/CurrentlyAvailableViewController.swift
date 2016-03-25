@@ -28,7 +28,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CurrentlyAvailableViewController.systemDidReceiveFriendAndScheduleUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: nil)
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -45,12 +45,12 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         searchBar.sizeToFit()
         tableView.tableHeaderView = searchBar
         
-        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
+        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: #selector(UIResponder.resignFirstResponder))
         
         let imInvisibleButton = UIButton(type: .Custom)
         imInvisibleButton.frame.size = CGSize(width: 20, height: 20)
         imInvisibleButton.setBackgroundImage(UIImage(named: "Eye")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        imInvisibleButton.addTarget(self, action: Selector("imInvisibleButtonPressed:"), forControlEvents: .TouchUpInside)
+        imInvisibleButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imInvisibleButtonPressed(_:)), forControlEvents: .TouchUpInside)
         imInvisibleButton.tintColor = UIColor.whiteColor()
         imInvisibleBarItem = UIBarButtonItem(customView: imInvisibleButton)
         navigationItem.leftBarButtonItem = imInvisibleBarItem
@@ -58,7 +58,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         let imFreeButton = UIButton(type: .Custom)
         imFreeButton.frame.size = CGSize(width: 20, height: 20)
         imFreeButton.setBackgroundImage(UIImage(named: "HandRaised")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        imFreeButton.addTarget(self, action: Selector("imAvailableButtonPressed:"), forControlEvents: .TouchUpInside)
+        imFreeButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imAvailableButtonPressed(_:)), forControlEvents: .TouchUpInside)
         imFreeButton.tintColor = UIColor.whiteColor()
         imAvailableBarItem = UIBarButtonItem(customView: imFreeButton)
         navigationItem.rightBarButtonItem = imAvailableBarItem

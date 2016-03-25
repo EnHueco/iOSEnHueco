@@ -80,7 +80,7 @@ class ScheduleViewController: UIViewController
             SynchronizationManager.sharedManager().reportNewEvent(event)
         }
         
-        undoManager?.registerUndoWithTarget(self, selector: Selector("deleteEventsWithUndoCapability:"), object: eventsToAdd)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: eventsToAdd)
         
         if undoManager != nil && !undoManager!.undoing
         {
@@ -117,7 +117,7 @@ class ScheduleViewController: UIViewController
             SynchronizationManager.sharedManager().reportEventDeleted(event)
         }
         
-        undoManager?.registerUndoWithTarget(self, selector: Selector("addEventsWithUndoCapability:"), object: events)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.addEventsWithUndoCapability(_:)), object: events)
         
         if undoManager != nil && !undoManager!.undoing
         {

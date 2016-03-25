@@ -20,7 +20,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     {
         super.viewDidLoad()
                 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendRequestsViewController.systemDidReceiveFriendRequestUpdates(_:)), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
 
         //view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
         

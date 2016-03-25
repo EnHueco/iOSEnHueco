@@ -34,7 +34,7 @@ class User: EHSynchronizable
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
-                    NSTimer.scheduledTimerWithTimeInterval(self.currentBSSIDTimeToLive, target: self, selector: Selector("currentBSSIDTimeToLiveReached:"), userInfo: nil, repeats: false)
+                    NSTimer.scheduledTimerWithTimeInterval(self.currentBSSIDTimeToLive, target: self, selector: #selector(User.currentBSSIDTimeToLiveReached(_:)), userInfo: nil, repeats: false)
                 }
             }
             

@@ -153,7 +153,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         }
         
         self.searchText = searchText
-        searchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("timeToSearch:"), userInfo: nil, repeats: false)
+        searchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SearchNewFriendViewController.timeToSearch(_:)), userInfo: nil, repeats: false)
     }
     
     func timeToSearch(timer: NSTimer)

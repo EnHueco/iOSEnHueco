@@ -21,8 +21,8 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
 
     @IBAction func editButtonPressed(sender: UIBarButtonItem)
     {
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonPressed:")), animated: true)
-        navigationItem.setLeftBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonPressed:")), animated: true)
+        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.addButtonPressed(_:))), animated: true)
+        navigationItem.setLeftBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.doneButtonPressed(_:))), animated: true)
         
         navigationItem.setHidesBackButton(true, animated: true)
     }
@@ -38,7 +38,7 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
     
     func doneButtonPressed(sender: UIBarButtonItem)
     {
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonPressed:")), animated: true)
+        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.editButtonPressed(_:))), animated: true)
         navigationItem.setLeftBarButtonItem(nil, animated: true)
         
         navigationItem.setHidesBackButton(false, animated: true)

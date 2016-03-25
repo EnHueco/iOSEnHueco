@@ -106,7 +106,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         let dotsButton = UIButton(type: .Custom)
         dotsButton.frame.size = CGSize(width: 20, height: 20)
         dotsButton.setBackgroundImage(UIImage(named: "Dots")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dotsButton.addTarget(self, action: Selector("dotsIconPressed:"), forControlEvents: .TouchUpInside)
+        dotsButton.addTarget(self, action: #selector(FriendDetailViewController.dotsIconPressed(_:)), forControlEvents: .TouchUpInside)
         dotsButton.tintColor = UIColor.whiteColor()
         
         dotsBarButtonItem = UIBarButtonItem(customView: dotsButton)

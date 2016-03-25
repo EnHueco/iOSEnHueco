@@ -30,7 +30,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         
         clearsSelectionOnViewWillAppear = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveAppUserWasUpdated:"), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsEmbeddedTableViewController.didReceiveAppUserWasUpdated(_:)), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
         
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
