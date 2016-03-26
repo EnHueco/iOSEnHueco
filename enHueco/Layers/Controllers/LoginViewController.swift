@@ -37,9 +37,6 @@ import UIKit
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
 
         loginButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-
-        loginButton.clipsToBounds = true
-        loginButton.layer.cornerRadius = loginButton.frame.height / 2
         
         let title = NSMutableAttributedString(string: "ENHUECO")
         let boldFont = UIFont.boldSystemFontOfSize(logoTitleLabel.font.pointSize)
@@ -47,6 +44,17 @@ import UIKit
         title.addAttribute(NSFontAttributeName, value: boldFont, range: NSMakeRange(0, 2))
         
         logoTitleLabel.attributedText = title
+        
+        let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
+        
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+    
+        backgroundImageView.addSubview(effectView)
+        effectView.autoPinEdgesToSuperviewEdges()
+        
+        view.insertSubview(backgroundImageView, atIndex: 0)
+        backgroundImageView.autoPinEdgesToSuperviewEdges()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,6 +79,7 @@ import UIKit
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        loginButton.roundCorners()
         logoImageView.roundCorners()
     }
 
@@ -109,7 +118,7 @@ import UIKit
             
             guard success && error == nil else {
                 
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: "IncorrectCredentialsMessage".localizedUsingGeneralFile())
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
             

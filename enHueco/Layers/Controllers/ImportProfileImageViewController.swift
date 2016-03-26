@@ -35,7 +35,18 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         if hideCancelButton
         {
             cancelButton.hidden = true
-        }        
+        }
+        
+        let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
+        
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        
+        backgroundImageView.addSubview(effectView)
+        effectView.autoPinEdgesToSuperviewEdges()
+        
+        view.insertSubview(backgroundImageView, atIndex: 0)
+        backgroundImageView.autoPinEdgesToSuperviewEdges()
     }
     
     override func viewDidLayoutSubviews() {
