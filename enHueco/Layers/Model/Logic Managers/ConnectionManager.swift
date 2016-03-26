@@ -28,6 +28,12 @@ typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) ->
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (compoundError: ConnectionManagerCompoundError) -> ()
 
+struct ConnectionManagerNotifications
+{
+    /// Thrown when the session expired
+    static let sessionDidExpire = "sessionDidExpire"
+}
+
 /// Handles all generic network-related operations. **All** network operations should be executed using this manager.
 class ConnectionManager: NSObject
 {
@@ -63,6 +69,9 @@ class ConnectionManager: NSObject
         request.HTTPBody = dictionaryJSONData
         request.setValue("application/json", forHTTPHeaderField: "Content-type")
         
+        var request = request
+        adjustRequestForBackend(&request)
+        
         let alamoRequest = alamoManager.request(request)
         
         alamoRequest.response { (_, response, data, error) -> Void in
@@ -73,11 +82,7 @@ class ConnectionManager: NSObject
                     debugPrint(alamoRequest); debugPrint(response)
                 #endif
                 
-                if let data = data where error == nil
-                {
-                    successfulRequestBlock?(data: data)
-                }
-                else if let error = error
+                let errorHandler =
                 {
                     #if DEBUG
                         if let data = data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
@@ -85,12 +90,33 @@ class ConnectionManager: NSObject
                     
                     failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:request))
                 }
+                
+                guard let urlResponse = response where !(urlResponse.statusCode == 401) else {
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
+                    }
+                    
+                    errorHandler()
+                    return
+                }
+                
+                guard let data = data where error == nil else
+                {
+                    errorHandler()
+                    return
+                }
+                
+                successfulRequestBlock?(data: data)
             }
         }
     }
     
     class func sendAsyncRequest(request: NSMutableURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
+        var request = request
+        adjustRequestForBackend(&request)
+        
         let alamoRequest = alamoManager.request(request)
         
         alamoRequest.responseJSON(options: .MutableContainers) { (response) -> Void in
@@ -100,9 +126,9 @@ class ConnectionManager: NSObject
                 #if DEBUG
                     debugPrint(alamoRequest); debugPrint(response)
                 #endif
-
-                guard let value = response.result.value where response.result.isSuccess else
-                {
+                
+                let errorHandler = {
+                    
                     #if DEBUG
                         if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
                     #endif
@@ -111,11 +137,37 @@ class ConnectionManager: NSObject
                     return
                 }
                 
+                guard let urlResponse = response.response where !(urlResponse.statusCode == 401) else
+                {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
+                    }
+                    
+                    errorHandler()
+                    return
+                }
+                
+                guard let value = response.result.value where response.result.isSuccess else
+                {
+                    errorHandler()
+                    return
+                }
+                
                 successfulRequestBlock?(JSONResponse: value)
             }
         }
     }
     
+    private class func adjustRequestForBackend(inout request: NSMutableURLRequest)
+    {
+        guard let appUser = enHueco.appUser else { return }
+        
+        if let url = request.URL where url.absoluteString.hasPrefix(EHURLS.Base)
+        {
+            request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        }
+    }
     
     class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
     {

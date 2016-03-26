@@ -28,7 +28,6 @@ class AppUserInformationManager
         let appUser = enHueco.appUser
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
@@ -58,7 +57,6 @@ class AppUserInformationManager
         let appUser = enHueco.appUser
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in

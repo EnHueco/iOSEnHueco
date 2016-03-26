@@ -192,17 +192,6 @@ extension UIImage
     }  
 }
 
-extension NSMutableURLRequest
-{
-    /// Sets the default session headers to a request
-    func setEHSessionHeaders()
-    {
-        let appUser = enHueco.appUser
-        setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
-    }
-}
-
 extension ErrorType
 {
     

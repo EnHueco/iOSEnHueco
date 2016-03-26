@@ -29,7 +29,6 @@ class FriendsManager
     func fetchUpdatesForFriendsAndFriendSchedules()
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
@@ -85,7 +84,6 @@ class FriendsManager
     func deleteFriend(friend: User, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "DELETE"
         
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
@@ -115,7 +113,6 @@ class FriendsManager
     func fetchUpdatesForFriendRequests()
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (incomingRequestsResponseDictionary) -> () in
@@ -149,7 +146,6 @@ class FriendsManager
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "POST"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
@@ -180,7 +176,6 @@ class FriendsManager
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "POST"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in

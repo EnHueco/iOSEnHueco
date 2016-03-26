@@ -44,7 +44,6 @@ class PrivacyManager
     func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let parameters = [setting.rawValue : "false"]
@@ -76,7 +75,6 @@ class PrivacyManager
     func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let parameters = [setting.rawValue : "true"]
@@ -99,7 +97,6 @@ class PrivacyManager
     func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let instantEvent =
@@ -128,7 +125,6 @@ class PrivacyManager
     func turnVisibleWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let instantEvent =

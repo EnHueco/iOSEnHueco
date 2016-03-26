@@ -11,7 +11,6 @@ import CoreData
 import WatchConnectivity
 import FBSDKCoreKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 {
@@ -50,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.proximityManagerDidReceiveProximityUpdates(_:)), name: EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: ProximityUpdatesManager.sharedManager())
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.sessionDidExpire(_:)), name: ConnectionManagerNotifications.sessionDidExpire, object: ConnectionManager.self)
         
         return true
     }
@@ -214,10 +215,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
                 notificationText += " parece estar cerca y en hueco, ¿por qué no le escribes?"
             }
             
-            dispatch_async(dispatch_get_main_queue())
-            {
+            dispatch_async(dispatch_get_main_queue()) {
+                
                 //TODO: FIX
                 //TSMessage.showNotificationWithTitle(notificationText, type: .Message)
+            }
+        }
+    }
+    
+    /// The session with the server expired
+    func sessionDidExpire(notification: NSNotification)
+    {
+        let logout = {
+            
+            guard self.mainNavigationController.presentedViewController != nil else
+            {
+                //Strange
+                return
+            }
+            
+            /// The LoginController logs us out upon appearance
+            self.mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        //We better make sure this method is not run concurrently
+        
+        if NSThread.isMainThread()
+        {
+            logout()
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue()) {
+                logout()
             }
         }
     }

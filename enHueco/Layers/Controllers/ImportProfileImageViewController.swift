@@ -35,7 +35,7 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         if hideCancelButton
         {
             cancelButton.hidden = true
-        }
+        }        
     }
     
     override func viewDidLayoutSubviews() {

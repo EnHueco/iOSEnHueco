@@ -91,7 +91,6 @@ class CurrentStateManager
     func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: BasicCompletionHandler )
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         var instantEvent : [String : AnyObject] =
@@ -122,7 +121,6 @@ class CurrentStateManager
     func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let instantEvent =
