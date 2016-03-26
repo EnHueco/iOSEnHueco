@@ -41,7 +41,7 @@ class AppUserInformationManager
                 
                 try? PersistenceManager.sharedManager().persistData()
 
-                AppUserInformationManager.sharedManager().downloadProfilePicture()
+                AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
             }
             
         }) { (error) -> () in
@@ -80,7 +80,7 @@ class AppUserInformationManager
         }
     }
     
-    func pushProfilePicture(image: UIImage)
+    func pushProfilePicture(image: UIImage, completionHandler: BasicCompletionHandler?)
     {
         let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
@@ -96,14 +96,21 @@ class AppUserInformationManager
         
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
             
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: true, error: nil)
+            }
+            
             self.fetchAppUser()
             
         }, onFailure: { (error) -> () in
-                
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: false, error: error)
+            }
         })
     }
     
-    func downloadProfilePicture()
+    func downloadProfilePictureWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         if let url = enHueco.appUser.imageURL
         {
@@ -117,11 +124,16 @@ class AppUserInformationManager
                 let path = PersistenceManager.sharedManager().documentsPath + "/profile.jpg"
                 PersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler?(success: true, error: nil)
+                    }
                 })
             
             }) { (error) -> () in
-                    
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler?(success: false, error: error)
+                }
             }
         }
     }

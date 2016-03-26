@@ -41,7 +41,7 @@ class PrivacyManager
     }
     
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
-    func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.setEHSessionHeaders()
@@ -73,7 +73,7 @@ class PrivacyManager
      
      If policy nil the setting is applied to everyone
      */
-    func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.setEHSessionHeaders()
@@ -96,7 +96,7 @@ class PrivacyManager
     }
     
     /// Makes the user invisible to everyone else
-    func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
@@ -125,7 +125,7 @@ class PrivacyManager
     }
     
     /// Makes the user visible to everyone else
-    func turnVisibleWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnVisibleWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()

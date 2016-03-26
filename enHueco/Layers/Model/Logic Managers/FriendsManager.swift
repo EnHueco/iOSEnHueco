@@ -82,7 +82,7 @@ class FriendsManager
     }
     
     /// Deletes a friend. If the operation fails the friend is not deleted.
-    func deleteFriend(friend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func deleteFriend(friend: User, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
         request.setEHSessionHeaders()
@@ -145,7 +145,7 @@ class FriendsManager
      - EHSystemNotification.SystemDidSendFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToSendFriendRequest in case of failure
      */
-    func sendFriendRequestToUser(user: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func sendFriendRequestToUser(user: User, completionHandler: BasicCompletionHandler)
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
@@ -176,7 +176,7 @@ class FriendsManager
      - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
      */
-    func acceptFriendRequestFromFriend (requestFriend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func acceptFriendRequestFromFriend (requestFriend: User, completionHandler: BasicCompletionHandler)
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)

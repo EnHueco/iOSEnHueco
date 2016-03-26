@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias BasicCompletionHandler = (success: Bool, error: ErrorType?) -> Void
+
 struct Either<T1, T2>
 {
     let left: T1?
@@ -230,6 +232,16 @@ extension ErrorType
         }
         
         return nil
+    }
+}
+
+extension UIView
+{
+    /// Rounds the corners of the view by setting the corner radius to height/2
+    func roundCorners()
+    {
+        clipsToBounds = true
+        layer.cornerRadius = bounds.height/2
     }
 }
 

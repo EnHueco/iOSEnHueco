@@ -21,7 +21,7 @@ class AccountManager
     }
     
     /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
-    class func loginWithUsername (username: String, password: String, completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    class func loginWithUsername (username: String, password: String, completionHandler: BasicCompletionHandler)
     {
         let params = ["user_id":username, "password":password]
         
@@ -32,7 +32,7 @@ class AccountManager
             
             enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
-            AppUserInformationManager.sharedManager().downloadProfilePicture()
+            AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
             AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
             FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
             

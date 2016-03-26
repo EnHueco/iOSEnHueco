@@ -12,7 +12,7 @@ import MobileCoreServices
 import ChameleonFramework
 import RSKImageCropper
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
+class ProfileViewController: UIViewController, UINavigationControllerDelegate
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -34,8 +34,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ProfileViewController.appUserRefreshed(_:)), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
     }
 
     override func viewDidLayoutSubviews()
@@ -165,7 +163,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.imageImageView.hidden = true
                     self.backgroundImageView.hidden = true
                     
-                    AppUserInformationManager.sharedManager().downloadProfilePicture()
+                    AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
                 }
 
                 self.imageImageView.contentMode = .ScaleAspectFill
@@ -292,32 +290,40 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         self.navigationController?.presentViewController(imagePicker, animated: true, completion: nil)
     }
+}
 
+extension ProfileViewController: UIImagePickerControllerDelegate
+{
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String:AnyObject]?)
     {
-
+        
         let imageCropVC = RSKImageCropViewController(image: image)
         imageCropVC.delegate = self
         picker.dismissViewControllerAnimated(true, completion: nil)
         self.presentViewController(imageCropVC, animated: true, completion: nil)
     }
+}
 
-    func appUserRefreshed(notification: NSNotification)
+extension ProfileViewController: RSKImageCropViewControllerDelegate
+{
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
-        dispatch_async(dispatch_get_main_queue())
-        {
+        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage) { success, error in
+            
+            if error != nil
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
+            }
+            
             self.stopAnimatingImageLoadingIndicator()
             self.assignImages()
         }
-    }
-
-    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
-    {
-        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage)
+        
         startAnimatingImageLoadingIndicator()
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController)
     {
         controller.dismissViewControllerAnimated(true, completion: nil)

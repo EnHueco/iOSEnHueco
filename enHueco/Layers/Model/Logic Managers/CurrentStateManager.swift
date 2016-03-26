@@ -88,7 +88,7 @@ class CurrentStateManager
      Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.
      Network operation must succeed immediately or else the newFreeTimePeriod is discarded
      */
-    func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: (success: Bool, error: ErrorType?) -> Void )
+    func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: BasicCompletionHandler )
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
@@ -119,7 +119,7 @@ class CurrentStateManager
         })
     }
     
-    func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.setEHSessionHeaders()
