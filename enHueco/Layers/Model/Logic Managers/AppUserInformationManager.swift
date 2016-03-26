@@ -112,7 +112,7 @@ class AppUserInformationManager
     
     func downloadProfilePictureWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
-        if let url = enHueco.appUser.imageURL
+        if let url = enHueco.appUser?.imageURL
         {
             let request = NSMutableURLRequest(URL: url)
             request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)

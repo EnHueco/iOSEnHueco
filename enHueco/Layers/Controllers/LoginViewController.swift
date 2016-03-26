@@ -12,6 +12,9 @@ import UIKit
 
 @IBDesignable class LoginViewController: UIViewController
 {
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoTitleLabel: UILabel!
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
@@ -19,9 +22,13 @@ import UIKit
 
     @IBOutlet weak var verticalSpaceToBottomConstraint: NSLayoutConstraint!
     var verticalSpaceToBottomInitialValue: CGFloat!
+    
+    private var firstAppearance = true
 
     override func viewDidLoad()
     {
+        (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController = navigationController
+        
         navigationController?.navigationBarHidden = true
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
@@ -33,16 +40,38 @@ import UIKit
 
         loginButton.clipsToBounds = true
         loginButton.layer.cornerRadius = loginButton.frame.height / 2
+        
+        let title = NSMutableAttributedString(string: "ENHUECO")
+        let boldFont = UIFont.boldSystemFontOfSize(logoTitleLabel.font.pointSize)
+        
+        title.addAttribute(NSFontAttributeName, value: boldFont, range: NSMakeRange(0, 2))
+        
+        logoTitleLabel.attributedText = title
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if firstAppearance && enHueco.appUser != nil
+        {
+            goToMainTabViewController()
+        }
+        else
+        {
+            AccountManager.sharedManager().logOut()
+        }
     }
 
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-
-        if enHueco.appUser != nil
-        {
-            goToMainTabViewController()
-        }
+        firstAppearance = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        logoImageView.roundCorners()
     }
 
     @IBAction func login(sender: AnyObject)
@@ -86,7 +115,11 @@ import UIKit
             
             if enHueco.appUser.imageURL == nil
             {
-                self.navigationController?.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+                importImageController.hideCancelButton = true
+                importImageController.delegate = self
+                
+                self.navigationController?.pushViewController(importImageController, animated: true)
             }
             else
             {
@@ -98,8 +131,13 @@ import UIKit
     func goToMainTabViewController()
     {
         ProximityUpdatesManager.sharedManager().beginProximityUpdates()
-
-        performSegueWithIdentifier("PresentMainTabViewController", sender: self)
+        
+        let mainTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+        
+        navigationController?.presentViewController(mainTabBarController, animated: true, completion: {
+          
+            self.navigationController?.setViewControllers([self.navigationController!.viewControllers.first!], animated: false)
+        })
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -138,5 +176,13 @@ import UIKit
 
             self.view.layoutIfNeeded()
         })
+    }
+}
+
+extension LoginViewController: ImportProfileImageViewControllerDelegate
+{
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+    {
+        goToMainTabViewController()
     }
 }

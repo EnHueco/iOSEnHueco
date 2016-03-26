@@ -6,6 +6,10 @@
   Copyright © 2015 Diego Gómez. All rights reserved.
 */
 
+"import_photo_title" = "Import Image";
+"take_photo" = "Take Photo";
+"choose_photo" = "Choose Photo";
+
 "Monday" = "Monday";
 "Tuesday" = "Tuesday";
 "Wednesday" = "Wednesday";

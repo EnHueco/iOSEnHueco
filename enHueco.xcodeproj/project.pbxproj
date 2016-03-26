@@ -33,7 +33,7 @@
 		F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */; };
 		F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */; };
 		F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */; };
-		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
+		F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFA1BE4836800AE561D /* Interface.storyboard */; };
 		F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFD1BE4836800AE561D /* Assets.xcassets */; };
@@ -190,7 +190,7 @@
 		F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
-		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Layers/Views/Assets.xcassets; sourceTree = "<group>"; };
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F126ADF81BE4836800AE561D /* enHueco watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "enHueco watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -378,6 +378,7 @@
 				F183F84F1C82032100390CF7 /* Layers */,
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
 				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
+				F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */,
 				F1229BD91A74947200C4FDE2 /* Supporting Files */,
 			);
 			path = enHueco;
@@ -416,7 +417,6 @@
 				F1229C261A7495A200C4FDE2 /* Main.storyboard */,
 				F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */,
 				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
-				F1229C2B1A7495A200C4FDE2 /* Images.xcassets */,
 				F11D6FA31BA3BE1500206B9A /* Colors.swift */,
 			);
 			path = Views;
@@ -800,7 +800,7 @@
 			files = (
 				F155C81E1C2760E6000EAF96 /* General.strings in Resources */,
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
-				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
+				F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */,
 				F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,

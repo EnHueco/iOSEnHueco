@@ -11,23 +11,67 @@ import FBSDKLoginKit
 import RSKImageCropper
 import MobileCoreServices
 
+protocol ImportProfileImageViewControllerDelegate: class
+{
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+}
+
 class ImportProfileImageViewController: UIViewController, UINavigationControllerDelegate
 {
+    @IBOutlet weak var importFromLocalStorageButton: UIButton!
+    @IBOutlet weak var importFromFacebookButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    let imagePicker = UIImagePickerController()
+    
+    var hideCancelButton = false
+    
+    weak var delegate: ImportProfileImageViewControllerDelegate?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        if hideCancelButton
+        {
+            cancelButton.hidden = true
+        }
     }
     
-    @IBAction func importFromCameraRollButtonPressed(sender: UIButton)
-    {
-        let imagePicker = UIImagePickerController()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        imagePicker.delegate = self
-        imagePicker.sourceType = .PhotoLibrary
+        importFromFacebookButton.roundCorners()
+        importFromLocalStorageButton.roundCorners()
+    }
+    
+    @IBAction func importFromLocalStorageButtonPressed(sender: UIButton)
+    {
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.allowsEditing = false
+        imagePicker.delegate = self
         
-        presentViewController(imagePicker, animated: true, completion: nil)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            // There is a camera on this device, so show the take photo button.
+            
+            alertController.addAction(UIAlertAction(title: "take_photo".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
+                
+                self.imagePicker.sourceType = .Camera
+                self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            }))
+        }
+        
+        alertController.addAction(UIAlertAction(title: "choose_photo".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
+            
+            self.imagePicker.sourceType = .PhotoLibrary
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
 
     @IBAction func importFromFacebookButtonPressed(sender: UIButton)
@@ -66,10 +110,9 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         }
     }
     
-    func goToMainTabViewController()
+    @IBAction func cancelButtonPressed(sender: AnyObject)
     {
-        ProximityUpdatesManager.sharedManager().beginProximityUpdates()
-        presentViewController(storyboard!.instantiateViewControllerWithIdentifier("MainTabBarViewController"), animated: true, completion: nil)
+        delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
     }
 }
 
@@ -88,7 +131,10 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate
 {
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
+        EHProgressHUD.showSpinnerInView(view)
         AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage) { success, error in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
             
             guard error == nil else
             {
@@ -96,10 +142,11 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate
                 return
             }
             
-            self.goToMainTabViewController()
+            controller.dismissViewControllerAnimated(true)
+            {
+                self.delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
+            }
         }
-        
-        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController)

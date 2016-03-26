@@ -8,11 +8,9 @@
 
 import UIKit
 import LocalAuthentication
-import MobileCoreServices
 import ChameleonFramework
-import RSKImageCropper
 
-class ProfileViewController: UIViewController, UINavigationControllerDelegate
+class ProfileViewController: UIViewController
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -52,6 +50,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
         AppUserInformationManager.sharedManager().fetchAppUser()
@@ -281,51 +280,18 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate
 
     @IBAction func imageViewClicked(sender: AnyObject)
     {
-        let imagePicker = UIImagePickerController()
-
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        imagePicker.allowsEditing = false
-
-        self.navigationController?.presentViewController(imagePicker, animated: true, completion: nil)
+        let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+        importPictureController.delegate = self
+        
+        presentViewController(importPictureController, animated: true, completion: nil)
     }
 }
 
-extension ProfileViewController: UIImagePickerControllerDelegate
+extension ProfileViewController: ImportProfileImageViewControllerDelegate
 {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String:AnyObject]?)
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
     {
-        
-        let imageCropVC = RSKImageCropViewController(image: image)
-        imageCropVC.delegate = self
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.presentViewController(imageCropVC, animated: true, completion: nil)
-    }
-}
-
-extension ProfileViewController: RSKImageCropViewControllerDelegate
-{
-    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
-    {
-        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage) { success, error in
-            
-            if error != nil
-            {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                return
-            }
-            
-            self.stopAnimatingImageLoadingIndicator()
-            self.assignImages()
-        }
-        
-        startAnimatingImageLoadingIndicator()
-        controller.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController)
-    {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        assignImages()
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
