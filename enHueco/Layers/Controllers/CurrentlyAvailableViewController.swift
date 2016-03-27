@@ -156,19 +156,19 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             })
         }
 
-        let controller = UIAlertController(title: "turn_invisible_action_sheet_title".localizedUsingGeneralFile(), message: nil, preferredStyle: .ActionSheet)
+        let controller = UIAlertController(title: "TurnInvisibleActionSheetTitle".localizedUsingGeneralFile(), message: nil, preferredStyle: .ActionSheet)
         
-        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_1_hour_20_minutes".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+        controller.addAction(UIAlertAction(title: "TurnInvisibleActionSheet1Hour20Minutes".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
             
             turnInvisibleForInterval(80 * 60)
         }))
         
-        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_3_hours".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+        controller.addAction(UIAlertAction(title: "TurnInvisibleActionSheet3Hours".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
             
             turnInvisibleForInterval(3 * 60 * 60)
         }))
         
-        controller.addAction(UIAlertAction(title: "turn_invisible_action_sheet_rest_of_day".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
+        controller.addAction(UIAlertAction(title: "TurnInvisibleActionSheetRestOfDay".localizedUsingGeneralFile(), style: .Default, handler: { (_) -> Void in
             
             let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -178,7 +178,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             turnInvisibleForInterval(tomorrow.timeIntervalSinceNow)
         }))
         
-        controller.addAction(UIAlertAction(title: "cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+        controller.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
         
         presentViewController(controller, animated: true, completion: nil)
     }

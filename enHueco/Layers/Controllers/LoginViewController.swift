@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 @IBDesignable class LoginViewController: UIViewController
 {
     @IBOutlet weak var logoImageView: UIImageView!
@@ -99,11 +97,15 @@ import UIKit
 
             if enHueco.appUser.imageURL == nil
             {
-                navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
+                importImageController.delegate = self
+                
+                self.navigationController?.pushViewController(importImageController, animated: true)
             }
             else
             {
-                goToMainTabViewController()
+                self.goToMainTabViewController()
             }
             
             return
@@ -125,7 +127,7 @@ import UIKit
             if enHueco.appUser.imageURL == nil
             {
                 let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
-                importImageController.hideCancelButton = true
+                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
                 importImageController.delegate = self
                 
                 self.navigationController?.pushViewController(importImageController, animated: true)
@@ -191,6 +193,11 @@ import UIKit
 extension LoginViewController: ImportProfileImageViewControllerDelegate
 {
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+    {
+        goToMainTabViewController()
+    }
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
     {
         goToMainTabViewController()
     }

@@ -55,6 +55,7 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UI
     {
         let friend = filteredFriends[indexPath.row]
         delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func filterContentForSearchText(searchText: String)

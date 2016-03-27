@@ -114,57 +114,54 @@ class ProfileViewController: UIViewController
 
             dispatch_async(dispatch_get_main_queue())
             {
-                if let image = image
+                var image: UIImage! = image
+                
+                if image == nil
                 {
-                    self.imageImageView.hidden = false
-                    self.backgroundImageView.hidden = false
-                    
-                    if (self.imageImageView.image != nil)
-                    {
-                        UIView.transitionWithView(self.imageImageView,
-                                duration: 1,
-                                options: UIViewAnimationOptions.CurveEaseInOut, //UIViewAnimationOptions.TransitionFlipFromTop,
-                                animations: { self.imageImageView.image = image },
-                                completion: nil)
-                    }
-                    else
-                    {
-                        self.imageImageView.image = image
-                       
-                        UIView.animateWithDuration(0.4)
-                        {
-                            self.imageImageView.alpha = 1
-                        }
-                    }
-
-                    if self.backgroundImageView.image != nil
-                    {
-                        UIView.transitionWithView(self.backgroundImageView,
-                                duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve,
-                                animations: {
-                                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                                    self.backgroundImageView.alpha = 1
-                        }, completion: nil)
-                    }
-                    else
-                    {
-                        self.backgroundImageView.image = image
-                       
-                        UIView.animateWithDuration(0.4)
-                        {
-                            self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                            self.backgroundImageView.alpha = 1
-                        }
-                    }
-                }
-                else
-                {
-                    self.imageImageView.hidden = true
-                    self.backgroundImageView.hidden = true
+                    image = UIImage(named: "stripes")
                     
                     AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
                 }
-
+                
+                self.imageImageView.hidden = false
+                self.backgroundImageView.hidden = false
+                
+                if (self.imageImageView.image != nil)
+                {
+                    UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        
+                        self.imageImageView.image = image
+                    }, completion: nil)
+                }
+                else
+                {
+                    self.imageImageView.image = image
+                    
+                    UIView.animateWithDuration(0.4) {
+                        self.imageImageView.alpha = 1
+                    }
+                }
+                
+                if self.backgroundImageView.image != nil
+                {
+                    UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                                                
+                        self.backgroundImageView.image = image.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                        
+                    }, completion: nil)
+                }
+                else
+                {
+                    self.backgroundImageView.image = image
+                    
+                    UIView.animateWithDuration(0.4) {
+                        
+                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                    }
+                }
+                
                 self.imageImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.clipsToBounds = true
@@ -292,6 +289,11 @@ extension ProfileViewController: ImportProfileImageViewControllerDelegate
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
     {
         assignImages()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
+    {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -14,6 +14,8 @@ import MobileCoreServices
 protocol ImportProfileImageViewControllerDelegate: class
 {
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
 }
 
 class ImportProfileImageViewController: UIViewController, UINavigationControllerDelegate
@@ -24,6 +26,7 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     
     let imagePicker = UIImagePickerController()
     
+    var cancelButtonText: String?
     var hideCancelButton = false
     
     weak var delegate: ImportProfileImageViewControllerDelegate?
@@ -35,6 +38,11 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         if hideCancelButton
         {
             cancelButton.hidden = true
+        }
+        
+        if let cancelButtonText = cancelButtonText
+        {
+            cancelButton.setTitle(cancelButtonText, forState: .Normal)
         }
         
         let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
@@ -67,20 +75,20 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             // There is a camera on this device, so show the take photo button.
             
-            alertController.addAction(UIAlertAction(title: "take_photo".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
+            alertController.addAction(UIAlertAction(title: "TakePhoto".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
                 
                 self.imagePicker.sourceType = .Camera
                 self.presentViewController(self.imagePicker, animated: true, completion: nil)
             }))
         }
         
-        alertController.addAction(UIAlertAction(title: "choose_photo".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
+        alertController.addAction(UIAlertAction(title: "ChoosePhoto".localizedUsingGeneralFile(), style: .Default, handler: { (action) -> Void in
             
             self.imagePicker.sourceType = .PhotoLibrary
             self.presentViewController(self.imagePicker, animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
         
         presentViewController(alertController, animated: true, completion: nil)
     }
@@ -123,7 +131,7 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     
     @IBAction func cancelButtonPressed(sender: AnyObject)
     {
-        delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
+        delegate?.importProfileImageViewControllerDidCancel(self)
     }
 }
 

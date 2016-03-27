@@ -214,7 +214,7 @@ extension ErrorType
             }
             else
             {
-                errorMessage = "sorry_unknown_error".localizedUsingGeneralFile()
+                errorMessage = "SorryUnknownError".localizedUsingGeneralFile()
             }
             
             return errorMessage

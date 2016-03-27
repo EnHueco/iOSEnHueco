@@ -138,4 +138,9 @@ extension SettingsEmbeddedTableViewController: ImportProfileImageViewControllerD
     {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
+    {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
