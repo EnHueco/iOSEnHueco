@@ -77,7 +77,8 @@ extension NSDate
     {
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
-        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
         
         guard let date = possibleDate else { return nil }
@@ -89,7 +90,8 @@ extension NSDate
     {
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
-        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         return dateStringFormatter.stringFromDate(self)
     }
