@@ -205,8 +205,6 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func imAvailableButtonPressed(sender: UIButton)
     {
-        enHueco.appUser.invisible = false
-        
         UIView.animateWithDuration(0.2)
         {
             self.imAvailableBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220 / 255.0, green: 170 / 255.0, blue: 10 / 255.0, alpha: 1) : UIColor.whiteColor()
@@ -230,6 +228,11 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     func updateFreeTimePeriodDataAndReloadTableView()
     {
+        if enHueco.appUser.invisible
+        {
+            imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+        }
+        
         dispatch_async(dispatch_get_main_queue())
         {
             self.resetDataArrays()
@@ -407,8 +410,20 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     // MARK: SW Table View
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
     {
-        if let cell = cell as? AvailableFriendCell, friend = enHueco.appUser.friends[cell.friendUsername!]
+        if let cell = cell as? AvailableFriendCell
         {
+            let indexPath = tableView.indexPathForCell(cell)!
+            let friend: User
+            
+            if indexPath.section == 0
+            {
+                friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
+            }
+            else
+            {
+                friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
+            }
+            
             if friend === enHueco.appUser
             {
                 EHProgressHUD.showSpinnerInView(view)

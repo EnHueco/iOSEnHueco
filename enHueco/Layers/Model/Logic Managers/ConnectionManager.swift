@@ -180,26 +180,23 @@ class ConnectionManager: NSObject
     
     class func sendSyncRequest(request: NSMutableURLRequest) throws -> AnyObject
     {
-//        let semaphore = dispatch_semaphore_create(0)
-//        
-//        sendAsyncRequest(request, onSuccess: { (JSONResponse) in
-//            
-//            dispatch_semaphore_signal(semaphore)
-//            
-//            
-//            
-//        }) { (compoundError) in
-//            
-//            
-//        }
+        let semaphore = dispatch_semaphore_create(0)
         
-//        [self executeInBackgroundWithCompletion:^{
-//            ;
-//            }];
-//        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
-//            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0]];
-//        };
-//        
+        sendAsyncRequest(request, onSuccess: { (JSONResponse) in
+            
+            dispatch_semaphore_signal(semaphore)
+            
+            
+            
+        }) { (compoundError) in
+            
+            
+        }
+
+//        while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) {
+//            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate())
+//        }
+//
 //        let response = alamoManager.request(request).responseJSON(options: .MutableContainers)
 //        
 //        if let error = response.result.error { throw error }

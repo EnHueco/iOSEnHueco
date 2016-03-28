@@ -48,8 +48,16 @@ class User: EHSynchronizable
     ///Last time we notified the app user that this user was nearby
     var lastNotifiedNearbyStatusDate: NSDate?
     
+    /** The ending date of the user invisibility.
+     The user is visible if this is either nil or a date in the past.
+    */
+    var inivisibilityEndDate: NSDate?
+    
     ///User visibility state
-    var invisible = false
+    var invisible: Bool
+    {
+        return inivisibilityEndDate != nil && inivisibilityEndDate!.timeIntervalSinceNow > 0
+    }
     
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
@@ -70,7 +78,7 @@ class User: EHSynchronizable
         let username = JSONDictionary["login"] as! String
         let firstNames = JSONDictionary["firstNames"] as! String
         let lastNames = JSONDictionary["lastNames"] as! String
-        let imageURL:NSURL? = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
+        let imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         let phoneNumber = JSONDictionary["phoneNumber"] as? String
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
@@ -78,7 +86,12 @@ class User: EHSynchronizable
         
         if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
         {
-            invisible = true
+            let endDate = NSDate(serverFormattedString: invisibilityEvent["valid_until"] as! String)!
+            inivisibilityEndDate = endDate.timeIntervalSinceNow > 0 ? endDate : nil
+        }
+        else if var instantFreeTimePeriod = JSONDictionary["immediate_event"] as? [String : AnyObject] where (instantFreeTimePeriod["type"] as! String) == "EVENT"
+        {
+            schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
         }
     }
     
@@ -92,7 +105,12 @@ class User: EHSynchronizable
         
         if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
         {
-            invisible = true
+            let endDate = NSDate(serverFormattedString: invisibilityEvent["valid_until"] as! String)!
+            inivisibilityEndDate = endDate.timeIntervalSinceNow > 0 ? endDate : nil
+        }
+        else if var instantFreeTimePeriod = JSONDictionary["immediate_event"] as? [String : AnyObject] where (instantFreeTimePeriod["type"] as! String) == "EVENT"
+        {
+            schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
         }
     }
     
@@ -110,6 +128,8 @@ class User: EHSynchronizable
     /// Returns user current free time period, or nil if user is not free.
     func currentFreeTimePeriod() -> Event?
     {
+        guard !invisible else { return nil }
+        
         if schedule.instantFreeTimePeriod != nil { return schedule.instantFreeTimePeriod }
         
         let currentDate = NSDate()
@@ -134,6 +154,8 @@ class User: EHSynchronizable
     ///For Performance
     func currentAndNextFreeTimePeriods() -> (currentFreeTimePeriod: Event?, nextFreeTimePeriod: Event?)
     {
+        guard !invisible else { return (nil, nil) }
+        
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -169,6 +191,8 @@ class User: EHSynchronizable
     
     func nextFreeTimePeriod() -> Event?
     {
+        guard !invisible else { return nil }
+
         let currentDate = NSDate()
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!

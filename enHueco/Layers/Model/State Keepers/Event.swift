@@ -109,6 +109,21 @@ class Event: EHSynchronizable, Comparable, NSCopying
         self.init(type: EventType(rawValue: type)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
+    convenience init(instantFreeTimeJSONDictionary: [String : AnyObject])
+    {
+        let name = instantFreeTimeJSONDictionary["name"] as? String
+        let location = instantFreeTimeJSONDictionary ["location"] as? String
+        
+        let endDate = NSDate(serverFormattedString: instantFreeTimeJSONDictionary["valid_until"] as! String)!
+        
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+
+        let endHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: endDate)
+        
+        self.init(type: .FreeTime, name: name, startHour: NSDateComponents(), endHour: endHourComponents, location: location, ID: "", lastUpdatedOn: NSDate())
+    }
+    
     func replaceValuesWithThoseOfTheEvent(event: Event)
     {
         name = event.name

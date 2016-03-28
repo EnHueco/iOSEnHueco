@@ -104,6 +104,7 @@ class CurrentStateManager
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
+            enHueco.appUser.inivisibilityEndDate = nil
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
             
             dispatch_async(dispatch_get_main_queue()) {

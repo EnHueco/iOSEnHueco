@@ -99,15 +99,17 @@ class PrivacyManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
         
+        let endDate = NSDate().dateByAddingTimeInterval(timeInterval)
+        
         let instantEvent =
         [
             "type" : "INVISIBILITY",
-            "valid_until" : NSDate().dateByAddingTimeInterval(timeInterval).serverFormattedString()
+            "valid_until" : endDate.serverFormattedString()
         ]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
-            enHueco.appUser.invisible = true
+            enHueco.appUser.inivisibilityEndDate = endDate
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -127,15 +129,17 @@ class PrivacyManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
         
+        let endDate = NSDate()
+
         let instantEvent =
         [
             "type" : "INVISIBILITY",
-            "valid_until" : NSDate().serverFormattedString()
+            "valid_until" : endDate.serverFormattedString()
         ]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
-            enHueco.appUser.invisible = false
+            enHueco.appUser.inivisibilityEndDate = endDate
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
