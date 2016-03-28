@@ -76,6 +76,7 @@ extension NSDate
     convenience init?(serverFormattedString: String)
     {
         let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
         dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
         let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
         
@@ -87,6 +88,7 @@ extension NSDate
     func serverFormattedString() -> String
     {
         let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
         dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
         
         return dateStringFormatter.stringFromDate(self)
