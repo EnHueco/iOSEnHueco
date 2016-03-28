@@ -20,7 +20,7 @@ class SynchronizationManager: NSObject, NSCoding
     class PendingRequest: NSObject, NSCoding
     {
         /// NSURLRequest that was attempted
-        let request: NSURLRequest
+        let request: NSMutableURLRequest
         
         /// Closure to be executed in case of success when reattempting the request.
         let successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?
@@ -31,7 +31,7 @@ class SynchronizationManager: NSObject, NSCoding
         /// Object associated with the request (For example, the Free time period that was going to be updated).
         let associatedObject: EHSynchronizable
         
-        init(request: NSURLRequest, successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable) {
+        init(request: NSMutableURLRequest, successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable) {
             self.request = request
             self.successfulRequestBlock = successfulRequestBlock
             self.failureRequestBlock = failureRequestBlock
@@ -43,11 +43,11 @@ class SynchronizationManager: NSObject, NSCoding
             self.successfulRequestBlock = nil
             self.failureRequestBlock = nil
 
-            guard let request = aDecoder.decodeObjectForKey("request") as? NSURLRequest,
+            guard let request = aDecoder.decodeObjectForKey("request") as? NSMutableURLRequest,
                   let associatedObject = aDecoder.decodeObjectForKey("associatedObject") as? EHSynchronizable
             else
             {
-                self.request = NSURLRequest()
+                self.request = NSMutableURLRequest()
                 self.associatedObject = EHSynchronizable(ID: nil, lastUpdatedOn: NSDate())
                 
                 super.init()
@@ -133,7 +133,7 @@ class SynchronizationManager: NSObject, NSCoding
     
     // MARK: Synchronization
 
-    private func addPendingRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
+    private func addPendingRequestToQueue(request request: NSMutableURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
     {
         pendingRequestsQueue.append(PendingRequest(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
     }
@@ -162,11 +162,7 @@ class SynchronizationManager: NSObject, NSCoding
         
         do
         {
-            guard let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request) else
-            {
-                pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:nil, request:pendingRequest.request))
-                return false
-            }
+            let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request)
             
             pendingRequestsQueue.removeFirst()
                         
@@ -175,7 +171,7 @@ class SynchronizationManager: NSObject, NSCoding
         }
         catch
         {
-            pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:pendingRequest.request))
+            pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error: error, response: nil, request:pendingRequest.request))
             return false
         }
     }
@@ -193,9 +189,12 @@ class SynchronizationManager: NSObject, NSCoding
     */
     func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {
+        //TODO: DELETE THIS !
+        pendingRequestsQueue = []
+        
         let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
             
-            failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error.error, request:error.request))
+            failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error.error, response: error.response, request:error.request))
             
             self.addPendingRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
         }

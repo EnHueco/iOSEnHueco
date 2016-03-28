@@ -96,7 +96,7 @@ class CurrentStateManager
         var instantEvent : [String : AnyObject] =
         [
             "type" : "EVENT",
-            "valid_type" : newFreeTimePeriod.endHourInDate(NSDate()),
+            "valid_until" : newFreeTimePeriod.endHourInDate(NSDate()).serverFormattedString(),
         ]
         
         instantEvent["name"] = newFreeTimePeriod.name
@@ -126,7 +126,7 @@ class CurrentStateManager
         let instantEvent =
         [
             "type" : "EVENT",
-            "valid_until" : NSDate()
+            "valid_until" : NSDate().serverFormattedString()
         ]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in

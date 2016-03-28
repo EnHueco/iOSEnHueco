@@ -173,8 +173,8 @@ class Event: EHSynchronizable, Comparable, NSCopying
         
         dictionary["type"] = type.rawValue
         
-        if name != nil { dictionary["name"] = name }
-        if location != nil { dictionary["location"] = location }
+        dictionary["name"] = name
+        dictionary["location"] = location
         
         dictionary["start_hour_weekday"] = String(startHour.weekday)
         dictionary["end_hour_weekday"] = String(endHour.weekday)

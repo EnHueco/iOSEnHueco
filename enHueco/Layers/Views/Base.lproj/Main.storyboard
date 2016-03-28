@@ -1402,7 +1402,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3w-G8-chG">
-                                        <rect key="frame" x="422" y="29" width="157" height="30"/>
+                                        <rect key="frame" x="422" y="25" width="157" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="157" id="LCe-4w-XDS">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="97"/>
@@ -1428,7 +1428,7 @@
                                     <constraint firstItem="Gmh-Ms-6ZF" firstAttribute="centerX" secondItem="EIg-Yi-dfT" secondAttribute="centerX" id="1Fg-pJ-k6W"/>
                                     <constraint firstAttribute="bottom" secondItem="Gmh-Ms-6ZF" secondAttribute="bottom" constant="13" id="BHi-uK-Udy"/>
                                     <constraint firstAttribute="trailing" secondItem="Q3w-G8-chG" secondAttribute="trailing" constant="21" id="Fgy-nu-4Eo"/>
-                                    <constraint firstAttribute="bottom" secondItem="Q3w-G8-chG" secondAttribute="bottom" constant="4" id="Ufy-eX-eOO"/>
+                                    <constraint firstItem="Q3w-G8-chG" firstAttribute="centerY" secondItem="Gmh-Ms-6ZF" secondAttribute="centerY" id="twz-wF-Klm"/>
                                     <constraint firstAttribute="height" constant="63" id="wqX-nO-mGw"/>
                                 </constraints>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1441,7 +1441,6 @@
                                         <include reference="1Fg-pJ-k6W"/>
                                         <include reference="BHi-uK-Udy"/>
                                         <include reference="Fgy-nu-4Eo"/>
-                                        <include reference="Ufy-eX-eOO"/>
                                     </mask>
                                 </variation>
                             </view>

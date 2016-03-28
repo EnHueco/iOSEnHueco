@@ -21,7 +21,8 @@ that triggered it */
 struct ConnectionManagerCompoundError: ErrorType
 {
     var error: ErrorType?
-    var request: NSURLRequest
+    var response: NSURLResponse?
+    var request: NSMutableURLRequest
 }
 
 typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
@@ -57,8 +58,12 @@ class ConnectionManager: NSObject
     class func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
-        request.HTTPBody = dictionaryJSONData
-        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        
+        if params != nil
+        {
+            request.setValue("application/json", forHTTPHeaderField: "Content-type")
+            request.HTTPBody = dictionaryJSONData
+        }
         
         sendAsyncRequest(request, onSuccess: successfulRequestBlock, onFailure: failureRequestBlock)
     }
@@ -66,8 +71,12 @@ class ConnectionManager: NSObject
     class func sendAsyncDataRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]? = nil, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
     {
         let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
-        request.HTTPBody = dictionaryJSONData
-        request.setValue("application/json", forHTTPHeaderField: "Content-type")
+        
+        if params != nil
+        {
+            request.setValue("application/json", forHTTPHeaderField: "Content-type")
+            request.HTTPBody = dictionaryJSONData
+        }
         
         var request = request
         adjustRequestForBackend(&request)
@@ -88,7 +97,7 @@ class ConnectionManager: NSObject
                         if let data = data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
                     #endif
                     
-                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:request))
+                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, response: response, request:request))
                 }
                 
                 guard let urlResponse = response where !(urlResponse.statusCode == 401) else {
@@ -101,7 +110,7 @@ class ConnectionManager: NSObject
                     return
                 }
                 
-                guard let data = data where error == nil else
+                guard let data = data where error == nil && response?.statusCode == 200 else
                 {
                     errorHandler()
                     return
@@ -133,7 +142,7 @@ class ConnectionManager: NSObject
                         if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
                     #endif
                     
-                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:response.result.error, request:request))
+                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:response.result.error, response: response.response, request:request))
                     return
                 }
                 
@@ -147,7 +156,7 @@ class ConnectionManager: NSObject
                     return
                 }
                 
-                guard let value = response.result.value where response.result.isSuccess else
+                guard let value = response.result.value where response.result.isSuccess && response.response?.statusCode == 200 else
                 {
                     errorHandler()
                     return
@@ -169,13 +178,35 @@ class ConnectionManager: NSObject
         }
     }
     
-    class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
+    class func sendSyncRequest(request: NSMutableURLRequest) throws -> AnyObject
     {
-        let response = alamoManager.request(request).responseJSON(options: .MutableContainers)
+//        let semaphore = dispatch_semaphore_create(0)
+//        
+//        sendAsyncRequest(request, onSuccess: { (JSONResponse) in
+//            
+//            dispatch_semaphore_signal(semaphore)
+//            
+//            
+//            
+//        }) { (compoundError) in
+//            
+//            
+//        }
         
-        if let error = response.result.error { throw error }
+//        [self executeInBackgroundWithCompletion:^{
+//            ;
+//            }];
+//        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) {
+//            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0]];
+//        };
+//        
+//        let response = alamoManager.request(request).responseJSON(options: .MutableContainers)
+//        
+//        if let error = response.result.error { throw error }
+//        
+//        return response.result.value ?? [:]
         
-        return response.result.value
+        return [:]
     }
 }
 

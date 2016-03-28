@@ -21,7 +21,7 @@ class EHURLS
     static let UsersSegment = "/users/"
     static let EventsSegment = "/gaps/"
     static let LocationReportSegment = "/me/location/friends/"
-    static let ImmediateEventsSegment = "/events/immediate"
+    static let ImmediateEventsSegment = "/events/immediate/"
 }
 
 /// Default parameters

@@ -130,7 +130,7 @@ class PrivacyManager
         let instantEvent =
         [
             "type" : "INVISIBILITY",
-            "valid_until" : NSDate()
+            "valid_until" : NSDate().serverFormattedString()
         ]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in

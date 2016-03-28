@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController
             startAnimatingImageLoadingIndicator()
         }
         
-        PersistenceManager.sharedManager().loadImageFromPath(PersistenceManager.sharedManager().documentsPath + "profile.jpg") {(image) -> () in
+        PersistenceManager.sharedManager().loadImageFromPath(PersistenceManager.sharedManager().documentsPath + "/profile.jpg") {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
             {
@@ -120,7 +120,13 @@ class ProfileViewController: UIViewController
                 {
                     image = UIImage(named: "stripes")
                     
-                    AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
+                    AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler { success, error in 
+                        
+                        if success
+                        {
+                            self.assignImages()
+                        }
+                    }
                 }
                 
                 self.imageImageView.hidden = false

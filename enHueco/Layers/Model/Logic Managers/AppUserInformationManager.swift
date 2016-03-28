@@ -83,13 +83,10 @@ class AppUserInformationManager
         let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
         let request = NSMutableURLRequest(URL: url!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
-        
         request.HTTPMethod = "PUT"
         request.setValue("attachment; filename=upload.jpg", forHTTPHeaderField: "Content-Disposition")
         
-        let jpegData = NSData(data: UIImageJPEGRepresentation(image, 100)!)
+        let jpegData = NSData(data: UIImageJPEGRepresentation(image, 1)!)
         request.HTTPBody = jpegData
         
         ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
@@ -113,8 +110,6 @@ class AppUserInformationManager
         if let url = enHueco.appUser?.imageURL
         {
             let request = NSMutableURLRequest(URL: url)
-            request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-            request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
             request.HTTPMethod = "GET"
             
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
