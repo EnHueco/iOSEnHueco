@@ -129,7 +129,7 @@ class EventsAndSchedulesManager
         return true
     }
     
-    /// Adds the events given events to the AppUser's schedule if and only if the request is successful
+    /// Adds the events given events to the AppUser's schedule if and only if the request is successful.
     func addEvents(newEvents: [Event], completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
@@ -156,19 +156,54 @@ class EventsAndSchedulesManager
         })
     }
     
-    /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful
+    /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful.
      The events given **must** be a reference to existing events.
     */
     func deleteEvents(events: [Event], completionHandler: BasicCompletionHandler)
     {
-        // TODO: Implement
+        guard events.reduce(true, combine: { $0 && $1.ID != nil }) else { return }
+        
+        let params = events.map { $0.ID }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+        request.HTTPMethod = "DELETE"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: true, error: nil)
+            }
+            
+        }, failureCompletionHandler: { error in
+                
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: error)
+            }
+            
+        })
     }
     
-    /** Edits the given existing event from the AppUser's schedule if and only if the request is successful
+    /** Edits the given existing event from the AppUser's schedule if and only if the request is successful.
      The event given **must** be a reference to an existing event.
     */
     func editEvent(event: Event, completionHandler: BasicCompletionHandler)
     {
-        // TODO: Implement
+        guard let ID = event.ID else { return }
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
+        request.HTTPMethod = "PUT"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
+            
+            let JSONDictionary = JSONResponse as! [String : AnyObject]
+            event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+            completionHandler(success: true, error: nil)
+            
+        }, failureCompletionHandler: { error in
+                
+            completionHandler(success: false, error: error)
+                
+        })
     }
 }
