@@ -109,7 +109,7 @@ class PrivacyManager
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
-            enHueco.appUser.inivisibilityEndDate = endDate
+            enHueco.appUser.setInivisibilityEndDate(endDate)
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -139,7 +139,7 @@ class PrivacyManager
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
             
-            enHueco.appUser.inivisibilityEndDate = endDate
+            enHueco.appUser.setInivisibilityEndDate(endDate)
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)

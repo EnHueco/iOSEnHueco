@@ -124,7 +124,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func imInvisibleButtonPressed(sender: UIButton)
     {
-        if enHueco.appUser.invisible
+        if enHueco.appUser.isInvisible
         {
             turnVisible()
         }
@@ -151,7 +151,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
                 
                 UIView.animateWithDuration(0.2) {
                     
-                    self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+                    self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
                 }
             })
         }
@@ -198,18 +198,13 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             
             UIView.animateWithDuration(0.2) {
                 
-                self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
+                self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
             }
         }
     }
     
     func imAvailableButtonPressed(sender: UIButton)
     {
-        UIView.animateWithDuration(0.2)
-        {
-            self.imAvailableBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220 / 255.0, green: 170 / 255.0, blue: 10 / 255.0, alpha: 1) : UIColor.whiteColor()
-        }
-        
         let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
         instantFreeTimeViewController.showInViewController(navigationController!)
     }
@@ -228,10 +223,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     func updateFreeTimePeriodDataAndReloadTableView()
     {
-        if enHueco.appUser.invisible
-        {
-            imInvisibleBarItem.customView!.tintColor = enHueco.appUser.invisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
-        }
+        imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
         
         dispatch_async(dispatch_get_main_queue())
         {

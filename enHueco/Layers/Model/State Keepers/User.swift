@@ -51,10 +51,10 @@ class User: EHSynchronizable
     /** The ending date of the user invisibility.
      The user is visible if this is either nil or a date in the past.
     */
-    var inivisibilityEndDate: NSDate?
+    private var inivisibilityEndDate: NSDate?
     
     ///User visibility state
-    var invisible: Bool
+    var isInvisible: Bool
     {
         return inivisibilityEndDate != nil && inivisibilityEndDate!.timeIntervalSinceNow > 0
     }
@@ -114,6 +114,14 @@ class User: EHSynchronizable
         }
     }
     
+    /** The ending date of the user invisibility.
+     The user is visible if this is either nil or a date in the past.
+     */
+    func setInivisibilityEndDate(date: NSDate?)
+    {
+        inivisibilityEndDate = date
+    }
+    
     func addEvents(JSONDictionary: [String: AnyObject])
     {
         let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
@@ -128,7 +136,7 @@ class User: EHSynchronizable
     /// Returns user current free time period, or nil if user is not free.
     func currentFreeTimePeriod() -> Event?
     {
-        guard !invisible else { return nil }
+        guard !isInvisible else { return nil }
         
         if schedule.instantFreeTimePeriod != nil { return schedule.instantFreeTimePeriod }
         
@@ -154,7 +162,7 @@ class User: EHSynchronizable
     ///For Performance
     func currentAndNextFreeTimePeriods() -> (currentFreeTimePeriod: Event?, nextFreeTimePeriod: Event?)
     {
-        guard !invisible else { return (nil, nil) }
+        guard !isInvisible else { return (nil, nil) }
         
         let currentDate = NSDate()
         
@@ -191,7 +199,7 @@ class User: EHSynchronizable
     
     func nextFreeTimePeriod() -> Event?
     {
-        guard !invisible else { return nil }
+        guard !isInvisible else { return nil }
 
         let currentDate = NSDate()
         
