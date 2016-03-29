@@ -14,7 +14,7 @@ import Foundation
  The Synchronization Manager maintains a persistent queue to guarantee that operations are executed in order
  and when a connection is available.
 */
-@available(*, deprecated=0.5, message="EnHueco doesn't allow offline editing now. You must now use other managers available which accomplish the task in a network-immediate fashion. It will soon be removed completely.")
+@available(*, deprecated=0.5, message="EnHueco doesn't allow offline editing now. You must now use the EventsAndScheduleManager to accomplish the task in a network-immediate fashion. The Synchronization Manager will soon be removed completely.")
 class SynchronizationManager: NSObject, NSCoding
 {
     // TODO: Should be a struct but NSCoding doesn't let us.
@@ -178,7 +178,7 @@ class SynchronizationManager: NSObject, NSCoding
     - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
     - parameter associatedObject: Object associated with the request (For example, the free time period that was going to be updated).
     */
-    func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
+    func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  successCompletionHandler successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureCompletionHandler failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {
         //TODO: DELETE THIS !
         pendingRequestsQueue = []
@@ -198,7 +198,7 @@ class SynchronizationManager: NSObject, NSCoding
             return
         }
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: successfulRequestBlock, failureCompletionHandler: synchronizationFailureRequestBlock)
     }
     
     // MARK: Reporting
@@ -211,7 +211,7 @@ class SynchronizationManager: NSObject, NSCoding
         
         let params = newEvent.toJSONObject(associatingUser: enHueco.appUser)
         
-        sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = (JSONResponse as! [String : AnyObject])
             newEvent.ID = "\(JSONDictionary["id"] as! Int)"
@@ -220,7 +220,7 @@ class SynchronizationManager: NSObject, NSCoding
             
             completionHandler?(success: true, error: nil)
             
-        }, onFailure: { error in
+        }, failureCompletionHandler: { error in
             
             completionHandler?(success: false, error: error)
             
@@ -237,7 +237,7 @@ class SynchronizationManager: NSObject, NSCoding
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
         request.HTTPMethod = "PUT"
 
-        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
@@ -245,7 +245,7 @@ class SynchronizationManager: NSObject, NSCoding
             
             completionHandler?(success: true, error: nil)
 
-        }, onFailure: { error in
+        }, failureCompletionHandler: { error in
             
             completionHandler?(success: false, error: error)
             
@@ -260,12 +260,12 @@ class SynchronizationManager: NSObject, NSCoding
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
         request.HTTPMethod = "DELETE"
 
-        sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: nil, successCompletionHandler: { (JSONResponse) -> () in
             
             print("Reported event deleted")
             completionHandler?(success: true, error: nil)
             
-        }, onFailure: { error in
+        }, failureCompletionHandler: { error in
                 
             completionHandler?(success: false, error: error)
                 

@@ -78,7 +78,7 @@
 		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
 		F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8461C81441600390CF7 /* FriendsManager.swift */; };
 		F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* CurrentStateManager.swift */; };
-		F183F84D1C814E3A00390CF7 /* SchedulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* SchedulesManager.swift */; };
+		F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */; };
 		F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8561C837FB500390CF7 /* PrivacyManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
@@ -241,7 +241,7 @@
 		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AccountManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8461C81441600390CF7 /* FriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendsManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8481C81454C00390CF7 /* CurrentStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurrentStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F183F84C1C814E3A00390CF7 /* SchedulesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SchedulesManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventsAndSchedulesManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8561C837FB500390CF7 /* PrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacyManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectCalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
@@ -632,7 +632,7 @@
 				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
 				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
-				F183F84C1C814E3A00390CF7 /* SchedulesManager.swift */,
+				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8421C80781400390CF7 /* PersistenceManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
@@ -919,7 +919,7 @@
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
 				F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */,
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
-				F183F84D1C814E3A00390CF7 /* SchedulesManager.swift in Sources */,
+				F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */,
 				F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,

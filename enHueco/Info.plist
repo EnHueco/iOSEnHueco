@@ -15,11 +15,28 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb170021583356683</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>170021583356683</string>
+	<key>FacebookDisplayName</key>
+	<string>EnHueco</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -44,23 +61,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb170021583356683</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>170021583356683</string>
-    <key>FacebookDisplayName</key>
-    <string>EnHueco</string>
-    
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbauth2</string>
-    </array>
 </dict>
 </plist>

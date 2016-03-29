@@ -61,7 +61,7 @@ class CommonFreeTimePeriodsViewController: UIViewController
     
     func prepareInfoAndReloadScheduleData()
     {
-        let commonFreeTimePeriodsSchedule = ScheduleManager.sharedManager.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
+        let commonFreeTimePeriodsSchedule = EventsAndSchedulesManager.sharedManager.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
         scheduleViewController.schedule = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }

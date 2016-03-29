@@ -97,7 +97,7 @@ class CurrentStateManager
         instantEvent["name"] = newFreeTimePeriod.name
         instantEvent["location"] = newFreeTimePeriod.location
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.setInivisibilityEndDate(nil)
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
@@ -106,7 +106,7 @@ class CurrentStateManager
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
         
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -125,13 +125,13 @@ class CurrentStateManager
             "valid_until" : NSDate().serverFormattedString()
         ]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
                         
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: {(compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)

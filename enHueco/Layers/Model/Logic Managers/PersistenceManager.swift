@@ -57,7 +57,7 @@ class PersistenceManager
         try? NSFileManager.defaultManager().removeItemAtPath(PersistenceManager.sharedManager.documentsPath + "profile.jpg")
     }
     
-    func saveImage (data: NSData, path: String, onSuccess: () -> ())
+    func saveImage (data: NSData, path: String, successCompletionHandler: () -> ())
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
@@ -65,7 +65,7 @@ class PersistenceManager
             
             if result
             {
-                onSuccess()
+                successCompletionHandler()
             }
         }
     }

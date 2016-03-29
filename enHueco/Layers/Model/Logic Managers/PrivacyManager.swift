@@ -43,13 +43,13 @@ class PrivacyManager
         
         let parameters = [setting.rawValue : "false"]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: { (compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -74,13 +74,13 @@ class PrivacyManager
         
         let parameters = [setting.rawValue : "true"]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: { (compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -102,7 +102,7 @@ class PrivacyManager
             "valid_until" : endDate.serverFormattedString()
         ]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.setInivisibilityEndDate(endDate)
             
@@ -110,7 +110,7 @@ class PrivacyManager
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: {(compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -132,7 +132,7 @@ class PrivacyManager
             "valid_until" : endDate.serverFormattedString()
         ]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.setInivisibilityEndDate(endDate)
             
@@ -140,7 +140,7 @@ class PrivacyManager
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: {(compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)

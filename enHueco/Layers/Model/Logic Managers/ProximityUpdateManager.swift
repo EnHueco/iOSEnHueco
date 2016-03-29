@@ -177,7 +177,7 @@ class ProximityUpdatesManager: NSObject
         
         let params = ["bssid" : currentBSSID]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
             for friendDictionary in JSONResponse as! [[String : AnyObject]]
             {

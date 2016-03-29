@@ -164,7 +164,7 @@ class AppUser: User
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], successCompletionHandler: { (JSONResponse) -> () in
             
             NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
         

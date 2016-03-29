@@ -22,8 +22,8 @@ class AccountManager
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!)
         request.HTTPMethod = "POST"
-        
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (response) -> () in
+                
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (response) -> () in
             
             enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
@@ -37,7 +37,7 @@ class AccountManager
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: { (error) -> () in
+        }, failureCompletionHandler: { (error) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: error.error)

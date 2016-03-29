@@ -10,12 +10,12 @@ import Foundation
 import EventKit
 
 /** 
-Handles operations related to schedules construction like getting schedules for common free time periods and
-schedules importing from external services
+Handles operations related to schedules and events like getting schedules for common free time periods, importing
+schedules from external services, and adding/removing/editing events.
 */
-class ScheduleManager
+class EventsAndSchedulesManager
 {
-    static let sharedManager = ScheduleManager()
+    static let sharedManager = EventsAndSchedulesManager()
 
     private init() {}
     
@@ -127,5 +127,40 @@ class ScheduleManager
             //TODO: Calculate Gaps and add them
         }
         return true
+    }
+    
+    func addEvents(newEvents: [Event], completionHandler: BasicCompletionHandler)
+    {
+//        var newEvents = newEvents
+//        
+//        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+//        request.HTTPMethod = "POST"
+//        
+//        let params = newEvents.map { $0.toJSONObject() }
+//        
+//        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
+//            
+//            let JSONDictionary = (JSONResponse as! [String : AnyObject])
+//            newEvent.ID = "\(JSONDictionary["id"] as! Int)"
+//            newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+//            print("Reported new event")
+//            
+//            completionHandler(success: true, error: nil)
+//            
+//        }, failureCompletionHandler: { error in
+//                
+//            completionHandler(success: false, error: error)
+//                
+//        })
+    }
+    
+    func deleteEvents(events: [Event], completionHandler: BasicCompletionHandler)
+    {
+        
+    }
+    
+    func editEvent(event: Event, completionHandler: BasicCompletionHandler)
+    {
+        
     }
 }

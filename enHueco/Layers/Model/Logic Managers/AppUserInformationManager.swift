@@ -25,7 +25,7 @@ class AppUserInformationManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             let downloadedUser = JSONResponse as! [String : AnyObject]
             
@@ -54,7 +54,7 @@ class AppUserInformationManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             appUser.updateUserWithJSONDictionary(JSONDictionary)
@@ -84,7 +84,7 @@ class AppUserInformationManager
         let jpegData = NSData(data: UIImageJPEGRepresentation(image, 1)!)
         request.HTTPBody = jpegData
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler?(success: true, error: nil)
@@ -92,7 +92,7 @@ class AppUserInformationManager
             
             self.fetchAppUser()
             
-        }, onFailure: { (error) -> () in
+        }, failureCompletionHandler: { (error) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler?(success: false, error: error)
@@ -107,10 +107,10 @@ class AppUserInformationManager
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "GET"
             
-            ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+            ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
                 
                 let path = PersistenceManager.sharedManager.documentsPath + "/profile.jpg"
-                PersistenceManager.sharedManager.saveImage(data, path: path, onSuccess: { () -> () in
+                PersistenceManager.sharedManager.saveImage(data, path: path, successCompletionHandler: { () -> () in
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         completionHandler?(success: true, error: nil)

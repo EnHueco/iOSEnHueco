@@ -26,7 +26,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (response) -> () in
                         
             let currentDate = NSDate()
             
@@ -81,7 +81,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
         request.HTTPMethod = "DELETE"
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
             
             enHueco.appUser.friends[friend.username] = nil
             
@@ -110,7 +110,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (incomingRequestsResponseDictionary) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (incomingRequestsResponseDictionary) -> () in
             
             var requestFriends = [User]()
             
@@ -143,7 +143,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             let requestFriend = //User(JSONDictionary: JSONResponse as! [String : AnyObject])
             enHueco.appUser.outgoingFriendRequests.append(user)
@@ -173,7 +173,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
             self.fetchUpdatesForFriendsAndFriendSchedules()
@@ -209,7 +209,7 @@ class FriendsManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             var userSearchResults = [User]()
             
