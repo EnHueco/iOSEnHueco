@@ -178,8 +178,6 @@ class ProximityUpdatesManager: NSObject
         enHueco.appUser.currentBSSID = currentBSSID
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.LocationReportSegment)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
         
         let params = ["bssid" : currentBSSID]

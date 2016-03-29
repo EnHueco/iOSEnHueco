@@ -216,8 +216,6 @@ class SynchronizationManager: NSObject, NSCoding
     func reportNewEvent(newEvent: Event)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "POST"
         
         let params = newEvent.toJSONObject(associatingUser: enHueco.appUser)
@@ -240,8 +238,6 @@ class SynchronizationManager: NSObject, NSCoding
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
 
         sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), onSuccess: { (JSONResponse) -> () in
@@ -259,8 +255,6 @@ class SynchronizationManager: NSObject, NSCoding
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "DELETE"
 
         sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in

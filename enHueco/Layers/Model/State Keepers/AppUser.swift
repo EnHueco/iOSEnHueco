@@ -162,8 +162,6 @@ class AppUser: User
     func pushPhoneNumber(newNumber : String)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setValue(username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], onSuccess: { (JSONResponse) -> () in

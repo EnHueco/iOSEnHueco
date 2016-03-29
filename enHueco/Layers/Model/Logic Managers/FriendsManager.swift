@@ -212,8 +212,6 @@ class FriendsManager
         }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
