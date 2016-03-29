@@ -11,15 +11,10 @@ import Foundation
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
 class AccountManager
 {
-    private static let instance = AccountManager()
+    static let sharedManager = AccountManager()
     
     private init() {}
-    
-    class func sharedManager() -> AccountManager
-    {
-        return instance
-    }
-    
+        
     /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
     class func loginWithUsername (username: String, password: String, completionHandler: BasicCompletionHandler)
     {
@@ -32,11 +27,11 @@ class AccountManager
             
             enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
-            AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
-            AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
-            FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndSchedule()
+            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
             
-            try! PersistenceManager.sharedManager().persistData()
+            try! PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -55,6 +50,6 @@ class AccountManager
         // TODO: Delete persistence information, send logout notification to server so token is deleted.
         
         enHueco.appUser = nil
-        try? PersistenceManager.sharedManager().deleteAllPersistenceData()
+        try? PersistenceManager.sharedManager.deleteAllPersistenceData()
     }
 }

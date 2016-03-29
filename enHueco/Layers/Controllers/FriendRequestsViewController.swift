@@ -39,7 +39,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         
         EHProgressHUD.showSpinnerInView(view)
 
-        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequests()
     }
     
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -161,7 +161,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let requestFriend = enHueco.appUser.incomingFriendRequests[indexPath.row]
 
         EHProgressHUD.showSpinnerInView(view)
-        FriendsManager.sharedManager().acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
+        FriendsManager.sharedManager.acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
             

@@ -102,7 +102,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             }
         })
         
-        FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
 
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
@@ -139,7 +139,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         let turnInvisibleForInterval = { (interval: NSTimeInterval) -> Void in
             
             EHProgressHUD.showSpinnerInView(self.view)
-            PrivacyManager.sharedManager().turnInvisibleForTimeInterval(interval, completionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager.turnInvisibleForTimeInterval(interval, completionHandler: { (success, error) -> Void in
                 
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
@@ -186,7 +186,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     private func turnVisible()
     {
         EHProgressHUD.showSpinnerInView(self.view)
-        PrivacyManager.sharedManager().turnVisibleWithCompletionHandler { (success, error) -> Void in
+        PrivacyManager.sharedManager.turnVisibleWithCompletionHandler { (success, error) -> Void in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
             
@@ -211,14 +211,14 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
     
     func resetDataArrays()
     {
-        filteredFriendsAndFreeTimePeriods = CurrentStateManager.sharedManager().currentlyAvailableFriends()
+        filteredFriendsAndFreeTimePeriods = CurrentStateManager.sharedManager.currentlyAvailableFriends()
         
         if let instantFreeTimePeriod = enHueco.appUser.schedule.instantFreeTimePeriod
         {
             filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }
         
-        filteredSoonFreefriendsAndFreeTimePeriods = CurrentStateManager.sharedManager().soonAvailableFriendsWithinTimeInterval(3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = CurrentStateManager.sharedManager.soonAvailableFriendsWithinTimeInterval(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView()
@@ -419,7 +419,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             if friend === enHueco.appUser
             {
                 EHProgressHUD.showSpinnerInView(view)
-                CurrentStateManager.sharedManager().deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
+                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
                     
                     EHProgressHUD.dismissSpinnerForView(self.view)
 

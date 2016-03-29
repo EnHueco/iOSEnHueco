@@ -11,15 +11,10 @@ import Foundation
 /// Handles operations related to the users' current state (i.e. users' availability (EnHueco's core services))
 class CurrentStateManager
 {
-    private static let instance = CurrentStateManager()
+    static let sharedManager = CurrentStateManager()
 
     private init() {}
     
-    class func sharedManager() -> CurrentStateManager
-    {
-        return instance
-    }
-
     /**
      Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period

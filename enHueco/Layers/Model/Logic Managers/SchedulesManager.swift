@@ -15,15 +15,10 @@ schedules importing from external services
 */
 class ScheduleManager
 {
-    private static let instance = ScheduleManager()
+    static let sharedManager = ScheduleManager()
 
     private init() {}
     
-    class func sharedManager() -> ScheduleManager
-    {
-        return instance
-    }
-
     /**
      Returns a schedule with the common free time periods of the users provided.
      */
@@ -123,7 +118,7 @@ class ScheduleManager
             
             if weekDayDaySchedule.addEvent(aClass)
             {
-                SynchronizationManager.sharedManager().reportNewEvent(aClass)
+                SynchronizationManager.sharedManager.reportNewEvent(aClass, completionHandler: nil)
             }
         }
         

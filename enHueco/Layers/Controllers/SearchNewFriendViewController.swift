@@ -112,7 +112,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         let friend = searchResults[indexPath.row]
         
         EHProgressHUD.showSpinnerInView(view)
-        FriendsManager.sharedManager().sendFriendRequestToUser(friend) { (success, error) -> () in
+        FriendsManager.sharedManager.sendFriendRequestToUser(friend) { (success, error) -> () in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
 
@@ -158,7 +158,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     
     func timeToSearch(timer: NSTimer)
     {
-        FriendsManager.sharedManager().searchUsersWithText(searchText) { (results) -> () in
+        FriendsManager.sharedManager.searchUsersWithText(searchText) { (results) -> () in
             
             self.searchResults = results
             self.searchResultsTableView.reloadData()

@@ -174,7 +174,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
                 
                 EHProgressHUD.showSpinnerInView(self.view)
-                FriendsManager.sharedManager().deleteFriend(self.friend, completionHandler: { (success, error) -> () in
+                FriendsManager.sharedManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
                     
                     EHProgressHUD.dismissSpinnerForView(self.view)
 

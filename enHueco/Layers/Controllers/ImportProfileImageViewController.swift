@@ -151,7 +151,7 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
         EHProgressHUD.showSpinnerInView(view)
-        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage) { success, error in
+        AppUserInformationManager.sharedManager.pushProfilePicture(croppedImage) { success, error in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
             

@@ -53,8 +53,8 @@ class ProfileViewController: UIViewController
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        AppUserInformationManager.sharedManager().fetchAppUser()
-        AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
+        AppUserInformationManager.sharedManager.fetchAppUser()
+        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndSchedule()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -110,7 +110,7 @@ class ProfileViewController: UIViewController
             startAnimatingImageLoadingIndicator()
         }
         
-        PersistenceManager.sharedManager().loadImageFromPath(PersistenceManager.sharedManager().documentsPath + "/profile.jpg") {(image) -> () in
+        PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
             {
@@ -120,7 +120,7 @@ class ProfileViewController: UIViewController
                 {
                     image = UIImage(named: "stripes")
                     
-                    AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler { success, error in 
+                    AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler { success, error in 
                         
                         if success
                         {

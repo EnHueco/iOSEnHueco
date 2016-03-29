@@ -64,7 +64,7 @@ import UIKit
         }
         else
         {
-            AccountManager.sharedManager().logOut()
+            AccountManager.sharedManager.logOut()
         }
     }
 
@@ -141,7 +141,7 @@ import UIKit
 
     func goToMainTabViewController()
     {
-        ProximityUpdatesManager.sharedManager().beginProximityUpdates()
+        ProximityUpdatesManager.sharedManager.beginProximityUpdates()
         
         let mainTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         

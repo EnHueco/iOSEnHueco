@@ -31,14 +31,9 @@ enum PrivacyPolicy
 /// Handles privacy settings
 class PrivacyManager
 {
-    private static let instance = PrivacyManager()
+    static let sharedManager = PrivacyManager()
     
     private init() {}
-    
-    class func sharedManager() -> PrivacyManager
-    {
-        return instance
-    }
     
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
     func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)

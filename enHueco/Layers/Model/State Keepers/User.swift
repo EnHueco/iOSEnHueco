@@ -224,7 +224,7 @@ class User: EHSynchronizable
     {
         if let appUserBSSID = enHueco.appUser.currentBSSID, currentBSSID = currentBSSID
         {
-            isNearby = ProximityUpdatesManager.sharedManager().wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
+            isNearby = ProximityUpdatesManager.sharedManager.wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
         }
         else
         {

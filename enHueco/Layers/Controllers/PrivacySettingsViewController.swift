@@ -33,7 +33,7 @@ class PrivacySettingsViewController: UITableViewController
     {
         NSUserDefaults.standardUserDefaults().setBool(shareLocationWithBestFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
         
-        ProximityUpdatesManager.sharedManager().updateBackgroundFetchInterval()
+        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -48,7 +48,7 @@ class PrivacySettingsViewController: UITableViewController
         {
             EHProgressHUD.showSpinnerInView(view)
             
-            PrivacyManager.sharedManager().turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager.turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
@@ -63,7 +63,7 @@ class PrivacySettingsViewController: UITableViewController
         {
             EHProgressHUD.showSpinnerInView(view)
 
-            PrivacyManager.sharedManager().turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager.turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 EHProgressHUD.dismissSpinnerForView(self.view)
 

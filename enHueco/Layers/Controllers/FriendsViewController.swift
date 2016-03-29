@@ -138,8 +138,8 @@ class FriendsViewController: UIViewController
 
     func fetchUpdates()
     {
-        FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
-        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequests()
     }
     
     func friendRequestsButtonPressed(sender: UIButton)

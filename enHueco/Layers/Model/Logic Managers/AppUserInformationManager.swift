@@ -13,15 +13,10 @@ import Foundation
 */
 class AppUserInformationManager
 {
-    private static let instance = AppUserInformationManager()
+    static let sharedManager = AppUserInformationManager()
 
     private init() {}
     
-    class func sharedManager() -> AppUserInformationManager
-    {
-        return instance
-    }
-
     //TODO: What is this method for?
     func fetchAppUser ()
     {
@@ -38,9 +33,9 @@ class AppUserInformationManager
             {
                 appUser.updateUserWithJSONDictionary(downloadedUser)
                 
-                try? PersistenceManager.sharedManager().persistData()
+                try? PersistenceManager.sharedManager.persistData()
 
-                AppUserInformationManager.sharedManager().downloadProfilePictureWithCompletionHandler(nil)
+                AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
             }
             
         }) { (error) -> () in
@@ -114,8 +109,8 @@ class AppUserInformationManager
             
             ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
                 
-                let path = PersistenceManager.sharedManager().documentsPath + "/profile.jpg"
-                PersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
+                let path = PersistenceManager.sharedManager.documentsPath + "/profile.jpg"
+                PersistenceManager.sharedManager.saveImage(data, path: path, onSuccess: { () -> () in
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         completionHandler?(success: true, error: nil)

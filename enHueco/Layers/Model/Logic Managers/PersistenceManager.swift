@@ -11,7 +11,7 @@ import Foundation
 /// Handles all operations related to persistence.
 class PersistenceManager
 {
-    private static let instance = PersistenceManager()
+    static let sharedManager = PersistenceManager()
 
     enum PersistenceManagerError: ErrorType
     {
@@ -27,11 +27,6 @@ class PersistenceManager
     private init() {
         
         persistencePath = documentsPath + "/appState.state"
-    }
-    
-    class func sharedManager() -> PersistenceManager
-    {
-        return instance
     }
     
     /// Persists all pertinent application data
@@ -59,7 +54,7 @@ class PersistenceManager
     func deleteAllPersistenceData()
     {
         try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
-        try? NSFileManager.defaultManager().removeItemAtPath(PersistenceManager.sharedManager().documentsPath + "profile.jpg")
+        try? NSFileManager.defaultManager().removeItemAtPath(PersistenceManager.sharedManager.documentsPath + "profile.jpg")
     }
     
     func saveImage (data: NSData, path: String, onSuccess: () -> ())

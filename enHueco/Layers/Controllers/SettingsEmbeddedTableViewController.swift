@@ -52,7 +52,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     {
         NSUserDefaults.standardUserDefaults().setBool(nearbyFriendsNotificationsSwitch.on, forKey: EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         
-        ProximityUpdatesManager.sharedManager().updateBackgroundFetchInterval()
+        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
     }
     
     @IBAction func authenticateWithTIDChanged(sender: UISwitch)

@@ -14,6 +14,7 @@ import Foundation
  The Synchronization Manager maintains a persistent queue to guarantee that operations are executed in order
  and when a connection is available.
 */
+@available(*, deprecated=0.5, message="EnHueco doesn't allow offline editing now. You must now use other managers available which accomplish the task in a network-immediate fashion. It will soon be removed completely.")
 class SynchronizationManager: NSObject, NSCoding
 {
     // TODO: Should be a struct but NSCoding doesn't let us.
@@ -70,7 +71,7 @@ class SynchronizationManager: NSObject, NSCoding
     /// Path where data will be persisted
     private static let persistencePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/synchronizationManager.state"
 
-    private static var instance: SynchronizationManager?
+    static let sharedManager = SynchronizationManager()
     
     /**
         FIFO queue containing pending requests that failed because of a network error.
@@ -96,16 +97,6 @@ class SynchronizationManager: NSObject, NSCoding
         self.pendingRequestsQueue = pendingRequestsQueue
         
         super.init()
-    }
-    
-    class func sharedManager() -> SynchronizationManager
-    {
-        if instance == nil
-        {
-            instance = managerFromPersistence() ?? SynchronizationManager()
-        }
-        
-        return instance!
     }
     
     /// Tries to initialize a SynchronizationManager instance from persistence
@@ -213,7 +204,7 @@ class SynchronizationManager: NSObject, NSCoding
     // MARK: Reporting
     
     ///Reports to the server a new event added
-    func reportNewEvent(newEvent: Event)
+    func reportNewEvent(newEvent: Event, completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
         request.HTTPMethod = "POST"
@@ -227,13 +218,19 @@ class SynchronizationManager: NSObject, NSCoding
             newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported new event")
             
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+            completionHandler?(success: true, error: nil)
+            
+        }, onFailure: { error in
+            
+            completionHandler?(success: false, error: error)
+            
+        }, associatedObject: enHueco.appUser)
     
         //TODO: Change associated object
     }
     
     ///Reports to the server an edit to an event
-    func reportEventEdited(event: Event)
+    func reportEventEdited(event: Event, completionHandler: BasicCompletionHandler?)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }
         
@@ -245,12 +242,18 @@ class SynchronizationManager: NSObject, NSCoding
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported event edited")
+            
+            completionHandler?(success: true, error: nil)
 
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+        }, onFailure: { error in
+            
+            completionHandler?(success: false, error: error)
+            
+        }, associatedObject: enHueco.appUser)
     }
     
     ///Reports to the server a deleted evet
-    func reportEventDeleted(event: Event)
+    func reportEventDeleted(event: Event, completionHandler: BasicCompletionHandler?)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }
         
@@ -260,8 +263,13 @@ class SynchronizationManager: NSObject, NSCoding
         sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
             
             print("Reported event deleted")
+            completionHandler?(success: true, error: nil)
             
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+        }, onFailure: { error in
+                
+            completionHandler?(success: false, error: error)
+                
+        }, associatedObject: enHueco.appUser)
     }    
 }
 

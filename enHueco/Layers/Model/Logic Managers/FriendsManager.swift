@@ -11,15 +11,10 @@ import Foundation
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager
 {
-    private static let instance = FriendsManager()
+    static let sharedManager = FriendsManager()
 
     private init() {}
     
-    class func sharedManager() -> FriendsManager
-    {
-        return instance
-    }
-
     /**
      Fetches full friends and schedule information from the server and notifies the result via Notification Center.
      
@@ -69,7 +64,7 @@ class FriendsManager
                 enHueco.appUser.friends[newFriend.username] = newFriend
             }
             
-            try? PersistenceManager.sharedManager().persistData()
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()){
                 NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
@@ -90,7 +85,7 @@ class FriendsManager
             
             enHueco.appUser.friends[friend.username] = nil
             
-            try? PersistenceManager.sharedManager().persistData()
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -297,12 +292,12 @@ class FriendsManager
         
         enHueco.appUser.friends[friend.username] = friend
         
-        try? PersistenceManager.sharedManager().persistData()
+        try? PersistenceManager.sharedManager.persistData()
         
         dispatch_async(dispatch_get_main_queue()) {
             
             //TODO :
-            //FriendsManager.sharedManager().sendFriendRequestToUser(friend)
+            //FriendsManager.sharedManager.sendFriendRequestToUser(friend)
         }
     }
     
