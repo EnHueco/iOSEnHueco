@@ -129,38 +129,46 @@ class EventsAndSchedulesManager
         return true
     }
     
+    /// Adds the events given events to the AppUser's schedule if and only if the request is successful
     func addEvents(newEvents: [Event], completionHandler: BasicCompletionHandler)
     {
-//        var newEvents = newEvents
-//        
-//        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-//        request.HTTPMethod = "POST"
-//        
-//        let params = newEvents.map { $0.toJSONObject() }
-//        
-//        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
-//            
-//            let JSONDictionary = (JSONResponse as! [String : AnyObject])
-//            newEvent.ID = "\(JSONDictionary["id"] as! Int)"
-//            newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-//            print("Reported new event")
-//            
-//            completionHandler(success: true, error: nil)
-//            
-//        }, failureCompletionHandler: { error in
-//                
-//            completionHandler(success: false, error: error)
-//                
-//        })
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
+        request.HTTPMethod = "POST"
+        
+        let params = newEvents.map { $0.toJSONObject() }
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
+            
+            for event in newEvents
+            {
+                enHueco.appUser.schedule.weekDays[event.startHour.weekday].addEvent(event)
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: true, error: nil)
+            }
+            
+        }, failureCompletionHandler: { error in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: error)
+            }
+        })
     }
     
+    /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful
+     The events given **must** be a reference to existing events.
+    */
     func deleteEvents(events: [Event], completionHandler: BasicCompletionHandler)
     {
-        
+        // TODO: Implement
     }
     
+    /** Edits the given existing event from the AppUser's schedule if and only if the request is successful
+     The event given **must** be a reference to an existing event.
+    */
     func editEvent(event: Event, completionHandler: BasicCompletionHandler)
     {
-        
+        // TODO: Implement
     }
 }
