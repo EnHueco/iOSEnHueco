@@ -109,7 +109,7 @@ class ConnectionManager: NSObject
                         failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error:error, response: response, request:request))
                     }
                     
-                    guard let urlResponse = response where !(urlResponse.statusCode == 401) else {
+                    guard response?.statusCode != 401 else {
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
@@ -160,7 +160,7 @@ class ConnectionManager: NSObject
                     return
                 }
                 
-                guard let urlResponse = response.response where !(urlResponse.statusCode == 401) else
+                guard response.response?.statusCode != 401 else
                 {
                     dispatch_async(dispatch_get_main_queue()) {
                         NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
