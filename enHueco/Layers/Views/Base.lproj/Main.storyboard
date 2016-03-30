@@ -3066,16 +3066,9 @@
             <objects>
                 <tableViewController storyboardIdentifier="SettingsEmbeddedTableViewController" id="3Ck-Y2-Wia" customClass="SettingsEmbeddedTableViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="TAV-Pr-XMo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="xdK-yB-2SD">
-                            <rect key="frame" x="0.0" y="726" width="600" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                            <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <sections>
                             <tableViewSection headerTitle="Profile" footerTitle="" id="sYt-H8-Frb">
                                 <cells>
@@ -3298,10 +3291,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="800"/>
                     <connections>
                         <outlet property="authTouchIDSwitch" destination="Sf7-aS-JzJ" id="aeL-Ie-KOH"/>
                         <outlet property="changeProfilePictureCell" destination="97T-Sb-Lig" id="K3M-9J-UkS"/>
-                        <outlet property="lastBackgroundFetchDateLabel" destination="xdK-yB-2SD" id="T9q-as-I5W"/>
                         <outlet property="logoutCell" destination="Jkg-YI-icF" id="DKU-sp-NxZ"/>
                         <outlet property="nearbyFriendsNotificationsSwitch" destination="emB-b6-BjO" id="xE3-4k-Z2O"/>
                         <outlet property="phoneNumberCell" destination="T0e-VF-RzH" id="Erk-CH-Pbe"/>
@@ -3309,7 +3303,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdx-ok-ZP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5831" y="914"/>
+            <point key="canvasLocation" x="5843" y="891"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="giD-vC-tMh">
@@ -3335,7 +3329,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PrivacySettingsViewController" id="gYa-dT-jDf" customClass="PrivacySettingsViewController" customModule="enHueco" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="U7j-2C-6zR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="PIa-mz-msR">
@@ -3558,11 +3552,11 @@
                         <viewControllerLayoutGuide type="bottom" id="uEn-6l-ruz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2gN-wW-lKy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zSi-ox-9Uv">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="692"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sAg-uC-tku">

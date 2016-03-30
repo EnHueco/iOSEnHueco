@@ -16,9 +16,9 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     @IBOutlet weak var nearbyFriendsNotificationsSwitch: UISwitch!
     @IBOutlet weak var phoneNumberCell: UITableViewCell!
     
-    //Temporary
-    @IBOutlet weak var lastBackgroundFetchDateLabel: UILabel!
-    
+    /// !!! Sections that must be hidden because they are not implemented yet
+    private let unimplementedSections = [1, 3]
+        
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -36,12 +36,46 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
-        
-        let lastBackgroundUpdate = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdate")).descriptionWithLocale(NSLocale.currentLocale())
-        let lastBackgroundUpdateResponse = NSDate(timeIntervalSince1970: NSUserDefaults.standardUserDefaults().doubleForKey("lastBackgroundUpdateResponse")).descriptionWithLocale(NSLocale.currentLocale())
-        
-        //lastBackgroundFetchDateLabel.text = "Last background fetch: \(lastBackgroundUpdate). Last response: \(lastBackgroundUpdateResponse)"
     }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // !!! REMOVE WHEN READY TO IMPLEMENT THE FEATURES IN THE HIDDEN SECTIONS
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        guard !unimplementedSections.contains(section) else { return 0 }
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        guard !unimplementedSections.contains(section) else { return nil }
+        return super.tableView(tableView, titleForHeaderInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String?
+    {
+        guard !unimplementedSections.contains(section) else { return nil }
+        return super.tableView(tableView, titleForFooterInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        guard !unimplementedSections.contains(section) else { return 1 }
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        guard !unimplementedSections.contains(section) else { return 1 }
+        return super.tableView(tableView, heightForFooterInSection: section)
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+
     
     @IBAction func doneButtonPressed(sender: AnyObject)
     {
@@ -103,7 +137,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
          
          From Apple docs:
          
-         "If you present several view controllers in succession, thus building a stack of presented view controllers, calling this method on a view controller lower 
+         "If you present several view controllers in succession, thus building a stack of presented view controllers, calling this method on a view controller lower
          in the stack dismisses its immediate child view controller and all view controllers above that child on the stack. When this happens, only the top-most view 
          is dismissed in an animated fashion; any intermediate view controllers are simply removed from the stack. The top-most view is dismissed using its modal transition 
          style, which may differ from the styles used by other view controllers lower in the stack."
