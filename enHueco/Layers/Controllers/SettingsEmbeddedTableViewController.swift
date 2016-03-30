@@ -30,9 +30,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
         
         clearsSelectionOnViewWillAppear = true
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsEmbeddedTableViewController.didReceiveAppUserWasUpdated(_:)), name: EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
-        
+                
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
@@ -145,7 +143,9 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
          The problem is that view(Will/Did)Appear is being called on all intermediate controllers without them ever appearing on screen, causing unexpected behavior if
          we did the actual logout procedure here*/
 
-        (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
+        dispatch_async(dispatch_get_main_queue()) {
+            (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
@@ -154,15 +154,20 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty
         {
             enHueco.appUser.phoneNumber = newNumber
-            enHueco.appUser.pushPhoneNumber(newNumber)
+            
+            AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) { success, error in
+                
+                guard success && error == nil else
+                {
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    return
+                }
+                
+                UIView.animateWithDuration(0.4) {
+                    self.phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
+                }
+            }
         }
-    }
-    
-    func didReceiveAppUserWasUpdated(notification : NSNotification)
-    {
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
-            self.phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
-        }, completion: nil)
     }
 }
 

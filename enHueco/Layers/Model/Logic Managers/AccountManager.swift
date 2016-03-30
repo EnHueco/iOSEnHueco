@@ -28,10 +28,10 @@ class AccountManager
             enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
             
             AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndSchedule()
-            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
+            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
             
-            try! PersistenceManager.sharedManager.persistData()
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)

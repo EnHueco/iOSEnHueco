@@ -158,19 +158,5 @@ class AppUser: User
         
         return encodedSchedule
     }
-    
-    func pushPhoneNumber(newNumber : String)
-    {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.HTTPMethod = "PUT"
-        
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], successCompletionHandler: { (JSONResponse) -> () in
-            
-            NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserWasUpdated, object: enHueco)
-        
-        }) { (error) -> () in
-        
-        }
-    }
 }
 

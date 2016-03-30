@@ -46,7 +46,7 @@ import UIKit
         let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
         
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
     
         backgroundImageView.addSubview(effectView)
         effectView.autoPinEdgesToSuperviewEdges()

@@ -14,13 +14,6 @@ import APAddressBook
 /// Universally accessible singleton instance
 let enHueco = EnHueco()
 
-class EHSystemNotification
-{
-    static let SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
-    static let SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
-    static let SystemDidReceiveAppUserWasUpdated = "SystemDidReceiveAppUserWasUpdated"
-}
-
 /** Stateful singleton entry point
  
  The singleton is intended to store all aplication's model state which should be persisted in order for 

@@ -53,14 +53,15 @@ class ProfileViewController: UIViewController
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        AppUserInformationManager.sharedManager.fetchAppUser()
-        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndSchedule()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        assignImages()
+        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+            
+            self.assignImages()
+            
+            if error != nil
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+            }
+        }
     }
     
     func updateButtonColors()
@@ -132,7 +133,7 @@ class ProfileViewController: UIViewController
                 self.imageImageView.hidden = false
                 self.backgroundImageView.hidden = false
                 
-                if (self.imageImageView.image != nil)
+                if self.imageImageView.image != nil
                 {
                     UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                         

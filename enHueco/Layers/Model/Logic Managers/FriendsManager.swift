@@ -8,6 +8,12 @@
 
 import Foundation
 
+class FriendsManagerNotification
+{
+    static let didReceiveFriendAndScheduleUpdates = "didReceiveFriendAndScheduleUpdates"
+    static let didReceiveFriendRequestUpdates = "didReceiveFriendRequestUpdates"
+}
+
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager
 {
@@ -21,7 +27,7 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates in case of success
      */
-    func fetchUpdatesForFriendsAndFriendSchedules()
+    func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
         request.HTTPMethod = "GET"
@@ -67,11 +73,16 @@ class FriendsManager
             try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()){
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
+                
+                completionHandler?(success: true, error: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(FriendsManagerNotification.didReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
             }
             
         }) { (error) -> () in
-                
+            
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler?(success: false, error: error)
+            }
         }
     }
     
@@ -105,7 +116,7 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendRequestUpdates in case of success
      */
-    func fetchUpdatesForFriendRequests()
+    func fetchUpdatesForFriendRequestsWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
         request.HTTPMethod = "GET"
@@ -122,11 +133,16 @@ class FriendsManager
             enHueco.appUser.incomingFriendRequests = requestFriends
             
             dispatch_async(dispatch_get_main_queue()) {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco, userInfo: nil)
+                
+                completionHandler?(success: true, error: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(FriendsManagerNotification.didReceiveFriendRequestUpdates, object: self, userInfo: nil)
             }
             
-            }) { (error) -> () in
-        
+        }) { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler?(success: false, error: error)
+            }
         }
     }
     
@@ -176,7 +192,7 @@ class FriendsManager
         ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
-            self.fetchUpdatesForFriendsAndFriendSchedules()
+            self.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -222,11 +238,11 @@ class FriendsManager
                 completionHandler(results: userSearchResults)
             }
             
-            }) { (error) -> () in
+        }) { (error) -> () in
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(results: [User]())
-                }
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(results: [User]())
+            }
         }
     }
     

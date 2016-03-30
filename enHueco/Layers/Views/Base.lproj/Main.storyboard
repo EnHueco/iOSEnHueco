@@ -2735,7 +2735,7 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="d.montoya10" borderStyle="roundedRect" placeholder="login" textAlignment="center" minimumFontSize="18" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dKZ-Cl-i2z">
                                 <rect key="frame" x="146" y="285" width="309" height="30"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.05062584005376345" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="800" constant="309" id="SPX-2B-TYd"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="310" id="V6C-WO-xYW"/>
@@ -2757,7 +2757,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="contraseña" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vcH-iL-dbG">
                                 <rect key="frame" x="146" y="323" width="309" height="30"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.05062584005376345" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="f91-Ql-0uz">
                                         <variation key="heightClass=regular-widthClass=compact" constant="30"/>

@@ -28,8 +28,6 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CurrentlyAvailableViewController.systemDidReceiveFriendAndScheduleUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: nil)
-
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -102,19 +100,20 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             }
         })
         
-        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
-
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
-
-        updateFreeTimePeriodDataAndReloadTableView()
-    }
-
-    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
-    {
-        updateFreeTimePeriodDataAndReloadTableView()
+        
+        /// This way we ensure this call will not collide with the next one in the completion handler
+        dispatch_async(dispatch_get_main_queue()) {
+            self.updateFreeTimePeriodDataAndReloadTableView()
+        }
+        
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
+            
+            self.updateFreeTimePeriodDataAndReloadTableView()
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)

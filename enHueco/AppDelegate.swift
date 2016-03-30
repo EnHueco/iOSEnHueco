@@ -87,8 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         
         if enHueco.appUser != nil
         {
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndSchedule()
-            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
+            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
             SynchronizationManager.sharedManager.retryPendingRequests()
         }
     }

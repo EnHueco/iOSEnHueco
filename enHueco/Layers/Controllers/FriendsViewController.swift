@@ -30,9 +30,6 @@ class FriendsViewController: UIViewController
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.systemDidReceiveFriendAndScheduleUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsViewController.systemDidReceiveFriendRequestUpdates(_:)), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
-
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -138,8 +135,15 @@ class FriendsViewController: UIViewController
 
     func fetchUpdates()
     {
-        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedules()
-        FriendsManager.sharedManager.fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
+            self.reloadFriendsAndTableView()
+        }
+        
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { success, error in
+            
+            self.friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+            self.friendRequestsNotificationHub.pop()
+        }
     }
     
     func friendRequestsButtonPressed(sender: UIButton)
@@ -172,19 +176,6 @@ class FriendsViewController: UIViewController
             self.tableView.reloadData()
 
         }, completion: nil)
-    }
-    
-    // MARK: Notification Center
-
-    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
-    {
-        reloadFriendsAndTableView()
-    }
-
-    func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
-    {
-        friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
-        friendRequestsNotificationHub.pop()
     }
 }
 
