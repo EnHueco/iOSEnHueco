@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias BasicCompletionHandler = (success: Bool, error: ErrorType?) -> Void
+
 struct Either<T1, T2>
 {
     let left: T1?
@@ -74,7 +76,9 @@ extension NSDate
     convenience init?(serverFormattedString: String)
     {
         let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
         
         guard let date = possibleDate else { return nil }
@@ -85,7 +89,9 @@ extension NSDate
     func serverFormattedString() -> String
     {
         let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         return dateStringFormatter.stringFromDate(self)
     }
@@ -158,6 +164,7 @@ extension String
         return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
     
+    /// Localizes the receiver using the General.strings file
     func localizedUsingGeneralFile() -> String
     {
         return localizedUsingFile("General")
@@ -176,6 +183,7 @@ extension String
 
 extension UIImage
 {
+    /// Initializes an image with the given size containing a given color
     convenience init(color: UIColor, size: CGSize = CGSizeMake(1, 1))
     {
         let rect = CGRectMake(0, 0, size.width, size.height)
@@ -186,16 +194,6 @@ extension UIImage
         UIGraphicsEndImageContext()
         self.init(CGImage: image.CGImage!)
     }  
-}
-
-extension NSMutableURLRequest
-{
-    func setEHSessionHeaders()
-    {
-        let appUser = enHueco.appUser
-        setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
-    }
 }
 
 extension ErrorType
@@ -220,13 +218,23 @@ extension ErrorType
             }
             else
             {
-                errorMessage = "sorry_unknown_error".localizedUsingGeneralFile()
+                errorMessage = "SorryUnknownError".localizedUsingGeneralFile()
             }
             
             return errorMessage
         }
         
         return nil
+    }
+}
+
+extension UIView
+{
+    /// Rounds the corners of the view by setting the corner radius to height/2
+    func roundCorners()
+    {
+        clipsToBounds = true
+        layer.cornerRadius = bounds.height/2
     }
 }
 

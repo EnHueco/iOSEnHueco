@@ -8,30 +8,31 @@
 
 import Foundation
 
+class FriendsManagerNotification
+{
+    static let didReceiveFriendAndScheduleUpdates = "didReceiveFriendAndScheduleUpdates"
+    static let didReceiveFriendRequestUpdates = "didReceiveFriendRequestUpdates"
+}
+
+/// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager
 {
-    private static let instance = FriendsManager()
+    static let sharedManager = FriendsManager()
 
     private init() {}
     
-    class func sharedManager() -> FriendsManager
-    {
-        return instance
-    }
-
     /**
      Fetches full friends and schedule information from the server and notifies the result via Notification Center.
      
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates in case of success
      */
-    func fetchUpdatesForFriendsAndFriendSchedules()
+    func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (response) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (response) -> () in
                         
             let currentDate = NSDate()
             
@@ -69,29 +70,33 @@ class FriendsManager
                 enHueco.appUser.friends[newFriend.username] = newFriend
             }
             
-            try? PersistenceManager.sharedManager().persistData()
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()){
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
+                
+                completionHandler?(success: true, error: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(FriendsManagerNotification.didReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
             }
             
         }) { (error) -> () in
-                
+            
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler?(success: false, error: error)
+            }
         }
     }
     
     /// Deletes a friend. If the operation fails the friend is not deleted.
-    func deleteFriend(friend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func deleteFriend(friend: User, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "DELETE"
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
             
             enHueco.appUser.friends[friend.username] = nil
             
-            try? PersistenceManager.sharedManager().persistData()
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -111,13 +116,12 @@ class FriendsManager
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendRequestUpdates in case of success
      */
-    func fetchUpdatesForFriendRequests()
+    func fetchUpdatesForFriendRequestsWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (incomingRequestsResponseDictionary) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (incomingRequestsResponseDictionary) -> () in
             
             var requestFriends = [User]()
             
@@ -129,11 +133,16 @@ class FriendsManager
             enHueco.appUser.incomingFriendRequests = requestFriends
             
             dispatch_async(dispatch_get_main_queue()) {
-                NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco, userInfo: nil)
+                
+                completionHandler?(success: true, error: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(FriendsManagerNotification.didReceiveFriendRequestUpdates, object: self, userInfo: nil)
             }
             
-            }) { (error) -> () in
-        
+        }) { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler?(success: false, error: error)
+            }
         }
     }
     
@@ -144,14 +153,13 @@ class FriendsManager
      - EHSystemNotification.SystemDidSendFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToSendFriendRequest in case of failure
      */
-    func sendFriendRequestToUser(user: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func sendFriendRequestToUser(user: User, completionHandler: BasicCompletionHandler)
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "POST"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             let requestFriend = //User(JSONDictionary: JSONResponse as! [String : AnyObject])
             enHueco.appUser.outgoingFriendRequests.append(user)
@@ -175,17 +183,16 @@ class FriendsManager
      - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
      */
-    func acceptFriendRequestFromFriend (requestFriend: User, completionHandler:(success: Bool, error: ErrorType?)->())
+    func acceptFriendRequestFromFriend (requestFriend: User, completionHandler: BasicCompletionHandler)
     {
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "POST"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
-            self.fetchUpdatesForFriendsAndFriendSchedules()
+            self.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -216,11 +223,9 @@ class FriendsManager
         }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             var userSearchResults = [User]()
             
@@ -233,11 +238,11 @@ class FriendsManager
                 completionHandler(results: userSearchResults)
             }
             
-            }) { (error) -> () in
+        }) { (error) -> () in
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(results: [User]())
-                }
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(results: [User]())
+            }
         }
     }
     
@@ -303,12 +308,12 @@ class FriendsManager
         
         enHueco.appUser.friends[friend.username] = friend
         
-        try? PersistenceManager.sharedManager().persistData()
+        try? PersistenceManager.sharedManager.persistData()
         
         dispatch_async(dispatch_get_main_queue()) {
             
             //TODO :
-            //FriendsManager.sharedManager().sendFriendRequestToUser(friend)
+            //FriendsManager.sharedManager.sendFriendRequestToUser(friend)
         }
     }
     

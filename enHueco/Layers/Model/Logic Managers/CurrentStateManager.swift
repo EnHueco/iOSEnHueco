@@ -8,17 +8,13 @@
 
 import Foundation
 
+/// Handles operations related to the users' current state (i.e. users' availability (EnHueco's core services))
 class CurrentStateManager
 {
-    private static let instance = CurrentStateManager()
+    static let sharedManager = CurrentStateManager()
 
     private init() {}
     
-    class func sharedManager() -> CurrentStateManager
-    {
-        return instance
-    }
-
     /**
      Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period
@@ -85,32 +81,37 @@ class CurrentStateManager
     
     /**
      Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.
-     Network operation must succeed immediately or else the newFreeTimePeriod is discarded
+     Network operation must succeed immediately or else the newFreeTimePeriod is discarded.
+     
+     Updates the appUser
      */
-    func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: (success: Bool, error: ErrorType?) -> Void )
+    func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: BasicCompletionHandler )
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.setEHSessionHeaders()
-        request.HTTPMethod = "GET"
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
+        request.HTTPMethod = "PUT"
         
         var instantEvent : [String : AnyObject] =
         [
             "type" : "EVENT",
-            "valid_type" : newFreeTimePeriod.endHourInDate(NSDate()),
+            "valid_until" : newFreeTimePeriod.endHourInDate(NSDate()).serverFormattedString(),
         ]
         
         instantEvent["name"] = newFreeTimePeriod.name
         instantEvent["location"] = newFreeTimePeriod.location
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : instantEvent], onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
+            enHueco.appUser.setInivisibilityEndDate(nil)
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
         
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -118,23 +119,31 @@ class CurrentStateManager
         })
     }
     
-    func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.setEHSessionHeaders()
-        request.HTTPMethod = "GET"
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
+        request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : ""], onSuccess: { (JSONResponse) -> () in
+        let instantEvent =
+        [
+            "type" : "EVENT",
+            "valid_until" : NSDate().serverFormattedString()
+        ]
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
                         
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
-            }
-            
-            }, onFailure: {(compoundError) -> () in
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(success: false, error: compoundError.error)
+                    completionHandler(success: true, error: nil)
                 }
+            }
+            
+        }, failureCompletionHandler: {(compoundError) -> () in
+                
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: compoundError.error)
+            }
         })
     }
 }

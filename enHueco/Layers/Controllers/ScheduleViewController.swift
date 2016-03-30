@@ -77,10 +77,14 @@ class ScheduleViewController: UIViewController
         for event in eventsToAdd
         {
             event.daySchedule.addEvent(event)
-            SynchronizationManager.sharedManager().reportNewEvent(event)
+            
+            SynchronizationManager.sharedManager.reportNewEvent(event) { success, error in
+                
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+            }
         }
         
-        undoManager?.registerUndoWithTarget(self, selector: Selector("deleteEventsWithUndoCapability:"), object: eventsToAdd)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: eventsToAdd)
         
         if undoManager != nil && !undoManager!.undoing
         {
@@ -95,14 +99,22 @@ class ScheduleViewController: UIViewController
     {
         let oldEvent = eventToEdit.copy() as! Event
         
-        eventToEdit.replaceValuesWithThoseOfTheEvent(newEvent)
-        SynchronizationManager.sharedManager().reportEventEdited(eventToEdit)
-        
-        undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withValuesOfEvent: oldEvent)
-        
-        if undoManager != nil && !undoManager!.undoing
-        {
-            undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
+        SynchronizationManager.sharedManager.reportEventEdited(eventToEdit) { success, error in
+            
+            guard success && error == nil else
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
+            }
+            
+            eventToEdit.replaceValuesWithThoseOfTheEvent(newEvent)
+            
+            self.undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withValuesOfEvent: oldEvent)
+            
+            if self.undoManager != nil && !self.undoManager!.undoing
+            {
+                self.undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
+            }
         }
         
         scheduleCalendarViewController.reloadData()
@@ -114,10 +126,13 @@ class ScheduleViewController: UIViewController
         for event in events
         {
             event.daySchedule.removeEvent(event)
-            SynchronizationManager.sharedManager().reportEventDeleted(event)
+            SynchronizationManager.sharedManager.reportEventDeleted(event) { success, error in
+                
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+            }
         }
         
-        undoManager?.registerUndoWithTarget(self, selector: Selector("addEventsWithUndoCapability:"), object: events)
+        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.addEventsWithUndoCapability(_:)), object: events)
         
         if undoManager != nil && !undoManager!.undoing
         {

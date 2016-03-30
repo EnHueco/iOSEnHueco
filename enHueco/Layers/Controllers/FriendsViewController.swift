@@ -9,15 +9,17 @@
 import UIKit
 import SWTableViewCell
 import SDWebImage
+import RKNotificationHub
 
-class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
+class FriendsViewController: UIViewController
 {
-    @IBOutlet weak var topBarBackgroundView: UIView!
-    @IBOutlet weak var friendRequestsNotificationsIndicator: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
     var emptyLabel: UILabel!
     let searchBar = UISearchBar()
+    
+    /// Notification indicator for the friend requests button. Set count to change the number (animatable)
+    private(set) var friendRequestsNotificationHub: RKNotificationHub!
 
     var lastUpdatesFetchDate = NSDate()
 
@@ -28,11 +30,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func viewDidLoad()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendAndScheduleUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates, object: enHueco)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name: EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
-
-        //topBarBackgroundView.backgroundColor = EHInterfaceColor.homeTopBarsColor
-
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -45,19 +42,25 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         createEmptyLabel()
         
-        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: Selector("resignFirstResponder"))
+        searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: #selector(UIResponder.resignFirstResponder))
         
         let friendRequestsButton = UIButton(type: .Custom)
         friendRequestsButton.frame.size = CGSize(width: 20, height: 20)
         friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        friendRequestsButton.addTarget(self, action: Selector("friendRequestsButtonPressed:"), forControlEvents: .TouchUpInside)
+        friendRequestsButton.addTarget(self, action: #selector(FriendsViewController.friendRequestsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         friendRequestsButton.tintColor = UIColor.whiteColor()
+        
+        friendRequestsNotificationHub = RKNotificationHub(view: friendRequestsButton)
+        friendRequestsNotificationHub.scaleCircleSizeBy(0.45)
+        friendRequestsNotificationHub.moveCircleByX(0, y: -2)
+        friendRequestsNotificationHub.setCircleColor(UIColor(red: 1.0, green: 0.4, blue: 0.4, alpha: 1.0), labelColor: UIColor.whiteColor())
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)
 
         let commonFreeTimeButton = UIButton(type: .Custom)
         commonFreeTimeButton.frame.size = CGSize(width: 20, height: 20)
         commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        commonFreeTimeButton.addTarget(self, action: Selector("commonFreeTimeButtonPressed:"), forControlEvents: .TouchUpInside)
+        commonFreeTimeButton.addTarget(self, action: #selector(FriendsViewController.commonFreeTimeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         commonFreeTimeButton.tintColor = UIColor.whiteColor()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: commonFreeTimeButton)
     }
@@ -76,28 +79,12 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
-
-        //friendRequestsNotificationsIndicator.clipsToBounds = true
-        //friendRequestsNotificationsIndicator.layer.cornerRadius = friendRequestsNotificationsIndicator.frame.height / 2
-
         emptyLabel.center = tableView.center
     }
 
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
-        /*let animation = CATransition()
-        animation.duration = 0
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionFade
-        
-        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
-                
-        UIView.animateWithDuration(0)
-        {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: EHInterfaceColor.defaultNavigationBarColor), forBarMetrics: .Default)
-        }*/
 
         navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
         
@@ -115,7 +102,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         })
 
-        //friendRequestsNotificationsIndicator.hidden = enHueco.appUser.incomingFriendRequests.isEmpty
+        if enHueco.appUser.incomingFriendRequests.count > 10
+        {
+            friendRequestsNotificationHub.hideCount()
+        }
+        else
+        {
+            friendRequestsNotificationHub.showCount()
+        }
 
         reloadFriendsAndTableView()
     }
@@ -134,12 +128,22 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             lastUpdatesFetchDate = NSDate()
             fetchUpdates()
         }
+        
+        friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+        friendRequestsNotificationHub.pop()
     }
 
     func fetchUpdates()
     {
-        FriendsManager.sharedManager().fetchUpdatesForFriendsAndFriendSchedules()
-        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
+            self.reloadFriendsAndTableView()
+        }
+        
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { success, error in
+            
+            self.friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+            self.friendRequestsNotificationHub.pop()
+        }
     }
     
     func friendRequestsButtonPressed(sender: UIButton)
@@ -152,28 +156,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController"), sender: self)
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar)
-    {
-        tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
-    {
-        filteredFriends = Array(enHueco.appUser.friends.values)
-        
-        if !searchText.isBlank()
-        {
-            filteredFriends = filteredFriends.filter { $0.name.lowercaseString.containsString(searchText.lowercaseString) }
-        }
-        
-        tableView.reloadData()
-    }
-
     func reloadFriendsAndTableView()
     {
         filteredFriends = Array(enHueco.appUser.friends.values)
@@ -195,40 +177,19 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         }, completion: nil)
     }
-    
-    // MARK: Notification Center
+}
 
-    func systemDidReceiveFriendAndScheduleUpdates(notification: NSNotification)
-    {
-        reloadFriendsAndTableView()
-    }
-
-    func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
-    {
-        //friendRequestsNotificationsIndicator.hidden = enHueco.appUser.incomingFriendRequests.isEmpty
-    }
-
-    // MARK: TableView Delegate
-
+extension FriendsViewController: UITableViewDataSource
+{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return filteredFriends.count
     }
 
-
-//    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-//        let more = UITableViewRowAction(style: .Normal, title: "More") { action, index in
-//            print("more button tapped")
-//        }
-//        more.backgroundColor = UIColor.lightGrayColor()
-//        
-//        return [more]
-//    }
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
-
+        
         let friend = filteredFriends[indexPath.row]
         
         cell.friendNameLabel.text = friend.name
@@ -253,7 +214,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 where nextEvent.type == .Class && nextEvent.startHourInDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60*10000
             {
                 cell.eventNameOrLocationLabel.text = nextEventName
-                    
+                
                 if let nextEventLocation = nextEvent.location
                 {
                     cell.eventNameOrLocationLabel.text! += " (" + nextEventLocation + ")"
@@ -280,7 +241,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         
         SDWebImageManager().downloadImageWithURL(friend.imageURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: {(image, error, cacheType, bool, url) -> Void in
-                
+            
             if error == nil
             {
                 if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk
@@ -292,7 +253,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                         
                         cell.friendImageImageView.alpha = 1
                         
-                    }, completion: nil)
+                        }, completion: nil)
                 }
                 else if cacheType == SDImageCacheType.Memory
                 {
@@ -300,23 +261,51 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
         })
-
+        
         return cell
     }
+}
 
+extension FriendsViewController: UITableViewDelegate
+{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 70
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let friend = filteredFriends[indexPath.row]
-
+        
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
         //friendDetailViewController.hidesBottomBarWhenPushed = true
-
+        
         splitViewController?.showDetailViewController(friendDetailViewController, sender: self)
+    }
+}
+
+extension FriendsViewController: UISearchBarDelegate
+{
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar)
+    {
+        tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        filteredFriends = Array(enHueco.appUser.friends.values)
+        
+        if !searchText.isBlank()
+        {
+            filteredFriends = filteredFriends.filter { $0.name.lowercaseString.containsString(searchText.lowercaseString) }
+        }
+        
+        tableView.reloadData()
     }
 }

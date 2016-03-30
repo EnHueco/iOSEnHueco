@@ -8,8 +8,13 @@
 
 import Foundation
 
+/** 
+ The schedule of a particular day. Contains the events of a given week day.
+ DaySchedules are stored inside a Schedule object
+ */
 class DaySchedule: NSObject, NSCoding
 {
+    ///Localized weekday name
     let weekDayName: String
     
     private var mutableEvents = [Event]()

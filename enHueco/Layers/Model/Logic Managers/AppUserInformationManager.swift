@@ -8,59 +8,48 @@
 
 import Foundation
 
+struct AppUserInformationManagerNotifications
+{
+    static let didReceiveAppUserInformationUpdates = "didReceiveAppUserInformationUpdates"
+}
+
+/** Handles fetching and sending of the AppUser's basic information like names, profile picture, username,
+ phone number, and schedule. (Friends are not included)
+*/
 class AppUserInformationManager
 {
-    private static let instance = AppUserInformationManager()
+    static let sharedManager = AppUserInformationManager()
 
     private init() {}
-    
-    class func sharedManager() -> AppUserInformationManager
-    {
-        return instance
-    }
 
-    //TODO: What is this method for?
-    func fetchAppUser ()
+    /** Fetches the AppUser's basic information like names, profile picture URL, username,
+     phone number, and schedule. (Friends are not included)
+     */
+    func fetchUpdatesForAppUserAndScheduleWithCompletionHandler(completionHandler: BasicCompletionHandler?)
     {
         let appUser = enHueco.appUser
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
-            
-            let downloadedUser = JSONResponse as! [String : AnyObject]
-            
-            if appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: downloadedUser["updated_on"] as! String)!)
-            {
-                appUser.updateUserWithJSONDictionary(downloadedUser)
-                
-                try? PersistenceManager.sharedManager().persistData()
-
-                AppUserInformationManager.sharedManager().downloadProfilePicture()
-            }
-            
-        }) { (error) -> () in
-            
-            
-        }
-    }
-
-    func fetchUpdatesForAppUserAndSchedule ()
-    {
-        let appUser = enHueco.appUser
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
-        request.HTTPMethod = "GET"
-        
-        ConnectionManager.sendAsyncRequest(request, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
-            appUser.updateUserWithJSONDictionary(JSONDictionary)
+            
+            // Doesn't really work for now
+            
+//            guard appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!) else
+//            {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    completionHandler?(success: true, error: nil)
+//                }
+//                return
+//            }
             
             appUser.schedule = Schedule()
+            
+            appUser.updateUserWithJSONDictionary(JSONDictionary)
+            
             let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
             
             for eventJSON in eventSet
@@ -69,53 +58,93 @@ class AppUserInformationManager
                 appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
             }
             
+            try? PersistenceManager.sharedManager.persistData()
+            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: true, error: nil)
+            }
+            
         }) { (error) -> () in
             
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: false, error: error)
+            }
         }
     }
     
-    func pushProfilePicture(image: UIImage)
+    /// Sends a new image to the server and refreshes the pictureURL for the AppUser
+    func pushProfilePicture(image: UIImage, completionHandler: BasicCompletionHandler?)
     {
         let url = NSURL(string: EHURLS.Base + EHURLS.MeImageSegment)
         
         let request = NSMutableURLRequest(URL: url!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
-        
         request.HTTPMethod = "PUT"
         request.setValue("attachment; filename=upload.jpg", forHTTPHeaderField: "Content-Disposition")
         
-        let jpegData = NSData(data: UIImageJPEGRepresentation(image, 100)!)
+        let jpegData = NSData(data: UIImageJPEGRepresentation(image, 1)!)
         request.HTTPBody = jpegData
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
             
-            self.fetchAppUser()
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: true, error: nil)
+            }
             
-        }, onFailure: { (error) -> () in
-                
+            self.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
+            
+        }, failureCompletionHandler: { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: false, error: error)
+            }
         })
     }
     
-    func downloadProfilePicture()
+    func pushPhoneNumber(newNumber : String, completionHandler: BasicCompletionHandler?)
     {
-        if let url = enHueco.appUser.imageURL
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
+        request.HTTPMethod = "PUT"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["phoneNumber":newNumber], successCompletionHandler: { (JSONResponse) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                completionHandler?(success: true, error: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(AppUserInformationManagerNotifications.didReceiveAppUserInformationUpdates, object: self)
+            }
+            
+        }) { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler?(success: false, error: error)
+            }
+        }
+    }
+    
+    /// Downloads the data for the pictureURL currently present in the AppUser
+    func downloadProfilePictureWithCompletionHandler(completionHandler: BasicCompletionHandler?)
+    {
+        if let url = enHueco.appUser?.imageURL
         {
             let request = NSMutableURLRequest(URL: url)
-            request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-            request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
             request.HTTPMethod = "GET"
             
-            ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+            ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: { (data) -> () in
                 
-                let path = ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")
-                ImagePersistenceManager.sharedManager().saveImage(data, path: path, onSuccess: { () -> () in
+                let path = PersistenceManager.sharedManager.documentsPath + "/profile.jpg"
+                PersistenceManager.sharedManager.saveImage(data, path: path, successCompletionHandler: { () -> () in
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler?(success: true, error: nil)
+                    }
                 })
             
             }) { (error) -> () in
-                    
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler?(success: false, error: error)
+                }
             }
         }
     }

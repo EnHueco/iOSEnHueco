@@ -8,11 +8,9 @@
 
 import UIKit
 import LocalAuthentication
-import MobileCoreServices
 import ChameleonFramework
-import RSKImageCropper
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate
+class ProfileViewController: UIViewController
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -34,8 +32,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appUserRefreshed:"), name: EHSystemNotification.SystemDidReceiveAppUserImage, object: enHueco)
     }
 
     override func viewDidLayoutSubviews()
@@ -49,17 +45,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
-        
-        assignImages()
     }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
-        AppUserInformationManager.sharedManager().fetchAppUser()
-        AppUserInformationManager.sharedManager().fetchUpdatesForAppUserAndSchedule()
+        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+            
+            self.assignImages()
+            
+            if error != nil
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+            }
+        }
     }
     
     func updateButtonColors()
@@ -109,61 +113,64 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             startAnimatingImageLoadingIndicator()
         }
         
-        ImagePersistenceManager.sharedManager().loadImageFromPath(ImagePersistenceManager.sharedManager().fileInDocumentsDirectory("profile.jpg")) {(image) -> () in
+        PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
             {
-                if let image = image
+                var image: UIImage! = image
+                
+                if image == nil
                 {
-                    self.imageImageView.hidden = false
-                    self.backgroundImageView.hidden = false
+                    image = UIImage(named: "stripes")
                     
-                    if (self.imageImageView.image != nil)
-                    {
-                        UIView.transitionWithView(self.imageImageView,
-                                duration: 1,
-                                options: UIViewAnimationOptions.CurveEaseInOut, //UIViewAnimationOptions.TransitionFlipFromTop,
-                                animations: { self.imageImageView.image = image },
-                                completion: nil)
+                    AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler { success, error in 
+                        
+                        if success
+                        {
+                            self.assignImages()
+                        }
                     }
-                    else
-                    {
+                }
+                
+                self.imageImageView.hidden = false
+                self.backgroundImageView.hidden = false
+                
+                if self.imageImageView.image != nil
+                {
+                    UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                        
                         self.imageImageView.image = image
-                       
-                        UIView.animateWithDuration(0.4)
-                        {
-                            self.imageImageView.alpha = 1
-                        }
-                    }
-
-                    if self.backgroundImageView.image != nil
-                    {
-                        UIView.transitionWithView(self.backgroundImageView,
-                                duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve,
-                                animations: {
-                                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                                    self.backgroundImageView.alpha = 1
-                        }, completion: nil)
-                    }
-                    else
-                    {
-                        self.backgroundImageView.image = image
-                       
-                        UIView.animateWithDuration(0.4)
-                        {
-                            self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                            self.backgroundImageView.alpha = 1
-                        }
-                    }
+                    }, completion: nil)
                 }
                 else
                 {
-                    self.imageImageView.hidden = true
-                    self.backgroundImageView.hidden = true
+                    self.imageImageView.image = image
                     
-                    AppUserInformationManager.sharedManager().downloadProfilePicture()
+                    UIView.animateWithDuration(0.4) {
+                        self.imageImageView.alpha = 1
+                    }
                 }
-
+                
+                if self.backgroundImageView.image != nil
+                {
+                    UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                                                
+                        self.backgroundImageView.image = image.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                        
+                    }, completion: nil)
+                }
+                else
+                {
+                    self.backgroundImageView.image = image
+                    
+                    UIView.animateWithDuration(0.4) {
+                        
+                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                        self.backgroundImageView.alpha = 1
+                    }
+                }
+                
                 self.imageImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.clipsToBounds = true
@@ -279,43 +286,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBAction func imageViewClicked(sender: AnyObject)
     {
-        let imagePicker = UIImagePickerController()
-
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        imagePicker.allowsEditing = false
-
-        self.navigationController?.presentViewController(imagePicker, animated: true, completion: nil)
+        let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+        importPictureController.delegate = self
+        
+        presentViewController(importPictureController, animated: true, completion: nil)
     }
+}
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String:AnyObject]?)
+extension ProfileViewController: ImportProfileImageViewControllerDelegate
+{
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
     {
-
-        let imageCropVC = RSKImageCropViewController(image: image)
-        imageCropVC.delegate = self
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.presentViewController(imageCropVC, animated: true, completion: nil)
+        assignImages()
+        dismissViewControllerAnimated(true, completion: nil)
     }
-
-    func appUserRefreshed(notification: NSNotification)
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
     {
-        dispatch_async(dispatch_get_main_queue())
-        {
-            self.stopAnimatingImageLoadingIndicator()
-            self.assignImages()
-        }
-    }
-
-    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
-    {
-        AppUserInformationManager.sharedManager().pushProfilePicture(croppedImage)
-        startAnimatingImageLoadingIndicator()
-        controller.dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController)
-    {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -8,11 +8,18 @@
 
 import Foundation
 
+/**
+ Available privacy settings
+ 
+ - ShowEventNames:    If event names will be shown to a given group
+ - ShowEventLocation: If event locations will be shown to a given group
+ - ShowUserIsNearby:  If a given group can find out that the AppUser is nearby
+ */
 enum PrivacySetting: String
 {
-    case ShowEventNames = "show_event_names"
-    case ShowEventLocation = "show_event_locations"
-    case ShowUserIsNearby = "show_user_is_nearby"
+    case ShowEventNames = "shares_event_names"
+    case ShowEventLocation = "shares_event_locations"
+    case ShowUserIsNearby = "shares_user_nearby"
 }
 
 /// Policy applied to the group of friends it accepts for parameter.
@@ -21,33 +28,28 @@ enum PrivacyPolicy
     case EveryoneExcept([User]), Only([User])
 }
 
+/// Handles privacy settings
 class PrivacyManager
 {
-    private static let instance = PrivacyManager()
+    static let sharedManager = PrivacyManager()
     
     private init() {}
     
-    class func sharedManager() -> PrivacyManager
-    {
-        return instance
-    }
-    
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
-    func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let parameters = [setting.rawValue : "false"]
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: { (compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -65,21 +67,20 @@ class PrivacyManager
      
      If policy nil the setting is applied to everyone
      */
-    func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
         request.HTTPMethod = "PUT"
         
         let parameters = [setting.rawValue : "true"]
         
-        ConnectionManager.sendAsyncDataRequest(request, onSuccess: { (data) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
             
-        }, onFailure: { (compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -87,28 +88,33 @@ class PrivacyManager
         })
     }
     
-    /// Makes the user invisible to everyone else
-    func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    /// Makes the user invisible to everyone else. Updates the appUser
+    func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: BasicCompletionHandler)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
+        
+        let endDate = NSDate().dateByAddingTimeInterval(timeInterval)
         
         let instantEvent =
         [
             "type" : "INVISIBILITY",
-            "valid_until" : NSDate().dateByAddingTimeInterval(timeInterval).serverFormattedString()
+            "valid_until" : endDate.serverFormattedString()
         ]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : instantEvent], onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
-            enHueco.appUser.invisible = true
+            enHueco.appUser.setInivisibilityEndDate(endDate)
+            enHueco.appUser.schedule.instantFreeTimePeriod = nil
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: {(compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
@@ -116,22 +122,32 @@ class PrivacyManager
         })
     }
     
-    /// Makes the user visible to everyone else
-    func turnVisibleWithCompletionHandler(completionHandler: (success: Bool, error: ErrorType?) -> Void)
+    /// Makes the user visible to everyone else. Updates the appUser
+    func turnVisibleWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.setEHSessionHeaders()
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: ["immediate_event" : ""], onSuccess: { (JSONResponse) -> () in
+        let endDate = NSDate()
+
+        let instantEvent =
+        [
+            "type" : "INVISIBILITY",
+            "valid_until" : endDate.serverFormattedString()
+        ]
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
-            enHueco.appUser.invisible = false
+            enHueco.appUser.setInivisibilityEndDate(endDate)
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
-        }, onFailure: {(compoundError) -> () in
+        }, failureCompletionHandler: {(compoundError) -> () in
                 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)

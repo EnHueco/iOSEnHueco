@@ -8,9 +8,10 @@
 
 import Foundation
 
+/// Handles all operations related to persistence.
 class PersistenceManager
 {
-    private static let instance = PersistenceManager()
+    static let sharedManager = PersistenceManager()
 
     enum PersistenceManagerError: ErrorType
     {
@@ -18,19 +19,14 @@ class PersistenceManager
     }
     
     /// Path to the documents folder
-    private let documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
     
     /// Path where data will be persisted
     private let persistencePath: String!
     
     private init() {
         
-        persistencePath = documents + "/appState.state"
-    }
-    
-    class func sharedManager() -> PersistenceManager
-    {
-        return instance
+        persistencePath = documentsPath + "/appState.state"
     }
     
     /// Persists all pertinent application data
@@ -58,5 +54,33 @@ class PersistenceManager
     func deleteAllPersistenceData()
     {
         try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
+        try? NSFileManager.defaultManager().removeItemAtPath(PersistenceManager.sharedManager.documentsPath + "profile.jpg")
+    }
+    
+    func saveImage (data: NSData, path: String, successCompletionHandler: () -> ())
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            let result = data.writeToFile(path, atomically: true)
+            
+            if result
+            {
+                successCompletionHandler()
+            }
+        }
+    }
+    
+    func loadImageFromPath(path: String, onFinish: (image: UIImage?) -> ())
+    {
+        var image : UIImage? = nil
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            image = UIImage(contentsOfFile: path)
+            if image == nil {
+                print("Missing image at: \(path)")
+            }
+            print("Loading image from path: \(path)") // this is just for you to see the path in case you want to go to the directory, using Finder.
+            onFinish(image: image)
+        }
     }
 }

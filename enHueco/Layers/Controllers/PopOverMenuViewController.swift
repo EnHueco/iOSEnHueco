@@ -37,7 +37,7 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     {
         if tapOutsideRecognizer == nil
         {
-            tapOutsideRecognizer = UITapGestureRecognizer(target: self, action: "handleTapBehind:")
+            tapOutsideRecognizer = UITapGestureRecognizer(target: self, action: #selector(PopOverMenuViewController.handleTapBehind(_:)))
             tapOutsideRecognizer.numberOfTapsRequired = 1
             tapOutsideRecognizer.cancelsTouchesInView = false
             tapOutsideRecognizer.delegate = self

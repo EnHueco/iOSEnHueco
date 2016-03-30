@@ -26,9 +26,9 @@ target 'enHueco' do
     pod 'TapkuLibrary'
     pod 'MultiSelectSegmentedControl'
     pod 'SwiftGraph'
-    pod 'SwiftDataStructures'
     pod 'QRCode'
     pod 'CSwiftV'
+    pod 'RKNotificationHub'
 end
 
 target 'enHuecoTests' do

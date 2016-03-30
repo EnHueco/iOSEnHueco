@@ -12,6 +12,7 @@ import ReachabilitySwift
 import SwiftGraph
 import CSwiftV
 
+/// ProximityUpdatesManager Notifications
 class EHProximityUpdatesManagerNotification
 {
     private init() {}
@@ -26,9 +27,10 @@ enum ProximityUpdatesManagerReportingCompletionStatus
     case Success
 }
 
+/// Handles operations related to proximity between users, including location reporting.
 class ProximityUpdatesManager: NSObject
 {
-    private static let instance = ProximityUpdatesManager()
+    static let sharedManager = ProximityUpdatesManager()
     
     static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
     static let backgroundFetchIntervalAfterDayOver = 7*3600.0
@@ -43,16 +45,11 @@ class ProximityUpdatesManager: NSObject
     {
         super.init()
     }
-    
-    class func sharedManager() -> ProximityUpdatesManager
-    {
-        return instance
-    }
-    
+        
     ///Temporary
     private func scheduleProximityInformationRefreshTimer()
     {
-        proximityInformationRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("proximityInformationRefreshTimerTicked:"), userInfo: nil, repeats: true)
+        proximityInformationRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ProximityUpdatesManager.proximityInformationRefreshTimerTicked(_:)), userInfo: nil, repeats: true)
     }
     
     func proximityInformationRefreshTimerTicked(timer:NSTimer)
@@ -74,7 +71,7 @@ class ProximityUpdatesManager: NSObject
         }
     }
     
-    //Temporary
+    ///Temporary
     func generateGraphFromFile()
     {
         let fileLocation = NSBundle.mainBundle().pathForResource("accessPoints", ofType: "csv")!
@@ -176,13 +173,11 @@ class ProximityUpdatesManager: NSObject
         enHueco.appUser.currentBSSID = currentBSSID
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.LocationReportSegment)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
         
         let params = ["bssid" : currentBSSID]
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
             for friendDictionary in JSONResponse as! [[String : AnyObject]]
             {

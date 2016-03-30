@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// URLS
 class EHURLS
 {
     static let Domain = "enhueco.uniandes.edu.co"
@@ -20,46 +21,12 @@ class EHURLS
     static let UsersSegment = "/users/"
     static let EventsSegment = "/gaps/"
     static let LocationReportSegment = "/me/location/friends/"
+    static let ImmediateEventsSegment = "/events/immediate/"
 }
 
+/// Default parameters
 class EHParameters
 {
     static let UserID = "X-USER-ID"
     static let Token = "X-USER-TOKEN"
 }
-
-/*public class APIURLS
-{
-    
-    // BASIC Settings
-    let TESTDOMAIN : String = "http://enhueco.virtual.uniandes.edu.co"
-    let PRODUCTION_DOMAIN: String = "enhueco.uniandes.edu.co"
-    let PORT = "80"
-    
-    let DOMAIN : String
-    
-    // Funcitonal URIs
-    let AUTHENTICATIONURI : String = "/auth/"
-    let GETAPPUSERURI : String = "/me/"
-
-    //Functional URLs
-    let AUTHENTICATIONURL : NSURL
-    let GETAPPUSERURL : NSURL
-    
-    init(production: Bool)
-    {
-        if(production)
-        {
-            DOMAIN = self.PRODUCTION_DOMAIN
-        }
-        else
-        {
-            DOMAIN = self.TESTDOMAIN
-        }
-        
-        // Define URLs
-        let baseURL = DOMAIN+":"+PORT+"/api"
-        self.AUTHENTICATIONURL = NSURL(string: baseURL + AUTHENTICATIONURI)!
-        self.GETAPPUSERURL = NSURL(string: baseURL + GETAPPUSERURI)!
-    }
-}*/

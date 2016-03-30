@@ -6,6 +6,14 @@
   Copyright © 2015 Diego Gómez. All rights reserved.
 */
 
+"Skip" = "Saltar";
+
+"ImportPhotoTitle" = "Importar Foto";
+"TakePhoto" = "Tomar Foto";
+"ChoosePhoto" = "Elegir Foto";
+
+"Cancel" = "Cancelar";
+
 "Monday" = "Lunes";
 "Tuesday" = "Martes";
 "Wednesday" = "Miércoles";
@@ -45,10 +53,10 @@
 
 "AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";
 
-"options" = "Opciones";
-"sorry_unknown_error" = "Lo sentimos, ocurrió un error desconocido";
+"Options" = "Opciones";
+"SorryUnknownError" = "Lo sentimos, ocurrió un error desconocido";
 
-"turn_invisible_action_sheet_title" = "Selecciona el periodo";
-"turn_invisible_action_sheet_1_hour_20_minutes" = "1:20 horas";
-"turn_invisible_action_sheet_3_hours" = "3 horas";
-"turn_invisible_action_sheet_rest_of_day" = "Resto del día";
+"TurnInvisibleActionSheetTitle" = "Selecciona el periodo";
+"TurnInvisibleActionSheet1Hour20Minutes" = "1:20 horas";
+"TurnInvisibleActionSheet3Hours" = "3 horas";
+"TurnInvisibleActionSheetRestOfDay" = "Resto del día";

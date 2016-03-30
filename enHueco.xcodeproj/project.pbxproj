@@ -33,7 +33,7 @@
 		F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */; };
 		F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */; };
 		F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */; };
-		F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Images.xcassets */; };
+		F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */; };
 		F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */; };
 		F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFA1BE4836800AE561D /* Interface.storyboard */; };
 		F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126ADFD1BE4836800AE561D /* Assets.xcassets */; };
@@ -78,7 +78,7 @@
 		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
 		F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8461C81441600390CF7 /* FriendsManager.swift */; };
 		F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* CurrentStateManager.swift */; };
-		F183F84D1C814E3A00390CF7 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */; };
+		F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */; };
 		F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8561C837FB500390CF7 /* PrivacyManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
 		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
@@ -98,7 +98,6 @@
 		F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */; };
 		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
 		F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */; };
-		F1F0CF1C1C029FB8004C50A1 /* ImagePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */; };
 		F1F54B321B9CE1470087C30E /* AvailableFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; };
 		F1FAFF9D1B9FBAFB00E8CCDD /* FreeTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* FreeTimeCell.swift */; };
@@ -191,7 +190,7 @@
 		F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHuecoNowCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1229C2A1A7495A200C4FDE2 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
-		F1229C2B1A7495A200C4FDE2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Layers/Views/Assets.xcassets; sourceTree = "<group>"; };
 		F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "enHueco-Bridging-Header.h"; sourceTree = "<group>"; };
 		F126ADF81BE4836800AE561D /* enHueco watchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "enHueco watchOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,7 +241,7 @@
 		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AccountManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8461C81441600390CF7 /* FriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendsManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8481C81454C00390CF7 /* CurrentStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurrentStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ScheduleManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventsAndSchedulesManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8561C837FB500390CF7 /* PrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacyManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectCalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
@@ -262,7 +261,6 @@
 		F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProximityUpdateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
 		F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImagePersistenceManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
 		F1FAFF9C1B9FBAFB00E8CCDD /* FreeTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTimeCell.swift; sourceTree = "<group>"; };
@@ -380,6 +378,7 @@
 				F183F84F1C82032100390CF7 /* Layers */,
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
 				F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */,
+				F1229C2B1A7495A200C4FDE2 /* Assets.xcassets */,
 				F1229BD91A74947200C4FDE2 /* Supporting Files */,
 			);
 			path = enHueco;
@@ -418,7 +417,6 @@
 				F1229C261A7495A200C4FDE2 /* Main.storyboard */,
 				F1229C281A7495A200C4FDE2 /* Default-568h@2x.png */,
 				F1229C291A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift */,
-				F1229C2B1A7495A200C4FDE2 /* Images.xcassets */,
 				F11D6FA31BA3BE1500206B9A /* Colors.swift */,
 			);
 			path = Views;
@@ -634,11 +632,10 @@
 				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
 				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
-				F183F84C1C814E3A00390CF7 /* ScheduleManager.swift */,
+				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8421C80781400390CF7 /* PersistenceManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
-				F1F0CF1B1C029FB8004C50A1 /* ImagePersistenceManager.swift */,
 				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
 				F183F8581C837FC700390CF7 /* Generic Managers */,
 			);
@@ -803,7 +800,7 @@
 			files = (
 				F155C81E1C2760E6000EAF96 /* General.strings in Resources */,
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
-				F1229C471A7495A200C4FDE2 /* Images.xcassets in Resources */,
+				F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */,
 				F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
@@ -922,7 +919,7 @@
 				F11930A01BB84B570031EB58 /* ViewQRViewController.swift in Sources */,
 				F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */,
 				F165BC531BC613E900AA9248 /* OutgoingFriendRequestCell.swift in Sources */,
-				F183F84D1C814E3A00390CF7 /* ScheduleManager.swift in Sources */,
+				F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */,
 				F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,
@@ -945,7 +942,6 @@
 				F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */,
 				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
 				F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */,
-				F1F0CF1C1C029FB8004C50A1 /* ImagePersistenceManager.swift in Sources */,
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,
 				F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */,
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
@@ -1180,7 +1176,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1279,8 +1275,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -1322,7 +1318,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;

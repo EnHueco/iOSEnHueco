@@ -8,10 +8,11 @@
 
 import UIKit
 
-
-
 @IBDesignable class LoginViewController: UIViewController
 {
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var logoTitleLabel: UILabel!
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
@@ -19,30 +20,66 @@ import UIKit
 
     @IBOutlet weak var verticalSpaceToBottomConstraint: NSLayoutConstraint!
     var verticalSpaceToBottomInitialValue: CGFloat!
+    
+    private var firstAppearance = true
 
     override func viewDidLoad()
     {
+        (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController = navigationController
+        
         navigationController?.navigationBarHidden = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
 
         loginButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-
-        loginButton.clipsToBounds = true
-        loginButton.layer.cornerRadius = loginButton.frame.height / 2
+        
+        let title = NSMutableAttributedString(string: "ENHUECO")
+        let boldFont = UIFont.boldSystemFontOfSize(logoTitleLabel.font.pointSize)
+        
+        title.addAttribute(NSFontAttributeName, value: boldFont, range: NSMakeRange(0, 2))
+        
+        logoTitleLabel.attributedText = title
+        
+        let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
+        
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+    
+        backgroundImageView.addSubview(effectView)
+        effectView.autoPinEdgesToSuperviewEdges()
+        
+        view.insertSubview(backgroundImageView, atIndex: 0)
+        backgroundImageView.autoPinEdgesToSuperviewEdges()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if firstAppearance && enHueco.appUser != nil
+        {
+            goToMainTabViewController()
+        }
+        else
+        {
+            AccountManager.sharedManager.logOut()
+            (UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut = false
+        }
     }
 
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-
-        if enHueco.appUser != nil
-        {
-            goToMainTabViewController()
-        }
+        firstAppearance = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        loginButton.roundCorners()
+        logoImageView.roundCorners()
     }
 
     @IBAction func login(sender: AnyObject)
@@ -61,11 +98,15 @@ import UIKit
 
             if enHueco.appUser.imageURL == nil
             {
-                navigationController?.pushViewController(storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
+                importImageController.delegate = self
+                
+                self.navigationController?.pushViewController(importImageController, animated: true)
             }
             else
             {
-                goToMainTabViewController()
+                self.goToMainTabViewController()
             }
             
             return
@@ -80,13 +121,17 @@ import UIKit
             
             guard success && error == nil else {
                 
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: "IncorrectCredentialsMessage".localizedUsingGeneralFile())
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
             
             if enHueco.appUser.imageURL == nil
             {
-                self.navigationController?.pushViewController(self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController"), animated: true)
+                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
+                importImageController.delegate = self
+                
+                self.navigationController?.pushViewController(importImageController, animated: true)
             }
             else
             {
@@ -97,9 +142,14 @@ import UIKit
 
     func goToMainTabViewController()
     {
-        ProximityUpdatesManager.sharedManager().beginProximityUpdates()
-
-        performSegueWithIdentifier("PresentMainTabViewController", sender: self)
+        ProximityUpdatesManager.sharedManager.beginProximityUpdates()
+        
+        let mainTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+        
+        navigationController?.presentViewController(mainTabBarController, animated: true, completion: {
+          
+            self.navigationController?.setViewControllers([self.navigationController!.viewControllers.first!], animated: false)
+        })
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -138,5 +188,18 @@ import UIKit
 
             self.view.layoutIfNeeded()
         })
+    }
+}
+
+extension LoginViewController: ImportProfileImageViewControllerDelegate
+{
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+    {
+        goToMainTabViewController()
+    }
+    
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
+    {
+        goToMainTabViewController()
     }
 }

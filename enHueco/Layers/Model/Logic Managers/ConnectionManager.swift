@@ -10,21 +10,32 @@ import Foundation
 import Alamofire
 import Alamofire_Synchronous
 
+/// HTTP Methods
 enum HTTPMethod: String
 {
     case GET="GET", POST="POST", DELETE="DELETE"
 }
 
+/** An error which contains the error that occurred, along with the request
+that triggered it */
 struct ConnectionManagerCompoundError: ErrorType
 {
     var error: ErrorType?
-    var request: NSURLRequest
+    var response: NSURLResponse?
+    var request: NSMutableURLRequest
 }
 
 typealias ConnectionManagerSuccessfulRequestBlock = (JSONResponse: AnyObject) -> ()
 typealias ConnectionManagerSuccessfulDataRequestBlock = (data: NSData) -> ()
 typealias ConnectionManagerFailureRequestBlock = (compoundError: ConnectionManagerCompoundError) -> ()
 
+struct ConnectionManagerNotifications
+{
+    /// Thrown when the session expired
+    static let sessionDidExpire = "sessionDidExpire"
+}
+
+/// Handles all generic network-related operations. **All** network operations should be executed using this manager.
 class ConnectionManager: NSObject
 {
     static let completionQueue: NSOperationQueue =
@@ -44,49 +55,91 @@ class ConnectionManager: NSObject
         return Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies))
     }()
     
-    class func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    class func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params: AnyObject?, successCompletionHandler: ConnectionManagerSuccessfulRequestBlock?, failureCompletionHandler: ConnectionManagerFailureRequestBlock? )
     {
-        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
-        request.HTTPBody = dictionaryJSONData
-        request.setValue("application/json", forHTTPHeaderField: "Content-type")
-        
-        sendAsyncRequest(request, onSuccess: successfulRequestBlock, onFailure: failureRequestBlock)
-    }
-    
-    class func sendAsyncDataRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]? = nil, onSuccess successfulRequestBlock: ConnectionManagerSuccessfulDataRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
-    {
-        let dictionaryJSONData:NSData? = params != nil ? try! NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
-        request.HTTPBody = dictionaryJSONData
-        request.setValue("application/json", forHTTPHeaderField: "Content-type")
-        
-        let alamoRequest = alamoManager.request(request)
-        
-        alamoRequest.response { (_, response, data, error) -> Void in
+        do
+        {
+            let dictionaryJSONData:NSData? = params != nil ? try NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
             
-            completionQueue.addOperationWithBlock
+            if params != nil
             {
-                #if DEBUG
-                    debugPrint(alamoRequest); debugPrint(response)
-                #endif
-                
-                if let data = data where error == nil
-                {
-                    successfulRequestBlock?(data: data)
-                }
-                else if let error = error
-                {
-                    #if DEBUG
-                        if let data = data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
-                    #endif
-                    
-                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:request))
-                }
+                request.setValue("application/json", forHTTPHeaderField: "Content-type")
+                request.HTTPBody = dictionaryJSONData
             }
+            
+            sendAsyncRequest(request, successCompletionHandler: successCompletionHandler, failureCompletionHandler: failureCompletionHandler)
+        }
+        catch
+        {
+            failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error: error, response: nil, request: request))
         }
     }
     
-    class func sendAsyncRequest(request: NSMutableURLRequest,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock? )
+    class func sendAsyncDataRequest(request: NSMutableURLRequest, withJSONParams params: AnyObject? = nil, successCompletionHandler: ConnectionManagerSuccessfulDataRequestBlock?, failureCompletionHandler: ConnectionManagerFailureRequestBlock? )
     {
+        do
+        {
+            let dictionaryJSONData:NSData? = params != nil ? try NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
+            
+            if params != nil
+            {
+                request.setValue("application/json", forHTTPHeaderField: "Content-type")
+                request.HTTPBody = dictionaryJSONData
+            }
+            
+            var request = request
+            adjustRequestForBackend(&request)
+            
+            let alamoRequest = alamoManager.request(request)
+            
+            alamoRequest.response { (_, response, data, error) -> Void in
+                
+                completionQueue.addOperationWithBlock {
+                    
+                    #if DEBUG
+                        debugPrint(alamoRequest); debugPrint(response)
+                    #endif
+                    
+                    let errorHandler = {
+                        
+                        #if DEBUG
+                            if let data = data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
+                        #endif
+                        
+                        failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error:error, response: response, request:request))
+                    }
+                    
+                    guard response?.statusCode != 401 else {
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
+                        }
+                        
+                        errorHandler()
+                        return
+                    }
+                    
+                    guard let data = data where error == nil && response?.statusCode == 200 else
+                    {
+                        errorHandler()
+                        return
+                    }
+                    
+                    successCompletionHandler?(data: data)
+                }
+            }
+        }
+        catch
+        {
+            failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error: error, response: nil, request: request))
+        }
+    }
+    
+    class func sendAsyncRequest(request: NSMutableURLRequest,  successCompletionHandler: ConnectionManagerSuccessfulRequestBlock?, failureCompletionHandler: ConnectionManagerFailureRequestBlock? )
+    {
+        var request = request
+        adjustRequestForBackend(&request)
+        
         let alamoRequest = alamoManager.request(request)
         
         alamoRequest.responseJSON(options: .MutableContainers) { (response) -> Void in
@@ -96,30 +149,75 @@ class ConnectionManager: NSObject
                 #if DEBUG
                     debugPrint(alamoRequest); debugPrint(response)
                 #endif
-
-                guard let value = response.result.value where response.result.isSuccess else
-                {
+                
+                let errorHandler = {
+                    
                     #if DEBUG
                         if let data = response.data { print(NSString(data: data, encoding: NSUTF8StringEncoding)!) }
                     #endif
                     
-                    failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:response.result.error, request:request))
+                    failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error:response.result.error, response: response.response, request:request))
                     return
                 }
                 
-                successfulRequestBlock?(JSONResponse: value)
+                guard response.response?.statusCode != 401 else
+                {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
+                    }
+                    
+                    errorHandler()
+                    return
+                }
+                
+                guard let value = response.result.value where response.result.isSuccess && response.response?.statusCode == 200 else
+                {
+                    errorHandler()
+                    return
+                }
+                
+                successCompletionHandler?(JSONResponse: value)
             }
         }
     }
     
-    
-    class func sendSyncRequest(request: NSURLRequest) throws -> AnyObject?
+    private class func adjustRequestForBackend(inout request: NSMutableURLRequest)
     {
-        let response = alamoManager.request(request).responseJSON(options: .MutableContainers)
+        guard let appUser = enHueco.appUser else { return }
         
-        if let error = response.result.error { throw error }
+        if let url = request.URL where url.absoluteString.hasPrefix(EHURLS.Base)
+        {
+            request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
+            request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+        }
+    }
+    
+    class func sendSyncRequest(request: NSMutableURLRequest) throws -> AnyObject
+    {
+        let semaphore = dispatch_semaphore_create(0)
         
-        return response.result.value
+        sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) in
+            
+            dispatch_semaphore_signal(semaphore)
+            
+            
+            
+        }) { (compoundError) in
+            
+            
+        }
+
+//        while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) {
+//            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate())
+//        }
+//
+//        let response = alamoManager.request(request).responseJSON(options: .MutableContainers)
+//        
+//        if let error = response.result.error { throw error }
+//        
+//        return response.result.value ?? [:]
+        
+        return [:]
     }
 }
 

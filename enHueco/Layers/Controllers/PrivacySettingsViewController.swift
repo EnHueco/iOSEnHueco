@@ -19,6 +19,9 @@ class PrivacySettingsViewController: UITableViewController
     @IBOutlet weak var selectFriendsShareEventNamesCell: UITableViewCell!
     @IBOutlet weak var selectFriendsShareEventLocationsCell: UITableViewCell!
  
+    /// !!! Sections that must be hidden because they are not implemented yet
+    private let unimplementedSections = [0]
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -33,7 +36,7 @@ class PrivacySettingsViewController: UITableViewController
     {
         NSUserDefaults.standardUserDefaults().setBool(shareLocationWithBestFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
         
-        ProximityUpdatesManager.sharedManager().updateBackgroundFetchInterval()
+        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -48,7 +51,7 @@ class PrivacySettingsViewController: UITableViewController
         {
             EHProgressHUD.showSpinnerInView(view)
             
-            PrivacyManager.sharedManager().turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager.turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
@@ -63,7 +66,7 @@ class PrivacySettingsViewController: UITableViewController
         {
             EHProgressHUD.showSpinnerInView(view)
 
-            PrivacyManager.sharedManager().turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
+            PrivacyManager.sharedManager.turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
                 
                 EHProgressHUD.dismissSpinnerForView(self.view)
 
@@ -82,40 +85,65 @@ class PrivacySettingsViewController: UITableViewController
         tableView.endUpdates()
     }
     
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
         if cell == selectFriendsShareLocationCell
         {
-            return shareLocationWithBestFriendsSwitch.on ? 44:0
+            return 0 // !!! <- REMOVE WHEN READY TO IMPLEMENT GROUPS
+            //return shareLocationWithBestFriendsSwitch.on ? 44:0
         }
         else if cell == selectFriendsShareEventNamesCell
         {
-            return shareEventNamesSwitch.on ? 44:0
+            return 0 // !!! <- REMOVE WHEN READY TO IMPLEMENT GROUPS
+            //return shareEventNamesSwitch.on ? 44:0
         }
         else if cell == selectFriendsShareEventLocationsCell
         {
-            return shareEventLocationsSwitch.on ? 44:0
+            return 0 // !!! <- REMOVE WHEN READY TO IMPLEMENT GROUPS
+            //return shareEventLocationsSwitch.on ? 44:0
         }
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
-    override func didReceiveMemoryWarning()
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // !!! REMOVE WHEN READY TO IMPLEMENT THE FEATURES IN THE HIDDEN SECTIONS
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        guard !unimplementedSections.contains(section) else { return 0 }
+        return super.tableView(tableView, numberOfRowsInSection: section)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        guard !unimplementedSections.contains(section) else { return nil }
+        return super.tableView(tableView, titleForHeaderInSection: section)
     }
-    */
-
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String?
+    {
+        guard !unimplementedSections.contains(section) else { return nil }
+        return super.tableView(tableView, titleForFooterInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        guard !unimplementedSections.contains(section) else { return 1 }
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    {
+        guard !unimplementedSections.contains(section) else { return 1 }
+        return super.tableView(tableView, heightForFooterInSection: section)
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 }

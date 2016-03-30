@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate
+class CommonFreeTimePeriodsViewController: UIViewController
 {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var selectedFriendsCollectionView: UICollectionView!
@@ -29,6 +29,11 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
         
         selectedFriendsCollectionView.delegate = self
         selectedFriendsCollectionView.dataSource = self
+        
+        if let layout = selectedFriendsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        {
+            layout.estimatedItemSize = CGSize(width: 150, height: 29)
+        }
         
         commonFreeTimePeriodsSearchFriendViewController = storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddViewController") as! CommonFreeTimePeriodsSearchFriendToAddViewController
         
@@ -56,13 +61,15 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
     
     func prepareInfoAndReloadScheduleData()
     {
-        let commonFreeTimePeriodsSchedule = ScheduleManager.sharedManager().commonFreeTimePeriodsScheduleForUsers(selectedFriends)
+        let commonFreeTimePeriodsSchedule = EventsAndSchedulesManager.sharedManager.commonFreeTimePeriodsScheduleForUsers(selectedFriends)
         scheduleViewController.schedule = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }
     
     func addFriendToSelectedFriendsAndReloadData(friend: User)
     {
+        guard !selectedFriends.contains(friend) else { return }
+        
         if friend is AppUser
         {
             selectedFriends.insert(friend, atIndex: 0)
@@ -72,88 +79,31 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
             selectedFriends.append(friend)
         }
         
-        selectedFriendsCollectionView.reloadData()
+        let indexPathForLastItem = NSIndexPath(forItem: self.selectedFriends.count-1, inSection: 0)
+        
+        if selectedFriends.count == 1
+        {
+            selectedFriendsCollectionView.reloadData()
+        }
+        else
+        {
+            selectedFriendsCollectionView.insertItemsAtIndexPaths([indexPathForLastItem])
+        }
+        
+        selectedFriendsCollectionView.scrollToItemAtIndexPath(indexPathForLastItem, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+        
         prepareInfoAndReloadScheduleData()
     }
     
-    // MARK: Collection View Delegate
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func deleteFriendFromSelectedFriendsAtIndexPathAndReloadData(indexPath: NSIndexPath)
     {
-        return selectedFriends.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
-    {
-        let friend = selectedFriends[indexPath.item]
+        guard selectedFriends[indexPath.row] !== enHueco.appUser else { return }
         
-        let cell = selectedFriendsCollectionView.dequeueReusableCellWithReuseIdentifier("CommonFreeTimePeriodsSelectedFriendsCollectionViewCell", forIndexPath: indexPath) as! CommonFreeTimePeriodsSelectedFriendsCollectionViewCell
-        
-        cell.friendNameLabel.text = friend.name
-        
-        cell.clipsToBounds = true
-        cell.layer.cornerRadius = 10
-        
-        cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-        
-        return cell
+        selectedFriends.removeAtIndex(indexPath.row)
+        selectedFriendsCollectionView.deleteItemsAtIndexPaths([indexPath])
+        prepareInfoAndReloadScheduleData()
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-    {
-        let height = CGFloat(28.0)
-        
-        let label = UILabel()
-        label.text = selectedFriends[indexPath.item].name
-        label.font = UIFont.systemFontOfSize(12)
-        let size = label.sizeThatFits(CGSizeMake(CGFloat.max, height))
-        
-        return CGSizeMake(size.width + 20, height)
-    }
-    
-    // MARK: SearchBar Delegate
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
-    {
-        switchToSearch()
-        return true
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
-    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool
-    {
-        switchToSchedule()
-        return true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar)
-    {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar)
-    {
-        view.endEditing(true)
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
-    {
-        commonFreeTimePeriodsSearchFriendViewController.filterContentForSearchText(searchText)
-    }
-    
-    // MARK: commonFreeTimePeriodsSearchFriendToAddViewController Delegate
-    
-    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
-    {
-        addFriendToSelectedFriendsAndReloadData(friend)
-    }
-        
     // MARK: Controller switching
     
     func switchToSchedule()
@@ -168,7 +118,7 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
         
         currentController = scheduleViewController
         
-        UIView.animateWithDuration(0.5)
+        UIView.animateWithDuration(0.25)
         {
             self.currentController!.view.alpha = 1
         }
@@ -186,7 +136,7 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
         
         currentController = commonFreeTimePeriodsSearchFriendViewController
         
-        UIView.animateWithDuration(0.5)
+        UIView.animateWithDuration(0.25)
         {
             self.currentController!.view.alpha = 1
         }
@@ -207,5 +157,89 @@ class CommonFreeTimePeriodsViewController: UIViewController, UISearchBarDelegate
                 currentController.didMoveToParentViewController(nil)
             })
         }
+    }
+}
+
+extension CommonFreeTimePeriodsViewController: UICollectionViewDataSource
+{
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        return selectedFriends.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    {
+        let friend = selectedFriends[indexPath.item]
+        
+        let cell = selectedFriendsCollectionView.dequeueReusableCellWithReuseIdentifier("CommonFreeTimePeriodsSelectedFriendsCollectionViewCell", forIndexPath: indexPath) as! CommonFreeTimePeriodsSelectedFriendsCollectionViewCell
+        
+        cell.friendNameLabel.text = friend.name
+        
+        cell.setDeleteButtonHidden(friend === enHueco.appUser)
+        
+        cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+        
+        return cell
+    }
+}
+
+extension CommonFreeTimePeriodsViewController: UICollectionViewDelegate
+{
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        deleteFriendFromSelectedFriendsAtIndexPathAndReloadData(indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    {
+        cell.roundCorners()
+    }
+}
+
+// MARK: SearchBar Delegate
+extension CommonFreeTimePeriodsViewController: UISearchBarDelegate
+{
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        switchToSearch()
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool
+    {
+        return true
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar)
+    {
+        switchToSchedule()
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        commonFreeTimePeriodsSearchFriendViewController.filterContentForSearchText(searchText)
+    }
+}
+
+// MARK: commonFreeTimePeriodsSearchFriendToAddViewController Delegate
+extension CommonFreeTimePeriodsViewController: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate
+{
+    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
+    {
+        addFriendToSelectedFriendsAndReloadData(friend)
+        searchBar.endEditing(true)
     }
 }

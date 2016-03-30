@@ -87,18 +87,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         
-        /*let animation = CATransition()
-        animation.duration = 0
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionFade
-        
-        navigationController?.navigationBar.layer.addAnimation(animation, forKey: nil)
-        
-        UIView.animateWithDuration(0)
-        {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
-        }*/
-        
         transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
             
             self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -118,7 +106,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         let dotsButton = UIButton(type: .Custom)
         dotsButton.frame.size = CGSize(width: 20, height: 20)
         dotsButton.setBackgroundImage(UIImage(named: "Dots")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dotsButton.addTarget(self, action: Selector("dotsIconPressed:"), forControlEvents: .TouchUpInside)
+        dotsButton.addTarget(self, action: #selector(FriendDetailViewController.dotsIconPressed(_:)), forControlEvents: .TouchUpInside)
         dotsButton.tintColor = UIColor.whiteColor()
         
         dotsBarButtonItem = UIBarButtonItem(customView: dotsButton)
@@ -186,7 +174,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
                 
                 EHProgressHUD.showSpinnerInView(self.view)
-                FriendsManager.sharedManager().deleteFriend(self.friend, completionHandler: { (success, error) -> () in
+                FriendsManager.sharedManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
                     
                     EHProgressHUD.dismissSpinnerForView(self.view)
 

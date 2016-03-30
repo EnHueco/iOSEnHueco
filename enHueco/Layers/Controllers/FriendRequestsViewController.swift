@@ -20,10 +20,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     {
         super.viewDidLoad()
                 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("systemDidReceiveFriendRequestUpdates:"), name:EHSystemNotification.SystemDidReceiveFriendRequestUpdates, object: enHueco)
-
-        //view.backgroundColor = EHInterfaceColor.defaultColoredBackgroundColor
-        
         requestsTableView.dataSource = self
         requestsTableView.delegate = self
     }
@@ -38,8 +34,11 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         
         EHProgressHUD.showSpinnerInView(view)
-
-        FriendsManager.sharedManager().fetchUpdatesForFriendRequests()
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { (success, error) in
+            
+            EHProgressHUD.dismissAllSpinnersForView(self.view)
+            self.requestsTableView.reloadData()
+        }
     }
     
     @IBAction func addFriendButtonPressed(sender: AnyObject)
@@ -161,7 +160,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let requestFriend = enHueco.appUser.incomingFriendRequests[indexPath.row]
 
         EHProgressHUD.showSpinnerInView(view)
-        FriendsManager.sharedManager().acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
+        FriendsManager.sharedManager.acceptFriendRequestFromFriend(requestFriend) { (success, error) -> () in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
             
@@ -180,12 +179,5 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         let indexPath = requestsTableView.indexPathForCell(cell)
         
         // TODO:
-    }
-    
-    func systemDidReceiveFriendRequestUpdates(notification: NSNotification)
-    {
-        
-        EHProgressHUD.dismissAllSpinnersForView(view)
-        requestsTableView.reloadData()
     }
 }

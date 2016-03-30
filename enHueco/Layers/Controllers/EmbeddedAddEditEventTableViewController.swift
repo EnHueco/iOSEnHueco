@@ -47,8 +47,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         nameTextField.delegate = self
         locationTextField.delegate = self
         
-        startHourDatePicker.addTarget(self, action: Selector("startHourChanged:"), forControlEvents: .ValueChanged)
-        endHourDatePicker.addTarget(self, action: Selector("endHourChanged:"), forControlEvents: .ValueChanged)
+        startHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.startHourChanged(_:)), forControlEvents: .ValueChanged)
+        endHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.endHourChanged(_:)), forControlEvents: .ValueChanged)
         
         if let eventToEdit = addEditEventParentViewController.eventToEdit
         {

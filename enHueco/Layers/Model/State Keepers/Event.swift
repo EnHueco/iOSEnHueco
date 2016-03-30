@@ -8,11 +8,13 @@
 
 import UIKit
 
+/// The type of the event
 enum EventType: String
 {
     case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
+/// A calendar event (class or free time at the moment)
 class Event: EHSynchronizable, Comparable, NSCopying
 {
     weak var daySchedule: DaySchedule!
@@ -107,6 +109,21 @@ class Event: EHSynchronizable, Comparable, NSCopying
         self.init(type: EventType(rawValue: type)!, name: name, startHour: startHourComponents, endHour: endHourComponents, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
+    convenience init(instantFreeTimeJSONDictionary: [String : AnyObject])
+    {
+        let name = instantFreeTimeJSONDictionary["name"] as? String
+        let location = instantFreeTimeJSONDictionary ["location"] as? String
+        
+        let endDate = NSDate(serverFormattedString: instantFreeTimeJSONDictionary["valid_until"] as! String)!
+        
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+
+        let endHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: endDate)
+        
+        self.init(type: .FreeTime, name: name, startHour: NSDateComponents(), endHour: endHourComponents, location: location, ID: "", lastUpdatedOn: NSDate())
+    }
+    
     func replaceValuesWithThoseOfTheEvent(event: Event)
     {
         name = event.name
@@ -171,8 +188,8 @@ class Event: EHSynchronizable, Comparable, NSCopying
         
         dictionary["type"] = type.rawValue
         
-        if name != nil { dictionary["name"] = name }
-        if location != nil { dictionary["location"] = location }
+        dictionary["name"] = name
+        dictionary["location"] = location
         
         dictionary["start_hour_weekday"] = String(startHour.weekday)
         dictionary["end_hour_weekday"] = String(endHour.weekday)

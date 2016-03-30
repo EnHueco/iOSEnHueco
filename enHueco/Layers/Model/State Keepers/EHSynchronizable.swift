@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents an object that can be synchronized using the Synchronization Manager
 class EHSynchronizable: NSObject, NSCoding
 {
     var ID: String!

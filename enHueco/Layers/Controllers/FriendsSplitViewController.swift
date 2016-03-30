@@ -16,7 +16,7 @@ class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDe
         
         delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("orientationChanged:"), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsSplitViewController.orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning()

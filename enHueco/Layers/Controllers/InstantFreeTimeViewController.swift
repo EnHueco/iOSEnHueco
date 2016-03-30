@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol InstantFreeTimeViewControllerDelegate: class
+{
+    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(controller: InstantFreeTimeViewController)
+}
+
 class InstantFreeTimeViewController: UIViewController
 {
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -23,14 +28,16 @@ class InstantFreeTimeViewController: UIViewController
     var originalFrame: CGRect!
     var backgroundView: UIView!
     
+    weak var delegate: InstantFreeTimeViewControllerDelegate?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     
         navigationBar.barStyle = .Black
         navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
@@ -54,7 +61,7 @@ class InstantFreeTimeViewController: UIViewController
         backgroundView.backgroundColor = UIColor.clearColor()
         controller.view.insertSubview(backgroundView, belowSubview: view)
         
-        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("hideKeyboard")))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(InstantFreeTimeViewController.hideKeyboard)))
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1.6, options: .CurveEaseInOut, animations: {
         
@@ -102,7 +109,7 @@ class InstantFreeTimeViewController: UIViewController
         let newFreeTimePeriod = Event(type: .FreeTime, name: nameTextField.text, startHour: startHourComponents, endHour: endHourComponents, location: locationTextField.text, ID: nil, lastUpdatedOn: NSDate())
         
         EHProgressHUD.showSpinnerInView(view)
-        CurrentStateManager.sharedManager().postInstantFreeTimePeriod(newFreeTimePeriod) { (success, error) in
+        CurrentStateManager.sharedManager.postInstantFreeTimePeriod(newFreeTimePeriod) { (success, error) in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
             
@@ -112,6 +119,7 @@ class InstantFreeTimeViewController: UIViewController
                 return
             }
             
+            self.delegate?.instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(self)
             self.dismiss()
         }
     }

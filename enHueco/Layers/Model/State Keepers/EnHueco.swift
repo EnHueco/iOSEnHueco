@@ -14,14 +14,11 @@ import APAddressBook
 /// Universally accessible singleton instance
 let enHueco = EnHueco()
 
-class EHSystemNotification
-{
-    static let SystemDidReceiveFriendAndScheduleUpdates = "SystemDidReceiveFriendAndScheduleUpdates"
-    static let SystemDidReceiveFriendRequestUpdates = "SystemDidReceiveFriendRequestUpdates"
-    static let SystemDidReceiveAppUserImage = "SystemDidReceiveAppUserImage"
-    static let SystemDidReceiveAppUserWasUpdated = "SystemDidReceiveAppUserWasUpdated"
-}
-
+/** Stateful singleton entry point
+ 
+ The singleton is intended to store all aplication's model state which should be persisted in order for 
+ it to be restored in case the application is opened in an offline environment.
+*/
 class EnHueco
 {            
     /// User of the app
@@ -32,6 +29,7 @@ class EnHueco
         
     }
     
+    // TODO: Move, doesn't belong here
     func createTestAppUser ()
     {
         //Pruebas
@@ -51,19 +49,22 @@ class EnHueco
 
         //////////
     }
-            
+    
+    // TODO: Move, doesn't belong here
     func callFriend(phoneNumber : String)
     {
         let url:NSURL = NSURL(string: "tel://\(phoneNumber)")!
         UIApplication.sharedApplication().openURL(url)
     }
     
+    // TODO: Move, doesn't belong here
     func whatsappMessageTo(friendABID : NSNumber?)
     {
         let url: NSURL = NSURL(string: "whatsapp://send?" + ((friendABID == nil) ? "": "abid=\(friendABID!)"))!
         UIApplication.sharedApplication().openURL(url)
     }
     
+    // TODO: Move, doesn't belong here
     func getFriendABID(phoneNumber : String, completionHandler : (NSNumber) -> ())
     {
         let addressBook = APAddressBook()

@@ -8,13 +8,20 @@
 
 import Foundation
 
+/**
+ Handles  synchronization with the server of data that we must ensure is uplodaded when a connection is available in case the upload fails.
+ 
+ The Synchronization Manager maintains a persistent queue to guarantee that operations are executed in order
+ and when a connection is available.
+*/
+@available(*, deprecated=0.5, message="EnHueco doesn't allow offline editing now. You must now use the EventsAndScheduleManager to accomplish the task in a network-immediate fashion. The Synchronization Manager will soon be removed completely.")
 class SynchronizationManager: NSObject, NSCoding
 {
     // TODO: Should be a struct but NSCoding doesn't let us.
     class PendingRequest: NSObject, NSCoding
     {
         /// NSURLRequest that was attempted
-        let request: NSURLRequest
+        let request: NSMutableURLRequest
         
         /// Closure to be executed in case of success when reattempting the request.
         let successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?
@@ -25,7 +32,7 @@ class SynchronizationManager: NSObject, NSCoding
         /// Object associated with the request (For example, the Free time period that was going to be updated).
         let associatedObject: EHSynchronizable
         
-        init(request: NSURLRequest, successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable) {
+        init(request: NSMutableURLRequest, successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable) {
             self.request = request
             self.successfulRequestBlock = successfulRequestBlock
             self.failureRequestBlock = failureRequestBlock
@@ -37,11 +44,11 @@ class SynchronizationManager: NSObject, NSCoding
             self.successfulRequestBlock = nil
             self.failureRequestBlock = nil
 
-            guard let request = aDecoder.decodeObjectForKey("request") as? NSURLRequest,
+            guard let request = aDecoder.decodeObjectForKey("request") as? NSMutableURLRequest,
                   let associatedObject = aDecoder.decodeObjectForKey("associatedObject") as? EHSynchronizable
             else
             {
-                self.request = NSURLRequest()
+                self.request = NSMutableURLRequest()
                 self.associatedObject = EHSynchronizable(ID: nil, lastUpdatedOn: NSDate())
                 
                 super.init()
@@ -64,7 +71,7 @@ class SynchronizationManager: NSObject, NSCoding
     /// Path where data will be persisted
     private static let persistencePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/synchronizationManager.state"
 
-    private static var instance: SynchronizationManager?
+    static let sharedManager = SynchronizationManager()
     
     /**
         FIFO queue containing pending requests that failed because of a network error.
@@ -92,16 +99,6 @@ class SynchronizationManager: NSObject, NSCoding
         super.init()
     }
     
-    class func sharedManager() -> SynchronizationManager
-    {
-        if instance == nil
-        {
-            instance = managerFromPersistence() ?? SynchronizationManager()
-        }
-        
-        return instance!
-    }
-    
     /// Tries to initialize a SynchronizationManager instance from persistence
     private static func managerFromPersistence () -> SynchronizationManager?
     {
@@ -127,7 +124,7 @@ class SynchronizationManager: NSObject, NSCoding
     
     // MARK: Synchronization
 
-    private func addPendingRequestToQueue(request request: NSURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
+    private func addPendingRequestToQueue(request request: NSMutableURLRequest, successfulRequestBlock:ConnectionManagerSuccessfulRequestBlock?, failureRequestBlock:ConnectionManagerFailureRequestBlock?, associatedObject: EHSynchronizable)
     {
         pendingRequestsQueue.append(PendingRequest(request: request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject))
     }
@@ -156,24 +153,16 @@ class SynchronizationManager: NSObject, NSCoding
         
         do
         {
-            guard let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request) else
-            {
-                pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:nil, request:pendingRequest.request))
-                return false
-            }
+            let responseDictionary = try ConnectionManager.sendSyncRequest(pendingRequest.request)
             
             pendingRequestsQueue.removeFirst()
-            
-            let serverLastUpdatedOn = NSDate(serverFormattedString: responseDictionary["updated_on"] as! String)!
-            
-            if serverLastUpdatedOn < pendingRequest.associatedObject.lastUpdatedOn { return true }
-            
+                        
             pendingRequest.successfulRequestBlock?(JSONResponse: responseDictionary)
             return true
         }
         catch
         {
-            pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error, request:pendingRequest.request))
+            pendingRequest.failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error: error, response: nil, request:pendingRequest.request))
             return false
         }
     }
@@ -189,11 +178,14 @@ class SynchronizationManager: NSObject, NSCoding
     - parameter failureRequestBlock: Closure to be executed in case of an error when reattempting the request.
     - parameter associatedObject: Object associated with the request (For example, the free time period that was going to be updated).
     */
-    func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  onSuccess successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, onFailure failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
+    func sendAsyncRequest(request: NSMutableURLRequest, withJSONParams params:[String : AnyObject]?,  successCompletionHandler successfulRequestBlock: ConnectionManagerSuccessfulRequestBlock?, failureCompletionHandler failureRequestBlock: ConnectionManagerFailureRequestBlock?, associatedObject:EHSynchronizable)
     {
+        //TODO: DELETE THIS !
+        pendingRequestsQueue = []
+        
         let synchronizationFailureRequestBlock = {(error: ConnectionManagerCompoundError) -> () in
             
-            failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error.error, request:error.request))
+            failureRequestBlock?(compoundError: ConnectionManagerCompoundError(error:error.error, response: error.response, request:error.request))
             
             self.addPendingRequestToQueue(request: error.request, successfulRequestBlock: successfulRequestBlock, failureRequestBlock: failureRequestBlock, associatedObject: associatedObject)
         }
@@ -206,67 +198,78 @@ class SynchronizationManager: NSObject, NSCoding
             return
         }
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, onSuccess: successfulRequestBlock, onFailure: synchronizationFailureRequestBlock)
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: successfulRequestBlock, failureCompletionHandler: synchronizationFailureRequestBlock)
     }
     
     // MARK: Reporting
     
     ///Reports to the server a new event added
-    func reportNewEvent(newEvent: Event)
+    func reportNewEvent(newEvent: Event, completionHandler: BasicCompletionHandler?)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "POST"
         
         let params = newEvent.toJSONObject(associatingUser: enHueco.appUser)
         
-        sendAsyncRequest(request, withJSONParams: params, onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = (JSONResponse as! [String : AnyObject])
             newEvent.ID = "\(JSONDictionary["id"] as! Int)"
             newEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported new event")
             
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+            completionHandler?(success: true, error: nil)
+            
+        }, failureCompletionHandler: { error in
+            
+            completionHandler?(success: false, error: error)
+            
+        }, associatedObject: enHueco.appUser)
     
         //TODO: Change associated object
     }
     
     ///Reports to the server an edit to an event
-    func reportEventEdited(event: Event)
+    func reportEventEdited(event: Event, completionHandler: BasicCompletionHandler?)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "PUT"
 
-        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             print("Reported event edited")
+            
+            completionHandler?(success: true, error: nil)
 
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+        }, failureCompletionHandler: { error in
+            
+            completionHandler?(success: false, error: error)
+            
+        }, associatedObject: enHueco.appUser)
     }
     
     ///Reports to the server a deleted evet
-    func reportEventDeleted(event: Event)
+    func reportEventDeleted(event: Event, completionHandler: BasicCompletionHandler?)
     {
         guard let ID = event.ID else { /* Throw error ? */ return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.setValue(enHueco.appUser.username, forHTTPHeaderField: EHParameters.UserID)
-        request.setValue(enHueco.appUser.token, forHTTPHeaderField: EHParameters.Token)
         request.HTTPMethod = "DELETE"
 
-        sendAsyncRequest(request, withJSONParams: nil, onSuccess: { (JSONResponse) -> () in
+        sendAsyncRequest(request, withJSONParams: nil, successCompletionHandler: { (JSONResponse) -> () in
             
             print("Reported event deleted")
+            completionHandler?(success: true, error: nil)
             
-        }, onFailure: nil, associatedObject: enHueco.appUser)
+        }, failureCompletionHandler: { error in
+                
+            completionHandler?(success: false, error: error)
+                
+        }, associatedObject: enHueco.appUser)
     }    
 }
 

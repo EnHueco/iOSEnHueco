@@ -25,7 +25,7 @@ class AddFriendViewController: UIViewController
         navigationController?.navigationBar.translucent = true
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "dismissViewController:")
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(AddFriendViewController.dismissViewController(_:)))
         doneItem.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = doneItem
     }
