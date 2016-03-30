@@ -169,6 +169,7 @@ class FriendsViewController: UIViewController, ServerPoller
     func startPolling()
     {
         requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(FriendsViewController.pollFromServer), userInfo: nil, repeats: true)
+        requestTimer.fire()
     }
     
     func pollFromServer()
