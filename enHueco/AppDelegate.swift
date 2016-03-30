@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     var mainNavigationController: UINavigationController!
     
     var window: UIWindow?
+    
+    /// If we are currently logging out
+    var loggingOut = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {

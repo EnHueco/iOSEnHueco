@@ -65,6 +65,7 @@ import UIKit
         else
         {
             AccountManager.sharedManager.logOut()
+            (UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut = false
         }
     }
 

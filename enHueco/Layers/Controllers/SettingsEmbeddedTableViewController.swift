@@ -144,7 +144,11 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
          we did the actual logout procedure here*/
 
         dispatch_async(dispatch_get_main_queue()) {
-            (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.loggingOut = true
+            appDelegate.mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

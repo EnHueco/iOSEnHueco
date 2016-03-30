@@ -51,6 +51,8 @@ class ProfileViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
+        guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
         AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
