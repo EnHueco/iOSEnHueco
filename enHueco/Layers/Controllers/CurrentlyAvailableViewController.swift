@@ -10,7 +10,7 @@ import UIKit
 import SWTableViewCell
 import SDWebImage
 
-class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate, UISearchBarDelegate
+class CurrentlyAvailableViewController: UIViewController
 {
     @IBOutlet weak var tableView: UITableView!
     
@@ -111,6 +111,11 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         }
         
         FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
+
+            self.updateFreeTimePeriodDataAndReloadTableView()
+        }
+        
+        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { (success, error) in
             
             self.updateFreeTimePeriodDataAndReloadTableView()
         }
@@ -148,10 +153,7 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
                     return
                 }
                 
-                UIView.animateWithDuration(0.2) {
-                    
-                    self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
-                }
+                self.updateFreeTimePeriodDataAndReloadTableView()
             })
         }
 
@@ -194,17 +196,15 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
-            
-            UIView.animateWithDuration(0.2) {
-                
-                self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
-            }
+
+            self.updateFreeTimePeriodDataAndReloadTableView()
         }
     }
     
     func imAvailableButtonPressed(sender: UIButton)
     {
         let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
+        instantFreeTimeViewController.delegate = self
         instantFreeTimeViewController.showInViewController(navigationController!)
     }
     
@@ -222,8 +222,13 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
 
     func updateFreeTimePeriodDataAndReloadTableView()
     {
-        imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1) : UIColor.whiteColor()
-        
+        UIView.animateWithDuration(0.2) {
+            
+            let activeColor = UIColor(red: 220/255.0, green: 170/255.0, blue: 10/255.0, alpha: 1)
+            self.imInvisibleBarItem.customView!.tintColor = enHueco.appUser.isInvisible ? activeColor : UIColor.whiteColor()
+            self.imAvailableBarItem.customView!.tintColor = enHueco.appUser.schedule.instantFreeTimePeriod != nil ? activeColor : UIColor.whiteColor()
+        }
+
         dispatch_async(dispatch_get_main_queue())
         {
             self.resetDataArrays()
@@ -247,6 +252,206 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
+    func rightButtons() -> NSArray
+    {
+        let rightUtilityButtons = NSMutableArray()
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "WhatsApp")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localizedUsingGeneralFile())
+
+        return rightUtilityButtons
+    }
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
+
+extension CurrentlyAvailableViewController: UITableViewDataSource
+{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 2
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if section == 0
+        {
+            return filteredFriendsAndFreeTimePeriods.count
+        }
+        else if section == 1
+        {
+            return filteredSoonFreefriendsAndFreeTimePeriods.count
+        }
+        else
+        {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
+        
+        cell.delegate = self
+        
+        cell.freeTimeStartOrEndHourIconImageView.tintColor = cell.freeTimeStartOrEndHourLabel.textColor
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        
+        var (friend, freeTime): (User, Event)
+        
+        if indexPath.section == 0
+        {
+            (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
+            
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        else
+        {
+            (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
+            
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        
+        if friend === enHueco.appUser
+        {
+            cell.setInstantFreeTimeIconVisibility(visible: true)
+            
+            let array = NSMutableArray()
+            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete".localizedUsingGeneralFile())
+            
+            cell.rightUtilityButtons = array as [AnyObject]
+        }
+        else
+        {
+            cell.setInstantFreeTimeIconVisibility(visible: false)
+            cell.rightUtilityButtons = rightButtons() as [AnyObject]
+            
+        }
+        
+        cell.friendUsername = friend.username
+        cell.freeNameAndLocationLabel.text = freeTime.name ?? "FreeTime".localizedUsingGeneralFile()
+        
+        let url = friend.imageURL
+        
+        cell.friendNameLabel.text = friend.name
+        
+        cell.friendImageImageView.clipsToBounds = true
+        cell.friendImageImageView.layer.cornerRadius = 61 / 2
+        cell.friendImageImageView.image = nil
+        cell.friendImageImageView.contentMode = .ScaleAspectFill
+        
+        cell.instantFreeTimeIcon.image = cell.instantFreeTimeIcon.image?.imageWithRenderingMode(.AlwaysTemplate)
+        cell.instantFreeTimeIcon.tintColor = UIColor.grayColor()
+        
+        SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil,
+                                                 completed: {(image, error, cacheType, bool, url) -> Void in
+                                                    if error == nil
+                                                    {
+                                                        if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk
+                                                        {
+                                                            cell.friendImageImageView.alpha = 0
+                                                            cell.friendImageImageView.image = image
+                                                            UIView.animateWithDuration(0.5, animations: {
+                                                                () -> Void in
+                                                                cell.friendImageImageView.alpha = 1
+                                                                }, completion: nil)
+                                                        }
+                                                        else if cacheType == SDImageCacheType.Memory
+                                                        {
+                                                            cell.friendImageImageView.image = image
+                                                        }
+                                                    }
+        })
+        
+        return cell
+    }
+}
+
+extension CurrentlyAvailableViewController: UITableViewDelegate
+{
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let friend: User
+        
+        if indexPath.section == 0
+        {
+            friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
+        }
+        else
+        {
+            friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
+        }
+        
+        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
+        friendDetailViewController.friend = friend
+        
+        navigationController!.pushViewController(friendDetailViewController, animated: true)
+    }
+}
+
+extension CurrentlyAvailableViewController: SWTableViewCellDelegate
+{
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
+    {
+        if let cell = cell as? AvailableFriendCell
+        {
+            let indexPath = tableView.indexPathForCell(cell)!
+            let friend: User
+            
+            if indexPath.section == 0
+            {
+                friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
+            }
+            else
+            {
+                friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
+            }
+            
+            if friend === enHueco.appUser
+            {
+                EHProgressHUD.showSpinnerInView(view)
+                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
+                    
+                    EHProgressHUD.dismissSpinnerForView(self.view)
+                    
+                    guard success && error == nil else {
+                        
+                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                        return
+                    }
+                    
+                    self.updateFreeTimePeriodDataAndReloadTableView()
+                })
+            }
+            else if index == 0
+            {
+                enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
+                    (abid) -> () in
+                    enHueco.whatsappMessageTo(abid)
+                })
+            }
+            else if index == 1
+            {
+                enHueco.callFriend(friend.phoneNumber)
+            }
+        }
+        cell.hideUtilityButtonsAnimated(true)
+    }
+    
+    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool
+    {
+        return true
+    }
+}
+
+extension CurrentlyAvailableViewController: UISearchBarDelegate
+{
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
         tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
@@ -272,195 +477,12 @@ class CurrentlyAvailableViewController: UIViewController, UITableViewDelegate, U
             self.tableView.reloadData()
         }
     }
+}
 
-    // MARK: TableView Delegate
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+extension CurrentlyAvailableViewController: InstantFreeTimeViewControllerDelegate
+{
+    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(controller: InstantFreeTimeViewController)
     {
-        if section == 0
-        {
-            return filteredFriendsAndFreeTimePeriods.count
-        }
-        else if section == 1
-        {
-            return filteredSoonFreefriendsAndFreeTimePeriods.count
-        }
-        else
-        {
-            return 0
-        }
-    }
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
-    {
-        return 2
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
-
-        cell.delegate = self
-        
-        cell.freeTimeStartOrEndHourIconImageView.tintColor = cell.freeTimeStartOrEndHourLabel.textColor
-
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "hh:mm a"
-
-        var (friend, freeTime): (User, Event)
-
-        if indexPath.section == 0
-        {
-            (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
-
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInDate(NSDate()))
-            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
-        }
-        else
-        {
-            (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
-       
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInDate(NSDate()))
-            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
-        }
-        
-        if friend === enHueco.appUser
-        {
-            cell.setInstantFreeTimeIconVisibility(visible: true)
-            
-            let array = NSMutableArray()
-            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete".localizedUsingGeneralFile())
-            
-            cell.rightUtilityButtons = array as [AnyObject]
-        }
-        else
-        {
-            cell.setInstantFreeTimeIconVisibility(visible: false)
-            cell.rightUtilityButtons = rightButtons() as [AnyObject]
-
-        }
-        
-        cell.friendUsername = friend.username
-        cell.freeNameAndLocationLabel.text = freeTime.name ?? "FreeTime".localizedUsingGeneralFile()
-        
-        let url = friend.imageURL
-
-        cell.friendNameLabel.text = friend.name
-        
-        cell.friendImageImageView.clipsToBounds = true
-        cell.friendImageImageView.layer.cornerRadius = 61 / 2
-        cell.friendImageImageView.image = nil
-        cell.friendImageImageView.contentMode = .ScaleAspectFill
-        
-        cell.instantFreeTimeIcon.image = cell.instantFreeTimeIcon.image?.imageWithRenderingMode(.AlwaysTemplate)
-        cell.instantFreeTimeIcon.tintColor = UIColor.grayColor()
-
-        SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil,
-                completed: {(image, error, cacheType, bool, url) -> Void in
-                    if error == nil
-                    {
-                        if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk
-                        {
-                            cell.friendImageImageView.alpha = 0
-                            cell.friendImageImageView.image = image
-                            UIView.animateWithDuration(0.5, animations: {
-                                () -> Void in
-                                cell.friendImageImageView.alpha = 1
-                            }, completion: nil)
-                        }
-                        else if cacheType == SDImageCacheType.Memory
-                        {
-                            cell.friendImageImageView.image = image
-                        }
-                    }
-        })
-
-        return cell
-    }
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        let friend: User
-        
-        if indexPath.section == 0
-        {
-            friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
-        }
-        else
-        {
-            friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
-        }
-        
-        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
-        friendDetailViewController.friend = friend
-
-        navigationController!.pushViewController(friendDetailViewController, animated: true)
-    }
-
-
-    // MARK: SW Table View
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int)
-    {
-        if let cell = cell as? AvailableFriendCell
-        {
-            let indexPath = tableView.indexPathForCell(cell)!
-            let friend: User
-            
-            if indexPath.section == 0
-            {
-                friend = filteredFriendsAndFreeTimePeriods[indexPath.row].friend
-            }
-            else
-            {
-                friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
-            }
-            
-            if friend === enHueco.appUser
-            {
-                EHProgressHUD.showSpinnerInView(view)
-                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
-                    
-                    EHProgressHUD.dismissSpinnerForView(self.view)
-
-                    guard success && error == nil else {
-                        
-                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                        return
-                    }
-
-                })
-            }
-            else if index == 0
-            {
-                enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
-                    (abid) -> () in
-                    enHueco.whatsappMessageTo(abid)
-                })
-            }
-            else if index == 1
-            {
-                enHueco.callFriend(friend.phoneNumber)
-            }
-        }
-        cell.hideUtilityButtonsAnimated(true)
-    }
-
-    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool
-    {
-        return true
-    }
-
-    func rightButtons() -> NSArray
-    {
-        let rightUtilityButtons = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "WhatsApp")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localizedUsingGeneralFile())
-
-        return rightUtilityButtons
-    }
-    
-    deinit
-    {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.updateFreeTimePeriodDataAndReloadTableView()
     }
 }

@@ -81,7 +81,9 @@ class CurrentStateManager
     
     /**
      Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.
-     Network operation must succeed immediately or else the newFreeTimePeriod is discarded
+     Network operation must succeed immediately or else the newFreeTimePeriod is discarded.
+     
+     Updates the appUser
      */
     func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: BasicCompletionHandler )
     {
@@ -102,8 +104,11 @@ class CurrentStateManager
             enHueco.appUser.setInivisibilityEndDate(nil)
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
         }, failureCompletionHandler: { (compoundError) -> () in
@@ -127,8 +132,11 @@ class CurrentStateManager
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
                         
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
         }, failureCompletionHandler: {(compoundError) -> () in

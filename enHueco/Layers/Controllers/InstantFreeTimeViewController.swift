@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol InstantFreeTimeViewControllerDelegate: class
+{
+    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(controller: InstantFreeTimeViewController)
+}
+
 class InstantFreeTimeViewController: UIViewController
 {
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -22,6 +27,8 @@ class InstantFreeTimeViewController: UIViewController
     
     var originalFrame: CGRect!
     var backgroundView: UIView!
+    
+    weak var delegate: InstantFreeTimeViewControllerDelegate?
     
     override func viewDidLoad()
     {
@@ -112,6 +119,7 @@ class InstantFreeTimeViewController: UIViewController
                 return
             }
             
+            self.delegate?.instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(self)
             self.dismiss()
         }
     }

@@ -36,17 +36,20 @@ class AppUserInformationManager
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             
-            guard appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!) else
-            {
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler?(success: true, error: nil)
-                }
-                return
-            }
+            // Doesn't really work for now
+            
+//            guard appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!) else
+//            {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    completionHandler?(success: true, error: nil)
+//                }
+//                return
+//            }
+            
+            appUser.schedule = Schedule()
             
             appUser.updateUserWithJSONDictionary(JSONDictionary)
             
-            appUser.schedule = Schedule()
             let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
             
             for eventJSON in eventSet

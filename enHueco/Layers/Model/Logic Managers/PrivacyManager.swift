@@ -88,7 +88,7 @@ class PrivacyManager
         })
     }
     
-    /// Makes the user invisible to everyone else
+    /// Makes the user invisible to everyone else. Updates the appUser
     func turnInvisibleForTimeInterval(timeInterval: NSTimeInterval, completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
@@ -105,9 +105,13 @@ class PrivacyManager
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.setInivisibilityEndDate(endDate)
+            enHueco.appUser.schedule.instantFreeTimePeriod = nil
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
         }, failureCompletionHandler: {(compoundError) -> () in
@@ -118,7 +122,7 @@ class PrivacyManager
         })
     }
     
-    /// Makes the user visible to everyone else
+    /// Makes the user visible to everyone else. Updates the appUser
     func turnVisibleWithCompletionHandler(completionHandler: BasicCompletionHandler)
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
@@ -136,8 +140,11 @@ class PrivacyManager
             
             enHueco.appUser.setInivisibilityEndDate(endDate)
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: true, error: nil)
+                }
             }
             
         }, failureCompletionHandler: {(compoundError) -> () in
