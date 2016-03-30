@@ -10,6 +10,8 @@ import Foundation
 
 public class GlobalConstants
 {
+    static let delayForBackendRequest = 15.0
+    
     struct Schedule
     {
         static let hours : Array<String> =

@@ -10,7 +10,7 @@ import UIKit
 import LocalAuthentication
 import ChameleonFramework
 
-class ProfileViewController: UIViewController
+class ProfileViewController: UIViewController, ServerPoller
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -21,6 +21,9 @@ class ProfileViewController: UIViewController
     @IBOutlet weak var backgroundImageView: UIImageView!
 
     var imageIndicator: UIActivityIndicatorView? = nil
+    
+    var requestTimer = NSTimer()
+    var pollingInterval = 15.0
 
     override func viewDidLoad()
     {
@@ -33,6 +36,7 @@ class ProfileViewController: UIViewController
         backgroundImageView.alpha = 0
         imageImageView.alpha = 0
     }
+
 
     override func viewDidLayoutSubviews()
     {
@@ -54,16 +58,12 @@ class ProfileViewController: UIViewController
         guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
-        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
-            
-            self.assignImages()
-            
-            if error != nil
-            {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-            }
-        }
+        
+        startPolling()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        stopPolling()
     }
     
     func updateButtonColors()
@@ -177,6 +177,24 @@ class ProfileViewController: UIViewController
                 self.stopAnimatingImageLoadingIndicator()
                 
                 self.updateButtonColors()
+            }
+        }
+    }
+    
+    func startPolling()
+    {
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(ProfileViewController.pollFromServer), userInfo: nil, repeats: true)
+    }
+    
+    func pollFromServer()
+    {
+        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
+            
+            self.assignImages()
+            
+            if error != nil
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
             }
         }
     }

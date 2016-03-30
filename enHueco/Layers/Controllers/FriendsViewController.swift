@@ -11,17 +11,19 @@ import SWTableViewCell
 import SDWebImage
 import RKNotificationHub
 
-class FriendsViewController: UIViewController
+class FriendsViewController: UIViewController, ServerPoller
 {
     @IBOutlet weak var tableView: UITableView!
 
     var emptyLabel: UILabel!
     let searchBar = UISearchBar()
     
+    var requestTimer = NSTimer()
+    var pollingInterval = 15.0
+    
+    
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)
     private(set) var friendRequestsNotificationHub: RKNotificationHub!
-
-    var lastUpdatesFetchDate = NSDate()
 
     //For safety and performance (because friends is originally a dictionary)
     var filteredFriends = Array(enHueco.appUser.friends.values)
@@ -112,6 +114,11 @@ class FriendsViewController: UIViewController
         }
 
         reloadFriendsAndTableView()
+        startPolling()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        stopPolling()
     }
     
     override func viewDidAppear(animated: Bool)
@@ -120,30 +127,9 @@ class FriendsViewController: UIViewController
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
-
-        let timeSinceLastUpdatesFetch = NSDate().timeIntervalSinceDate(lastUpdatesFetchDate)
-
-        if timeSinceLastUpdatesFetch > 3 //3 seconds
-        {
-            lastUpdatesFetchDate = NSDate()
-            fetchUpdates()
-        }
         
         friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
         friendRequestsNotificationHub.pop()
-    }
-
-    func fetchUpdates()
-    {
-        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
-            self.reloadFriendsAndTableView()
-        }
-        
-        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { success, error in
-            
-            self.friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
-            self.friendRequestsNotificationHub.pop()
-        }
     }
     
     func friendRequestsButtonPressed(sender: UIButton)
@@ -177,7 +163,30 @@ class FriendsViewController: UIViewController
 
         }, completion: nil)
     }
+    
+    // Server Polling
+    
+    func startPolling()
+    {
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(FriendsViewController.pollFromServer), userInfo: nil, repeats: true)
+    }
+    
+    func pollFromServer()
+    {
+        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
+            self.reloadFriendsAndTableView()
+        }
+        
+        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { success, error in
+            
+            self.friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+            self.friendRequestsNotificationHub.pop()
+        }
+    }
+
+    
 }
+
 
 extension FriendsViewController: UITableViewDataSource
 {

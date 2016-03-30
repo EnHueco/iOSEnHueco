@@ -10,7 +10,7 @@ import UIKit
 import SWTableViewCell
 import SDWebImage
 
-class CurrentlyAvailableViewController: UIViewController
+class CurrentlyAvailableViewController: UIViewController, ServerPoller
 {
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,6 +25,9 @@ class CurrentlyAvailableViewController: UIViewController
     var imAvailableBarItem: UIBarButtonItem!
     
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
+    
+    var requestTimer = NSTimer()
+    var pollingInterval = 15.0
 
     override func viewDidLoad()
     {
@@ -80,6 +83,10 @@ class CurrentlyAvailableViewController: UIViewController
         }
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        stopPolling()
+    }
+    
     override func viewWillAppear(animated: Bool)
     {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -110,8 +117,17 @@ class CurrentlyAvailableViewController: UIViewController
             self.updateFreeTimePeriodDataAndReloadTableView()
         }
         
+        startPolling()
+    }
+    
+    func startPolling() {
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(CurrentlyAvailableViewController.pollFromServer), userInfo: nil, repeats: true)
+    }
+    
+    func pollFromServer()
+    {
         FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
-
+            
             self.updateFreeTimePeriodDataAndReloadTableView()
         }
         
