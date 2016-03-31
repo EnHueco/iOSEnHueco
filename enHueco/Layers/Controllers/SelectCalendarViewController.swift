@@ -127,13 +127,15 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
         }
         else
         {
-            if EventsAndSchedulesManager.sharedManager.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1)
-            {
-                navigationController!.popViewControllerAnimated(true)
-            }
-            else
-            {
-                UIAlertView(title: "Error", message: "Lo sentimos, hubo un error importando el calendario", delegate: nil, cancelButtonTitle: "Que raro").show()
+            EventsAndSchedulesManager.sharedManager.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1) { success, error in
+                
+                guard success && error == nil else
+                {
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    return
+                }
+                
+                self.navigationController!.popViewControllerAnimated(true)
             }
         }
     }

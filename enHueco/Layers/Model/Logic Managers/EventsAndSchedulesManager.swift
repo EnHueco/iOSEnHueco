@@ -70,7 +70,7 @@ class EventsAndSchedulesManager
      Imports an schedule of classes from a device's calendar.
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
      */
-    func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses:Bool) -> Bool
+    func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses:Bool, completionHandler: BasicCompletionHandler)
     {
         let today = NSDate()
         let eventStore = EKEventStore()
@@ -104,29 +104,30 @@ class EventsAndSchedulesManager
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        for event in fetchedEvents
-        {
-            let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: event.startDate)
+        let classEvents = fetchedEvents.map { fetchedEvent -> Event in
             
             let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
             
-            let startDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.startDate)
-            let endDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: event.endDate)
+            let startDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: fetchedEvent.startDate)
+            let endDateComponents = globalCalendar.components(weekdayHourMinute, fromDate: fetchedEvent.endDate)
             
-            let weekDayDaySchedule = enHueco.appUser.schedule.weekDays[localWeekDayNumber]
-            let aClass = Event(type:.Class, name:event.title, startHour: startDateComponents, endHour: endDateComponents, location: event.location)
-            
-            if weekDayDaySchedule.addEvent(aClass)
-            {
-                SynchronizationManager.sharedManager.reportNewEvent(aClass, completionHandler: nil)
-            }
+            return Event(type:.Class, name:fetchedEvent.title, startHour: startDateComponents, endHour: endDateComponents, location: fetchedEvent.location)
         }
         
-        if generateFreeTimePeriodsBetweenClasses
-        {
-            //TODO: Calculate Gaps and add them
-        }
-        return true
+        EventsAndSchedulesManager.sharedManager.addEvents(classEvents) { (success, error) in
+            
+            guard success && error == nil else {
+                completionHandler(success: success, error: error)
+                return
+            }
+            
+            if generateFreeTimePeriodsBetweenClasses
+            {
+                //TODO: Calculate Gaps and add them
+            }
+            
+            completionHandler(success: true, error: nil)
+        }        
     }
     
     /// Adds the events given events to the AppUser's schedule if and only if the request is successful.
@@ -159,16 +160,21 @@ class EventsAndSchedulesManager
     /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful.
      The events given **must** be a reference to existing events.
     */
-    func deleteEvents(events: [Event], completionHandler: BasicCompletionHandler)
+    func deleteEvents(existingEvents: [Event], completionHandler: BasicCompletionHandler)
     {
-        guard events.reduce(true, combine: { $0 && $1.ID != nil }) else { return }
+        guard existingEvents.reduce(true, combine: { $0 && $1.ID != nil }) else { return }
         
-        let params = events.map { $0.ID }
+        let params = existingEvents.map { $0.ID }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
         request.HTTPMethod = "DELETE"
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
+            
+            for event in existingEvents
+            {
+                event.daySchedule.removeEvent(event)
+            }
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -184,26 +190,29 @@ class EventsAndSchedulesManager
     }
     
     /** Edits the given existing event from the AppUser's schedule if and only if the request is successful.
-     The event given **must** be a reference to an existing event.
+     
+     - parameter existingEvent:     Reference to existing event
+     - parameter dummyEvent:        A new event with the values that should be replaced in the existing event.
     */
-    func editEvent(event: Event, completionHandler: BasicCompletionHandler)
+    func editEvent(existingEvent: Event, withValuesOfDummyEvent dummyEvent: Event, completionHandler: BasicCompletionHandler)
     {
-        guard let ID = event.ID else { return }
+        guard let ID = existingEvent.ID else { return }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
         request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: event.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: existingEvent.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
-            event.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+            existingEvent.replaceValuesWithThoseOfTheEvent(dummyEvent)
+            existingEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             
             completionHandler(success: true, error: nil)
             
         }, failureCompletionHandler: { error in
                 
             completionHandler(success: false, error: error)
-                
         })
     }
 }

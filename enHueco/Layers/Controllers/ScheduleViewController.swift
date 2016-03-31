@@ -74,32 +74,7 @@ class ScheduleViewController: UIViewController
     ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
     func addEventsWithUndoCapability(eventsToAdd: [Event])
     {
-        for event in eventsToAdd
-        {
-            event.daySchedule.addEvent(event)
-            
-            SynchronizationManager.sharedManager.reportNewEvent(event) { success, error in
-                
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-            }
-        }
-        
-        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: eventsToAdd)
-        
-        if undoManager != nil && !undoManager!.undoing
-        {
-            undoManager?.setActionName("AddEvents".localizedUsingGeneralFile())
-        }
-        
-        scheduleCalendarViewController.reloadData()
-    }
-    
-    ///Edits the event, giving the ability to undo and redo the actions.
-    func editEventWithUndoCapability(eventToEdit: Event, withValuesOfEvent newEvent: Event)
-    {
-        let oldEvent = eventToEdit.copy() as! Event
-        
-        SynchronizationManager.sharedManager.reportEventEdited(eventToEdit) { success, error in
+        EventsAndSchedulesManager.sharedManager.addEvents(eventsToAdd) { (success, error) in
             
             guard success && error == nil else
             {
@@ -107,7 +82,29 @@ class ScheduleViewController: UIViewController
                 return
             }
             
-            eventToEdit.replaceValuesWithThoseOfTheEvent(newEvent)
+            self.undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: eventsToAdd)
+            
+            if self.undoManager != nil && !self.undoManager!.undoing
+            {
+                self.undoManager?.setActionName("AddEvents".localizedUsingGeneralFile())
+            }
+            
+            self.scheduleCalendarViewController.reloadData()
+        }
+    }
+    
+    ///Edits the event, giving the ability to undo and redo the actions.
+    func editEventWithUndoCapability(eventToEdit: Event, withValuesOfEvent newEvent: Event)
+    {
+        let oldEvent = eventToEdit.copy() as! Event
+        
+        EventsAndSchedulesManager.sharedManager.editEvent(eventToEdit, withValuesOfDummyEvent: newEvent) { success, error in
+            
+            guard success && error == nil else
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
+            }
             
             self.undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withValuesOfEvent: oldEvent)
             
@@ -115,31 +112,31 @@ class ScheduleViewController: UIViewController
             {
                 self.undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
             }
+            
+            self.scheduleCalendarViewController.reloadData()
         }
-        
-        scheduleCalendarViewController.reloadData()
     }
     
     ///Deletes the events from their assigned daySchedules, giving the ability to undo and redo the actions.
     func deleteEventsWithUndoCapability(events: [Event])
     {
-        for event in events
-        {
-            event.daySchedule.removeEvent(event)
-            SynchronizationManager.sharedManager.reportEventDeleted(event) { success, error in
-                
+        EventsAndSchedulesManager.sharedManager.deleteEvents(events) { (success, error) in
+            
+            guard success && error == nil else
+            {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                return
             }
+
+            self.undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.addEventsWithUndoCapability(_:)), object: events)
+            
+            if self.undoManager != nil && !self.undoManager!.undoing
+            {
+                self.undoManager?.setActionName("DeleteEvents".localizedUsingGeneralFile())
+            }
+            
+            self.scheduleCalendarViewController.reloadData()
         }
-        
-        undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.addEventsWithUndoCapability(_:)), object: events)
-        
-        if undoManager != nil && !undoManager!.undoing
-        {
-            undoManager?.setActionName("DeleteEvents".localizedUsingGeneralFile())
-        }
-        
-        scheduleCalendarViewController.reloadData()
     }
     
     @IBAction func importScheduleButtonPressed(sender: AnyObject)

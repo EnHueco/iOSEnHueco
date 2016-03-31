@@ -71,7 +71,6 @@
 		F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */; };
 		F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */; };
 		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
-		F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */; };
 		F183F83D1C7FF90900390CF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F183F83C1C7FF90900390CF7 /* main.m */; };
 		F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */; };
 		F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8421C80781400390CF7 /* PersistenceManager.swift */; };
@@ -235,7 +234,6 @@
 		F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacySettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsPrivacySettingsViewController.swift; sourceTree = "<group>"; };
 		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
-		F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SynchronizationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F83C1C7FF90900390CF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppUserInformationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8421C80781400390CF7 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PersistenceManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -647,7 +645,6 @@
 				F183F8421C80781400390CF7 /* PersistenceManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
-				F1827F6F1BC35E08002ECB64 /* SynchronizationManager.swift */,
 				F183F8581C837FC700390CF7 /* Generic Managers */,
 			);
 			path = "Logic Managers";
@@ -961,7 +958,6 @@
 				F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
 				F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */,
-				F1827F701BC35E08002ECB64 /* SynchronizationManager.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F16E7D131C13877A009A3C30 /* PopOverMenuTableViewCell.swift in Sources */,
 				F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */,
