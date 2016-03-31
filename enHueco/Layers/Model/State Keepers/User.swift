@@ -116,6 +116,8 @@ class User: EHSynchronizable
         {
             schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
         }
+        
+        
     }
     
     /** The ending date of the user invisibility.

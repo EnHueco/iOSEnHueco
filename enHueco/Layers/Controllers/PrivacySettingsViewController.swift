@@ -28,8 +28,13 @@ class PrivacySettingsViewController: UITableViewController
         
         title = "Privacidad"
         clearsSelectionOnViewWillAppear = true
+    }
+    override func viewWillAppear(animated: Bool) {
         
-        shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
+        //shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
+        shareEventNamesSwitch.on = enHueco.appUser.sharesEventsNames()
+        shareEventLocationsSwitch.on = enHueco.appUser.sharesEventsLocations()
+        
     }
     
     @IBAction func shareLocationWithBestFriendsToggleChanged(sender: UISwitch)
@@ -47,35 +52,25 @@ class PrivacySettingsViewController: UITableViewController
         tableView.beginUpdates()
         tableView.endUpdates()
         
+        EHProgressHUD.showSpinnerInView(view)
+        
+        let completionHandler:BasicCompletionHandler = {success,error in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
+            if !success
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                sender.on = !sender.on
+            }
+        }
+        
         if sender.on
         {
-            EHProgressHUD.showSpinnerInView(view)
-            
-            PrivacyManager.sharedManager.turnOffSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
-                
-                EHProgressHUD.dismissSpinnerForView(self.view)
-                
-                if !success
-                {
-                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                    sender.on = !sender.on
-                }
-            })
+            PrivacyManager.sharedManager.turnOnSetting(.ShowEventNames, withCompletionHandler: completionHandler)
         }
         else
         {
-            EHProgressHUD.showSpinnerInView(view)
-
-            PrivacyManager.sharedManager.turnOnSetting(.ShowEventNames, withCompletionHandler: { (success, error) -> Void in
-                
-                EHProgressHUD.dismissSpinnerForView(self.view)
-
-                if !success
-                {
-                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                    sender.on = !sender.on
-                }
-            })
+            PrivacyManager.sharedManager.turnOffSetting(.ShowEventNames, withCompletionHandler: completionHandler)
         }
     }
     
@@ -83,6 +78,26 @@ class PrivacySettingsViewController: UITableViewController
     {
         tableView.beginUpdates()
         tableView.endUpdates()
+        
+        EHProgressHUD.showSpinnerInView(view)
+        
+        let completionHandler:BasicCompletionHandler = {success,error in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
+            if !success
+            {
+                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                sender.on = !sender.on
+            }
+        }
+        if sender.on
+        {
+            PrivacyManager.sharedManager.turnOnSetting(.ShowEventLocation, withCompletionHandler: completionHandler)
+        }
+        else
+        {
+            PrivacyManager.sharedManager.turnOffSetting(.ShowEventLocation, withCompletionHandler: completionHandler)
+        }
     }
     
     

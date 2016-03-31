@@ -111,9 +111,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             //Ask iOS to kindly try to wake up the app frequently during free time periods.
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(ProximityUpdatesManager.backgroundFetchIntervalDuringFreeTimePeriods)
             
-            ProximityUpdatesManager.sharedManager.reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ (status) -> () in
+            /* ProximityUpdatesManager.sharedManager.reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler({ (status) -> () in
                 
             })
+            */
+        
         }
         else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
