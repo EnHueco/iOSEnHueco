@@ -458,7 +458,6 @@
 				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
 				F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */,
 				F16E7D101C135757009A3C30 /* PopOverMenuViewController.swift */,
-				F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -534,6 +533,7 @@
 				F1179E6D1B9BB3F100B04400 /* CurrentlyAvailableViewController.swift */,
 				F1179E691B9BB10C00B04400 /* FriendsViewController.swift */,
 				F1179E6F1B9BB40800B04400 /* ProfileViewController.swift */,
+				F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */,
 			);
 			name = "Main Screen View Controllers";
 			sourceTree = "<group>";

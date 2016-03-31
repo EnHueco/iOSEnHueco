@@ -35,6 +35,7 @@ class InstantFreeTimeViewController: UIViewController
         super.viewDidLoad()
         
         endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
+        endTimeDatePicker.minimumDate = NSDate().dateByAddingTimeInterval(60)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)

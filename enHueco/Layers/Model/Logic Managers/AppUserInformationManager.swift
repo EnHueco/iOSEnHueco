@@ -59,11 +59,11 @@ class AppUserInformationManager
             }
             
             try? PersistenceManager.sharedManager.persistData()
-            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
+            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(completionHandler)
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler?(success: true, error: nil)
-            }
+//            dispatch_async(dispatch_get_main_queue()) {
+//                completionHandler?(success: true, error: nil)
+//            }
             
         }) { (error) -> () in
             

@@ -123,6 +123,7 @@ class ProfileViewController: UIViewController, ServerPoller
                 {
                     image = UIImage(named: "stripes")
                     
+                    /*
                     AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler { success, error in 
                         
                         if success
@@ -130,6 +131,7 @@ class ProfileViewController: UIViewController, ServerPoller
                             self.assignImages()
                         }
                     }
+                    */
                 }
                 
                 self.imageImageView.hidden = false
@@ -137,7 +139,7 @@ class ProfileViewController: UIViewController, ServerPoller
                 
                 if self.imageImageView.image != nil
                 {
-                    UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                    UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                         
                         self.imageImageView.image = image
                     }, completion: nil)

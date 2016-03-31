@@ -141,8 +141,9 @@ extension ImportProfileImageViewController: UIImagePickerControllerDelegate
     {
         let imageCropVC = RSKImageCropViewController(image: image)
         imageCropVC.delegate = self
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        self.presentViewController(imageCropVC, animated: true, completion: nil)
+        picker.dismissViewControllerAnimated(true) { 
+            self.presentViewController(imageCropVC, animated: true, completion: nil)
+        }
     }
 }
 
@@ -150,10 +151,8 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate
 {
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect)
     {
-        EHProgressHUD.showSpinnerInView(view)
+        EHProgressHUD.showSpinnerInView(controller.view)
         AppUserInformationManager.sharedManager.pushProfilePicture(croppedImage) { success, error in
-            
-            EHProgressHUD.dismissSpinnerForView(self.view)
             
             guard error == nil else
             {
