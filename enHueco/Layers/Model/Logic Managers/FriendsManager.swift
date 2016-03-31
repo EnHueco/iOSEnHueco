@@ -44,7 +44,8 @@ class FriendsManager
                 if friendExists
                 {
                     let friend = enHueco.appUser.friends[newFriend.username]!
-                    friendOutdated = newFriend.lastUpdatedOn > friend.lastUpdatedOn||newFriend.scheduleLastUpdatedOn > friend.lastUpdatedOn||newFriend.immediateEventLastUpdatedOn > friend.lastUpdatedOn
+                    
+                    friendOutdated = newFriend.lastUpdatedOn > friend.lastUpdatedOn
                 }
                 
                 // if newFriend hasn't been downloaded or is updated
@@ -353,9 +354,11 @@ class FriendsManager
         // Get image
         let imageURL : NSURL? = mainComponents[3].isEmpty ? nil : NSURL(fileURLWithPath: mainComponents[3])
         
-        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: username, lastUpdatedOn: NSDate())
+        let imageThumbnailURL : NSURL? = mainComponents[4].isEmpty ? nil : NSURL(fileURLWithPath: mainComponents[4])
         
-        let events = mainComponents[4].isEmpty ? [String]() : mainComponents[4].componentsSeparatedByString(Characters.multipleElementsCharacter)
+        let friend = User(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, imageThumbnailURL : imageThumbnailURL, ID: username, lastUpdatedOn: NSDate())
+        
+        let events = mainComponents[5].isEmpty ? [String]() : mainComponents[4].componentsSeparatedByString(Characters.multipleElementsCharacter)
         
         for (i, encodedEvent) in events.enumerate()
         {

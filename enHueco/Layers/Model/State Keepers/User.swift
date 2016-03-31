@@ -19,6 +19,7 @@ class User: EHSynchronizable
     var name: String { return "\(firstNames) \(lastNames)" }
     
     var imageURL: NSURL?
+    var imageThumbnailURL: NSURL?
     var phoneNumber: String! = ""
     
     var schedule: Schedule
@@ -59,7 +60,7 @@ class User: EHSynchronizable
         return inivisibilityEndDate != nil && inivisibilityEndDate!.timeIntervalSinceNow > 0
     }
     
-    init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+    init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.username = username
         
@@ -67,6 +68,7 @@ class User: EHSynchronizable
         self.lastNames = lastNames
         self.phoneNumber = phoneNumber
         self.imageURL = imageURL
+        self.imageThumbnailURL = imageThumbnailURL
         
         schedule = Schedule()
         
@@ -79,10 +81,11 @@ class User: EHSynchronizable
         let firstNames = JSONDictionary["firstNames"] as! String
         let lastNames = JSONDictionary["lastNames"] as! String
         let imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
+        let imageThumbnailURL = ((JSONDictionary["image_thumbnail"] == nil || JSONDictionary["image_thumbnail"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["image_thumbnail"]! as! String)).replace("https", withString: "http")))
         let phoneNumber = JSONDictionary["phoneNumber"] as? String
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
-        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, ID:username, lastUpdatedOn: lastUpdatedOn)
+        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID:username, lastUpdatedOn: lastUpdatedOn)
         
         if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
         {
@@ -100,6 +103,7 @@ class User: EHSynchronizable
         self.firstNames = JSONDictionary["firstNames"] as! String
         self.lastNames = JSONDictionary["lastNames"] as! String
         self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
+        self.imageThumbnailURL = ((JSONDictionary["image_thumbnail"] == nil || JSONDictionary["image_thumbnail"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["image_thumbnail"]! as! String)).replace("https", withString: "http")))
         self.phoneNumber = JSONDictionary["phoneNumber"] as? String
         self.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
@@ -259,6 +263,7 @@ class User: EHSynchronizable
         self.lastNames = lastNames
         self.phoneNumber = decoder.decodeObjectForKey("phoneNumber") as? String
         self.imageURL = decoder.decodeObjectForKey("imageURL") as? NSURL
+        self.imageThumbnailURL = decoder.decodeObjectForKey("imageThumbnailURL") as? NSURL
         self.schedule = schedule
         self.lastNotifiedNearbyStatusDate = decoder.decodeObjectForKey("lastNotifiedNearbyStatusDate") as? NSDate
         
@@ -272,6 +277,7 @@ class User: EHSynchronizable
         coder.encodeObject(lastNames, forKey: "lastNames")
         coder.encodeObject(phoneNumber, forKey: "phoneNumber")
         coder.encodeObject(imageURL, forKey: "imageURL")
+        coder.encodeObject(imageThumbnailURL, forKey: "imageThumbnailURL")
         coder.encodeObject(schedule, forKey: "schedule")
         coder.encodeObject(lastNotifiedNearbyStatusDate, forKey: "lastNotifiedNearbyStatusDate")
         

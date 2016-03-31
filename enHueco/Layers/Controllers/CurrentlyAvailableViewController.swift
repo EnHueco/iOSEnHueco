@@ -354,7 +354,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource
         cell.friendUsername = friend.username
         cell.freeNameAndLocationLabel.text = freeTime.name ?? "FreeTime".localizedUsingGeneralFile()
         
-        let url = friend.imageURL
+        let url = friend.imageThumbnailURL
         
         cell.friendNameLabel.text = friend.name
         

@@ -250,7 +250,7 @@ extension FriendsViewController: UITableViewDataSource
         cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         
-        SDWebImageManager().downloadImageWithURL(friend.imageURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: {(image, error, cacheType, bool, url) -> Void in
+        SDWebImageManager().downloadImageWithURL(friend.imageThumbnailURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: {(image, error, cacheType, bool, url) -> Void in
             
             if error == nil
             {

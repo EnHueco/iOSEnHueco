@@ -28,11 +28,11 @@ class AppUser: User
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
         
-    init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+    init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.token = token
         
-        super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
+        super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
     convenience init(JSONDictionary: [String : AnyObject])
@@ -40,7 +40,7 @@ class AppUser: User
         let token = JSONDictionary["value"] as? String
         let user = User(JSONDictionary: JSONDictionary["user"] as! [String : AnyObject])
         
-        self.init(username: user.username, token: token ?? enHueco.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, ID: user.ID!, lastUpdatedOn: user.lastUpdatedOn)
+        self.init(username: user.username, token: token ?? enHueco.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, imageThumbnailURL: user.imageThumbnailURL, ID: user.ID!, lastUpdatedOn: user.lastUpdatedOn)
     }
     
     // MARK: NSCoding
