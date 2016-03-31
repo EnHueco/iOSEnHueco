@@ -19,7 +19,7 @@ class FriendsViewController: UIViewController, ServerPoller
     let searchBar = UISearchBar()
     
     var requestTimer = NSTimer()
-    var pollingInterval = 15.0
+    var pollingInterval = 10.0
     
     
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)

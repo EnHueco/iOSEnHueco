@@ -23,7 +23,7 @@ class ProfileViewController: UIViewController, ServerPoller
     var imageIndicator: UIActivityIndicatorView? = nil
     
     var requestTimer = NSTimer()
-    var pollingInterval = 15.0
+    var pollingInterval = 10.0
 
     override func viewDidLoad()
     {

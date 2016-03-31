@@ -17,6 +17,7 @@ class EHURLS
     static let MeImageSegment = "/me/image/"
     static let AuthSegment = "/auth/"
     static let FriendsSegment = "/friends/"
+    static let FriendsSyncSegment = "/friends/sync/"
     static let OutgoingFriendRequestsSegment = "/requests/sent/", IncomingFriendRequestsSegment = "/requests/received/"
     static let UsersSegment = "/users/"
     static let EventsSegment = "/gaps/"

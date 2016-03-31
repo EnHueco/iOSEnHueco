@@ -21,18 +21,89 @@ class FriendsManager
 
     private init() {}
     
+    
+    func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?)
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSyncSegment)!)
+        request.HTTPMethod = "GET"
+        
+        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (response) -> () in
+            
+            var friendsToUpdate = [[String: AnyObject]]()
+            var allFriendsJSONDict : [String:Bool] = [:]
+            
+            for friendJSON in response as! [[String: AnyObject]]
+            {
+                let newFriend = UserSync(JSONDictionary: friendJSON)
+                allFriendsJSONDict[newFriend.username] = true
+                
+                let friendExists = enHueco.appUser.friends[newFriend.username] != nil
+                var friendOutdated = false
+                
+                // Check if outdated
+                if friendExists
+                {
+                    let friend = enHueco.appUser.friends[newFriend.username]!
+                    friendOutdated = newFriend.lastUpdatedOn > friend.lastUpdatedOn||newFriend.scheduleLastUpdatedOn > friend.lastUpdatedOn||newFriend.immediateEventLastUpdatedOn > friend.lastUpdatedOn
+                }
+                
+                // if newFriend hasn't been downloaded or is updated
+                if !friendExists || friendOutdated
+                {
+                    friendsToUpdate.append(newFriend.toJSONDictionary())
+                }
+            }
+            
+            // Friend deletion
+            
+            var deleted = false
+            for (friendUsername, friend) in enHueco.appUser.friends
+            {
+                if allFriendsJSONDict[friendUsername] == nil
+                {
+                    enHueco.appUser.friends[friendUsername] = nil
+                    deleted = true
+                }
+            }
+            
+            if deleted
+            {
+                try? PersistenceManager.sharedManager.persistData()
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    
+                    completionHandler?(success: true, error: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(FriendsManagerNotification.didReceiveFriendAndScheduleUpdates, object: self, userInfo: nil)
+                }
+            }
+            
+            if friendsToUpdate.count != 0
+            {
+                self._fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler, friendsToRequest: friendsToUpdate)
+            }
+            
+        }) { (error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler?(success: false, error: error)
+            }
+        }
+    }
+    
     /**
      Fetches full friends and schedule information from the server and notifies the result via Notification Center.
      
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendAndScheduleUpdates in case of success
      */
-    func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?)
+    private func _fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?, friendsToRequest : [[String : AnyObject]])
     {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment)!)
-        request.HTTPMethod = "GET"
         
-        ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (response) -> () in
+        
+        request.HTTPMethod = "POST"
+        
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: friendsToRequest, successCompletionHandler: { (response) -> () in
                         
             let currentDate = NSDate()
             
@@ -41,7 +112,12 @@ class FriendsManager
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
             
-            for friendJSON in response as! [[String: AnyObject]]
+            let friendsJSONArray = response as! [[String: AnyObject]]
+            
+            var friendsJSONDict : [String:Bool] = [:]
+            
+            // Add and update friends
+            for friendJSON in friendsJSONArray
             {
                 let newFriend = User(JSONDictionary: friendJSON)
                 
@@ -49,6 +125,7 @@ class FriendsManager
                 
                 for eventJSON in eventsJSON
                 {
+                    // TODO : ADD EVENT PARSING TO EVENTS CLASS
                     let newEvent = Event(JSONDictionary: eventJSON)
                     
                     let startHourWeekDayConversionComponents = NSDateComponents()
@@ -68,7 +145,9 @@ class FriendsManager
                 }
                 
                 enHueco.appUser.friends[newFriend.username] = newFriend
+                friendsJSONDict[newFriend.username] = true
             }
+            
             
             try? PersistenceManager.sharedManager.persistData()
             
@@ -192,7 +271,8 @@ class FriendsManager
         ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
-            self.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
+            let userDataRequest = [UserSync(fromUser: requestFriend).toJSONDictionary()]
+            self._fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil, friendsToRequest: userDataRequest)
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)

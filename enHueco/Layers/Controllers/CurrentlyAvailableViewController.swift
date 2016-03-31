@@ -27,7 +27,7 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
     
     var requestTimer = NSTimer()
-    var pollingInterval = 15.0
+    var pollingInterval = 10.0
 
     override func viewDidLoad()
     {
