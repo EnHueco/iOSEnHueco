@@ -98,7 +98,36 @@ class AppUser: User
             friend.refreshIsNearby()
         }
     }
-        
+    
+    // SETTINGS
+    
+    func sharesEventsNames() -> Bool
+    {
+        return NSUserDefaults.standardUserDefaults().boolForKey("SharesEventsNames")
+    }
+    
+    func setSharesEventsNames(value : Bool)
+    {
+        setUserBoolSetting(value, forKey: "SharesEventsNames")
+    }
+    
+    func sharesEventsLocations() -> Bool
+    {
+        return NSUserDefaults.standardUserDefaults().boolForKey("SharesEventsLocations")
+    }
+    
+    func setSharesEventsLocations(value : Bool)
+    {
+        setUserBoolSetting(value, forKey: "SharesEventsLocations")
+    }
+    
+    func setUserBoolSetting(value : Bool, forKey:String)
+    {
+        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+        standardUserDefaults.setBool(value, forKey: forKey)
+        standardUserDefaults.synchronize()
+    }
+    
     /*
 
     Returns the string encoded representation of the user, to be decoded by "addFriendFromStringEncodedFriendRepresentation:"
@@ -157,6 +186,14 @@ class AppUser: User
         encodedSchedule += Characters.splitCharacter
         
         return encodedSchedule
+    }
+    
+    override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
+    {
+        super.updateUserWithJSONDictionary(JSONDictionary)
+        
+        self.setSharesEventsLocations(JSONDictionary[PrivacySetting.ShowEventLocation.rawValue] as! Bool)
+        self.setSharesEventsNames(JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
     }
 }
 

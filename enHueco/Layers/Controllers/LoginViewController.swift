@@ -142,7 +142,7 @@ import UIKit
 
     func goToMainTabViewController()
     {
-        ProximityUpdatesManager.sharedManager.beginProximityUpdates()
+        //ProximityUpdatesManager.sharedManager.beginProximityUpdates()
         
         let mainTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
         

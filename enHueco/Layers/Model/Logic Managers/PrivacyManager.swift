@@ -38,23 +38,7 @@ class PrivacyManager
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
     func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
-        request.HTTPMethod = "PUT"
-        
-        let parameters = [setting.rawValue : "false"]
-        
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
-            }
-            
-        }, failureCompletionHandler: { (compoundError) -> () in
-                
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: compoundError.error)
-            }
-        })
+        self._turnSetting(setting, value: false, withCompletionHandler: completionHandler)
     }
     
     /**
@@ -69,22 +53,38 @@ class PrivacyManager
      */
     func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
+        self._turnSetting(setting, value: true, for: policy, withCompletionHandler: completionHandler)
+    }
+    
+    
+    private func _turnSetting(setting: PrivacySetting, value: Bool, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
+    {
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.MeSegment)!)
         request.HTTPMethod = "PUT"
         
-        let parameters = [setting.rawValue : "true"]
+        let valueString = value ? "true" : "false"
+        let parameters = [setting.rawValue : valueString]
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
+                switch setting
+                {
+                case PrivacySetting.ShowEventNames:
+                    enHueco.appUser.setSharesEventsNames(value)
+                case PrivacySetting.ShowEventLocation:
+                    enHueco.appUser.setSharesEventsLocations(value)
+                default:
+                    break
+                }
                 completionHandler(success: true, error: nil)
             }
             
-        }, failureCompletionHandler: { (compoundError) -> () in
+            }, failureCompletionHandler: { (compoundError) -> () in
                 
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: compoundError.error)
-            }
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: false, error: compoundError.error)
+                }
         })
     }
     
