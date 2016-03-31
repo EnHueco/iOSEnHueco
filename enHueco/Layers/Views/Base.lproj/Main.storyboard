@@ -3702,7 +3702,7 @@
         <image name="EnHuecoB50" width="25" height="27"/>
         <image name="EnHuecoLogo" width="1000" height="1000"/>
         <image name="EnHuecoV50" width="25" height="27"/>
-        <image name="HandRaised" width="543" height="543"/>
+        <image name="HandRaised" width="523" height="523"/>
         <image name="Phone" width="253" height="255"/>
         <image name="Plus" width="512" height="512"/>
         <image name="Search" width="160" height="160"/>

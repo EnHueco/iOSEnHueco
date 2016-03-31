@@ -45,7 +45,12 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         dispatch_async(dispatch_get_main_queue())
         {
-            self.imageImageView.sd_setImageWithURL(self.friend.imageURL)
+            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, completed: { (image, error, SDImageCacheType, url) in
+                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
+                    self.imageImageView.image = image
+                    }, completion: nil)
+            })
             self.backgroundImageView.sd_setImageWithURL(self.friend.imageURL)
             { (_, error, _, _) -> Void in
                 

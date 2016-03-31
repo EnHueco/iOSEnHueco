@@ -59,12 +59,17 @@ class ProfileViewController: UIViewController, ServerPoller
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+        if imageImageView.image == nil||backgroundImageView.image == nil
+        {
+            assignImages()
+        }
         startPolling()
     }
     
     override func viewWillDisappear(animated: Bool) {
         stopPolling()
     }
+    
     
     func updateButtonColors()
     {
@@ -193,7 +198,10 @@ class ProfileViewController: UIViewController, ServerPoller
     {
         AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
             
-            self.assignImages()
+            if success
+            {
+                self.assignImages()
+            }
             
             if error != nil
             {
@@ -318,8 +326,7 @@ extension ProfileViewController: ImportProfileImageViewControllerDelegate
 {
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
     {
-        assignImages()
-        dismissViewControllerAnimated(true, completion: nil)
+        viewWillAppear(true)
     }
     
     func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)

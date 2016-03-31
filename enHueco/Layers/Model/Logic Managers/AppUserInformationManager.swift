@@ -45,25 +45,26 @@ class AppUserInformationManager
 //                }
 //                return
 //            }
-            
-            appUser.schedule = Schedule()
-            
-            appUser.updateUserWithJSONDictionary(JSONDictionary)
-            
-            let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
-            
-            for eventJSON in eventSet
+
+            if appUser.updateUserWithJSONDictionary(JSONDictionary)
             {
-                let event = Event(JSONDictionary: eventJSON)
-                appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
+                appUser.schedule = Schedule()
+                let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
+                
+                for eventJSON in eventSet
+                {
+                    let event = Event(JSONDictionary: eventJSON)
+                    appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
+                }
+                try? PersistenceManager.sharedManager.persistData()
+                AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(completionHandler)
             }
-            
-            try? PersistenceManager.sharedManager.persistData()
-            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(completionHandler)
-            
-//            dispatch_async(dispatch_get_main_queue()) {
-//                completionHandler?(success: true, error: nil)
-//            }
+            else
+            {
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler?(success: false, error: nil)
+                }
+            }
             
         }) { (error) -> () in
             
@@ -91,7 +92,7 @@ class AppUserInformationManager
                 completionHandler?(success: true, error: nil)
             }
             
-            self.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
+            // self.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             
         }, failureCompletionHandler: { (error) -> () in
             

@@ -93,6 +93,7 @@
 		F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */; };
 		F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD98761CAC741200F390E5 /* ServerPoller.swift */; };
 		F1BD98791CAC92D300F390E5 /* UserSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD98781CAC92D300F390E5 /* UserSync.swift */; };
+		F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */; };
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
 		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
@@ -258,6 +259,7 @@
 		F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHueco.swift; sourceTree = "<group>"; };
 		F1BD98761CAC741200F390E5 /* ServerPoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerPoller.swift; sourceTree = "<group>"; };
 		F1BD98781CAC92D300F390E5 /* UserSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSync.swift; sourceTree = "<group>"; };
+		F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
 				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
 				F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */,
+				F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
+				F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */,
 				F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */,
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */,
