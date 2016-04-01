@@ -20,6 +20,20 @@ enum PrivacySetting: String
     case ShowEventNames = "shares_event_names"
     case ShowEventLocations = "shares_event_locations"
     case ShowUserIsNearby = "shares_user_nearby"
+    
+    /// The key to which the setting is associated in NSUserDefaults
+    func userDefaultsKey() -> String {
+        
+        switch self
+        {
+        case .ShowEventNames:
+            return "ShowEventNames"
+        case .ShowEventLocations:
+            return "ShowEventLocations"
+        case .ShowUserIsNearby:
+            return "ShowUserIsNearby"
+        }
+    }
 }
 
 /// Policy applied to the group of friends it accepts for parameter.
@@ -38,7 +52,7 @@ class PrivacyManager
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
     func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
-        self._turnSetting(setting, value: false, withCompletionHandler: completionHandler)
+        _turnSetting(setting, value: false, withCompletionHandler: completionHandler)
     }
     
     /**
@@ -53,7 +67,7 @@ class PrivacyManager
      */
     func turnOnSetting(setting: PrivacySetting, `for` policy: PrivacyPolicy? = nil, withCompletionHandler completionHandler: BasicCompletionHandler)
     {
-        self._turnSetting(setting, value: true, for: policy, withCompletionHandler: completionHandler)
+        _turnSetting(setting, value: true, for: policy, withCompletionHandler: completionHandler)
     }
     
     
@@ -68,23 +82,17 @@ class PrivacyManager
         ConnectionManager.sendAsyncRequest(request, withJSONParams: parameters, successCompletionHandler: { (data) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
-                switch setting
-                {
-                case PrivacySetting.ShowEventNames:
-                    enHueco.appUser.setSharesEventsNames(value)
-                case PrivacySetting.ShowEventLocations:
-                    enHueco.appUser.setSharesEventsLocations(value)
-                default:
-                    break
-                }
+                
+                self.changeAndSynchronizeUserDefaultsBoolValue(value, forKey: setting.userDefaultsKey())
+                
                 completionHandler(success: true, error: nil)
             }
             
-            }, failureCompletionHandler: { (compoundError) -> () in
+        }, failureCompletionHandler: { (compoundError) -> () in
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(success: false, error: compoundError.error)
-                }
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: compoundError.error)
+            }
         })
     }
     
@@ -153,5 +161,24 @@ class PrivacyManager
                 completionHandler(success: false, error: compoundError.error)
             }
         })
+    }
+    
+    /// Changes the NSUserDefaults value for the setting provided
+    func changeUserDefaultsValueForPrivacySetting(setting: PrivacySetting, toNewValue newValue: Bool) {
+        
+        changeAndSynchronizeUserDefaultsBoolValue(newValue, forKey: setting.userDefaultsKey())
+    }
+    
+    /// Returns the turned on bool value for a given setting as it appears in NSUserDefaults
+    func isPrivacySettingTurnedOn(setting: PrivacySetting) -> Bool {
+        
+        return NSUserDefaults.standardUserDefaults().boolForKey(setting.userDefaultsKey())
+    }
+    
+    private func changeAndSynchronizeUserDefaultsBoolValue(value: Bool, forKey key: String)
+    {
+        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+        standardUserDefaults.setBool(value, forKey: key)
+        standardUserDefaults.synchronize()
     }
 }

@@ -87,9 +87,7 @@ class AppUser: User
     {
         
     }
-    
-    // MARK: Functions
-        
+            
     /// When currentBSSID is set, refreshes the isNearby property for all friends.
     override func refreshIsNearby()
     {
@@ -97,35 +95,6 @@ class AppUser: User
         {
             friend.refreshIsNearby()
         }
-    }
-    
-    // SETTINGS
-    
-    func sharesEventsNames() -> Bool
-    {
-        return NSUserDefaults.standardUserDefaults().boolForKey("SharesEventsNames")
-    }
-    
-    func setSharesEventsNames(value : Bool)
-    {
-        setUserBoolSetting(value, forKey: "SharesEventsNames")
-    }
-    
-    func sharesEventsLocations() -> Bool
-    {
-        return NSUserDefaults.standardUserDefaults().boolForKey("SharesEventsLocations")
-    }
-    
-    func setSharesEventsLocations(value : Bool)
-    {
-        setUserBoolSetting(value, forKey: "SharesEventsLocations")
-    }
-    
-    func setUserBoolSetting(value : Bool, forKey:String)
-    {
-        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-        standardUserDefaults.setBool(value, forKey: forKey)
-        standardUserDefaults.synchronize()
     }
     
     /*
@@ -191,9 +160,11 @@ class AppUser: User
     override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject]) -> Bool
     {
         let value = super.updateUserWithJSONDictionary(JSONDictionary)
+                
+        PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
         
-        self.setSharesEventsLocations(JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
-        self.setSharesEventsNames(JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
+        PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
+
         return value
     }
 }

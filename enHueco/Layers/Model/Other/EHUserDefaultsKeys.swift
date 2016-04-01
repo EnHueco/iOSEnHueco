@@ -11,6 +11,4 @@ import UIKit
 class EHUserDefaultsKeys: NSObject
 {
     static let authTouchID = "authTouchID"
-    static let shareLocationWithCloseFriends = "shareLocationWithCloseFriends"
-    static let nearbyCloseFriendsNotifications = "nearbyCloseFriendsNotifications"
 }

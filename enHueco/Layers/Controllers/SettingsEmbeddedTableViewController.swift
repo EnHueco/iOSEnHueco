@@ -32,7 +32,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         clearsSelectionOnViewWillAppear = true
                 
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
-        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
+//        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
     }
     
@@ -82,9 +82,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     
     @IBAction func nearbyFriendsNotificationsToggleChanged(sender: AnyObject)
     {
-        NSUserDefaults.standardUserDefaults().setBool(nearbyFriendsNotificationsSwitch.on, forKey: EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
-        
-        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
+        //TODO
     }
     
     @IBAction func authenticateWithTIDChanged(sender: UISwitch)

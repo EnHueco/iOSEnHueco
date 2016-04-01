@@ -199,9 +199,10 @@ class ProximityUpdatesManager: NSObject
         }
     }
     
+    /// !!! DEACTIVATED FOR NOW, WILL MOST PROBABLY DISSAPEAR IN A NEAR FUTURE
     func updateBackgroundFetchInterval()
     {
-        if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
+        /*if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         {
             let (currentFreeTimePeriod, nextFreeTimePeriod) = enHueco.appUser.currentAndNextFreeTimePeriods()
             
@@ -227,6 +228,6 @@ class ProximityUpdatesManager: NSObject
         else
         {
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
-        }
+        }*/
     }
 }

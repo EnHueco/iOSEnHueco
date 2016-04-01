@@ -32,17 +32,14 @@ class PrivacySettingsViewController: UITableViewController
     override func viewWillAppear(animated: Bool) {
         
         //shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
-        shareEventNamesSwitch.on = enHueco.appUser.sharesEventsNames()
-        shareEventLocationsSwitch.on = enHueco.appUser.sharesEventsLocations()
         
+        shareEventNamesSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventNames)
+        shareEventLocationsSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventLocations)
     }
     
     @IBAction func shareLocationWithBestFriendsToggleChanged(sender: UISwitch)
     {
-        NSUserDefaults.standardUserDefaults().setBool(shareLocationWithBestFriendsSwitch.on, forKey: EHUserDefaultsKeys.shareLocationWithCloseFriends)
-        
-        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
-        
+        //TODO
         tableView.beginUpdates()
         tableView.endUpdates()
     }
