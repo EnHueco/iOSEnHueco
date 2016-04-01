@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController, ServerPoller
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
 
-    var imageIndicator: UIActivityIndicatorView? = nil
+    var imageActivityIndicator: UIActivityIndicatorView!
     
     var requestTimer = NSTimer()
     var pollingInterval = 10.0
@@ -32,11 +32,12 @@ class ProfileViewController: UIViewController, ServerPoller
 
         firstNamesLabel.text = enHueco.appUser.firstNames
         lastNamesLabel.text = enHueco.appUser.lastNames
-
-        backgroundImageView.alpha = 0
-        imageImageView.alpha = 0
+        
+        imageActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        view.addSubview(imageActivityIndicator!)
+        imageActivityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
+        imageActivityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
     }
-
 
     override func viewDidLayoutSubviews()
     {
@@ -59,17 +60,15 @@ class ProfileViewController: UIViewController, ServerPoller
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        if imageImageView.image == nil||backgroundImageView.image == nil
-        {
-            assignImages()
-        }
         startPolling()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
         stopPolling()
     }
-    
     
     func updateButtonColors()
     {
@@ -82,42 +81,8 @@ class ProfileViewController: UIViewController, ServerPoller
         }
     }
 
-    func startAnimatingImageLoadingIndicator()
-    {
-        if imageIndicator == nil
-        {
-            imageIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-            imageIndicator!.center = imageImageView.center
-            view.addSubview(imageIndicator!)
-        }
-
-        if !imageIndicator!.isAnimating()
-        {
-            imageIndicator!.startAnimating()
-        }
-    }
-
-    func stopAnimatingImageLoadingIndicator()
-    {
-        if let imageIndicator = imageIndicator
-        {
-            if imageIndicator.isAnimating()
-            {
-                imageIndicator.stopAnimating()
-            }
-            
-            self.imageIndicator!.removeFromSuperview()
-            self.imageIndicator = nil
-        }
-    }
-
     func assignImages()
     {
-        if imageImageView.image == nil
-        {
-            startAnimatingImageLoadingIndicator()
-        }
-        
         PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {(image) -> () in
 
             dispatch_async(dispatch_get_main_queue())
@@ -127,61 +92,27 @@ class ProfileViewController: UIViewController, ServerPoller
                 if image == nil
                 {
                     image = UIImage(named: "stripes")
-                    
-                    /*
-                    AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler { success, error in 
-                        
-                        if success
-                        {
-                            self.assignImages()
-                        }
-                    }
-                    */
                 }
                 
                 self.imageImageView.hidden = false
                 self.backgroundImageView.hidden = false
                 
-                if self.imageImageView.image != nil
-                {
-                    UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                        
-                        self.imageImageView.image = image
-                    }, completion: nil)
-                }
-                else
-                {
+                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
                     self.imageImageView.image = image
                     
-                    UIView.animateWithDuration(0.4) {
-                        self.imageImageView.alpha = 1
-                    }
-                }
+                }, completion: nil)
                 
-                if self.backgroundImageView.image != nil
-                {
-                    UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                                                
-                        self.backgroundImageView.image = image.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                        self.backgroundImageView.alpha = 1
-                        
-                    }, completion: nil)
-                }
-                else
-                {
-                    self.backgroundImageView.image = image
+                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                     
-                    UIView.animateWithDuration(0.4) {
-                        
-                        self.backgroundImageView.image = self.backgroundImageView.image?.applyBlurWithRadius(50, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                        self.backgroundImageView.alpha = 1
-                    }
-                }
+                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                    
+                }, completion: nil)
                 
                 self.imageImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.contentMode = .ScaleAspectFill
                 self.backgroundImageView.clipsToBounds = true
-                self.stopAnimatingImageLoadingIndicator()
+                self.imageActivityIndicator.stopAnimating()
                 
                 self.updateButtonColors()
             }
@@ -196,14 +127,16 @@ class ProfileViewController: UIViewController, ServerPoller
     
     func pollFromServer()
     {
+        if imageImageView.image == nil
+        {
+            imageActivityIndicator.startAnimating()
+        }
+        
         AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
             
-            if success
-            {
-                self.assignImages()
-            }
+            self.assignImages()
             
-            if error != nil
+            if !success
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
             }

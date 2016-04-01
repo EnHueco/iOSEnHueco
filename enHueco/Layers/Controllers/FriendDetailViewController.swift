@@ -41,30 +41,32 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         setRecordId()
         
-        backgroundImageView.alpha = 0
-        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        view.addSubview(activityIndicator)
+        activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
+        activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
+        activityIndicator.startAnimating()
+
         dispatch_async(dispatch_get_main_queue())
         {
-            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, completed: { (image, error, SDImageCacheType, url) in
+            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: { (image, error, cacheType, _) in
+                
+                activityIndicator.removeFromSuperview()
+                
                 UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                     
                     self.imageImageView.image = image
-                    }, completion: nil)
-            })
-            self.backgroundImageView.sd_setImageWithURL(self.friend.imageURL)
-            { (_, error, _, _) -> Void in
-                
-                if error == nil
-                {
-                    UIView.animateWithDuration(0.4)
-                    {
-                        self.backgroundImageView.image = self.backgroundImageView.image!.applyBlurWithRadius(40,tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-                        self.backgroundImageView.alpha = 1
-                    }
                     
-                    self.updateButtonColors()
-                }
-            }
+                }, completion: nil)
+                
+                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
+                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                    
+                }, completion: nil)
+                
+                self.updateButtonColors()
+            })
         }
         
         imageImageView.contentMode = .ScaleAspectFill
