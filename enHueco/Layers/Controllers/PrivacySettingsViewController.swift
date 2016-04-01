@@ -63,6 +63,14 @@ class PrivacySettingsViewController: UITableViewController
         _togglePrivacySetting(.ShowEventLocations, on: sender.on, senderSwitch: sender)
     }
     
+    /**
+     Toggles a privacy setting on or off.
+     Must only be called after a UISwitch triggered the event.
+     
+     - parameter setting:      Privacy setting to change
+     - parameter on:           True if the setting should be turned on
+     - parameter senderSwitch: The switch that triggered the event
+     */
     private func _togglePrivacySetting(setting: PrivacySetting, on: Bool, senderSwitch: UISwitch) {
         
         EHProgressHUD.showSpinnerInView(view)
