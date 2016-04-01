@@ -140,9 +140,23 @@ class EventsAndSchedulesManager
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
-            for event in newEvents
+            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let currentDate = NSDate()
+            
+            guard let eventJSONArray = JSONResponse as? [[String : AnyObject]] else
             {
-                enHueco.appUser.schedule.weekDays[event.startHour.weekday].addEvent(event)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: false, error: nil)
+                }
+                return
+            }
+            
+            let fetchedNewEvents = eventJSONArray.map { Event(JSONDictionary: $0) }
+            
+            for event in fetchedNewEvents
+            {
+                let localWeekDay = localCalendar.component(.Weekday, fromDate: event.startHourInDate(currentDate))
+                enHueco.appUser.schedule.weekDays[localWeekDay].addEvent(event)
             }
             
             dispatch_async(dispatch_get_main_queue()) {
@@ -164,12 +178,12 @@ class EventsAndSchedulesManager
     {
         guard existingEvents.reduce(true, combine: { $0 && $1.ID != nil }) else { return }
         
-        let params = existingEvents.map { $0.ID }
+        let params = existingEvents.map { ["id" : $0.ID] }
         
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
         request.HTTPMethod = "DELETE"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncDataRequest(request, withJSONParams: params, successCompletionHandler: { (_) -> () in
             
             for event in existingEvents
             {

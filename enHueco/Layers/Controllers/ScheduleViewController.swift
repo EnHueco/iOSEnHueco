@@ -74,8 +74,11 @@ class ScheduleViewController: UIViewController
     ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
     func addEventsWithUndoCapability(eventsToAdd: [Event])
     {
+        EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.addEvents(eventsToAdd) { (success, error) in
             
+            EHProgressHUD.dismissSpinnerForView(self.view)
+
             guard success && error == nil else
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
@@ -98,7 +101,10 @@ class ScheduleViewController: UIViewController
     {
         let oldEvent = eventToEdit.copy() as! Event
         
+        EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.editEvent(eventToEdit, withValuesOfDummyEvent: newEvent) { success, error in
+            
+            EHProgressHUD.dismissSpinnerForView(self.view)
             
             guard success && error == nil else
             {
@@ -120,8 +126,11 @@ class ScheduleViewController: UIViewController
     ///Deletes the events from their assigned daySchedules, giving the ability to undo and redo the actions.
     func deleteEventsWithUndoCapability(events: [Event])
     {
+        EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.deleteEvents(events) { (success, error) in
             
+            EHProgressHUD.dismissSpinnerForView(self.view)
+
             guard success && error == nil else
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
