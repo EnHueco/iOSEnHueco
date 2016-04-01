@@ -192,7 +192,7 @@ class AppUser: User
     {
         let value = super.updateUserWithJSONDictionary(JSONDictionary)
         
-        self.setSharesEventsLocations(JSONDictionary[PrivacySetting.ShowEventLocation.rawValue] as! Bool)
+        self.setSharesEventsLocations(JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
         self.setSharesEventsNames(JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
         return value
     }

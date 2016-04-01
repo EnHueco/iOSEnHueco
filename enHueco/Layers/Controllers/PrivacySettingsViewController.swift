@@ -52,54 +52,39 @@ class PrivacySettingsViewController: UITableViewController
         tableView.beginUpdates()
         tableView.endUpdates()
         
-        EHProgressHUD.showSpinnerInView(view)
-        
-        let completionHandler:BasicCompletionHandler = {success,error in
-            
-            EHProgressHUD.dismissSpinnerForView(self.view)
-            if !success
-            {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                sender.on = !sender.on
-            }
-        }
-        
-        if sender.on
-        {
-            PrivacyManager.sharedManager.turnOnSetting(.ShowEventNames, withCompletionHandler: completionHandler)
-        }
-        else
-        {
-            PrivacyManager.sharedManager.turnOffSetting(.ShowEventNames, withCompletionHandler: completionHandler)
-        }
+        _togglePrivacySetting(.ShowEventNames, on: sender.on, senderSwitch: sender)
     }
     
     @IBAction func shareEventLocationsToggleChanged(sender: UISwitch)
     {
         tableView.beginUpdates()
         tableView.endUpdates()
+    
+        _togglePrivacySetting(.ShowEventLocations, on: sender.on, senderSwitch: sender)
+    }
+    
+    private func _togglePrivacySetting(setting: PrivacySetting, on: Bool, senderSwitch: UISwitch) {
         
         EHProgressHUD.showSpinnerInView(view)
-        
         let completionHandler:BasicCompletionHandler = {success,error in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
+            
             if !success
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                sender.on = !sender.on
+                senderSwitch.on = !senderSwitch.on
             }
         }
-        if sender.on
+        if on
         {
-            PrivacyManager.sharedManager.turnOnSetting(.ShowEventLocation, withCompletionHandler: completionHandler)
+            PrivacyManager.sharedManager.turnOnSetting(setting, withCompletionHandler: completionHandler)
         }
         else
         {
-            PrivacyManager.sharedManager.turnOffSetting(.ShowEventLocation, withCompletionHandler: completionHandler)
+            PrivacyManager.sharedManager.turnOffSetting(setting, withCompletionHandler: completionHandler)
         }
     }
-    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {

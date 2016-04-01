@@ -18,7 +18,7 @@ import Foundation
 enum PrivacySetting: String
 {
     case ShowEventNames = "shares_event_names"
-    case ShowEventLocation = "shares_event_locations"
+    case ShowEventLocations = "shares_event_locations"
     case ShowUserIsNearby = "shares_user_nearby"
 }
 
@@ -72,7 +72,7 @@ class PrivacyManager
                 {
                 case PrivacySetting.ShowEventNames:
                     enHueco.appUser.setSharesEventsNames(value)
-                case PrivacySetting.ShowEventLocation:
+                case PrivacySetting.ShowEventLocations:
                     enHueco.appUser.setSharesEventsLocations(value)
                 default:
                     break
