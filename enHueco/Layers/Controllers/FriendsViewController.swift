@@ -144,6 +144,8 @@ class FriendsViewController: UIViewController, ServerPoller
     
     func reloadFriendsAndTableView()
     {
+        let oldFilteredFriends = filteredFriends
+        
         filteredFriends = Array(enHueco.appUser.friends.values)
 
         if filteredFriends.isEmpty
@@ -156,10 +158,13 @@ class FriendsViewController: UIViewController, ServerPoller
             tableView.hidden = false
             emptyLabel.removeFromSuperview()
         }
-
-        let range = NSMakeRange(0, tableView.numberOfSections)
-        let sections = NSIndexSet(indexesInRange: range)
-        tableView.reloadSections(sections, withRowAnimation: .Automatic)
+        
+        if !oldFilteredFriends.elementsEqual(filteredFriends, isEquivalent: ==) {
+            
+            let range = NSMakeRange(0, tableView.numberOfSections)
+            let sections = NSIndexSet(indexesInRange: range)
+            tableView.reloadSections(sections, withRowAnimation: .Automatic)
+        }
     }
     
     // Server Polling
@@ -243,9 +248,9 @@ extension FriendsViewController: UITableViewDataSource
         
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 53.0 / 2.0
-        cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
-        
+        cell.friendImageImageView.image = nil
+
         cell.friendImageImageView.sd_setImageWithURL(friend.imageThumbnailURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed, .AllowInvalidSSLCertificates]) { (image, error, cacheType, _) in
             
             if error == nil

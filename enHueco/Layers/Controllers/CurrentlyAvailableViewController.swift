@@ -236,6 +236,9 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
 
         dispatch_async(dispatch_get_main_queue())
         {
+            let oldFilteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods
+            let oldFilteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods
+            
             self.resetDataArrays()
             
             if self.filteredFriendsAndFreeTimePeriods.isEmpty && self.filteredSoonFreefriendsAndFreeTimePeriods.isEmpty
@@ -248,10 +251,14 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
                 self.tableView.hidden = false
                 self.emptyLabel.removeFromSuperview()
             }
-
-            let range = NSMakeRange(0, self.tableView.numberOfSections)
-            let sections = NSIndexSet(indexesInRange: range)
-            self.tableView.reloadSections(sections, withRowAnimation: .Automatic)
+            
+            if !oldFilteredFriendsAndFreeTimePeriods.elementsEqual(self.filteredFriendsAndFreeTimePeriods, isEquivalent: ==)
+            || !oldFilteredSoonFreefriendsAndFreeTimePeriods.elementsEqual(self.filteredSoonFreefriendsAndFreeTimePeriods, isEquivalent: ==)  {
+                
+                let range = NSMakeRange(0, self.tableView.numberOfSections)
+                let sections = NSIndexSet(indexesInRange: range)
+                self.tableView.reloadSections(sections, withRowAnimation: .Automatic)
+            }
         }
     }
     
