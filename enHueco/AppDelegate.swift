@@ -64,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         
         try? PersistenceManager.sharedManager.persistData()
-        SynchronizationManager.sharedManager.persistData()
     }
 
     func applicationDidEnterBackground(application: UIApplication)
@@ -92,7 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         {
             AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
-            SynchronizationManager.sharedManager.retryPendingRequests()
         }
     }
 
@@ -120,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
             //If the user is not free ask iOS to try to wake up app as soon as user becomes free.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow )
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceNow )
             
             completionHandler(.NoData)
         }
@@ -155,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
                 
                 friendDictionary["name"] = friend.name
                 friendDictionary["imageURL"] = friend.imageURL?.absoluteString
-                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInDate(NSDate())
+                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
                 
                 friendsArray.append(friendDictionary)
             }

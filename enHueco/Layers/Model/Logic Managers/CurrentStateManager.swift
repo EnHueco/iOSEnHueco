@@ -70,7 +70,7 @@ class CurrentStateManager
         
         for friend in enHueco.appUser.friends.values
         {
-            if let freeTime = friend.nextFreeTimePeriod() where freeTime.startHourInDate(currentDate).timeIntervalSinceNow <= interval
+            if let freeTime = friend.nextFreeTimePeriod() where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval
             {
                 friendsAndFreeTimePeriods.append((friend, freeTime))
             }
@@ -93,7 +93,7 @@ class CurrentStateManager
         var instantEvent : [String : AnyObject] =
         [
             "type" : "EVENT",
-            "valid_until" : newFreeTimePeriod.endHourInDate(NSDate()).serverFormattedString(),
+            "valid_until" : newFreeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate()).serverFormattedString(),
         ]
         
         instantEvent["name"] = newFreeTimePeriod.name

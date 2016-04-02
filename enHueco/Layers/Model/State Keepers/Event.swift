@@ -146,40 +146,44 @@ class Event: EHSynchronizable, Comparable, NSCopying
         super.encodeWithCoder(coder)
     }
     
-    /// Returns the start hour (Weekday, Hour, Minute) by setting the components to the date provided.
-    func startHourInDate(date: NSDate) -> NSDate
+    /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
+     possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
+     one given that the weekday of the event doesn't exist for the week of the month of the date provided.
+     */
+    func startHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
     {
-        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-        
-        let components = NSDateComponents()
-        components.year = globalCalendar.component(.Year, fromDate: date)
-        components.month = globalCalendar.component(.Month, fromDate: date)
-        components.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: date)
-        components.weekday = startHour.weekday
-        components.hour = startHour.hour
-        components.minute = startHour.minute
-        components.second = 0
-
-        return globalCalendar.dateFromComponents(components)!
+        return eventComponents(startHour, inNearestPossibleWeekToDate: date)
     }
     
-    /// Returns the end hour (Weekday, Hour, Minute) by setting the components to the date provided.
-    func endHourInDate(date: NSDate) -> NSDate
+    /** Returns the end hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
+     possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
+     one given that the weekday of the event doesn't exist for the week of the month of the date provided.
+     */
+    func endHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
+    {
+        return eventComponents(endHour, inNearestPossibleWeekToDate: date)
+    }
+    
+    /** Returns a date by setting the components (Weekday, Hour, Minute) provided to the date of the nearest
+     possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
+     one given that the weekday of the event doesn't exist for the week of the month of the date provided.
+     */
+    private func eventComponents(eventComponents: NSDateComponents, inNearestPossibleWeekToDate date: NSDate) -> NSDate
     {
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        let components = NSDateComponents()
-        components.year = globalCalendar.component(.Year, fromDate: date)
-        components.month = globalCalendar.component(.Month, fromDate: date)
-        components.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: date)
-        components.weekday = endHour.weekday
-        components.hour = endHour.hour
-        components.minute = endHour.minute
-        components.second = 0
+        var startOfWeek: NSDate?
+        var interval = NSTimeInterval(0)
         
-        return globalCalendar.dateFromComponents(components)!
+        globalCalendar.rangeOfUnit(.WeekOfMonth, startDate: &startOfWeek, interval: &interval, forDate: date)
+        
+        let componentsToAdd = NSDateComponents()
+        componentsToAdd.day = eventComponents.weekday-1
+        componentsToAdd.hour = eventComponents.hour
+        componentsToAdd.minute = eventComponents.minute
+        
+        return globalCalendar.dateByAddingComponents(componentsToAdd, toDate: startOfWeek!, options: [])!
     }
     
     func toJSONObject (associatingUser user: User? = nil) -> [String : AnyObject]
@@ -222,8 +226,8 @@ class Event: EHSynchronizable, Comparable, NSCopying
         startHourWeekDayConversionComponents.minute = self.startHour.minute
         startHourWeekDayConversionComponents.second = 0
         
-        let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-        return localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
+        let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
+        return localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)
     }
     
     func copyWithZone(zone: NSZone) -> AnyObject
@@ -238,11 +242,11 @@ class Event: EHSynchronizable, Comparable, NSCopying
 func < (lhs: Event, rhs: Event) -> Bool
 {
     let currentDate = NSDate()
-    return lhs.startHourInDate(currentDate) < rhs.startHourInDate(currentDate)
+    return lhs.startHourInNearestPossibleWeekToDate(currentDate) < rhs.startHourInNearestPossibleWeekToDate(currentDate)
 }
 
 func == (lhs: Event, rhs: Event) -> Bool
 {
     let currentDate = NSDate()
-    return lhs.startHourInDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.startHourInDate(currentDate)) && lhs.endHourInDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.endHourInDate(currentDate))
+    return lhs.startHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.startHourInNearestPossibleWeekToDate(currentDate)) && lhs.endHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.endHourInNearestPossibleWeekToDate(currentDate))
 }

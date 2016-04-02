@@ -215,13 +215,13 @@ extension FriendsViewController: UITableViewDataSource
         
         if let currentFreeTimePeriod = currentFreeTimePeriod
         {
-            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endHourInDate(NSDate())
+            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
             
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriodEndDate)
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
             
             if let nextEvent = friend.nextEvent(), nextEventName = nextEvent.name
-                where nextEvent.type == .Class && nextEvent.startHourInDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60*10000
+                where nextEvent.type == .Class && nextEvent.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60*10000
             {
                 cell.eventNameOrLocationLabel.text = nextEventName
                 
@@ -233,7 +233,7 @@ extension FriendsViewController: UITableViewDataSource
         }
         else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
             cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localizedUsingGeneralFile()
         }

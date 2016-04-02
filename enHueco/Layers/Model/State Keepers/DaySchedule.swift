@@ -73,13 +73,13 @@ class DaySchedule: NSObject, NSCoding
     {
         let currentDate = NSDate()
         
-        let newEventStartHourInCurrentDate = newEvent.startHourInDate(currentDate)
-        let newEventEndHourInCurrentDate = newEvent.endHourInDate(currentDate)
+        let newEventStartHourInCurrentDate = newEvent.startHourInNearestPossibleWeekToDate(currentDate)
+        let newEventEndHourInCurrentDate = newEvent.endHourInNearestPossibleWeekToDate(currentDate)
         
         for event in mutableEvents where eventToExclude == nil || event !== eventToExclude
         {
-            let startHourInCurrentDate = event.startHourInDate(currentDate)
-            let endHourInCurrentDate = event.endHourInDate(currentDate)
+            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
             
             if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
             {

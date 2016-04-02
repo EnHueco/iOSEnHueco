@@ -198,7 +198,6 @@ extension UIImage
 
 extension ErrorType
 {
-    
     /**
      Attempts to extract a localized description that is suitable for display to the user. This
      is determined by the domain of the error.
@@ -212,7 +211,7 @@ extension ErrorType
         {
             let errorMessage: String
             
-            if nserror.domain.hasPrefix("com.ncodde") || nserror.domain == NSURLErrorDomain
+            if nserror.domain.hasPrefix(ehBaseErrorDomain) || nserror.domain == NSURLErrorDomain
             {
                 errorMessage = nserror.localizedDescription
             }

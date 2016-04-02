@@ -61,21 +61,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
 
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
-            eventView.startDate = event.startHourInDate(date)
-
-            if localCalendar.component(.Day, fromDate: date) != localCalendar.component(.Day, fromDate: eventView.startDate)
-            {
-                let diff = localCalendar.component(.WeekOfMonth, fromDate: date) - localCalendar.component(.WeekOfMonth, fromDate: eventView.startDate)
-                eventView.startDate = localCalendar.dateByAddingUnit(.WeekOfMonth, value: diff, toDate: eventView.startDate, options: .MatchStrictly)!
-            }
-
-            eventView.endDate = event.endHourInDate(date)
-
-            if localCalendar.component(.Day, fromDate: date) != localCalendar.component(.Day, fromDate: eventView.endDate)
-            {
-                let diff = localCalendar.component(.WeekOfMonth, fromDate: date) - localCalendar.component(.WeekOfMonth, fromDate: eventView.endDate)
-                eventView.endDate = localCalendar.dateByAddingUnit(.WeekOfMonth, value: diff, toDate: eventView.endDate, options: .MatchStrictly)!
-            }
+            eventView.startDate = event.startHourInNearestPossibleWeekToDate(date)
+            eventView.endDate = event.endHourInNearestPossibleWeekToDate(date)
 
             eventViews.append(eventView)
         }

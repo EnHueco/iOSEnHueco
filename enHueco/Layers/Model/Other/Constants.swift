@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Error domain prefix for NSErrors 
+let ehBaseErrorDomain = "com.enhueco"
+
 /// URLS
 class EHURLS
 {
