@@ -71,18 +71,6 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
         emptyLabel.center = tableView.center
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        if section == 0
-        {
-            return "Now".localizedUsingGeneralFile()
-        }
-        else
-        {
-            return "Soon".localizedUsingGeneralFile()
-        }
-    }
-
     override func viewWillDisappear(animated: Bool) {
         stopPolling()
     }
@@ -261,11 +249,9 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
                 self.emptyLabel.removeFromSuperview()
             }
 
-            UIView.transitionWithView(self.tableView, duration: 0.35, options: .TransitionCrossDissolve, animations: {() -> Void in
-
-                self.tableView.reloadData()
-
-            }, completion: nil)
+            let range = NSMakeRange(0, self.tableView.numberOfSections)
+            let sections = NSIndexSet(indexesInRange: range)
+            self.tableView.reloadSections(sections, withRowAnimation: .Automatic)
         }
     }
     
@@ -288,6 +274,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource
 {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
+        // Should be and stay constant in order for animations to work
         return 2
     }
 
@@ -387,6 +374,18 @@ extension CurrentlyAvailableViewController: UITableViewDataSource
         })
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        if section == 0
+        {
+            return "Now".localizedUsingGeneralFile()
+        }
+        else
+        {
+            return "Soon".localizedUsingGeneralFile()
+        }
     }
 }
 

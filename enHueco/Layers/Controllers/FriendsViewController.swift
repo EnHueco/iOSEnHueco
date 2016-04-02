@@ -157,11 +157,9 @@ class FriendsViewController: UIViewController, ServerPoller
             emptyLabel.removeFromSuperview()
         }
 
-        UIView.transitionWithView(self.tableView, duration: 0.35, options: .TransitionCrossDissolve, animations: {() -> Void in
-
-            self.tableView.reloadData()
-
-        }, completion: nil)
+        let range = NSMakeRange(0, tableView.numberOfSections)
+        let sections = NSIndexSet(indexesInRange: range)
+        tableView.reloadSections(sections, withRowAnimation: .Automatic)
     }
     
     // Server Polling
@@ -184,8 +182,6 @@ class FriendsViewController: UIViewController, ServerPoller
             self.friendRequestsNotificationHub.pop()
         }
     }
-
-    
 }
 
 
@@ -250,7 +246,7 @@ extension FriendsViewController: UITableViewDataSource
         cell.friendImageImageView.image = nil
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         
-        SDWebImageManager().downloadImageWithURL(friend.imageThumbnailURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: {(image, error, cacheType, bool, url) -> Void in
+        cell.friendImageImageView.sd_setImageWithURL(friend.imageThumbnailURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed, .AllowInvalidSSLCertificates]) { (image, error, cacheType, _) in
             
             if error == nil
             {
@@ -259,18 +255,18 @@ extension FriendsViewController: UITableViewDataSource
                     cell.friendImageImageView.alpha = 0
                     cell.friendImageImageView.image = image
                     
-                    UIView.animateWithDuration(0.5, animations: {() -> Void in
+                    UIView.animateWithDuration(0.4, animations: {() -> Void in
                         
                         cell.friendImageImageView.alpha = 1
-                        
-                        }, completion: nil)
+                    
+                    }, completion: nil)
                 }
                 else if cacheType == SDImageCacheType.Memory
                 {
                     cell.friendImageImageView.image = image
                 }
             }
-        })
+        }
         
         return cell
     }

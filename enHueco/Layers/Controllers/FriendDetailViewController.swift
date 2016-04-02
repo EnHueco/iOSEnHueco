@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate
 {
     @IBOutlet weak var imageImageView: UIImageView!
