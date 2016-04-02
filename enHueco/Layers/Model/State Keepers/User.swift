@@ -98,12 +98,8 @@ class User: EHSynchronizable
         }
     }
     
-    func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject]) -> Bool
+    func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
     {
-        let incomingDate = NSDate(serverFormattedString:JSONDictionary["updated_on"] as! String)!
-        
-        if lastUpdatedOn == incomingDate { return false }
-        
         self.firstNames = JSONDictionary["firstNames"] as! String
         self.lastNames = JSONDictionary["lastNames"] as! String
         self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
@@ -120,8 +116,6 @@ class User: EHSynchronizable
         {
             schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
         }
-        
-        return true
     }
     
     /** The ending date of the user invisibility.

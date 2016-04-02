@@ -46,9 +46,13 @@ class AppUserInformationManager
 //                return
 //            }
 
-            if appUser.updateUserWithJSONDictionary(JSONDictionary)
+            let fetchedUpdatedOn = NSDate(serverFormattedString:JSONDictionary["updated_on"] as! String)!
+
+            if appUser.isOutdatedBasedOnDate(fetchedUpdatedOn)
             {
                 appUser.schedule = Schedule()
+                appUser.updateUserWithJSONDictionary(JSONDictionary)
+
                 let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
                 
                 for eventJSON in eventSet
@@ -62,7 +66,7 @@ class AppUserInformationManager
             else
             {
                 dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler?(success: false, error: nil)
+                    completionHandler?(success: true, error: nil)
                 }
             }
             

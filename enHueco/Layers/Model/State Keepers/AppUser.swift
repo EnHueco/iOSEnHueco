@@ -157,15 +157,13 @@ class AppUser: User
         return encodedSchedule
     }
     
-    override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject]) -> Bool
+    override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
     {
-        let value = super.updateUserWithJSONDictionary(JSONDictionary)
+        super.updateUserWithJSONDictionary(JSONDictionary)
                 
         PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
         
         PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
-
-        return value
     }
 }
 
