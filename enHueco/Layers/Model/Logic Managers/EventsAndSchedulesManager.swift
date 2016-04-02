@@ -9,6 +9,10 @@
 import Foundation
 import EventKit
 
+enum EventsAndSchedulesManagerError: ErrorType {
+    case CantAddEvents
+}
+
 /** 
 Handles operations related to schedules and events like getting schedules for common free time periods, importing
 schedules from external services, and adding/removing/editing events.
@@ -114,39 +118,66 @@ class EventsAndSchedulesManager
             return Event(type:.Class, name:fetchedEvent.title, startHour: startDateComponents, endHour: endDateComponents, location: fetchedEvent.location)
         }
         
-        EventsAndSchedulesManager.sharedManager.addEvents(classEvents) { (success, error) in
-            
-            guard success && error == nil else {
-                completionHandler(success: success, error: error)
-                return
+        do
+        {
+            try EventsAndSchedulesManager.sharedManager.addEventsWithDataFromEvents(classEvents) { (addedEvents, error) in
+                
+                guard addedEvents != nil && error == nil else {
+                    completionHandler(success: false, error: error)
+                    return
+                }
+                
+                if generateFreeTimePeriodsBetweenClasses
+                {
+                    //TODO: Calculate Gaps and add them
+                }
+                
+                completionHandler(success: true, error: nil)
             }
-            
-            if generateFreeTimePeriodsBetweenClasses
-            {
-                //TODO: Calculate Gaps and add them
-            }
-            
-            completionHandler(success: true, error: nil)
-        }        
+        }
+        catch
+        {
+            completionHandler(success: false, error: error)
+        }
     }
     
-    /// Adds the events given events to the AppUser's schedule if and only if the request is successful.
-    func addEvents(newEvents: [Event], completionHandler: BasicCompletionHandler)
+    /**
+     Adds the events given events to the AppUser's schedule if and only if the request is successful.
+     
+     - parameter newDummyEvents:    Dummy events that contain the information of the events that wish to be added
+     - parameter completionHandler: (-parameter addedEvents: actual event objects added, these contain the updated ids)
+     
+     - throws: CantAddEvents in case new events overlap with existing events. The request is not attempted.
+     */
+    func addEventsWithDataFromEvents(newDummyEvents: [Event], completionHandler: (addedEvents: [Event]?, error: ErrorType?) -> Void) throws
     {
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let currentDate = NSDate()
+        
+        /// Can add all events
+        guard newDummyEvents.reduce(true, combine: {
+        
+            let localWeekDay = localCalendar.component(.Weekday, fromDate: $1.startHourInNearestPossibleWeekToDate(currentDate))
+            return $0 && enHueco.appUser.schedule.weekDays[localWeekDay].canAddEvent($1)
+
+        }) else {
+            
+            throw EventsAndSchedulesManagerError.CantAddEvents
+        }
+        
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
         request.HTTPMethod = "POST"
         
-        let params = newEvents.map { $0.toJSONObject() }
+        let params = newDummyEvents.map { $0.toJSONObject() }
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
             
-            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             let currentDate = NSDate()
             
             guard let eventJSONArray = JSONResponse as? [[String : AnyObject]] else
             {
                 dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(success: false, error: nil)
+                    completionHandler(addedEvents: nil, error: nil)
                 }
                 return
             }
@@ -160,13 +191,13 @@ class EventsAndSchedulesManager
             }
             
             dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+                completionHandler(addedEvents: fetchedNewEvents, error: nil)
             }
             
         }, failureCompletionHandler: { error in
             
             dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: error)
+                completionHandler(addedEvents: nil, error: error)
             }
         })
     }

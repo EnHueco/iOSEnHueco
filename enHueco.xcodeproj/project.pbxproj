@@ -46,7 +46,7 @@
 		F126AE161BE4836900AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126AE151BE4836900AE561D /* Assets.xcassets */; };
 		F126AE1A1BE4836900AE561D /* enHueco watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F126ADF81BE4836800AE561D /* enHueco watchOS.app */; };
 		F126AE251BE58CE600AE561D /* InGapRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE241BE58CE600AE561D /* InGapRowController.swift */; };
-		F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* EHURLS.swift */; };
+		F134AE5E1A800BB200E6E9AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* Constants.swift */; };
 		F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */; };
 		F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */; };
 		F13DB84D1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */ = {isa = PBXBuildFile; fileRef = F13DB8501C27A2AE00DB11AD /* LocalizableInterface.strings */; };
@@ -206,7 +206,7 @@
 		F126AE151BE4836900AE561D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F126AE171BE4836900AE561D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F126AE241BE58CE600AE561D /* InGapRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InGapRowController.swift; path = Views/InGapRowController.swift; sourceTree = "<group>"; };
-		F134AE5D1A800BB200E6E9AB /* EHURLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHURLS.swift; sourceTree = "<group>"; };
+		F134AE5D1A800BB200E6E9AB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsEmbeddedTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F13DB8451C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F13DB8461C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -551,7 +551,7 @@
 		F1827F6E1BC35DAC002ECB64 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				F134AE5D1A800BB200E6E9AB /* EHURLS.swift */,
+				F134AE5D1A800BB200E6E9AB /* Constants.swift */,
 				F1229C351A7495A200C4FDE2 /* GlobalConstants.swift */,
 				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
 				F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */,
@@ -930,7 +930,7 @@
 				F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */,
 				F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */,
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
-				F134AE5E1A800BB200E6E9AB /* EHURLS.swift in Sources */,
+				F134AE5E1A800BB200E6E9AB /* Constants.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
 				F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */,
 				F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */,

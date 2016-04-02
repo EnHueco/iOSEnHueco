@@ -75,17 +75,17 @@ class ScheduleViewController: UIViewController
     func addEventsWithUndoCapability(eventsToAdd: [Event])
     {
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.addEvents(eventsToAdd) { (success, error) in
+        _ = try? EventsAndSchedulesManager.sharedManager.addEventsWithDataFromEvents(eventsToAdd) { (addedEvents, error) in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard success && error == nil else
+            guard addedEvents != nil && error == nil else
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
             
-            self.undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: eventsToAdd)
+            self.undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: addedEvents)
             
             if self.undoManager != nil && !self.undoManager!.undoing
             {
