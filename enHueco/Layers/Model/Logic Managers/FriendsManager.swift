@@ -60,8 +60,8 @@ class FriendsManager
                     startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
                     startHourWeekDayConversionComponents.second = 0
                     
-                    let startHourInDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-                    let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInDate)
+                    let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
+                    let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)
                     
                     let daySchedule = newFriend.schedule.weekDays[localStartHourWeekDay]
                     daySchedule.addEvent(newEvent)

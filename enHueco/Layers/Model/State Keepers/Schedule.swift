@@ -24,7 +24,7 @@ class Schedule: NSObject, NSCoding
                 dispatch_async(dispatch_get_main_queue())
                 {
                     let currentDate = NSDate()
-                    NSTimer.scheduledTimerWithTimeInterval(instantFreeTimePeriod.endHourInDate(currentDate).timeIntervalSinceDate(currentDate), target: self, selector: #selector(Schedule.instantFreeTimePeriodTimeToLiveReached(_:)), userInfo: nil, repeats: false)
+                    NSTimer.scheduledTimerWithTimeInterval(instantFreeTimePeriod.endHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceDate(currentDate), target: self, selector: #selector(Schedule.instantFreeTimePeriodTimeToLiveReached(_:)), userInfo: nil, repeats: false)
                 }
             }
         }

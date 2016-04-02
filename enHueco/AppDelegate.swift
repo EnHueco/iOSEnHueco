@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         else if let nextFreeTimePeriod = nextFreeTimePeriod
         {
             //If the user is not free ask iOS to try to wake up app as soon as user becomes free.
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow )
+            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceNow )
             
             completionHandler(.NoData)
         }
@@ -151,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
                 
                 friendDictionary["name"] = friend.name
                 friendDictionary["imageURL"] = friend.imageURL?.absoluteString
-                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInDate(NSDate())
+                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
                 
                 friendsArray.append(friendDictionary)
             }

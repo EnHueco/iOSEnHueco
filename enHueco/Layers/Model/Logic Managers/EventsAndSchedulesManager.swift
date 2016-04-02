@@ -39,13 +39,13 @@ class EventsAndSchedulesManager
                 
                 for freeTimePeriod1 in currentCommonFreeTimePeriods
                 {
-                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInDate(currentDate)
-                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInDate(currentDate)
+                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInNearestPossibleWeekToDate(currentDate)
+                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInNearestPossibleWeekToDate(currentDate)
                     
                     for freeTimePeriod2 in users[j].schedule.weekDays[i].events.filter({ $0.type == .FreeTime })
                     {
-                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInDate(currentDate)
-                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInDate(currentDate)
+                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInNearestPossibleWeekToDate(currentDate)
+                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInNearestPossibleWeekToDate(currentDate)
                         
                         if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2)
                         {
@@ -155,7 +155,7 @@ class EventsAndSchedulesManager
             
             for event in fetchedNewEvents
             {
-                let localWeekDay = localCalendar.component(.Weekday, fromDate: event.startHourInDate(currentDate))
+                let localWeekDay = localCalendar.component(.Weekday, fromDate: event.startHourInNearestPossibleWeekToDate(currentDate))
                 enHueco.appUser.schedule.weekDays[localWeekDay].addEvent(event)
             }
             
@@ -199,7 +199,6 @@ class EventsAndSchedulesManager
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: error)
             }
-            
         })
     }
     
@@ -222,11 +221,15 @@ class EventsAndSchedulesManager
             existingEvent.replaceValuesWithThoseOfTheEvent(dummyEvent)
             existingEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
             
-            completionHandler(success: true, error: nil)
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: true, error: nil)
+            }
             
         }, failureCompletionHandler: { error in
-                
-            completionHandler(success: false, error: error)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: false, error: error)
+            }
         })
     }
 }

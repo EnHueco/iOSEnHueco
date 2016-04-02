@@ -76,8 +76,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             
             let currentDate = NSDate()
             
-            startHourDatePicker.setDate(eventToEdit.startHourInDate(currentDate), animated: true)
-            endHourDatePicker.setDate(eventToEdit.endHourInDate(currentDate), animated: true)
+            startHourDatePicker.setDate(eventToEdit.startHourInNearestPossibleWeekToDate(currentDate), animated: true)
+            endHourDatePicker.setDate(eventToEdit.endHourInNearestPossibleWeekToDate(currentDate), animated: true)
         }
         else
         {

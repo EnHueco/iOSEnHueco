@@ -323,14 +323,14 @@ extension CurrentlyAvailableViewController: UITableViewDataSource
         {
             (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
             
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         else
         {
             (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
             
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
         

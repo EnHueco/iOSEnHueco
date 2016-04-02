@@ -214,8 +214,8 @@ class ProximityUpdatesManager: NSObject
             else if let nextFreeTimePeriod = nextFreeTimePeriod
             {
                 //If the user is not free ask iOS to try to wake up app as soon as user becomes free.
-                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow )
-                print("Reprogramming fetch interval: In \(nextFreeTimePeriod.startHourInDate(NSDate()).timeIntervalSinceNow/60) minutes")
+                UIApplication.sharedApplication().setMinimumBackgroundFetchInterval( nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceNow )
+                print("Reprogramming fetch interval: In \(nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceNow/60) minutes")
             }
             else
             {

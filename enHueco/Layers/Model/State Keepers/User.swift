@@ -147,8 +147,8 @@ class User: EHSynchronizable
         
         for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime
         {
-            let startHourInCurrentDate = event.startHourInDate(currentDate)
-            let endHourInCurrentDate = event.endHourInDate(currentDate)
+            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
             
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
             {
@@ -175,8 +175,8 @@ class User: EHSynchronizable
         
         for event in localWeekdayEvents where event.type == .FreeTime
         {
-            let startHourInCurrentDate = event.startHourInDate(currentDate)
-            let endHourInCurrentDate = event.endHourInDate(currentDate)
+            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
             
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate)
             {
@@ -206,7 +206,7 @@ class User: EHSynchronizable
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
 
-        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime && event.startHourInDate(currentDate) > currentDate
+        for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime && event.startHourInNearestPossibleWeekToDate(currentDate) > currentDate
         {
             return event
         }
