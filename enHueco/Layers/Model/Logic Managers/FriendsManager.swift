@@ -105,10 +105,6 @@ class FriendsManager
         request.HTTPMethod = "POST"
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: friendsToRequest, successCompletionHandler: { (response) -> () in
-                        
-            let currentDate = NSDate()
-            
-            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -121,25 +117,6 @@ class FriendsManager
             for friendJSON in friendsJSONArray
             {
                 let newFriend = User(JSONDictionary: friendJSON)
-                
-                let eventsJSON = friendJSON["gap_set"] as! [[String: AnyObject]]
-                
-                for eventJSON in eventsJSON
-                {
-                    // TODO : ADD EVENT PARSING TO EVENTS CLASS
-                    let newEvent = Event(JSONDictionary: eventJSON)
-                    
-                    let startHourWeekDayConversionComponents = globalCalendar.components([.Year, .Month, .WeekOfMonth], fromDate: currentDate)
-                    startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
-                    startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
-                    startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-                    
-                    let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-                    let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)
-                    
-                    let daySchedule = newFriend.schedule.weekDays[localStartHourWeekDay]
-                    daySchedule.addEvent(newEvent)
-                }
                 
                 enHueco.appUser.friends[newFriend.username] = newFriend
                 friendsJSONDict[newFriend.username] = true

@@ -45,6 +45,17 @@ class Schedule: NSObject, NSCoding
         self.weekDays = weekDays
     }
     
+    convenience init(JSONEvents: [[String : AnyObject]])
+    {
+        self.init()
+        
+        for eventJSON in JSONEvents
+        {
+            let event = Event(JSONDictionary: eventJSON)
+            weekDays[event.localWeekDay()].addEvent(event)
+        }
+    }
+    
     func instantFreeTimePeriodTimeToLiveReached(timer: NSTimer)
     {
         instantFreeTimePeriod = nil

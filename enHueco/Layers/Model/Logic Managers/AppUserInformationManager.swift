@@ -53,13 +53,6 @@ class AppUserInformationManager
                 appUser.schedule = Schedule()
                 appUser.updateUserWithJSONDictionary(JSONDictionary)
 
-                let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
-                
-                for eventJSON in eventSet
-                {
-                    let event = Event(JSONDictionary: eventJSON)
-                    appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
-                }
                 try? PersistenceManager.sharedManager.persistData()
                 AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(completionHandler)
             }

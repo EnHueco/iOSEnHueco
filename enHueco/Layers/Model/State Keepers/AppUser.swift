@@ -19,28 +19,20 @@ class UserStringEncodingCharacters
 /// The user that uses the app.
 class AppUser: User
 {
-    /// Session token
-    var token : String
-    
     ///Dictionary containing the AppUser's friends with their usernames as their keys
     var friends = [String : User]()
     
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
         
-    init(username: String, token : String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+    override init(username: String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
-        self.token = token
-        
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    convenience init(JSONDictionary: [String : AnyObject])
+    override init(JSONDictionary: [String : AnyObject])
     {
-        let token = JSONDictionary["value"] as? String
-        let user = User(JSONDictionary: JSONDictionary["user"] as! [String : AnyObject])
-        
-        self.init(username: user.username, token: token ?? enHueco.appUser.token, firstNames: user.firstNames, lastNames: user.lastNames, phoneNumber: nil, imageURL: user.imageURL, imageThumbnailURL: user.imageThumbnailURL, ID: user.ID!, lastUpdatedOn: user.lastUpdatedOn)
+        super.init(JSONDictionary: JSONDictionary)
     }
     
     // MARK: NSCoding
@@ -48,22 +40,14 @@ class AppUser: User
     required init?(coder decoder: NSCoder)
     {
         guard
-            let token = decoder.decodeObjectForKey("token") as? String,
             let friends = decoder.decodeObjectForKey("friends") as? [String : User],
             let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
             let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
             else
         {
-            self.token = ""
-            self.friends = [String : User]()
-            self.incomingFriendRequests = [User]()
-            self.outgoingFriendRequests = [User]()
-            super.init(coder: decoder)
-            
             return nil
         }
         
-        self.token = token
         self.friends = friends
         self.incomingFriendRequests = incomingFriendRequests
         self.outgoingFriendRequests = outgoingFriendRequests
@@ -75,7 +59,6 @@ class AppUser: User
     {
         super.encodeWithCoder(coder)
         
-        coder.encodeObject(token, forKey: "token")
         coder.encodeObject(friends, forKey: "friends")
         coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
         coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
@@ -162,7 +145,6 @@ class AppUser: User
         super.updateUserWithJSONDictionary(JSONDictionary)
                 
         PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
-        
         PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
     }
 }

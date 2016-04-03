@@ -188,7 +188,7 @@ class ConnectionManager: NSObject
         if let url = request.URL where url.absoluteString.hasPrefix(EHURLS.Base)
         {
             request.setValue(appUser.username, forHTTPHeaderField: EHParameters.UserID)
-            request.setValue(appUser.token, forHTTPHeaderField: EHParameters.Token)
+            request.setValue(NSUserDefaults.standardUserDefaults().objectForKey("token") as? String, forHTTPHeaderField: EHParameters.Token)
         }
     }
     

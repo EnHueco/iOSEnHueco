@@ -25,13 +25,24 @@ class AccountManager
                 
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (response) -> () in
             
-            enHueco.appUser = AppUser(JSONDictionary: response as! [String : AnyObject])
+            guard let token = response["value"] as? String else
+            {
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: false, error: nil)
+                }
+                return
+            }
             
+            NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
+            
+            enHueco.appUser = AppUser(JSONDictionary: response["user"] as! [String : AnyObject])
+            
+            try? PersistenceManager.sharedManager.persistData()
+            
+            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
             AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
-            
-            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -46,10 +57,9 @@ class AccountManager
     }
     
     func logOut()
-    {
-        // TODO: Delete persistence information, send logout notification to server so token is deleted.
-        
+    {        
         enHueco.appUser = nil
-        try? PersistenceManager.sharedManager.deleteAllPersistenceData()
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!)
+        PersistenceManager.sharedManager.deleteAllPersistenceData()
     }
 }
