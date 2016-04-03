@@ -36,16 +36,6 @@ class AppUserInformationManager
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             
-            // Doesn't really work for now
-            
-//            guard appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!) else
-//            {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    completionHandler?(success: true, error: nil)
-//                }
-//                return
-//            }
-
             let fetchedUpdatedOn = NSDate(serverFormattedString:JSONDictionary["updated_on"] as! String)!
 
             if appUser.isOutdatedBasedOnDate(fetchedUpdatedOn)
