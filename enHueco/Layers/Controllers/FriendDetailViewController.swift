@@ -220,8 +220,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBAction func commonFreeTimePeriodsButtonPressed(sender: AnyObject)
     {
         let commonFreeTimePeriodsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
-        commonFreeTimePeriodsViewController.selectedFriends.append(friend)
-      
+        commonFreeTimePeriodsViewController.initialFriend = friend
+        
         navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
     }
 

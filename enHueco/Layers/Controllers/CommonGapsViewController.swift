@@ -13,8 +13,11 @@ class CommonFreeTimePeriodsViewController: UIViewController
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var selectedFriendsCollectionView: UICollectionView!
     @IBOutlet weak var containerView: UIView!
+ 
+    /// A friend the controller should display upon appearance.
+    var initialFriend: User?
     
-    var selectedFriends = [User]()
+    private(set) var selectedFriends = [User]()
     
     var commonFreeTimePeriodsSearchFriendViewController: CommonFreeTimePeriodsSearchFriendToAddViewController!
     var scheduleViewController: ScheduleCalendarViewController!
@@ -43,7 +46,13 @@ class CommonFreeTimePeriodsViewController: UIViewController
         scheduleViewController.schedule = Schedule()
         
         switchToSchedule()
+        
         addFriendToSelectedFriendsAndReloadData(enHueco.appUser)
+        
+        if initialFriend != nil
+        {
+            addFriendToSelectedFriendsAndReloadData(initialFriend!)
+        }
     }
     
     override func viewWillAppear(animated: Bool)
@@ -51,6 +60,24 @@ class CommonFreeTimePeriodsViewController: UIViewController
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        
+        transitionCoordinator()?.animateAlongsideTransition({ (context) -> Void in
+            
+            self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+            
+        }, completion:{ (context) -> Void in
+            
+            let navigationStack = self.navigationController?.viewControllers
+            
+            if context.isCancelled() && navigationStack?.count > 1 && navigationStack![navigationStack!.count-1] is FriendDetailViewController
+            {
+                self.navigationController?.navigationBar.barTintColor = UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)
+                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
+            }
+        })
     }
 
     override func didReceiveMemoryWarning()
@@ -68,36 +95,40 @@ class CommonFreeTimePeriodsViewController: UIViewController
     
     func addFriendToSelectedFriendsAndReloadData(friend: User)
     {
-        guard !selectedFriends.contains(friend) else { return }
-        
-        if friend is AppUser
-        {
-            selectedFriends.insert(friend, atIndex: 0)
+        /// Prevent thread collisions
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            guard !self.selectedFriends.contains(friend) else { return }
+            
+            if friend is AppUser
+            {
+                self.selectedFriends.insert(friend, atIndex: 0)
+            }
+            else
+            {
+                self.selectedFriends.append(friend)
+            }
+            
+            let indexPathForLastItem = NSIndexPath(forItem: self.selectedFriends.count-1, inSection: 0)
+            
+            if self.selectedFriends.count == 1
+            {
+                self.selectedFriendsCollectionView.reloadData()
+            }
+            else
+            {
+                self.selectedFriendsCollectionView.insertItemsAtIndexPaths([indexPathForLastItem])
+            }
+            
+            self.selectedFriendsCollectionView.scrollToItemAtIndexPath(indexPathForLastItem, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+            
+            self.prepareInfoAndReloadScheduleData()
         }
-        else
-        {
-            selectedFriends.append(friend)
-        }
-        
-        let indexPathForLastItem = NSIndexPath(forItem: self.selectedFriends.count-1, inSection: 0)
-        
-        if selectedFriends.count == 1
-        {
-            selectedFriendsCollectionView.reloadData()
-        }
-        else
-        {
-            selectedFriendsCollectionView.insertItemsAtIndexPaths([indexPathForLastItem])
-        }
-        
-        selectedFriendsCollectionView.scrollToItemAtIndexPath(indexPathForLastItem, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
-        
-        prepareInfoAndReloadScheduleData()
     }
     
     func deleteFriendFromSelectedFriendsAtIndexPathAndReloadData(indexPath: NSIndexPath)
     {
-        guard selectedFriends[indexPath.row] !== enHueco.appUser else { return }
+        guard !(selectedFriends[indexPath.row] is AppUser) else { return }
         
         selectedFriends.removeAtIndex(indexPath.row)
         selectedFriendsCollectionView.deleteItemsAtIndexPaths([indexPath])
