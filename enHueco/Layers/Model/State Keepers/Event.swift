@@ -161,7 +161,16 @@ class Event: EHSynchronizable, Comparable, NSCopying
      */
     func endHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
     {
-        return eventComponents(endHour, inNearestPossibleWeekToDate: date)
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+
+        var endHourDate = eventComponents(endHour, inNearestPossibleWeekToDate: date)
+        
+        if endHourDate < startHourInNearestPossibleWeekToDate(date) {
+            endHourDate = globalCalendar.dateByAddingUnit(.WeekOfMonth, value: 1, toDate: endHourDate, options: [])!
+        }
+        
+        return endHourDate
     }
     
     /** Returns a date by setting the components (Weekday, Hour, Minute) provided to the date of the nearest
