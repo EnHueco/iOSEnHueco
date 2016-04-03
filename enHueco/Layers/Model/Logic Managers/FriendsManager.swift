@@ -129,14 +129,10 @@ class FriendsManager
                     // TODO : ADD EVENT PARSING TO EVENTS CLASS
                     let newEvent = Event(JSONDictionary: eventJSON)
                     
-                    let startHourWeekDayConversionComponents = NSDateComponents()
-                    startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-                    startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-                    startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
+                    let startHourWeekDayConversionComponents = globalCalendar.components([.Year, .Month, .WeekOfMonth], fromDate: currentDate)
                     startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
                     startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
                     startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-                    startHourWeekDayConversionComponents.second = 0
                     
                     let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
                     let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)
@@ -148,7 +144,6 @@ class FriendsManager
                 enHueco.appUser.friends[newFriend.username] = newFriend
                 friendsJSONDict[newFriend.username] = true
             }
-            
             
             try? PersistenceManager.sharedManager.persistData()
             
@@ -212,6 +207,8 @@ class FriendsManager
             
             enHueco.appUser.incomingFriendRequests = requestFriends
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 
                 completionHandler?(success: true, error: nil)
@@ -274,7 +271,9 @@ class FriendsManager
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
             let userDataRequest = [UserSync(fromUser: requestFriend).toJSONDictionary()]
             self._fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil, friendsToRequest: userDataRequest)
-            
+                        
+            try? PersistenceManager.sharedManager.persistData()
+
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }

@@ -190,6 +190,8 @@ class EventsAndSchedulesManager
                 enHueco.appUser.schedule.weekDays[localWeekDay].addEvent(event)
             }
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(addedEvents: fetchedNewEvents, error: nil)
             }
@@ -221,6 +223,8 @@ class EventsAndSchedulesManager
                 event.daySchedule.removeEvent(event)
             }
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
@@ -249,8 +253,10 @@ class EventsAndSchedulesManager
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             
-            existingEvent.replaceValuesWithThoseOfTheEvent(dummyEvent)
+            existingEvent.replaceValuesWithThoseOfTheEvent(Event(JSONDictionary: JSONDictionary))
             existingEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
