@@ -1,30 +1,25 @@
 PODS:
   - AHKActionSheet (0.5.4)
   - Alamofire (3.3.0)
-  - Alamofire-Synchronous (0.0.2):
-    - Alamofire (~> 3.0)
   - APAddressBook (0.1.14):
     - APAddressBook/Core (= 0.1.14)
   - APAddressBook/Core (0.1.14)
   - ASBPlayerScrubbing (0.1)
-  - ASMediaFocusManager (0.5):
+  - ASMediaFocusManager (0.6):
     - ASBPlayerScrubbing (~> 0.1)
-  - Bolts (1.6.0):
-    - Bolts/AppLinks (= 1.6.0)
-    - Bolts/Tasks (= 1.6.0)
-  - Bolts/AppLinks (1.6.0):
+  - Bolts (1.7.0):
+    - Bolts/AppLinks (= 1.7.0)
+    - Bolts/Tasks (= 1.7.0)
+  - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.6.0)
+  - Bolts/Tasks (1.7.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - CRToast (0.0.9)
   - CSwiftV (0.0.3)
   - FBSDKCoreKit (4.10.1):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.1):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.10.1):
     - FBSDKCoreKit
   - HexColors (2.3.0)
   - MRProgress (0.8.3):
@@ -55,7 +50,6 @@ PODS:
   - MRProgress/ProgressBaseClass (0.8.3)
   - MRProgress/Stopable (0.8.3):
     - MRProgress/Helper
-  - MSCollectionViewCalendarLayout (0.1.5)
   - MultiSelectSegmentedControl (1.1.0)
   - PureLayout (3.0.1)
   - QRCode (0.5)
@@ -74,18 +68,14 @@ PODS:
 
 DEPENDENCIES:
   - AHKActionSheet
-  - Alamofire (~> 3.0)
-  - Alamofire-Synchronous (from `https://github.com/zhuangluda/Alamofire-Synchronous.git`)
+  - Alamofire
   - APAddressBook (~> 0.1.11)
   - ASMediaFocusManager
   - ChameleonFramework/Swift
-  - CRToast (~> 0.0.7)
   - CSwiftV
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - FBSDKShareKit
   - MRProgress
-  - MSCollectionViewCalendarLayout
   - MultiSelectSegmentedControl
   - PureLayout
   - QRCode
@@ -93,24 +83,19 @@ DEPENDENCIES:
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
   - RKNotificationHub
   - RSKImageCropper
-  - SDWebImage (~> 3.7)
+  - SDWebImage
   - SwiftGraph
   - SWTableViewCell (~> 0.3.7)
   - TapkuLibrary
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
-  Alamofire-Synchronous:
-    :git: https://github.com/zhuangluda/Alamofire-Synchronous.git
   ReachabilitySwift:
     :git: https://github.com/ashleymills/Reachability.swift
   TSMessages:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
-  Alamofire-Synchronous:
-    :commit: 54f7351366b5eec94c2797af60b18dce2b3d8d14
-    :git: https://github.com/zhuangluda/Alamofire-Synchronous.git
   ReachabilitySwift:
     :commit: fa90df50c04f5743fbdf643cbe8d10562d75673d
     :git: https://github.com/ashleymills/Reachability.swift
@@ -121,20 +106,16 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
   Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
-  Alamofire-Synchronous: 207904c1cf8f61b3c97e77fa5417f6ab6ae78dc5
   APAddressBook: 697e88cdf8930e4a4783d813289e95822602e516
   ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
-  ASMediaFocusManager: 5a071038ada1a79abf9d0c95b6b2b1c1e5cd3a87
-  Bolts: f52a250053bb517ca874523c3913776359ab3def
+  ASMediaFocusManager: 564dc75d983e4e0dacf24855b5f8a7b4d4a9caec
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   CSwiftV: 93e3d4e1501f2a9b1eac3ae51d53a5edf41beb5b
   FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
-  FBSDKShareKit: 2fd887cce0056bdda91f99b2021d724a4fed8e88
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
-  MSCollectionViewCalendarLayout: 9c52894930d6b712951f18873618fc32c00cd4fa
   MultiSelectSegmentedControl: 54fb23c997b971eff621cfcf965ff1613d99c3d2
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   QRCode: a249ed747aeb0f4bf5f9c58b5b001b6b3bc80073
