@@ -90,14 +90,19 @@ class User: EHSynchronizable
         
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
-        if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
+        if let instantEvent = JSONDictionary["immediate_event"] as? [String : AnyObject],
+           let endDate = NSDate(serverFormattedString: instantEvent["valid_until"] as! String),
+           let type = instantEvent["type"] as? String
+        where endDate.timeIntervalSinceNow > 0
         {
-            let endDate = NSDate(serverFormattedString: invisibilityEvent["valid_until"] as! String)!
-            inivisibilityEndDate = endDate.timeIntervalSinceNow > 0 ? endDate : nil
-        }
-        else if var instantFreeTimePeriod = JSONDictionary["immediate_event"] as? [String : AnyObject] where (instantFreeTimePeriod["type"] as! String) == "EVENT"
-        {
-            schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
+            if type == "INVISIBILITY"
+            {
+                inivisibilityEndDate = endDate
+            }
+            else if type == "EVENT"
+            {
+                schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantEvent)
+            }
         }
         
         super.init(ID: username, lastUpdatedOn: lastUpdatedOn)
