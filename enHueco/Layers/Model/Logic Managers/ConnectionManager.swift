@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Alamofire_Synchronous
 
 /// HTTP Methods
 enum HTTPMethod: String
