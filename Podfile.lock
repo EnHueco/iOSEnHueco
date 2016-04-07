@@ -16,7 +16,10 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
   - CSwiftV (0.0.3)
+  - Fabric (1.6.7)
   - FBSDKCoreKit (4.10.1):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.1):
@@ -72,7 +75,9 @@ DEPENDENCIES:
   - APAddressBook (~> 0.1.11)
   - ASMediaFocusManager
   - ChameleonFramework/Swift
+  - Crashlytics
   - CSwiftV
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - MRProgress
@@ -111,7 +116,9 @@ SPEC CHECKSUMS:
   ASMediaFocusManager: 564dc75d983e4e0dacf24855b5f8a7b4d4a9caec
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   CSwiftV: 93e3d4e1501f2a9b1eac3ae51d53a5edf41beb5b
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
   FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f

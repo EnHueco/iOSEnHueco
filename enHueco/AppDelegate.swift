@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import WatchConnectivity
 import FBSDKCoreKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -24,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        // Override point for customization after application launch.
-        
+        Fabric.with([Crashlytics.self])
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
                 
         if #available(iOS 9.0, *)
@@ -38,9 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             }
         }
         
-        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
-        
-        if notFirstLaunch
+        if NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
         {
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
         }

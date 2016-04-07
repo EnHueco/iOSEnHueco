@@ -4,6 +4,8 @@ use_frameworks!
  
 target 'enHueco' do
 
+	pod 'Fabric'
+	pod 'Crashlytics'
 	pod 'QRCodeReaderViewController', '~> 3.5.2'
 	#pod 'MSCollectionViewCalendarLayout'
 	pod 'SWTableViewCell', '~> 0.3.7'
