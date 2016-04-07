@@ -106,6 +106,11 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                     self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
                 }
             }
+            else
+            {
+                self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+                self.navigationController?.navigationBar.shadowImage = UIImage()
+            }
         })
         
         let dotsButton = UIButton(type: .Custom)
