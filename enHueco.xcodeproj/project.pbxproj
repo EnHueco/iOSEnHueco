@@ -96,6 +96,9 @@
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
 		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
+		F1DFF5F91CB6018400F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
+		F1DFF5FA1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
+		F1DFF5FB1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */; };
 		F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */; };
 		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
@@ -261,6 +264,7 @@
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
+		F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommonGapsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProximityUpdateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
@@ -359,6 +363,7 @@
 				F1229BD71A74947200C4FDE2 /* Products */,
 				F183F8501C8203FC00390CF7 /* Vendor */,
 				F183F8531C82075800390CF7 /* Resources */,
+				F1DFF5F71CB6016A00F21E13 /* Supporting Files */,
 				7925AF665DEA52F357FF8A87 /* Frameworks */,
 				DD1796788F747C50B1E7DB40 /* Pods */,
 			);
@@ -656,6 +661,14 @@
 			path = "Logic Managers";
 			sourceTree = "<group>";
 		};
+		F1DFF5F71CB6016A00F21E13 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F1EB0B891BD1CA2500D5DF01 /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,6 +828,7 @@
 			files = (
 				F155C81E1C2760E6000EAF96 /* General.strings in Resources */,
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
+				F1DFF5F91CB6018400F21E13 /* GoogleService-Info.plist in Resources */,
 				F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */,
 				F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
@@ -837,6 +851,7 @@
 			files = (
 				F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */,
 				F13DB8541C27A36600DB11AD /* General.strings in Resources */,
+				F1DFF5FA1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */,
 				F13DB84D1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */,
 			);
@@ -847,6 +862,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F126AE161BE4836900AE561D /* Assets.xcassets in Resources */,
+				F1DFF5FB1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */,
 				F13DB8551C27A36700DB11AD /* General.strings in Resources */,
 				F13DB84E1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 			);
