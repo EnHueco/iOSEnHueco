@@ -1941,15 +1941,16 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar opaque="NO" contentMode="redraw" barStyle="blackTranslucent" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="hTM-K4-DZv">
+                                    <searchBar opaque="NO" contentMode="redraw" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="hTM-K4-DZv">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="nJl-pf-ODU"/>
                                         </constraints>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" red="0.3911576705" green="0.3911576705" blue="0.3911576705" alpha="0.85074429900000004" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.63529411759999999" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CZM-QN-2Rj" secondAttribute="trailing" constant="8" id="9t0-EG-yIn"/>
                                     <constraint firstAttribute="trailing" secondItem="hTM-K4-DZv" secondAttribute="trailing" id="B0z-JY-Ieh"/>

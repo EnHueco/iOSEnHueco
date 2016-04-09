@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SearchFriendCellDelegate
+class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -29,8 +29,16 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
+        
         searchBar.delegate = self
         searchBar.becomeFirstResponder()
+        searchBar.barStyle = .Black
+        searchBar.tintColor = UIColor.whiteColor()
+        
+        //Ugly, but... is there another solution?
+        if let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField {
+            textFieldInsideSearchBar.textColor = UIColor.whiteColor()
+        }
     }
     
     override func viewWillAppear(animated: Bool)
@@ -86,7 +94,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchFriendCell") as! SearchFriendCell
         cell.friendNameLabel.text = searchResult.name
-        cell.delegate = self
         
         return cell
     }
@@ -95,27 +102,12 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     {
         let friend = searchResults[indexPath.row]
         
-        searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        //let controller = storyboard!.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
-        //controller.friend = friend
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        cell.backgroundColor = UIColor.clearColor()
-    }
-    
-    func didPressAddButtonInSearchFriendCell(cell: SearchFriendCell)
-    {
-        let indexPath = searchResultsTableView.indexPathForCell(cell)!
-        let friend = searchResults[indexPath.row]
-        
         EHProgressHUD.showSpinnerInView(view)
         FriendsManager.sharedManager.sendFriendRequestToUser(friend) { (success, error) -> () in
             
             EHProgressHUD.dismissSpinnerForView(self.view)
-
+            self.searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
             guard success && error == nil else
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
@@ -126,6 +118,11 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
             
             self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        cell.backgroundColor = UIColor.clearColor()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -164,14 +161,4 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
             self.searchResultsTableView.reloadData()
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
