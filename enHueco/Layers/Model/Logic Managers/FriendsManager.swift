@@ -270,7 +270,9 @@ class FriendsManager
      */
     func searchUsersWithText (searchText: String, completionHandler: (results: [User])->())
     {
-        guard !searchText.isBlank() else
+        guard let urlString = (EHURLS.Base + EHURLS.UsersSegment + searchText).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
+              let url = NSURL(string: urlString)
+            where !searchText.isBlank() else
         {
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(results: [User]())
@@ -279,7 +281,7 @@ class FriendsManager
             return
         }
         
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in

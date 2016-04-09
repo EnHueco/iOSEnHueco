@@ -314,7 +314,14 @@ extension FriendsViewController: UISearchBarDelegate
         
         if !searchText.isBlank()
         {
-            filteredFriends = filteredFriends.filter { $0.name.lowercaseString.containsString(searchText.lowercaseString) }
+            filteredFriends = filteredFriends.filter {
+                
+                for word in $0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                    return true
+                }
+                
+                return false
+            }
         }
         
         tableView.reloadData()

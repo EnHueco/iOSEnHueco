@@ -491,10 +491,19 @@ extension CurrentlyAvailableViewController: UISearchBarDelegate
         {
             self.resetDataArrays()
             
+            let nameContainsPrefix = { (name: String, string: String) -> Bool in
+                
+                for word in name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(string) {
+                    return true
+                }
+                
+                return false
+            }
+            
             if !searchText.isBlank()
             {
-                self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
-                self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+                self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter { nameContainsPrefix($0.friend.name, searchText.lowercaseString) }
+                self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter { nameContainsPrefix($0.friend.name, searchText.lowercaseString) }
             }
             
             self.tableView.reloadData()
