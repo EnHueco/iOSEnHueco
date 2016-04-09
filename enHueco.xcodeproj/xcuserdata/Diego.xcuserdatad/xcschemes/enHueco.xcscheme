@@ -111,6 +111,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "EnHueco"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
