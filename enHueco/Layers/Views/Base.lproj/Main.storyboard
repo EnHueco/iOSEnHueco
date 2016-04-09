@@ -1941,7 +1941,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar opaque="NO" contentMode="redraw" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="hTM-K4-DZv">
+                                    <searchBar opaque="NO" contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="hTM-K4-DZv">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="nJl-pf-ODU"/>

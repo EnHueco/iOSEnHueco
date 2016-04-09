@@ -32,7 +32,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         
         searchBar.delegate = self
         searchBar.becomeFirstResponder()
-        searchBar.barStyle = .Black
         searchBar.tintColor = UIColor.whiteColor()
         
         //Ugly, but... is there another solution?
