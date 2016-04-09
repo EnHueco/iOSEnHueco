@@ -24,6 +24,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     var recordId : NSNumber?
     
+    let localizableStringsFile = "Friends"
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -181,7 +183,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
-            alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
+            alertController.addAction(UIAlertAction(title: "DeleteFriend".localizedUsingFile(localizableStringsFile), style: .Destructive, handler: { (action) -> Void in
                 
                 EHProgressHUD.showSpinnerInView(self.view)
                 FriendsManager.sharedManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
@@ -198,7 +200,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 })
             }))
             
-            alertController.addAction(UIAlertAction(title: "cancel", style: .Cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
             
             controller.dismissViewControllerAnimated(true, completion: nil)
             presentViewController(alertController, animated: true, completion: nil)

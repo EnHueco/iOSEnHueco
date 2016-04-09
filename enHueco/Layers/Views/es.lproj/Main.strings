@@ -340,3 +340,9 @@
 
 /* Class = "UILabel"; text = "Share event locations"; ObjectID = "zpj-n7-PWa"; */
 "zpj-n7-PWa.text" = "Compartir ubiaciones de eventos";
+
+/* Class = "UILabel"; text = "Change profile picture"; ObjectID = "Fuz-xZ-k4J"; */
+"Fuz-xZ-k4J.text" = "Cambiar foto de perfil";
+
+/* Class = "UITableViewSection"; headerTitle = "Profile"; ObjectID = "sYt-H8-Frb"; */
+"sYt-H8-Frb.headerTitle" = "Perfil";

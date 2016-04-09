@@ -265,8 +265,8 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
     func rightButtons() -> NSArray
     {
         let rightUtilityButtons = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "WhatsApp")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localizedUsingGeneralFile())
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatMintColor(), title: "WhatsApp")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatWatermelonColor(), title: "Call".localizedUsingGeneralFile())
 
         return rightUtilityButtons
     }
