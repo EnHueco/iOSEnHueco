@@ -1,11 +1,44 @@
 # iOSEnHueco
 
-EnHueco is a technological platform that enables university students to share their schedules and see who is currently free and around so they can join or arrange meetings.
+### What is it?
+[EnHueco] is an online system that allows university members (students and teachers) to share their weekly schedule information with other members of the community, so that they're able to plan work meetings, leisure time and any other activity together. 
 
-<img src="https://cloud.githubusercontent.com/assets/8212679/10113536/1184dce2-63ab-11e5-9f17-01f292b17e5d.png" alt="alt text" width="190" height="338">
-<img src="https://cloud.githubusercontent.com/assets/8212679/10113548/1f2f4148-63ab-11e5-9cc2-7238d95ff696.png" alt="alt text" width="190" height="338">
-<img src="https://cloud.githubusercontent.com/assets/8212679/10113539/16e05d56-63ab-11e5-88ba-a99886f6f39e.PNG" alt="alt text" width="190" height="338">
-<img src="https://cloud.githubusercontent.com/assets/8212679/10113540/17fa8c98-63ab-11e5-8f2b-90cc03d8bdd6.PNG" alt="alt text" width="190" height="338">
-<img src="https://cloud.githubusercontent.com/assets/8212679/10113545/1a94dfda-63ab-11e5-8dd4-fe39e59c237b.PNG" alt="alt text" width="190" height="338">
+This repository contains the iOS mobile version of the platform. It allows iOS users to connect to the system and use it either with mobile data or offline. 
 
-*Temporary development screenshots
+**Check out the Android version of EnHueco [here](https://github.com/EnHueco/AndroidEnHueco).**
+
+**Check out the Web API (backend) of EnHueco [here](https://github.com/EnHueco/APIEnHueco).**
+### What can you do with it?
+  - See who is in their free time now or who will be soon.
+  - See your friends' schedules.
+  - Set privacy settings (what do you share and with who).
+  - Use it online and offline.
+  - See common free time periods with groups of friends/workmates.
+  - _And more features coming soon..._
+
+### Version
+0.1
+
+### Screenshots
+<img src="https://cloud.githubusercontent.com/assets/8212679/13743726/8791c3e6-e9b1-11e5-87d6-8b4f46208ac2.png" alt="alt text" width="213" height="378">
+<img src="https://cloud.githubusercontent.com/assets/8212679/13743730/87b55fa4-e9b1-11e5-8139-34dbc6ab427a.png" alt="alt text" width="213" height="378">
+<img src="https://cloud.githubusercontent.com/assets/8212679/13743729/87b4f6c2-e9b1-11e5-8a52-55677e3e72a1.png" alt="alt text" width="213" height="378">
+<img src="https://cloud.githubusercontent.com/assets/8212679/13743778/c27ff586-e9b1-11e5-889f-935f69d775ce.png" alt="alt text" width="213" height="378">
+
+
+### Development
+
+Want to contribute? Great! You are very welcome to fork the repository and help as desired.
+
+### License
+MIT
+   
+   [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+
+   [EnHueco]:<http://enhueco.uniandes.edu.co>
+
+
+   
+   
+
+
