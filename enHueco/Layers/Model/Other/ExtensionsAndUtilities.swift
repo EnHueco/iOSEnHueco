@@ -196,6 +196,11 @@ extension UIImage
     }  
 }
 
+protocol EHErrorType: ErrorType {
+    
+    var localizedDescription: String? { get }
+}
+
 extension ErrorType
 {
     /**
@@ -207,8 +212,11 @@ extension ErrorType
      */
     func localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage() -> String? {
         
-        if let nserror = self as? NSError
+        if self.dynamicType == NSError.self
         {
+            /// Not forcing the downcast causes information loss because of compiler magic
+            let nserror = self as! NSError
+            
             let errorMessage: String
             
             if nserror.domain.hasPrefix(ehBaseErrorDomain) || nserror.domain == NSURLErrorDomain
@@ -221,6 +229,10 @@ extension ErrorType
             }
             
             return errorMessage
+            
+        } else if let eherror = self as? EHErrorType {
+            
+            return eherror.localizedDescription
         }
         
         return nil

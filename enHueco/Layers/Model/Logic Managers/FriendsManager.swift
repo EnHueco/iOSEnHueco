@@ -239,7 +239,7 @@ class FriendsManager
      */
     func acceptFriendRequestFromFriend (requestFriend: User, completionHandler: BasicCompletionHandler)
     {
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         

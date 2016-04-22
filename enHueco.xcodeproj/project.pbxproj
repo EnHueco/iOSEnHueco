@@ -44,7 +44,6 @@
 		F126AE121BE4836900AE561D /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE111BE4836900AE561D /* GlanceController.swift */; };
 		F126AE141BE4836900AE561D /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE131BE4836900AE561D /* ComplicationController.swift */; };
 		F126AE161BE4836900AE561D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F126AE151BE4836900AE561D /* Assets.xcassets */; };
-		F126AE1A1BE4836900AE561D /* enHueco watchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F126ADF81BE4836800AE561D /* enHueco watchOS.app */; };
 		F126AE251BE58CE600AE561D /* InGapRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126AE241BE58CE600AE561D /* InGapRowController.swift */; };
 		F134AE5E1A800BB200E6E9AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F134AE5D1A800BB200E6E9AB /* Constants.swift */; };
 		F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */; };
@@ -126,13 +125,6 @@
 			remoteGlobalIDString = F126AE031BE4836900AE561D;
 			remoteInfo = "enHueco watchOS Extension";
 		};
-		F126AE181BE4836900AE561D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F1229BCE1A74947200C4FDE2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F126ADF71BE4836800AE561D;
-			remoteInfo = "enHueco watchOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -153,7 +145,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				F126AE1A1BE4836900AE561D /* enHueco watchOS.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,7 +691,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F126AE191BE4836900AE561D /* PBXTargetDependency */,
 			);
 			name = enHueco;
 			productName = enHueco;
@@ -775,7 +765,7 @@
 						DevelopmentTeam = JWR9F7H7N4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -1050,11 +1040,6 @@
 			target = F126AE031BE4836900AE561D /* enHueco watchOS Extension */;
 			targetProxy = F126AE061BE4836900AE561D /* PBXContainerItemProxy */;
 		};
-		F126AE191BE4836900AE561D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F126ADF71BE4836800AE561D /* enHueco watchOS */;
-			targetProxy = F126AE181BE4836900AE561D /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1214,6 +1199,7 @@
 					/Users/Diego/Developer/Libraries/Tapku/tapkulibrary/src,
 				);
 				INFOPLIST_FILE = enHueco/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1237,8 +1223,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: ncodde@hotmail.com (C3BM6772LF)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ncodde@hotmail.com (C3BM6772LF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Diego Diego (JWR9F7H7N4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1252,6 +1238,7 @@
 					/Users/Diego/Developer/Libraries/Tapku/tapkulibrary/src,
 				);
 				INFOPLIST_FILE = enHueco/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1347,7 +1334,7 @@
 				INFOPLIST_FILE = "enHueco watchOS/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncodde.enHueco.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "595305b9-5e3e-481d-ab29-03805d5279f6";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1389,7 +1376,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncodde.enHueco.watchkitapp.extension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "595305b9-5e3e-481d-ab29-03805d5279f6";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;

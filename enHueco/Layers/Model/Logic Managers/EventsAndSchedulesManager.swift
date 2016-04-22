@@ -9,8 +9,17 @@
 import Foundation
 import EventKit
 
-enum EventsAndSchedulesManagerError: ErrorType {
+enum EventsAndSchedulesManagerError: EHErrorType {
     case CantAddEvents
+    
+    var localizedDescription: String? {
+        
+        switch self {
+        case .CantAddEvents: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
+            
+        default: return nil
+        }
+    }
 }
 
 /** 
