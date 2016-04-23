@@ -22,6 +22,7 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
                 
         requestsTableView.dataSource = self
         requestsTableView.delegate = self
+        requestsTableView.allowsSelection = false
     }
     
     override func viewWillAppear(animated: Bool)
@@ -29,9 +30,9 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController!.navigationBar.barStyle = UIBarStyle.Black
-        navigationController!.navigationBar.barTintColor = EHInterfaceColor.mainInterfaceColor
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        navigationController?.navigationBar.barTintColor = EHInterfaceColor.mainInterfaceColor
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         EHProgressHUD.showSpinnerInView(view)
         FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { (success, error) in

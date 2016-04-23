@@ -53,8 +53,8 @@ class FriendsViewController: UIViewController, ServerPoller
         friendRequestsButton.tintColor = UIColor.whiteColor()
         
         friendRequestsNotificationHub = RKNotificationHub(view: friendRequestsButton)
-        friendRequestsNotificationHub.scaleCircleSizeBy(0.45)
-        friendRequestsNotificationHub.moveCircleByX(0, y: -2)
+        friendRequestsNotificationHub.scaleCircleSizeBy(0.48)
+        friendRequestsNotificationHub.moveCircleByX(0, y: 0)
         friendRequestsNotificationHub.setCircleColor(UIColor(red: 1.0, green: 0.4, blue: 0.4, alpha: 1.0), labelColor: UIColor.whiteColor())
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)

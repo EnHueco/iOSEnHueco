@@ -28,12 +28,20 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     
     var cancelButtonText: String?
     var hideCancelButton = false
+    var translucent = false
     
     weak var delegate: ImportProfileImageViewControllerDelegate?
+    
+    /// Status bar style before presenting this controller
+    private var originalStatusBarStyle: UIStatusBarStyle!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        originalStatusBarStyle = UIApplication.sharedApplication().statusBarStyle
+        
+        modalPresentationStyle = .OverCurrentContext
         
         if hideCancelButton
         {
@@ -45,23 +53,44 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
             cancelButton.setTitle(cancelButtonText, forState: .Normal)
         }
         
-        let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
-        
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
         
-        backgroundImageView.addSubview(effectView)
+        if translucent
+        {
+            view.backgroundColor = UIColor.clearColor()
+            view.insertSubview(effectView, atIndex: 0)
+        }
+        else
+        {
+            effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+            
+            let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
+            view.insertSubview(backgroundImageView, atIndex: 0)
+            backgroundImageView.autoPinEdgesToSuperviewEdges()
+            backgroundImageView.addSubview(effectView)
+        }
+        
         effectView.autoPinEdgesToSuperviewEdges()
-        
-        view.insertSubview(backgroundImageView, atIndex: 0)
-        backgroundImageView.autoPinEdgesToSuperviewEdges()
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews()
+    {
         super.viewDidLayoutSubviews()
         
         importFromFacebookButton.roundCorners()
         importFromLocalStorageButton.roundCorners()
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(originalStatusBarStyle, animated: animated)
     }
     
     @IBAction func importFromLocalStorageButtonPressed(sender: UIButton)
@@ -163,7 +192,6 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate
             
             controller.dismissViewControllerAnimated(true)
             {
-                self.dismissViewControllerAnimated(true, completion: nil)
                 self.delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
             }
         }
