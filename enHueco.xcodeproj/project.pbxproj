@@ -26,6 +26,7 @@
 		F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */; };
 		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; };
 		F11E73411B94A6A000D3D3FA /* AddFriendByQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11E73401B94A6A000D3D3FA /* AddFriendByQRViewController.swift */; };
+		F12130091CCB56C6006985BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
 		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
 		F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */; };
@@ -837,6 +838,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F12130091CCB56C6006985BE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

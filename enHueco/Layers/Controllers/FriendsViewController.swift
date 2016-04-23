@@ -123,6 +123,8 @@ class FriendsViewController: UIViewController, ServerPoller
     
     override func viewDidAppear(animated: Bool)
     {
+        reportScreenViewToGoogleAnalyticsWithName("Friends")
+        
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)

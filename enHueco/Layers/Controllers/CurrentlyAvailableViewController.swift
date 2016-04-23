@@ -108,6 +108,13 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
         startPolling()
     }
     
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        reportScreenViewToGoogleAnalyticsWithName("Currently Available")
+    }
+    
     func startPolling() {
         requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(CurrentlyAvailableViewController.pollFromServer), userInfo: nil, repeats: true)
         requestTimer.fire()

@@ -67,6 +67,7 @@ class ProfileViewController: UIViewController, ServerPoller
         
         guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
         
+        reportScreenViewToGoogleAnalyticsWithName("Profile")
         startPolling()
     }
     

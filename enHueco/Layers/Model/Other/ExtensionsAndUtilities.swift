@@ -6,7 +6,8 @@
 //  Copyright © 2015 Diego Gómez. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Google
 
 typealias BasicCompletionHandler = (success: Bool, error: ErrorType?) -> Void
 
@@ -255,5 +256,17 @@ class Wrapper<T>
     init(element : T)
     {
         self.element = element
+    }
+}
+
+extension UIViewController
+{
+    func reportScreenViewToGoogleAnalyticsWithName(name: String)
+    {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
     }
 }
