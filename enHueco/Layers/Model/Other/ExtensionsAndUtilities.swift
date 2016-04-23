@@ -266,7 +266,7 @@ extension UIViewController
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: name)
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
+        tracker.send(builder as! [NSObject : AnyObject])
     }
 }
