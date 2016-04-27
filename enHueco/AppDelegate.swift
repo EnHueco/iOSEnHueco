@@ -38,11 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         // Optional: configure GAI options.
         let gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        //gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
         
-        let tracker = GAI.sharedInstance().defaultTracker
+        let tracker = gai.defaultTracker
         let event = GAIDictionaryBuilder.createEventWithCategory("Action", action: "App Launch", label: nil, value: nil)
         tracker.send(event.build() as [NSObject : AnyObject])
+        
+        #if DEBUG
+            gai.dryRun = true
+        #endif
                 
         if #available(iOS 9.0, *)
         {
