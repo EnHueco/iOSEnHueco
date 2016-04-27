@@ -59,7 +59,15 @@ class ProfileViewController: UIViewController, ServerPoller
         guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
         
+        guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else { return }
+        
+        reportScreenViewToGoogleAnalyticsWithName("Profile")
         startPolling()
     }
     
@@ -248,8 +256,11 @@ class ProfileViewController: UIViewController, ServerPoller
 
     @IBAction func imageViewClicked(sender: AnyObject)
     {
+        definesPresentationContext = true
+        
         let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
         importPictureController.delegate = self
+        importPictureController.translucent = true
         
         presentViewController(importPictureController, animated: true, completion: nil)
     }
@@ -259,7 +270,7 @@ extension ProfileViewController: ImportProfileImageViewControllerDelegate
 {
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
     {
-        viewWillAppear(true)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)

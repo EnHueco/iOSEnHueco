@@ -105,10 +105,6 @@ class FriendsManager
         request.HTTPMethod = "POST"
         
         ConnectionManager.sendAsyncRequest(request, withJSONParams: friendsToRequest, successCompletionHandler: { (response) -> () in
-                        
-            let currentDate = NSDate()
-            
-            let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
             
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -122,33 +118,9 @@ class FriendsManager
             {
                 let newFriend = User(JSONDictionary: friendJSON)
                 
-                let eventsJSON = friendJSON["gap_set"] as! [[String: AnyObject]]
-                
-                for eventJSON in eventsJSON
-                {
-                    // TODO : ADD EVENT PARSING TO EVENTS CLASS
-                    let newEvent = Event(JSONDictionary: eventJSON)
-                    
-                    let startHourWeekDayConversionComponents = NSDateComponents()
-                    startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-                    startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-                    startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
-                    startHourWeekDayConversionComponents.weekday = newEvent.startHour.weekday
-                    startHourWeekDayConversionComponents.hour = newEvent.startHour.hour
-                    startHourWeekDayConversionComponents.minute = newEvent.startHour.minute
-                    startHourWeekDayConversionComponents.second = 0
-                    
-                    let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
-                    let localStartHourWeekDay = localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)
-                    
-                    let daySchedule = newFriend.schedule.weekDays[localStartHourWeekDay]
-                    daySchedule.addEvent(newEvent)
-                }
-                
                 enHueco.appUser.friends[newFriend.username] = newFriend
                 friendsJSONDict[newFriend.username] = true
             }
-            
             
             try? PersistenceManager.sharedManager.persistData()
             
@@ -212,6 +184,8 @@ class FriendsManager
             
             enHueco.appUser.incomingFriendRequests = requestFriends
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 
                 completionHandler?(success: true, error: nil)
@@ -265,7 +239,7 @@ class FriendsManager
      */
     func acceptFriendRequestFromFriend (requestFriend: User, completionHandler: BasicCompletionHandler)
     {
-        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + "/" + requestFriend.ID + "/")!
+        let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
         request.HTTPMethod = "POST"
         
@@ -274,7 +248,9 @@ class FriendsManager
             enHueco.appUser.incomingFriendRequests.removeObject(requestFriend)
             let userDataRequest = [UserSync(fromUser: requestFriend).toJSONDictionary()]
             self._fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil, friendsToRequest: userDataRequest)
-            
+                        
+            try? PersistenceManager.sharedManager.persistData()
+
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
@@ -294,7 +270,9 @@ class FriendsManager
      */
     func searchUsersWithText (searchText: String, completionHandler: (results: [User])->())
     {
-        guard !searchText.isBlank() else
+        guard let urlString = (EHURLS.Base + EHURLS.UsersSegment + searchText).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
+              let url = NSURL(string: urlString)
+            where !searchText.isBlank() else
         {
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(results: [User]())
@@ -303,7 +281,7 @@ class FriendsManager
             return
         }
         
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.UsersSegment + searchText)!)
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         
         ConnectionManager.sendAsyncRequest(request, successCompletionHandler: { (JSONResponse) -> () in

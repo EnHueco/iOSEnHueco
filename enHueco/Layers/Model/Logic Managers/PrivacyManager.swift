@@ -115,6 +115,8 @@ class PrivacyManager
             enHueco.appUser.setInivisibilityEndDate(endDate)
             enHueco.appUser.schedule.instantFreeTimePeriod = nil
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
                 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -147,6 +149,8 @@ class PrivacyManager
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: { (JSONResponse) -> () in
             
             enHueco.appUser.setInivisibilityEndDate(endDate)
+            
+            try? PersistenceManager.sharedManager.persistData()
             
             AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler { success, error in
                 

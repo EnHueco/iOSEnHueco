@@ -72,7 +72,7 @@ class ProximityUpdatesManager: NSObject
     }
     
     ///Temporary
-    func generateGraphFromFile()
+    /*func generateGraphFromFile()
     {
         let fileLocation = NSBundle.mainBundle().pathForResource("accessPoints", ofType: "csv")!
         
@@ -122,7 +122,7 @@ class ProximityUpdatesManager: NSObject
                 }
             }
         }
-    }
+    }*/
     
     func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool
     {
@@ -199,7 +199,7 @@ class ProximityUpdatesManager: NSObject
         }
     }
     
-    /// !!! DEACTIVATED FOR NOW, WILL MOST PROBABLY DISSAPEAR IN A NEAR FUTURE
+    /// !!! DEACTIVATED FOR NOW, WILL MOST PROBABLY DISSAPEAR IN THE NEAR FUTURE
     func updateBackgroundFetchInterval()
     {
         /*if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)

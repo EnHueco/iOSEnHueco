@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 import WatchConnectivity
 import FBSDKCoreKit
+import Fabric
+import Crashlytics
+import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -24,9 +27,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        // Override point for customization after application launch.
-        
+        Fabric.with([Crashlytics.self])
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        
+        let tracker = gai.defaultTracker
+        let event = GAIDictionaryBuilder.createEventWithCategory("Action", action: "App Launch", label: nil, value: nil)
+        tracker.send(event.build() as [NSObject : AnyObject])
+        
+        #if DEBUG
+            gai.dryRun = true
+        #endif
                 
         if #available(iOS 9.0, *)
         {
@@ -38,9 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
             }
         }
         
-        let notFirstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
-        
-        if notFirstLaunch
+        if NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch")
         {
             UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
         }
@@ -231,9 +248,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let logout = {
             
-            guard self.mainNavigationController.presentedViewController != nil else
+            guard enHueco.appUser != nil else
             {
-                //Strange
                 return
             }
             

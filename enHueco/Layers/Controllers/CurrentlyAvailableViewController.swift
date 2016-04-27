@@ -108,6 +108,13 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
         startPolling()
     }
     
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        reportScreenViewToGoogleAnalyticsWithName("Currently Available")
+    }
+    
     func startPolling() {
         requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(CurrentlyAvailableViewController.pollFromServer), userInfo: nil, repeats: true)
         requestTimer.fire()
@@ -265,8 +272,8 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller
     func rightButtons() -> NSArray
     {
         let rightUtilityButtons = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 0, alpha: 1.0), title: "WhatsApp")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor(red: 67.0 / 255.0, green: 142.0 / 255.0, blue: 1, alpha: 0.75), title: "Call".localizedUsingGeneralFile())
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatMintColor(), title: "WhatsApp")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatWatermelonColor(), title: "Call".localizedUsingGeneralFile())
 
         return rightUtilityButtons
     }
@@ -491,10 +498,19 @@ extension CurrentlyAvailableViewController: UISearchBarDelegate
         {
             self.resetDataArrays()
             
+            let nameContainsPrefix = { (name: String, string: String) -> Bool in
+                
+                for word in name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(string) {
+                    return true
+                }
+                
+                return false
+            }
+            
             if !searchText.isBlank()
             {
-                self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
-                self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter { $0.friend.name.lowercaseString.containsString(searchText.lowercaseString) }
+                self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter { nameContainsPrefix($0.friend.name, searchText.lowercaseString) }
+                self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter { nameContainsPrefix($0.friend.name, searchText.lowercaseString) }
             }
             
             self.tableView.reloadData()

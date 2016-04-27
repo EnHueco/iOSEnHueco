@@ -50,6 +50,7 @@
 "CouldNotAddEventErrorMessage" = "Imposible agregar evento";
 "EventOverlapExplanation" = "El evento que estas tratando de agregar se cruza con algún otro evento en tu calendario en alguno de los días que elegiste...";
 "OKIwillCheck" = "OK, lo revisaré.";
+"EventImportOverlapExplanation" = "The schedule that you're trying to import has events that overlap with existing events!";
 
 "AreYouSureDeleteEventMessage" = "¿Estás seguro que quieres eliminar este evento?";
 

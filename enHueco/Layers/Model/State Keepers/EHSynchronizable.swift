@@ -26,9 +26,6 @@ class EHSynchronizable: NSObject, NSCoding
             let lastUpdatedOn = decoder.decodeObjectForKey("lastUpdatedOn") as? NSDate
         else
         {
-            self.lastUpdatedOn = NSDate()
-            
-            super.init()
             return nil
         }
         

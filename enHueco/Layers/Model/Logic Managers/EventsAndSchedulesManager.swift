@@ -9,8 +9,17 @@
 import Foundation
 import EventKit
 
-enum EventsAndSchedulesManagerError: ErrorType {
+enum EventsAndSchedulesManagerError: EHErrorType {
     case CantAddEvents
+    
+    var localizedDescription: String? {
+        
+        switch self {
+        case .CantAddEvents: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
+            
+        default: return nil
+        }
+    }
 }
 
 /** 
@@ -190,6 +199,8 @@ class EventsAndSchedulesManager
                 enHueco.appUser.schedule.weekDays[localWeekDay].addEvent(event)
             }
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(addedEvents: fetchedNewEvents, error: nil)
             }
@@ -221,6 +232,8 @@ class EventsAndSchedulesManager
                 event.daySchedule.removeEvent(event)
             }
             
+            try? PersistenceManager.sharedManager.persistData()
+            
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }
@@ -245,12 +258,14 @@ class EventsAndSchedulesManager
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
         request.HTTPMethod = "PUT"
         
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: existingEvent.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: dummyEvent.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: { (JSONResponse) -> () in
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             
-            existingEvent.replaceValuesWithThoseOfTheEvent(dummyEvent)
+            existingEvent.replaceValuesWithThoseOfTheEvent(Event(JSONDictionary: JSONDictionary))
             existingEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+            
+            try? PersistenceManager.sharedManager.persistData()
             
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)

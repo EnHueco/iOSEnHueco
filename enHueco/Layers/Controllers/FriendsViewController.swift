@@ -53,8 +53,8 @@ class FriendsViewController: UIViewController, ServerPoller
         friendRequestsButton.tintColor = UIColor.whiteColor()
         
         friendRequestsNotificationHub = RKNotificationHub(view: friendRequestsButton)
-        friendRequestsNotificationHub.scaleCircleSizeBy(0.45)
-        friendRequestsNotificationHub.moveCircleByX(0, y: -2)
+        friendRequestsNotificationHub.scaleCircleSizeBy(0.48)
+        friendRequestsNotificationHub.moveCircleByX(0, y: 0)
         friendRequestsNotificationHub.setCircleColor(UIColor(red: 1.0, green: 0.4, blue: 0.4, alpha: 1.0), labelColor: UIColor.whiteColor())
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)
@@ -123,6 +123,8 @@ class FriendsViewController: UIViewController, ServerPoller
     
     override func viewDidAppear(animated: Bool)
     {
+        reportScreenViewToGoogleAnalyticsWithName("Friends")
+        
         if let selectedIndex = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
@@ -314,7 +316,14 @@ extension FriendsViewController: UISearchBarDelegate
         
         if !searchText.isBlank()
         {
-            filteredFriends = filteredFriends.filter { $0.name.lowercaseString.containsString(searchText.lowercaseString) }
+            filteredFriends = filteredFriends.filter {
+                
+                for word in $0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                    return true
+                }
+                
+                return false
+            }
         }
         
         tableView.reloadData()

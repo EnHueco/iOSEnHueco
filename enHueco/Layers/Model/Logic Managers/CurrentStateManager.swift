@@ -104,11 +104,7 @@ class CurrentStateManager
             enHueco.appUser.setInivisibilityEndDate(nil)
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
             
-            do
-            {
-                try PersistenceManager.sharedManager.persistData()
-            }
-            catch _ {}
+            try? PersistenceManager.sharedManager.persistData()
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
             }

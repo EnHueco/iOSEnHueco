@@ -161,7 +161,16 @@ class Event: EHSynchronizable, Comparable, NSCopying
      */
     func endHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
     {
-        return eventComponents(endHour, inNearestPossibleWeekToDate: date)
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+
+        var endHourDate = eventComponents(endHour, inNearestPossibleWeekToDate: date)
+        
+        if endHourDate < startHourInNearestPossibleWeekToDate(date) {
+            endHourDate = globalCalendar.dateByAddingUnit(.WeekOfMonth, value: 1, toDate: endHourDate, options: [])!
+        }
+        
+        return endHourDate
     }
     
     /** Returns a date by setting the components (Weekday, Hour, Minute) provided to the date of the nearest
@@ -217,14 +226,10 @@ class Event: EHSynchronizable, Comparable, NSCopying
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        let startHourWeekDayConversionComponents = NSDateComponents()
-        startHourWeekDayConversionComponents.year = globalCalendar.component(.Year, fromDate: currentDate)
-        startHourWeekDayConversionComponents.month = globalCalendar.component(.Month, fromDate: currentDate)
-        startHourWeekDayConversionComponents.weekOfMonth = globalCalendar.component(.WeekOfMonth, fromDate: currentDate)
-        startHourWeekDayConversionComponents.weekday = self.startHour.weekday
-        startHourWeekDayConversionComponents.hour = self.startHour.hour
-        startHourWeekDayConversionComponents.minute = self.startHour.minute
-        startHourWeekDayConversionComponents.second = 0
+        let startHourWeekDayConversionComponents = globalCalendar.components([.Year, .Month, .WeekOfMonth], fromDate: currentDate)
+        startHourWeekDayConversionComponents.weekday = startHour.weekday
+        startHourWeekDayConversionComponents.hour = startHour.hour
+        startHourWeekDayConversionComponents.minute = startHour.minute
         
         let startHourInNearestPossibleWeekToDate = globalCalendar.dateFromComponents(startHourWeekDayConversionComponents)!
         return localCalendar.component(NSCalendarUnit.Weekday, fromDate: startHourInNearestPossibleWeekToDate)

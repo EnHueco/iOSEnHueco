@@ -22,7 +22,7 @@ class User: EHSynchronizable
     var imageThumbnailURL: NSURL?
     var phoneNumber: String! = ""
     
-    var schedule: Schedule
+    var schedule = Schedule()
     
     /// (For efficiency) True if the user is near the App User at the current time, given the currentBSSID values.
     private(set) var isNearby = false
@@ -63,7 +63,6 @@ class User: EHSynchronizable
     init(username: String, firstNames: String, lastNames: String, phoneNumber:String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
     {
         self.username = username
-        
         self.firstNames = firstNames
         self.lastNames = lastNames
         self.phoneNumber = phoneNumber
@@ -75,47 +74,51 @@ class User: EHSynchronizable
         super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
     
-    convenience init(JSONDictionary: [String : AnyObject])
+    init(JSONDictionary: [String : AnyObject])
     {
-        let username = JSONDictionary["login"] as! String
-        let firstNames = JSONDictionary["firstNames"] as! String
-        let lastNames = JSONDictionary["lastNames"] as! String
-        let imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
-        let imageThumbnailURL = ((JSONDictionary["image_thumbnail"] == nil || JSONDictionary["image_thumbnail"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["image_thumbnail"]! as! String)).replace("https", withString: "http")))
-        let phoneNumber = JSONDictionary["phoneNumber"] as? String
-        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-        
-        self.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber ?? "", imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID:username, lastUpdatedOn: lastUpdatedOn)
-        
-        if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
-        {
-            let endDate = NSDate(serverFormattedString: invisibilityEvent["valid_until"] as! String)!
-            inivisibilityEndDate = endDate.timeIntervalSinceNow > 0 ? endDate : nil
-        }
-        else if var instantFreeTimePeriod = JSONDictionary["immediate_event"] as? [String : AnyObject] where (instantFreeTimePeriod["type"] as! String) == "EVENT"
-        {
-            schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
-        }
-    }
-    
-    func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
-    {
+        self.username = JSONDictionary["login"] as! String
         self.firstNames = JSONDictionary["firstNames"] as! String
         self.lastNames = JSONDictionary["lastNames"] as! String
         self.imageURL = ((JSONDictionary["imageURL"] == nil || JSONDictionary["imageURL"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["imageURL"]! as! String)).replace("https", withString: "http")))
         self.imageThumbnailURL = ((JSONDictionary["image_thumbnail"] == nil || JSONDictionary["image_thumbnail"] is NSNull) ? nil : NSURL(string: (EHURLS.Base+(JSONDictionary["image_thumbnail"]! as! String)).replace("https", withString: "http")))
         self.phoneNumber = JSONDictionary["phoneNumber"] as? String
-        self.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
         
-        if let invisibilityEvent = JSONDictionary["immediate_event"] where (invisibilityEvent["type"] as! String) == "INVISIBILITY"
+        if let JSONEvents = JSONDictionary["gap_set"] as? [[String : AnyObject]]
         {
-            let endDate = NSDate(serverFormattedString: invisibilityEvent["valid_until"] as! String)!
-            inivisibilityEndDate = endDate.timeIntervalSinceNow > 0 ? endDate : nil
+            schedule = Schedule(JSONEvents: JSONEvents)
         }
-        else if var instantFreeTimePeriod = JSONDictionary["immediate_event"] as? [String : AnyObject] where (instantFreeTimePeriod["type"] as! String) == "EVENT"
+        
+        let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
+        
+        if let instantEvent = JSONDictionary["immediate_event"] as? [String : AnyObject],
+           let endDate = NSDate(serverFormattedString: instantEvent["valid_until"] as! String),
+           let type = instantEvent["type"] as? String
+        where endDate.timeIntervalSinceNow > 0
         {
-            schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantFreeTimePeriod)
+            if type == "INVISIBILITY"
+            {
+                inivisibilityEndDate = endDate
+            }
+            else if type == "EVENT"
+            {
+                schedule.instantFreeTimePeriod = Event(instantFreeTimeJSONDictionary: instantEvent)
+            }
         }
+        
+        super.init(ID: username, lastUpdatedOn: lastUpdatedOn)
+    }
+    
+    func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
+    {
+        let dummyUser = User(JSONDictionary: JSONDictionary)
+        
+        firstNames = dummyUser.firstNames
+        lastNames = dummyUser.lastNames
+        phoneNumber = dummyUser.phoneNumber
+        imageURL = dummyUser.imageURL
+        imageThumbnailURL = dummyUser.imageThumbnailURL
+        inivisibilityEndDate = dummyUser.inivisibilityEndDate
+        schedule = dummyUser.schedule
     }
     
     /** The ending date of the user invisibility.
@@ -247,13 +250,6 @@ class User: EHSynchronizable
             let schedule = decoder.decodeObjectForKey("schedule") as? Schedule
         else
         {
-            self.username = ""
-            self.firstNames = ""
-            self.lastNames = ""
-            self.phoneNumber = ""
-            self.schedule = Schedule()
-
-            super.init(coder: decoder)
             return nil
         }
         

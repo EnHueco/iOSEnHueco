@@ -13,6 +13,9 @@ class PersistenceManager
 {
     static let sharedManager = PersistenceManager()
 
+    /// Lock to ensure thread safety
+    private let lock = NSObject()
+    
     enum PersistenceManagerError: ErrorType
     {
         case CouldNotPersistData
@@ -32,8 +35,13 @@ class PersistenceManager
     /// Persists all pertinent application data
     func persistData () throws
     {
-        guard enHueco.appUser != nil && NSKeyedArchiver.archiveRootObject(enHueco.appUser, toFile: persistencePath) else
+        defer { objc_sync_exit(lock) }
+        
+        objc_sync_enter(lock)
+            
+        if !(enHueco.appUser != nil && NSKeyedArchiver.archiveRootObject(enHueco.appUser, toFile: persistencePath))
         {
+            PersistenceManager.sharedManager.deleteAllPersistenceData()
             throw PersistenceManagerError.CouldNotPersistData
         }
     }

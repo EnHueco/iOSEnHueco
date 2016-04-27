@@ -36,16 +36,6 @@ class AppUserInformationManager
             
             let JSONDictionary = JSONResponse as! [String : AnyObject]
             
-            // Doesn't really work for now
-            
-//            guard appUser.isOutdatedBasedOnDate(NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!) else
-//            {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    completionHandler?(success: true, error: nil)
-//                }
-//                return
-//            }
-
             let fetchedUpdatedOn = NSDate(serverFormattedString:JSONDictionary["updated_on"] as! String)!
 
             if appUser.isOutdatedBasedOnDate(fetchedUpdatedOn)
@@ -53,13 +43,6 @@ class AppUserInformationManager
                 appUser.schedule = Schedule()
                 appUser.updateUserWithJSONDictionary(JSONDictionary)
 
-                let eventSet = JSONDictionary["gap_set"] as! [[String : AnyObject]]
-                
-                for eventJSON in eventSet
-                {
-                    let event = Event(JSONDictionary: eventJSON)
-                    appUser.schedule.weekDays[event.localWeekDay()].addEvent(event)
-                }
                 try? PersistenceManager.sharedManager.persistData()
                 AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(completionHandler)
             }

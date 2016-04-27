@@ -72,6 +72,7 @@ import UIKit
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         firstAppearance = false
     }
     

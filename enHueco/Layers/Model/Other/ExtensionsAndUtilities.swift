@@ -6,7 +6,8 @@
 //  Copyright © 2015 Diego Gómez. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Google
 
 typealias BasicCompletionHandler = (success: Bool, error: ErrorType?) -> Void
 
@@ -196,6 +197,11 @@ extension UIImage
     }  
 }
 
+protocol EHErrorType: ErrorType {
+    
+    var localizedDescription: String? { get }
+}
+
 extension ErrorType
 {
     /**
@@ -207,8 +213,11 @@ extension ErrorType
      */
     func localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage() -> String? {
         
-        if let nserror = self as? NSError
+        if self.dynamicType == NSError.self
         {
+            /// Not forcing the downcast causes information loss because of compiler magic
+            let nserror = self as! NSError
+            
             let errorMessage: String
             
             if nserror.domain.hasPrefix(ehBaseErrorDomain) || nserror.domain == NSURLErrorDomain
@@ -221,6 +230,10 @@ extension ErrorType
             }
             
             return errorMessage
+            
+        } else if let eherror = self as? EHErrorType {
+            
+            return eherror.localizedDescription
         }
         
         return nil
@@ -243,5 +256,17 @@ class Wrapper<T>
     init(element : T)
     {
         self.element = element
+    }
+}
+
+extension UIViewController
+{
+    func reportScreenViewToGoogleAnalyticsWithName(name: String)
+    {
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
+        tracker.send(builder as! [NSObject : AnyObject])
     }
 }

@@ -24,6 +24,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     var recordId : NSNumber?
     
+    let localizableStringsFile = "Friends"
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -106,6 +108,11 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                     self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57/255.0, green: 57/255.0, blue: 57/255.0, alpha: 0.6)), forBarMetrics: .Default)
                 }
             }
+            else
+            {
+                self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
+                self.navigationController?.navigationBar.shadowImage = UIImage()
+            }
         })
         
         let dotsButton = UIButton(type: .Custom)
@@ -176,7 +183,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
-            alertController.addAction(UIAlertAction(title: "Delete Friend", style: .Destructive, handler: { (action) -> Void in
+            alertController.addAction(UIAlertAction(title: "DeleteFriend".localizedUsingFile(localizableStringsFile), style: .Destructive, handler: { (action) -> Void in
                 
                 EHProgressHUD.showSpinnerInView(self.view)
                 FriendsManager.sharedManager.deleteFriend(self.friend, completionHandler: { (success, error) -> () in
@@ -193,7 +200,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 })
             }))
             
-            alertController.addAction(UIAlertAction(title: "cancel", style: .Cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
             
             controller.dismissViewControllerAnimated(true, completion: nil)
             presentViewController(alertController, animated: true, completion: nil)
@@ -220,8 +227,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBAction func commonFreeTimePeriodsButtonPressed(sender: AnyObject)
     {
         let commonFreeTimePeriodsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
-        commonFreeTimePeriodsViewController.selectedFriends.append(friend)
-      
+        commonFreeTimePeriodsViewController.initialFriend = friend
+        
         navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
     }
 
