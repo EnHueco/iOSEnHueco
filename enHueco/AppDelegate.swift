@@ -245,9 +245,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
     {
         let logout = {
             
-            guard self.mainNavigationController.presentedViewController != nil else
+            guard enHueco.appUser != nil else
             {
-                //Strange
                 return
             }
             
