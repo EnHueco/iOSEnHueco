@@ -53,7 +53,7 @@ class PersistenceManager
         
         if enHueco.appUser == nil
         {
-            try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
+            let _ = try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
         }
         
         return enHueco.appUser != nil
@@ -61,8 +61,16 @@ class PersistenceManager
 
     func deleteAllPersistenceData()
     {
-        try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
-        try? NSFileManager.defaultManager().removeItemAtPath(PersistenceManager.sharedManager.documentsPath + "profile.jpg")
+        let fileManager = NSFileManager.defaultManager()
+        
+        let _ = try? fileManager.removeItemAtPath(persistencePath)
+        
+        if let directoryContents = try? fileManager.contentsOfDirectoryAtPath(documentsPath) {
+            for path in directoryContents {
+                let fullPath = (documentsPath as NSString).stringByAppendingPathComponent(path)
+                let _ = try? fileManager.removeItemAtPath(fullPath)
+            }
+        }
     }
     
     func saveImage (data: NSData, path: String, successCompletionHandler: () -> ())
