@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
     @IBOutlet weak var navigationBar: UINavigationBar!
