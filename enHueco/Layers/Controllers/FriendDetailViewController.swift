@@ -13,7 +13,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var viewScheduleButton: UIButton!
     @IBOutlet weak var commonFreeTimePeriodsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -37,7 +36,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         firstNamesLabel.text = friend.firstNames
         lastNamesLabel.text = friend.lastNames
-        userNameLabel.text = friend.username
         
         setRecordId()
         
@@ -214,11 +212,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         return .None
     }
     
-    @IBAction func whatsappMessage(sender: UIButton)
-    {
-        enHueco.whatsappMessageTo(self.recordId!)
-    }
-    
     @IBAction func viewSchedule(sender: UIButton)
     {
         let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as!ScheduleViewController
@@ -234,14 +227,6 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
     }
 
-    @IBAction func call(sender: UIButton)
-    {
-        if let num = friend.phoneNumber
-        {
-            enHueco.callFriend(num)
-        }
-    }
-
     func setRecordId()
     {
         if self.friend.phoneNumber.characters.count < 7
@@ -255,14 +240,4 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             })
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
