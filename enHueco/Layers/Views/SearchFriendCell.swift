@@ -8,15 +8,8 @@
 
 import UIKit
 
-@objc protocol SearchFriendCellDelegate: class
-{
-    optional func didPressAddButtonInSearchFriendCell(cell:SearchFriendCell)
-}
-
 class SearchFriendCell: UITableViewCell
 {
-    weak var delegate: SearchFriendCellDelegate?
-
     @IBOutlet weak var friendNameLabel: UILabel!
     
     override func awakeFromNib()
@@ -30,13 +23,5 @@ class SearchFriendCell: UITableViewCell
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    @IBAction func addButtonPressed(sender: AnyObject)
-    {
-        if let delegate = delegate
-        {
-            delegate.didPressAddButtonInSearchFriendCell?(self)
-        }
-    }
+    }    
 }

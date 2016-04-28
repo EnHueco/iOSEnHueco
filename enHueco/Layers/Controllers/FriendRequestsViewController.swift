@@ -44,29 +44,12 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     
     @IBAction func addFriendButtonPressed(sender: AnyObject)
     {
-        let actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancelar", destructiveButtonTitle: nil)
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
+        viewController.modalPresentationStyle = .OverCurrentContext
         
-        actionSheet.addButtonWithTitle("Buscar Amigo")
-        actionSheet.addButtonWithTitle("Agregar por QR")
-        actionSheet.showFromTabBar(tabBarController!.tabBar)
+        presentViewController(viewController, animated: true, completion: nil)
     }
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
-    {
-        if buttonIndex == 1
-        {
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
-            viewController.modalPresentationStyle = .OverCurrentContext
-            
-            presentViewController(viewController, animated: true, completion: nil)
-        }
-        else if buttonIndex == 2
-        {
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("AddFriendByQRViewController") as! AddFriendByQRViewController
-            presentViewController(viewController, animated: true, completion: nil)
-        }
-    }
-
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()

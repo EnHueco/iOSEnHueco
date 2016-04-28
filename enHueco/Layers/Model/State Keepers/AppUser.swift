@@ -8,14 +8,6 @@
 
 import Foundation
 
-class UserStringEncodingCharacters
-{
-    static let splitCharacter = "\\"
-    static let separationCharacter = "-"
-    static let multipleElementsCharacter = ","
-    static let hourMinuteSeparationCharacter = ":"
-}
-
 /// The user that uses the app.
 class AppUser: User
 {
@@ -79,67 +71,7 @@ class AppUser: User
             friend.refreshIsNearby()
         }
     }
-    
-    /*
-
-    Returns the string encoded representation of the user, to be decoded by "addFriendFromStringEncodedFriendRepresentation:"
-    Formatted as follows:
-    username/first names, last names/phone number/imageURL/00:00-00:10,00:30-01:30/00:00-00:10,00:30-01:30
-    */
-    func stringEncodedUserRepresentation () -> String
-    {
-        typealias Characters = UserStringEncodingCharacters
         
-        var encodedSchedule = ""
-
-        // Add username
-        encodedSchedule += username + Characters.splitCharacter
-        
-        // Add names
-        encodedSchedule += firstNames + Characters.separationCharacter + lastNames + Characters.splitCharacter
-        
-        // Add phone
-        encodedSchedule += String(phoneNumber) + Characters.splitCharacter
-        
-        // Add image
-        encodedSchedule += (imageURL?.absoluteString)! + Characters.splitCharacter
-        
-        var firstEvent = true;
-        
-        // Add events
-        for (i, daySchedule) in schedule.weekDays.enumerate() where i > 0
-        {
-            for (j, event) in daySchedule.events.enumerate()
-            {
-                if firstEvent
-                {
-                    firstEvent = false
-                }
-                else
-                {
-                    encodedSchedule += Characters.multipleElementsCharacter
-                }
-                
-                let eventType = event.type == EventType.FreeTime ? "G" : "C"
-                
-                // Add event type
-                encodedSchedule += eventType + Characters.separationCharacter
-                
-                // Add event weekday
-                encodedSchedule += String(i) + Characters.separationCharacter
-                
-                // Add hours
-                encodedSchedule += "\(event.startHour.hour)\(Characters.hourMinuteSeparationCharacter)\(event.startHour.minute)"
-                encodedSchedule += Characters.separationCharacter
-                encodedSchedule += "\(event.endHour.hour)\(Characters.hourMinuteSeparationCharacter)\(event.endHour.minute)"
-            }
-        }
-        
-        encodedSchedule += Characters.splitCharacter
-        
-        return encodedSchedule
-    }
-    
     override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
     {
         super.updateUserWithJSONDictionary(JSONDictionary)

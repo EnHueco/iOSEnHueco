@@ -14,9 +14,7 @@ class ProfileViewController: UIViewController, ServerPoller
 {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var editScheduleButton: UIButton!
-    @IBOutlet weak var myQRButton: UIButton!
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var backgroundImageView: UIImageView!
 
@@ -28,7 +26,6 @@ class ProfileViewController: UIViewController, ServerPoller
     override func viewDidLoad()
     {
         editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-        myQRButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
         firstNamesLabel.text = enHueco.appUser.firstNames
         lastNamesLabel.text = enHueco.appUser.lastNames
@@ -45,8 +42,6 @@ class ProfileViewController: UIViewController, ServerPoller
 
         editScheduleButton.clipsToBounds = true
         editScheduleButton.layer.cornerRadius = editScheduleButton.frame.height / 2
-        myQRButton.clipsToBounds = true
-        myQRButton.layer.cornerRadius = myQRButton.frame.height / 2
 
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
@@ -85,7 +80,6 @@ class ProfileViewController: UIViewController, ServerPoller
         UIView.animateWithDuration(0.8)
         {
             self.editScheduleButton.backgroundColor = averageImageColor
-            self.myQRButton.backgroundColor = averageImageColor
         }
     }
 
@@ -149,17 +143,6 @@ class ProfileViewController: UIViewController, ServerPoller
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
             }
         }
-    }
-
-    @IBAction func myQRButtonPressed(sender: AnyObject)
-    {
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("ViewQRViewController") as! ViewQRViewController
-
-        viewController.view.backgroundColor = UIColor.clearColor()
-
-        providesPresentationContextTransitionStyle = true
-        viewController.modalPresentationStyle = .OverCurrentContext
-        presentViewController(viewController, animated: true, completion: nil)
     }
 
     @IBAction func settingsButtonPressed(sender: UIButton)

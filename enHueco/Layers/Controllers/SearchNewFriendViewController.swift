@@ -101,10 +101,12 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     {
         let friend = searchResults[indexPath.row]
         
-        EHProgressHUD.showSpinnerInView(view)
+        let window = UIApplication.sharedApplication().delegate!.window!!
+        
+        EHProgressHUD.showSpinnerInView(window)
         FriendsManager.sharedManager.sendFriendRequestToUser(friend) { (success, error) -> () in
             
-            EHProgressHUD.dismissSpinnerForView(self.view)
+            EHProgressHUD.dismissSpinnerForView(window)
             self.searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
             
             guard success && error == nil else
