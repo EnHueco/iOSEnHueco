@@ -53,6 +53,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 
                 activityIndicator.removeFromSuperview()
                 
+                guard let image = image else { return }
+                
                 UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                     
                     self.imageImageView.image = image
