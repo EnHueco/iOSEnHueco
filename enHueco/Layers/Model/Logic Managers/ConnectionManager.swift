@@ -124,15 +124,15 @@ class ConnectionManager: NSObject
     private class func _processResponse<ValueType>(response: Response<ValueType, NSError>, forRequest request: Request,
                                         successCompletionHandler: ((value: ValueType) -> Void)?, failureCompletionHandler: ConnectionManagerFailureRequestBlock?) {
         
-        if debug {
-            debugPrint(request); debugPrint(response)
+        if debug
+        {
+            debugPrint(request);
+            
+            if ValueType.self != NSData.self { debugPrint(response) }
+            else { print("[Data]: \(response.data?.length ?? 0) bytes") }
         }
         
         let errorHandler = {
-            
-            if let data = response.data where debug {
-                print(NSString(data: data, encoding: NSUTF8StringEncoding)!)
-            }
             
             let tracker = GAI.sharedInstance().defaultTracker
             tracker.send(GAIDictionaryBuilder.createExceptionWithDescription(request.request?.URLString ?? "Nil URL", withFatal: NSNumber(bool: false)).build() as [NSObject : AnyObject])
@@ -141,8 +141,8 @@ class ConnectionManager: NSObject
             return
         }
         
-        guard response.response?.statusCode != 401 else {
-            
+        guard response.response?.statusCode != 401 else
+        {
             dispatch_async(dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(ConnectionManagerNotifications.sessionDidExpire, object: self)
             }
@@ -151,7 +151,8 @@ class ConnectionManager: NSObject
             return
         }
         
-        guard let value = response.result.value where response.result.isSuccess else {
+        guard let value = response.result.value where response.result.isSuccess else
+        {
             errorHandler()
             return
         }
@@ -161,8 +162,8 @@ class ConnectionManager: NSObject
     
     private class func addJSONParameters(params: AnyObject?, inout toRequest request: NSMutableURLRequest) throws
     {
-        if let dictionaryJSONData:NSData? = params != nil ? try NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil {
-            
+        if let dictionaryJSONData:NSData? = params != nil ? try NSJSONSerialization.dataWithJSONObject(params!, options: NSJSONWritingOptions.PrettyPrinted) : nil
+        {
             request.setValue("application/json", forHTTPHeaderField: "Content-type")
             request.HTTPBody = dictionaryJSONData
         }
