@@ -123,11 +123,11 @@ class ProfileViewController: UIViewController, ServerPoller
     
     func startPolling()
     {
-        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(ProfileViewController.pollFromServer), userInfo: nil, repeats: true)
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(ProfileViewController.pollFromServer(_:)), userInfo: nil, repeats: true)
         requestTimer.fire()
     }
     
-    func pollFromServer()
+    func pollFromServer(timer: NSTimer)
     {
         if imageImageView.image == nil
         {

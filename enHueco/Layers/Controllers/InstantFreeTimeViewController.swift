@@ -35,6 +35,7 @@ class InstantFreeTimeViewController: UIViewController
         super.viewDidLoad()
         
         endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
+        endTimeDatePicker.locale = NSLocale(localeIdentifier: "en_US")
         endTimeDatePicker.minimumDate = NSDate().dateByAddingTimeInterval(60)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
@@ -46,8 +47,6 @@ class InstantFreeTimeViewController: UIViewController
         
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
-        //view.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
-        //view.layer.borderWidth = 1
     }
     
     func showInViewController(controller: UIViewController)

@@ -8,16 +8,17 @@
 
 import UIKit
 
-protocol ServerPoller {
+protocol ServerPoller
+{
     var requestTimer: NSTimer {get set}
     var pollingInterval :NSTimeInterval {get}
     
     func startPolling()
-    func pollFromServer()
+    func pollFromServer(timer: NSTimer)
 }
 
-extension ServerPoller where Self: NSObject {
-    
+extension ServerPoller where Self: NSObject
+{
     func stopPolling()
     {
         requestTimer.invalidate()

@@ -97,7 +97,7 @@
 		F1DFF5FA1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1DFF5FB1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1DFF5FE1CB96C8600F21E13 /* Friends.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF6001CB96C8600F21E13 /* Friends.strings */; };
-		F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */; };
+		F1E6E5581BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift */; };
 		F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */; };
 		F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */ = {isa = PBXBuildFile; fileRef = F1ED50C71BEAFCA700533557 /* accessPoints.csv */; };
 		F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */; };
@@ -254,7 +254,7 @@
 		F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F1DFF5FF1CB96C8600F21E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Friends.strings; sourceTree = "<group>"; };
 		F1DFF6011CB96C8E00F21E13 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Friends.strings; sourceTree = "<group>"; };
-		F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommonGapsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F1E6E5571BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommonFreeTimePeriodsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProximityUpdateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1ED50C71BEAFCA700533557 /* accessPoints.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accessPoints.csv; sourceTree = "<group>"; };
 		F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -446,7 +446,7 @@
 				F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */,
 				F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */,
 				F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */,
-				F1E6E5571BC6D050007A0867 /* CommonGapsViewController.swift */,
+				F1E6E5571BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift */,
 				F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */,
 				F16E7D101C135757009A3C30 /* PopOverMenuViewController.swift */,
 			);
@@ -985,7 +985,7 @@
 				F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,
 				F16E7D131C13877A009A3C30 /* PopOverMenuTableViewCell.swift in Sources */,
-				F1E6E5581BC6D050007A0867 /* CommonGapsViewController.swift in Sources */,
+				F1E6E5581BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift in Sources */,
 				F1F54B321B9CE1470087C30E /* AvailableFriendCell.swift in Sources */,
 				F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */,
 				F119309E1BB7AFD70031EB58 /* UIImage+ImageEffects.m in Sources */,

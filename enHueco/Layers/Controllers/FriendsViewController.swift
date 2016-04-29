@@ -173,11 +173,11 @@ class FriendsViewController: UIViewController, ServerPoller
     
     func startPolling()
     {
-        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(FriendsViewController.pollFromServer), userInfo: nil, repeats: true)
+        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(FriendsViewController.pollFromServer(_:)), userInfo: nil, repeats: true)
         requestTimer.fire()
     }
     
-    func pollFromServer()
+    func pollFromServer(timer: NSTimer)
     {
         FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler { success, error in
             self.reloadFriendsAndTableView()

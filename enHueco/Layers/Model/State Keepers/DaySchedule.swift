@@ -19,6 +19,11 @@ class DaySchedule: NSObject, NSCoding
     
     private var mutableEvents = [Event]()
     
+    override var description: String
+    {
+        return "\(weekDayName): \(mutableEvents.count) events"
+    }
+    
     var events:[Event]
     {
         get
@@ -127,6 +132,4 @@ class DaySchedule: NSObject, NSCoding
     {
         return mutableEvents.filter { $0.startHour == startHour }.first
     }
-    
-    // TODO: Implement Equatable protocol
 }

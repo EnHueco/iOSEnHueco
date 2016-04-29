@@ -55,14 +55,7 @@ class AppUser: User
         coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
         coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
     }
-    
-    // MARK: Updates
-    
-    func fetchUpdatesForFriendLocations (successHandler: () -> (), failureHandler: () -> ())
-    {
-        
-    }
-            
+                
     /// When currentBSSID is set, refreshes the isNearby property for all friends.
     override func refreshIsNearby()
     {

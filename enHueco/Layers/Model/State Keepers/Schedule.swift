@@ -14,6 +14,8 @@ class Schedule: NSObject, NSCoding
     ///DaySchedule array that makes the days of the week
     let weekDays:[DaySchedule]
     
+    private var instantFreeTimePeriodTTLTimer: NSTimer?
+    
     ///Current instant free time period for the day. Self-destroys when the period is over (i.e. currentTime > endHour)
     var instantFreeTimePeriod: Event?
     {
@@ -24,7 +26,9 @@ class Schedule: NSObject, NSCoding
                 dispatch_async(dispatch_get_main_queue())
                 {
                     let currentDate = NSDate()
-                    NSTimer.scheduledTimerWithTimeInterval(instantFreeTimePeriod.endHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceDate(currentDate), target: self, selector: #selector(Schedule.instantFreeTimePeriodTimeToLiveReached(_:)), userInfo: nil, repeats: false)
+                    
+                    self.instantFreeTimePeriodTTLTimer?.invalidate()
+                    self.instantFreeTimePeriodTTLTimer = NSTimer.scheduledTimerWithTimeInterval(instantFreeTimePeriod.endHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceDate(currentDate), target: self, selector: #selector(Schedule.instantFreeTimePeriodTimeToLiveReached(_:)), userInfo: nil, repeats: false)
                 }
             }
         }

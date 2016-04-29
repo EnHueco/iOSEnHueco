@@ -37,11 +37,10 @@ class AccountManager
             
             enHueco.appUser = AppUser(JSONDictionary: response["user"] as! [String : AnyObject])
             
-            try? PersistenceManager.sharedManager.persistData()
+            let _ = try? PersistenceManager.sharedManager.persistData()
             
             AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
             FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
             
             dispatch_async(dispatch_get_main_queue()) {

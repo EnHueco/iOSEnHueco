@@ -78,9 +78,7 @@ class AppUserInformationManager
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler?(success: true, error: nil)
             }
-            
-            // self.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
-            
+                        
         }, failureCompletionHandler: { (error) -> () in
             
             dispatch_async(dispatch_get_main_queue()) {
