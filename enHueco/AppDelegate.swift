@@ -103,12 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         FBSDKAppEvents.activateApp()
         
         PersistenceManager.sharedManager.loadDataFromPersistence()
-        
-        if enHueco.appUser != nil
-        {
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
-            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
-        }
     }
 
     func applicationWillTerminate(application: UIApplication)
