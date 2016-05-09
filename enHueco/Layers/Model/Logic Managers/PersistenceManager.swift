@@ -49,14 +49,39 @@ class PersistenceManager
     /// Restores all pertinent application data to memory
     func loadDataFromPersistence () -> Bool
     {
-        enHueco.appUser = NSKeyedUnarchiver.unarchiveObjectWithFile(persistencePath) as? AppUser
-        
-        if enHueco.appUser == nil
-        {
-            let _ = try? NSFileManager.defaultManager().removeItemAtPath(persistencePath)
+        class UnArchiverDelegate: NSObject, NSKeyedUnarchiverDelegate {
+            
+            // This class is placeholder for unknown classes.
+            // It will eventually be `nil` when decoded.
+            final class Unknown: NSObject, NSCoding  {
+                @objc init?(coder aDecoder: NSCoder) { super.init(); return nil }
+                @objc func encodeWithCoder(aCoder: NSCoder) {}
+            }
+            
+            @objc func unarchiver(unarchiver: NSKeyedUnarchiver, cannotDecodeObjectOfClassName name: String, originalClasses classNames: [String]) -> AnyClass? {
+                return Unknown.self
+            }
         }
         
-        return enHueco.appUser != nil
+        let removeAndFinish = { () -> Bool in
+            let _ = try? NSFileManager.defaultManager().removeItemAtPath(self.persistencePath)
+            return false
+        }
+        
+        guard let data = NSData(contentsOfFile: persistencePath) else {
+            return removeAndFinish()
+        }
+        
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+        let delegate = UnArchiverDelegate()
+        unarchiver.delegate = delegate
+        
+        guard let appUser = unarchiver.decodeObjectForKey("root") as? AppUser else {
+            return removeAndFinish()
+        }
+        
+        enHueco.appUser = appUser
+        return true
     }
 
     func deleteAllPersistenceData()
