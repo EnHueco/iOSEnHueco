@@ -65,42 +65,41 @@ class EnHueco
     }
     
     // TODO: Move, doesn't belong here
-    func getFriendABID(phoneNumber : String, completionHandler : (NSNumber) -> ())
+    func getFriendABID(phoneNumber : String, completionHandler : (abid: NSNumber?) -> ())
     {
         let addressBook = APAddressBook()
         addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
-        var abid : NSNumber? = nil
-        addressBook.loadContacts(
-            { (contacts: [AnyObject]!, error: NSError!) in
+        
+        addressBook.loadContacts({ (contacts: [AnyObject]!, error: NSError!) in
+            
+            guard let contacts = contacts else
+            {
+                completionHandler(abid: nil)
+                return
+            }
+            
+            for contact in contacts
+            {
+                guard let contactAP = contact as? APContact else { continue }
                 
-                if contacts != nil
+                for phone in contactAP.phones ?? []
                 {
-                    for contact in contacts
+                    guard var phoneString = phone as? String else { continue }
+                    
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    
+                    if phoneString.rangeOfString(phoneNumber) != nil
                     {
-                        if let contactAP = contact as? APContact
-                        {
-                            for phone in contactAP.phones
-                            {
-                                if var phoneString = phone as? String
-                                {
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
-                                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                                    
-                                    if phoneString.rangeOfString(phoneNumber) != nil
-                                    {
-                                        abid = contactAP.recordID
-                                        completionHandler(abid!)
-                                        return
-                                    }
-                                }
-                            }
-                        }
+                        completionHandler(abid: contactAP.recordID)
+                        return
                     }
                 }
+            }
         })
         return
     }

@@ -106,11 +106,13 @@ class Schedule: NSObject, NSCoding
         return nil
     }
     
-    func removeEventWithID(ID: String)
+    func removeEventWithID(ID: String) -> Bool
     {
         if let (event, daySchedule) = eventAndDayScheduleOfEventWithID(ID)
         {
-            daySchedule.removeEvent(event)
+            return daySchedule.removeEvent(event)
         }
+        
+        return false
     }
 }
