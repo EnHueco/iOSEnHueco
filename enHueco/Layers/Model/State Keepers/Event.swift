@@ -17,8 +17,6 @@ enum EventType: String
 /// A calendar event (class or free time at the moment)
 class Event: EHSynchronizable, Comparable, NSCopying
 {
-    weak var daySchedule: DaySchedule!
-    
     var name:String?
     {
         didSet
@@ -58,23 +56,15 @@ class Event: EHSynchronizable, Comparable, NSCopying
     required init?(coder decoder: NSCoder)
     {
         guard
-            let daySchedule = decoder.decodeObjectForKey("daySchedule") as? DaySchedule,
             let type = decoder.decodeObjectForKey("type") as? String,
             let startHour = decoder.decodeObjectForKey("startHour") as? NSDateComponents,
             let endHour = decoder.decodeObjectForKey("endHour") as? NSDateComponents
         else
         {
-            self.type = .FreeTime
-            self.startHour = NSDateComponents()
-            self.endHour = NSDateComponents()
-            self.daySchedule = DaySchedule(weekDayName: "")
-        
-            super.init(coder: decoder)
             return nil
         }
         
         self.type = EventType(rawValue: type)!
-        self.daySchedule = daySchedule
         self.startHour = startHour
         self.endHour = endHour
         
@@ -131,7 +121,6 @@ class Event: EHSynchronizable, Comparable, NSCopying
         startHour = event.startHour
         endHour = event.endHour
         location = event.location
-        daySchedule = event.daySchedule
     }
     
     override func encodeWithCoder(coder: NSCoder)
@@ -141,7 +130,6 @@ class Event: EHSynchronizable, Comparable, NSCopying
         coder.encodeObject(startHour, forKey: "startHour")
         coder.encodeObject(endHour, forKey: "endHour")
         coder.encodeObject(location, forKey: "location")
-        coder.encodeObject(daySchedule, forKey: "daySchedule")
         
         super.encodeWithCoder(coder)
     }
@@ -237,9 +225,7 @@ class Event: EHSynchronizable, Comparable, NSCopying
     
     func copyWithZone(zone: NSZone) -> AnyObject
     {
-        let event = Event(type: type, name: name, startHour: startHour, endHour: endHour, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)
-        event.daySchedule = daySchedule
-        
+        let event = Event(type: type, name: name, startHour: startHour, endHour: endHour, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)        
         return event
     }
 }

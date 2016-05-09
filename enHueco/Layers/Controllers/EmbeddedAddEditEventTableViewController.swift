@@ -62,7 +62,9 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             let globalCalendar = NSCalendar.currentCalendar()
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
             
-            let indexSet = NSIndexSet(index: enHueco.appUser.schedule.weekDays.indexOf(eventToEdit.daySchedule)!-1)
+            let schedule = enHueco.appUser.schedule
+            
+            let indexSet = NSIndexSet(index: schedule.weekDays.indexOf(schedule.eventAndDayScheduleOfEventWithID(eventToEdit.ID)!.daySchedule)!-1)
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
             
             if eventToEdit.type == .FreeTime

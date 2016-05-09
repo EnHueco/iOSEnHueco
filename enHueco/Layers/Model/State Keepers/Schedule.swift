@@ -90,4 +90,27 @@ class Schedule: NSObject, NSCoding
         coder.encodeObject(weekDays, forKey: "weekDays")
         coder.encodeObject(instantFreeTimePeriod, forKey: "instantFreeTimePeriod")
     }
+    
+    func eventAndDayScheduleOfEventWithID(ID: String) -> (event: Event, daySchedule: DaySchedule)?
+    {
+        for daySchedule in weekDays
+        {
+            let event = daySchedule.events.filter { $0.ID == ID }.first
+            
+            if event != nil
+            {
+                return (event!, daySchedule)
+            }
+        }
+    
+        return nil
+    }
+    
+    func removeEventWithID(ID: String)
+    {
+        if let (event, daySchedule) = eventAndDayScheduleOfEventWithID(ID)
+        {
+            daySchedule.removeEvent(event)
+        }
+    }
 }

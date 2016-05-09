@@ -229,7 +229,7 @@ class EventsAndSchedulesManager
             
             for event in existingEvents
             {
-                event.daySchedule.removeEvent(event)
+                enHueco.appUser.schedule.removeEventWithID(event.ID)
             }
             
             try? PersistenceManager.sharedManager.persistData()

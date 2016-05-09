@@ -44,9 +44,6 @@ class DaySchedule: NSObject, NSCoding
             let mutableEvents = decoder.decodeObjectForKey("mutableEvents") as? [Event]
         else
         {
-            self.weekDayName = ""
-           
-            super.init()
             return nil
         }
         
@@ -68,7 +65,6 @@ class DaySchedule: NSObject, NSCoding
         
         for event in events
         {
-            event.daySchedule = self
             mutableEvents.insertInSortedArray(event)
         }
     }
@@ -100,9 +96,7 @@ class DaySchedule: NSObject, NSCoding
     {
         if canAddEvent(newEvent)
         {
-            newEvent.daySchedule = self
             mutableEvents.insertInSortedArray(newEvent)
-            
             return true
         }
         return false

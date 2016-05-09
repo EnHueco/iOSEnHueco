@@ -110,7 +110,6 @@ class AddEditEventViewController: UIViewController
             }
             else
             {
-                newEvent.daySchedule = daySchedule
                 eventsToAdd.append(newEvent)
             }
         }
