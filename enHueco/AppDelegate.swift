@@ -12,6 +12,8 @@ import WatchConnectivity
 import FBSDKCoreKit
 import Fabric
 import Crashlytics
+import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -26,7 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
+        // Start Firebase
+        FIRApp.configure()
+        
+        // Start Crashlitics
         Fabric.with([Crashlytics.self])
+        
+        // Start FBSDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         if #available(iOS 9.0, *)

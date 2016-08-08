@@ -4,6 +4,10 @@ use_frameworks!
  
 target 'enHueco' do
 
+    # Only pull in the "Auth" FirebaseUI features (including Facebook and Google)
+    #    pod 'FirebaseUI/Auth', '~> 0.4'
+    pod 'Firebase/Auth'
+
 	pod 'Fabric'
 	pod 'Crashlytics'
     pod 'Firebase/Database'

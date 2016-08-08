@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FirebaseAuth
+
 
 @IBDesignable class LoginViewController: UIViewController
 {
@@ -53,6 +56,14 @@ import UIKit
         
         view.insertSubview(backgroundImageView, atIndex: 0)
         backgroundImageView.autoPinEdgesToSuperviewEdges()
+        
+        let fbLoginButton = FBSDKLoginButton()
+        fbLoginButton.delegate = self
+        
+        fbLoginButton.center = view.center
+        view.addSubview(fbLoginButton)
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,10 +93,13 @@ import UIKit
         loginButton.roundCorners()
         logoImageView.roundCorners()
     }
+    
+    
 
     @IBAction func login(sender: AnyObject)
     {
         view.endEditing(true)
+        
         guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
         {
             //TODO: Shake animation
@@ -202,5 +216,25 @@ extension LoginViewController: ImportProfileImageViewControllerDelegate
     func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
     {
         goToMainTabViewController()
+    }
+}
+
+extension LoginViewController: FBSDKLoginButtonDelegate
+{
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        else {
+            let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+            FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                print(" SUCCESSFULLY LOGGED IN ")
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        
     }
 }

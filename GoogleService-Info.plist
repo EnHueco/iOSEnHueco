@@ -2,25 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TRACKING_ID</key>
-	<string>UA-74431031-3</string>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>109647077180-lc8gq1svuhof1uf1cm479q67p3i0aph1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.109647077180-lc8gq1svuhof1uf1cm479q67p3i0aph1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB37rU_RXOLDjCYHTfNFgwGpQzHTJdtMcE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>109647077180</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.ncodde.enHueco</string>
+	<key>PROJECT_ID</key>
+	<string>en-hueco-cddfd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>en-hueco-cddfd.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
-	<key>IS_ANALYTICS_ENABLED</key>
 	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<false/>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:892055088473:ios:499e7c5eee8a9bfd</string>
-	<key>PROJECT_ID</key>
-	<string>enhueco-1113</string>
+	<string>1:109647077180:ios:499e7c5eee8a9bfd</string>
+	<key>DATABASE_URL</key>
+	<string>https://en-hueco-cddfd.firebaseio.com</string>
 </dict>
 </plist>
