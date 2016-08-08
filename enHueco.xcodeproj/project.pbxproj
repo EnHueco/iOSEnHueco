@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		40A43EF21102292AE43CC9C7 /* Pods_enHuecoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */; };
 		414D42BF472E8CB8371E11D3 /* Pods_enHueco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F21BED4E4201370C8D4BB7C /* Pods_enHueco.framework */; };
+		F105DC2B1D580960001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
+		F105DC2C1D580966001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
+		F105DC2D1D580967001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
+		F105DC2E1D580967001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
 		F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */; };
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
@@ -24,7 +28,6 @@
 		F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B03671BA5334C00ADD580 /* ScheduleViewController.swift */; };
 		F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */; };
 		F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11D6FA31BA3BE1500206B9A /* Colors.swift */; };
-		F12130091CCB56C6006985BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BDB1A74947200C4FDE2 /* AppDelegate.swift */; };
 		F1229BF51A74947200C4FDE2 /* enHuecoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1229BF41A74947200C4FDE2 /* enHuecoTests.swift */; };
 		F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1229C241A7495A200C4FDE2 /* LaunchScreen.xib */; };
@@ -94,9 +97,6 @@
 		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
 		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
-		F1DFF5F91CB6018400F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
-		F1DFF5FA1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
-		F1DFF5FB1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */; };
 		F1DFF5FE1CB96C8600F21E13 /* Friends.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF6001CB96C8600F21E13 /* Friends.strings */; };
 		F1E6E5581BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E6E5571BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift */; };
 		F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */; };
@@ -158,6 +158,7 @@
 		9F21BED4E4201370C8D4BB7C /* Pods_enHueco.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_enHueco.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71A5595C1513C38D1D1797E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEE272258B40F441A8506A2D /* Pods-enHueco.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHueco.release.xcconfig"; path = "Pods/Target Support Files/Pods-enHueco/Pods-enHueco.release.xcconfig"; sourceTree = "<group>"; };
+		F105DC2A1D580960001C1960 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImportProfileImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Vendor/Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
 		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
@@ -253,7 +254,6 @@
 		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
-		F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F1DFF5FF1CB96C8600F21E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Friends.strings; sourceTree = "<group>"; };
 		F1DFF6011CB96C8E00F21E13 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Friends.strings; sourceTree = "<group>"; };
 		F1E6E5571BC6D050007A0867 /* CommonFreeTimePeriodsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CommonFreeTimePeriodsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -663,7 +663,7 @@
 		F1DFF5F71CB6016A00F21E13 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F1DFF5F81CB6018400F21E13 /* GoogleService-Info.plist */,
+				F105DC2A1D580960001C1960 /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -830,7 +830,7 @@
 			files = (
 				F155C81E1C2760E6000EAF96 /* General.strings in Resources */,
 				F1ED50C81BEAFCA700533557 /* accessPoints.csv in Resources */,
-				F1DFF5F91CB6018400F21E13 /* GoogleService-Info.plist in Resources */,
+				F105DC2B1D580960001C1960 /* GoogleService-Info.plist in Resources */,
 				F1229C471A7495A200C4FDE2 /* Assets.xcassets in Resources */,
 				F13DB84C1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
@@ -845,7 +845,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F12130091CCB56C6006985BE /* GoogleService-Info.plist in Resources */,
+				F105DC2C1D580966001C1960 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +855,7 @@
 			files = (
 				F126ADFE1BE4836800AE561D /* Assets.xcassets in Resources */,
 				F13DB8541C27A36600DB11AD /* General.strings in Resources */,
-				F1DFF5FA1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */,
+				F105DC2D1D580967001C1960 /* GoogleService-Info.plist in Resources */,
 				F13DB84D1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 				F126ADFC1BE4836800AE561D /* Interface.storyboard in Resources */,
 			);
@@ -865,8 +865,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F105DC2E1D580967001C1960 /* GoogleService-Info.plist in Resources */,
 				F126AE161BE4836900AE561D /* Assets.xcassets in Resources */,
-				F1DFF5FB1CB6018D00F21E13 /* GoogleService-Info.plist in Resources */,
 				F13DB8551C27A36700DB11AD /* General.strings in Resources */,
 				F13DB84E1C27A2AE00DB11AD /* LocalizableInterface.strings in Resources */,
 			);
