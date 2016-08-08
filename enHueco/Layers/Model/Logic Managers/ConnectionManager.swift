@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Google
 
 /// HTTP Methods
 enum HTTPMethod: String
@@ -133,10 +132,7 @@ class ConnectionManager: NSObject
         }
         
         let errorHandler = {
-            
-            let tracker = GAI.sharedInstance().defaultTracker
-            tracker.send(GAIDictionaryBuilder.createExceptionWithDescription(request.request?.URLString ?? "Nil URL", withFatal: NSNumber(bool: false)).build() as [NSObject : AnyObject])
-            
+                        
             failureCompletionHandler?(compoundError: ConnectionManagerCompoundError(error:response.result.error, response: response.response))
             return
         }

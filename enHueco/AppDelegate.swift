@@ -12,7 +12,6 @@ import WatchConnectivity
 import FBSDKCoreKit
 import Fabric
 import Crashlytics
-import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
@@ -30,23 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
         Fabric.with([Crashlytics.self])
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        // Configure tracker from GoogleService-Info.plist.
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        // Optional: configure GAI options.
-        let gai = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true  // report uncaught exceptions
-        
-        let tracker = gai.defaultTracker
-        let event = GAIDictionaryBuilder.createEventWithCategory("Action", action: "App Launch", label: nil, value: nil)
-        tracker.send(event.build() as [NSObject : AnyObject])
-        
-        #if DEBUG
-            gai.dryRun = true
-        #endif
-                
         if #available(iOS 9.0, *)
         {
             if WCSession.isSupported()

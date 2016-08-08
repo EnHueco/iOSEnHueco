@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Google
 
 typealias BasicCompletionHandler = (success: Bool, error: ErrorType?) -> Void
 
@@ -263,10 +262,6 @@ extension UIViewController
 {
     func reportScreenViewToGoogleAnalyticsWithName(name: String)
     {
-        let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: name)
-        
-        let builder: NSObject = GAIDictionaryBuilder.createScreenView().build()
-        tracker.send(builder as! [NSObject : AnyObject])
+        // TODO: Send report to Firebase analytics
     }
 }

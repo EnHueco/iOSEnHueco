@@ -130,7 +130,7 @@ class FriendsViewController: UIViewController, ServerPoller
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
         
-        friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+        friendRequestsNotificationHub.count = Int32(enHueco.appUser.incomingFriendRequests.count)
         friendRequestsNotificationHub.pop()
     }
     
@@ -185,7 +185,7 @@ class FriendsViewController: UIViewController, ServerPoller
         
         FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler { success, error in
             
-            self.friendRequestsNotificationHub.count = UInt(enHueco.appUser.incomingFriendRequests.count)
+            self.friendRequestsNotificationHub.count = Int32(enHueco.appUser.incomingFriendRequests.count)
             self.friendRequestsNotificationHub.pop()
         }
     }

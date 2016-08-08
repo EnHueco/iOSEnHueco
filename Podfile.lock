@@ -1,44 +1,45 @@
 PODS:
-  - AHKActionSheet (0.5.4)
-  - Alamofire (3.3.0)
+  - Alamofire (3.4.1)
   - APAddressBook (0.1.14):
     - APAddressBook/Core (= 0.1.14)
   - APAddressBook/Core (0.1.14)
   - ASBPlayerScrubbing (0.1)
   - ASMediaFocusManager (0.6):
     - ASBPlayerScrubbing (~> 0.1)
-  - Bolts (1.7.0):
-    - Bolts/AppLinks (= 1.7.0)
-    - Bolts/Tasks (= 1.7.0)
-  - Bolts/AppLinks (1.7.0):
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
-  - Bolts/Tasks (1.7.0)
+  - Bolts/Tasks (1.8.4)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - Crashlytics (3.7.0):
+  - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
-  - CSwiftV (0.0.3)
+  - CSwiftV (0.0.5)
   - Fabric (1.6.7)
-  - FBSDKCoreKit (4.10.1):
-    - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.10.1):
+  - FBSDKCoreKit (4.14.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.14.0):
     - FBSDKCoreKit
-  - Google/Analytics (2.0.3):
-    - Google/Core
-    - GoogleAnalytics (~> 3.12)
-  - Google/Core (2.0.3):
-    - GoogleInterchangeUtilities (~> 1.0)
-    - GoogleNetworkingUtilities (~> 1.0)
+  - Firebase/Analytics (3.4.0):
+    - FirebaseAnalytics (~> 3.3)
+  - Firebase/Database (3.4.0):
+    - Firebase/Analytics
+    - FirebaseDatabase (= 3.0.2)
+  - FirebaseAnalytics (3.3.0):
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.2)
+  - FirebaseDatabase (3.0.2):
+    - FirebaseAnalytics (~> 3.2)
+  - FirebaseInstanceID (1.0.8)
+  - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.1)
-  - GoogleAnalytics (3.14.0)
-  - GoogleInterchangeUtilities (1.2.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleNetworkingUtilities (1.2.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSymbolUtilities (1.1.0)
-  - GoogleUtilities (1.2.0):
+  - GoogleSymbolUtilities (1.1.1)
+  - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
   - HexColors (2.3.0)
   - MRProgress (0.8.3):
@@ -70,23 +71,20 @@ PODS:
   - MRProgress/Stopable (0.8.3):
     - MRProgress/Helper
   - MultiSelectSegmentedControl (1.1.0)
-  - PureLayout (3.0.1)
-  - QRCode (0.5)
-  - QRCodeReaderViewController (3.5.2)
+  - PureLayout (3.0.2)
   - ReachabilitySwift (2.3.3)
-  - RKNotificationHub (2.0.1)
+  - RKNotificationHub (2.0.4)
   - RSKImageCropper (1.5.1)
-  - SDWebImage (3.7.5):
-    - SDWebImage/Core (= 3.7.5)
-  - SDWebImage/Core (3.7.5)
-  - SwiftGraph (1.0.5)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - SwiftGraph (1.0.6)
   - SWTableViewCell (0.3.7)
   - TapkuLibrary (0.3.8)
   - TSMessages (0.9.13):
     - HexColors (~> 2.3.0)
 
 DEPENDENCIES:
-  - AHKActionSheet
   - Alamofire
   - APAddressBook (~> 0.1.11)
   - ASMediaFocusManager
@@ -96,13 +94,11 @@ DEPENDENCIES:
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - Google/Analytics
+  - Firebase/Database
   - MRProgress
   - MultiSelectSegmentedControl
   - PureLayout
-  - QRCode
-  - QRCodeReaderViewController (~> 3.5.2)
-  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - ReachabilitySwift
   - RKNotificationHub
   - RSKImageCropper
   - SDWebImage
@@ -112,51 +108,46 @@ DEPENDENCIES:
   - TSMessages (from `https://github.com/KrauseFx/TSMessages.git`)
 
 EXTERNAL SOURCES:
-  ReachabilitySwift:
-    :git: https://github.com/ashleymills/Reachability.swift
   TSMessages:
     :git: https://github.com/KrauseFx/TSMessages.git
 
 CHECKOUT OPTIONS:
-  ReachabilitySwift:
-    :commit: fa90df50c04f5743fbdf643cbe8d10562d75673d
-    :git: https://github.com/ashleymills/Reachability.swift
   TSMessages:
     :commit: e63f23304f781dcadbac31e6d338f3105fb3cd78
     :git: https://github.com/KrauseFx/TSMessages.git
 
 SPEC CHECKSUMS:
-  AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   APAddressBook: 697e88cdf8930e4a4783d813289e95822602e516
   ASBPlayerScrubbing: 0fc5e76aad6fdbcf14380734fb7f2c127cd28b66
   ASMediaFocusManager: 564dc75d983e4e0dacf24855b5f8a7b4d4a9caec
-  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  CSwiftV: 93e3d4e1501f2a9b1eac3ae51d53a5edf41beb5b
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  CSwiftV: 2560532e2e5b04d95c36b0f49a8dc745071fa525
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: d2aaed5e9ab7d8d6301c533376a1fbff1cf3deb5
-  FBSDKLoginKit: 699ff169080e3072de4b9b0faca90bf23dc36deb
-  Google: 61379f0072bc561a7e174d23a6cbe41bd6d8599c
-  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
-  GoogleInterchangeUtilities: 427382e42d8a340038bec37c6fdfd316e14b5fa2
-  GoogleNetworkingUtilities: ec1e9911aca811eb18b7144394fee6168b607785
-  GoogleSymbolUtilities: eb3965ea12710569c7b80db198a39e39b18613f7
-  GoogleUtilities: 85f8ad6b251544286a97163133d042ec95f889c5
+  FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
+  FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
+  Firebase: 754562547af419cc2f4b15247fee419081924bc2
+  FirebaseAnalytics: 228be2991cb28efb96cdafc4d62f64680e615c69
+  FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
+  GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
   MultiSelectSegmentedControl: 54fb23c997b971eff621cfcf965ff1613d99c3d2
-  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  QRCode: a249ed747aeb0f4bf5f9c58b5b001b6b3bc80073
-  QRCodeReaderViewController: f20275985c41ae551099641493ab364691d9113e
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
-  RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
+  RKNotificationHub: 3765424499139c3d3885b681bb0837f072d12ae6
   RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
-  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  SwiftGraph: e4e3837db6d4c0d703c70823ca717e1e3532190e
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SwiftGraph: 176d7058ab4cedfeef079742c4e4dafaa3d574b6
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TapkuLibrary: 7a406dac46eff8595e191557eba88959f97f69b7
   TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 455841129974ad7ae890c532f74f0fc906563f1f
+
+COCOAPODS: 1.0.1
