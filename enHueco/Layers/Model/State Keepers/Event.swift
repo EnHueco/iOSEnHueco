@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Genome
 /// The type of the event
 enum EventType: String
 {
@@ -15,32 +15,37 @@ enum EventType: String
 }
 
 /// A calendar event (class or free time at the moment)
-class Event: EHSynchronizable, Comparable, NSCopying
+class Event
 {
-    var name:String?
-    {
-        didSet
-        {
-            if name == "" { name = nil }
-        }
-    }
+    let userID:String
     
-    var location: String?
-    {
-        didSet
-        {
-            if location == "" { location = nil }
-        }
-    }
+    let eventID: String
 
-    var type: EventType
+    let type: EventType
     
-    /** UTC weekday, hour and minute time components of the event's start hour */
-    var startHour: NSDateComponents
+    let name: String
     
-    /** UTC weekday, hour and minute time components of the event's end hour */
-    var endHour: NSDateComponents
+    let startDate : NSDateComponents
     
+    let endDate : NSDateComponents
+    
+    let location : String
+    
+    let repetitionDays : String
+    
+    
+    init(map: Map) throws {
+        userID = try map.extract("user_id")
+        eventID = try map.extract("event_id")
+        type = try map["type"].fromJson { EventType(rawValue: $0)! }
+        name = try map.extract("name")
+        // To do: Set start & end dates based on JSON data
+        location = try map.extract("location")
+        repetitionDays = try map.extract("location")
+        
+    }
+    
+    /*
     init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
     {
         self.type = type
@@ -228,8 +233,10 @@ class Event: EHSynchronizable, Comparable, NSCopying
         let event = Event(type: type, name: name, startHour: startHour, endHour: endHour, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)        
         return event
     }
+*/
 }
 
+/*
 func < (lhs: Event, rhs: Event) -> Bool
 {
     let currentDate = NSDate()
@@ -241,3 +248,4 @@ func == (lhs: Event, rhs: Event) -> Bool
     let currentDate = NSDate()
     return lhs.startHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.startHourInNearestPossibleWeekToDate(currentDate)) && lhs.endHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.endHourInNearestPossibleWeekToDate(currentDate))
 }
+*/

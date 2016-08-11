@@ -8,6 +8,9 @@ target 'enHueco' do
     #    pod 'FirebaseUI/Auth', '~> 0.4'
     pod 'Firebase/Auth'
 
+    # JSON parsing library
+    pod 'Genome', '~> 2.0.0'
+
 	pod 'Fabric'
 	pod 'Crashlytics'
     pod 'Firebase/Database'

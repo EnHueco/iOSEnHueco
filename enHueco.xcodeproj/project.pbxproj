@@ -216,6 +216,7 @@
 		F152DE501C1B75EF001C0F72 /* InstantFreeTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = InstantFreeTimeViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F155C81F1C2760E6000EAF96 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/General.strings; sourceTree = "<group>"; };
 		F156646B1BE5EA7800823AEE /* FriendDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendDetailInterfaceController.swift; sourceTree = "<group>"; };
+		F15862801D5C3C99007AED20 /* Genome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Genome.framework; path = "Pods/../build/Debug-iphoneos/Genome/Genome.framework"; sourceTree = "<group>"; };
 		F165BC4A1BC6060600AA9248 /* SearchFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendCell.swift; sourceTree = "<group>"; };
 		F165BC4C1BC6066400AA9248 /* SearchNewFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchNewFriendViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F165BC4E1BC611A200AA9248 /* FriendRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendRequestsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -317,6 +318,7 @@
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F15862801D5C3C99007AED20 /* Genome.framework */,
 				F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */,
 				F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */,
 				F11B02011BA5226F00ADD580 /* QuartzCore.framework */,
@@ -1241,6 +1243,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Genome",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1280,6 +1283,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Genome",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
