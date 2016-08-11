@@ -435,7 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				F1C8E5351BEBCA35007673BC /* Logic Managers */,
-				F1827F6D1BC35D91002ECB64 /* State Keepers */,
+				F1827F6D1BC35D91002ECB64 /* Entities */,
 				F1827F6E1BC35DAC002ECB64 /* Other */,
 			);
 			path = Model;
@@ -540,7 +540,7 @@
 			name = "Main Screen View Controllers";
 			sourceTree = "<group>";
 		};
-		F1827F6D1BC35D91002ECB64 /* State Keepers */ = {
+		F1827F6D1BC35D91002ECB64 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */,
@@ -552,6 +552,7 @@
 				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
 				F16C613A1BB222EF00703782 /* Event.swift */,
 			);
+			name = Entities;
 			path = "State Keepers";
 			sourceTree = "<group>";
 		};
