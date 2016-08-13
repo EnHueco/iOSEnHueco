@@ -8,11 +8,13 @@
 
 import Foundation
 
-/// A schedule
 class Schedule: NSObject, NSCoding
 {
-    ///DaySchedule array that makes the days of the week
-    let weekDays:[DaySchedule]
+
+    let events:[Event]
+    
+    /*
+    
     
     private var instantFreeTimePeriodTTLTimer: NSTimer?
     
@@ -33,6 +35,8 @@ class Schedule: NSObject, NSCoding
             }
         }
     }
+    
+ 
     
     override init()
     {
@@ -115,4 +119,5 @@ class Schedule: NSObject, NSCoding
         
         return false
     }
+ */
 }

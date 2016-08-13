@@ -17,7 +17,7 @@ enum EventType: String
 /// A calendar event (class or free time at the moment)
 class Event
 {
-    let userID:String
+    let userID: String
     
     let eventID: String
 
@@ -25,13 +25,13 @@ class Event
     
     let name: String
     
-    let startDate : NSDateComponents
+    let startDate: NSDateComponents
     
-    let endDate : NSDateComponents
+    let endDate: NSDateComponents
     
-    let location : String
+    let location: String
     
-    let repetitionDays : String
+    let repetitionDays: String
     
     
     init(map: Map) throws {
@@ -41,7 +41,7 @@ class Event
         name = try map.extract("name")
         // To do: Set start & end dates based on JSON data
         location = try map.extract("location")
-        repetitionDays = try map.extract("location")
+        repetitionDays = try map.extract("repetition_days")
         
     }
     
@@ -233,6 +233,36 @@ class Event
         let event = Event(type: type, name: name, startHour: startHour, endHour: endHour, location: location, ID: ID, lastUpdatedOn: lastUpdatedOn)        
         return event
     }
+     
+     
+     /// Returns true if event doesn't overlap with any gap or class, excluding eventToExclude.
+     func canAddEvent(newEvent: Event, excludingEvent eventToExclude:Event? = nil) -> Bool
+     {
+     let currentDate = NSDate()
+     
+     let newEventStartHourInCurrentDate = newEvent.startHourInNearestPossibleWeekToDate(currentDate)
+     let newEventEndHourInCurrentDate = newEvent.endHourInNearestPossibleWeekToDate(currentDate)
+     
+     for event in mutableEvents where eventToExclude == nil || event !== eventToExclude
+     {
+     let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+     let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
+     
+     if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
+     {
+     return false
+     }
+     }
+     
+     return true
+     }
+     
+     func eventWithStartHour(startHour: NSDateComponents) -> Event?
+     {
+     return mutableEvents.filter { $0.startHour == startHour }.first
+     }
+     
+     
 */
 }
 

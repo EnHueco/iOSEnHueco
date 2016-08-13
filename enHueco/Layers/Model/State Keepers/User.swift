@@ -7,21 +7,104 @@
 //
 
 import Foundation
-
+import Genome
 /// A user.
-class User: EHSynchronizable
+class User
 {
-    let username: String
+    let userID: String
     
-    var firstNames: String
-    var lastNames: String
+    let institution : String
     
-    var name: String { return "\(firstNames) \(lastNames)" }
+    let firstNames: String
     
-    var imageURL: NSURL?
-    var imageThumbnailURL: NSURL?
-    var phoneNumber: String! = ""
+    let lastNames: String
     
+    let image: NSURL
+    
+    let imageThumbnail: NSURL
+    
+    let phoneNumber: String
+    
+    //var name: String { return "\(firstNames) \(lastNames)" }
+    
+    init(map: Map) throws {
+        userID = try map.extract("user_id")
+        institution = try map.extract("institution")
+        firstNames = try map.extract("first_names")
+        lastNames = try map.extract("last_names")
+        image = try map.extract("image")
+        imageThumbnail = try map.extract("image_thumbnail")
+        phoneNumber = try map.extract("phone_number")
+    }
+    
+    
+    
+    
+    
+    /*
+     
+     ///Dictionary containing the AppUser's friends with their usernames as their keys
+     var friends = [String : User]()
+     
+     var outgoingFriendRequests = [User]()
+     var incomingFriendRequests = [User]()
+     
+     override init(username: String, firstNames: String, lastNames: String, phoneNumber: String!, imageURL: NSURL?, imageThumbnailURL: NSURL?, ID: String, lastUpdatedOn: NSDate)
+     {
+     super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
+     }
+     
+     override init(JSONDictionary: [String : AnyObject])
+     {
+     super.init(JSONDictionary: JSONDictionary)
+     }
+     
+     // MARK: NSCoding
+     
+     required init?(coder decoder: NSCoder)
+     {
+     guard
+     let friends = decoder.decodeObjectForKey("friends") as? [String : User],
+     let incomingFriendRequests = decoder.decodeObjectForKey("incomingFriendRequests") as? [User],
+     let outgoingFriendRequests = decoder.decodeObjectForKey("outgoingFriendRequests") as? [User]
+     else
+     {
+     return nil
+     }
+     
+     self.friends = friends
+     self.incomingFriendRequests = incomingFriendRequests
+     self.outgoingFriendRequests = outgoingFriendRequests
+     
+     super.init(coder: decoder)
+     }
+     
+     override func encodeWithCoder(coder: NSCoder)
+     {
+     super.encodeWithCoder(coder)
+     
+     coder.encodeObject(friends, forKey: "friends")
+     coder.encodeObject(incomingFriendRequests, forKey: "incomingFriendRequests")
+     coder.encodeObject(outgoingFriendRequests, forKey: "outgoingFriendRequests")
+     }
+     
+     /// When currentBSSID is set, refreshes the isNearby property for all friends.
+     override func refreshIsNearby()
+     {
+     for friend in friends.values
+     {
+     friend.refreshIsNearby()
+     }
+     }
+     
+     override func updateUserWithJSONDictionary(JSONDictionary: [String : AnyObject])
+     {
+     super.updateUserWithJSONDictionary(JSONDictionary)
+     
+     PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
+     PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
+     }
+     
     var schedule = Schedule()
     
     /// (For efficiency) True if the user is near the App User at the current time, given the currentBSSID values.
@@ -279,6 +362,7 @@ class User: EHSynchronizable
         
         super.encodeWithCoder(coder)
     }
+ */
     
 }
 extension String

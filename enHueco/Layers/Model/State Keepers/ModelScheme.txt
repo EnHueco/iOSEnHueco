@@ -1,0 +1,69 @@
+version : {
+    appVersion : 2.0,
+    requiresUpdate : true
+}
+
+users : {
+    user_id: {
+        first_names : (String)
+        last_names : (String)
+        institution : (String:Type)
+        image : (String-URL)
+        image_thumbnail : (String-URL)
+        phone_number : (String)
+    }
+}
+
+instantEvents : {
+    user_id: {
+        type : (String-Type)
+        name : (String)
+        start_date : (Date)
+        end_date : (Date)
+        location : (String)
+    }
+}
+
+privacy : {
+    user_id: {
+        show_events_names: (Bool)
+        show_events_locations: (Bool)
+    }
+}
+
+schedules:  {
+    user_id: {
+        eventID1: {
+            type : (String-Type)
+            name : (String)
+            start_date : (Date)
+            end_date : (Date)
+            location : (String)
+            repetition_days : (String)
+        },
+        ...
+    }
+}
+
+// Relationships
+
+friends : {
+    userID: {
+        friendID1 : True (Boolean),
+        ...
+    }
+}
+
+sentRequests: {
+    inviterUserID: {
+        inviteeUserID1 : True (Boolean),
+        ...
+    }
+}
+
+receivedRequests: {
+    inviteeUserID: {
+        inviterUserID1 : True (Boolean),
+        ...
+    }
+}

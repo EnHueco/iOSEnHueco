@@ -17,7 +17,6 @@
 		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
-		F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1691B7CDDEB00325209 /* DaySchedule.swift */; };
 		F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */; };
 		F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E691B9BB10C00B04400 /* FriendsViewController.swift */; };
 		F1179E6E1B9BB3F100B04400 /* CurrentlyAvailableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E6D1B9BB3F100B04400 /* CurrentlyAvailableViewController.swift */; };
@@ -81,7 +80,6 @@
 		F183F84D1C814E3A00390CF7 /* EventsAndSchedulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */; };
 		F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8561C837FB500390CF7 /* PrivacyManager.swift */; };
 		F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */; };
-		F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */; };
 		F1B54B161C8FB7B40059F855 /* EHNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B54B151C8FB7B40059F855 /* EHNotifications.swift */; };
 		F1B54B181C8FBA6D0059F855 /* EHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B54B171C8FBA6D0059F855 /* EHProgressHUD.swift */; };
 		F1B8AD5C1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */; };
@@ -89,12 +87,13 @@
 		F1B8AD601BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD5F1BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift */; };
 		F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */; };
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
+		F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */; };
+		F1B9BCB41D5EC81C00153850 /* Privacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB31D5EC81C00153850 /* Privacy.swift */; };
+		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
 		F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */; };
 		F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD98761CAC741200F390E5 /* ServerPoller.swift */; };
-		F1BD98791CAC92D300F390E5 /* UserSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD98781CAC92D300F390E5 /* UserSync.swift */; };
 		F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */; };
-		F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C598BB1A81C7220081DA9E /* AppUser.swift */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
 		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
 		F1DFF5FE1CB96C8600F21E13 /* Friends.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1DFF6001CB96C8600F21E13 /* Friends.strings */; };
@@ -164,7 +163,6 @@
 		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = User.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
-		F113D1691B7CDDEB00325209 /* DaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
 		F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F1179E691B9BB10C00B04400 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1179E6D1B9BB3F100B04400 /* CurrentlyAvailableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurrentlyAvailableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -239,7 +237,6 @@
 		F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventsAndSchedulesManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8561C837FB500390CF7 /* PrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacyManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F184D2681BA4F54E00D6129F /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectCalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHSynchronizable.swift; sourceTree = "<group>"; };
 		F1B54B151C8FB7B40059F855 /* EHNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHNotifications.swift; sourceTree = "<group>"; };
 		F1B54B171C8FBA6D0059F855 /* EHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHProgressHUD.swift; sourceTree = "<group>"; };
 		F1B8AD5B1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFreeTimePeriodsSearchFriendToAddViewController.swift; sourceTree = "<group>"; };
@@ -247,12 +244,13 @@
 		F1B8AD5F1BC8E13500BB879B /* CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyFreeNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
+		F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantEvent.swift; sourceTree = "<group>"; };
+		F1B9BCB31D5EC81C00153850 /* Privacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Privacy.swift; sourceTree = "<group>"; };
+		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHueco.swift; sourceTree = "<group>"; };
 		F1BD98761CAC741200F390E5 /* ServerPoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerPoller.swift; sourceTree = "<group>"; };
-		F1BD98781CAC92D300F390E5 /* UserSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSync.swift; sourceTree = "<group>"; };
 		F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
-		F1C598BB1A81C7220081DA9E /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
 		F1DFF5FF1CB96C8600F21E13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Friends.strings; sourceTree = "<group>"; };
@@ -545,14 +543,13 @@
 		F1827F6D1BC35D91002ECB64 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				F197BFD21BAA043E00DEDE0D /* EHSynchronizable.swift */,
 				F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */,
-				F1C598BB1A81C7220081DA9E /* AppUser.swift */,
 				F113D1611B7CDD3A00325209 /* User.swift */,
-				F1BD98781CAC92D300F390E5 /* UserSync.swift */,
 				F113D1651B7CDD6200325209 /* Schedule.swift */,
-				F113D1691B7CDDEB00325209 /* DaySchedule.swift */,
 				F16C613A1BB222EF00703782 /* Event.swift */,
+				F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */,
+				F1B9BCB31D5EC81C00153850 /* Privacy.swift */,
+				F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */,
 			);
 			name = Entities;
 			path = "State Keepers";
@@ -839,6 +836,7 @@
 				F1229C441A7495A200C4FDE2 /* Default-568h@2x.png in Resources */,
 				F1DFF5FE1CB96C8600F21E13 /* Friends.strings in Resources */,
 				F1229C431A7495A200C4FDE2 /* Main.storyboard in Resources */,
+				F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */,
 				F1229C421A7495A200C4FDE2 /* LaunchScreen.xib in Resources */,
 				F14A72BD1BA3786700D70BD1 /* AutoCoding in Resources */,
 			);
@@ -996,7 +994,6 @@
 				F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */,
 				F11D6FA41BA3BE1500206B9A /* Colors.swift in Sources */,
 				F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */,
-				F113D16A1B7CDDEB00325209 /* DaySchedule.swift in Sources */,
 				F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */,
 				F1179E701B9BB40800B04400 /* ProfileViewController.swift in Sources */,
 				F113D1621B7CDD3A00325209 /* User.swift in Sources */,
@@ -1006,6 +1003,7 @@
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
 				F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */,
+				F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */,
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */,
 				F183F83D1C7FF90900390CF7 /* main.m in Sources */,
@@ -1020,12 +1018,12 @@
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* Constants.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
+				F1B9BCB41D5EC81C00153850 /* Privacy.swift in Sources */,
 				F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */,
 				F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */,
 				F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */,
 				F1179E6E1B9BB3F100B04400 /* CurrentlyAvailableViewController.swift in Sources */,
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
-				F197BFD31BAA043E00DEDE0D /* EHSynchronizable.swift in Sources */,
 				F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */,
 				F16E7D111C135757009A3C30 /* PopOverMenuViewController.swift in Sources */,
 				F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */,
@@ -1036,9 +1034,7 @@
 				F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
 				F165BC4D1BC6066400AA9248 /* SearchNewFriendViewController.swift in Sources */,
-				F1C598BC1A81C7220081DA9E /* AppUser.swift in Sources */,
 				F165BC511BC6123400AA9248 /* IncomingFriendRequestCell.swift in Sources */,
-				F1BD98791CAC92D300F390E5 /* UserSync.swift in Sources */,
 				F16C613B1BB222EF00703782 /* Event.swift in Sources */,
 				F183F8571C837FB500390CF7 /* PrivacyManager.swift in Sources */,
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
