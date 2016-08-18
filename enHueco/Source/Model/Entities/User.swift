@@ -8,37 +8,41 @@
 
 import Foundation
 import Genome
-/// A user.
-class User
+
+class User: MappableObject
 {
+    struct JSONKeys {
+        private init() {}
+        
+        static let userID = "user_id"
+        static let institution = "institution"
+        static let firstNames = "first_names"
+        static let lastNames = "last_names"
+        static let image = "image"
+        static let imageThumbnail = "image_thumbnail"
+        static let phoneNumber = "phone_number"
+    }
+    
     let userID: String
-    
-    let institution : String
-    
+    let institution: String
     let firstNames: String
-    
     let lastNames: String
-    
     let image: NSURL
-    
     let imageThumbnail: NSURL
-    
     let phoneNumber: String
     
     //var name: String { return "\(firstNames) \(lastNames)" }
     
     init(map: Map) throws {
-        userID = try map.extract("user_id")
-        institution = try map.extract("institution")
-        firstNames = try map.extract("first_names")
-        lastNames = try map.extract("last_names")
-        image = try map.extract("image")
-        imageThumbnail = try map.extract("image_thumbnail")
-        phoneNumber = try map.extract("phone_number")
+        
+        userID = try map.extract(JSONKeys.userID)
+        institution = try map.extract(JSONKeys.institution)
+        firstNames = try map.extract(JSONKeys.firstNames)
+        lastNames = try map.extract(JSONKeys.lastNames)
+        image = try map.extract(JSONKeys.image)
+        imageThumbnail = try map.extract(JSONKeys.imageThumbnail)
+        phoneNumber = try map.extract(JSONKeys.phoneNumber)
     }
-    
-    
-    
     
     
     /*

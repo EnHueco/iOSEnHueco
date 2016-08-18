@@ -10,32 +10,47 @@ import UIKit
 import Genome
 
 /// The type of the Instant Event
-enum InstantEventType: String
-{
-    case FreeTime = "FREE_TIME", Invisible = "INVISIBLE"
+enum InstantEventType: String {
+    case FreeTime = "FREE_TIME", Invisibility = "INVISIBILITY"
 }
-class InstantEvent
-{
+
+class InstantEvent: MappableObject {
+    
+    struct JSONKeys {
+        private init() {}
+        
+        static let userID = "user_id"
+        static let type = "type"
+        static let name = "name"
+        static let startDate = "start_date"
+        static let endDate = "end_date"
+        static let location = "location"
+    }
+    
     let userID: String
-    
     let type : InstantEventType
+    let name: String?
+    let location: String?
+    let startDate: NSDate
+    let endDate: NSDate
     
-    let name: String
-    
-    let startDate: NSDateComponents
-    
-    let endDate: NSDateComponents
-    
-    let location: NSString
-    
-    //var name: String { return "\(firstNames) \(lastNames)" }
-    
+    init(type: InstantEventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate) {
+        
+        self.type = type
+        self.name = name
+        self.location = location
+        self.startDate = startDate
+        self.endDate = endDate
+        self.repetitionDays = repetitionDays
+    }
+        
     init(map: Map) throws {
-        userID = try map.extract("user_id")
-        type = try map["type"].fromJson { EventType(rawValue: $0)! }
-        name = try map.extract("name")
+        
+        userID = try map.extract(JSONKeys.id)
+        type = try map[JSONKeys.ty].fromJson { EventType(rawValue: $0)! }
+        name = try map.extract(JSONKeys.name)
         
         // To do: Set start & end dates based on JSON data
-        location = try map.extract("location")
+        location = try map.extract(JSONKeys.location)
     }
 }

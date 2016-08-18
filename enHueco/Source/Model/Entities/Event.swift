@@ -8,41 +8,25 @@
 
 import UIKit
 import Genome
-/// The type of the event
-enum EventType: String
-{
-    case FreeTime = "FREE_TIME", Class = "CLASS"
-}
 
 /// A calendar event (class or free time at the moment)
-class Event
+class Event: BaseEvent
 {
+    struct JSONKeys {
+        private init() {}
+        
+        static let userID = "user_id"
+        static let id = "id"
+    }
+    
     let userID: String
-    
-    let eventID: String
-
-    let type: EventType
-    
-    let name: String
-    
-    let startDate: NSDateComponents
-    
-    let endDate: NSDateComponents
-    
-    let location: String
-    
-    let repetitionDays: String
-    
+    let id: String
     
     init(map: Map) throws {
-        userID = try map.extract("user_id")
-        eventID = try map.extract("event_id")
-        type = try map["type"].fromJson { EventType(rawValue: $0)! }
-        name = try map.extract("name")
-        // To do: Set start & end dates based on JSON data
-        location = try map.extract("location")
-        repetitionDays = try map.extract("repetition_days")
-        
+        userID = try map.extract(JSONKeys.eventID)
+        eventID = try map.extract("id")
+
+        super.init(map: Map)
     }
     
     /*
