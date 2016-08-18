@@ -8,125 +8,129 @@
 
 import UIKit
 
-class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDelegate
-{
+class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDelegate {
     @IBOutlet weak var changeProfilePictureCell: UITableViewCell!
     @IBOutlet weak var logoutCell: UITableViewCell!
     @IBOutlet weak var authTouchIDSwitch: UISwitch!
     @IBOutlet weak var nearbyFriendsNotificationsSwitch: UISwitch!
     @IBOutlet weak var phoneNumberCell: UITableViewCell!
-    
+
     /// !!! Sections that must be hidden because they are not implemented yet
     private let unimplementedSections = [1, 3]
-        
-    override func viewDidLoad()
-    {
+
+    override func viewDidLoad() {
+
         super.viewDidLoad()
-        
+
         title = "Ajustes"
-        
+
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         navigationController?.navigationBar.barStyle = .BlackTranslucent
         navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
-        
+
         clearsSelectionOnViewWillAppear = true
-                
+
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
 //        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
     // !!! REMOVE WHEN READY TO IMPLEMENT THE FEATURES IN THE HIDDEN SECTIONS
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        guard !unimplementedSections.contains(section) else { return 0 }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        guard !unimplementedSections.contains(section) else {
+            return 0
+        }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        guard !unimplementedSections.contains(section) else { return nil }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+        guard !unimplementedSections.contains(section) else {
+            return nil
+        }
         return super.tableView(tableView, titleForHeaderInSection: section)
     }
-    
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String?
-    {
-        guard !unimplementedSections.contains(section) else { return nil }
+
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+
+        guard !unimplementedSections.contains(section) else {
+            return nil
+        }
         return super.tableView(tableView, titleForFooterInSection: section)
     }
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
-    {
-        guard !unimplementedSections.contains(section) else { return 1 }
+
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+        guard !unimplementedSections.contains(section) else {
+            return 1
+        }
         return super.tableView(tableView, heightForHeaderInSection: section)
     }
-    
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-    {
-        guard !unimplementedSections.contains(section) else { return 1 }
+
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+
+        guard !unimplementedSections.contains(section) else {
+            return 1
+        }
         return super.tableView(tableView, heightForFooterInSection: section)
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-    @IBAction func doneButtonPressed(sender: AnyObject)
-    {
+
+    @IBAction func doneButtonPressed(sender: AnyObject) {
+
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    @IBAction func nearbyFriendsNotificationsToggleChanged(sender: AnyObject)
-    {
+
+    @IBAction func nearbyFriendsNotificationsToggleChanged(sender: AnyObject) {
+
         //TODO
     }
-    
-    @IBAction func authenticateWithTIDChanged(sender: UISwitch)
-    {
+
+    @IBAction func authenticateWithTIDChanged(sender: UISwitch) {
+
         var isOn = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
         isOn = !isOn
-        
+
         NSUserDefaults.standardUserDefaults().setBool(isOn, forKey: EHUserDefaultsKeys.authTouchID)
-        
+
         authTouchIDSwitch.on = isOn
     }
-    
-    override func didReceiveMemoryWarning()
-    {
+
+    override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        
-        if cell ==  logoutCell
-        {
+
+        if cell == logoutCell {
             logout()
-        }
-        else if cell == phoneNumberCell
-        {
+        } else if cell == phoneNumberCell {
             let alertView = UIAlertView(title: "Teléfono", message: "Agrega un nuevo número de teléfono", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Agregar")
             alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
             alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.PhonePad
             alertView.show()
-        }
-        else if cell == changeProfilePictureCell
-        {
+        } else if cell == changeProfilePictureCell {
             let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
             importPictureController.delegate = self
-            
+
             presentViewController(importPictureController, animated: true, completion: nil)
         }
     }
-    
-    func logout()
-    {
+
+    func logout() {
+
         /*The actual logout will be done by the login view controller. We do this this way becase there seems to be a bug in iOS. 
          We are calling dismissViewController from the presenting controller that is first in the controller stack (i.e. AppDelegate.mainNavigationController).
          As a consequence, all intermediate controllers will also be dismissed behind the scenes.
@@ -142,29 +146,29 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
          we did the actual logout procedure here*/
 
         dispatch_async(dispatch_get_main_queue()) {
-            
+
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
+
             appDelegate.loggingOut = true
             appDelegate.mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
-    {
+
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+
         phoneNumberCell.setSelected(false, animated: true)
-        if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty
-        {
+        if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty {
             enHueco.appUser.phoneNumber = newNumber
-            
-            AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) { success, error in
-                
+
+            AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) {
+                success, error in
+
                 guard success && error == nil else
                 {
                     EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                     return
                 }
-                
+
                 UIView.animateWithDuration(0.4) {
                     self.phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
                 }
@@ -173,15 +177,14 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     }
 }
 
-extension SettingsEmbeddedTableViewController: ImportProfileImageViewControllerDelegate
-{
-    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
-    {
+extension SettingsEmbeddedTableViewController: ImportProfileImageViewControllerDelegate {
+    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
+
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
-    {
+
+    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController) {
+
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

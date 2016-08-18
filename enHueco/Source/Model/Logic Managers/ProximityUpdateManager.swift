@@ -13,64 +13,62 @@ import SwiftGraph
 import CSwiftV
 
 /// ProximityUpdatesManager Notifications
-class EHProximityUpdatesManagerNotification
-{
-    private init() {}
+
+class EHProximityUpdatesManagerNotification {
+    private init() {
+    }
 
     static let ProximityUpdatesManagerDidReceiveProximityUpdates = "ProximityUpdatesManagerDidReceiveProximityUpdates"
 }
 
-enum ProximityUpdatesManagerReportingCompletionStatus
-{
+enum ProximityUpdatesManagerReportingCompletionStatus {
     case NotConnectedToWifi
     case NetworkFailure
     case Success
 }
 
 /// Handles operations related to proximity between users, including location reporting.
-class ProximityUpdatesManager: NSObject
-{
+
+class ProximityUpdatesManager: NSObject {
     static let sharedManager = ProximityUpdatesManager()
-    
+
     static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
-    static let backgroundFetchIntervalAfterDayOver = 7*3600.0
-    
+    static let backgroundFetchIntervalAfterDayOver = 7 * 3600.0
+
     ///Graph with BSSIDs of the access points
     private let wifiAccessPointsGraph = UnweightedGraph<String>()
-    
+
     /// Temporary solution: Timer to trigger location updates with the server while app open
     private var proximityInformationRefreshTimer: NSTimer!
-    
-    private override init()
-    {
+
+    private override init() {
         super.init()
     }
-        
+
     ///Temporary
-    private func scheduleProximityInformationRefreshTimer()
-    {
+    private func scheduleProximityInformationRefreshTimer() {
+
         proximityInformationRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(ProximityUpdatesManager.proximityInformationRefreshTimerTicked(_:)), userInfo: nil, repeats: true)
     }
-    
-    func proximityInformationRefreshTimerTicked(timer:NSTimer)
-    {
-        reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler { _ -> () in }
+
+    func proximityInformationRefreshTimerTicked(timer: NSTimer) {
+
+        reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler {
+            _ -> () in }
     }
-    
+
     ///Temporary
-    func beginProximityUpdates()
-    {
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
-        {
+    func beginProximityUpdates() {
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             //self.generateGraphFromFile()
-            
-            dispatch_async(dispatch_get_main_queue())
-            {
+
+            dispatch_async(dispatch_get_main_queue()) {
                 self.scheduleProximityInformationRefreshTimer()
             }
         }
     }
-    
+
     ///Temporary
     /*func generateGraphFromFile()
     {
@@ -123,85 +121,89 @@ class ProximityUpdatesManager: NSObject
             }
         }
     }*/
-    
-    func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool
-    {
-        guard let neighbors = wifiAccessPointsGraph.neighborsForVertex(bssidA) else { return false }
-        
-        for neighbor in neighbors
-        {
-            if neighbor == bssidB { return true }
-            
-            for neighbor2 in wifiAccessPointsGraph.neighborsForVertex(neighbor)!
-            {
-                if neighbor2 == bssidB { return true }
+
+    func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool {
+
+        guard let neighbors = wifiAccessPointsGraph.neighborsForVertex(bssidA) else {
+            return false
+        }
+
+        for neighbor in neighbors {
+            if neighbor == bssidB {
+                return true
+            }
+
+            for neighbor2 in wifiAccessPointsGraph.neighborsForVertex(neighbor)! {
+                if neighbor2 == bssidB {
+                    return true
+                }
             }
         }
-        
+
         return false
     }
-    
-    static func currentBSSID() -> String?
-    {
-        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi && TARGET_OS_SIMULATOR == 0 else { return nil }
-        
-        if let interfaces:CFArray! = CNCopySupportedInterfaces() where CFArrayGetCount(interfaces) > 0
-        {
+
+    static func currentBSSID() -> String? {
+
+        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi && TARGET_OS_SIMULATOR == 0 else {
+            return nil
+        }
+
+        if let interfaces: CFArray! = CNCopySupportedInterfaces() where CFArrayGetCount(interfaces) > 0 {
             let interfaceName: UnsafePointer<Void> = CFArrayGetValueAtIndex(interfaces, 0)
             let rec = unsafeBitCast(interfaceName, AnyObject.self)
-            
-            if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec))
-            {
+
+            if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec)) {
                 let interfaceData = unsafeInterfaceData as Dictionary
                 return (interfaceData["BSSID"] as? String)?.uppercaseString
             }
         }
-        
+
         return nil
     }
-    
-    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status: ProximityUpdatesManagerReportingCompletionStatus) -> ())
-    {
+
+    func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status:ProximityUpdatesManagerReportingCompletionStatus) -> ()) {
+
         NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdate")
-        
+
         guard let currentBSSID = ProximityUpdatesManager.currentBSSID() else
         {
             completionHandler(status: .NotConnectedToWifi)
             return
         }
-        
+
         enHueco.appUser.currentBSSID = currentBSSID
-        
+
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.LocationReportSegment)!)
         request.HTTPMethod = "PUT"
-        
-        let params = ["bssid" : currentBSSID]
-        
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: { (JSONResponse) -> () in
-            
-            for friendDictionary in JSONResponse as! [[String : AnyObject]]
-            {
-                enHueco.appUser.friends[ friendDictionary["login"] as! String ]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String).uppercaseString
+
+        let params = ["bssid": currentBSSID]
+
+        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: {
+            (JSONResponse) -> () in
+
+            for friendDictionary in JSONResponse as! [[String:AnyObject]] {
+                enHueco.appUser.friends[friendDictionary["login"] as! String]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String).uppercaseString
             }
-                    
+
             NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdateResponse")
-            
-            dispatch_async(dispatch_get_main_queue())
-            {
+
+            dispatch_async(dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(EHProximityUpdatesManagerNotification.ProximityUpdatesManagerDidReceiveProximityUpdates, object: self)
             }
-            
+
             completionHandler(status: .Success)
-            
-        }) { (error) -> () in
-            
+
+        }) {
+            (error) -> () in
+
             completionHandler(status: .NetworkFailure)
         }
     }
-    
+
     /// !!! DEACTIVATED FOR NOW, WILL MOST PROBABLY DISSAPEAR IN THE NEAR FUTURE
-    func updateBackgroundFetchInterval()
-    {
+    func updateBackgroundFetchInterval() {
+
         /*if NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends) || NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
         {
             let (currentFreeTimePeriod, nextFreeTimePeriod) = enHueco.appUser.currentAndNextFreeTimePeriods()

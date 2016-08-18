@@ -8,19 +8,18 @@
 
 import UIKit
 
-class PopOverMenuTableViewCell: UITableViewCell
-{
+class PopOverMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
 
-    override func awakeFromNib()
-    {
+    override func awakeFromNib() {
+
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool)
-    {
+    override func setSelected(selected: Bool, animated: Bool) {
+
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

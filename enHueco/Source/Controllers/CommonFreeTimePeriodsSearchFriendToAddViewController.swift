@@ -8,70 +8,66 @@
 
 import UIKit
 
-protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class
-{
+protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class {
     func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
 }
 
-class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
-{
+class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var resultsTableView: UITableView!
-    
+
     var filteredFriends = Array(enHueco.appUser.friends.values)
-    
+
     weak var delegate: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate?
-    
-    override func viewDidLoad()
-    {
+
+    override func viewDidLoad() {
+
         super.viewDidLoad()
 
         resultsTableView.delegate = self
         resultsTableView.dataSource = self
     }
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return filteredFriends.count
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
         let friend = filteredFriends[indexPath.row]
-        
+
         let cell = resultsTableView.dequeueReusableCellWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddResultsCell") as! CommonFreeTimePeriodsSearchFriendToAddResultsCell
-        
+
         cell.friendNameLabel.text = friend.name
-        
+
         return cell
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
         let friend = filteredFriends[indexPath.row]
         delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    
-    func filterContentForSearchText(searchText: String)
-    {
-        if searchText == ""
-        {
+
+    func filterContentForSearchText(searchText: String) {
+
+        if searchText == "" {
             filteredFriends = Array(enHueco.appUser.friends.values)
-        }
-        else
-        {
-            filteredFriends = Array(enHueco.appUser.friends.values).filter({(user: User) -> Bool in
-                
+        } else {
+            filteredFriends = Array(enHueco.appUser.friends.values).filter({
+                (user: User) -> Bool in
+
                 return user.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || user.username.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
             })
         }
-        
+
         resultsTableView.reloadData()
     }
 }

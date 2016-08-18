@@ -8,7 +8,6 @@
 
 import UIKit
 
-class EHUserDefaultsKeys: NSObject
-{
+class EHUserDefaultsKeys: NSObject {
     static let authTouchID = "authTouchID"
 }

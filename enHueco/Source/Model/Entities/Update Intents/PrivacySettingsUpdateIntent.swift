@@ -10,14 +10,14 @@ import Foundation
 import Genome
 
 struct PrivacyUpdateIntent: MappableObject {
-    
+
     var showEventsNames: Bool?
     var showEventsLocations: Bool?
-    
+
     func sequence(map: Map) throws {
-        
+
         typealias JSONKeys = PrivacySettings.JSONKeys
-        
+
         institution ~> map[JSONKeys.institution]
         firstNames ~> map[JSONKeys.firstNames]
         lastNames ~> map[JSONKeys.lastNames]

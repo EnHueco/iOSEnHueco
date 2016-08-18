@@ -8,26 +8,25 @@
 
 import UIKit
 
-class FriendsNavigationViewController: UINavigationController
-{
+class FriendsNavigationViewController: UINavigationController {
 
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
+
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewWillAppear(animated: Bool)
-    {
+
+    override func viewWillAppear(animated: Bool) {
+
         super.viewWillAppear(animated)
-        
+
         navigationBar.barStyle = UIBarStyle.Black
         navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
         navigationBar.tintColor = UIColor.whiteColor()

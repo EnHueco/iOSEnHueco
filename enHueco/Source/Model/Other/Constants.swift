@@ -12,8 +12,8 @@ import Foundation
 let ehBaseErrorDomain = "com.enhueco"
 
 /// URLS
-class EHURLS
-{
+
+class EHURLS {
     static let Domain = "enhueco.uniandes.edu.co"
     static let Base = "https://enhueco.uniandes.edu.co/api"
     static let MeSegment = "/me/"
@@ -29,8 +29,8 @@ class EHURLS
 }
 
 /// Default parameters
-class EHParameters
-{
+
+class EHParameters {
     static let UserID = "X-USER-ID"
     static let Token = "X-USER-TOKEN"
 }

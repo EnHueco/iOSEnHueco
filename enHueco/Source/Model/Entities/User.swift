@@ -9,11 +9,11 @@
 import Foundation
 import Genome
 
-class User: MappableObject
-{
+class User: MappableObject {
+
     struct JSONKeys {
         private init() {}
-        
+
         static let userID = "user_id"
         static let institution = "institution"
         static let firstNames = "first_names"
@@ -22,7 +22,7 @@ class User: MappableObject
         static let imageThumbnail = "image_thumbnail"
         static let phoneNumber = "phone_number"
     }
-    
+
     let userID: String
     let institution: String
     let firstNames: String
@@ -30,11 +30,11 @@ class User: MappableObject
     let image: NSURL
     let imageThumbnail: NSURL
     let phoneNumber: String
-    
+
     //var name: String { return "\(firstNames) \(lastNames)" }
-    
+
     init(map: Map) throws {
-        
+
         userID = try map.extract(JSONKeys.userID)
         institution = try map.extract(JSONKeys.institution)
         firstNames = try map.extract(JSONKeys.firstNames)
@@ -43,8 +43,8 @@ class User: MappableObject
         imageThumbnail = try map.extract(JSONKeys.imageThumbnail)
         phoneNumber = try map.extract(JSONKeys.phoneNumber)
     }
-    
-    
+
+
     /*
      
      ///Dictionary containing the AppUser's friends with their usernames as their keys
@@ -367,12 +367,12 @@ class User: MappableObject
         super.encodeWithCoder(coder)
     }
  */
-    
+
 }
-extension String
-{
-    func replace(target: String, withString: String) -> String
-    {
+
+extension String {
+    func replace(target: String, withString: String) -> String {
+
         return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
 }

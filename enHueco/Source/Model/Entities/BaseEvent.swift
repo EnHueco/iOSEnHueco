@@ -15,15 +15,16 @@ enum Weekday: Int {
 }
 
 /// The type of the event
+
 enum EventType: String {
     case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
 class BaseEvent: MappableObject {
-    
+
     struct JSONKeys {
         private init() {}
-        
+
         static let type = "type"
         static let name = "name"
         static let startDate = "start_date"
@@ -31,16 +32,16 @@ class BaseEvent: MappableObject {
         static let location = "location"
         static let repetitionDays = "repetition_days"
     }
-    
+
     let type: EventType
     let name: String?
     let startDate: NSDate
     let endDate: NSDate
     let location: String?
     let repetitionDays: [Weekday]?
-    
+
     init(type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repetitionDays: [Weekday]?) {
-        
+
         self.type = type
         self.name = name
         self.location = location
@@ -48,9 +49,11 @@ class BaseEvent: MappableObject {
         self.endDate = endDate
         self.repetitionDays = repetitionDays
     }
-    
+
     init(map: Map) throws {
-        type = try map[JSONKeys.type].fromJson { EventType(rawValue: $0)! }
+        type = try map[JSONKeys.type].fromJson {
+            EventType(rawValue: $0)!
+        }
         name = try? map.extract(JSONKeys.name)
         // To do: Set start & end dates based on JSON data
         location = try? map.extract(JSONKeys.location)

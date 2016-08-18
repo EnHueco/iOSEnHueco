@@ -10,25 +10,26 @@ import UIKit
 import Genome
 
 /// A calendar event (class or free time at the moment)
-class Event: BaseEvent
-{
+
+class Event: BaseEvent {
+
     struct JSONKeys {
         private init() {}
-        
+
         static let userID = "user_id"
         static let id = "id"
     }
-    
+
     let userID: String
     let id: String
-    
+
     init(map: Map) throws {
         userID = try map.extract(JSONKeys.eventID)
         eventID = try map.extract("id")
 
         super.init(map: Map)
     }
-    
+
     /*
     init(type:EventType, name:String? = nil, startHour: NSDateComponents, endHour: NSDateComponents, location: String? = nil, ID: String? = nil, lastUpdatedOn : NSDate = NSDate())
     {

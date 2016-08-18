@@ -9,8 +9,7 @@
 import UIKit
 import TapkuLibrary
 
-class ScheduleCalendarViewController: TKCalendarDayViewController
-{
+class ScheduleCalendarViewController: TKCalendarDayViewController {
     /**
         Schedule to be displayed. Defaults to AppUser's
     */
@@ -19,8 +18,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
+
         super.viewDidLoad()
 
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
@@ -28,30 +27,28 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
         dayView.daysBackgroundView.backgroundColor = UIColor(red: 248 / 255.0, green: 248 / 255.0, blue: 248 / 255.0, alpha: 1)
     }
 
-    override func viewWillAppear(animated: Bool)
-    {
+    override func viewWillAppear(animated: Bool) {
+
         super.viewWillAppear(animated)
         dayView.reloadData()
     }
 
-    func reloadData()
-    {
+    func reloadData() {
+
         dayView.reloadData()
     }
 
-    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]!
-    {
+    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]! {
+
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
         let weekDayDaySchedule = schedule.weekDays[localWeekDayNumber]
 
         var eventViews = [TKCalendarDayEventView]()
 
-        for event in weekDayDaySchedule.events
-        {
+        for event in weekDayDaySchedule.events {
             var eventView = calendarDay.dequeueReusableEventView
 
-            if eventView == nil
-            {
+            if eventView == nil {
                 eventView = TKCalendarDayEventView()
             }
 
@@ -70,8 +67,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController
         return eventViews
     }
 
-    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!)
-    {
+    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!) {
+
         guard schedule === enHueco.appUser.schedule else {
             return
         }

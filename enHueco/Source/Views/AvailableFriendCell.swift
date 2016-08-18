@@ -9,21 +9,20 @@
 import UIKit
 import SWTableViewCell
 
-class AvailableFriendCell: SWTableViewCell
-{
+class AvailableFriendCell: SWTableViewCell {
     @IBOutlet weak var friendImageImageView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var freeTimeStartOrEndHourIconImageView: UIImageView!
     @IBOutlet weak var freeTimeStartOrEndHourLabel: UILabel!
     @IBOutlet weak var freeNameAndLocationLabel: UILabel!
     @IBOutlet weak var instantFreeTimeIcon: UIImageView!
-    
+
     @IBOutlet weak var instantFreeTimeIconWidthConstraint: NSLayoutConstraint!
-   
-    var friendUsername : String? = nil
-    
-    func setInstantFreeTimeIconVisibility(visible visible: Bool)
-    {
-        instantFreeTimeIconWidthConstraint.constant = visible ? 25:0
+
+    var friendUsername: String? = nil
+
+    func setInstantFreeTimeIconVisibility(visible visible: Bool) {
+
+        instantFreeTimeIconWidthConstraint.constant = visible ? 25 : 0
     }
 }

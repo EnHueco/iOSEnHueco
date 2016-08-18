@@ -19,16 +19,15 @@ let enHueco = EnHueco()
  The singleton is intended to store all aplication's model state which should be persisted in order for 
  it to be restored in case the application is opened in an offline environment.
 */
-class EnHueco
-{            
+
+class EnHueco {
     /// User of the app
     var appUser: AppUser!
-    
-    private init()
-    {
-        
+
+    private init() {
+
     }
-    
+
     /*
     // TODO: Move, doesn't belong here
     func createTestAppUser ()

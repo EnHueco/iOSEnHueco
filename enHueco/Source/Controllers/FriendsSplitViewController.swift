@@ -8,34 +8,32 @@
 
 import UIKit
 
-class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDelegate
-{
-    override func viewDidLoad()
-    {
+class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDelegate {
+    override func viewDidLoad() {
+
         super.viewDidLoad()
-        
+
         delegate = self
-        
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsSplitViewController.orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    
-    override func didReceiveMemoryWarning()
-    {
+
+    override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func orientationChanged(notification: NSNotification)
-    {
-        switch UIApplication.sharedApplication().statusBarOrientation
-        {
-        
+
+    func orientationChanged(notification: NSNotification) {
+
+        switch UIApplication.sharedApplication().statusBarOrientation {
+
         case .Portrait, .PortraitUpsideDown:
-            
+
             preferredDisplayMode = .PrimaryHidden
-            
+
         default: break
-            
+
         }
     }
 

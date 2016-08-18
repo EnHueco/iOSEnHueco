@@ -8,15 +8,14 @@
 
 import UIKit
 
-class CommonFreeTimePeriodsSelectedFriendsCollectionViewCell: UICollectionViewCell
-{    
+class CommonFreeTimePeriodsSelectedFriendsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
-    
+
     @IBOutlet weak var deleteButtonWidthConstraint: NSLayoutConstraint!
-    
-    func setDeleteButtonHidden(hidden: Bool)
-    {
+
+    func setDeleteButtonHidden(hidden: Bool) {
+
         deleteButtonWidthConstraint.constant = hidden ? 0 : 20
         layoutIfNeeded()
     }

@@ -8,57 +8,55 @@
 
 import UIKit
 
-class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelectFriendsViewControllerDelegate
-{
+class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelectFriendsViewControllerDelegate {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
+
         super.viewDidLoad()
-        
+
         segmentedControl.tintColor = EHInterfaceColor.defaultNavigationBarColor
     }
 
-    @IBAction func editButtonPressed(sender: UIBarButtonItem)
-    {
+    @IBAction func editButtonPressed(sender: UIBarButtonItem) {
+
         navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.addButtonPressed(_:))), animated: true)
         navigationItem.setLeftBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.doneButtonPressed(_:))), animated: true)
-        
+
         navigationItem.setHidesBackButton(true, animated: true)
     }
-    
-    func addButtonPressed(sender: UIBarButtonItem)
-    {
+
+    func addButtonPressed(sender: UIBarButtonItem) {
+
         let controller = storyboard?.instantiateViewControllerWithIdentifier("SearchSelectFriendsViewController") as! SearchSelectFriendsViewController
-        
+
         controller.delegate = self
-        
+
         presentViewController(controller, animated: true, completion: nil)
     }
-    
-    func doneButtonPressed(sender: UIBarButtonItem)
-    {
+
+    func doneButtonPressed(sender: UIBarButtonItem) {
+
         navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.editButtonPressed(_:))), animated: true)
         navigationItem.setLeftBarButtonItem(nil, animated: true)
-        
+
         navigationItem.setHidesBackButton(false, animated: true)
     }
-    
-    @IBAction func segmentedControlSelectionChanged(sender: UISegmentedControl)
-    {
+
+    @IBAction func segmentedControlSelectionChanged(sender: UISegmentedControl) {
+
     }
-    
-    func searchSelectFriendsViewController(controller: SearchSelectFriendsViewController, didSelectFriends friends: [User])
-    {
-        
+
+    func searchSelectFriendsViewController(controller: SearchSelectFriendsViewController, didSelectFriends friends: [User]) {
+
     }
-    
-    override func didReceiveMemoryWarning()
-    {
+
+    override func didReceiveMemoryWarning() {
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     /*
     // MARK: - Navigation
 

@@ -8,11 +8,10 @@
 
 import Foundation
 
-class Schedule: NSObject, NSCoding
-{
+class Schedule: NSObject, NSCoding {
 
-    let events:[Event]
-    
+    let events: [Event]
+
     /*
     
     
