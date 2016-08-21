@@ -7,22 +7,100 @@
 //
 
 import Foundation
+import Firebase
 
-class FriendsManagerNotification {
-    static let didReceiveFriendAndScheduleUpdates = "didReceiveFriendAndScheduleUpdates"
-    static let didReceiveFriendRequestUpdates = "didReceiveFriendRequestUpdates"
+protocol FriendsManagerDelegate: class {
+    func friendsManagerDidReceiveUpdates(manager: FriendsManager)
 }
 
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
+class FriendsManager: NetworkSynchronizable {
+    
+    /// Dictionary with all friends as values and friend IDs as the keys
+    private(set) var friends = [String : User]()
+    
+    /// Dictionary with all friend schedules as values and friend IDs as the keys
+    private(set) var schedules = [String : Schedule]()
 
-class FriendsManager {
-    static let sharedManager = FriendsManager()
+    weak var delegate: FriendsManagerDelegate?
+    
+    private let appUser: FIRUser
+    
+    /// All references and handles for the references
+    private var databaseRefsAndHandles = [(FIRDatabaseReference, FIRDatabaseHandle)]()
+    
+    private let database = FIRDatabase.database()
 
-    private init() {
+    init?() {
+        
+        guard let appUser = FIRAuth.auth()?.currentUser else {
+            assertionFailure()
+            return nil
+        }
+
+        self.appUser = appUser
     }
 
+    func resumeUpdates() {
+        
+        database.referenceWithPath("\(FirebasePaths.friends).\(appUser.uid)").observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
+            
+            let friendIDs = (snapshot as! [String : AnyObject]).keys
+            
+            for friendID in friendIDs {
+                
+                let friendReference = database.referenceWithPath("\(FirebasePaths.users).\(friendID)")
+                let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
 
-    func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?) {
+                    guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
+                    let friend = User(js: friendJSON)
+
+                    /// Thread safety, dictionaries are structs and therefore copied.
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.friends[friend.id] = friend
+                        notifyChangesIfNeededForFriend(friendID: friend.id)
+                    }
+                }
+                
+                databaseRefsAndHandles.append((friendReference, friendHandle))
+
+                let scheduleReference = database.referenceWithPath("\(FirebasePaths.schedules).\(friendID)")
+                let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
+
+                    guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
+                    let schedule = Schedule(js: scheduleJSON)
+                    
+                    /// Thread safety
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.schedules[friend.id] = schedule
+                        notifyChangesIfNeededForFriend(friendID: friend.id)
+                    }
+                }
+                
+                databaseRefsAndHandles.append((scheduleReference, scheduleHandle))
+            }
+        }
+        
+    }
+
+    func stopUpdates() {
+        
+        for (ref, handle) in databaseRefsAndHandles {
+            ref.removeObserverWithHandle(handle)
+        }
+    }
+    
+    private func notifyChangesIfNeededForFriend(friendID id: String) {
+        
+        guard friends[friend.id] != nil && schedules[friend.id] != nil else { return }
+        
+        dispatch_async(dispatch_get_main_queue()){
+            delegate?.friendsManagerDidReceiveUpdates(self)
+        }
+    }
+
+    /*
+    private func fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(completionHandler: BasicCompletionHandler?) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSyncSegment)!)
         request.HTTPMethod = "GET"
@@ -135,7 +213,7 @@ class FriendsManager {
     }
 
     /// Deletes a friend. If the operation fails the friend is not deleted.
-    func deleteFriend(friend: User, completionHandler: BasicCompletionHandler) {
+    class func deleteFriend(friend: User, completionHandler: BasicCompletionHandler) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + friend.ID + "/")!)
         request.HTTPMethod = "DELETE"
@@ -166,7 +244,7 @@ class FriendsManager {
      ### Notifications
      - EHSystemNotification.SystemDidReceiveFriendRequestUpdates in case of success
      */
-    func fetchUpdatesForFriendRequestsWithCompletionHandler(completionHandler: BasicCompletionHandler?) {
+    private func fetchUpdatesForFriendRequestsWithCompletionHandler(completionHandler: BasicCompletionHandler?) {
 
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.IncomingFriendRequestsSegment)!)
         request.HTTPMethod = "GET"
@@ -206,7 +284,7 @@ class FriendsManager {
      - EHSystemNotification.SystemDidSendFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToSendFriendRequest in case of failure
      */
-    func sendFriendRequestToUser(user: User, completionHandler: BasicCompletionHandler) {
+    private func sendFriendRequestToUser(user: User, completionHandler: BasicCompletionHandler) {
 
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + user.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
@@ -238,7 +316,7 @@ class FriendsManager {
      - EHSystemNotification.SystemDidAcceptFriendRequest in case of success
      - EHSystemNotification.SystemDidFailToAcceptFriendRequest in case of failure
      */
-    func acceptFriendRequestFromFriend(requestFriend: User, completionHandler: BasicCompletionHandler) {
+    private func acceptFriendRequestFromFriend(requestFriend: User, completionHandler: BasicCompletionHandler) {
 
         let URL = NSURL(string: EHURLS.Base + EHURLS.FriendsSegment + requestFriend.ID + "/")!
         let request = NSMutableURLRequest(URL: URL)
@@ -271,7 +349,7 @@ class FriendsManager {
      
      - parameter searchText:        Text to search
      */
-    func searchUsersWithText(searchText: String, completionHandler: (results:[User]) -> ()) {
+    class func searchUsersWithText(searchText: String, completionHandler: (results:[User]) -> ()) {
 
         guard let urlString = (EHURLS.Base + EHURLS.UsersSegment + searchText).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
         let url = NSURL(string: urlString)
@@ -308,4 +386,5 @@ class FriendsManager {
             }
         }
     }
+ */
 }

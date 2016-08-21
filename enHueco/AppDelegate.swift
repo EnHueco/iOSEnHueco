@@ -14,10 +14,11 @@ import Fabric
 import Crashlytics
 import Firebase
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate
 {
+    static var sharedDelegate: AppDelegate { UIApplication.sharedApplication().delegate as! AppDelegate }
+    
     /// The navigation to which the login controller belongs
     var mainNavigationController: UINavigationController!
     

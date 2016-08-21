@@ -13,8 +13,7 @@ import Foundation
 class AccountManager {
     static let sharedManager = AccountManager()
 
-    private init() {
-    }
+    private init() {}
 
     /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
     class func loginWithUsername(username: String, password: String, completionHandler: BasicCompletionHandler) {
