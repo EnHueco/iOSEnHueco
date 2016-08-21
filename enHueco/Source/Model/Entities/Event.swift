@@ -23,7 +23,7 @@ class Event: BaseEvent {
     let userID: String
     let id: String
 
-    init(map: Map) throws {
+    override init(map: Map) throws {
         userID = try map.extract(JSONKeys.eventID)
         eventID = try map.extract("id")
 

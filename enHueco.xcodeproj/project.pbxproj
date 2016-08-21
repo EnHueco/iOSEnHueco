@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EF810B40F7BD2B3BED1B24E /* NetworkSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF813151434ADDC386CF430 /* NetworkSynchronizable.swift */; };
 		3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */; };
 		40A43EF21102292AE43CC9C7 /* Pods_enHuecoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */; };
 		414D42BF472E8CB8371E11D3 /* Pods_enHueco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F21BED4E4201370C8D4BB7C /* Pods_enHueco.framework */; };
@@ -77,6 +76,7 @@
 		F17AD9AB1C0FE619001FE56A /* PrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */; };
 		F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */; };
 		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
+		F17BE79A1D6A1E0600401004 /* NetworkSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17BE7991D6A1E0600401004 /* NetworkSynchronizable.swift */; };
 		F183F83D1C7FF90900390CF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F183F83C1C7FF90900390CF7 /* main.m */; };
 		F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */; };
 		F183F8431C80781400390CF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8421C80781400390CF7 /* PersistenceManager.swift */; };
@@ -157,7 +157,6 @@
 
 /* Begin PBXFileReference section */
 		0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_enHuecoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EF813151434ADDC386CF430 /* NetworkSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSynchronizable.swift; sourceTree = "<group>"; };
 		3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePaths.swift; sourceTree = "<group>"; };
 		462CA353816B2D71FBFD901E /* Pods-enHuecoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHuecoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4952F3569EC0579CEA03C7FD /* Pods-enHuecoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHuecoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +239,7 @@
 		F17AD9AA1C0FE619001FE56A /* PrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PrivacySettingsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsPrivacySettingsViewController.swift; sourceTree = "<group>"; };
 		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
+		F17BE7991D6A1E0600401004 /* NetworkSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSynchronizable.swift; sourceTree = "<group>"; };
 		F183F83C1C7FF90900390CF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppUserInformationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8421C80781400390CF7 /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PersistenceManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -669,6 +669,7 @@
 		F1C8E5351BEBCA35007673BC /* Logic Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F17BE7991D6A1E0600401004 /* NetworkSynchronizable.swift */,
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
@@ -678,7 +679,6 @@
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
 				F183F8581C837FC700390CF7 /* Generic Managers */,
-				3EF813151434ADDC386CF430 /* NetworkSynchronizable.swift */,
 				3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */,
 			);
 			path = "Logic Managers";
@@ -1045,6 +1045,7 @@
 				F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */,
 				F134AE5E1A800BB200E6E9AB /* Constants.swift in Sources */,
 				F113D1661B7CDD6200325209 /* Schedule.swift in Sources */,
+				F17BE79A1D6A1E0600401004 /* NetworkSynchronizable.swift in Sources */,
 				F1B9BCB41D5EC81C00153850 /* PrivacySettings.swift in Sources */,
 				F11B1BE41BEEB27B00C0132C /* Array+Sorting.swift in Sources */,
 				F184D2691BA4F54E00D6129F /* SelectCalendarViewController.swift in Sources */,
@@ -1080,7 +1081,6 @@
 				F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */,
 				F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */,
 				F16C62A31D6557DA000D44CA /* BaseEvent.swift in Sources */,
-				3EF810B40F7BD2B3BED1B24E /* NetworkSynchronizable.swift in Sources */,
 				3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,9 +21,6 @@ let enHueco = EnHueco()
 */
 
 class EnHueco {
-    /// User of the app
-    var appUser: AppUser!
-
     private init() {
 
     }

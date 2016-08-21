@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FirebasePaths.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/NetworkSynchronizable.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/SynchronizedFriendsManager.swift" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/NetworkSynchronizable.swift" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/enHueco.xcscheme" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/enHueco.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/xcschememanagement.plist" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/xcschememanagement.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/AppDelegate.swift" afterPath="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" />
     </list>
     <ignored path="enHueco.iws" />
@@ -46,8 +40,8 @@
       <file leaf-file-name="FriendsManager.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+            <state relative-caret-position="765">
+              <caret line="83" column="24" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -68,16 +62,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NetworkSynchronizable.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/NetworkSynchronizable.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -791,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+        <state relative-caret-position="765">
+          <caret line="83" column="24" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
           <folding />
         </state>
       </provider>

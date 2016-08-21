@@ -30,6 +30,8 @@ class FriendsManager: NetworkSynchronizable {
     private var databaseRefsAndHandles = [(FIRDatabaseReference, FIRDatabaseHandle)]()
     
     private let database = FIRDatabase.database()
+    
+    private var updatesEnabled = false
 
     init?() {
         
@@ -40,53 +42,67 @@ class FriendsManager: NetworkSynchronizable {
 
         self.appUser = appUser
     }
+    
+    private func resetData() {
+        friends = [:]
+        schedules = [:]
+    }
 
     func resumeUpdates() {
         
-        database.referenceWithPath("\(FirebasePaths.friends).\(appUser.uid)").observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
+        dispatch_async(dispatch_get_main_queue()){
+            guard !self.updatesEnabled else { return }
+            self.updatesEnabled = true
+            self.resetData()
             
-            let friendIDs = (snapshot as! [String : AnyObject]).keys
-            
-            for friendID in friendIDs {
+            database.referenceWithPath("\(FirebasePaths.friends).\(self.appUser.uid)").observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
                 
-                let friendReference = database.referenceWithPath("\(FirebasePaths.users).\(friendID)")
-                let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
-
-                    guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
-                    let friend = User(js: friendJSON)
-
-                    /// Thread safety, dictionaries are structs and therefore copied.
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.friends[friend.id] = friend
-                        notifyChangesIfNeededForFriend(friendID: friend.id)
-                    }
-                }
+                let friendIDs = (snapshot as! [String : AnyObject]).keys
                 
-                databaseRefsAndHandles.append((friendReference, friendHandle))
-
-                let scheduleReference = database.referenceWithPath("\(FirebasePaths.schedules).\(friendID)")
-                let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
-
-                    guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
-                    let schedule = Schedule(js: scheduleJSON)
+                for friendID in friendIDs {
                     
-                    /// Thread safety
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.schedules[friend.id] = schedule
-                        notifyChangesIfNeededForFriend(friendID: friend.id)
+                    let friendReference = database.referenceWithPath("\(FirebasePaths.users).\(friendID)")
+                    let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
+                        
+                        guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
+                        let friend = User(js: friendJSON)
+                        
+                        /// Thread safety, dictionaries are structs and therefore copied.
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.friends[friend.id] = friend
+                            notifyChangesIfNeededForFriend(friendID: friend.id)
+                        }
                     }
+                    
+                    databaseRefsAndHandles.append((friendReference, friendHandle))
+                    
+                    let scheduleReference = database.referenceWithPath("\(FirebasePaths.schedules).\(friendID)")
+                    let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
+                        
+                        guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject] else { return }
+                        let schedule = Schedule(js: scheduleJSON)
+                        
+                        /// Thread safety
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.schedules[friend.id] = schedule
+                            notifyChangesIfNeededForFriend(friendID: friend.id)
+                        }
+                    }
+                    
+                    databaseRefsAndHandles.append((scheduleReference, scheduleHandle))
                 }
-                
-                databaseRefsAndHandles.append((scheduleReference, scheduleHandle))
             }
         }
-        
     }
 
     func stopUpdates() {
         
-        for (ref, handle) in databaseRefsAndHandles {
-            ref.removeObserverWithHandle(handle)
+        dispatch_async(dispatch_get_main_queue()){
+            for (ref, handle) in self.databaseRefsAndHandles {
+                ref.removeObserverWithHandle(handle)
+            }
+
+            self.updatesEnabled = false
         }
     }
     
