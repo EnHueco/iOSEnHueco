@@ -15,7 +15,6 @@
 		F105DC2D1D580967001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
 		F105DC2E1D580967001C1960 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F105DC2A1D580960001C1960 /* GoogleService-Info.plist */; };
 		F10A47491C3725960066D4DF /* ImportProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */; };
-		F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */; };
 		F113D1621B7CDD3A00325209 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1611B7CDD3A00325209 /* User.swift */; };
 		F113D1661B7CDD6200325209 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F113D1651B7CDD6200325209 /* Schedule.swift */; };
 		F1179E681B9BA8CA00B04400 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */; };
@@ -165,7 +164,6 @@
 		F105DC2A1D580960001C1960 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F10A47481C3725960066D4DF /* ImportProfileImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImportProfileImageViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F10FCDF91A801EAD0011CD62 /* libPods-SwiftHTTP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SwiftHTTP.a"; path = "Vendor/Pods/build/Debug-iphoneos/libPods-SwiftHTTP.a"; sourceTree = "<group>"; };
-		F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		F113D1611B7CDD3A00325209 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = User.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F113D1651B7CDD6200325209 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		F1179E671B9BA8CA00B04400 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -627,14 +625,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		F183F8581C837FC700390CF7 /* Generic Managers */ = {
-			isa = PBXGroup;
-			children = (
-				F10FCDFB1A8020EC0011CD62 /* ConnectionManager.swift */,
-			);
-			name = "Generic Managers";
-			sourceTree = "<group>";
-		};
 		F1B54B141C8FAD970059F855 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,7 +662,6 @@
 				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
-				F183F8581C837FC700390CF7 /* Generic Managers */,
 				3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */,
 			);
 			path = "Logic Managers";
@@ -1049,7 +1038,6 @@
 				F16E7D111C135757009A3C30 /* PopOverMenuViewController.swift in Sources */,
 				F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */,
 				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
-				F10FCDFC1A8020EC0011CD62 /* ConnectionManager.swift in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */,
 				F1229BDC1A74947200C4FDE2 /* AppDelegate.swift in Sources */,
