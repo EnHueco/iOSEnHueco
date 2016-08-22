@@ -7,60 +7,43 @@
 //
 
 import Foundation
+import Firebase
 
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
-
 class AccountManager {
-    static let sharedManager = AccountManager()
-
     private init() {}
-
-    /// Logs user in for the first time or when session expires. Creates or replaces the AppUser (enhueco.appUser)
-    class func loginWithUsername(username: String, password: String, completionHandler: BasicCompletionHandler) {
-
-        let params = ["user_id": username, "password": password]
-
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.AuthSegment)!)
-        request.HTTPMethod = "POST"
-
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: {
-            (response) -> () in
-
-            guard let token = response["value"] as? String else
-            {
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(success: false, error: nil)
-                }
-                return
+    
+    class func loginWith(facebookToken facebookToken: String, completionHandler: BasicCompletionHandler) {
+        
+        FIRAuth.auth()?.signInWithCredential(facebookToken) { (user, error) in
+            dispatch_async(dispatch_get_main_queue()){
+                completion
             }
-
-            NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
-
-            enHueco.appUser = AppUser(JSONDictionary: response["user"] as! [String:AnyObject])
-
-            let _ = try? PersistenceManager.sharedManager.persistData()
-
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler(nil)
-            AppUserInformationManager.sharedManager.downloadProfilePictureWithCompletionHandler(nil)
-            FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler(nil)
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
+        }
+    }
+    
+    /// Creates an account.
+    class func loginWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
+        
+        FIRAuth.auth()?.createUserWithEmail(username, password: password) { (user, error) in
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler(error: error)
             }
-
-        }, failureCompletionHandler: {
-            (error) -> () in
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: error.error)
-            }
-        })
+        }
     }
 
-    func logOut() {
+    /// Creates an account.
+    class func signupWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
 
-        enHueco.appUser = nil
+        FIRAuth.auth()?.createUserWithEmail(username, password: password) { (user, error) in
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler(error: error)
+            }
+        }
+    }
+
+    class func logOut() throws {
+        try FIRAuth.auth()?.signOut()
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!)
-        PersistenceManager.sharedManager.deleteAllPersistenceData()
     }
 }

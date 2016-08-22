@@ -218,9 +218,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             return
         } else {
             let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-            FIRAuth.auth()?.signInWithCredential(credential) {
-                (user, error) in
-                print(" SUCCESSFULLY LOGGED IN ")
+            AccountManager.login(facebookToken: credential) { error in
+                // TODO
             }
         }
     }

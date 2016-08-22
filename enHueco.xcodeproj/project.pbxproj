@@ -77,7 +77,7 @@
 		F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */; };
 		F17AD9AF1C101684001FE56A /* SearchSelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */; };
 		F183F83D1C7FF90900390CF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F183F83C1C7FF90900390CF7 /* main.m */; };
-		F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */; };
+		F183F8411C8077FC00390CF7 /* AppUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8401C8077FC00390CF7 /* AppUserManager.swift */; };
 		F183F8451C8078F400390CF7 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8441C8078F400390CF7 /* AccountManager.swift */; };
 		F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8461C81441600390CF7 /* FriendsManager.swift */; };
 		F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F8481C81454C00390CF7 /* CurrentStateManager.swift */; };
@@ -238,7 +238,7 @@
 		F17AD9AC1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFriendsPrivacySettingsViewController.swift; sourceTree = "<group>"; };
 		F17AD9AE1C101684001FE56A /* SearchSelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSelectFriendsViewController.swift; sourceTree = "<group>"; };
 		F183F83C1C7FF90900390CF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppUserInformationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F183F8401C8077FC00390CF7 /* AppUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppUserManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8441C8078F400390CF7 /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AccountManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8461C81441600390CF7 /* FriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendsManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F183F8481C81454C00390CF7 /* CurrentStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurrentStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -666,7 +666,7 @@
 			isa = PBXGroup;
 			children = (
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
-				F183F8401C8077FC00390CF7 /* AppUserInformationManager.swift */,
+				F183F8401C8077FC00390CF7 /* AppUserManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
 				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
 				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
@@ -1071,7 +1071,7 @@
 				F1B8AD5E1BC8D49D00BB879B /* CommonFreeTimePeriodsSearchFriendToAddResultsCell.swift in Sources */,
 				F183F8491C81454C00390CF7 /* CurrentStateManager.swift in Sources */,
 				F183F8471C81441600390CF7 /* FriendsManager.swift in Sources */,
-				F183F8411C8077FC00390CF7 /* AppUserInformationManager.swift in Sources */,
+				F183F8411C8077FC00390CF7 /* AppUserManager.swift in Sources */,
 				F16C62A31D6557DA000D44CA /* BaseEvent.swift in Sources */,
 				3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */,
 			);

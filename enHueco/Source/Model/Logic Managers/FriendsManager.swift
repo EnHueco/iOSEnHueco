@@ -131,7 +131,7 @@ class FriendsManager {
      Returns all friends that will soon be available.
      - returns: Friends with their current free time period
      */
-    func soonAvailableFriendsWithinTimeInterval(interval: NSTimeInterval) -> [(friend:User, freeTime:Event)] {
+    func soonAvailableFriendsWithin(interval interval: NSTimeInterval) -> [(friend:User, freeTime:Event)] {
         
         let currentDate = NSDate()
         
@@ -222,7 +222,7 @@ extension FriendsManager {
      
      - parameter searchText:        Text to search
      */
-    class func searchUsersWithText(searchText: Stringm, institutionID: String, completionHandler: (results:[User]) -> ()) {
+    class func searchUsersWith(searchText searchText: String, institutionID: String, completionHandler: (results:[User]) -> ()) {
         
         guard !searchText.isBlank() else {
             dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }
