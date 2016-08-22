@@ -114,6 +114,37 @@ class FriendsManager {
         }
     }
     
+    /**
+     Returns all friends that are currently available.
+     - returns: Friends with their current free time periods
+     */
+    func currentlyAvailableFriends() -> [(friend:User, freeTime:Event)] {
+        
+        return friends.values.flatMap {
+            
+            guard let freeTime = $0.currentFreeTimePeriod() else { return nil }
+            return (friend, freeTime)
+        }
+    }
+    
+    /**
+     Returns all friends that will soon be available.
+     - returns: Friends with their current free time period
+     */
+    func soonAvailableFriendsWithinTimeInterval(interval: NSTimeInterval) -> [(friend:User, freeTime:Event)] {
+        
+        let currentDate = NSDate()
+        
+        return friends.values.flatMap {
+            
+            guard let freeTime = $0.nextFreeTimePeriod() where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
+                return nil
+            }
+            
+            return (friend, freeTime)
+        }
+    }
+    
     deinit {
         removeFirebaseSubscriptions()
     }
