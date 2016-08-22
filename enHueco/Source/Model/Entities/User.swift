@@ -30,7 +30,7 @@ class User: MappableObject {
     let image: NSURL
     let imageThumbnail: NSURL
     let phoneNumber: String
-
+    
     //var name: String { return "\(firstNames) \(lastNames)" }
 
     init(map: Map) throws {

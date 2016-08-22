@@ -15,4 +15,6 @@ struct FirebasePaths {
     static let version = "version"
     static let privacy = "privacy"
     static let instantEvents = "instantEvents"
+    static let receivedRequests = "receivedRequests"
+    static let sentRequests = "sentRequests"
 }

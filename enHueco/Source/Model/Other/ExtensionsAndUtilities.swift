@@ -8,7 +8,12 @@
 
 import UIKit
 
-typealias BasicCompletionHandler = (success:Bool, error:ErrorType?) -> Void
+enum GenericError: ErrorType {
+    case NotLoggedIn
+    case UnknownError
+}
+
+typealias BasicCompletionHandler = (error:ErrorType?) -> Void
 
 struct Either<T1, T2> {
     let left: T1?
