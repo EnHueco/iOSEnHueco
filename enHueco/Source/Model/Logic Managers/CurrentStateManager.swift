@@ -11,11 +11,9 @@ import Foundation
 /// Handles operations related to the users' current state (i.e. users' availability (EnHueco's core services))
 
 class CurrentStateManager {
-    static let sharedManager = CurrentStateManager()
+    private init() {}
 
-    private init() {
-    }
-
+    /*
     /**
      Returns all friends that are currently available and nearby.
      - returns: Friend with their current free time period
@@ -34,7 +32,7 @@ class CurrentStateManager {
     
     func friendsCurrentlyNearby() -> [User] {
         return enHueco.appUser.friends.values.filter { $0.isNearby }
-    }
+    }*/
     
     /**
      Posts an instant free time period that everyone sees and that overrides any classes present in the app user's schedule during the instant free time period duration.

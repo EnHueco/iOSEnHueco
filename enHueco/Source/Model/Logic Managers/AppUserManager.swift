@@ -17,28 +17,34 @@ protocol AppUserManagerDelegate: class {
 /** Handles fetching and sending of the AppUser's basic information like names, profile picture, username,
  phone number, and schedule. (Friends are not included)
 */
-class AppUserManager {
+class AppUserManager: FirebaseSynchronizable {
 
     /// Delegate
     weak var delegate: AppUserManagerDelegate?
+    
+    private let firebaseUser: FIRUser
 
     private(set) var appUser: User?
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles = [(FIRDatabaseReference, FIRDatabaseHandle)]()
+    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
     
-    private init?() {
-        
-        guard FIRAuth.auth()?.currentUser != nil else {
+    /** Creates an instance of the manager that listens to database changes as soon as it is created.
+     You must set the delegate property if you want to be notified when any data has changed.
+     */
+    init?(delegate: AppUserManagerDelegate?) {
+        guard let user = FIRAuth.auth()?.currentUser else {
             assertionFailure()
             return nil
         }
         
+        self.delegate = delegate
+        firebaseUser = user
         createFirebaseSubscriptions()
     }
     
     private func createFirebaseSubscriptions() {
-        
+
         FIRDatabase.database().reference().child(FirebasePaths.users).child(FIRAuth.auth()!.currentUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
             
             guard let userJSON = snapshot.value as? [String : AnyObject],
@@ -51,13 +57,6 @@ class AppUserManager {
             dispatch_async(dispatch_get_main_queue()){
                 self.delegate?.appUserManagerDidReceiveAppUserInformationUpdates(self)
             }
-        }
-    }
-    
-    private func removeFirebaseSubscriptions() {
-        
-        while let (ref, handle) = databaseRefsAndHandles.popLast() {
-            ref.removeObserverWithHandle(handle)
         }
     }
     

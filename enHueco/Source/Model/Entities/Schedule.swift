@@ -18,6 +18,28 @@ class Schedule: MappableObject {
         self.events = try [Event](js: map.json)
     }
     
+    /// Returns true if event doesn't overlap with any gap or class, excluding eventToExclude.
+    func canAddEvent(newEvent: Event, excludingEvent eventToExclude:Event? = nil) -> Bool
+    {
+        let currentDate = NSDate()
+        
+        let newEventStartHourInCurrentDate = newEvent.startHourInNearestPossibleWeekToDate(currentDate)
+        let newEventEndHourInCurrentDate = newEvent.endHourInNearestPossibleWeekToDate(currentDate)
+        
+        for event in mutableEvents where eventToExclude == nil || event !== eventToExclude
+        {
+            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
+            
+            if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
+            {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     /*
     private var instantFreeTimePeriodTTLTimer: NSTimer?
     

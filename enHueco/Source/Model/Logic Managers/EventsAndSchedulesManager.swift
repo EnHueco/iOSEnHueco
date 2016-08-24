@@ -8,6 +8,7 @@
 
 import Foundation
 import EventKit
+import Firebase
 
 enum EventsAndSchedulesManagerError: EHErrorType {
     case CantAddEvents
@@ -22,21 +23,64 @@ enum EventsAndSchedulesManagerError: EHErrorType {
     }
 }
 
+protocol EventsAndSchedulesManagerDelegate: class {
+    func eventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: EventsAndSchedulesManager)
+}
+
 /** 
-Handles operations related to schedules and events like getting schedules for common free time periods, importing
+Handles operations related to schedule fetching and autoupdating for the app user, getting schedules for common free time periods, importing
 schedules from external services, and adding/removing/editing events.
 */
-
-class EventsAndSchedulesManager {
-    static let sharedManager = EventsAndSchedulesManager()
-
-    private init() {
+class EventsAndSchedulesManager: FirebaseSynchronizable {
+    
+    /// The app user's schedule
+    private(set) var schedule: Schedule?
+    
+    private let firebaseUser: FIRUser
+    
+    /// All references and handles for the references
+    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
+    
+    weak var delegate: EventsAndSchedulesManagerDelegate
+    
+    /** Creates an instance of the manager that listens to database changes as soon as it is created.
+     You must set the delegate property if you want to be notified when any data has changed.
+     */
+    init?(delegate: EventsAndSchedulesManagerDelegate?) {
+        guard let user = FIRAuth.auth()?.currentUser else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.delegate = delegate
+        firebaseUser = user
+        createFirebaseSubscriptions()
     }
+    
+    private func createFirebaseSubscriptions() {
+    
+        FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+            
+            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = Schedule(js: schedule) else {
+                return
+            }
+            
+            self.schedule = schedule
+            self.delegate.eventsAndSchedulesManagerDidReceiveScheduleUpdates(self)
+        }
+    }
+    
+    deinit {
+        removeFireBaseSubscriptions()
+    }
+}
+
+extension EventsAndSchedulesManager {
 
     /**
      Returns a schedule with the common free time periods of the users provided.
      */
-    func commonFreeTimePeriodsScheduleForUsers(users: [User]) -> Schedule {
+    class func commonFreeTimePeriodsScheduleForUsers(users: [User]) -> Schedule {
 
         let currentDate = NSDate()
         let commonFreeTimePeriodsSchedule = Schedule()
@@ -83,7 +127,7 @@ class EventsAndSchedulesManager {
      Imports an schedule of classes from a device's calendar.
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
      */
-    func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses: Bool, completionHandler: BasicCompletionHandler) {
+    class func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses: Bool, completionHandler: BasicCompletionHandler) {
 
         let today = NSDate()
         let eventStore = EKEventStore()
@@ -151,75 +195,55 @@ class EventsAndSchedulesManager {
     /**
      Adds the events given events to the AppUser's schedule if and only if the request is successful.
      
-     - parameter newDummyEvents:    Dummy events that contain the information of the events that wish to be added
-     - parameter completionHandler: (-parameter addedEvents: actual event objects added, these contain the updated ids)
-     
+     - parameter dummyEvents:    Dummy events that contain the information of the events that wish to be added
      - throws: CantAddEvents in case new events overlap with existing events. The request is not attempted.
      */
-    func addEventsWithDataFromEvents(newDummyEvents: [Event], completionHandler: (addedEvents:[Event]?, error:ErrorType?) -> Void) throws {
+    class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: BasicCompletionHandler) throws {
 
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let currentDate = NSDate()
-
-        /// Can add all events
-        guard newDummyEvents.reduce(true, combine: {
-
-            let localWeekDay = localCalendar.component(.Weekday, fromDate: $1.startHourInNearestPossibleWeekToDate(currentDate))
-            return $0 && enHueco.appUser.schedule.weekDays[localWeekDay].canAddEvent($1)
-
-        }) else {
-
-            throw EventsAndSchedulesManagerError.CantAddEvents
+        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+            return
         }
-
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.HTTPMethod = "POST"
-
-        let params = newDummyEvents.map {
-            $0.toJSONObject()
-        }
-
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: {
-            (JSONResponse) -> () in
-
-            let currentDate = NSDate()
-
-            guard let eventJSONArray = JSONResponse as? [[String:AnyObject]] else
-            {
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(addedEvents: nil, error: nil)
-                }
+        
+        let scheduleRef = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid)
+        
+        scheduleRef.observeSingleEventType(.Value) { [unowned self] (snapshot) in
+            
+            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = Schedule(js: schedule) else {
+                assertionFailure()
+                dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
                 return
             }
-
-            let fetchedNewEvents = eventJSONArray.map {
-                Event(JSONDictionary: $0)
+            
+            for dummyEvent in dummyEvents {
+                
+                let localWeekDay = localCalendar.component(.Weekday, fromDate: dummyEvent.startDate)
+                
+                guard schedule.canAddEvent(dummyEvent) || dummyEvent.repetitionDays == nil else {
+                    throw EventsAndSchedulesManagerError.CantAddEvents
+                }
             }
-
-            for event in fetchedNewEvents {
-                let localWeekDay = localCalendar.component(.Weekday, fromDate: event.startHourInNearestPossibleWeekToDate(currentDate))
-                enHueco.appUser.schedule.weekDays[localWeekDay].addEvent(event)
+            
+            do {
+                let params = dummyEvents.map {
+                    try $0.jsonRepresentation().foundationDictionary
+                }
+                
+                
+                
+            } catch {
+                
             }
-
-            try? PersistenceManager.sharedManager.persistData()
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(addedEvents: fetchedNewEvents, error: nil)
-            }
-
-        }, failureCompletionHandler: {
-            error in
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(addedEvents: nil, error: error)
-            }
-        })
+            
+            ///TODO: Finish
+        }
     }
 
     /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful.
      The events given **must** be a reference to existing events.
     */
-    func deleteEvents(existingEvents: [Event], completionHandler: BasicCompletionHandler) {
+    class func deleteEvents(existingEvents: [Event], completionHandler: BasicCompletionHandler) {
 
         guard existingEvents.reduce(true, combine: { $0 && $1.ID != nil }) else {
             return
@@ -259,7 +283,7 @@ class EventsAndSchedulesManager {
      - parameter existingEvent:     Reference to existing event
      - parameter dummyEvent:        A new event with the values that should be replaced in the existing event.
     */
-    func editEvent(existingEvent: Event, withValuesOfDummyEvent dummyEvent: Event, completionHandler: BasicCompletionHandler) {
+    class func editEvent(existingEvent: Event, withValuesOfDummyEvent dummyEvent: Event, completionHandler: BasicCompletionHandler) {
 
         guard let ID = existingEvent.ID else {
             return

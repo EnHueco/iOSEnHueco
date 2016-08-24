@@ -106,6 +106,7 @@
 		F1F0CF1A1BFFE056004C50A1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */; };
 		F1F54B321B9CE1470087C30E /* AvailableFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */; };
 		F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */; };
+		F1F941491D6D374A00801C27 /* FirebaseSynchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F941481D6D374A00801C27 /* FirebaseSynchronizable.swift */; };
 		F1FAFF9D1B9FBAFB00E8CCDD /* FreeTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFF9C1B9FBAFB00E8CCDD /* FreeTimeCell.swift */; };
 		F1FAFFA11B9FD49700E8CCDD /* AddEditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */; };
 		F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */; };
@@ -267,6 +268,7 @@
 		F1F0CF191BFFE056004C50A1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F1F54B311B9CE1470087C30E /* AvailableFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableFriendCell.swift; sourceTree = "<group>"; };
 		F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsAndUtilities.swift; sourceTree = "<group>"; };
+		F1F941481D6D374A00801C27 /* FirebaseSynchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseSynchronizable.swift; sourceTree = "<group>"; };
 		F1FAFF9C1B9FBAFB00E8CCDD /* FreeTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeTimeCell.swift; sourceTree = "<group>"; };
 		F1FAFFA01B9FD49700E8CCDD /* AddEditEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditEventViewController.swift; sourceTree = "<group>"; };
 		F1FAFFA21B9FE28600E8CCDD /* FriendDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -662,7 +664,7 @@
 				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
-				3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */,
+				F1F941471D6D36F600801C27 /* Other */,
 			);
 			path = "Logic Managers";
 			sourceTree = "<group>";
@@ -681,6 +683,15 @@
 				F11B1BE21BEEB27B00C0132C /* Array+Sorting.swift */,
 			);
 			name = "Data Structures";
+			sourceTree = "<group>";
+		};
+		F1F941471D6D36F600801C27 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */,
+				F1F941481D6D374A00801C27 /* FirebaseSynchronizable.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1011,6 +1022,7 @@
 				F11AACC61D654231006D27EB /* EventUpdateIntent.swift in Sources */,
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
+				F1F941491D6D374A00801C27 /* FirebaseSynchronizable.swift in Sources */,
 				F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */,
 				F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */,
 				F11AACC41D653F09006D27EB /* UserUpdateIntent.swift in Sources */,

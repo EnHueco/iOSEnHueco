@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 
 protocol FriendsManagerDelegate: class {
-    func friendsManagerDidReceiveFriendOrScheduleUpdates(manager: FriendsManager)
+    func friendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendsManager)
 }
 
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
-class FriendsManager {
+class FriendsManager: FirebaseSynchronizable {
     
     /// Dictionary with all friends as values and friend IDs as the keys
     private(set) var friends = [String : User]()
@@ -22,36 +22,31 @@ class FriendsManager {
     /// Dictionary with all friend schedules as values and friend IDs as the keys
     private(set) var schedules = [String : Schedule]()
     
+    private let firebaseUser: FIRUser
+    
+    /// All references and handles for the references
+    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
+    
     /// Delegate
     weak var delegate: FriendsManagerDelegate?
     
-    /// The Firebase app user
-    private let appUser: FIRUser
-    
-    /// All references and handles for the references
-    private var databaseRefsAndHandles = [(FIRDatabaseReference, FIRDatabaseHandle)]()
-    
-    /// Firebase database
-    private let database = FIRDatabase.database()
-    
-    /** Creates an instance of FriendsManager that listens to database changes as soon as it is created.
+    /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
-    init?() {
-        
-        guard let appUser = FIRAuth.auth()?.currentUser else {
+    init?(delegate: FriendsManagerDelegate?) {
+        guard let user = FIRAuth.auth()?.currentUser else {
             assertionFailure()
             return nil
         }
         
-        self.appUser = appUser
-        
+        self.delegate = delegate
+        firebaseUser = user
         createFirebaseSubscriptions()
     }
     
     private func createFirebaseSubscriptions() {
         
-        database.reference().child(FirebasePaths.friends).child(appUser.uid).observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.friends).child(appUser.uid).observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
             
             let friendIDs = (snapshot as! [String : AnyObject]).keys
             
@@ -97,22 +92,22 @@ class FriendsManager {
             }
         }
     }
-    
-    private func removeFirebaseSubscriptions() {
         
-        while let (ref, handle) = databaseRefsAndHandles.popLast() {
-            ref.removeObserverWithHandle(handle)
-        }
-    }
-    
     private func notifyChangesIfNeededForFriend(friendID id: String) {
         
         guard friends[friend.id] != nil && schedules[friend.id] != nil else { return }
         
         dispatch_async(dispatch_get_main_queue()){
-            delegate?.friendsManagerDidReceiveFriendOrScheduleUpdates(self)
+            delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
         }
     }
+    
+    deinit {
+        removeFireBaseSubscriptions()
+    }
+}
+
+extension FriendsManager {
     
     /**
      Returns all friends that are currently available.
@@ -143,10 +138,6 @@ class FriendsManager {
             
             return (friend, freeTime)
         }
-    }
-    
-    deinit {
-        removeFirebaseSubscriptions()
     }
 }
 
