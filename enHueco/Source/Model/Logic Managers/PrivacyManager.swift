@@ -7,48 +7,86 @@
 //
 
 import Foundation
+import Firebase
 
-/**
- Available privacy settings
- 
- - ShowEventNames:    If event names will be shown to a given group
- - ShowEventLocation: If event locations will be shown to a given group
- - ShowUserIsNearby:  If a given group can find out that the AppUser is nearby
- */
 
-enum PrivacySetting: String {
-    case ShowEventNames = "shares_event_names"
-    case ShowEventLocations = "shares_event_locations"
-    case ShowUserIsNearby = "shares_user_nearby"
-
-    /// The key to which the setting is associated in NSUserDefaults
-    func userDefaultsKey() -> String {
-
-        switch self {
-        case .ShowEventNames:
-            return "ShowEventNames"
-        case .ShowEventLocations:
-            return "ShowEventLocations"
-        case .ShowUserIsNearby:
-            return "ShowUserIsNearby"
-        }
-    }
-}
-
-/// Policy applied to the group of friends it accepts for parameter.
-
-enum PrivacyPolicy {
-    case EveryoneExcept([User]), Only([User])
+protocol PrivacyManagerDelegate : class {
+    
+    func privacyManagerDidReceivePrivacyUpdates(manager: PrivacyManager)
 }
 
 /// Handles privacy settings
 
-class PrivacyManager {
-    static let sharedManager = PrivacyManager()
 
-    private init() {
+
+class PrivacyManager : FirebaseSynchronizable {
+    
+    weak var delegate : PrivacyManagerDelegate?
+    private let firebaseUser: FIRUser
+    private(set) var settings : PrivacySettings?
+    
+    
+    init?(delegate: PrivacyManagerDelegate){
+        
+        guard let user = FIRAuth.auth()?.currentUser else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.delegate = delegate
+        firebaseUser = user
+        
+        createFirebaseSubscriptions()
     }
-
+    
+    
+    private func createFirebaseSubscriptions() {
+        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+            
+                guard let userJSON = snapshot.value as? [String : AnyObject],
+                    let settings = try? PrivacySettings(js: snapshot) else {
+                        return
+            }
+            
+            self.settings = settings
+            
+            dispatch_async(dispatch_get_main_queue()){
+                self.delegate?.privacyManagerDidReceivePrivacyUpdates(self)
+            }
+        }
+    }
+    
+    deinit {
+        removeFirebaseSubscriptions()
+    }
+    
+}
+extension PrivacyManager{
+    
+    class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler)
+    {
+        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+            return
+        }
+        
+        guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            return
+        }
+        
+        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID).updateChildValues(updateJSON) { (error, reference) in
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler(error: error)
+            }
+        }
+    }
+    
+   
+/// LEGACY METHODS
+        /*
     /// Turns a setting off (e.g. If called as "turnOffSetting(.ShowEventsNames)", nobody will be able to see the names of the user's events.
     func turnOffSetting(setting: PrivacySetting, withCompletionHandler completionHandler: BasicCompletionHandler) {
 
@@ -193,4 +231,41 @@ class PrivacyManager {
         standardUserDefaults.setBool(value, forKey: key)
         standardUserDefaults.synchronize()
     }
+ 
+    
+    
+    /**
+     Available privacy settings
+     
+     - ShowEventNames:    If event names will be shown to a given group
+     - ShowEventLocation: If event locations will be shown to a given group
+     - ShowUserIsNearby:  If a given group can find out that the AppUser is nearby
+     
+     
+     enum PrivacySetting: String {
+     case ShowEventNames = "shares_event_names"
+     case ShowEventLocations = "shares_event_locations"
+     case ShowUserIsNearby = "shares_user_nearby"
+     
+     /// The key to which the setting is associated in NSUserDefaults
+     func userDefaultsKey() -> String {
+     
+     switch self {
+     case .ShowEventNames:
+     return "ShowEventNames"
+     case .ShowEventLocations:
+     return "ShowEventLocations"
+     case .ShowUserIsNearby:
+     return "ShowUserIsNearby"
+     }
+     }
+     }
+     
+     /// Policy applied to the group of friends it accepts for parameter.
+     
+     enum PrivacyPolicy {
+     case EveryoneExcept([User]), Only([User])
+     }
+     */
+ */
 }

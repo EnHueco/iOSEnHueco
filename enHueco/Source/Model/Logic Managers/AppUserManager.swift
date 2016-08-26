@@ -45,7 +45,7 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     private func createFirebaseSubscriptions() {
 
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(FIRAuth.auth()!.currentUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
             
             guard let userJSON = snapshot.value as? [String : AnyObject],
                   let appUser = try? User(js: snapshot) else {
