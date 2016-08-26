@@ -18,11 +18,7 @@ struct PrivacyUpdateIntent: MappableObject {
 
         typealias JSONKeys = PrivacySettings.JSONKeys
 
-        institution ~> map[JSONKeys.institution]
-        firstNames ~> map[JSONKeys.firstNames]
-        lastNames ~> map[JSONKeys.lastNames]
-        image ~> map[JSONKeys.image]
-        imageThumbnail ~> map[JSONKeys.imageThumbnail]
-        phoneNumber ~> map[JSONKeys.phoneNumber]
+        showEventsNames ~> map[JSONKeys.showEventsNames]
+        showEventsLocations ~> map[JSONKeys.showEventsLocations]
     }
 }
