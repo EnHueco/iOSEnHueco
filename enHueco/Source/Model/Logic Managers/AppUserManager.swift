@@ -17,7 +17,7 @@ protocol AppUserManagerDelegate: class {
 /** Handles fetching and sending of the AppUser's basic information like names, profile picture, username,
  phone number, and schedule. (Friends are not included)
 */
-class AppUserManager: FirebaseSynchronizable {
+class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
 
     /// Delegate
     weak var delegate: AppUserManagerDelegate?
@@ -69,11 +69,7 @@ extension AppUserManager {
     
     class func updateUserWith(intent: UserUpdateIntent, completionHandler: BasicCompletionHandler) {
         
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-            return
-        }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
         
         guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
             assertionFailure()

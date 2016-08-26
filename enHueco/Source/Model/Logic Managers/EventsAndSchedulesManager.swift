@@ -200,11 +200,7 @@ extension EventsAndSchedulesManager {
      */
     class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: BasicCompletionHandler) throws {
 
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-            return
-        }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
         
         let scheduleRef = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid)
         
