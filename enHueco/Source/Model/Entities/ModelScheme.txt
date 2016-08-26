@@ -33,20 +33,15 @@ privacy : {
 
 schedules:  {
     user_id: {
-        repeating_events {
-            eventID1: {
-                type : (String-Type)
-                name : (String)
-                start_date : (Date)
-                end_date : (Date)
-                location : (String)
-                repetition_days : (String)
-            },
-            ...
-        }
-        unique_events {
-
-        }
+        eventID1: {
+            type : (String-Type)
+            name : (String)
+            start_date : (Date)
+            end_date : (Date)
+            location : (String)
+            repetition_days : (String)
+        },
+        ...
     }
 }
 

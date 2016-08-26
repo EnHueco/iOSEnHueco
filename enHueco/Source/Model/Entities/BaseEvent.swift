@@ -38,7 +38,7 @@ class BaseEvent: MappableObject {
     let startDate: NSDate
     let endDate: NSDate
     let location: String?
-    let repetitionDays: [Weekday]?
+    let repetitionDays: Set<Weekday>?
 
     init(type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repetitionDays: [Weekday]?) {
 
