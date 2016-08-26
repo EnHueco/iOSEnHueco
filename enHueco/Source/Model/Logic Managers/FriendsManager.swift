@@ -14,7 +14,7 @@ protocol FriendsManagerDelegate: class {
 }
 
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
-class FriendsManager: FirebaseSynchronizable {
+class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     /// Dictionary with all friends as values and friend IDs as the keys
     private(set) var friends = [String : User]()
@@ -142,15 +142,11 @@ extension FriendsManager {
 }
 
 extension FriendsManager {
-    
+        
     /// Deletes a friend.
     class func deleteFriend(id friendID: String, completionHandler: BasicCompletionHandler) {
         
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-            return
-        }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
 
         let update = [
             appUser.uid + "/" + friendID : NSNull(),
@@ -167,11 +163,7 @@ extension FriendsManager {
     /// Sends a friend request to the username provided and notifies the result via Notification Center.
     class func sendFriendRequestTo(id friendID: String, completionHandler: BasicCompletionHandler) {
         
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-            return
-        }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
         
         let update = [
             FirebasePaths.sentRequests + "/" + appUserID : friendID,
@@ -188,11 +180,7 @@ extension FriendsManager {
     /// Accepts friend request from the friend id provided.
     class func acceptFriendRequestFrom(id friendID: String, completionHandler: BasicCompletionHandler) {
         
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-            return
-        }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
 
         let update = [
             FirebasePaths.receivedRequests + "/" + appUserID + "/" + friendID : NSNull(),
