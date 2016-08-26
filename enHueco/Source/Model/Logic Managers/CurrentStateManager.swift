@@ -48,7 +48,7 @@ class CurrentStateManager {
         var instantEvent: [String:AnyObject] =
         [
                 "type": "EVENT",
-                "valid_until": newFreeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate()).serverFormattedString(),
+                "valid_until": newFreeTimePeriod.endDateInNearestPossibleWeekToDate(NSDate()).serverFormattedString(),
         ]
 
         instantEvent["name"] = newFreeTimePeriod.name

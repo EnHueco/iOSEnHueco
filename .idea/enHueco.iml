@@ -27,13 +27,14 @@
     <content url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Intermediates/Pods.build/Debug-iphoneos/TSMessages.build/DerivedSources" />
     <content url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Intermediates/Pods.build/Debug-iphoneos/TapkuLibrary.build/DerivedSources" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Assets.xcassets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GoogleService-Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/PushNotificationPayload.apns" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ComplicationController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Views/InGapRowController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/FriendDetailInterfaceController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ComplicationController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/InGapInterfaceController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Assets.xcassets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/NotificationController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/GlanceController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ExtensionDelegate.swift" isTestSource="false" />
@@ -41,7 +42,6 @@
       <sourceFolder url="file://$MODULE_DIR$/enHuecoTests/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Resources/accessPoints.csv" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/Array+Sorting.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/UIImage+ImageEffects.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/UIImage+ImageEffects.h" isTestSource="false" />
@@ -55,6 +55,34 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/es.lproj/General.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/AppDelegate.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/enHueco-Bridging-Header.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHNotifications.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHProgressHUD.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/EventUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/PrivacySettingsUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/UserUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Schedule.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/InstantEvent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/User.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/ModelScheme.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Event.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/PrivacyManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebasePaths.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/ProximityUpdateManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/EHUserDefaultsKeys.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/Constants.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/GlobalConstants.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/RBResizer.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/FreeTimeCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/EnHuecoNowCollectionViewCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/AvailableFriendCell.swift" isTestSource="false" />
@@ -70,57 +98,30 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/Colors.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/FriendsCell.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/EventUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/PrivacySettingsUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/UserUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Schedule.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/InstantEvent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/User.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/ModelScheme.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Event.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/PrivacyManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebasePaths.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/ProximityUpdateManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/EHUserDefaultsKeys.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/Constants.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/GlobalConstants.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/RBResizer.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHNotifications.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHProgressHUD.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/AddEditEventViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PopOverMenuViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyFreeNavigationViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/InstantFreeTimeViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PrivacySettingsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ChooseFriendsPrivacySettingsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyFreeNavigationViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsSplitViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchSelectFriendsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchNewFriendViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsEmbeddedTableViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ServerPoller.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsSplitViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsEmbeddedTableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PrivacySettingsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/MainTabBarViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendRequestsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PopOverMenuViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ProfileViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ChooseFriendsPrivacySettingsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendRequestsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SelectCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/InstantFreeTimeViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/LoginViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/AddEditEventViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsNavigationViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ImportProfileImageViewController.swift" isTestSource="false" />
@@ -130,7 +131,7 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Localization/es.lproj/Friends.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Base.lproj/LocalizableInterface.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Base.lproj/General.strings" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GoogleService-Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resources/accessPoints.csv" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MultiSelectSegmentedControl/MultiSelectSegmentedControl.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MultiSelectSegmentedControl/MultiSelectSegmentedControl.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKCopying.h" isTestSource="false" />

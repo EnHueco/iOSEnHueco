@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 protocol FirebaseLogicManager {
     static func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser?

@@ -33,24 +33,32 @@ class Event: BaseEvent {
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
      possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
      one given that the weekday of the event doesn't exist for the week of the month of the date provided.
+
+     If the event is unique (i.e. non-repeating), the startDate is returned unchanged.
      */
-    func startHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
+    func startDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate
     {
+        guard repetitionDays != nil else { return startDate }
+
         return date(startDate, inNearestPossibleWeekToDate: date)
     }
     
     /** Returns the end hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
      possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
      one given that the weekday of the event doesn't exist for the week of the month of the date provided.
+
+     If the event is unique (i.e. non-repeating), the endDate is returned unchanged.
      */
-    func endHourInNearestPossibleWeekToDate(date: NSDate) -> NSDate
+    func endDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate
     {
+        guard repetitionDays != nil else { return endDate }
+
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
         var endHourDate = date(endDate, inNearestPossibleWeekToDate: date)
         
-        if endHourDate < startHourInNearestPossibleWeekToDate(date) {
+        if endHourDate < startDateInNearestPossibleWeekToDate(date) {
             endHourDate = globalCalendar.dateByAddingUnit(.WeekOfMonth, value: 1, toDate: endHourDate, options: [])!
         }
         

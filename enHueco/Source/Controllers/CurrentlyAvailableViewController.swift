@@ -318,12 +318,12 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endHourInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endDateInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         } else {
             (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startHourInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startDateInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
 

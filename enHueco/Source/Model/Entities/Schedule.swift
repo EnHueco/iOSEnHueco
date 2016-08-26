@@ -18,21 +18,20 @@ class Schedule: MappableObject {
         self.events = try [Event](js: map.json)
     }
     
-    /// Returns true if event doesn't overlap with any gap or class, excluding eventToExclude.
-    func canAddEvent(newEvent: Event, excludingEvent eventToExclude:Event? = nil) -> Bool
-    {
+    /// Returns true if event doesn't overlap with any other event, excluding the event with ID == eventToExcludeID.
+    func canAddEvent(newEvent: Event, excludingEvent eventToExcludeID: String? = nil) -> Bool {
+        
         let currentDate = NSDate()
         
-        let newEventStartHourInCurrentDate = newEvent.startHourInNearestPossibleWeekToDate(currentDate)
-        let newEventEndHourInCurrentDate = newEvent.endHourInNearestPossibleWeekToDate(currentDate)
+        let newEventStartHourInCurrentDate = newEvent.startDateInNearestPossibleWeekToDate(currentDate)
+        let newEventEndHourInCurrentDate = newEvent.endDateInNearestPossibleWeekToDate(currentDate)
         
-        for event in mutableEvents where eventToExclude == nil || event !== eventToExclude
-        {
-            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
-            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
+        for event in events where eventToExclude == nil || event.id !== eventToExclude.id {
             
-            if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
-            {
+            let startHourInCurrentDate = event.startDateInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endDateInNearestPossibleWeekToDate(currentDate)
+            
+            if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate) {
                 return false
             }
         }

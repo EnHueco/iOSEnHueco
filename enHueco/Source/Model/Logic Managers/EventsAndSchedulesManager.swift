@@ -11,12 +11,12 @@ import EventKit
 import Firebase
 
 enum EventsAndSchedulesManagerError: EHErrorType {
-    case CantAddEvents
+    case EventsOverlap
 
     var localizedDescription: String? {
 
         switch self {
-        case .CantAddEvents: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
+        case .EventsOverlap: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
 
         default: return nil
         }
@@ -31,7 +31,7 @@ protocol EventsAndSchedulesManagerDelegate: class {
 Handles operations related to schedule fetching and autoupdating for the app user, getting schedules for common free time periods, importing
 schedules from external services, and adding/removing/editing events.
 */
-class EventsAndSchedulesManager: FirebaseSynchronizable {
+class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     /// The app user's schedule
     private(set) var schedule: Schedule?
@@ -70,58 +70,145 @@ class EventsAndSchedulesManager: FirebaseSynchronizable {
         }
     }
     
+    /** Returns a schedule with the common free time periods among the schedules provided and the one of the app user
+     Returns nil if no schedule data has been received for the app user yet.
+     */
+    func commonFreeTimePeriodsScheduleAmong(schedules: [Schedule]) -> Schedule? {
+        
+        guard let schedule = self.schedule else {
+            return nil
+        }
+        
+        // TODO: Finish
+        
+        let currentDate = NSDate()
+        let commonFreeTimePeriodsSchedule = Schedule()
+        
+        guard schedules.count >= 2 else {
+            return commonFreeTimePeriodsSchedule
+        }
+        
+        for i in 1 ..< enHueco.appUser.schedule.weekDays.count {
+            var currentCommonFreeTimePeriods = schedules.first!.schedule.weekDays[i].events.filter {
+                $0.type == .FreeTime
+            }
+            
+            for j in 1 ..< schedules.count {
+                var newCommonFreeTimePeriods = [Event]()
+                
+                for freeTimePeriod1 in currentCommonFreeTimePeriods {
+                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInNearestPossibleWeekToDate(currentDate)
+                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInNearestPossibleWeekToDate(currentDate)
+                    
+                    for freeTimePeriod2 in schedules[j].schedule.weekDays[i].events.filter({ $0.type == .FreeTime }) {
+                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInNearestPossibleWeekToDate(currentDate)
+                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInNearestPossibleWeekToDate(currentDate)
+                        
+                        if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2) {
+                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.startHour : freeTimePeriod2.startHour)
+                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.endHour : freeTimePeriod2.endHour)
+                            
+                            newCommonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
+                        }
+                    }
+                }
+                
+                currentCommonFreeTimePeriods = newCommonFreeTimePeriods
+            }
+            
+            commonFreeTimePeriodsSchedule.weekDays[i].setEvents(currentCommonFreeTimePeriods)
+        }
+        
+        return commonFreeTimePeriodsSchedule
+    }
+    
     deinit {
         removeFireBaseSubscriptions()
     }
 }
 
 extension EventsAndSchedulesManager {
-
+    
     /**
-     Returns a schedule with the common free time periods of the users provided.
+     Adds the events given events to the AppUser's schedule if and only if the request is successful.
+     
+     - parameter dummyEvents:    Dummy events that contain the information of the events that wish to be added
      */
-    class func commonFreeTimePeriodsScheduleForUsers(users: [User]) -> Schedule {
-
-        let currentDate = NSDate()
-        let commonFreeTimePeriodsSchedule = Schedule()
-
-        guard users.count >= 2 else {
-            return commonFreeTimePeriodsSchedule
-        }
-
-        for i in 1 ..< enHueco.appUser.schedule.weekDays.count {
-            var currentCommonFreeTimePeriods = users.first!.schedule.weekDays[i].events.filter {
-                $0.type == .FreeTime
+    class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: BasicCompletionHandler) {
+        
+        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
+        
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(firebaseUser.uid)
+        
+        scheduleReference.observeSingleEventType(.Value) { [unowned self] (snapshot) in
+            
+            let unknownError = {
+                assertionFailure()
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(error: GenericError.UnknownError)
+                }
             }
-
-            for j in 1 ..< users.count {
-                var newCommonFreeTimePeriods = [Event]()
-
-                for freeTimePeriod1 in currentCommonFreeTimePeriods {
-                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInNearestPossibleWeekToDate(currentDate)
-                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInNearestPossibleWeekToDate(currentDate)
-
-                    for freeTimePeriod2 in users[j].schedule.weekDays[i].events.filter({ $0.type == .FreeTime }) {
-                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInNearestPossibleWeekToDate(currentDate)
-                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInNearestPossibleWeekToDate(currentDate)
-
-                        if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2) {
-                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.startHour : freeTimePeriod2.startHour)
-                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.endHour : freeTimePeriod2.endHour)
-
-                            newCommonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
-                        }
+            
+            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = try? Schedule(js: schedule) else {
+                unknownError()
+                return
+            }
+            
+            for dummyEvent in dummyEvents {
+                
+                let localWeekDay = localCalendar.component(.Weekday, fromDate: dummyEvent.startDate)
+                
+                guard schedule.canAddEvent(dummyEvent) else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler(error: EventsAndSchedulesManagerError.EventsOverlap)
+                    }
+                    return
+                }
+            }
+            
+            do {
+                var update = [String : AnyObject]()
+                
+                for dummyEvent in dummyEvents {
+                    update[dummyEvent.id] = try dummyEvent.jsonRepresentation().foundationDictionary
+                }
+                
+                scheduleReference.updateChildValues(update) { (error, _) in
+                    
+                    dispatch_async(dispatch_get_main_queue()){
+                        completionHandler(error: error)
                     }
                 }
-
-                currentCommonFreeTimePeriods = newCommonFreeTimePeriods
+                
+            } catch {
+                unknownError()
             }
-
-            commonFreeTimePeriodsSchedule.weekDays[i].setEvents(currentCommonFreeTimePeriods)
         }
-
-        return commonFreeTimePeriodsSchedule
     }
+    
+    /// Deletes the events with the given IDs
+    class func deleteEvents(IDs: [String], completionHandler: BasicCompletionHandler) {
+        
+        guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
+
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(appUser.uid)
+        
+        var update = [String : AnyObject]()
+
+        for ID in IDs {
+            update[ID] = NSNull()
+        }
+        
+        scheduleReference.updateChildValues(update) { (error, _) in
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler(error: error)
+            }
+        }
+    }
+}
+
+// TODO: Convert to Firebase
+extension EventsAndSchedulesManager {
 
     /**
      Imports an schedule of classes from a device's calendar.
@@ -190,88 +277,6 @@ extension EventsAndSchedulesManager {
         } catch {
             completionHandler(success: false, error: error)
         }
-    }
-
-    /**
-     Adds the events given events to the AppUser's schedule if and only if the request is successful.
-     
-     - parameter dummyEvents:    Dummy events that contain the information of the events that wish to be added
-     - throws: CantAddEvents in case new events overlap with existing events. The request is not attempted.
-     */
-    class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: BasicCompletionHandler) throws {
-
-        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
-        
-        let scheduleRef = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid)
-        
-        scheduleRef.observeSingleEventType(.Value) { [unowned self] (snapshot) in
-            
-            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = Schedule(js: schedule) else {
-                assertionFailure()
-                dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
-                return
-            }
-            
-            for dummyEvent in dummyEvents {
-                
-                let localWeekDay = localCalendar.component(.Weekday, fromDate: dummyEvent.startDate)
-                
-                guard schedule.canAddEvent(dummyEvent) || dummyEvent.repetitionDays == nil else {
-                    throw EventsAndSchedulesManagerError.CantAddEvents
-                }
-            }
-            
-            do {
-                let params = dummyEvents.map {
-                    try $0.jsonRepresentation().foundationDictionary
-                }
-                
-                
-                
-            } catch {
-                
-            }
-            
-            ///TODO: Finish
-        }
-    }
-
-    /** Deletes the given existing events from the AppUser's schedule if and only if the request is successful.
-     The events given **must** be a reference to existing events.
-    */
-    class func deleteEvents(existingEvents: [Event], completionHandler: BasicCompletionHandler) {
-
-        guard existingEvents.reduce(true, combine: { $0 && $1.ID != nil }) else {
-            return
-        }
-
-        let params = existingEvents.map {
-            ["id": $0.ID]
-        }
-
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment)!)
-        request.HTTPMethod = "DELETE"
-
-        ConnectionManager.sendAsyncDataRequest(request, withJSONParams: params, successCompletionHandler: {
-            (_) -> () in
-
-            for event in existingEvents {
-                enHueco.appUser.schedule.removeEventWithID(event.ID)
-            }
-
-            try? PersistenceManager.sharedManager.persistData()
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
-            }
-
-        }, failureCompletionHandler: {
-            error in
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: error)
-            }
-        })
     }
 
     /** Edits the given existing event from the AppUser's schedule if and only if the request is successful.
