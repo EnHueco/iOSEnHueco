@@ -187,7 +187,7 @@ extension EventsAndSchedulesManager {
         
         guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
 
-        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(appUser.uid)
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid)
         
         var update = [String : AnyObject]()
 
@@ -201,11 +201,37 @@ extension EventsAndSchedulesManager {
             }
         }
     }
+    
+    
+    /** Edits the given existing event from the AppUser's schedule if and only if the request is successful.
+     
+     - parameter eventID: The ID of the event to edit
+     - parameter intent:  The intent with the values to change
+     */
+    class func editEvent(eventID eventID: String, withIntent intent: Event, completionHandler: BasicCompletionHandler) {
+        
+        guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
+        
+        let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(eventID)
+        
+        guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            return
+        }
+        
+        eventReference.updateChildValues(updateJSON) { (error, _) in
+            dispatch_async(dispatch_get_main_queue()){
+                completionHandler(error: error)
+            }
+        }
+    }
 }
 
 // TODO: Convert to Firebase
 extension EventsAndSchedulesManager {
 
+    /*
     /**
      Imports an schedule of classes from a device's calendar.
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
@@ -274,41 +300,5 @@ extension EventsAndSchedulesManager {
             completionHandler(success: false, error: error)
         }
     }
-
-    /** Edits the given existing event from the AppUser's schedule if and only if the request is successful.
-     
-     - parameter existingEvent:     Reference to existing event
-     - parameter dummyEvent:        A new event with the values that should be replaced in the existing event.
     */
-    class func editEvent(existingEvent: Event, withValuesOfDummyEvent dummyEvent: Event, completionHandler: BasicCompletionHandler) {
-
-        guard let ID = existingEvent.ID else {
-            return
-        }
-
-        let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.EventsSegment + ID + "/")!)
-        request.HTTPMethod = "PUT"
-
-        ConnectionManager.sendAsyncRequest(request, withJSONParams: dummyEvent.toJSONObject(associatingUser: enHueco.appUser), successCompletionHandler: {
-            (JSONResponse) -> () in
-
-            let JSONDictionary = JSONResponse as! [String:AnyObject]
-
-            existingEvent.replaceValuesWithThoseOfTheEvent(Event(JSONDictionary: JSONDictionary))
-            existingEvent.lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
-
-            try? PersistenceManager.sharedManager.persistData()
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: true, error: nil)
-            }
-
-        }, failureCompletionHandler: {
-            error in
-
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(success: false, error: error)
-            }
-        })
-    }
 }
