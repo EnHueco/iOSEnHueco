@@ -25,7 +25,6 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
     var selectedCells = [NSIndexPath: AnyObject]()
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         navigationBar.tintColor = UIColor.whiteColor()
@@ -39,7 +38,6 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
     }
 
     override func didReceiveMemoryWarning() {
-
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

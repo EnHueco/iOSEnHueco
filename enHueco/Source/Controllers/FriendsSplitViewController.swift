@@ -10,7 +10,6 @@ import UIKit
 
 class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDelegate {
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         delegate = self
@@ -19,7 +18,6 @@ class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDe
     }
 
     override func didReceiveMemoryWarning() {
-
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

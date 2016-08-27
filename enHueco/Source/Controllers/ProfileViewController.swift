@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController, ServerPoller {
     var pollingInterval = 10.0
 
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
@@ -36,7 +37,6 @@ class ProfileViewController: UIViewController, ServerPoller {
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         editScheduleButton.clipsToBounds = true
@@ -47,7 +47,6 @@ class ProfileViewController: UIViewController, ServerPoller {
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
 
         guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else {
@@ -58,7 +57,6 @@ class ProfileViewController: UIViewController, ServerPoller {
     }
 
     override func viewDidAppear(animated: Bool) {
-
         super.viewDidAppear(animated)
 
         guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else {
@@ -70,7 +68,6 @@ class ProfileViewController: UIViewController, ServerPoller {
     }
 
     override func viewWillDisappear(animated: Bool) {
-
         super.viewWillDisappear(animated)
 
         stopPolling()

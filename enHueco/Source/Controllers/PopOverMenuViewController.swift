@@ -24,7 +24,6 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     private let rowHeight: CGFloat = 44.0
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         preferredContentSize = CGSize(width: 160, height: rowHeight * CGFloat(titlesAndIcons.count))
@@ -32,7 +31,8 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     }
 
     override func viewDidAppear(animated: Bool) {
-
+        super.viewDidAppear(animated)
+        
         if tapOutsideRecognizer == nil {
             tapOutsideRecognizer = UITapGestureRecognizer(target: self, action: #selector(PopOverMenuViewController.handleTapBehind(_:)))
             tapOutsideRecognizer.numberOfTapsRequired = 1
@@ -43,7 +43,8 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     }
 
     override func viewWillDisappear(animated: Bool) {
-
+        super.viewWillAppear(animated)
+        
         if tapOutsideRecognizer != nil {
             view.window?.removeGestureRecognizer(tapOutsideRecognizer)
             tapOutsideRecognizer = nil

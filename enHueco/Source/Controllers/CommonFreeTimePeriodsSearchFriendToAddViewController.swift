@@ -20,7 +20,6 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UI
     weak var delegate: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         resultsTableView.delegate = self
@@ -28,7 +27,6 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController, UI
     }
 
     override func didReceiveMemoryWarning() {
-
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

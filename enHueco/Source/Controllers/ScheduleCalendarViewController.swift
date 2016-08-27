@@ -19,16 +19,14 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
-
+        
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
         dayView.daysBackgroundView.backgroundColor = UIColor(red: 248 / 255.0, green: 248 / 255.0, blue: 248 / 255.0, alpha: 1)
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
         dayView.reloadData()
     }

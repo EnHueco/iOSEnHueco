@@ -22,7 +22,6 @@ class PrivacySettingsViewController: UITableViewController {
     private let unimplementedSections = [0]
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         title = "Privacidad"
@@ -30,7 +29,8 @@ class PrivacySettingsViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-
+        super.viewWillAppear(animated)
+        
         //shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
 
         shareEventNamesSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventNames)

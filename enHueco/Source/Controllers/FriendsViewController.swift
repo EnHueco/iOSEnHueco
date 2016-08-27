@@ -115,7 +115,8 @@ class FriendsViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-
+        super.viewDidAppear(animated)
+        
         reportScreenViewToGoogleAnalyticsWithName("Friends")
 
         if let selectedIndex = tableView.indexPathForSelectedRow {

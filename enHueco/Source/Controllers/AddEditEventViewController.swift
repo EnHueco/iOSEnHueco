@@ -25,7 +25,6 @@ class AddEditEventViewController: UIViewController {
     // MARK: View Controller
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         topBarBackgroundView.backgroundColor = EHInterfaceColor.defaultTopBarsColor
@@ -43,13 +42,13 @@ class AddEditEventViewController: UIViewController {
 
 
     override func didReceiveMemoryWarning() {
-
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
+        super.touchesBegan(touchesBegan, withEvent: event)
+        
         view.endEditing(true)
         embeddedTableViewController.view.endEditing(true)
     }

@@ -26,6 +26,7 @@ import FirebaseAuth
     private var firstAppearance = true
 
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController = navigationController
 
@@ -66,7 +67,6 @@ import FirebaseAuth
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
 
         if firstAppearance && enHueco.appUser != nil {
@@ -78,14 +78,13 @@ import FirebaseAuth
     }
 
     override func viewDidAppear(animated: Bool) {
-
         super.viewDidAppear(animated)
+        
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         firstAppearance = false
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         loginButton.roundCorners()
@@ -159,7 +158,8 @@ import FirebaseAuth
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
+        super.touchesBegan(touches, withEvent: event)
+        
         self.view.endEditing(true)
     }
 

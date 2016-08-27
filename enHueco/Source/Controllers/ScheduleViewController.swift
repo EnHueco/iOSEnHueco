@@ -24,7 +24,6 @@ class ScheduleViewController: UIViewController {
     var scheduleCalendarViewController: ScheduleCalendarViewController!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         topBarBackgroundView.backgroundColor = EHInterfaceColor.defaultTopBarsColor
@@ -34,7 +33,6 @@ class ScheduleViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         addEventButton.clipsToBounds = true
@@ -42,7 +40,8 @@ class ScheduleViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-
+        super.viewWillAppear(animated)
+        
         navigationController?.navigationBarHidden = true
 
         if schedule !== enHueco.appUser.schedule {
@@ -52,14 +51,16 @@ class ScheduleViewController: UIViewController {
     }
 
     override func viewDidAppear(animated: Bool) {
-
+        super.viewDidAppear(animated)
+        
         if schedule === enHueco.appUser.schedule {
             becomeFirstResponder()
         }
     }
 
     override func viewWillDisappear(animated: Bool) {
-
+        super.viewWillDisappear(animated)
+        
         resignFirstResponder()
     }
 

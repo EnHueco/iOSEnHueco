@@ -24,7 +24,6 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     var currentController: UIViewController?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         searchBar.delegate = self
@@ -53,7 +52,6 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -79,7 +77,6 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
-
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

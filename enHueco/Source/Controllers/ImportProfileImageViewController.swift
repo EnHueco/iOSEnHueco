@@ -34,7 +34,6 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     private var originalStatusBarStyle: UIStatusBarStyle!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         originalStatusBarStyle = UIApplication.sharedApplication().statusBarStyle
@@ -67,7 +66,6 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         importFromFacebookButton.roundCorners()
@@ -75,14 +73,14 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
+        
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
     }
 
     override func viewWillDisappear(animated: Bool) {
-
         super.viewWillDisappear(animated)
+        
         UIApplication.sharedApplication().setStatusBarStyle(originalStatusBarStyle, animated: animated)
     }
 

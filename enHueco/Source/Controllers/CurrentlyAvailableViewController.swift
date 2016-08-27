@@ -29,6 +29,7 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller {
     var pollingInterval = 10.0
 
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -65,18 +66,19 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller {
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
         emptyLabel.center = tableView.center
     }
 
     override func viewWillDisappear(animated: Bool) {
-
+        super.viewWillDisappear(animated)
+        
         stopPolling()
     }
 
     override func viewWillAppear(animated: Bool) {
-
+        super.viewWillAppear(animated)
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         navigationController?.setNavigationBarHidden(false, animated: false)
 
@@ -109,7 +111,6 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller {
     }
 
     override func viewDidAppear(animated: Bool) {
-
         super.viewDidAppear(animated)
 
         reportScreenViewToGoogleAnalyticsWithName("Currently Available")
@@ -137,7 +138,8 @@ class CurrentlyAvailableViewController: UIViewController, ServerPoller {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
+        super.touchesBegan(touches, withEvent: event)
+        
         view.endEditing(true)
     }
 

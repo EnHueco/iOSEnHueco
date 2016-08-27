@@ -12,7 +12,6 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         segmentedControl.tintColor = EHInterfaceColor.defaultNavigationBarColor

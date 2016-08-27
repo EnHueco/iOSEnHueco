@@ -16,7 +16,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     @IBOutlet weak var requestsTableView: UITableView!
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         requestsTableView.dataSource = self
@@ -25,7 +24,6 @@ class FriendRequestsViewController: UIViewController, UITableViewDataSource, UIT
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)

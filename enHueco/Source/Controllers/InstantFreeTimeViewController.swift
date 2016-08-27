@@ -29,7 +29,6 @@ class InstantFreeTimeViewController: UIViewController {
     weak var delegate: InstantFreeTimeViewControllerDelegate?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()

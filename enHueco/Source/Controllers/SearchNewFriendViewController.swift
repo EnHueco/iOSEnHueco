@@ -19,7 +19,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     var searchTimer: NSTimer?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.clearColor()
@@ -38,7 +37,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -55,7 +53,6 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         let blurEffect = UIBlurEffect(style: .Light)
@@ -125,7 +122,8 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
+        super.touchesBegan(touches, withEvent: event)
+        
         searchBar.endEditing(true)
     }
 

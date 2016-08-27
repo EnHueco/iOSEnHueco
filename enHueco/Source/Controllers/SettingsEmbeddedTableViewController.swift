@@ -19,7 +19,6 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     private let unimplementedSections = [1, 3]
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
 
         title = "Ajustes"
