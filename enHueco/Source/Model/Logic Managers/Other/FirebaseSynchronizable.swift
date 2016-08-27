@@ -16,17 +16,32 @@ protocol FirebaseSynchronizable {
     private let firebaseUser: FIRUser
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)]
+    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]]
     
     private func createFirebaseSubscriptions()
+    
+    private func addHandle(handle: FIRDatabaseHandle, toReference reference: FIRDatabaseReference)
 }
 
 extension FirebaseSynchronizable {
         
     private func removeFirebaseSubscriptions() {
         
-        while let (ref, handle) = databaseRefsAndHandles.popLast() {
-            ref.removeObserverWithHandle(handle)
+        for (reference, handles) in databaseRefsAndHandles {
+            for handlle in handles {
+                reference.removeObserverWithHandle(handle)
+            }
         }
+        
+        databaseRefsAndHandles = [:]
+    }
+    
+    private func addHandle(handle: FIRDatabaseHandle, toReference reference: FIRDatabaseReference) {
+        
+        if databaseRefsAndHandles[reference] == nil {
+            databaseRefsAndHandles[reference] = []
+        }
+        
+        databaseRefsAndHandles[reference]?.append(handle)
     }
 }

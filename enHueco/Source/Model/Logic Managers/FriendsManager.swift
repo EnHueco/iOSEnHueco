@@ -25,7 +25,7 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     private let firebaseUser: FIRUser
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
+    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
     
     /// Delegate
     weak var delegate: FriendsManagerDelegate?
@@ -46,50 +46,54 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     private func createFirebaseSubscriptions() {
         
-        FIRDatabase.database().reference().child(FirebasePaths.friends).child(appUser.uid).observeSingleEventOfType(.Value) { [unowned self] (snapshot) in
+        let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(firebaseUser.uid)
+        
+        friendsReference.observeEventType(.ChildAdded) { (snapshot) in
             
-            let friendIDs = (snapshot as! [String : AnyObject]).keys
+            let friendID = snapshot.key
             
-            for friendID in friendIDs {
+            let friendReference = database.reference().child(FirebasePaths.users).child(friendID)
+            let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
                 
-                let friendReference = database.reference().child(FirebasePaths.users).child(friendID)
-                let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
-                    
-                    guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject],
-                          let friend = try? User(js: friendJSON) else {
-
+                guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject],
+                    let friend = try? User(js: friendJSON) else {
+                        
                         assertionFailure()
                         return
-                    }
-
-                    /// Thread safety, dictionaries are structs and therefore copied.
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.friends[friend.id] = friend
-                        notifyChangesIfNeededForFriend(friendID: friend.id)
-                    }
                 }
                 
-                databaseRefsAndHandles.append((friendReference, friendHandle))
-                
-                let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
-                let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
-                    
-                    guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject],
-                          let schedule = try? Schedule(js: scheduleJSON) else {
-
-                        assertionFailure()
-                        return
-                    }
-                    
-                    /// Thread safety
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.schedules[friend.id] = schedule
-                        notifyChangesIfNeededForFriend(friendID: friend.id)
-                    }
+                /// Thread safety, dictionaries are structs and therefore copied.
+                dispatch_async(dispatch_get_main_queue()){
+                    self.friends[friend.id] = friend
+                    notifyChangesIfNeededForFriend(friendID: friend.id)
                 }
-                
-                databaseRefsAndHandles.append((scheduleReference, scheduleHandle))
             }
+            
+            addHandle(friendHandle, toReference: friendsReference)
+            
+            let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
+            let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
+                
+                guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject],
+                    let schedule = try? Schedule(js: scheduleJSON) else {
+                        
+                        assertionFailure()
+                        return
+                }
+                
+                /// Thread safety
+                dispatch_async(dispatch_get_main_queue()){
+                    self.schedules[friend.id] = schedule
+                    notifyChangesIfNeededForFriend(friendID: friend.id)
+                }
+            }
+            
+            addHandle(scheduleHandle, toReference: scheduleReference)
+        }
+        
+        friendsReference.observeEventType(.ChildRemoved) { (snapshot) in
+            
+            //TODO: Implement
         }
     }
         

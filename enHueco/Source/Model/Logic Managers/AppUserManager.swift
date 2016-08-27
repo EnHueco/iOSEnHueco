@@ -27,7 +27,7 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
     private(set) var appUser: User?
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
+    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
     
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
@@ -45,7 +45,8 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     private func createFirebaseSubscriptions() {
 
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+        let reference = FIRDatabase.database().reference().child(FirebasePaths.users).child(firebaseUser.uid)
+        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
             
             guard let userJSON = snapshot.value as? [String : AnyObject],
                   let appUser = try? User(js: snapshot) else {
@@ -58,6 +59,8 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
                 self.delegate?.appUserManagerDidReceiveAppUserInformationUpdates(self)
             }
         }
+        
+        addHandle(handle, toReference: reference)
     }
     
     deinit {

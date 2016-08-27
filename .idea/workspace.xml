@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/enHueco.xcscheme" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/xcuserdata/Diego.xcuserdatad/xcschemes/enHueco.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,8 +47,8 @@
       <file leaf-file-name="EventsAndSchedulesManager.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="212" column="13" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
+            <state relative-caret-position="810">
+              <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
               <folding>
                 <element signature="e#152#169#0" expanded="true" />
               </folding>
@@ -501,12 +492,12 @@
       <workItem from="1471791838148" duration="413000" />
       <workItem from="1471793280469" duration="1272000" />
       <workItem from="1471820526975" duration="936000" />
-      <workItem from="1472133852907" duration="1515000" />
+      <workItem from="1472133852907" duration="1896000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14966000" />
+    <option name="totallyTimeSpent" value="15347000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -709,8 +700,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="212" column="13" selection-start-line="212" selection-start-column="13" selection-end-line="212" selection-end-column="13" />
+        <state relative-caret-position="810">
+          <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
           <folding>
             <element signature="e#152#169#0" expanded="true" />
           </folding>

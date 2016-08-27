@@ -39,7 +39,7 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
     private let firebaseUser: FIRUser
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles: [(FIRDatabaseReference, FIRDatabaseHandle)] = []
+    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
     
     weak var delegate: EventsAndSchedulesManagerDelegate
     
@@ -59,7 +59,8 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     private func createFirebaseSubscriptions() {
     
-        FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+        let reference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid)
+        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
             
             guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = Schedule(js: schedule) else {
                 return
@@ -68,6 +69,8 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
             self.schedule = schedule
             self.delegate.eventsAndSchedulesManagerDidReceiveScheduleUpdates(self)
         }
+        
+        addHandle(handle, toReference: reference)
     }
     
     /** Returns a schedule with the common free time periods among the schedules provided and the one of the app user
