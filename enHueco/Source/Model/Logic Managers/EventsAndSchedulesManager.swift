@@ -75,6 +75,8 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     /** Returns a schedule with the common free time periods among the schedules provided and the one of the app user
      Returns nil if no schedule data has been received for the app user yet.
+     
+     Note: **Only works with repeating days for now**
      */
     func commonFreeTimePeriodsScheduleAmong(schedules: [Schedule]) -> Schedule? {
         
@@ -85,44 +87,35 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
         // TODO: Finish
         
         let currentDate = NSDate()
-        let commonFreeTimePeriodsSchedule = Schedule()
+        var commonFreeTimePeriods = [Event]()
         
         guard schedules.count >= 2 else {
             return commonFreeTimePeriodsSchedule
         }
         
-        for i in 1 ..< enHueco.appUser.schedule.weekDays.count {
-            var currentCommonFreeTimePeriods = schedules.first!.schedule.weekDays[i].events.filter {
-                $0.type == .FreeTime
-            }
+        for event in (schedule.events.filter { $0.type == .FreeTime }) {
             
-            for j in 1 ..< schedules.count {
-                var newCommonFreeTimePeriods = [Event]()
-                
-                for freeTimePeriod1 in currentCommonFreeTimePeriods {
-                    let startHourInCurrentDate1 = freeTimePeriod1.startHourInNearestPossibleWeekToDate(currentDate)
-                    let endHourInCurrentDate1 = freeTimePeriod1.endHourInNearestPossibleWeekToDate(currentDate)
+            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
+            
+            for friendSchedule in schedules {
+                for friendEvent in (friendSchedule.events.filter { $0.type == .FreeTime }) where friendEvent.overlapsWith(event) {
                     
-                    for freeTimePeriod2 in schedules[j].schedule.weekDays[i].events.filter({ $0.type == .FreeTime }) {
-                        let startHourInCurrentDate2 = freeTimePeriod2.startHourInNearestPossibleWeekToDate(currentDate)
-                        let endHourInCurrentDate2 = freeTimePeriod2.endHourInNearestPossibleWeekToDate(currentDate)
-                        
-                        if !(endHourInCurrentDate1 < startHourInCurrentDate2 || startHourInCurrentDate1 > endHourInCurrentDate2) {
-                            let newStartHour = (startHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.startHour : freeTimePeriod2.startHour)
-                            let newEndHour = (endHourInCurrentDate1.isBetween(startHourInCurrentDate2, and: endHourInCurrentDate2) ? freeTimePeriod1.endHour : freeTimePeriod2.endHour)
-                            
-                            newCommonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
-                        }
-                    }
+                    let friendStartHourInCurrentDate = friendEvent.startHourInNearestPossibleWeekToDate(currentDate)
+                    let friendEndHourInCurrentDate = friendEvent.endHourInNearestPossibleWeekToDate(currentDate)
+                    
+                    let newStartDate = (startHourInCurrentDate.isBetween(friendStartHourInCurrentDate, and: friendEndHourInCurrentDate) ? event.startDate : friendEvent.startDate)
+                    let newEndDate = (endHourInCurrentDate.isBetween(friendStartHourInCurrentDate, and: friendEndHourInCurrentDate) ? event.endDate : friendEvent.endDate)
+                    
+                    let repetitionDays = event.repetitionDays!.map { friendEvent.repetitionDays!.contains($0) }
+                    
+                    let commonEvent = BaseEvent(type: .FreeTime, name: nil, location: nil, startDate: newStartDate, endDate: newEndDate, repetitionDays: repetitionDays)
+                    commonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
                 }
-                
-                currentCommonFreeTimePeriods = newCommonFreeTimePeriods
             }
-            
-            commonFreeTimePeriodsSchedule.weekDays[i].setEvents(currentCommonFreeTimePeriods)
         }
         
-        return commonFreeTimePeriodsSchedule
+        return Schedule(events: commonFreeTimePeriods)
     }
     
     deinit {

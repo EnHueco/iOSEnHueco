@@ -10,41 +10,35 @@ import Foundation
 import Genome
 
 class Schedule: MappableObject {
-
+    
     let events: [Event]
-
+    
     init(map: Map) throws {
-        
         self.events = try [Event](js: map.json)
+    }
+    
+    init(events: [Event]) {
+        self.events = events
     }
     
     /// Returns true if event doesn't overlap with any other event, excluding the event with ID == eventToExcludeID.
     func canAddEvent(newEvent: Event, excludingEvent eventToExcludeID: String? = nil) -> Bool {
         
-        let currentDate = NSDate()
-        
-        let newEventStartHourInCurrentDate = newEvent.startDateInNearestPossibleWeekToDate(currentDate)
-        let newEventEndHourInCurrentDate = newEvent.endDateInNearestPossibleWeekToDate(currentDate)
-        
-        for event in events where eventToExclude == nil || event.id !== eventToExclude.id {
-            
-            let startHourInCurrentDate = event.startDateInNearestPossibleWeekToDate(currentDate)
-            let endHourInCurrentDate = event.endDateInNearestPossibleWeekToDate(currentDate)
-            
-            if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate) {
-                return false
-            }
+        for event in events where (eventToExcludeID == nil || event.id != eventToExcludeID) && event.overlapsWith(newEvent) {
+            return false
         }
         
         return true
     }
-    
+}
+
+extension Schedule {
     /*
     private var instantFreeTimePeriodTTLTimer: NSTimer?
     
     ///Current instant free time period for the day. Self-destroys when the period is over (i.e. currentTime > endHour)
     var instantFreeTimePeriod: Event?
-    {
+        {
         didSet
         {
             if let instantFreeTimePeriod = instantFreeTimePeriod
@@ -59,89 +53,89 @@ class Schedule: MappableObject {
             }
         }
     }
-
+    
     /// Returns user current free time period, or nil if user is not free.
     func currentFreeTimePeriod() -> Event? {
-
+        
         guard !isInvisible else {
             return nil
         }
-
+        
         if schedule.instantFreeTimePeriod != nil {
             return schedule.instantFreeTimePeriod
         }
-
+        
         let currentDate = NSDate()
-
+        
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
-
+        
         for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime {
             let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
             let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
-
+            
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate) {
                 return event
             }
         }
-
+        
         return nil
     }
-
+    
     ///For Performance
     func currentAndNextFreeTimePeriods() -> (currentFreeTimePeriod:Event?, nextFreeTimePeriod:Event?) {
-
+        
         guard !isInvisible else {
             return (nil, nil)
         }
-
+        
         let currentDate = NSDate()
-
+        
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
-
+        
         let localWeekdayEvents = schedule.weekDays[localWeekDayNumber].events
-
+        
         var currentFreeTimePeriod: Event?
-
+        
         for event in localWeekdayEvents where event.type == .FreeTime {
             let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
             let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
-
+            
             if currentDate.isBetween(startHourInCurrentDate, and: endHourInCurrentDate) || startHourInCurrentDate.hasSameHourAndMinutesThan(currentDate) {
                 currentFreeTimePeriod = event
             } else if startHourInCurrentDate > currentDate {
                 return (currentFreeTimePeriod, event)
             }
         }
-
+        
         return (currentFreeTimePeriod, nil)
     }
-
+    
     /// Returns user's next event
     func nextEvent() -> Event? {
-
+        
         return nil //TODO:
     }
-
+    
     func nextFreeTimePeriod() -> Event? {
-
+        
         guard !isInvisible else {
             return nil
         }
-
+        
         let currentDate = NSDate()
-
+        
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: currentDate)
-
+        
         for event in schedule.weekDays[localWeekDayNumber].events where event.type == .FreeTime && event.startHourInNearestPossibleWeekToDate(currentDate) > currentDate {
             return event
         }
-
+        
         return nil
     }
-
+    
     override init()
     {
         var weekDays = [DaySchedule]()
@@ -180,7 +174,7 @@ class Schedule: MappableObject {
         guard let weekDays = decoder.decodeObjectForKey("weekDays") as? [DaySchedule] else
         {
             self.weekDays = [DaySchedule]()
-
+            
             super.init()
             return nil
         }
@@ -210,7 +204,7 @@ class Schedule: MappableObject {
                 return (event!, daySchedule)
             }
         }
-    
+        
         return nil
     }
     
