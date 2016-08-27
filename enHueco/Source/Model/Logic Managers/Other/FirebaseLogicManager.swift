@@ -16,7 +16,13 @@ protocol FirebaseLogicManager {
 extension FirebaseLogicManager {
     
     static func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser? {
-        assertionFailure()
-        dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+        
+        guard let user = FIRAuth.auth()?.currentUser else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+            return nil
+        }
+        
+        return user
     }
 }

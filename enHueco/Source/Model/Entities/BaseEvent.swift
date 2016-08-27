@@ -99,7 +99,7 @@ class BaseEvent: MappableObject {
      one given that the weekday of the event doesn't exist for the week of the month of the date provided.
      */
     private func date(date: NSDate, inNearestPossibleWeekToDate targetDate: NSDate) -> NSDate  {
-        
+
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         

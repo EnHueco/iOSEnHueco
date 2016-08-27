@@ -130,18 +130,22 @@ extension EventsAndSchedulesManager {
      
      - parameter dummyEvents:    Dummy events that contain the information of the events that wish to be added
      */
-    class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: BasicCompletionHandler) {
+    class func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: (addedEventIDs: [String]?, error: ErrorType?) -> Void) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
+        guard let user = (firebaseUser() { (error) in
+            completionHandler(addedEventIDs: nil, error: error)
+        }) else {
+            return
+        }
         
-        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(firebaseUser.uid)
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(appUser.uid)
         
         scheduleReference.observeSingleEventType(.Value) { [unowned self] (snapshot) in
             
             let unknownError = {
                 assertionFailure()
                 dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(error: GenericError.UnknownError)
+                    completionHandler(addedEventIDs: nil, error: GenericError.UnknownError)
                 }
             }
             
@@ -156,7 +160,7 @@ extension EventsAndSchedulesManager {
                 
                 guard schedule.canAddEvent(dummyEvent) else {
                     dispatch_async(dispatch_get_main_queue()) {
-                        completionHandler(error: EventsAndSchedulesManagerError.EventsOverlap)
+                        completionHandler(addedEventIDs: nil, error: EventsAndSchedulesManagerError.EventsOverlap)
                     }
                     return
                 }
@@ -166,13 +170,14 @@ extension EventsAndSchedulesManager {
                 var update = [String : AnyObject]()
                 
                 for dummyEvent in dummyEvents {
-                    update[dummyEvent.id] = try dummyEvent.jsonRepresentation().foundationDictionary
+                    let newID = scheduleReference.childByAutoId().key
+                    update[newID] = try dummyEvent.jsonRepresentation().foundationDictionary
                 }
                 
                 scheduleReference.updateChildValues(update) { (error, _) in
                     
                     dispatch_async(dispatch_get_main_queue()){
-                        completionHandler(error: error)
+                        completionHandler(addedEventIDs: error == nil ? Array(update.keys) : nil, error: error)
                     }
                 }
                 
