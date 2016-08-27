@@ -49,7 +49,7 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
         let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot) in
             
             let friendID = snapshot.key
-            let friendManager = FriendManager(friendID: friendID, delegate: self)
+            friendManagers[friendID] = FriendManager(friendID: friendID, delegate: self)
         }
         
         trackHandle(friendAddedHandle, forReference: friendsReference)
@@ -60,7 +60,6 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
         friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot) in
             
             let friendID = snapshot.key
-            
             friendManagers[friendID] = nil
             
             /// Thread safety

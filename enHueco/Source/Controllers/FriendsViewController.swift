@@ -272,10 +272,10 @@ extension FriendsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let friend = friendsAndSchedules[indexPath.row]
+        let friend = friendsAndSchedules[indexPath.row].user
 
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
-        friendDetailViewController.friend = friend
+        friendDetailViewController.friendID = friend.id
         //friendDetailViewController.hidesBottomBarWhenPushed = true
 
         splitViewController?.showDetailViewController(friendDetailViewController, sender: self)

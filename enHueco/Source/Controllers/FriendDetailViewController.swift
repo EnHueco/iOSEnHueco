@@ -16,67 +16,23 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var commonFreeTimePeriodsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
 
-    var dotsBarButtonItem: UIBarButtonItem!
+    private var dotsBarButtonItem: UIBarButtonItem!
+    
+    /// The ID of the friend to display
+    var friendID: String?
 
-    var friend: User!
+    // Real-time logic manager (If view visible)
+    private var friendManager: FriendManager?
 
-    var recordId: NSNumber?
+    private var recordId: NSNumber?
 
     let localizableStringsFile = "Friends"
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
-
-        title = friend.firstNames
-
-        viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-        commonFreeTimePeriodsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-
-        firstNamesLabel.text = friend.firstNames
-        lastNamesLabel.text = friend.lastNames
-
-        setRecordId()
-
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        view.addSubview(activityIndicator)
-        activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
-        activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
-        activityIndicator.startAnimating()
-
-        dispatch_async(dispatch_get_main_queue()) {
-            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
-                (image, error, cacheType, _) in
-
-                activityIndicator.removeFromSuperview()
-
-                guard let image = image else {
-                    return
-                }
-
-                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-
-                    self.imageImageView.image = image
-
-                }, completion: nil)
-
-                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-
-                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-
-                }, completion: nil)
-
-                self.updateButtonColors()
-            })
-        }
-
-        imageImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.clipsToBounds = true
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
 
         viewScheduleButton.clipsToBounds = true
@@ -90,8 +46,11 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     }
 
     override func viewWillAppear(animated: Bool) {
-
         super.viewWillAppear(animated)
+        
+        if let friendID = friendID {
+            friendManager = FriendManager(friendID: friendID, delegate: self)
+        }
 
         navigationController?.setNavigationBarHidden(false, animated: true)
 
@@ -125,9 +84,57 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         navigationItem.rightBarButtonItem = dotsBarButtonItem
     }
 
-    override func viewDidAppear(animated: Bool) {
-
-        super.viewDidAppear(animated)
+    func refreshUIData() {
+        
+        guard let friend = friendManager?.friend , schedule = friendManager?.schedule else {
+            return
+        }
+        
+        title = friend.firstNames
+        
+        viewScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        commonFreeTimePeriodsButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
+        
+        firstNamesLabel.text = friend.firstNames
+        lastNamesLabel.text = friend.lastNames
+        
+        setRecordId()
+        
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        view.addSubview(activityIndicator)
+        activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
+        activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
+        activityIndicator.startAnimating()
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
+                (image, error, cacheType, _) in
+                
+                activityIndicator.removeFromSuperview()
+                
+                guard let image = image else {
+                    return
+                }
+                
+                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
+                    self.imageImageView.image = image
+                    
+                    }, completion: nil)
+                
+                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
+                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                    
+                    }, completion: nil)
+                
+                self.updateButtonColors()
+            })
+        }
+        
+        imageImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -224,13 +231,22 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func setRecordId() {
 
-        if self.friend.phoneNumber.characters.count < 7 {
-            self.recordId = nil
+        guard let friend = friendManager?.friend else { return }
+        
+        if friend.phoneNumber.characters.count < 7 {
+            recordId = nil
         } else {
-            enHueco.getFriendABID(self.friend.phoneNumber, completionHandler: {
+            enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
                 (abid) -> () in
                 self.recordId = abid
             })
         }
+    }
+}
+
+extension FriendDetailViewController: FriendManagerDelegate {
+    
+    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendManager) {
+        refreshUIData()
     }
 }
