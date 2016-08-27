@@ -75,7 +75,7 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
             let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
             let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
                 
-                guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject],
+                guard let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]],
                     let schedule = try? Schedule(js: scheduleJSON) else {
                         
                         assertionFailure()

@@ -62,7 +62,7 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
         let reference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(firebaseUser.uid)
         let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
             
-            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = Schedule(js: schedule) else {
+            guard let scheduleJSON = snapshot.value as? [[String : AnyObject]], let schedule = Schedule(js: schedule) else {
                 return
             }
             
