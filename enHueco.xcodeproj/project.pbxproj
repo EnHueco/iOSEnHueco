@@ -91,6 +91,7 @@
 		F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */; };
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1B8D9F31D6FF0640019420E /* FirebaseLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */; };
+		F1B8DA0B1D71E56D0019420E /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8DA0A1D71E56D0019420E /* FriendManager.swift */; };
 		F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */; };
 		F1B9BCB41D5EC81C00153850 /* PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */; };
 		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
@@ -253,6 +254,7 @@
 		F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyFreeNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLogicManager.swift; sourceTree = "<group>"; };
+		F1B8DA0A1D71E56D0019420E /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantEvent.swift; sourceTree = "<group>"; };
 		F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettings.swift; sourceTree = "<group>"; };
 		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
+				F1B8DA0A1D71E56D0019420E /* FriendManager.swift */,
 				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
 				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
@@ -1021,6 +1024,7 @@
 				F1B54B161C8FB7B40059F855 /* EHNotifications.swift in Sources */,
 				F16C62A11D6553A1000D44CA /* PrivacySettingsUpdateIntent.swift in Sources */,
 				F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */,
+				F1B8DA0B1D71E56D0019420E /* FriendManager.swift in Sources */,
 				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
 				F11AACC61D654231006D27EB /* EventUpdateIntent.swift in Sources */,
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,

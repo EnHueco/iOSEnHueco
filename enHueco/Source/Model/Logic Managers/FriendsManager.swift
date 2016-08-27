@@ -16,12 +16,6 @@ protocol FriendsManagerDelegate: class {
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     
-    /// Dictionary with all friends as values and friend IDs as the keys
-    private(set) var friends = [String : User]()
-    
-    /// Dictionary with all friend schedules as values and friend IDs as the keys
-    private(set) var schedules = [String : Schedule]()
-    
     private let firebaseUser: FIRUser
     
     /// All references and handles for the references
@@ -29,6 +23,9 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     
     /// Delegate
     weak var delegate: FriendsManagerDelegate?
+    
+    /// Friend managers with the friend IDs as the key
+    private var friendManagers = [String : FriendManager]()
     
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
@@ -52,44 +49,7 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
         let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot) in
             
             let friendID = snapshot.key
-            
-            let friendReference = database.reference().child(FirebasePaths.users).child(friendID)
-            let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
-                
-                guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject],
-                    let friend = try? User(js: friendJSON) else {
-                        
-                        assertionFailure()
-                        return
-                }
-                
-                /// Thread safety, dictionaries are structs and therefore copied.
-                dispatch_async(dispatch_get_main_queue()){
-                    self.friends[friend.id] = friend
-                    notifyChangesIfNeededForFriend(friendID: friend.id)
-                }
-            }
-            
-            trackHandle(friendHandle, forReference: friendsReference)
-            
-            let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
-            let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
-                
-                guard let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]],
-                    let schedule = try? Schedule(js: scheduleJSON) else {
-                        
-                        assertionFailure()
-                        return
-                }
-                
-                /// Thread safety
-                dispatch_async(dispatch_get_main_queue()){
-                    self.schedules[friend.id] = schedule
-                    notifyChangesIfNeededForFriend(friendID: friend.id)
-                }
-            }
-            
-            trackHandle(scheduleHandle, forReference: scheduleReference)
+            let friendManager = FriendManager(friendID: friendID, delegate: self)
         }
         
         trackHandle(friendAddedHandle, forReference: friendsReference)
@@ -100,30 +60,41 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
         friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot) in
             
             let friendID = snapshot.key
-            databaseRefsAndHandles[friendsReference]?.removeObject(friendRemovedHandle)
+            
+            friendManagers[friendID] = nil
             
             /// Thread safety
             dispatch_async(dispatch_get_main_queue()){
-                friends[friendID] = nil
-                schedules[friendID] = nil
                 self.delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
             }
         }
         
         trackHandle(friendsHandle, forReference: friendsReference)
     }
+    
+    subscript(friendID: String) -> (friend: User?, schedule: Schedule?) {
         
-    private func notifyChangesIfNeededForFriend(friendID id: String) {
-        
-        guard friends[friend.id] != nil && schedules[friend.id] != nil else { return }
-        
-        dispatch_async(dispatch_get_main_queue()){
-            delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+        get {
+            guard let friendManager = friendManagers[friendID] else { return nil }
+            return (friendManager.friend, friendManager.schedule)
         }
+    }
+    
+    func friendAndSchedules() -> [(friend: User?, schedule: Schedule?)] {
+        
+        // #NoPanic We'll see how this works, if it's too costly we'll keep local array copies to speed up the process
+        return friendManagers.values.map { ($0.friend, $0.schedule) }
     }
     
     deinit {
         removeFireBaseSubscriptions()
+    }
+}
+
+extension FriendsManager: FriendManagerDelegate {
+    
+    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendManager) {
+        delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
     }
 }
 

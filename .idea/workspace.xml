@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendManager.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -584,12 +584,12 @@
       <workItem from="1471793280469" duration="1272000" />
       <workItem from="1471820526975" duration="936000" />
       <workItem from="1472133852907" duration="1896000" />
-      <workItem from="1472260542004" duration="514000" />
+      <workItem from="1472260542004" duration="972000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15861000" />
+    <option name="totallyTimeSpent" value="16319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />

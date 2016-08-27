@@ -148,12 +148,9 @@ class FriendsViewController: UIViewController {
         
         guard let friendsManager = friendsManager else { return }
 
-        friendsAndSchedules = []
-        
-        for friend in Array(friendsManager.friends.values) {
-            if let schedule = friendsManager.schedules[friend.id] {
-                friendsAndSchedules.append((friend, schedule))
-            }
+        friendsAndSchedules = friendsManager.friendAndSchedules().flatMap {
+            guard let friend = $0.friend, schedule = $0.schedule else { return nil }
+            return (friend, schedule)
         }
     }
 
