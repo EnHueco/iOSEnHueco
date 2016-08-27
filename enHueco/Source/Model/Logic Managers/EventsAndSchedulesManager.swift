@@ -70,7 +70,7 @@ class EventsAndSchedulesManager: FirebaseSynchronizable, FirebaseLogicManager {
             self.delegate.eventsAndSchedulesManagerDidReceiveScheduleUpdates(self)
         }
         
-        addHandle(handle, toReference: reference)
+        trackHandle(handle, forReference: reference)
     }
     
     /** Returns a schedule with the common free time periods among the schedules provided and the one of the app user

@@ -20,7 +20,7 @@ protocol FirebaseSynchronizable {
     
     private func createFirebaseSubscriptions()
     
-    private func addHandle(handle: FIRDatabaseHandle, toReference reference: FIRDatabaseReference)
+    private func trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference)
 }
 
 extension FirebaseSynchronizable {

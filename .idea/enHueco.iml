@@ -27,14 +27,13 @@
     <content url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Intermediates/Pods.build/Debug-iphoneos/TSMessages.build/DerivedSources" />
     <content url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Intermediates/Pods.build/Debug-iphoneos/TapkuLibrary.build/DerivedSources" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/GoogleService-Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Assets.xcassets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/PushNotificationPayload.apns" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ComplicationController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Views/InGapRowController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/FriendDetailInterfaceController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/InGapInterfaceController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ComplicationController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/Assets.xcassets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/InGapInterfaceController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/NotificationController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/GlanceController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco watchOS Extension/ExtensionDelegate.swift" isTestSource="false" />
@@ -42,6 +41,7 @@
       <sourceFolder url="file://$MODULE_DIR$/enHuecoTests/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Resources/accessPoints.csv" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/Array+Sorting.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/UIImage+ImageEffects.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Vendor/UIImage+ImageEffects.h" isTestSource="false" />
@@ -55,34 +55,6 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/es.lproj/General.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/AppDelegate.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/enHueco-Bridging-Header.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHNotifications.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHProgressHUD.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/EventUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/PrivacySettingsUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/UserUpdateIntent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Schedule.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/InstantEvent.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/User.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/ModelScheme.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Event.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/PrivacyManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebasePaths.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/ProximityUpdateManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/EHUserDefaultsKeys.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/Constants.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/GlobalConstants.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/RBResizer.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/FreeTimeCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/EnHuecoNowCollectionViewCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/AvailableFriendCell.swift" isTestSource="false" />
@@ -98,110 +70,127 @@
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/Colors.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/CommonFreeTimePeriodsSelectedFriendsCollectionViewCell.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Views/FriendsCell.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/EventUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/PrivacySettingsUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Update Intents/UserUpdateIntent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Schedule.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/Event.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/InstantEvent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/EnHueco.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/User.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Entities/ModelScheme.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/PrivacyManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebasePaths.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/ProximityUpdateManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/EHUserDefaultsKeys.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/Constants.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/GlobalConstants.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Model/Other/RBResizer.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHNotifications.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Other/EHProgressHUD.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ChooseFriendsPrivacySettingsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PopOverMenuViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyFreeNavigationViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsSplitViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchSelectFriendsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchNewFriendViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsEmbeddedTableViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ServerPoller.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchSelectFriendsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/EmbeddedAddEditEventTableViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SearchNewFriendViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ImportProfileImageViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PrivacySettingsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PrivacySettingsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/MainTabBarViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/PopOverMenuViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsSplitViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SettingsEmbeddedTableViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ProfileViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/MainTabBarViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendRequestsViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/SelectCalendarViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/InstantFreeTimeViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/LoginViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/AddEditEventViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsSearchFriendToAddViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendsNavigationViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/ImportProfileImageViewController.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Assets.xcassets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Localization/Base.lproj/Friends.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Localization/es.lproj/Friends.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Base.lproj/LocalizableInterface.strings" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/enHueco/Base.lproj/General.strings" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Resources/accessPoints.csv" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GoogleService-Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MultiSelectSegmentedControl/MultiSelectSegmentedControl.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MultiSelectSegmentedControl/MultiSelectSegmentedControl.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKCopying.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphErrorRecoveryProcessor.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKMutableCopying.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphErrorRecoveryProcessor.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKProfile.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKButton.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKTestUsersManager.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAccessToken.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKMacros.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKButton.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKTestUsersManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkUtility.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequest.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal_NoARC/FBSDKDynamicFrameworkLoader.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKSettings.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAccessToken.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKSettings.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequestDataAttachment.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAccessToken.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkResolver.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequestDataAttachment.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKProfilePictureView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKOrganicDeeplinkHelper.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKBoltsMeasurementEventListener.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKBoltsMeasurementEventListener.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKOrganicDeeplinkHelper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKMonotonicTime.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKSystemAccountStoreAdapter.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_17.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStore.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_17.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStore.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCaching.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStoreViaBundleID.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV4.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCache.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_21.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCache.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_21.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStoreViaBundleID.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV4.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKCoreKit+Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKSettings+Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKInternalUtility.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsUtility.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsDeviceInfo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKPaymentObserver.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsDeviceInfo.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsUtility.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsState.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKTimeSpentData.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKPaymentObserver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsStateManager.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsState.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKTimeSpentData.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsUtility.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsStateManager.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsDeviceInfo.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEvents+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKTimeSpentData.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsStateManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsState.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppEvents/FBSDKAppEventsUtility.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTriStateBOOL.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKApplicationDelegate+Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIProtocolType.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest+Private.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIResponse.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIProtocol.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPICrypto.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPICrypto.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIResponse.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV2.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolNativeV1.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV2.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV1.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolNativeV1.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/ProtocolVersions/FBSDKBridgeAPIProtocolWebV1.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIProtocol.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPICrypto.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest+Private.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKURLOpening.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIResponse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/BridgeAPI/FBSDKBridgeAPIRequest.h" isTestSource="false" />
@@ -214,24 +203,23 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKDynamicFrameworkLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKContainerViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKMath.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfigurationManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorConfiguration.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKDialogConfiguration.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfigurationManager.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfiguration.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorConfiguration.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKDialogConfiguration.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfiguration.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorRecoveryConfiguration.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfigurationManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorRecoveryConfiguration.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfiguration+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorConfiguration.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfigurationManager+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKDialogConfiguration.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorConfiguration.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKErrorRecoveryConfiguration.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKDialogConfiguration.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ServerConfiguration/FBSDKServerConfiguration.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Cryptography/FBSDKCrypto.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Cryptography/FBSDKCrypto.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKAudioResourceLoader.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKMonotonicTime.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKLogger.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKInternalUtility.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKAudioResourceLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKButton+Subclass.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKColor.m" isTestSource="false" />
@@ -247,39 +235,51 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKMaleSilhouetteIcon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKIcon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/UI/FBSDKIcon.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKLogger.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTypeUtility.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKProfile+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKOrganicDeeplinkHelper.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKBoltsMeasurementEventListener.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKBoltsMeasurementEventListener.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/AppLink/FBSDKOrganicDeeplinkHelper.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKInternalUtility.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTypeUtility.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKApplicationDelegate+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKLogger.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKError.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/FBSDKErrorRecoveryAttempter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/FBSDKErrorRecoveryAttempter.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/_FBSDKTemporaryErrorRecoveryAttempter.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/_FBSDKTemporaryErrorRecoveryAttempter.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/ErrorRecovery/FBSDKErrorRecoveryAttempter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialogView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialog.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialog.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/WebDialog/FBSDKWebDialogView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestPiggybackManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKURLConnection.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestMetadata.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequest+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKURLConnection.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestMetadata.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestPiggybackManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestBody.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestPiggybackManager.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestConnection+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKURLConnection.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestMetadata.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestBody.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKURLConnection.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestConnection+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/Network/FBSDKGraphRequestMetadata.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKError.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/FBSDKTypeUtility.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequest.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCache.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_17.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStore.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_17.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStore.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCaching.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCache.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_21.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStoreViaBundleID.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV4.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV3_21.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKKeychainStoreViaBundleID.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCacheV4.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKProfilePictureView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKConstants.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKUtility.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkResolver.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAppLinkUtility.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKApplicationDelegate.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKConstants.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKUtility.h" isTestSource="false" />
@@ -290,84 +290,63 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequestConnection.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKAppEvents.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequestConnection.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKProfile.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKGraphRequest.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKCoreKit/FBSDKCoreKit/FBSDKCoreKit/FBSDKProfile.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Firebase/Analytics/Sources/Firebase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask+Exceptions.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationToken.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask+Exceptions.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/Bolts.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationTokenSource.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask+Exceptions.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/Bolts.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationTokenSource.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationTokenSource.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFExecutor.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTaskCompletionSource.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFExecutor.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFCancellationToken.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTaskCompletionSource.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFTask+Exceptions.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/Common/BFExecutor.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFWebViewAppLinkResolver.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLink.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFAppLinkReturnToRefererView_Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFAppLink_Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFURL_Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFAppLinkReturnToRefererView_Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFMeasurementEvent_Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/Internal/BFURL_Internal.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFMeasurementEvent.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFWebViewAppLinkResolver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLink.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFMeasurementEvent.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFURL.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkNavigation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkTarget.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFURL.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkNavigation.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkResolving.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkTarget.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Bolts/Bolts/iOS/BFAppLinkTarget.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/APAddressBook.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APRelatedPerson.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APEmailWithLabel.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSocialProfile.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APPhoneWithLabel.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSource.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APContact.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSocialProfile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APPhoneWithLabel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSource.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APContact.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APTypes.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APEmailWithLabel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APRelatedPerson.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APAddress.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APAddress.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/APAddressBook.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Builders/APContactBuilder.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Builders/APContactBuilder.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookAccessRoutine.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookContactsRoutine.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookAccessRoutine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/Base/APAddressBookBaseRoutine.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/Base/APAddressBookBaseRoutine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookContactsRoutine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeRoutine.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeDelegate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeRoutine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Extractor/APContactDataExtractor.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Extractor/APContactDataExtractor.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Helpers/APSocialServiceHelper.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Helpers/APSocialServiceHelper.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Categories/NSArray+APAddressBook.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Categories/NSArray+APAddressBook.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Wrapper/APAddressBookRefWrapper.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Wrapper/APAddressBookRefWrapper.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Thread/APThread.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Thread/APThread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Validation.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Timeline.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Error.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Stream.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/MultipartFormData.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ServerTrustPolicy.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ParameterEncoding.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Result.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Upload.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Manager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Download.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/NetworkReachabilityManager.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ResponseSerialization.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Request.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Notifications.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Response.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Alamofire.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/RSKImageCropper/RSKImageCropper/UIApplication+RSKImageCropper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/RSKImageCropper/RSKImageCropper/RSKImageCropper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/RSKImageCropper/RSKImageCropper/RSKTouchView.m" isTestSource="false" />
@@ -388,61 +367,35 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/CollectionInitializers.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/MappableObject.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Map.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/KeyType.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Logging.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Errors.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Foundation/Foundation.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/SettableOperator.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Json+KeyPaths.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/StandardOperators.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/KeyType.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/JsonConvertibleType.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/JsonRepresentation.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Transformers.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManagerLoginResult.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManager.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKTooltipView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginButton.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKTooltipView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginButton.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginConstants.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManagerLoginResult.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginConstants.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManager+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginUtility.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLogger.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginError.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginUtility.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginError.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/_FBSDKLoginRecoveryAttempter.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLoginResult+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/_FBSDKLoginRecoveryAttempter.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginKit+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLogger.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Genome/Genome/Source/Json+KeyPaths.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonEnums.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIAppearance+Swift.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon_.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonConstants.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIButton+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon_.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/ChameleonMacros.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIButton+Chameleon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIButton+Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UINavigationController+Chameleon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIViewController+Chameleon.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIView+ChameleonPrivate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon_.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UINavigationController+Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIViewController+Chameleon.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+ChameleonPrivate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIView+ChameleonPrivate.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIColor+Chameleon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/NSArray+Chameleon.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIView+ChameleonPrivate.m" isTestSource="false" />
@@ -451,11 +404,10 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIImage+ChameleonPrivate.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UIAppearance+Swift.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Objective-C/UILabel+Chameleon.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ChameleonFramework/Pod/Classes/Swift/ChameleonShorthand.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/FirebaseInstanceID/Sources/FIRInstanceID.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusBasicToolbarController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusBasicToolbarController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusManager.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASTransparentView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_pause.png" isTestSource="false" />
@@ -464,16 +416,16 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_play.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_playbig@2x.png" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/Resources/asmedia_playbig.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.xib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoBehavior.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASTransparentView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoBehavior.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusController.xib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusBasicToolbar.xib" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoBehavior.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASImageScrollView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASMediaFocusBasicToolbarController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASImageScrollView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASMediaFocusManager/ASMediaFocusManager/ASVideoControlView.xib" isTestSource="false" />
@@ -492,35 +444,29 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SDWebImage/SDWebImage-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SDWebImage/SDWebImage-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Genome/Genome-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Genome/Genome-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Genome/Info.plist" isTestSource="false" />
@@ -529,36 +475,42 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Genome/Genome.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.markdown" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-resources.sh" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-frameworks.sh" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.release.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests-acknowledgements.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Alamofire/Alamofire-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CSwiftV/CSwiftV.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/FBSDKCoreKit/FBSDKCoreKit.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/TSMessages.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/TSMessages.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/TSMessages-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/TSMessages-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TSMessages/TSMessages-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/RSKImageCropper.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/RSKImageCropper.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/RSKImageCropper-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/RSKImageCropper.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/RSKImageCropper/RSKImageCropper-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureJsonSerializer/PureJsonSerializer-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureJsonSerializer/PureJsonSerializer-dummy.m" isTestSource="false" />
@@ -594,6 +546,12 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ChameleonFramework/ChameleonFramework.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MRProgress/MRProgress-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TapkuLibrary/TapkuLibrary-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TapkuLibrary/TapkuLibrary-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/TapkuLibrary/Info.plist" isTestSource="false" />
@@ -606,24 +564,18 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/HexColors/HexColors-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/HexColors/HexColors-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/HexColors/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/SwiftGraph/SwiftGraph-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/MultiSelectSegmentedControl/MultiSelectSegmentedControl-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/ASMediaFocusManager/ASMediaFocusManager.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-umbrella.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/PureLayout/PureLayout.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook.modulemap" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-prefix.pch" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook.xcconfig" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-dummy.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/APAddressBook/APAddressBook-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Bolts/Bolts.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Bolts/Bolts-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Bolts/Bolts-umbrella.h" isTestSource="false" />
@@ -650,70 +602,73 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAlertViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputWithNextKeyView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIImagePickerController+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIView+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIActionSheet+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGlowButton.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIView+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIBarButtonItem+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputWithNextKeyView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIBarButtonItem+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSMutableArray+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIButton+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSwitchCell.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSwitchCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSMutableArray+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKRetroButton.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKButtonCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKButtonCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGradientView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKRetroButton.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextFieldCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKInputKey.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIDevice+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKReorderTableView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKInputKey.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKReorderTableView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UINavigationBar+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextFieldCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSArray+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCoverflowView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSArray+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIColor+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGlowButton.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCoverflowView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSlideToUnlockView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGlowButton.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextViewCell.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UINavigationBar+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextViewCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelSwitchCell.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSDate+CalendarGrid.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIDevice+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UINavigationBar+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKStepperCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIDevice+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressAlertView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKStepperCell.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSMutableArray+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAlertViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAppDelegate.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGradientView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAppDelegate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIButton+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSString+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSString+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKKeyboardTableViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UINavigationBar+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKKeyboardTableViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKViewController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressBarView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressBarView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressAlertView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TapkuLibrary.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputWithNextKeyView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKMultiSwitch.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWebViewController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextViewCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKPegSlider.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextViewCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWebViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIScrollview+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSArray+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelCell.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIScrollview+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UILabel+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKShimmerLabel.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UILabel+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputWithNextKeyView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIActionSheet+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressCircleView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKShapeView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNumberInputWithNextKeyView.h" isTestSource="false" />
@@ -725,47 +680,43 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSoundAlertController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIViewController+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKInputView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIColor+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIAlertView+TKCategory.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIViewController+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKInputView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIAlertView+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAlertViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSwitchCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextViewCell.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKButtonCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIImageView+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelSwitchCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextViewCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIImageView+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelSwitchCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGlobal.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSDate+CalendarGrid.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSDate+CalendarGrid.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKGlobal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKSwitchCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKHTTPRequest.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKButtonCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIImage+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKHTTPRequest.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIGestureRecognizer+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIGestureRecognizer+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKShimmerLabel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIButton+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKHTTPRequest.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressBarView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKShimmerLabel.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAppDelegate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIView+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UITextField+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIActionSheet+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UITextField+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKImageCache.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextFieldCell.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelTextFieldCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKImageCache.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKPegSlider.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKPegSlider.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWindow.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKKeyboardTableViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNetworkQueue.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWindow.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKNetworkQueue.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayViewController.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSObject+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayEventView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAlertCenter.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayEventView.h" isTestSource="false" />
@@ -773,33 +724,34 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKAlertCenter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLoadingView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextFieldCell.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelSwitchCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLoadingView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextFieldCell.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthTableViewController.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKEmptyView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIBarButtonItem+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKMultiSwitch.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIFont+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthTableViewController.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKShimmerLabel.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKEmptyView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarMonthTableViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIFont+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLoadingView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSObject+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIColor+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSObject+TKCategory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCardModalViewController.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWindow.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKWindow.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIScreen+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCardModalViewController.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIImage+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewController.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKDecimalInputWithNextKeyView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIScreen+TKCategory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIView+TKCategory.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIViewController+TKCategory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/UIAlertView+TKCategory.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelFieldCell.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/NSDate+CalendarGrid.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKLabelFieldCell.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKCalendarDayView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTextView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKTableViewCell.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary/TKProgressBarView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/TapkuLibrary/src/TapkuLibrary.bundle" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWTableViewCell.h" isTestSource="false" />
@@ -810,11 +762,92 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWTableViewCell.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWCellScrollView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/NSMutableArray+SWUtilityButtons.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SWTableViewCell/SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASBPlayerScrubbing/ASBPlayerScrubbing/ASBPlayerScrubbing.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/ASBPlayerScrubbing/ASBPlayerScrubbing/ASBPlayerScrubbing.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Graph.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/WeightedGraph.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/WeightedEdge.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/UnweightedGraph.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Edge.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Queue.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/SwiftPriorityQueue.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Stack.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/UnweightedEdge.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Search.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/ReachabilitySwift/Reachability/Reachability.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessageView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSBlurView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSBlurView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessage.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessageView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundMessage@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundMessage.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundError@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarning.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccess@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundError.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccess.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationButtonBackground@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarning@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/TSMessagesDefaultDesign.json" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon@2x.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationButtonBackground.png" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/APAddressBook.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APRelatedPerson.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APEmailWithLabel.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APRelatedPerson.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APPhoneWithLabel.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSource.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APContact.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSocialProfile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APPhoneWithLabel.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSource.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APContact.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APTypes.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APSocialProfile.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APEmailWithLabel.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APAddress.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/Models/APAddress.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Public/APAddressBook.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Builders/APContactBuilder.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Builders/APContactBuilder.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookAccessRoutine.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeRoutine.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookAccessRoutine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/Base/APAddressBookBaseRoutine.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/Base/APAddressBookBaseRoutine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeDelegate.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookContactsRoutine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookContactsRoutine.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Routine/APAddressBookExternalChangeRoutine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Extractor/APContactDataExtractor.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Extractor/APContactDataExtractor.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Helpers/APSocialServiceHelper.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Helpers/APSocialServiceHelper.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Categories/NSArray+APAddressBook.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Categories/NSArray+APAddressBook.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Wrapper/APAddressBookRefWrapper.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Wrapper/APAddressBookRefWrapper.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Thread/APThread.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/APAddressBook/Pod/Core/Private/Thread/APThread.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayout.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayout+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSArray+PureLayout.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/ALView+PureLayout.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSLayoutConstraint+PureLayout.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSLayoutConstraint+PureLayout.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/ALView+PureLayout.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayoutDefines.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSArray+PureLayout.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Components/MRProgressOverlayView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Components/MRProgressView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Components/MRStopableView.h" isTestSource="false" />
@@ -831,107 +864,74 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Components/MRCircularProgressView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Components/MRProgressView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/UIImage+MRImageEffects.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/MRBlurView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/MRBlurView.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/UIImage+MRImageEffects.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/MRBlurView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Blur/MRBlurView.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/MRProgress.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/MRProgress/src/Utils/MRProgressHelper.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/ReachabilitySwift/Reachability/Reachability.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessageView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSBlurView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSBlurView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessage.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessageView.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Classes/TSMessage.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundMessage@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundMessage.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundError@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/TSMessagesDefaultDesign.json" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarning.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccess@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccess.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundSuccessIcon.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationButtonBackground@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationButtonBackground.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundError.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarningIcon@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundWarning@2x.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Timeline.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Response.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Error.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Stream.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/MultipartFormData.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ServerTrustPolicy.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ParameterEncoding.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Result.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Manager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Download.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/NetworkReachabilityManager.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/ResponseSerialization.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Request.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Notifications.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Validation.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Upload.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Alamofire/Source/Alamofire.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayout.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayout+Internal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSArray+PureLayout.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/ALView+PureLayout.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSLayoutConstraint+PureLayout.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSLayoutConstraint+PureLayout.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/ALView+PureLayout.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/PureLayoutDefines.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureLayout/PureLayout/PureLayout/NSArray+PureLayout.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIView+WebCacheOperation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImagePrefetcher.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImage+GIF.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+WebCache.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageCompat.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageManager.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+HighlightedWebCache.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDownloaderOperation.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImage+GIF.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageManager.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+HighlightedWebCache.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+WebCache.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/NSData+ImageContentType.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageOperation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImage+MultiFormat.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+WebCache.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImage+MultiFormat.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/NSData+ImageContentType.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImage+GIF.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageOperation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIButton+WebCache.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIButton+WebCache.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDecoder.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImagePrefetcher.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDownloader.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+HighlightedWebCache.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDImageCache.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDecoder.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIImageView+WebCache.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImagePrefetcher.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDownloader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/UIView+WebCacheOperation.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDImageCache.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageDownloaderOperation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/SDWebImage/SDWebImage/SDWebImageCompat.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/CSwiftV/Sources/CSwiftV.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Search.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/WeightedGraph.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/UnweightedGraph.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Stack.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Edge.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Queue.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/Graph.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/WeightedEdge.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/UnweightedEdge.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/SwiftGraph/Sources/SwiftPriorityQueue.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/ParseError.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/Json.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManagerLoginResult.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManager.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginTooltipView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKTooltipView.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginButton.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKTooltipView.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginButton.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginConstants.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginManagerLoginResult.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginConstants.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManager+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginUtility.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLogger.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginError.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginUtility.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginError.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/_FBSDKLoginRecoveryAttempter.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLoginResult+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/_FBSDKLoginRecoveryAttempter.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginKit+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginManagerLogger.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/FBSDKLoginKit/FBSDKLoginKit/FBSDKLoginKit/Internal/FBSDKLoginCompletion+Internal.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/JsonSerializer.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/StringUtils.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/JsonParser.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/Json.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/JsonParser+Foundation.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/JsonSerializer.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/PureJsonSerializer/JsonSerializer/ParseError.swift" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
@@ -941,7 +941,7 @@
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/SDWebImage/SDWebImage.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ChameleonFramework/ChameleonFramework.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework/Headers" />
-          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MRProgress/MRProgress.framework/Headers" />
+          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MultiSelectSegmentedControl/MultiSelectSegmentedControl.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/APAddressBook/APAddressBook.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/PureLayout/PureLayout.framework/Headers" />
@@ -956,7 +956,7 @@
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/TapkuLibrary/TapkuLibrary.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/HexColors/HexColors.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/SwiftGraph/SwiftGraph.framework/Headers" />
-          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MultiSelectSegmentedControl/MultiSelectSegmentedControl.framework/Headers" />
+          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MRProgress/MRProgress.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ASMediaFocusManager/ASMediaFocusManager.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/Bolts/Bolts.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/FBSDKLoginKit/FBSDKLoginKit.framework/Headers" />
@@ -1076,7 +1076,7 @@
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/SDWebImage/SDWebImage.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ChameleonFramework/ChameleonFramework.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework/Headers" />
-          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MRProgress/MRProgress.framework/Headers" />
+          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MultiSelectSegmentedControl/MultiSelectSegmentedControl.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/Alamofire/Alamofire.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/APAddressBook/APAddressBook.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/PureLayout/PureLayout.framework/Headers" />
@@ -1091,7 +1091,7 @@
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/TapkuLibrary/TapkuLibrary.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/HexColors/HexColors.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/SwiftGraph/SwiftGraph.framework/Headers" />
-          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MultiSelectSegmentedControl/MultiSelectSegmentedControl.framework/Headers" />
+          <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/MRProgress/MRProgress.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/ASMediaFocusManager/ASMediaFocusManager.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/Bolts/Bolts.framework/Headers" />
           <root url="file://$USER_HOME$/Library/Caches/AppCode2016.2/DerivedData/enHueco-avxzndtjoahsxnfpzezxusywchey/Build/Products/Debug-iphoneos/FBSDKLoginKit/FBSDKLoginKit.framework/Headers" />

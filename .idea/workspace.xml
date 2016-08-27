@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,10 +27,11 @@
       <file leaf-file-name="FriendsManager.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="167" column="22" selection-start-line="167" selection-start-column="22" selection-end-line="167" selection-end-column="22" />
+            <state relative-caret-position="2490">
+              <caret line="187" column="22" selection-start-line="187" selection-start-column="22" selection-end-line="187" selection-end-column="22" />
               <folding>
                 <element signature="e#151#168#0" expanded="true" />
+                <marker date="1472260483000" expanded="true" signature="523:4947" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -44,14 +47,60 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventsAndSchedulesManager.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventsAndSchedulesManager.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="810">
-              <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+              <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
               <folding>
                 <element signature="e#152#169#0" expanded="true" />
+                <marker date="1472259751000" expanded="true" signature="252:483" ph="{...}" />
+                <marker date="1472259751000" expanded="true" signature="316:481" ph="{...}" />
+                <marker date="1472259751000" expanded="true" signature="535:634" ph="{...}" />
+                <marker date="1472259751000" expanded="true" signature="636:854" ph="/*...*/" />
+                <marker date="1472259751000" expanded="true" signature="933:5170" ph="{...}" />
+                <marker date="1472259751000" expanded="true" signature="2407:2413" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FirebaseLogicManager.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FirebaseSynchronizable.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AccountManager.swift" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppUserManager.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-435">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,6 +173,7 @@
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" />
       </list>
     </option>
   </component>
@@ -163,6 +213,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -333,6 +384,36 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Logic Managers" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Other" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="enHueco" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Source" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Entities" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeViewNode" />
             </PATH_ELEMENT>
@@ -417,7 +498,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Cidr.FilesView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -425,8 +505,8 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="FullScreen" value="true" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="enHueco" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager" selected="Application.enHueco">
     <configuration default="true" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="enHueco" TARGET_NAME="enHueco" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="enHueco" RUN_TARGET_NAME="enHueco" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -493,11 +573,12 @@
       <workItem from="1471793280469" duration="1272000" />
       <workItem from="1471820526975" duration="936000" />
       <workItem from="1472133852907" duration="1896000" />
+      <workItem from="1472260542004" duration="69000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15347000" />
+    <option name="totallyTimeSpent" value="15416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -506,23 +587,23 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17864583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.089060985" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.089060985" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38007382" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -541,9 +622,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/AddFriendViewController.swift" />
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/FriendRequestsViewController.swift" />
-    <entry file="file://$PROJECT_DIR$/enHueco/Controllers/LoginViewController.swift" />
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/MainTabBarViewController.swift" />
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ScheduleCalendarViewController.swift" />
     <entry file="file://$PROJECT_DIR$/enHueco/Controllers/ScheduleViewController.swift" />
@@ -605,14 +683,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
         </state>
       </provider>
     </entry>
@@ -636,22 +706,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1770">
           <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FirebasePaths.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FirebasePaths.swift" />
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -666,16 +728,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
           <caret line="206" column="0" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="167" column="22" selection-start-line="167" selection-start-column="22" selection-end-line="167" selection-end-column="22" />
+        <state relative-caret-position="2490">
+          <caret line="187" column="22" selection-start-line="187" selection-start-column="22" selection-end-line="187" selection-end-column="22" />
           <folding>
             <element signature="e#151#168#0" expanded="true" />
+            <marker date="1472260483000" expanded="true" signature="523:4947" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -701,10 +763,48 @@
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
-          <caret line="246" column="0" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+          <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
           <folding>
             <element signature="e#152#169#0" expanded="true" />
+            <marker date="1472259751000" expanded="true" signature="252:483" ph="{...}" />
+            <marker date="1472259751000" expanded="true" signature="316:481" ph="{...}" />
+            <marker date="1472259751000" expanded="true" signature="535:634" ph="{...}" />
+            <marker date="1472259751000" expanded="true" signature="636:854" ph="/*...*/" />
+            <marker date="1472259751000" expanded="true" signature="933:5170" ph="{...}" />
+            <marker date="1472259751000" expanded="true" signature="2407:2413" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseLogicManager.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-435">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

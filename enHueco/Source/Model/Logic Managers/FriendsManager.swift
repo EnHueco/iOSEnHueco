@@ -48,7 +48,8 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
         
         let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(firebaseUser.uid)
         
-        friendsReference.observeEventType(.ChildAdded) { (snapshot) in
+        // Observe friend addition
+        let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot) in
             
             let friendID = snapshot.key
             
@@ -69,7 +70,7 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
                 }
             }
             
-            addHandle(friendHandle, toReference: friendsReference)
+            trackHandle(friendHandle, forReference: friendsReference)
             
             let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
             let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
@@ -88,13 +89,28 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
                 }
             }
             
-            addHandle(scheduleHandle, toReference: scheduleReference)
+            trackHandle(scheduleHandle, forReference: scheduleReference)
         }
         
-        friendsReference.observeEventType(.ChildRemoved) { (snapshot) in
+        trackHandle(friendAddedHandle, forReference: friendsReference)
+        
+        var friendRemovedHandle: FIRDatabaseHandle!
+        
+        // Observe friend removal
+        friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot) in
             
-            //TODO: Implement
+            let friendID = snapshot.key
+            databaseRefsAndHandles[friendsReference]?.removeObject(friendRemovedHandle)
+            
+            /// Thread safety
+            dispatch_async(dispatch_get_main_queue()){
+                friends[friendID] = nil
+                schedules[friendID] = nil
+                self.delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+            }
         }
+        
+        trackHandle(friendsHandle, forReference: friendsReference)
     }
         
     private func notifyChangesIfNeededForFriend(friendID id: String) {

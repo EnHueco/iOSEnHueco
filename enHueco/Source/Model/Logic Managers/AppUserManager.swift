@@ -60,7 +60,7 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
             }
         }
         
-        addHandle(handle, toReference: reference)
+        trackHandle(handle, forReference: reference)
     }
     
     deinit {
