@@ -66,10 +66,9 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the startDate is returned unchanged.
      */
-    func startDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate
-    {
+    func startDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate  {
+
         guard repetitionDays != nil else { return startDate }
-        
         return date(startDate, inNearestPossibleWeekToDate: date)
     }
     
@@ -79,8 +78,8 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the endDate is returned unchanged.
      */
-    func endDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate
-    {
+    func endDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate  {
+
         guard repetitionDays != nil else { return endDate }
         
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -99,8 +98,8 @@ class BaseEvent: MappableObject {
      possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
      one given that the weekday of the event doesn't exist for the week of the month of the date provided.
      */
-    private func date(date: NSDate, inNearestPossibleWeekToDate targetDate: NSDate) -> NSDate
-    {
+    private func date(date: NSDate, inNearestPossibleWeekToDate targetDate: NSDate) -> NSDate  {
+        
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         

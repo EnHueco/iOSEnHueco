@@ -11,25 +11,24 @@ import SWTableViewCell
 import SDWebImage
 import RKNotificationHub
 
-class FriendsViewController: UIViewController, ServerPoller {
+class FriendsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var emptyLabel: UILabel!
     let searchBar = UISearchBar()
+    
+    var friendsAndSchedules = [(user: User, schedule: Schedule)]()
 
-    var requestTimer = NSTimer()
-    var pollingInterval = 10.0
-
+    /// The friends logic manager (if currently fetching updates)
+    private var friendsManager: FriendsManager?
 
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)
     private(set) var friendRequestsNotificationHub: RKNotificationHub!
 
-    //For safety and performance (because friends is originally a dictionary)
-    var filteredFriends = Array(enHueco.appUser.friends.values)
-
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -78,13 +77,14 @@ class FriendsViewController: UIViewController, ServerPoller {
     }
 
     override func viewDidLayoutSubviews() {
-
         super.viewDidLayoutSubviews()
+        
         emptyLabel.center = tableView.center
     }
 
     override func viewWillAppear(animated: Bool) {
-
+        super.viewWillAppear(animated)
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
         navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
@@ -110,15 +110,10 @@ class FriendsViewController: UIViewController, ServerPoller {
             friendRequestsNotificationHub.showCount()
         }
 
-        reloadFriendsAndTableView()
-        startPolling()
+        // Begin real time updates
+        friendsManager = FriendsManager(delegate: self)
     }
-
-    override func viewWillDisappear(animated: Bool) {
-
-        stopPolling()
-    }
-
+    
     override func viewDidAppear(animated: Bool) {
 
         reportScreenViewToGoogleAnalyticsWithName("Friends")
@@ -130,6 +125,13 @@ class FriendsViewController: UIViewController, ServerPoller {
         friendRequestsNotificationHub.count = Int32(enHueco.appUser.incomingFriendRequests.count)
         friendRequestsNotificationHub.pop()
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Stop realtime updates
+        friendsManager = nil
+    }
 
     func friendRequestsButtonPressed(sender: UIButton) {
 
@@ -140,14 +142,28 @@ class FriendsViewController: UIViewController, ServerPoller {
 
         navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController"), sender: self)
     }
+    
+    /// Reloads the friends and schedules array
+    func reloadFriendsData() {
+        
+        guard let friendsManager = friendsManager else { return }
+
+        friendsAndSchedules = []
+        
+        for friend in Array(friendsManager.friends.values) {
+            if let schedule = friendsManager.schedules[friend.id] {
+                friendsAndSchedules.append((friend, schedule))
+            }
+        }
+    }
 
     func reloadFriendsAndTableView() {
-
-        let oldFilteredFriends = filteredFriends
-
-        filteredFriends = Array(enHueco.appUser.friends.values)
-
-        if filteredFriends.isEmpty {
+        
+        let oldFriendsAndSchedules = friendsAndSchedules
+        
+        reloadFriendsData()
+        
+        if friendsAndSchedules.isEmpty {
             tableView.hidden = true
             view.addSubview(emptyLabel)
         } else {
@@ -155,51 +171,35 @@ class FriendsViewController: UIViewController, ServerPoller {
             emptyLabel.removeFromSuperview()
         }
 
-        if !oldFilteredFriends.elementsEqual(filteredFriends, isEquivalent: ==) {
+        if !oldFriendsAndSchedules.elementsEqual(friendsAndSchedules, isEquivalent: ==) {
 
             let range = NSMakeRange(0, tableView.numberOfSections)
             let sections = NSIndexSet(indexesInRange: range)
             tableView.reloadSections(sections, withRowAnimation: .Automatic)
         }
     }
+}
 
-    // Server Polling
-
-    func startPolling() {
-
-        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(FriendsViewController.pollFromServer(_:)), userInfo: nil, repeats: true)
-        requestTimer.fire()
-    }
-
-    func pollFromServer(timer: NSTimer) {
-
-        FriendsManager.sharedManager.fetchUpdatesForFriendsAndFriendSchedulesWithCompletionHandler {
-            success, error in
-            self.reloadFriendsAndTableView()
-        }
-
-        FriendsManager.sharedManager.fetchUpdatesForFriendRequestsWithCompletionHandler {
-            success, error in
-
-            self.friendRequestsNotificationHub.count = Int32(enHueco.appUser.incomingFriendRequests.count)
-            self.friendRequestsNotificationHub.pop()
-        }
+extension FriendsViewController: FriendsManagerDelegate {
+    
+    func friendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendsManager) {
+        reloadFriendsAndTableView()
     }
 }
 
-
 extension FriendsViewController: UITableViewDataSource {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return filteredFriends.count
+        return friendsAndSchedules.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
 
-        let friend = filteredFriends[indexPath.row]
-
+        let (friend, schedule) = friendsAndSchedules[indexPath.row]
+        
         cell.friendNameLabel.text = friend.name
 
         let formatter = NSDateFormatter()
@@ -209,15 +209,16 @@ extension FriendsViewController: UITableViewDataSource {
 
         cell.showFreeTimeStartEndHourIcon()
 
-        let (currentFreeTimePeriod, nextFreeTimePeriod) = friend.currentAndNextFreeTimePeriods()
+        let (currentFreeTimePeriod, nextFreeTimePeriod) = schedule.currentAndNextFreeTimePeriods()
 
         if let currentFreeTimePeriod = currentFreeTimePeriod {
-            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
+            
+            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endDateInNearestPossibleWeekToDate(NSDate())
 
             cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriodEndDate)
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
 
-            if let nextEvent = friend.nextEvent(), nextEventName = nextEvent.name
+            if let nextEvent = schedule.nextEvent(), nextEventName = nextEvent.name
             where nextEvent.type == .Class && nextEvent.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60 * 10000 {
                 cell.eventNameOrLocationLabel.text = nextEventName
 
@@ -225,8 +226,9 @@ extension FriendsViewController: UITableViewDataSource {
                     cell.eventNameOrLocationLabel.text! += " (" + nextEventLocation + ")"
                 }
             }
+            
         } else if let nextFreeTimePeriod = nextFreeTimePeriod {
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startHourInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startDateInNearestPossibleWeekToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
             cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localizedUsingGeneralFile()
         } else {
@@ -273,7 +275,7 @@ extension FriendsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-        let friend = filteredFriends[indexPath.row]
+        let friend = friendsAndSchedules[indexPath.row]
 
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friend = friend
@@ -296,10 +298,10 @@ extension FriendsViewController: UISearchBarDelegate {
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
-        filteredFriends = Array(enHueco.appUser.friends.values)
+        reloadFriendsData()
 
         if !searchText.isBlank() {
-            filteredFriends = filteredFriends.filter {
+            friendsAndSchedules = friendsAndSchedules.filter {
 
                 for word in $0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
                     return true

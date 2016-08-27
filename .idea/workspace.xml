@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +32,7 @@
               <caret line="187" column="22" selection-start-line="187" selection-start-column="22" selection-end-line="187" selection-end-column="22" />
               <folding>
                 <element signature="e#151#168#0" expanded="true" />
-                <marker date="1472260483000" expanded="true" signature="523:4947" ph="{...}" />
+                <marker date="1472274942000" expanded="true" signature="523:4961" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -40,8 +41,8 @@
       <file leaf-file-name="Schedule.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="31" column="52" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
+            <state relative-caret-position="360">
+              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -50,16 +51,15 @@
       <file leaf-file-name="EventsAndSchedulesManager.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+            <state relative-caret-position="660">
+              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
               <folding>
                 <element signature="e#152#169#0" expanded="true" />
-                <marker date="1472259751000" expanded="true" signature="252:483" ph="{...}" />
-                <marker date="1472259751000" expanded="true" signature="316:481" ph="{...}" />
-                <marker date="1472259751000" expanded="true" signature="535:634" ph="{...}" />
-                <marker date="1472259751000" expanded="true" signature="636:854" ph="/*...*/" />
-                <marker date="1472259751000" expanded="true" signature="933:5170" ph="{...}" />
-                <marker date="1472259751000" expanded="true" signature="2407:2413" ph="{...}" />
+                <marker date="1472274898000" expanded="true" signature="252:483" ph="{...}" />
+                <marker date="1472274898000" expanded="true" signature="316:481" ph="{...}" />
+                <marker date="1472274898000" expanded="true" signature="535:634" ph="{...}" />
+                <marker date="1472274898000" expanded="true" signature="636:854" ph="/*...*/" />
+                <marker date="1472274898000" expanded="true" signature="933:2103" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -95,7 +95,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppUserManager.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppUserManager.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-435">
@@ -108,11 +108,21 @@
       <file leaf-file-name="Event.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#141#153#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseEvent.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1380">
+              <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,7 +171,6 @@
         <option value="$PROJECT_DIR$/enHueco/Views/AvailableFriendCell.swift" />
         <option value="$PROJECT_DIR$/enHueco/Models/AppUser.swift" />
         <option value="$PROJECT_DIR$/enHueco/Controllers/CurrentlyAvailableViewController.swift" />
-        <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/CurrentStateManager.swift" />
@@ -174,6 +183,8 @@
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/Other/FirebaseSynchronizable.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
       </list>
     </option>
   </component>
@@ -573,12 +584,12 @@
       <workItem from="1471793280469" duration="1272000" />
       <workItem from="1471820526975" duration="936000" />
       <workItem from="1472133852907" duration="1896000" />
-      <workItem from="1472260542004" duration="69000" />
+      <workItem from="1472260542004" duration="514000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15416000" />
+    <option name="totallyTimeSpent" value="15861000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -665,13 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="39" column="25" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -737,41 +741,30 @@
           <caret line="187" column="22" selection-start-line="187" selection-start-column="22" selection-end-line="187" selection-end-column="22" />
           <folding>
             <element signature="e#151#168#0" expanded="true" />
-            <marker date="1472260483000" expanded="true" signature="523:4947" ph="{...}" />
+            <marker date="1472274942000" expanded="true" signature="523:4961" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="31" column="52" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="52" />
+        <state relative-caret-position="360">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#141#153#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+        <state relative-caret-position="660">
+          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
           <folding>
             <element signature="e#152#169#0" expanded="true" />
-            <marker date="1472259751000" expanded="true" signature="252:483" ph="{...}" />
-            <marker date="1472259751000" expanded="true" signature="316:481" ph="{...}" />
-            <marker date="1472259751000" expanded="true" signature="535:634" ph="{...}" />
-            <marker date="1472259751000" expanded="true" signature="636:854" ph="/*...*/" />
-            <marker date="1472259751000" expanded="true" signature="933:5170" ph="{...}" />
-            <marker date="1472259751000" expanded="true" signature="2407:2413" ph="{...}" />
+            <marker date="1472274898000" expanded="true" signature="252:483" ph="{...}" />
+            <marker date="1472274898000" expanded="true" signature="316:481" ph="{...}" />
+            <marker date="1472274898000" expanded="true" signature="535:634" ph="{...}" />
+            <marker date="1472274898000" expanded="true" signature="636:854" ph="/*...*/" />
+            <marker date="1472274898000" expanded="true" signature="933:2103" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -804,6 +797,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-435">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#141#153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
           <folding />
         </state>
       </provider>
