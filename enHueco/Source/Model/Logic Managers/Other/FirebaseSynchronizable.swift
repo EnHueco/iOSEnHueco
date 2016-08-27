@@ -13,7 +13,7 @@ protocol FirebaseSynchronizable {
     
     init?()
     
-    private let firebaseUser: FIRUser
+    private let appUserID: String
     
     /// All references and handles for the references
     private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]]

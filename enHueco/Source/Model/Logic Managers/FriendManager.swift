@@ -22,20 +22,20 @@ class FriendManager: FirebaseSynchronizable, FirebaseLogicManager {
     private(set) var friend: User?
     private(set) var schedule: Schedule?
     
-    private let firebaseUser: FIRUser
+    private let appUserID: String
     
     /// All references and handles for the references
     private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
     
     init?(friendID: String, delegate: FriendManagerDelegate?) {
-        guard let user = FIRAuth.auth()?.currentUser else {
+        guard let userID = AccountManager.sharedManager.userID else {
             assertionFailure()
             return nil
         }
 
         self.friendID = friendID
         self.delegate = delegate
-        firebaseUser = user
+        appUserID = userID
         createFirebaseSubscriptions()
     }
     

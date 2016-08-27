@@ -16,7 +16,7 @@ protocol FriendsManagerDelegate: class {
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
     
-    private let firebaseUser: FIRUser
+    private let appUserID: String
     
     /// All references and handles for the references
     private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
@@ -31,13 +31,13 @@ class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
      You must set the delegate property if you want to be notified when any data has changed.
      */
     init?(delegate: FriendsManagerDelegate?) {
-        guard let user = FIRAuth.auth()?.currentUser else {
+        guard let userID = AccountManager.sharedManager.userID else {
             assertionFailure()
             return nil
         }
         
         self.delegate = delegate
-        firebaseUser = user
+        appUserID = userID
         createFirebaseSubscriptions()
     }
     

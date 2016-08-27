@@ -16,32 +16,26 @@ protocol PrivacyManagerDelegate : class {
 }
 
 /// Handles privacy settings
-
-
-
-class PrivacyManager : FirebaseSynchronizable {
+class PrivacyManager : FirebaseSynchronizable, FirebaseLogicManager {
     
     weak var delegate : PrivacyManagerDelegate?
-    private let firebaseUser: FIRUser
+    private let appUserID: String
     private(set) var settings : PrivacySettings?
-    
     
     init?(delegate: PrivacyManagerDelegate){
         
-        guard let user = FIRAuth.auth()?.currentUser else {
+        guard let user = AccountManager.sharedManager.userID else {
             assertionFailure()
             return nil
         }
         
         self.delegate = delegate
-        firebaseUser = user
-        
+        appUserID = appUserID
         createFirebaseSubscriptions()
     }
     
-    
     private func createFirebaseSubscriptions() {
-        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(firebaseUser.uid).observeEventType(.Value) { [unowned self] (snapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID).observeEventType(.Value) { [unowned self] (snapshot) in
             
                 guard let userJSON = snapshot.value as? [String : AnyObject],
                     let settings = try? PrivacySettings(js: snapshot) else {
@@ -59,15 +53,12 @@ class PrivacyManager : FirebaseSynchronizable {
     deinit {
         removeFirebaseSubscriptions()
     }
-    
 }
 extension PrivacyManager{
     
     class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler)
     {
-        guard let appUserID = FIRAuth.auth()?.currentUser?.uid else {
-            assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else {
             return
         }
         

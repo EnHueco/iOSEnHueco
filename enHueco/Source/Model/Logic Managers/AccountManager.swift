@@ -13,6 +13,13 @@ import Firebase
 class AccountManager {
     private init() {}
     
+    static let sharedManager = AccountManager()
+    
+    /// The ID of the currently logged in user
+    var userID: String? {
+        return FIRAuth.auth()?.currentUser?.uid
+    }
+    
     class func loginWith(facebookToken facebookToken: String, completionHandler: BasicCompletionHandler) {
         
         FIRAuth.auth()?.signInWithCredential(facebookToken) { (user, error) in

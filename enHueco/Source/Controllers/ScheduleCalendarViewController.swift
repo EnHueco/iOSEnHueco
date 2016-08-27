@@ -9,11 +9,15 @@
 import UIKit
 import TapkuLibrary
 
-class ScheduleCalendarViewController: TKCalendarDayViewController {
-    /**
-        Schedule to be displayed. Defaults to AppUser's
-    */
-    var schedule: Schedule! = enHueco.appUser.schedule
+class ScheduleCalendarViewController: TKCalendarDayViewController, FriendManagerDelegate {
+    
+    private let appUserID = AccountManager.sharedManager.userID
+    
+    /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
+    var userID = appUserID
+    
+    /// The real-time updates manager
+    private var friendManager: FriendManager?
 
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -22,13 +26,16 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         super.viewDidLoad()
         
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-
         dayView.daysBackgroundView.backgroundColor = UIColor(red: 248 / 255.0, green: 248 / 255.0, blue: 248 / 255.0, alpha: 1)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         dayView.reloadData()
+        
+        if let userID = userID {
+            friendManager = FriendManager(friendID: userID, delegate: self)
+        }
     }
 
     func reloadData() {

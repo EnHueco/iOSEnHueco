@@ -22,7 +22,7 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
     /// Delegate
     weak var delegate: AppUserManagerDelegate?
     
-    private let firebaseUser: FIRUser
+    private let appUserID: String
 
     private(set) var appUser: User?
     
@@ -33,19 +33,19 @@ class AppUserManager: FirebaseSynchronizable, FirebaseLogicManager {
      You must set the delegate property if you want to be notified when any data has changed.
      */
     init?(delegate: AppUserManagerDelegate?) {
-        guard let user = FIRAuth.auth()?.currentUser else {
+        guard let userID = AccountManager.sharedManager.userID else {
             assertionFailure()
             return nil
         }
         
         self.delegate = delegate
-        firebaseUser = user
+        appUserID = userID
         createFirebaseSubscriptions()
     }
     
     private func createFirebaseSubscriptions() {
 
-        let reference = FIRDatabase.database().reference().child(FirebasePaths.users).child(firebaseUser.uid)
+        let reference = FIRDatabase.database().reference().child(FirebasePaths.users).child(appUserID)
         let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
             
             guard let userJSON = snapshot.value as? [String : AnyObject],
