@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ScheduleViewController: UIViewController {
     @IBOutlet weak var topBarBackgroundView: UIView!
@@ -15,11 +16,11 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var importCalendarButton: UIButton!
 
-    /**
-     Schedule to be displayed. Defaults to AppUser's
-     */
-    var schedule: Schedule = enHueco.appUser.schedule
-
+    private let appUserID = FIRAuth.auth()?.currentUser?.uid
+    
+    /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
+    var userID = appUserID
+    
     ///Reference to the embeded calendar view controller
     var scheduleCalendarViewController: ScheduleCalendarViewController!
 
@@ -44,7 +45,7 @@ class ScheduleViewController: UIViewController {
         
         navigationController?.navigationBarHidden = true
 
-        if schedule !== enHueco.appUser.schedule {
+        if userID != nil && userID == appUserID {
             importCalendarButton.hidden = true
             addEventButton.hidden = true
         }
@@ -53,7 +54,7 @@ class ScheduleViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if schedule === enHueco.appUser.schedule {
+        if userID == appUserID {
             becomeFirstResponder()
         }
     }
@@ -66,24 +67,22 @@ class ScheduleViewController: UIViewController {
 
     override func canBecomeFirstResponder() -> Bool {
 
-        return schedule === enHueco.appUser.schedule
+        return userID == appUserID
     }
 
     ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
-    func addEventsWithUndoCapability(eventsToAdd: [Event]) {
+    func addEventsWithUndoCapability(eventsToAdd: [BasicEvent]) {
 
         EHProgressHUD.showSpinnerInView(view)
-        _ = try? EventsAndSchedulesManager.sharedManager.addEventsWithDataFromEvents(eventsToAdd) {
-            (addedEvents, error) in
-
+        EventsAndSchedulesManager.addEventsWithDataFrom(eventsToAdd) { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard addedEvents != nil && error == nil else
-            {
+            guard addedEvents != nil && error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
+            // TODO: Need the IDs of the added events
             self.undoManager?.registerUndoWithTarget(self, selector: #selector(ScheduleViewController.deleteEventsWithUndoCapability(_:)), object: addedEvents)
 
             if self.undoManager != nil && !self.undoManager!.undoing {
@@ -95,9 +94,10 @@ class ScheduleViewController: UIViewController {
     }
 
     ///Edits the event, giving the ability to undo and redo the actions.
-    func editEventWithUndoCapability(eventToEdit: Event, withValuesOfEvent newEvent: Event) {
+    func editEventWithUndoCapability(event: Event, withIntent intent: EventUpdateIntent) {
 
-        let oldEvent = eventToEdit.copy() as! Event
+        // TODO: Add info to the old intent in order to allows for undo
+        let oldEventIntent = EventUpdateIntent(id: event.id)
 
         EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.editEvent(eventToEdit, withValuesOfDummyEvent: newEvent) {
@@ -105,13 +105,12 @@ class ScheduleViewController: UIViewController {
 
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard success && error == nil else
-            {
+            guard success && error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
-            self.undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withValuesOfEvent: oldEvent)
+            self.undoManager?.prepareWithInvocationTarget(self).editEventWithUndoCapability(eventToEdit, withIntent: oldEventIntent)
 
             if self.undoManager != nil && !self.undoManager!.undoing {
                 self.undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
@@ -125,13 +124,10 @@ class ScheduleViewController: UIViewController {
     func deleteEventsWithUndoCapability(events: [Event]) {
 
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.deleteEvents(events) {
-            (success, error) in
-
+        EventsAndSchedulesManager.deleteEvents(events.map { $0.id }) { (success, error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard success && error == nil else
-            {
+            guard success && error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
