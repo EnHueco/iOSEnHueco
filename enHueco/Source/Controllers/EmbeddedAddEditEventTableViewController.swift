@@ -73,8 +73,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
 
             let currentDate = NSDate()
 
-            startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleWeekToDate(currentDate), animated: true)
-            endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleWeekToDate(currentDate), animated: true)
+            startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleDateToDate(currentDate), animated: true)
+            endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleDateToDate(currentDate), animated: true)
         } else {
             deleteButton.hidden = true
             deleteButtonHeightConstraint.constant = 0

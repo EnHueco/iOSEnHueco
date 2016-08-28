@@ -31,11 +31,16 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        dayView.reloadData()
         
         if let userID = userID {
             friendManager = RealtimeFriendManager(friendID: userID, delegate: self)
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        friendManager = nil
     }
 
     func reloadData() {
@@ -45,18 +50,21 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]! {
 
-        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
-        let weekDayDaySchedule = schedule.weekDays[localWeekDayNumber]
-
+        guard let schedule = friendManager?.schedule else {
+            return []
+        }
+        
+        let eventsInDay = schedule.eventsInDayOfDate(date)
         var eventViews = [TKCalendarDayEventView]()
 
-        for event in weekDayDaySchedule.events {
+        for event in eventsInDay {
             var eventView = calendarDay.dequeueReusableEventView
 
             if eventView == nil {
                 eventView = TKCalendarDayEventView()
             }
-
+            
+            eventView.identifier = NSNumber(integer: Int(event.id) ?? -1)
             eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .FreeTime ? UIColor(red: 0 / 255.0, green: 150 / 255.0, blue: 245 / 255.0, alpha: 0.15) : UIColor(red: 255 / 255.0, green: 213 / 255.0, blue: 0 / 255.0, alpha: 0.15))
@@ -74,20 +82,21 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!) {
 
-        guard schedule === enHueco.appUser.schedule else {
+        guard userID == appUserID else {
             return
         }
 
         let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditEventViewController") as! AddEditEventViewController
-
-        let weekDayNumber = localCalendar.component(.Weekday, fromDate: eventView.startDate)
-        let weekDayDaySchedule = schedule.weekDays[weekDayNumber]
-
-        let componentUnits: NSCalendarUnit = [.Weekday, .Hour, .Minute]
-        let startHour = globalCalendar.components(componentUnits, fromDate: eventView.startDate)
-
-        viewController.eventToEdit = weekDayDaySchedule.eventWithStartHour(startHour)!
+        
+        viewController.eventToEditID = String(eventView.identifier)
         viewController.scheduleViewController = parentViewController as! ScheduleViewController
         presentViewController(viewController, animated: true, completion: nil)
+    }
+}
+
+extension ScheduleCalendarViewController: RealtimeFriendManagerDelegate {
+    
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManagerDelegate) {
+        dayView.reloadData()
     }
 }

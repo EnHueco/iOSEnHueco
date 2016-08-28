@@ -320,12 +320,12 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endDateInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endDateInNearestPossibleDateToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         } else {
             (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startDateInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startDateInNearestPossibleDateToDate(NSDate()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
         }
 

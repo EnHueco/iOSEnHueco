@@ -9,11 +9,6 @@
 import Foundation
 import Genome
 
-enum Weekday: Int {
-    case Monday = 0, Tuesday, Wednesday, Thursday, Friday
-    case Saturday, Sunday
-}
-
 /// The type of the event
 
 enum EventType: String {
@@ -30,7 +25,7 @@ class BaseEvent: MappableObject {
         static let startDate = "start_date"
         static let endDate = "end_date"
         static let location = "location"
-        static let repetitionDays = "repetition_days"
+        static let repeating = "repeating"
     }
 
     let type: EventType
@@ -38,16 +33,16 @@ class BaseEvent: MappableObject {
     let startDate: NSDate
     let endDate: NSDate
     let location: String?
-    let repetitionDays: Set<Weekday>?
+    let repeating: Bool
 
-    init(type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repetitionDays: [Weekday]?) {
+    init(type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repeating: Bool) {
 
         self.type = type
         self.name = name
         self.location = location
         self.startDate = startDate
         self.endDate = endDate
-        self.repetitionDays = repetitionDays
+        self.repeating = repeating
     }
 
     init(map: Map) throws {
@@ -57,7 +52,7 @@ class BaseEvent: MappableObject {
         name = try? map.extract(JSONKeys.name)
         // To do: Set start & end dates based on JSON data
         location = try? map.extract(JSONKeys.location)
-        repetitionDays = try map.extract(JSONKeys.repetitionDays)
+        repetitionDays = try map.extract(JSONKeys.repeating)
     }
     
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest

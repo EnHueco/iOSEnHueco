@@ -30,6 +30,25 @@ class Schedule: MappableObject {
         
         return true
     }
+
+    func eventWithID(ID: String) -> Event? {
+
+        for event in events where event.id == ID {
+            return event
+        }
+
+        return nil
+    }
+    
+    func eventsInDayOfDate(date: NSDate) -> [Event] {
+        
+        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
+        
+        return events.filter {
+            return localCalendar.isDate($0.startDateInNearestPossibleDateToDate(date), inSameDayAsDate: date)
+        }
+    }
 }
 
 extension Schedule {
@@ -138,14 +157,5 @@ extension Schedule {
     
     func instantFreeTimePeriodTimeToLiveReached(timer: NSTimer) {
         instantFreeTimePeriod = nil
-    }
-    
-    func eventWithID(ID: String) -> Event? {
-        
-        for event in events where event.id == ID {
-            return event
-        }
-        
-        return nil
     }
 }

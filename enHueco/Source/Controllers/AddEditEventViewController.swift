@@ -17,7 +17,8 @@ class AddEditEventViewController: UIViewController {
 
     var embeddedTableViewController: EmbeddedAddEditEventTableViewController!
 
-    var eventToEdit: Event?
+    /// The ID of the event to edit
+    var eventToEditID: String?
 
     ///Parent schedule view controller
     var scheduleViewController: ScheduleViewController!
