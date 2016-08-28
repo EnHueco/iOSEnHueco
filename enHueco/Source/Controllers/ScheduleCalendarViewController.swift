@@ -17,7 +17,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController, FriendManager
     var userID = appUserID
     
     /// The real-time updates manager
-    private var friendManager: FriendManager?
+    private var friendManager: RealtimeFriendManager?
 
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -34,7 +34,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController, FriendManager
         dayView.reloadData()
         
         if let userID = userID {
-            friendManager = FriendManager(friendID: userID, delegate: self)
+            friendManager = RealtimeFriendManager(friendID: userID, delegate: self)
         }
     }
 

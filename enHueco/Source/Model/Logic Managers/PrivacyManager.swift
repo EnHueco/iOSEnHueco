@@ -9,53 +9,12 @@
 import Foundation
 import Firebase
 
+class PrivacyManager: FirebaseLogicManager  {
 
-protocol PrivacyManagerDelegate : class {
-    
-    func privacyManagerDidReceivePrivacyUpdates(manager: PrivacyManager)
-}
+    private init() {}
 
-/// Handles privacy settings
-class PrivacyManager : FirebaseSynchronizable, FirebaseLogicManager {
-    
-    weak var delegate : PrivacyManagerDelegate?
-    private let appUserID: String
-    private(set) var settings : PrivacySettings?
-    
-    init?(delegate: PrivacyManagerDelegate){
-        
-        guard let user = AccountManager.sharedManager.userID else {
-            assertionFailure()
-            return nil
-        }
-        
-        self.delegate = delegate
-        appUserID = appUserID
-        createFirebaseSubscriptions()
-    }
-    
-    private func createFirebaseSubscriptions() {
-        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID).observeEventType(.Value) { [unowned self] (snapshot) in
-            
-                guard let userJSON = snapshot.value as? [String : AnyObject],
-                    let settings = try? PrivacySettings(js: snapshot) else {
-                        return
-            }
-            
-            self.settings = settings
-            
-            dispatch_async(dispatch_get_main_queue()){
-                self.delegate?.privacyManagerDidReceivePrivacyUpdates(self)
-            }
-        }
-    }
-    
-    deinit {
-        removeFirebaseSubscriptions()
-    }
-}
-extension PrivacyManager{
-    
+    static let sharedManager = PrivacyManager()
+
     class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler)
     {
         guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else {

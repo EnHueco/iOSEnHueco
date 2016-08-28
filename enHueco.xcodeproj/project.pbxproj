@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EF81162CC1D5A13B0F27A87 /* RealtimePrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */; };
+		3EF81437563CC43F1929E9B8 /* RealtimeFriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */; };
+		3EF81479F5608529CB60C0F6 /* RealtimeEventsAndSchedulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF816654A6E5E1DB858BD58 /* RealtimeEventsAndSchedulesManager.swift */; };
+		3EF817079302DED37CF01189 /* RealtimeFriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */; };
+		3EF81863E73924B3FAEFFDAF /* RealtimeAppUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF81E2014A8E2FCCD9ADC18 /* RealtimeAppUserManager.swift */; };
 		3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */; };
 		40A43EF21102292AE43CC9C7 /* Pods_enHuecoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */; };
 		414D42BF472E8CB8371E11D3 /* Pods_enHueco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F21BED4E4201370C8D4BB7C /* Pods_enHueco.framework */; };
@@ -91,7 +96,6 @@
 		F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */; };
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1B8D9F31D6FF0640019420E /* FirebaseLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */; };
-		F1B8DA0B1D71E56D0019420E /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8DA0A1D71E56D0019420E /* FriendManager.swift */; };
 		F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */; };
 		F1B9BCB41D5EC81C00153850 /* PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */; };
 		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
@@ -157,7 +161,12 @@
 
 /* Begin PBXFileReference section */
 		0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_enHuecoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeFriendManager.swift; sourceTree = "<group>"; };
+		3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimePrivacyManager.swift; sourceTree = "<group>"; };
+		3EF816654A6E5E1DB858BD58 /* RealtimeEventsAndSchedulesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeEventsAndSchedulesManager.swift; sourceTree = "<group>"; };
 		3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePaths.swift; sourceTree = "<group>"; };
+		3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeFriendsManager.swift; sourceTree = "<group>"; };
+		3EF81E2014A8E2FCCD9ADC18 /* RealtimeAppUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeAppUserManager.swift; sourceTree = "<group>"; };
 		462CA353816B2D71FBFD901E /* Pods-enHuecoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHuecoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.release.xcconfig"; sourceTree = "<group>"; };
 		4952F3569EC0579CEA03C7FD /* Pods-enHuecoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHuecoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-enHuecoTests/Pods-enHuecoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		992D5DAA71C517804FC6CD6E /* Pods-enHueco.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-enHueco.debug.xcconfig"; path = "Pods/Target Support Files/Pods-enHueco/Pods-enHueco.debug.xcconfig"; sourceTree = "<group>"; };
@@ -254,7 +263,6 @@
 		F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyFreeNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLogicManager.swift; sourceTree = "<group>"; };
-		F1B8DA0A1D71E56D0019420E /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantEvent.swift; sourceTree = "<group>"; };
 		F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettings.swift; sourceTree = "<group>"; };
 		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
@@ -323,6 +331,18 @@
 				462CA353816B2D71FBFD901E /* Pods-enHuecoTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3EF81A57C98F05A07A39E201 /* RealTimeManagers */ = {
+			isa = PBXGroup;
+			children = (
+				3EF81E2014A8E2FCCD9ADC18 /* RealtimeAppUserManager.swift */,
+				3EF816654A6E5E1DB858BD58 /* RealtimeEventsAndSchedulesManager.swift */,
+				3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */,
+				3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */,
+				3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */,
+			);
+			path = RealTimeManagers;
 			sourceTree = "<group>";
 		};
 		7925AF665DEA52F357FF8A87 /* Frameworks */ = {
@@ -664,12 +684,12 @@
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
-				F1B8DA0A1D71E56D0019420E /* FriendManager.swift */,
 				F183F8481C81454C00390CF7 /* CurrentStateManager.swift */,
 				F183F84C1C814E3A00390CF7 /* EventsAndSchedulesManager.swift */,
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
 				F1F941471D6D36F600801C27 /* Other */,
+				3EF81A57C98F05A07A39E201 /* RealTimeManagers */,
 			);
 			path = "Logic Managers";
 			sourceTree = "<group>";
@@ -1024,7 +1044,6 @@
 				F1B54B161C8FB7B40059F855 /* EHNotifications.swift in Sources */,
 				F16C62A11D6553A1000D44CA /* PrivacySettingsUpdateIntent.swift in Sources */,
 				F13C06371BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift in Sources */,
-				F1B8DA0B1D71E56D0019420E /* FriendManager.swift in Sources */,
 				F165BC4B1BC6060600AA9248 /* SearchFriendCell.swift in Sources */,
 				F11AACC61D654231006D27EB /* EventUpdateIntent.swift in Sources */,
 				F14DC5121BE448380046CD48 /* FriendsSplitViewController.swift in Sources */,
@@ -1082,6 +1101,11 @@
 				F183F8411C8077FC00390CF7 /* AppUserManager.swift in Sources */,
 				F16C62A31D6557DA000D44CA /* BaseEvent.swift in Sources */,
 				3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */,
+				3EF81863E73924B3FAEFFDAF /* RealtimeAppUserManager.swift in Sources */,
+				3EF81479F5608529CB60C0F6 /* RealtimeEventsAndSchedulesManager.swift in Sources */,
+				3EF81437563CC43F1929E9B8 /* RealtimeFriendManager.swift in Sources */,
+				3EF817079302DED37CF01189 /* RealtimeFriendsManager.swift in Sources */,
+				3EF81162CC1D5A13B0F27A87 /* RealtimePrivacyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

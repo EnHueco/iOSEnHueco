@@ -13,6 +13,8 @@ import Foundation
 class CurrentStateManager {
     private init() {}
 
+    static let sharedManager = CurrentStateManager()
+
     /*
     /**
      Returns all friends that are currently available and nearby.

@@ -9,132 +9,14 @@
 import Foundation
 import Firebase
 
-protocol FriendsManagerDelegate: class {
-    func friendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendsManager)
-}
+class FriendsManager: FirebaseLogicManager {
 
-/// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
-class FriendsManager: FirebaseSynchronizable, FirebaseLogicManager {
-    
-    private let appUserID: String
-    
-    /// All references and handles for the references
-    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
-    
-    /// Delegate
-    weak var delegate: FriendsManagerDelegate?
-    
-    /// Friend managers with the friend IDs as the key
-    private var friendManagers = [String : FriendManager]()
-    
-    /** Creates an instance of the manager that listens to database changes as soon as it is created.
-     You must set the delegate property if you want to be notified when any data has changed.
-     */
-    init?(delegate: FriendsManagerDelegate?) {
-        guard let userID = AccountManager.sharedManager.userID else {
-            assertionFailure()
-            return nil
-        }
-        
-        self.delegate = delegate
-        appUserID = userID
-        createFirebaseSubscriptions()
-    }
-    
-    private func createFirebaseSubscriptions() {
-        
-        let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(firebaseUser.uid)
-        
-        // Observe friend addition
-        let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot) in
-            
-            let friendID = snapshot.key
-            friendManagers[friendID] = FriendManager(friendID: friendID, delegate: self)
-        }
-        
-        trackHandle(friendAddedHandle, forReference: friendsReference)
-        
-        var friendRemovedHandle: FIRDatabaseHandle!
-        
-        // Observe friend removal
-        friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot) in
-            
-            let friendID = snapshot.key
-            friendManagers[friendID] = nil
-            
-            /// Thread safety
-            dispatch_async(dispatch_get_main_queue()){
-                self.delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
-            }
-        }
-        
-        trackHandle(friendsHandle, forReference: friendsReference)
-    }
-    
-    subscript(friendID: String) -> (friend: User?, schedule: Schedule?) {
-        
-        get {
-            guard let friendManager = friendManagers[friendID] else { return nil }
-            return (friendManager.friend, friendManager.schedule)
-        }
-    }
-    
-    func friendAndSchedules() -> [(friend: User?, schedule: Schedule?)] {
-        
-        // #NoPanic We'll see how this works, if it's too costly we'll keep local array copies to speed up the process
-        return friendManagers.values.map { ($0.friend, $0.schedule) }
-    }
-    
-    deinit {
-        removeFireBaseSubscriptions()
-    }
-}
+    private init() {}
 
-extension FriendsManager: FriendManagerDelegate {
-    
-    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendManager) {
-        delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
-    }
-}
+    static let sharedManager = FriendsManager()
 
-extension FriendsManager {
-    
-    /**
-     Returns all friends that are currently available.
-     - returns: Friends with their current free time periods
-     */
-    func currentlyAvailableFriends() -> [(friend:User, freeTime:Event)] {
-        
-        return friends.values.flatMap {
-            
-            guard let freeTime = $0.currentFreeTimePeriod() else { return nil }
-            return (friend, freeTime)
-        }
-    }
-    
-    /**
-     Returns all friends that will soon be available.
-     - returns: Friends with their current free time period
-     */
-    func soonAvailableFriendsWithin(interval interval: NSTimeInterval) -> [(friend:User, freeTime:Event)] {
-        
-        let currentDate = NSDate()
-        
-        return friends.values.flatMap {
-            
-            guard let freeTime = $0.nextFreeTimePeriod() where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
-                return nil
-            }
-            
-            return (friend, freeTime)
-        }
-    }
-}
-
-extension FriendsManager {
-        
     /// Deletes a friend.
-    class func deleteFriend(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func deleteFriend(id friendID: String, completionHandler: BasicCompletionHandler) {
         
         guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
 
@@ -151,7 +33,7 @@ extension FriendsManager {
     }
 
     /// Sends a friend request to the username provided and notifies the result via Notification Center.
-    class func sendFriendRequestTo(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func sendFriendRequestTo(id friendID: String, completionHandler: BasicCompletionHandler) {
         
         guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
         
@@ -168,7 +50,7 @@ extension FriendsManager {
     }
     
     /// Accepts friend request from the friend id provided.
-    class func acceptFriendRequestFrom(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func acceptFriendRequestFrom(id friendID: String, completionHandler: BasicCompletionHandler) {
         
         guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
 
@@ -191,7 +73,7 @@ extension FriendsManager {
      
      - parameter searchText:        Text to search
      */
-    class func searchUsersWith(searchText searchText: String, institutionID: String, completionHandler: (results:[User]) -> ()) {
+    func searchUsersWith(searchText searchText: String, institutionID: String, completionHandler: (results:[User]) -> ()) {
         
         guard !searchText.isBlank() else {
             dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }

@@ -1,5 +1,5 @@
 //
-//  FriendManager.swift
+//  RealtimeFriendManager.swift
 //  enHueco
 //
 //  Created by Diego Montoya Sefair on 8/27/16.
@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import Firebase
 
-protocol FriendManagerDelegate: class {
-    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendManager)
+protocol RealtimeFriendManagerDelegate: class {
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager)
 }
 
 /// Handles user and schedule real-time fetching for a given friend
-class FriendManager: FirebaseSynchronizable, FirebaseLogicManager {
+class RealtimeFriendManager: FirebaseSynchronizable {
     
-    weak var delegate: FriendManagerDelegate?
+    weak var delegate: RealtimeFriendManagerDelegate?
     
     let friendID: String
     
@@ -27,7 +28,7 @@ class FriendManager: FirebaseSynchronizable, FirebaseLogicManager {
     /// All references and handles for the references
     private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
     
-    init?(friendID: String, delegate: FriendManagerDelegate?) {
+    init?(friendID: String, delegate: RealtimeFriendManagerDelegate?) {
         guard let userID = AccountManager.sharedManager.userID else {
             assertionFailure()
             return nil
@@ -85,7 +86,7 @@ class FriendManager: FirebaseSynchronizable, FirebaseLogicManager {
         guard friend != nil && schedule != nil else { return }
         
         dispatch_async(dispatch_get_main_queue()){
-            delegate?.friendManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+            delegate?.realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(self)
         }
     }
     

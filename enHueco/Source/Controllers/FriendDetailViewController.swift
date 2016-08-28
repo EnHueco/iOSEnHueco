@@ -22,7 +22,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     var friendID: String?
 
     // Real-time logic manager (If view visible)
-    private var friendManager: FriendManager?
+    private var friendManager: RealtimeFriendManager?
 
     private var recordId: NSNumber?
 
@@ -49,7 +49,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         super.viewWillAppear(animated)
         
         if let friendID = friendID {
-            friendManager = FriendManager(friendID: friendID, delegate: self)
+            friendManager = RealtimeFriendManager(friendID: friendID, delegate: self)
         }
 
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -246,7 +246,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
 extension FriendDetailViewController: FriendManagerDelegate {
     
-    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendManager) {
+    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
         refreshUIData()
     }
 }

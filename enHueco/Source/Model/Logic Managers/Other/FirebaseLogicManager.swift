@@ -15,7 +15,7 @@ protocol FirebaseLogicManager {
 
 extension FirebaseLogicManager {
     
-    static func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser? {
+    func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser? {
         
         guard let user = FIRAuth.auth()?.currentUser else {
             assertionFailure()
