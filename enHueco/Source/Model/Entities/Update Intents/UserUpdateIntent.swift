@@ -8,8 +8,9 @@
 
 import Foundation
 import Genome
+import PureJsonSerializer
 
-struct UserUpdateIntent: MappableObject {
+struct UserUpdateIntent: MappableBase {
 
     var institution: String?
     var firstNames: String?
@@ -18,15 +19,19 @@ struct UserUpdateIntent: MappableObject {
     var imageThumbnail: NSURL?
     var phoneNumber: String?
 
+    static func newInstance(json: Json, context: Context) throws -> UserUpdateIntent {
+        throw GenericError.UnsupportedOperation
+    }
+    
     func sequence(map: Map) throws {
 
         typealias JSONKeys = User.JSONKeys
 
-        institution ~> map[JSONKeys.institution]
-        firstNames ~> map[JSONKeys.firstNames]
-        lastNames ~> map[JSONKeys.lastNames]
-        image ~> map[JSONKeys.image]
-        imageThumbnail ~> map[JSONKeys.imageThumbnail]
-        phoneNumber ~> map[JSONKeys.phoneNumber]
+        try institution ~> map[.Key(JSONKeys.institution)]
+        try firstNames ~> map[.Key(JSONKeys.firstNames)]
+        try lastNames ~> map[.Key(JSONKeys.lastNames)]
+        try image ~> map[.Key(JSONKeys.image)].transformToJson(GenomeTransformers.toJSON)
+        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)].transformToJson(GenomeTransformers.toJSON)
+        try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
     }
 }

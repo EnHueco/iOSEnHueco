@@ -96,7 +96,7 @@
 		F1B8AD631BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */; };
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1B8D9F31D6FF0640019420E /* FirebaseLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */; };
-		F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */; };
+		F1B8DA0D1D72A7FD0019420E /* GenomeTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8DA0C1D72A7FD0019420E /* GenomeTransformers.swift */; };
 		F1B9BCB41D5EC81C00153850 /* PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */; };
 		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
@@ -263,7 +263,7 @@
 		F1B8AD621BCADD8600BB879B /* CurrentlyFreeNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentlyFreeNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLogicManager.swift; sourceTree = "<group>"; };
-		F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantEvent.swift; sourceTree = "<group>"; };
+		F1B8DA0C1D72A7FD0019420E /* GenomeTransformers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenomeTransformers.swift; sourceTree = "<group>"; };
 		F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettings.swift; sourceTree = "<group>"; };
 		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -591,7 +591,6 @@
 				F113D1651B7CDD6200325209 /* Schedule.swift */,
 				F16C62A21D6557DA000D44CA /* BaseEvent.swift */,
 				F16C613A1BB222EF00703782 /* Event.swift */,
-				F1B9BCB11D5EC6A000153850 /* InstantEvent.swift */,
 				F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */,
 				F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */,
 			);
@@ -606,6 +605,7 @@
 				F1F54B331B9D03340087C30E /* ExtensionsAndUtilities.swift */,
 				F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */,
 				F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */,
+				F1B8DA0C1D72A7FD0019420E /* GenomeTransformers.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -681,6 +681,7 @@
 		F1C8E5351BEBCA35007673BC /* Logic Managers */ = {
 			isa = PBXGroup;
 			children = (
+				3EF81A57C98F05A07A39E201 /* RealTimeManagers */,
 				F183F8441C8078F400390CF7 /* AccountManager.swift */,
 				F183F8401C8077FC00390CF7 /* AppUserManager.swift */,
 				F183F8461C81441600390CF7 /* FriendsManager.swift */,
@@ -689,7 +690,6 @@
 				F183F8561C837FB500390CF7 /* PrivacyManager.swift */,
 				F1ED50C11BE9A44A00533557 /* ProximityUpdateManager.swift */,
 				F1F941471D6D36F600801C27 /* Other */,
-				3EF81A57C98F05A07A39E201 /* RealTimeManagers */,
 			);
 			path = "Logic Managers";
 			sourceTree = "<group>";
@@ -1050,11 +1050,11 @@
 				F11B03681BA5334C00ADD580 /* ScheduleViewController.swift in Sources */,
 				F1F941491D6D374A00801C27 /* FirebaseSynchronizable.swift in Sources */,
 				F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */,
-				F1B9BCB21D5EC6A000153850 /* InstantEvent.swift in Sources */,
 				F11AACC41D653F09006D27EB /* UserUpdateIntent.swift in Sources */,
 				F1179E6A1B9BB10C00B04400 /* FriendsViewController.swift in Sources */,
 				F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */,
 				F183F83D1C7FF90900390CF7 /* main.m in Sources */,
+				F1B8DA0D1D72A7FD0019420E /* GenomeTransformers.swift in Sources */,
 				F1B8AD5C1BC8D2B600BB879B /* CommonFreeTimePeriodsSearchFriendToAddViewController.swift in Sources */,
 				F1B54B181C8FBA6D0059F855 /* EHProgressHUD.swift in Sources */,
 				F11B01D71BA520BB00ADD580 /* ScheduleCalendarViewController.swift in Sources */,

@@ -13,7 +13,7 @@ class Schedule: MappableObject {
     
     let events: [Event]
     
-    init(map: Map) throws {
+    required init(map: Map) throws {
         self.events = try [Event](js: map.json)
     }
     
@@ -22,7 +22,7 @@ class Schedule: MappableObject {
     }
     
     /// Returns true if event doesn't overlap with any other event, excluding the event with ID == eventToExcludeID.
-    func canAddEvent(newEvent: Event, excludingEvent eventToExcludeID: String? = nil) -> Bool {
+    func canAddEvent(newEvent: BaseEvent, excludingEvent eventToExcludeID: String? = nil) -> Bool {
         
         for event in events where (eventToExcludeID == nil || event.id != eventToExcludeID) && event.overlapsWith(newEvent) {
             return false

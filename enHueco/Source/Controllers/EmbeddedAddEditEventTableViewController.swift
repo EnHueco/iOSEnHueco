@@ -186,8 +186,22 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     }
 
     @IBAction func deleteButtonPressed(sender: AnyObject) {
+        
+        let title = "Eliminar " + (freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
+        let message = "AreYouSureDeleteEventMessage".localizedUsingGeneralFile()
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
 
-        UIAlertView(title: "Eliminar " + (freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile()), message: "AreYouSureDeleteEventMessage".localizedUsingGeneralFile(), delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Si").show()
+        alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+            
+        alertController.addAction(UIAlertAction(title: "Si", style: .Cancel, handler: { (action) in
+            addEditEventParentViewController.deleteEventToEdit()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
 
     // MARK: Methods
@@ -199,21 +213,6 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
 
         startHourCell.detailTextLabel?.text = formatter.stringFromDate(startHourDatePicker.date)
         endHourCell.detailTextLabel?.text = formatter.stringFromDate(endHourDatePicker.date)
-    }
-
-    func deleteEventToEdit() {
-
-        addEditEventParentViewController.deleteEventToEdit()
-    }
-
-    // MARK: Other Delegates
-
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-
-        if buttonIndex == 1 {
-            deleteEventToEdit()
-            dismissViewControllerAnimated(true, completion: nil)
-        }
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

@@ -99,21 +99,13 @@ class InstantFreeTimeViewController: UIViewController {
 
     @IBAction func postButtonPressed(sender: AnyObject) {
 
-        let globalCalendar = NSCalendar.currentCalendar()
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-
-        let startHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: NSDate())
-        let endHourComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: endTimeDatePicker.date)
-
-        let newFreeTimePeriod = Event(type: .FreeTime, name: nameTextField.text, startHour: startHourComponents, endHour: endHourComponents, location: locationTextField.text, ID: nil, lastUpdatedOn: NSDate())
+        let newFreeTimePeriod = BaseEvent(type: .FreeTime, name: nameTextField.text, location: locationTextField.text, startDate: NSDate(), endDate: endTimeDatePicker.date, repeating: false)
 
         EHProgressHUD.showSpinnerInView(view)
-        CurrentStateManager.sharedManager.postInstantFreeTimePeriod(newFreeTimePeriod) {
-            (success, error) in
-
+        CurrentStateManager.sharedManager.postInstantFreeTimePeriod(newFreeTimePeriod) { error in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard success && error == nil else {
+            guard error == nil else {
 
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return

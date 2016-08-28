@@ -9,18 +9,18 @@
 import Foundation
 import Firebase
 
-protocol FirebaseSynchronizable {
+protocol FirebaseSynchronizable: class {
     
     init?()
     
-    private let appUserID: String
+    var appUserID: String { get }
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]]
+    var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] { get set }
     
-    private func createFirebaseSubscriptions()
+    func createFirebaseSubscriptions()
     
-    private func trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference)
+    func trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference)
 }
 
 extension FirebaseSynchronizable {
@@ -28,7 +28,7 @@ extension FirebaseSynchronizable {
     private func removeFirebaseSubscriptions() {
         
         for (reference, handles) in databaseRefsAndHandles {
-            for handlle in handles {
+            for handle in handles {
                 reference.removeObserverWithHandle(handle)
             }
         }

@@ -29,51 +29,6 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
 
     static let sharedManager = EventsAndSchedulesManager()
 
-    /** Returns a schedule with the common free time periods among the schedules provided and the one of the app user
-    Returns nil if no schedule data has been received for the app user yet.
-
-    Note: **Only works with repeating days for now**
-    */
-    func commonFreeTimePeriodsScheduleAmong(schedules: [Schedule]) -> Schedule? {
-
-        guard let schedule = self.schedule else {
-            return nil
-        }
-
-        // TODO: Finish
-
-        let currentDate = NSDate()
-        var commonFreeTimePeriods = [Event]()
-
-        guard schedules.count >= 2 else {
-            return commonFreeTimePeriodsSchedule
-        }
-
-        for event in (schedule.events.filter { $0.type == .FreeTime }) {
-
-            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
-            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
-
-            for friendSchedule in schedules {
-                for friendEvent in (friendSchedule.events.filter { $0.type == .FreeTime }) where friendEvent.overlapsWith(event) {
-
-                    let friendStartHourInCurrentDate = friendEvent.startHourInNearestPossibleWeekToDate(currentDate)
-                    let friendEndHourInCurrentDate = friendEvent.endHourInNearestPossibleWeekToDate(currentDate)
-
-                    let newStartDate = (startHourInCurrentDate.isBetween(friendStartHourInCurrentDate, and: friendEndHourInCurrentDate) ? event.startDate : friendEvent.startDate)
-                    let newEndDate = (endHourInCurrentDate.isBetween(friendStartHourInCurrentDate, and: friendEndHourInCurrentDate) ? event.endDate : friendEvent.endDate)
-
-                    let repetitionDays = event.repetitionDays!.map { friendEvent.repetitionDays!.contains($0) }
-
-                    let commonEvent = BaseEvent(type: .FreeTime, name: nil, location: nil, startDate: newStartDate, endDate: newEndDate, repetitionDays: repetitionDays)
-                    commonFreeTimePeriods.append(Event(type: .FreeTime, startHour: newStartHour, endHour: newEndHour))
-                }
-            }
-        }
-
-        return Schedule(events: commonFreeTimePeriods)
-    }
-
     /**
      Adds the events given events to the AppUser's schedule if and only if the request is successful.
      
@@ -87,9 +42,9 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
             return
         }
         
-        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(appUser.uid)
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(user.uid)
         
-        scheduleReference.observeSingleEventType(.Value) { [unowned self] (snapshot) in
+        scheduleReference.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             
             let unknownError = {
                 assertionFailure()
@@ -98,15 +53,12 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
                 }
             }
             
-            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = try? Schedule(js: schedule) else {
+            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = try? Schedule(js: scheduleJSON) else {
                 unknownError()
                 return
             }
             
             for dummyEvent in dummyEvents {
-                
-                let localWeekDay = localCalendar.component(.Weekday, fromDate: dummyEvent.startDate)
-                
                 guard schedule.canAddEvent(dummyEvent) else {
                     dispatch_async(dispatch_get_main_queue()) {
                         completionHandler(addedEventIDs: nil, error: EventsAndSchedulesManagerError.EventsOverlap)
@@ -162,13 +114,13 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
      - parameter eventID: The ID of the event to edit
      - parameter intent:  The intent with the values to change
      */
-    func editEvent(eventID eventID: String, withIntent intent: Event, completionHandler: BasicCompletionHandler) {
+    func editEvent(eventID eventID: String, withIntent intent: EventUpdateIntent, completionHandler: BasicCompletionHandler) {
         
         guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
         
         let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(eventID)
         
-        guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
+        guard let tmpUpdateJSON = try? intent.jsonRepresentation().foundationDictionary, let updateJSON = tmpUpdateJSON else {
             assertionFailure()
             dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
             return

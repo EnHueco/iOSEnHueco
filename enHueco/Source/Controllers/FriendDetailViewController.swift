@@ -22,7 +22,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     var friendID: String?
 
     // Real-time logic manager (If view visible)
-    private var friendManager: RealtimeFriendManager?
+    private var realtimeFriendManager: RealtimeFriendManager?
 
     private var recordId: NSNumber?
 
@@ -86,7 +86,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func refreshUIData() {
         
-        guard let friend = friendManager?.friend , schedule = friendManager?.schedule else {
+        guard let friend = realtimeFriendManager?.friend , schedule = realtimeFriendManager?.schedule else {
             return
         }
         
@@ -231,7 +231,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func setRecordId() {
 
-        guard let friend = friendManager?.friend else { return }
+        guard let friend = realtimeFriendManager?.friend else { return }
         
         if friend.phoneNumber.characters.count < 7 {
             recordId = nil
@@ -244,7 +244,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     }
 }
 
-extension FriendDetailViewController: FriendManagerDelegate {
+extension FriendDetailViewController: RealtimeFriendManagerDelegate {
     
     func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
         refreshUIData()

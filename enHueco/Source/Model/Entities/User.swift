@@ -31,17 +31,16 @@ class User: MappableObject {
     let imageThumbnail: NSURL
     let phoneNumber: String
     
-    //var name: String { return "\(firstNames) \(lastNames)" }
+    var name: String { return "\(firstNames) \(lastNames)" }
 
-    init(map: Map) throws {
-
-        id = try map.extract(JSONKeys.userID)
-        institution = try map.extract(JSONKeys.institution)
-        firstNames = try map.extract(JSONKeys.firstNames)
-        lastNames = try map.extract(JSONKeys.lastNames)
-        image = try map.extract(JSONKeys.image)
-        imageThumbnail = try map.extract(JSONKeys.imageThumbnail)
-        phoneNumber = try map.extract(JSONKeys.phoneNumber)
+    required init(map: Map) throws {
+        id = try map.extract(.Key(JSONKeys.id))
+        institution = try map.extract(.Key(JSONKeys.institution))
+        firstNames = try map.extract(.Key(JSONKeys.firstNames))
+        lastNames = try map.extract(.Key(JSONKeys.lastNames))
+        image = try map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
+        imageThumbnail = try map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
+        phoneNumber = try map.extract(.Key(JSONKeys.phoneNumber))
     }
 
     /*

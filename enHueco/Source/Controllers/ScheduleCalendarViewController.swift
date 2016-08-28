@@ -14,7 +14,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     private let appUserID = AccountManager.sharedManager.userID
     
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
-    var userID = appUserID
+    var userID = AccountManager.sharedManager.userID
     
     /// The real-time updates manager
     private var friendManager: RealtimeFriendManager?

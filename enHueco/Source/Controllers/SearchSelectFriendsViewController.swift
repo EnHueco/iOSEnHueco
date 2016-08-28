@@ -12,15 +12,17 @@ protocol SearchSelectFriendsViewControllerDelegate: class {
     func searchSelectFriendsViewController(controller: SearchSelectFriendsViewController, didSelectFriends friends: [User])
 }
 
-class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class SearchSelectFriendsViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
 
     weak var delegate: SearchSelectFriendsViewControllerDelegate?
+    
+    var filteredFriendsAndSchedules = [(friend: User, schedule: Schedule)]()
 
-    //For safety and performance (because friends is originally a dictionary)
-    var filteredFriends = Array(enHueco.appUser.friends.values)
+    /// The friends logic manager (if currently fetching updates)
+    private var realtimeFriendsManager: RealtimeFriendsManager?
 
     var selectedCells = [NSIndexPath: AnyObject]()
 
@@ -36,6 +38,18 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
         tableView.delegate = self
         searchBar.delegate = self
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        realtimeFriendsManager = RealtimeFriendsManager(delegate: self)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        realtimeFriendsManager = nil
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,7 +61,7 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
         var selectedFriends = [User]()
 
         for indexPath in selectedCells.keys {
-            selectedFriends.append(filteredFriends[indexPath.row])
+            selectedFriends.append(filteredFriendsAndSchedules[indexPath.row].friend)
         }
 
         delegate?.searchSelectFriendsViewController(self, didSelectFriends: selectedFriends)
@@ -60,62 +74,79 @@ class SearchSelectFriendsViewController: UIViewController, UITableViewDataSource
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    /// Reloads the friends and schedules array
+    func reloadFriendsData() {
+        
+        guard let friendsManager = realtimeFriendsManager else { return }
+        
+        filteredFriendsAndSchedules = friendsManager.friendAndSchedules().flatMap {
+            guard let friend = $0.friend, schedule = $0.schedule else { return nil }
+            return (friend, schedule)
+        }
+    }
+}
+
+extension SearchSelectFriendsViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return filteredFriendsAndSchedules.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let friend = filteredFriendsAndSchedules[indexPath.row].friend
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("SearchFriendsPrivacyViewControllerCell")!
+        
+        cell.textLabel?.text = friend.name
+        cell.accessoryType = (selectedCells[indexPath] != nil ? .Checkmark : .None)
+        
+        return cell
+    }
+}
+
+extension SearchSelectFriendsViewController: UITableViewDelegate {
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
+        
         if selectedCells[indexPath] != nil {
             selectedCells.removeValueForKey(indexPath)
         } else {
             selectedCells[indexPath] = true
         }
-
+        
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
+}
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return filteredFriends.count
+extension SearchSelectFriendsViewController: RealtimeFriendsManagerDelegate {
+    
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
+        reloadFriendsData()
+        tableView.reloadData()
     }
+}
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        let friend = filteredFriends[indexPath.row]
-
-        let cell = tableView.dequeueReusableCellWithIdentifier("SearchFriendsPrivacyViewControllerCell")!
-
-        cell.textLabel?.text = friend.name
-
-        cell.accessoryType = (selectedCells[indexPath] != nil ? .Checkmark : .None)
-
-        return cell
-    }
-
+extension SearchSelectFriendsViewController: UISearchBarDelegate {
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-
-        filteredFriends = Array(enHueco.appUser.friends.values)
-
+        
+        reloadFriendsData()
+        
         if !searchText.isBlank() {
-            filteredFriends = filteredFriends.filter {
-
-                for word in $0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+            filteredFriendsAndSchedules = filteredFriendsAndSchedules.filter {
+                
+                for word in $0.friend.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
                     return true
                 }
-
+                
                 return false
             }
         }
-
+        
         tableView.reloadData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

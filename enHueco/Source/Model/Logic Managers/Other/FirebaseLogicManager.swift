@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAuth
 
 protocol FirebaseLogicManager {
-    static func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser?
+    func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser?
 }
 
 extension FirebaseLogicManager {

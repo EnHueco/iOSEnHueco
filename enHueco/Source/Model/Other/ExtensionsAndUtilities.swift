@@ -11,6 +11,8 @@ import UIKit
 enum GenericError: ErrorType {
     case NotLoggedIn
     case UnknownError
+    case Error(message: String)
+    case UnsupportedOperation
 }
 
 typealias BasicCompletionHandler = (error:ErrorType?) -> Void

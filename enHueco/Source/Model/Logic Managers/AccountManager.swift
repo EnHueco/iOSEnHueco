@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
 class AccountManager {
@@ -23,9 +24,9 @@ class AccountManager {
     
     func loginWith(facebookToken facebookToken: String, completionHandler: BasicCompletionHandler) {
         
-        FIRAuth.auth()?.signInWithCredential(facebookToken) { (user, error) in
+        FIRAuth.auth()?.signInWithCredential(FIRFacebookAuthProvider.credentialWithAccessToken(facebookToken)) { (user, error) in
             dispatch_async(dispatch_get_main_queue()){
-                completion
+                completionHandler(error: error)
             }
         }
     }
@@ -33,7 +34,7 @@ class AccountManager {
     /// Creates an account.
     func loginWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
         
-        FIRAuth.auth()?.createUserWithEmail(username, password: password) { (user, error) in
+        FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
             dispatch_async(dispatch_get_main_queue()){
                 completionHandler(error: error)
             }
@@ -43,7 +44,7 @@ class AccountManager {
     /// Creates an account.
     func signupWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
 
-        FIRAuth.auth()?.createUserWithEmail(username, password: password) { (user, error) in
+        FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
             dispatch_async(dispatch_get_main_queue()){
                 completionHandler(error: error)
             }

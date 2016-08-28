@@ -9,7 +9,7 @@
 import Foundation
 import Genome
 
-struct PrivacyUpdateIntent: MappableObject {
+struct PrivacyUpdateIntent: BasicMappable {
 
     var showEventsNames: Bool?
     var showEventsLocations: Bool?
@@ -18,7 +18,7 @@ struct PrivacyUpdateIntent: MappableObject {
 
         typealias JSONKeys = PrivacySettings.JSONKeys
 
-        showEventsNames ~> map[JSONKeys.showEventsNames]
-        showEventsLocations ~> map[JSONKeys.showEventsLocations]
+        try showEventsNames ~> map[.Key(JSONKeys.showEventsNames)]
+        try showEventsLocations ~> map[.Key(JSONKeys.showEventsLocations)]
     }
 }

@@ -45,14 +45,12 @@ class BaseEvent: MappableObject {
         self.repeating = repeating
     }
 
-    init(map: Map) throws {
-        type = try map[JSONKeys.type].fromJson {
-            EventType(rawValue: $0)!
-        }
+    required init(map: Map) throws {
+        type = try map.extract(.Key(JSONKeys.type), transformer: GenomeTransformers.fromJSON)
         name = try? map.extract(JSONKeys.name)
         // To do: Set start & end dates based on JSON data
         location = try? map.extract(JSONKeys.location)
-        repetitionDays = try map.extract(JSONKeys.repeating)
+        repeating = try map.extract(JSONKeys.repeating)
     }
     
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
@@ -112,7 +110,7 @@ class BaseEvent: MappableObject {
         return globalCalendar.dateByAddingComponents(componentsToAdd, toDate: startOfWeek!, options: [])!
     }
     
-    /// Returns true iff the event overlaps with another. (Note: **Only works for repeating events for now**)
+    /// Returns true iff the event overlaps with another.
     func eventOverlapsWith(anotherEvent: Event) -> Bool {
         
         let currentDate = NSDate()
@@ -123,14 +121,6 @@ class BaseEvent: MappableObject {
         let startHourInCurrentDate = startDateInNearestPossibleWeekToDate(currentDate)
         let endHourInCurrentDate = endDateInNearestPossibleWeekToDate(currentDate)
             
-        if !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate) {
-            
-            // Times overlap, let's check if any days are equal
-            for repetitionDay in event.repetitionDays ?? [] where (newEvent.repetitionDays ?? []).contains(repetitionDay) {
-                return true
-            }
-        }
-        
-        return false
+        return !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
     }
 }

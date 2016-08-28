@@ -69,10 +69,10 @@ import FirebaseAuth
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        if firstAppearance && enHueco.appUser != nil {
+        if firstAppearance && AccountManager.sharedManager.userID != nil {
             goToMainTabViewController()
         } else {
-            AccountManager.sharedManager.logOut()
+            try? AccountManager.sharedManager.logOut()
             (UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut = false
         }
     }
@@ -102,37 +102,18 @@ import FirebaseAuth
             return
         }
 
-        if usernameTextField.text == "test" && passwordTextField.text == "test" {
-            // Test
-            enHueco.createTestAppUser()
-
-            if enHueco.appUser.imageURL == nil {
-                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
-                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
-                importImageController.delegate = self
-
-                self.navigationController?.pushViewController(importImageController, animated: true)
-            } else {
-                self.goToMainTabViewController()
-            }
-
-            return
-            /////////
-        }
-
         EHProgressHUD.showSpinnerInView(view)
-
-        AccountManager.loginWithUsername(username, password: password) {
-            (success, error) -> Void in
-
+        AccountManager.sharedManager.loginWith(email: username, password: password) { error -> Void in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            guard success && error == nil else {
+            guard error == nil else {
 
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
+            // TODO: Update
+            /*
             if enHueco.appUser.imageURL == nil {
                 let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
                 importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
@@ -141,7 +122,7 @@ import FirebaseAuth
                 self.navigationController?.pushViewController(importImageController, animated: true)
             } else {
                 self.goToMainTabViewController()
-            }
+            }*/
         }
     }
 
@@ -217,8 +198,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             print(error.localizedDescription)
             return
         } else {
-            let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-            AccountManager.login(facebookToken: credential) { error in
+            AccountManager.sharedManager.loginWith(facebookToken: FBSDKAccessToken.currentAccessToken().tokenString) { error in
                 // TODO
             }
         }

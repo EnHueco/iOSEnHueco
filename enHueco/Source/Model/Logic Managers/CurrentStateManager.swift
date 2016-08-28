@@ -42,8 +42,9 @@ class CurrentStateManager {
      
      Updates the appUser
      */
-    func postInstantFreeTimePeriod(newFreeTimePeriod: Event, completionHandler: BasicCompletionHandler) {
+    func postInstantFreeTimePeriod(newFreeTimePeriod: BaseEvent, completionHandler: BasicCompletionHandler) {
 
+        /*
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
 
@@ -74,11 +75,12 @@ class CurrentStateManager {
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
             }
-        })
+        })*/
     }
 
     func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: BasicCompletionHandler) {
 
+        /*
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
 
@@ -105,6 +107,6 @@ class CurrentStateManager {
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: false, error: compoundError.error)
             }
-        })
+        })*/
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import LocalAuthentication
 import ChameleonFramework
 
-class ProfileViewController: UIViewController, ServerPoller {
+class ProfileViewController: UIViewController {
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
     @IBOutlet weak var editScheduleButton: UIButton!
@@ -19,16 +19,12 @@ class ProfileViewController: UIViewController, ServerPoller {
 
     var imageActivityIndicator: UIActivityIndicatorView!
 
-    var requestTimer = NSTimer()
-    var pollingInterval = 10.0
-
+    var realtimeAppUserManager: RealtimeAppUserManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
-
-        firstNamesLabel.text = enHueco.appUser.firstNames
-        lastNamesLabel.text = enHueco.appUser.lastNames
 
         imageActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         view.addSubview(imageActivityIndicator!)
@@ -53,6 +49,8 @@ class ProfileViewController: UIViewController, ServerPoller {
             return
         }
 
+        realtimeAppUserManager = RealtimeAppUserManager(delegate: self)
+        
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
 
@@ -64,15 +62,18 @@ class ProfileViewController: UIViewController, ServerPoller {
         }
 
         reportScreenViewToGoogleAnalyticsWithName("Profile")
-        startPolling()
     }
 
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        stopPolling()
+    func refreshUIData() {
+        
+        guard let user = realtimeAppUserManager?.appUser else {
+            return
+        }
+        
+        firstNamesLabel.text = user.firstNames
+        lastNamesLabel.text = user.lastNames
     }
-
+    
     func updateButtonColors() {
 
         let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFromImage: imageImageView.image), isFlat: true, alpha: 0.4)
@@ -84,7 +85,7 @@ class ProfileViewController: UIViewController, ServerPoller {
 
     func assignImages() {
 
-        PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {
+        /*PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {
             (image) -> () in
 
             dispatch_async(dispatch_get_main_queue()) {
@@ -116,16 +117,10 @@ class ProfileViewController: UIViewController, ServerPoller {
 
                 self.updateButtonColors()
             }
-        }
+        }*/
     }
 
-    func startPolling() {
-
-        requestTimer = NSTimer.scheduledTimerWithTimeInterval(pollingInterval, target: self, selector: #selector(ProfileViewController.pollFromServer(_:)), userInfo: nil, repeats: true)
-        requestTimer.fire()
-    }
-
-    func pollFromServer(timer: NSTimer) {
+    /*func pollFromServer(timer: NSTimer) {
 
         if imageImageView.image == nil {
             imageActivityIndicator.startAnimating()
@@ -140,7 +135,7 @@ class ProfileViewController: UIViewController, ServerPoller {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
             }
         }
-    }
+    }*/
 
     @IBAction func settingsButtonPressed(sender: UIButton) {
 
@@ -230,6 +225,13 @@ class ProfileViewController: UIViewController, ServerPoller {
         importPictureController.translucent = true
 
         presentViewController(importPictureController, animated: true, completion: nil)
+    }
+}
+
+extension ProfileViewController: RealtimeAppUserManagerDelegate {
+    
+    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: RealtimeAppUserManager) {
+        refreshUIData()
     }
 }
 
