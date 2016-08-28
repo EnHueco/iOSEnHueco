@@ -20,7 +20,7 @@ class FriendsViewController: UIViewController {
     var friendsAndSchedules = [(user: User, schedule: Schedule)]()
 
     /// The friends logic manager (if currently fetching updates)
-    private var friendsManager: FriendsManager?
+    private var friendsManager: RealtimeFriendsManager?
 
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)
     private(set) var friendRequestsNotificationHub: RKNotificationHub!
@@ -111,7 +111,7 @@ class FriendsViewController: UIViewController {
         }
 
         // Begin real time updates
-        friendsManager = FriendsManager(delegate: self)
+        friendsManager = RealtimeFriendsManager(delegate: self)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -178,11 +178,11 @@ class FriendsViewController: UIViewController {
     }
 }
 
-extension FriendsViewController: FriendsManagerDelegate {
+extension FriendsViewController: RealtimeFriendsManagerDelegate {
     
-    func friendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendsManager) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
         reloadFriendsAndTableView()
-    }
+    }    
 }
 
 extension FriendsViewController: UITableViewDataSource {

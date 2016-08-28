@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeAppUserManagerDelegate: class {
-    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: AppUserManager)
+    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: RealtimeAppUserManager)
 }
 
 /** Handles fetching and sending of the AppUser's basic information like names, profile picture, username,

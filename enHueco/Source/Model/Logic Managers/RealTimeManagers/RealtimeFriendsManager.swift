@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeFriendsManagerDelegate: class {
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: FriendsManager)
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate)
 }
 
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)

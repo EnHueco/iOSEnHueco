@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeEventsAndSchedulesManagerDelegate: class {
-    func realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: EventsAndSchedulesManager)
+    func realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: RealtimeEventsAndSchedulesManagerDelegate)
 }
 
 /**

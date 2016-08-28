@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeFriendManagerDelegate: class {
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager)
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManagerDelegate)
 }
 
 /// Handles user and schedule real-time fetching for a given friend

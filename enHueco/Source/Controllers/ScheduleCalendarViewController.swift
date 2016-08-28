@@ -9,7 +9,7 @@
 import UIKit
 import TapkuLibrary
 
-class ScheduleCalendarViewController: TKCalendarDayViewController, FriendManagerDelegate {
+class ScheduleCalendarViewController: TKCalendarDayViewController {
     
     private let appUserID = AccountManager.sharedManager.userID
     
