@@ -71,8 +71,8 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
             globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
-            eventView.startDate = event.startHourInNearestPossibleWeekToDate(date)
-            eventView.endDate = event.endHourInNearestPossibleWeekToDate(date)
+            eventView.startDate = event.startDateInNearestPossibleWeekToDate(date)
+            eventView.endDate = event.endDateInNearestPossibleWeekToDate(date)
 
             eventViews.append(eventView)
         }

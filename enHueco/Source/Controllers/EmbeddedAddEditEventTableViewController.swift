@@ -10,6 +10,7 @@ import UIKit
 import MultiSelectSegmentedControl
 
 class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate {
+    
     var addEditEventParentViewController: AddEditEventViewController!
 
     @IBOutlet weak var freeTimeOrClassSegmentedControl: UISegmentedControl!
@@ -33,7 +34,6 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     var datePickerViewCellToDisplay: UITableViewCell?
 
     override func didMoveToParentViewController(parent: UIViewController?) {
-
         super.didMoveToParentViewController(parent)
 
         assert(parent is AddEditEventViewController)
@@ -49,44 +49,49 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         startHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.startHourChanged(_:)), forControlEvents: .ValueChanged)
         endHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.endHourChanged(_:)), forControlEvents: .ValueChanged)
 
-        if let eventToEdit = addEditEventParentViewController.eventToEdit {
-            nameTextField.text = eventToEdit.name
-            locationTextField.text = eventToEdit.location
-
-            deleteButton.clipsToBounds = true
-            deleteButton.layer.cornerRadius = 5
-            deleteButton.hidden = false
-
-            let globalCalendar = NSCalendar.currentCalendar()
-            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
-
-            let schedule = enHueco.appUser.schedule
-
-            let indexSet = NSIndexSet(index: schedule.weekDays.indexOf(schedule.eventAndDayScheduleOfEventWithID(eventToEdit.ID)!.daySchedule)! - 1)
-            weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
-
-            if eventToEdit.type == .FreeTime {
-                freeTimeOrClassSegmentedControl.selectedSegmentIndex = 0
-            } else {
-                freeTimeOrClassSegmentedControl.selectedSegmentIndex = 1
-            }
-
-            let currentDate = NSDate()
-
-            startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleDateToDate(currentDate), animated: true)
-            endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleDateToDate(currentDate), animated: true)
-        } else {
+        if eventToEditID == nil {
             deleteButton.hidden = true
             deleteButtonHeightConstraint.constant = 0
-
+            
             let indexSet = NSMutableIndexSet()
             weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
-        }
+        } 
 
         // Set end datepicker min to startdatepicker+1
         endHourDatePicker.minimumDate = startHourDatePicker.date
 
         updateStartAndEndHourCells()
+    }
+    
+    func refreshUIData() {
+        
+        guard let eventToEdit = addEditEventParentViewController.fetchedEventToEdit else {
+            return
+        }
+        
+        nameTextField.text = eventToEdit.name
+        locationTextField.text = eventToEdit.location
+        
+        deleteButton.clipsToBounds = true
+        deleteButton.layer.cornerRadius = 5
+        deleteButton.hidden = false
+        
+        let globalCalendar = NSCalendar.currentCalendar()
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let indexSet = NSIndexSet(index: globalCalendar.component(.Weekday, fromDate: eventToEdit.startDate) - 1)
+        weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
+        
+        if eventToEdit.type == .FreeTime {
+            freeTimeOrClassSegmentedControl.selectedSegmentIndex = 0
+        } else {
+            freeTimeOrClassSegmentedControl.selectedSegmentIndex = 1
+        }
+        
+        let currentDate = NSDate()
+        
+        startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleDateToDate(currentDate), animated: true)
+        endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleDateToDate(currentDate), animated: true)
     }
 
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {

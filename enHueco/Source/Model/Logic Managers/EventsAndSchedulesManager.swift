@@ -132,6 +132,28 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
             }
         }
     }
+    
+    /// Fetches the event with the given ID
+    func fetchEvent(id id: String, completionHandler: (event: Event?, error: ErrorType?) -> Void) {
+        
+        guard let appUser = firebaseUser(errorHandler: { (error) in
+            dispatch_async(dispatch_get_main_queue()) { completionHandler(event: nil, error: error) }
+        }) else { return }
+        
+        let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(id)
+
+        eventReference.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            
+            guard let valueJSON = snapshot.value as? [String : AnyObject], let event = try? Event(js: valueJSON) else {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(event: nil, error: GenericError.UnknownError) }
+                return
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(event: event, error: nil)
+            }
+        }
+    }
 }
 
 // TODO: Convert to Firebase

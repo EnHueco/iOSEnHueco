@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDelegate {
+    
     @IBOutlet weak var changeProfilePictureCell: UITableViewCell!
     @IBOutlet weak var logoutCell: UITableViewCell!
     @IBOutlet weak var authTouchIDSwitch: UISwitch!
@@ -17,6 +18,8 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
 
     /// !!! Sections that must be hidden because they are not implemented yet
     private let unimplementedSections = [1, 3]
+    
+    private var realtimeAppUserManager: RealtimeAppUserManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +34,23 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
 
         authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
 //        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
-        phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        realtimeAppUserManager = RealtimeAppUserManager(delegate: self)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        realtimeAppUserManager = nil
+    }
+    
+    func refreshUIData() {
+        
+        phoneNumberCell.textLabel?.text = realtimeAppUserManager?.appUser?.phoneNumber
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -115,12 +134,16 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
 
         if cell == logoutCell {
             logout()
+            
         } else if cell == phoneNumberCell {
+            
             let alertView = UIAlertView(title: "Teléfono", message: "Agrega un nuevo número de teléfono", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Agregar")
             alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
             alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.PhonePad
             alertView.show()
+            
         } else if cell == changeProfilePictureCell {
+            
             let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
             importPictureController.delegate = self
 
@@ -156,6 +179,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
 
         phoneNumberCell.setSelected(false, animated: true)
+        
         if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty {
             enHueco.appUser.phoneNumber = newNumber
 
@@ -176,7 +200,15 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     }
 }
 
+extension SettingsEmbeddedTableViewController: RealtimeAppUserManagerDelegate {
+    
+    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: RealtimeAppUserManager) {
+        refreshUIData()
+    }
+}
+
 extension SettingsEmbeddedTableViewController: ImportProfileImageViewControllerDelegate {
+    
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
 
         dismissViewControllerAnimated(true, completion: nil)

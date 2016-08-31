@@ -19,10 +19,13 @@ class AddEditEventViewController: UIViewController {
 
     /// The ID of the event to edit
     var eventToEditID: String?
+    
+    /// The event to edit that was fetched using the eventToEditID
+    private(set) var fetchedEventToEdit: Event?
 
     ///Parent schedule view controller
     var scheduleViewController: ScheduleViewController!
-
+    
     // MARK: View Controller
 
     override func viewDidLoad() {
@@ -33,9 +36,23 @@ class AddEditEventViewController: UIViewController {
         cancelButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
         saveButton.titleLabel?.textColor = EHInterfaceColor.defaultEmbededTopBarButtonsColor
 
-        if eventToEdit != nil {
+        if let eventToEditID = eventToEditID {
             titleLabel.text = "EditEvent".localizedUsingGeneralFile()
             embeddedTableViewController.weekDaysCell.hidden = true
+            
+            EHProgressHUD.showSpinnerInView(view)
+            EventsAndSchedulesManager.sharedManager.fetchEvent(id: eventToEditID) { (event, error) in
+                EHProgressHUD.dismissSpinnerForView(self.view)
+                
+                guard error == nil else {
+                    //TODO: Show error
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                
+                self.eventToEdit = event
+                self.embeddedTableViewController.refreshUIData()
+            }
+            
         } else {
             titleLabel.text = "AddEvent".localizedUsingGeneralFile()
         }
@@ -47,7 +64,7 @@ class AddEditEventViewController: UIViewController {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touchesBegan, withEvent: event)
+        super.touchesBegan(touches, withEvent: event)
         
         view.endEditing(true)
         embeddedTableViewController.view.endEditing(true)
@@ -79,12 +96,10 @@ class AddEditEventViewController: UIViewController {
             localStartHourComponents.weekday = index + 1
             localEndHourComponents.weekday = index + 1
 
-            let globalStartHourDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
-            let globalEndHourDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
+            let globalStartTimeDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
+            let globalEndTimeDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
 
             let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
-
-            let daySchedule = enHueco.appUser.schedule.weekDays[index + 1]
 
             let type: EventType = (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? .FreeTime : .Class)
 
@@ -94,16 +109,30 @@ class AddEditEventViewController: UIViewController {
                 name = nil
             }
 
-            let newEvent = BaseEvent(type: type, name: name, startDate: globalStartHourDateInWeekday, endHour: globalEndHourDateInWeekday, location: embeddedTableViewController.locationTextField.text)
+            let newEvent = BaseEvent(type: type, name: name, location: embeddedTableViewController.locationTextField.text, startDate: globalStartTimeDateInWeekday, endDate: globalEndTimeDateInWeekday, repeating: true)
             eventsToAdd.append(newEvent)
         }
-
-        if let eventToEdit = eventToEdit {
-            scheduleViewController.editEventWithUndoCapability(eventToEdit, withValuesOfEvent: eventsToAdd.first!) { error in
-                self.dismissViewControllerAnimated(true, completion: nil)
+        
+        if let eventToEdit = fetchedEventToEdit {
+            
+            guard let dummyEvent = eventsToAdd.first else {
+                return
             }
             
+            let intent = EventUpdateIntent(id: eventToEdit.id)
+            intent.type = dummyEvent.type
+            intent.name = dummyEvent.name
+            intent.location = dummyEvent.location
+            intent.startDate = dummyEvent.startDate
+            intent.endDate = dummyEvent.endDate
+            intent.location = dummyEvent.location
+            
+            scheduleViewController.editEventWithUndoCapability(eventToEdit, withIntent: intent, completionHandler: { (error) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+            
         } else {
+            
             scheduleViewController.addEventsWithUndoCapability(eventsToAdd) { error in
                 
                 guard error != EventsAndSchedulesManagerError.EventsOverlap else {
@@ -119,7 +148,6 @@ class AddEditEventViewController: UIViewController {
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            
         }
     }
 
@@ -132,7 +160,7 @@ class AddEditEventViewController: UIViewController {
 
     func deleteEventToEdit() {
 
-        if let eventToEdit = eventToEdit {
+        if let eventToEdit = fetchedEventToEdit {
             scheduleViewController.deleteEventsWithUndoCapability([eventToEdit]) { error in
                 self.dismissViewControllerAnimated(true, completion: nil)
             }

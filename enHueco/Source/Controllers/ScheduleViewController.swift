@@ -96,7 +96,6 @@ class ScheduleViewController: UIViewController {
     ///Edits the event, giving the ability to undo and redo the actions.
     func editEventWithUndoCapability(event: Event, withIntent intent: EventUpdateIntent, completionHandler: BasicCompletionHandler?) {
 
-        // TODO: Add info to the old intent in order to allow for undo
         let oldEventIntent = EventUpdateIntent(valuesOfEvent: event)
 
         EHProgressHUD.showSpinnerInView(view)

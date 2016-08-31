@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class {
-    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User)
+    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friendID: String)
 }
 
 class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
@@ -67,8 +67,7 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
         guard searchText != "" else { return }
         
         filteredFriendsAndSchedules = filteredFriendsAndSchedules.filter {
-            
-            return $0.friend.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil || $0.friend.username.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
+            return $0.friend.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
         }
     }
 }
@@ -77,15 +76,14 @@ extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDataS
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return filteredFriends.count
+        return filteredFriendsAndSchedules.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let friend = filteredFriends[indexPath.row]
+        let friend = filteredFriendsAndSchedules[indexPath.row].friend
         
         let cell = resultsTableView.dequeueReusableCellWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddResultsCell") as! CommonFreeTimePeriodsSearchFriendToAddResultsCell
-        
         cell.friendNameLabel.text = friend.name
         
         return cell
@@ -96,8 +94,8 @@ extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDeleg
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let friend = filteredFriends[indexPath.row]
-        delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend)
+        let friend = filteredFriendsAndSchedules[indexPath.row].friend
+        delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend.id)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
