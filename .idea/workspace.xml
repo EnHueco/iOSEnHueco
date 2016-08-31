@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/PrivacySettings.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="118" selection-start-line="9" selection-start-column="118" selection-end-line="9" selection-end-column="118" />
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
               <folding>
                 <element signature="e#106#123#0" expanded="true" />
               </folding>
@@ -116,10 +117,10 @@
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-420">
-              <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
               <folding>
                 <element signature="e#152#169#0" expanded="true" />
-                <marker date="1472365335000" expanded="true" signature="629:632" ph="/*...*/" />
+                <marker date="1472602379000" expanded="true" signature="629:632" ph="/*...*/" />
               </folding>
             </state>
           </provider>
@@ -615,12 +616,12 @@
       <workItem from="1471820526975" duration="936000" />
       <workItem from="1472133852907" duration="1896000" />
       <workItem from="1472260542004" duration="972000" />
-      <workItem from="1472341492048" duration="6354000" />
+      <workItem from="1472341492048" duration="6913000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22673000" />
+    <option name="totallyTimeSpent" value="23232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -885,7 +886,7 @@
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="118" selection-start-line="9" selection-start-column="118" selection-end-line="9" selection-end-column="118" />
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
           <folding>
             <element signature="e#106#123#0" expanded="true" />
           </folding>
@@ -895,10 +896,10 @@
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-420">
-          <caret line="1" column="5" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
           <folding>
             <element signature="e#152#169#0" expanded="true" />
-            <marker date="1472365335000" expanded="true" signature="629:632" ph="/*...*/" />
+            <marker date="1472602379000" expanded="true" signature="629:632" ph="/*...*/" />
           </folding>
         </state>
       </provider>

@@ -11,26 +11,26 @@ protocol RealtimePrivacyManagerDelegate: class {
 }
 
 /// Handles privacy settings
-class RealtimePrivacyManager : FirebaseSynchronizable {
+class RealtimePrivacyManager: FirebaseSynchronizable {
 
-    weak var delegate : RealtimePrivacyManagerDelegate?
-    private let appUserID: String
     private(set) var settings : PrivacySettings?
 
-    init?(delegate: RealtimePrivacyManagerDelegate) {
-
-        guard let user = AccountManager.sharedManager.userID else {
-            assertionFailure()
-            return nil
-        }
-
+    /// Delegate
+    weak var delegate: RealtimePrivacyManager?
+    
+    /** Creates an instance of the manager that listens to database changes as soon as it is created.
+     You must set the delegate property if you want to be notified when any data has changed.
+     */
+    init?(delegate: RealtimePrivacyManager?) {
+        
+        super.init?()
         self.delegate = delegate
-        appUserID = appUserID
-        createFirebaseSubscriptions()
     }
-
-    private func createFirebaseSubscriptions() {
-        FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID).observeEventType(.Value) { [unowned self] (snapshot) in
+    
+    override func _createFirebaseSubscriptions() {
+        
+        let reference = FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID)
+        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
 
             guard let userJSON = snapshot.value as? [String : AnyObject],
             let settings = try? PrivacySettings(js: snapshot) else {
@@ -43,9 +43,7 @@ class RealtimePrivacyManager : FirebaseSynchronizable {
                 self.delegate?.realtimePrivacyManagerDidReceivePrivacyUpdates(self)
             }
         }
-    }
-
-    deinit {
-        removeFirebaseSubscriptions()
+        
+        _trackHandle(handle, forReference: reference)
     }
 }

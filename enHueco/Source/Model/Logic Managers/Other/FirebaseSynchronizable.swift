@@ -9,22 +9,39 @@
 import Foundation
 import Firebase
 
-protocol FirebaseSynchronizable: class {
+class FirebaseSynchronizable {
     
-    init?()
-    
-    var appUserID: String { get }
+    let appUserID: String
     
     /// All references and handles for the references
-    var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] { get set }
+    private var databaseRefsAndHandles = [FIRDatabaseReference : [FIRDatabaseHandle]]()
     
-    func createFirebaseSubscriptions()
-    
-    func trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference)
-}
-
-extension FirebaseSynchronizable {
+    /** Creates an instance of the manager that listens to database changes as soon as it is created.
+     You must set the delegate property if you want to be notified when any data has changed.
+     */
+    init?() {
+        guard let userID = AccountManager.sharedManager.userID else {
+            assertionFailure()
+            return nil
+        }
         
+        appUserID = userID
+        _createFirebaseSubscriptions()
+    }
+    
+    func _createFirebaseSubscriptions() {
+        fatalError("Not yet implemented")
+    }
+    
+    func _trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference) {
+        
+        if databaseRefsAndHandles[reference] == nil {
+            databaseRefsAndHandles[reference] = []
+        }
+        
+        databaseRefsAndHandles[reference]?.append(handle)
+    }
+    
     private func removeFirebaseSubscriptions() {
         
         for (reference, handles) in databaseRefsAndHandles {
@@ -36,12 +53,7 @@ extension FirebaseSynchronizable {
         databaseRefsAndHandles = [:]
     }
     
-    private func addHandle(handle: FIRDatabaseHandle, toReference reference: FIRDatabaseReference) {
-        
-        if databaseRefsAndHandles[reference] == nil {
-            databaseRefsAndHandles[reference] = []
-        }
-        
-        databaseRefsAndHandles[reference]?.append(handle)
+    deinit {
+        removeFirebaseSubscriptions()
     }
 }

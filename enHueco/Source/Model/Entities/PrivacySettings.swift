@@ -25,9 +25,9 @@ class PrivacySettings: MappableObject {
 
     //var name: String { return "\(firstNames) \(lastNames)" }
 
-    init(map: Map) throws {
-        userID = try map.extract(JSONKeys.userID)
-        showEventsNames = try map.extract(JSONKeys.showEventsNames)
-        showEventsLocations = try map.extract(JSONKeys.showEventsLocations)
+    required init(map: Map) throws {
+        userID = try map.extract(.Key(JSONKeys.userID))
+        showEventsNames = try map.extract(.Key(JSONKeys.showEventsNames))
+        showEventsLocations = try map.extract(.Key(JSONKeys.showEventsLocations))
     }
 }

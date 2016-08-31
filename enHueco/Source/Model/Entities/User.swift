@@ -42,6 +42,8 @@ class User: MappableObject {
         imageThumbnail = try map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
         phoneNumber = try map.extract(.Key(JSONKeys.phoneNumber))
     }
+    
+    func sequence(map: Map) throws {}
 
     /*
     var outgoingFriendRequests = [User]()

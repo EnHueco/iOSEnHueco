@@ -19,7 +19,7 @@ extension FirebaseLogicManager {
         
         guard let user = FIRAuth.auth()?.currentUser else {
             assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.NotLoggedIn) }
+            dispatch_async(dispatch_get_main_queue()){ errorHandler(error: GenericError.NotLoggedIn) }
             return nil
         }
         

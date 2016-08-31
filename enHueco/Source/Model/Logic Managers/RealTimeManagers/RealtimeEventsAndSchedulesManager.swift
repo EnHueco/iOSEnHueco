@@ -18,32 +18,23 @@ class RealtimeEventsAndSchedulesManager: FirebaseSynchronizable {
 
     /// The app user's schedule
     private(set) var schedule: Schedule?
-
-    private let appUserID: String
-
-    /// All references and handles for the references
-    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
-
+    
+    /// Delegate
     weak var delegate: RealtimeEventsAndSchedulesManagerDelegate?
-
+    
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
     init?(delegate: RealtimeEventsAndSchedulesManagerDelegate?) {
-        guard let userID = AccountManager.sharedManager.userID else {
-            assertionFailure()
-            return nil
-        }
-
+        
+        super.init?()
         self.delegate = delegate
-        appUserID = userID
-        createFirebaseSubscriptions()
     }
 
-    private func createFirebaseSubscriptions() {
+    override func _createFirebaseSubscriptions() {
 
         let reference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUserID)
-        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
+        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
 
             guard let scheduleJSON = snapshot.value as? [[String : AnyObject]], let schedule = try? Schedule(js: schedule) else {
                 return
@@ -53,11 +44,7 @@ class RealtimeEventsAndSchedulesManager: FirebaseSynchronizable {
             self.delegate.realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(self)
         }
 
-        trackHandle(handle, forReference: reference)
-    }
-
-    deinit {
-        removeFireBaseSubscriptions()
+        _trackHandle(handle, forReference: reference)
     }
 }
 

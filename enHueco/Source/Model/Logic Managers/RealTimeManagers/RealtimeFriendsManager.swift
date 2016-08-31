@@ -13,32 +13,22 @@ protocol RealtimeFriendsManagerDelegate: class {
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
 class RealtimeFriendsManager: FirebaseSynchronizable {
 
-    private let appUserID: String
-
-    /// All references and handles for the references
-    private var databaseRefsAndHandles: [FIRDatabaseReference : [FIRDatabaseHandle]] = [:]
-
-    /// Delegate
-    weak var delegate: RealtimeFriendsManagerDelegate?
-
     /// Friend managers with the friend IDs as the key
     private var friendManagers = [String : RealtimeFriendManager]()
 
+    /// Delegate
+    weak var delegate: RealtimeFriendsManagerDelegate?
+    
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
     init?(delegate: RealtimeFriendsManagerDelegate?) {
-        guard let userID = AccountManager.sharedManager.userID else {
-            assertionFailure()
-            return nil
-        }
-
+        
+        super.init?()
         self.delegate = delegate
-        appUserID = userID
-        createFirebaseSubscriptions()
     }
-
-    private func createFirebaseSubscriptions() {
+    
+    override func _createFirebaseSubscriptions() {
 
         let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(firebaseUser.uid)
 
@@ -49,7 +39,7 @@ class RealtimeFriendsManager: FirebaseSynchronizable {
             friendManagers[friendID] = RealtimeFriendManager(friendID: friendID, delegate: self)
         }
 
-        trackHandle(friendAddedHandle, forReference: friendsReference)
+        _trackHandle(friendAddedHandle, forReference: friendsReference)
 
         var friendRemovedHandle: FIRDatabaseHandle!
 
@@ -65,7 +55,7 @@ class RealtimeFriendsManager: FirebaseSynchronizable {
             }
         }
 
-        trackHandle(friendsHandle, forReference: friendsReference)
+        _trackHandle(friendsHandle, forReference: friendsReference)
     }
 
     subscript(friendID: String) -> (friend: User?, schedule: Schedule?) {
@@ -80,10 +70,6 @@ class RealtimeFriendsManager: FirebaseSynchronizable {
 
         // #NoPanic We'll see how this works, if it's too costly we'll keep local array copies to speed up the process
         return friendManagers.values.map { ($0.friend, $0.schedule) }
-    }
-
-    deinit {
-        removeFireBaseSubscriptions()
     }
 }
 
