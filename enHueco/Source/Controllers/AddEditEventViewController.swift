@@ -49,7 +49,7 @@ class AddEditEventViewController: UIViewController {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
                 
-                self.eventToEdit = event
+                self.fetchedEventToEdit = event
                 self.embeddedTableViewController.refreshUIData()
             }
             
@@ -119,7 +119,7 @@ class AddEditEventViewController: UIViewController {
                 return
             }
             
-            let intent = EventUpdateIntent(id: eventToEdit.id)
+            var intent = EventUpdateIntent(id: eventToEdit.id)
             intent.type = dummyEvent.type
             intent.name = dummyEvent.name
             intent.location = dummyEvent.location

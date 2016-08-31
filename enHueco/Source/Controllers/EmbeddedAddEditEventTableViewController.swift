@@ -32,6 +32,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     let datePickerHeight: CGFloat = 167
 
     var datePickerViewCellToDisplay: UITableViewCell?
+    
+    private let weekdayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map { $0.localizedUsingGeneralFile() }
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -49,7 +51,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         startHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.startHourChanged(_:)), forControlEvents: .ValueChanged)
         endHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.endHourChanged(_:)), forControlEvents: .ValueChanged)
 
-        if eventToEditID == nil {
+        if addEditEventParentViewController.eventToEditID == nil {
             deleteButton.hidden = true
             deleteButtonHeightConstraint.constant = 0
             
@@ -90,8 +92,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         
         let currentDate = NSDate()
         
-        startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleDateToDate(currentDate), animated: true)
-        endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleDateToDate(currentDate), animated: true)
+        startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleWeekToDate(currentDate), animated: true)
+        endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleWeekToDate(currentDate), animated: true)
     }
 
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -173,8 +175,8 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
     }
 
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        return enHueco.appUser.schedule.weekDays[row + 2].weekDayName
+        
+        return weekdayNames[row + 2]
     }
 
     // MARK Buttons
@@ -202,7 +204,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         }))
             
         alertController.addAction(UIAlertAction(title: "Si", style: .Cancel, handler: { (action) in
-            addEditEventParentViewController.deleteEventToEdit()
+            self.addEditEventParentViewController.deleteEventToEdit()
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))
         
