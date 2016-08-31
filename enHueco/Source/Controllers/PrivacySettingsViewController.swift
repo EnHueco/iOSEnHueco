@@ -33,8 +33,11 @@ class PrivacySettingsViewController: UITableViewController {
         
         //shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
 
+        //TODO: Uncomment and update !!
+        /*
         shareEventNamesSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventNames)
         shareEventLocationsSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventLocations)
+         */
     }
 
     @IBAction func shareLocationWithBestFriendsToggleChanged(sender: UISwitch) {
@@ -49,7 +52,8 @@ class PrivacySettingsViewController: UITableViewController {
         tableView.beginUpdates()
         tableView.endUpdates()
 
-        _togglePrivacySetting(.ShowEventNames, on: sender.on, senderSwitch: sender)
+        //TODO: Uncomment and update !!
+        //_togglePrivacySetting(.ShowEventNames, on: sender.on, senderSwitch: sender)
     }
 
     @IBAction func shareEventLocationsToggleChanged(sender: UISwitch) {
@@ -57,9 +61,12 @@ class PrivacySettingsViewController: UITableViewController {
         tableView.beginUpdates()
         tableView.endUpdates()
 
-        _togglePrivacySetting(.ShowEventLocations, on: sender.on, senderSwitch: sender)
+        //TODO: Uncomment and update !!
+        //_togglePrivacySetting(.ShowEventLocations, on: sender.on, senderSwitch: sender)
     }
 
+    //TODO: Uncomment and update !!
+    /*
     /**
      Toggles a privacy setting on or off.
      Must only be called after a UISwitch triggered the event.
@@ -87,7 +94,8 @@ class PrivacySettingsViewController: UITableViewController {
             PrivacyManager.sharedManager.turnOffSetting(setting, withCompletionHandler: completionHandler)
         }
     }
-
+    */
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
