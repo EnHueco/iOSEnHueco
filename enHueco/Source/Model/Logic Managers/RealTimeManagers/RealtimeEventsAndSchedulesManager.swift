@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeEventsAndSchedulesManagerDelegate: class {
-    func realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: RealtimeEventsAndSchedulesManagerDelegate)
+    func realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: RealtimeEventsAndSchedulesManager)
 }
 
 /**
@@ -27,7 +27,7 @@ class RealtimeEventsAndSchedulesManager: FirebaseSynchronizable {
      */
     init?(delegate: RealtimeEventsAndSchedulesManagerDelegate?) {
         
-        super.init?()
+        super.init()
         self.delegate = delegate
     }
 
@@ -36,7 +36,7 @@ class RealtimeEventsAndSchedulesManager: FirebaseSynchronizable {
         let reference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUserID)
         let handle = reference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
 
-            guard let scheduleJSON = snapshot.value as? [[String : AnyObject]], let schedule = try? Schedule(js: schedule) else {
+            guard let scheduleJSON = snapshot.value as? [[String : AnyObject]], let schedule = try? Schedule(js: scheduleJSON) else {
                 return
             }
 
@@ -67,13 +67,13 @@ extension RealtimeEventsAndSchedulesManager {
         var commonFreeTimePeriods = [Event]()
         
         guard schedules.count >= 2 else {
-            return commonFreeTimePeriodsSchedule
+            return Schedule(events: [])
         }
         
         for event in (schedule.events.filter { $0.type == .FreeTime }) {
             
-            let startHourInCurrentDate = event.startHourInNearestPossibleWeekToDate(currentDate)
-            let endHourInCurrentDate = event.endHourInNearestPossibleWeekToDate(currentDate)
+            let startHourInCurrentDate = event.startDateInNearestPossibleWeekToDate(currentDate)
+            let endHourInCurrentDate = event.endDateInNearestPossibleWeekToDate(currentDate)
             
             for friendSchedule in schedules {
                 for friendEvent in (friendSchedule.events.filter { $0.type == .FreeTime }) where friendEvent.overlapsWith(event) {

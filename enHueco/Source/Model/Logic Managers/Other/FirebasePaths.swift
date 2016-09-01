@@ -11,6 +11,7 @@ struct FirebasePaths {
 
     static let friends = "friends"
     static let users = "users"
+    static let institutions = "institutions"
     static let schedules = "schedules"
     static let version = "version"
     static let privacy = "privacy"

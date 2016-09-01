@@ -7,10 +7,21 @@ users : {
     user_id: {
         first_names : (String)
         last_names : (String)
-        institution : (String:Type)
+        institutionID : (String:Type)
         image : (String-URL)
         image_thumbnail : (String-URL)
         phone_number : (String)
+    }
+}
+
+institutions {
+    institutionID {
+        name: String
+        users: {
+            id1,
+            id2,
+            ...
+        }
     }
 }
 

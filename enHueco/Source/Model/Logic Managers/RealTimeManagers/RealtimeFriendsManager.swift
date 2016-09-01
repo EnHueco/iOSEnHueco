@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeFriendsManagerDelegate: class {
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate)
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager)
 }
 
 /// Handles operations related to friends information fetching, and adding and deleting friends (including friend requests and searching)
@@ -15,7 +15,7 @@ class RealtimeFriendsManager: FirebaseSynchronizable {
 
     /// Friend managers with the friend IDs as the key
     private var friendManagers = [String : RealtimeFriendManager]()
-
+    
     /// Delegate
     weak var delegate: RealtimeFriendsManagerDelegate?
     
@@ -24,44 +24,44 @@ class RealtimeFriendsManager: FirebaseSynchronizable {
      */
     init?(delegate: RealtimeFriendsManagerDelegate?) {
         
-        super.init?()
+        super.init()
         self.delegate = delegate
     }
     
     override func _createFirebaseSubscriptions() {
 
-        let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(firebaseUser.uid)
-
+        let friendsReference = FIRDatabase.database().reference().child(FirebasePaths.friends).child(appUserID)
+        
         // Observe friend addition
-        let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot) in
-
+        let friendAddedHandle = friendsReference.observeEventType(.ChildAdded) { [unowned self] (snapshot: FIRDataSnapshot) in
+            
             let friendID = snapshot.key
-            friendManagers[friendID] = RealtimeFriendManager(friendID: friendID, delegate: self)
+            self.friendManagers[friendID] = RealtimeFriendManager(friendID: friendID, delegate: self)
         }
-
+        
         _trackHandle(friendAddedHandle, forReference: friendsReference)
-
+        
         var friendRemovedHandle: FIRDatabaseHandle!
-
+        
         // Observe friend removal
-        friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot) in
-
+        friendRemovedHandle = friendsReference.observeEventType(.ChildRemoved) { [unowned self] (snapshot: FIRDataSnapshot) in
+            
             let friendID = snapshot.key
-            friendManagers[friendID] = nil
-
+            self.friendManagers[friendID] = nil
+            
             /// Thread safety
             dispatch_async(dispatch_get_main_queue()){
-                self.delegate?.friendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+                self.delegate?.realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
             }
         }
-
-        _trackHandle(friendsHandle, forReference: friendsReference)
+        
+        _trackHandle(friendRemovedHandle, forReference: friendsReference)
     }
-
+    
     subscript(friendID: String) -> (friend: User?, schedule: Schedule?) {
 
         get {
-            guard let friendManager = friendManagers[friendID] else { return nil }
+            guard let friendManager = friendManagers[friendID] else { return (nil, nil) }
             return (friendManager.friend, friendManager.schedule)
         }
     }
@@ -81,10 +81,10 @@ extension RealtimeFriendsManager {
      */
     func currentlyAvailableFriends() -> [(friend:User, freeTime:Event)] {
 
-        return friends.values.flatMap {
+        return friendAndSchedules().flatMap {
 
-            guard let freeTime = $0.currentFreeTimePeriod() else { return nil }
-            return (friend, freeTime)
+            guard let freeTime = $0.schedule?.currentFreeTimePeriod() else { return nil }
+            return ($0.friend, freeTime)
         }
     }
 
@@ -96,20 +96,20 @@ extension RealtimeFriendsManager {
 
         let currentDate = NSDate()
 
-        return friends.values.flatMap {
+        return friendAndSchedules().flatMap {
 
-            guard let freeTime = $0.nextFreeTimePeriod() where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
+            guard let freeTime = $0.schedule?.nextFreeTimePeriod() where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
                 return nil
             }
 
-            return (friend, freeTime)
+            return ($0.friend, freeTime)
         }
     }
 }
 
 extension RealtimeFriendsManager: RealtimeFriendManagerDelegate {
 
-    func realTimeFriendUpdatesManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
         delegate?.realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(self)
     }
 }

@@ -23,14 +23,14 @@ class RealtimePrivacyManager: FirebaseSynchronizable {
      */
     init?(delegate: RealtimePrivacyManager?) {
         
-        super.init?()
+        super.init()
         self.delegate = delegate
     }
     
     override func _createFirebaseSubscriptions() {
         
         let reference = FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID)
-        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot) in
+        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
 
             guard let userJSON = snapshot.value as? [String : AnyObject],
             let settings = try? PrivacySettings(js: snapshot) else {

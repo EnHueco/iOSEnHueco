@@ -97,6 +97,7 @@
 		F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */; };
 		F1B8D9F31D6FF0640019420E /* FirebaseLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */; };
 		F1B8DA0D1D72A7FD0019420E /* GenomeTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8DA0C1D72A7FD0019420E /* GenomeTransformers.swift */; };
+		F1B8DA0F1D77A7720019420E /* RealtimeFriendRequestsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B8DA0E1D77A7720019420E /* RealtimeFriendRequestsManager.swift */; };
 		F1B9BCB41D5EC81C00153850 /* PrivacySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */; };
 		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
@@ -264,6 +265,7 @@
 		F1B8AD641BCADD9600BB879B /* FriendsNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsNavigationViewController.swift; sourceTree = "<group>"; };
 		F1B8D9F21D6FF0640019420E /* FirebaseLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseLogicManager.swift; sourceTree = "<group>"; };
 		F1B8DA0C1D72A7FD0019420E /* GenomeTransformers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenomeTransformers.swift; sourceTree = "<group>"; };
+		F1B8DA0E1D77A7720019420E /* RealtimeFriendRequestsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeFriendRequestsManager.swift; sourceTree = "<group>"; };
 		F1B9BCB31D5EC81C00153850 /* PrivacySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacySettings.swift; sourceTree = "<group>"; };
 		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -340,6 +342,7 @@
 				3EF816654A6E5E1DB858BD58 /* RealtimeEventsAndSchedulesManager.swift */,
 				3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */,
 				3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */,
+				F1B8DA0E1D77A7720019420E /* RealtimeFriendRequestsManager.swift */,
 				3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */,
 			);
 			path = RealTimeManagers;
@@ -1087,6 +1090,7 @@
 				F1FAFFA31B9FE28600E8CCDD /* FriendDetailViewController.swift in Sources */,
 				F16C613F1BB30A0100703782 /* UIView+Shadow.m in Sources */,
 				F1B8AD651BCADD9600BB879B /* FriendsNavigationViewController.swift in Sources */,
+				F1B8DA0F1D77A7720019420E /* RealtimeFriendRequestsManager.swift in Sources */,
 				F1F54B341B9D03340087C30E /* ExtensionsAndUtilities.swift in Sources */,
 				F17AD9AD1C0FEA95001FE56A /* ChooseFriendsPrivacySettingsViewController.swift in Sources */,
 				F1229C451A7495A200C4FDE2 /* EnHuecoNowCollectionViewCell.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 protocol RealtimeFriendManagerDelegate: class {
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManagerDelegate)
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager)
 }
 
 /// Handles user and schedule real-time fetching for a given friend
@@ -27,18 +27,21 @@ class RealtimeFriendManager: FirebaseSynchronizable {
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
-    init?(delegate: RealtimeFriendManagerDelegate?) {
+    init?(friendID: String, delegate: RealtimeFriendManagerDelegate?) {
         
-        super.init?()
+        super.init()
+        self.friendID = friendID
         self.delegate = delegate
     }
     
     override func _createFirebaseSubscriptions() {
         
-        let friendReference = database.reference().child(FirebasePaths.users).child(friendID)
-        let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (friendSnapshot) in
+        let firebaseReference = FIRDatabase.database().reference()
+        
+        let friendReference = firebaseReference.child(FirebasePaths.users).child(friendID)
+        let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
             
-            guard let friendJSON = scheduleSnapshot.value as? [String : AnyObject],
+            guard let friendJSON = snapshot.value as? [String : AnyObject],
                 let friend = try? User(js: friendJSON) else {
                     
                     assertionFailure()
@@ -48,14 +51,14 @@ class RealtimeFriendManager: FirebaseSynchronizable {
             /// Thread safety, dictionaries are structs and therefore copied.
             dispatch_async(dispatch_get_main_queue()){
                 self.friend = friend
-                notifyChangesIfNeeded()
+                self.notifyChangesIfNeeded()
             }
         }
         
-        _trackHandle(friendHandle, forReference: friendsReference)
+        _trackHandle(friendHandle, forReference: friendReference)
         
-        let scheduleReference = database.reference().child(FirebasePaths.schedules).child(friendID)
-        let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot) in
+        let scheduleReference = firebaseReference.child(FirebasePaths.schedules).child(friendID)
+        let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
             
             guard let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]],
                 let schedule = try? Schedule(js: scheduleJSON) else {
@@ -74,12 +77,12 @@ class RealtimeFriendManager: FirebaseSynchronizable {
         _trackHandle(scheduleHandle, forReference: scheduleReference)
     }
     
-    private func notifyChangesIfNeededForFriend(friendID id: String) {
+    private func notifyChangesIfNeeded() {
         
         guard friend != nil && schedule != nil else { return }
         
         dispatch_async(dispatch_get_main_queue()){
-            delegate?.realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+            self.delegate?.realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(self)
         }
     }
 }
