@@ -24,7 +24,7 @@ class RealtimeFriendRequestsManager: FirebaseSynchronizable {
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
-    init?(delegate: RealtimeFriendRequestsManager?) {
+    init?(delegate: RealtimeFriendRequestsManagerDelegate?) {
         
         super.init()
         self.delegate = delegate

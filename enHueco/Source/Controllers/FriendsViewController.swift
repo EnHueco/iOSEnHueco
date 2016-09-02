@@ -21,6 +21,8 @@ class FriendsViewController: UIViewController {
 
     /// The friends logic manager (if currently fetching updates)
     private var realtimeFriendsManager: RealtimeFriendsManager?
+    
+    private var realtimeFriendRequestsManager: RealtimeFriendRequestsManager?
 
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)
     private(set) var friendRequestsNotificationHub: RKNotificationHub!
@@ -104,14 +106,9 @@ class FriendsViewController: UIViewController {
             }
         })
 
-        if enHueco.appUser.incomingFriendRequests.count > 10 {
-            friendRequestsNotificationHub.hideCount()
-        } else {
-            friendRequestsNotificationHub.showCount()
-        }
-
         // Begin real time updates
         realtimeFriendsManager = RealtimeFriendsManager(delegate: self)
+        realtimeFriendRequestsManager = RealtimeFriendRequestsManager(delegate: self)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -122,8 +119,21 @@ class FriendsViewController: UIViewController {
         if let selectedIndex = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
         }
+    }
+    
+    func refreshFriendRequestsHub() {
+        
+        guard let requestsCount = realtimeFriendRequestsManager?.receivedFriendRequests.count else {
+            return
+        }
+        
+        if requestsCount > 10 {
+            friendRequestsNotificationHub.hideCount()
+        } else {
+            friendRequestsNotificationHub.showCount()
+        }
 
-        friendRequestsNotificationHub.count = Int32(enHueco.appUser.incomingFriendRequests.count)
+        friendRequestsNotificationHub.count = Int32(requestsCount)
         friendRequestsNotificationHub.pop()
     }
     
@@ -132,6 +142,7 @@ class FriendsViewController: UIViewController {
         
         // Stop realtime updates
         realtimeFriendsManager = nil
+        realtimeFriendRequestsManager = nil
     }
 
     func friendRequestsButtonPressed(sender: UIButton) {
@@ -183,6 +194,13 @@ extension FriendsViewController: RealtimeFriendsManagerDelegate {
     func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
         reloadFriendsAndTableView()
     }    
+}
+
+extension FriendsViewController: RealtimeFriendRequestsManagerDelegate {
+    
+    func realtimeFriendRequestsManagerDidReceiveFriendRequestUpdates(manager: RealtimeFriendRequestsManager) {
+        refreshFriendRequestsHub()
+    }
 }
 
 extension FriendsViewController: UITableViewDataSource {
@@ -266,8 +284,8 @@ extension FriendsViewController: UITableViewDataSource {
 }
 
 extension FriendsViewController: UITableViewDelegate {
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-
         return 70
     }
 
@@ -284,13 +302,12 @@ extension FriendsViewController: UITableViewDelegate {
 }
 
 extension FriendsViewController: UISearchBarDelegate {
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-
         tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-
         tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
