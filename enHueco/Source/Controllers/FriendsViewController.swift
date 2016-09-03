@@ -191,9 +191,9 @@ class FriendsViewController: UIViewController {
 
 extension FriendsViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
         reloadFriendsAndTableView()
-    }    
+    }
 }
 
 extension FriendsViewController: RealtimeFriendRequestsManagerDelegate {
@@ -235,7 +235,7 @@ extension FriendsViewController: UITableViewDataSource {
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
 
             if let nextEvent = schedule.nextEvent(), nextEventName = nextEvent.name
-            where nextEvent.type == .Class && nextEvent.startHourInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60 * 10000 {
+            where nextEvent.type == .Class && nextEvent.startDateInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60 * 10000 {
                 cell.eventNameOrLocationLabel.text = nextEventName
 
                 if let nextEventLocation = nextEvent.location {

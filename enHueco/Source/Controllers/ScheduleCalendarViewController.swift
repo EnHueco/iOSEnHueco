@@ -96,7 +96,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
 extension ScheduleCalendarViewController: RealtimeFriendManagerDelegate {
     
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManagerDelegate) {
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
         dayView.reloadData()
     }
 }

@@ -43,10 +43,9 @@ class Schedule: MappableObject {
     func eventsInDayOfDate(date: NSDate) -> [Event] {
         
         let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let localWeekDayNumber = localCalendar.component(.Weekday, fromDate: date)
         
         return events.filter {
-            return localCalendar.isDate($0.startDateInNearestPossibleDateToDate(date), inSameDayAsDate: date)
+            return localCalendar.isDate($0.startDateInNearestPossibleWeekToDate(date), inSameDayAsDate: date)
         }
     }
 }

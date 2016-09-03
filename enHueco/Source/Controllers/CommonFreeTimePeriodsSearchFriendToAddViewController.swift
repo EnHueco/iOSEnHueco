@@ -102,8 +102,8 @@ extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDeleg
 
 extension CommonFreeTimePeriodsSearchFriendToAddViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
         reloadFriendsData()
         resultsTableView.reloadData()
-    }
+    }    
 }

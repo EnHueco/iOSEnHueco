@@ -124,7 +124,7 @@ extension SearchSelectFriendsViewController: UITableViewDelegate {
 
 extension SearchSelectFriendsViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManagerDelegate) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
         reloadFriendsData()
         tableView.reloadData()
     }

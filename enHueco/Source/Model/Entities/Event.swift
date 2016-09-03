@@ -24,23 +24,19 @@ class Event: BaseEvent {
     let id: String
 
     required init(map: Map) throws {
-        userID = try map.extract(JSONKeys.eventID)
-        eventID = try map.extract("id")
+        userID = try map.extract(.Key(JSONKeys.userID))
+        id = try map.extract(.Key(JSONKeys.id))
 
-        super.init(map: Map)
+        super.init(map: map)
     }
 }
 
-/*
-func < (lhs: Event, rhs: Event) -> Bool
-{
+func < (lhs: Event, rhs: Event) -> Bool {
+    
     let currentDate = NSDate()
     return lhs.startHourInNearestPossibleWeekToDate(currentDate) < rhs.startHourInNearestPossibleWeekToDate(currentDate)
 }
 
-func == (lhs: Event, rhs: Event) -> Bool
-{
-    let currentDate = NSDate()
-    return lhs.startHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.startHourInNearestPossibleWeekToDate(currentDate)) && lhs.endHourInNearestPossibleWeekToDate(currentDate).hasSameWeekdayHourAndMinutesThan(rhs.endHourInNearestPossibleWeekToDate(currentDate))
+func == (lhs: Event, rhs: Event) -> Bool {
+    return lhs.id == rhs.id
 }
-*/

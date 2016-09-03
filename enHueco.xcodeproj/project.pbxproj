@@ -102,7 +102,6 @@
 		F1B9BCB81D5ECC9900153850 /* ModelScheme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */; };
 		F1BA03091B570AA200DEF9C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */; };
 		F1BA030B1B570BFC00DEF9C5 /* EnHueco.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */; };
-		F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD98761CAC741200F390E5 /* ServerPoller.swift */; };
 		F1BD987B1CAD8D1A00F390E5 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */; };
 		F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */; };
 		F1DEC10C1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */; };
@@ -270,7 +269,6 @@
 		F1B9BCB71D5ECC9900153850 /* ModelScheme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ModelScheme.txt; sourceTree = "<group>"; };
 		F1BA03081B570AA200DEF9C5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F1BA030A1B570BFC00DEF9C5 /* EnHueco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnHueco.swift; sourceTree = "<group>"; };
-		F1BD98761CAC741200F390E5 /* ServerPoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerPoller.swift; sourceTree = "<group>"; };
 		F1BD987A1CAD8D1A00F390E5 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 		F1DE07C61C067EB7003C2C15 /* EHUserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EHUserDefaultsKeys.swift; sourceTree = "<group>"; };
 		F1DEC10B1BE3D209005F4716 /* EmbeddedAddEditEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedAddEditEventTableViewController.swift; sourceTree = "<group>"; };
@@ -489,7 +487,6 @@
 		F1229C371A7495A200C4FDE2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F1BD98731CAC73D600F390E5 /* Helpers */,
 				F10A47471C37253B0066D4DF /* Login and Setup */,
 				F1B8AD611BCADD6700BB879B /* Navigation and Split View Controllers */,
 				F17AD9B01C10168E001FE56A /* Settings */,
@@ -671,14 +668,6 @@
 				F14DC5111BE448380046CD48 /* FriendsSplitViewController.swift */,
 			);
 			name = "Navigation and Split View Controllers";
-			sourceTree = "<group>";
-		};
-		F1BD98731CAC73D600F390E5 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				F1BD98761CAC741200F390E5 /* ServerPoller.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		F1C8E5351BEBCA35007673BC /* Logic Managers */ = {
@@ -1077,7 +1066,6 @@
 				F1229C461A7495A200C4FDE2 /* FriendsCell.swift in Sources */,
 				F1ED50C21BE9A44A00533557 /* ProximityUpdateManager.swift in Sources */,
 				F16E7D111C135757009A3C30 /* PopOverMenuViewController.swift in Sources */,
-				F1BD98771CAC741200F390E5 /* ServerPoller.swift in Sources */,
 				F165BC4F1BC611A200AA9248 /* FriendRequestsViewController.swift in Sources */,
 				F1229C4F1A7495A200C4FDE2 /* GlobalConstants.swift in Sources */,
 				F1DE07C71C067EB7003C2C15 /* EHUserDefaultsKeys.swift in Sources */,

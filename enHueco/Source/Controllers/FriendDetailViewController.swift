@@ -49,7 +49,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         super.viewWillAppear(animated)
         
         if let friendID = friendID {
-            friendManager = RealtimeFriendManager(friendID: friendID, delegate: self)
+            realtimeFriendManager = RealtimeFriendManager(friendID: friendID, delegate: self)
         }
 
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -107,7 +107,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         activityIndicator.startAnimating()
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.imageImageView.sd_setImageWithURL(self.friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
+            self.imageImageView.sd_setImageWithURL(friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
                 (image, error, cacheType, _) in
                 
                 activityIndicator.removeFromSuperview()

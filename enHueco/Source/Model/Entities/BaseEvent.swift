@@ -111,7 +111,7 @@ class BaseEvent: MappableObject {
     }
     
     /// Returns true iff the event overlaps with another.
-    func eventOverlapsWith(anotherEvent: Event) -> Bool {
+    func overlapsWith(anotherEvent: BaseEvent) -> Bool {
         
         let currentDate = NSDate()
         

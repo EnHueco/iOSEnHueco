@@ -47,6 +47,7 @@ class AddEditEventViewController: UIViewController {
                 guard error == nil else {
                     //TODO: Show error
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    return
                 }
                 
                 self.fetchedEventToEdit = event
@@ -83,8 +84,6 @@ class AddEditEventViewController: UIViewController {
         let globalCalendar = NSCalendar.currentCalendar()
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
-        var canAddEvents = true
-
         var eventsToAdd = [BaseEvent]()
 
         for index in embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes {
@@ -98,8 +97,6 @@ class AddEditEventViewController: UIViewController {
 
             let globalStartTimeDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
             let globalEndTimeDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
-
-            let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
 
             let type: EventType = (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? .FreeTime : .Class)
 
@@ -135,7 +132,7 @@ class AddEditEventViewController: UIViewController {
             
             scheduleViewController.addEventsWithUndoCapability(eventsToAdd) { error in
                 
-                guard error != EventsAndSchedulesManagerError.EventsOverlap else {
+                guard (error as? EventsAndSchedulesManagerError) != EventsAndSchedulesManagerError.EventsOverlap else {
                     
                     let alert = UIAlertController(title: "CouldNotAddEventErrorMessage".localizedUsingGeneralFile(), message: "EventOverlapExplanation".localizedUsingGeneralFile(), preferredStyle: .Alert)
                     
@@ -144,6 +141,7 @@ class AddEditEventViewController: UIViewController {
                     }))
                     
                     self.presentViewController(alert, animated: true, completion: nil)
+                    return
                 }
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -161,9 +159,14 @@ class AddEditEventViewController: UIViewController {
     func deleteEventToEdit() {
 
         if let eventToEdit = fetchedEventToEdit {
-            scheduleViewController.deleteEventsWithUndoCapability([eventToEdit]) { error in
+            scheduleViewController.deleteEventsWithUndoCapability([eventToEdit], IDs: [eventToEdit.id], completionHandler: { (error) in
+                
+                if error != nil {
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                }
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            })
         }
     }
 
