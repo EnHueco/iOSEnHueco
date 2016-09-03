@@ -181,8 +181,8 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         phoneNumberCell.setSelected(false, animated: true)
         
         if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty {
-            enHueco.appUser.phoneNumber = newNumber
-
+//            enHueco.appUser.phoneNumber = newNumber
+/*
             AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) {
                 success, error in
 
@@ -196,8 +196,10 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
                     self.phoneNumberCell.textLabel?.text = enHueco.appUser.phoneNumber
                 }
             }
+*/
         }
     }
+ 
 }
 
 extension SettingsEmbeddedTableViewController: RealtimeAppUserManagerDelegate {

@@ -259,7 +259,7 @@ extension FriendsViewController: UITableViewDataSource {
         cell.friendImageImageView.contentMode = .ScaleAspectFill
         cell.friendImageImageView.image = nil
 
-        cell.friendImageImageView.sd_setImageWithURL(friend.imageThumbnailURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed, .AllowInvalidSSLCertificates]) {
+        cell.friendImageImageView.sd_setImageWithURL(friend.imageThumbnail, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed, .AllowInvalidSSLCertificates]) {
             (image, error, cacheType, _) in
 
             if error == nil {
@@ -318,7 +318,7 @@ extension FriendsViewController: UISearchBarDelegate {
         if !searchText.isBlank() {
             friendsAndSchedules = friendsAndSchedules.filter {
 
-                for word in $0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                for word in $0.0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
                     return true
                 }
 

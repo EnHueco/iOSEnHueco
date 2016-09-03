@@ -70,7 +70,7 @@ class RealtimeFriendManager: FirebaseSynchronizable {
             /// Thread safety
             dispatch_async(dispatch_get_main_queue()){
                 self.schedule = schedule
-                notifyChangesIfNeeded()
+                self.notifyChangesIfNeeded()
             }
         }
         

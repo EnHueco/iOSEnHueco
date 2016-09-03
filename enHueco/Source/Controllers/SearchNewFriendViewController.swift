@@ -98,22 +98,21 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         let window = UIApplication.sharedApplication().delegate!.window!!
 
         EHProgressHUD.showSpinnerInView(window)
-        FriendsManager.sharedManager.sendFriendRequestToUser(friend) {
-            (success, error) -> () in
-
+        FriendsManager.sharedManager.sendFriendRequestTo(id: friend.id, completionHandler: { (error) in
             EHProgressHUD.dismissSpinnerForView(window)
             self.searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-            guard success && error == nil else
+            
+            // TODO: Check this
+            guard error == nil else
             {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
-
+            
             EHNotifications.showNotificationInViewController(self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .Success)
-
+            
             self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-        }
+        })
     }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

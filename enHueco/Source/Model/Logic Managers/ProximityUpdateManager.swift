@@ -44,7 +44,7 @@ class ProximityUpdatesManager: NSObject {
     private override init() {
         super.init()
     }
-
+/*
     ///Temporary
     private func scheduleProximityInformationRefreshTimer() {
 
@@ -68,6 +68,7 @@ class ProximityUpdatesManager: NSObject {
             }
         }
     }
+*/
 
     ///Temporary
     /*func generateGraphFromFile()
@@ -162,6 +163,7 @@ class ProximityUpdatesManager: NSObject {
         return nil
     }
 
+    /*
     func reportCurrentBSSIDAndFetchUpdatesForFriendsLocationsWithSuccessHandler(completionHandler: (status:ProximityUpdatesManagerReportingCompletionStatus) -> ()) {
 
         NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: "lastBackgroundUpdate")
@@ -200,7 +202,7 @@ class ProximityUpdatesManager: NSObject {
             completionHandler(status: .NetworkFailure)
         }
     }
-
+*/
     /// !!! DEACTIVATED FOR NOW, WILL MOST PROBABLY DISSAPEAR IN THE NEAR FUTURE
     func updateBackgroundFetchInterval() {
 

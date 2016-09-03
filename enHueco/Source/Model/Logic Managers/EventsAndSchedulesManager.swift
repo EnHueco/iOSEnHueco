@@ -159,12 +159,14 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
 // TODO: Convert to Firebase
 extension EventsAndSchedulesManager {
 
-    /*
+    
     /**
      Imports an schedule of classes from a device's calendar.
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
      */
+    
     class func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses: Bool, completionHandler: BasicCompletionHandler) {
+        /*
 
         let today = NSDate()
         let eventStore = EKEventStore()
@@ -227,6 +229,6 @@ extension EventsAndSchedulesManager {
         } catch {
             completionHandler(success: false, error: error)
         }
+ */
     }
-    */
 }

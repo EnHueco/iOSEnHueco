@@ -74,7 +74,7 @@ extension FriendRequestsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let realtimeFriendRequestsManager = realtimeFriendRequestsManager else { return }
+        guard let realtimeFriendRequestsManager = realtimeFriendRequestsManager else { return 0 }
         
         if incomingOutgoingSegmentedControl.selectedSegmentIndex == 0 {
             return realtimeFriendRequestsManager.receivedFriendRequests.count
@@ -98,7 +98,7 @@ extension FriendRequestsViewController: UITableViewDataSource {
             cell.friendImageImageView.image = nil
             cell.friendImageImageView.contentMode = .ScaleAspectFill
             
-            SDWebImageManager().downloadImageWithURL(requestFriend.imageURL, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil) {
+            SDWebImageManager().downloadImageWithURL(requestFriend.image, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil) {
                 (image, error, cacheType, bool, url) -> Void in
                 
                 guard error == nil else { return }
