@@ -15,8 +15,8 @@ class PrivacyManager: FirebaseLogicManager  {
 
     static let sharedManager = PrivacyManager()
 
-    class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler)
-    {
+    class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler) {
+        
         guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else {
             return
         }

@@ -150,11 +150,10 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
 
     func timeToSearch(timer: NSTimer) {
 
-        FriendsManager.sharedManager.searchUsersWithText(searchText) {
-            (results) -> () in
-
+        FriendsManager.sharedManager.searchUsersByName(searchText: searchText, institutionID: nil, completionHandler: { (results) in
+            
             self.searchResults = results
             self.searchResultsTableView.reloadData()
-        }
+        })
     }
 }

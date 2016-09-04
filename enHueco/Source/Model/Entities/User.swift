@@ -29,7 +29,7 @@ class User: MappableObject {
     let lastNames: String
     let image: NSURL
     let imageThumbnail: NSURL
-    let phoneNumber: String
+    let phoneNumber: String?
     
     var name: String { return "\(firstNames) \(lastNames)" }
 

@@ -9,6 +9,7 @@
 import UIKit
 
 class FriendDetailViewController: UIViewController, UIPopoverPresentationControllerDelegate, PopOverMenuViewControllerDelegate {
+    
     @IBOutlet weak var imageImageView: UIImageView!
     @IBOutlet weak var firstNamesLabel: UILabel!
     @IBOutlet weak var lastNamesLabel: UILabel!
@@ -86,7 +87,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func refreshUIData() {
         
-        guard let friend = realtimeFriendManager?.friend , schedule = realtimeFriendManager?.schedule else {
+        guard let friend = realtimeFriendManager?.friend else {
             return
         }
         
@@ -107,7 +108,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         activityIndicator.startAnimating()
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.imageImageView.sd_setImageWithURL(friend.imageURL, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
+            self.imageImageView.sd_setImageWithURL(friend.image, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
                 (image, error, cacheType, _) in
                 
                 activityIndicator.removeFromSuperview()
@@ -172,28 +173,32 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int) {
 
+        guard let friend = realtimeFriendManager?.friend else { return }
+        
+        let appDelegate = AppDelegate.sharedDelegate
+        
         if let number = friend.phoneNumber where index == 0 {
-            enHueco.callFriend(number)
-
+            
+            appDelegate.callFriend(number)
             controller.dismissViewControllerAnimated(true, completion: nil)
+            
         } else if let recordId = recordId where index == 1 {
-            enHueco.whatsappMessageTo(recordId)
-
+            
+            appDelegate.whatsappMessageTo(recordId)
             controller.dismissViewControllerAnimated(true, completion: nil)
+            
         } else if index == 2 {
+            
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
             alertController.addAction(UIAlertAction(title: "DeleteFriend".localizedUsingFile(localizableStringsFile), style: .Destructive, handler: {
                 (action) -> Void in
 
                 EHProgressHUD.showSpinnerInView(self.view)
-                FriendsManager.sharedManager.deleteFriend(self.friend, completionHandler: {
-                    (success, error) -> () in
-
+                FriendsManager.sharedManager.deleteFriend(id: friend.id, completionHandler: { (error) in
                     EHProgressHUD.dismissSpinnerForView(self.view)
 
-                    guard success && error == nil else {
-
+                    guard error == nil else {
                         EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                         return
                     }
@@ -216,8 +221,13 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     @IBAction func viewSchedule(sender: UIButton) {
 
+        guard let friendID = friendID else {
+            assertionFailure()
+            return
+        }
+        
         let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
-        scheduleCalendar.schedule = friend.schedule
+        scheduleCalendar.userID = friendID
         presentViewController(scheduleCalendar, animated: true, completion: nil)
     }
 
@@ -231,13 +241,13 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func setRecordId() {
 
-        guard let friend = realtimeFriendManager?.friend else { return }
+        guard let friend = realtimeFriendManager?.friend, phoneNumber = friend.phoneNumber else { return }
         
-        if friend.phoneNumber.characters.count < 7 {
+        if phoneNumber.characters.count < 7 {
             recordId = nil
+            
         } else {
-            enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
-                (abid) -> () in
+            AppDelegate.sharedDelegate.getFriendABID(phoneNumber, completionHandler: { (abid) -> () in
                 self.recordId = abid
             })
         }
@@ -246,7 +256,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
 extension FriendDetailViewController: RealtimeFriendManagerDelegate {
     
-    func friendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
+    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
         refreshUIData()
     }
 }

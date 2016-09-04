@@ -191,3 +191,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }*/
 }
 
+extension AppDelegate {
+    
+    // TODO: Move later to a dedicated manager
+    func callFriend(phoneNumber : String) {
+        guard let url = NSURL(string: "tel://\(phoneNumber)") else { return }
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    // TODO: Move later to a dedicated manager
+    func whatsappMessageTo(friendABID : NSNumber?) {
+        guard let url = NSURL(string: "whatsapp://send?" + ((friendABID == nil) ? "": "abid=\(friendABID!)")) else { return }
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    // TODO: Move later to a dedicated manager
+    func getFriendABID(phoneNumber : String, completionHandler : (abid: NSNumber?) -> ()) {
+        
+        let addressBook = APAddressBook()
+        addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
+        
+        addressBook.loadContacts({ (contacts: [AnyObject]!, error: NSError!) in
+            
+            guard let contacts = contacts else {
+                completionHandler(abid: nil)
+                return
+            }
+            
+            for contact in contacts {
+                guard let contactAP = contact as? APContact else { continue }
+                
+                for phone in contactAP.phones ?? [] {
+                    guard var phoneString = phone as? String else { continue }
+                    
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+                    
+                    if phoneString.rangeOfString(phoneNumber) != nil {
+                        completionHandler(abid: contactAP.recordID)
+                        return
+                    }
+                }
+            }
+        })
+        return
+    }
+}
+

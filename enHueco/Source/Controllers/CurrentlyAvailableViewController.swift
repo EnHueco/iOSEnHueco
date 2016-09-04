@@ -343,7 +343,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
 
         cell.freeNameAndLocationLabel.text = freeTime.name ?? "FreeTime".localizedUsingGeneralFile()
 
-        let url = friend.imageThumbnailURL
+        let url = friend.imageThumbnail
 
         cell.friendNameLabel.text = friend.name
 
@@ -398,13 +398,14 @@ extension CurrentlyAvailableViewController: UITableViewDelegate {
         }
 
         let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
-        friendDetailViewController.friend = friend
+        friendDetailViewController.friendID = friend.id
 
         navigationController!.pushViewController(friendDetailViewController, animated: true)
     }
 }
 
 extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
+    
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
 
         if let cell = cell as? AvailableFriendCell {
@@ -417,10 +418,12 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
                 friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
             }
 
-            if friend === enHueco.appUser {
+            let appDelegate = AppDelegate.sharedDelegate
+            
+            if friend.id == AccountManager.sharedManager.userID {
                 EHProgressHUD.showSpinnerInView(view)
-                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({
-                    (success, error) -> Void in
+                
+                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
 
                     EHProgressHUD.dismissSpinnerForView(self.view)
 
@@ -433,12 +436,13 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
                     self.updateFreeTimePeriodDataAndReloadTableView()
                 })
             } else if index == 0 {
-                enHueco.getFriendABID(friend.phoneNumber, completionHandler: {
-                    (abid) -> () in
-                    enHueco.whatsappMessageTo(abid)
+                
+                appDelegate.getFriendABID(friend.phoneNumber, completionHandler: { (abid) -> () in
+                    appDelegate.whatsappMessageTo(abid)
                 })
+
             } else if index == 1 {
-                enHueco.callFriend(friend.phoneNumber)
+                appDelegate.callFriend(friend.phoneNumber)
             }
         }
         cell.hideUtilityButtonsAnimated(true)

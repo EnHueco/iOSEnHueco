@@ -20,12 +20,23 @@ class PrivacySettings: MappableObject {
     }
 
     let userID: String
+    let invisibilityEndDate: NSDate?
     let showEventsNames: Bool
     let showEventsLocations: Bool
-
-    //var name: String { return "\(firstNames) \(lastNames)" }
+    
+    var invisible: Bool {
+        return invisibilityEndDate?.timeIntervalSinceNow < 0
+    }
+    
+    ///Temporary 
+    init() {
+        userID = ""
+        showEventsNames = true
+        showEventsLocations = true
+    }
 
     required init(map: Map) throws {
+        
         userID = try map.extract(.Key(JSONKeys.userID))
         showEventsNames = try map.extract(.Key(JSONKeys.showEventsNames))
         showEventsLocations = try map.extract(.Key(JSONKeys.showEventsLocations))

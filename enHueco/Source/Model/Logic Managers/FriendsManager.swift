@@ -126,14 +126,14 @@ class FriendsManager: FirebaseLogicManager {
      
      - parameter searchText:        Text to search
      */
-    func searchUsersWith(searchText searchText: String, institutionID: String, completionHandler: (results:[User]) -> ()) {
+    func searchUsersByName(searchText searchText: String, institutionID: String?, completionHandler: (results:[User]) -> ()) {
         
         guard !searchText.isBlank() else {
             dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }
             return
         }
         
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(institutionID).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.users).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             
             guard let value = snapshot.value as? [[String : AnyObject]] else {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }
