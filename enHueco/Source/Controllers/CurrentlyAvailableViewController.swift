@@ -126,15 +126,19 @@ class CurrentlyAvailableViewController: UIViewController {
 
     func imInvisibleButtonPressed(sender: UIButton) {
 
+        // TODO: Update implementation
+        /*
         if enHueco.appUser.isInvisible {
             turnVisible()
         } else {
             turnInvisible()
-        }
+        }*/
     }
 
     private func turnInvisible() {
 
+        // TODO: Update implementation
+        /*
         let turnInvisibleForInterval = {
             (interval: NSTimeInterval) -> Void in
 
@@ -182,13 +186,15 @@ class CurrentlyAvailableViewController: UIViewController {
         controller.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
 
         presentViewController(controller, animated: true, completion: nil)
+         */
     }
 
     private func turnVisible() {
 
+        // TODO: Update implementation
+        /*
         EHProgressHUD.showSpinnerInView(self.view)
-        PrivacyManager.sharedManager.turnVisibleWithCompletionHandler {
-            (success, error) -> Void in
+        PrivacyManager.sharedManager.turnVisibleWithCompletionHandler {(success, error) -> Void in
 
             EHProgressHUD.dismissSpinnerForView(self.view)
 
@@ -199,7 +205,7 @@ class CurrentlyAvailableViewController: UIViewController {
             }
 
             self.updateFreeTimePeriodDataAndReloadTableView()
-        }
+        }*/
     }
 
     func imAvailableButtonPressed(sender: UIButton) {
@@ -423,6 +429,8 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
             if friend.id == AccountManager.sharedManager.userID {
                 EHProgressHUD.showSpinnerInView(view)
                 
+                // TODO: Update implementation
+                /*
                 CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
 
                     EHProgressHUD.dismissSpinnerForView(self.view)
@@ -434,15 +442,19 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
                     }
 
                     self.updateFreeTimePeriodDataAndReloadTableView()
-                })
+                })*/
+                
             } else if index == 0 {
                 
-                appDelegate.getFriendABID(friend.phoneNumber, completionHandler: { (abid) -> () in
+                guard let phoneNumber  = friend.phoneNumber else { return }
+                appDelegate.getFriendABID(phoneNumber, completionHandler: { (abid) -> () in
                     appDelegate.whatsappMessageTo(abid)
                 })
 
             } else if index == 1 {
-                appDelegate.callFriend(friend.phoneNumber)
+                
+                guard let phoneNumber  = friend.phoneNumber else { return }
+                appDelegate.callFriend(phoneNumber)
             }
         }
         cell.hideUtilityButtonsAnimated(true)

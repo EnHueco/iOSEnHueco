@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import Fabric
 import Crashlytics
 import Firebase
+import APAddressBook
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {

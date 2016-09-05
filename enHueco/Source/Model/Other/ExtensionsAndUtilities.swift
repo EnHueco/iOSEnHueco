@@ -123,7 +123,21 @@ func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
     return NSCalendar.currentCalendar().components(dayHourMinuteSecond, fromDate: rhs, toDate: lhs, options: [])
 }
 
+extension CollectionType {
+    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Generator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 extension Array {
+    
+    func find(predicate: (Generator.Element) throws -> Bool) -> Element? {
+        
+        guard let index = (try? indexOf(predicate) ?? nil) ?? nil else { return nil }
+        return self[safe: index]
+    }
+    
     mutating func removeObject<U:Equatable>(object: U) -> Bool {
 
         var index: Int?

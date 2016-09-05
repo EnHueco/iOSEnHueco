@@ -120,7 +120,7 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
         
         let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(eventID)
         
-        guard let tmpUpdateJSON = try? intent.jsonRepresentation().foundationDictionary, let updateJSON = tmpUpdateJSON else {
+        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary ?? nil) ?? nil else {
             assertionFailure()
             dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
             return

@@ -9,7 +9,7 @@
 import Foundation
 import Genome
 
-class User: MappableObject {
+class User: Object, Equatable {
 
     struct JSONKeys {
         private init() {}
@@ -34,6 +34,7 @@ class User: MappableObject {
     var name: String { return "\(firstNames) \(lastNames)" }
 
     required init(map: Map) throws {
+        
         id = try map.extract(.Key(JSONKeys.id))
         institution = try map.extract(.Key(JSONKeys.institution))
         firstNames = try map.extract(.Key(JSONKeys.firstNames))
@@ -41,10 +42,10 @@ class User: MappableObject {
         image = try map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
         imageThumbnail = try map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
         phoneNumber = try map.extract(.Key(JSONKeys.phoneNumber))
+        
+        try super.init(map: map)
     }
     
-    func sequence(map: Map) throws {}
-
     /*
     var outgoingFriendRequests = [User]()
     var incomingFriendRequests = [User]()
@@ -260,6 +261,10 @@ class User: MappableObject {
         super.encodeWithCoder(coder)
     }
  */
+}
+
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.id == rhs.id
 }
 
 extension String {

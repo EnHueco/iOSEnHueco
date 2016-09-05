@@ -15,13 +15,13 @@ class PrivacyManager: FirebaseLogicManager  {
 
     static let sharedManager = PrivacyManager()
 
-    class func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler) {
+    func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler) {
         
         guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else {
             return
         }
         
-        guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
+        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary ?? nil) ?? nil else {
             assertionFailure()
             dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
             return

@@ -26,7 +26,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     }
     
     /// The real-time updates manager
-    private var friendManager: RealtimeFriendManager?
+    private var friendManager: RealtimeUserManager?
 
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -42,7 +42,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         super.viewWillAppear(animated)
         
         if let userID = userID where scheduleToDisplay == nil {
-            friendManager = RealtimeFriendManager(friendID: userID, delegate: self)
+            friendManager = RealtimeUserManager(userID: userID, delegate: self)
         }
     }
     
@@ -103,9 +103,9 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     }
 }
 
-extension ScheduleCalendarViewController: RealtimeFriendManagerDelegate {
+extension ScheduleCalendarViewController: RealtimeUserManagerDelegate {
     
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
         reloadData()
     }
 }

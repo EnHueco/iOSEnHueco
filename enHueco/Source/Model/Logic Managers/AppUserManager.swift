@@ -17,9 +17,9 @@ class AppUserManager: FirebaseLogicManager {
 
     func updateUserWith(intent: UserUpdateIntent, completionHandler: BasicCompletionHandler) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler) else { return }
+        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else { return }
         
-        guard let updateJSON = try? intent.jsonRepresentation().foundationDictionary else {
+        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary) ?? nil else {
             assertionFailure()
             dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
             return

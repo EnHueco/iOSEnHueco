@@ -329,3 +329,8 @@ extension FriendsViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+
+//func == (lhs: (user: User, schedule: Schedule), rhs: (user: User, schedule: Schedule)) -> Bool {
+//    
+//    return lhs.user == rhs.user
+//}

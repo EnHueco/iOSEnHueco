@@ -8,6 +8,7 @@
 
 import Foundation
 import Genome
+import PureJsonSerializer
 
 /// The type of the event
 
@@ -46,11 +47,19 @@ class BaseEvent: MappableObject {
     }
 
     required init(map: Map) throws {
+        
         type = try map.extract(.Key(JSONKeys.type), transformer: GenomeTransformers.fromJSON)
-        name = try? map.extract(JSONKeys.name)
-        // To do: Set start & end dates based on JSON data
-        location = try? map.extract(JSONKeys.location)
-        repeating = try map.extract(JSONKeys.repeating)
+        name = try? map.extract(.Key(JSONKeys.name))
+        startDate = try map.extract(.Key(JSONKeys.startDate), transformer: GenomeTransformers.fromJSON)
+        endDate = try map.extract(.Key(JSONKeys.endDate), transformer: GenomeTransformers.fromJSON)
+        location = try? map.extract(.Key(JSONKeys.location))
+        repeating = try map.extract(.Key(JSONKeys.repeating))
+    }
+    
+    static func newInstance(json: Json, context: Context) throws -> Self {
+        let map = Map(json: json, context: context)
+        let new = try self.init(map: map)
+        return new
     }
     
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
@@ -59,10 +68,10 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the startDate is returned unchanged.
      */
-    func startDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate  {
+    func startDateInNearestPossibleWeekToDate(targetDate: NSDate) -> NSDate  {
 
-        guard repetitionDays != nil else { return startDate }
-        return date(startDate, inNearestPossibleWeekToDate: date)
+        guard repeating else { return startDate }
+        return date(startDate, inNearestPossibleWeekToDate: targetDate)
     }
     
     /** Returns the end hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
@@ -71,16 +80,16 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the endDate is returned unchanged.
      */
-    func endDateInNearestPossibleWeekToDate(date: NSDate) -> NSDate  {
+    func endDateInNearestPossibleWeekToDate(targetDate: NSDate) -> NSDate  {
 
-        guard repetitionDays != nil else { return endDate }
+        guard repeating else { return endDate }
         
         let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
-        var endHourDate = date(endDate, inNearestPossibleWeekToDate: date)
+        var endHourDate = date(endDate, inNearestPossibleWeekToDate: targetDate)
         
-        if endHourDate < startDateInNearestPossibleWeekToDate(date) {
+        if endHourDate < startDateInNearestPossibleWeekToDate(targetDate) {
             endHourDate = globalCalendar.dateByAddingUnit(.WeekOfMonth, value: 1, toDate: endHourDate, options: [])!
         }
         
@@ -121,6 +130,6 @@ class BaseEvent: MappableObject {
         let startHourInCurrentDate = startDateInNearestPossibleWeekToDate(currentDate)
         let endHourInCurrentDate = endDateInNearestPossibleWeekToDate(currentDate)
             
-        return !(newEventEndHourInCurrentDate < startHourInCurrentDate || newEventStartHourInCurrentDate > endHourInCurrentDate)
+        return !(anotherEventEndHourInCurrentDate < startHourInCurrentDate || anotherEventStartHourInCurrentDate > endHourInCurrentDate)
     }
 }

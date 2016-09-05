@@ -9,36 +9,42 @@
 import Foundation
 import Firebase
 
-protocol RealtimeFriendManagerDelegate: class {
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager)
+protocol RealtimeUserManagerDelegate: class {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager)
 }
 
-/// Handles user and schedule real-time fetching for a given friend
-class RealtimeFriendManager: FirebaseSynchronizable {
+/// Handles user and schedule real-time fetching for a given user
+class RealtimeUserManager: FirebaseSynchronizable {
     
-    let friendID: String
+    let userID: String
     
-    private(set) var friend: User?
+    private(set) var user: User?
     private(set) var schedule: Schedule?
     
     /// Delegate
-    weak var delegate: RealtimeFriendManagerDelegate?
+    weak var delegate: RealtimeUserManagerDelegate?
     
-    /** Creates an instance of the manager that listens to database changes as soon as it is created.
+    /**
+     Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
+ 
+     - parameter userID:   The ID of the user to fetch information for (default is the app user's ID)
      */
-    init?(friendID: String, delegate: RealtimeFriendManagerDelegate?) {
+    init?(userID: String! = AccountManager.sharedManager.userID, delegate: RealtimeUserManagerDelegate?) {
+        
+        guard userID != nil else { return nil }
+        
+        self.userID = userID
+        self.delegate = delegate
         
         super.init()
-        self.friendID = friendID
-        self.delegate = delegate
     }
     
     override func _createFirebaseSubscriptions() {
         
         let firebaseReference = FIRDatabase.database().reference()
         
-        let friendReference = firebaseReference.child(FirebasePaths.users).child(friendID)
+        let friendReference = firebaseReference.child(FirebasePaths.users).child(userID)
         let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
             
             guard let friendJSON = snapshot.value as? [String : AnyObject],
@@ -50,15 +56,15 @@ class RealtimeFriendManager: FirebaseSynchronizable {
             
             /// Thread safety, dictionaries are structs and therefore copied.
             dispatch_async(dispatch_get_main_queue()){
-                self.friend = friend
+                self.user = friend
                 self.notifyChangesIfNeeded()
             }
         }
         
         _trackHandle(friendHandle, forReference: friendReference)
         
-        let scheduleReference = firebaseReference.child(FirebasePaths.schedules).child(friendID)
-        let scheduleHandle = scheduleReference.observeSingleEventOfType(.Value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
+        let scheduleReference = firebaseReference.child(FirebasePaths.schedules).child(userID)
+        let scheduleHandle = scheduleReference.observeEventType(.Value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
             
             guard let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]],
                 let schedule = try? Schedule(js: scheduleJSON) else {
@@ -79,10 +85,10 @@ class RealtimeFriendManager: FirebaseSynchronizable {
     
     private func notifyChangesIfNeeded() {
         
-        guard friend != nil && schedule != nil else { return }
+        guard user != nil && schedule != nil else { return }
         
         dispatch_async(dispatch_get_main_queue()){
-            self.delegate?.realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(self)
+            self.delegate?.realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(self)
         }
     }
 }

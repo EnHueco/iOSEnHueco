@@ -19,7 +19,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     /// !!! Sections that must be hidden because they are not implemented yet
     private let unimplementedSections = [1, 3]
     
-    private var realtimeAppUserManager: RealtimeAppUserManager?
+    private var realtimeAppUserManager: RealtimeUserManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        realtimeAppUserManager = RealtimeAppUserManager(delegate: self)
+        realtimeAppUserManager = RealtimeUserManager(delegate: self)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -50,7 +50,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     
     func refreshUIData() {
         
-        phoneNumberCell.textLabel?.text = realtimeAppUserManager?.appUser?.phoneNumber
+        phoneNumberCell.textLabel?.text = realtimeAppUserManager?.user?.phoneNumber
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -202,9 +202,9 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
  
 }
 
-extension SettingsEmbeddedTableViewController: RealtimeAppUserManagerDelegate {
+extension SettingsEmbeddedTableViewController: RealtimeUserManagerDelegate {
     
-    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: RealtimeAppUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
         refreshUIData()
     }
 }

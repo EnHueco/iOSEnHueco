@@ -23,7 +23,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     var friendID: String?
 
     // Real-time logic manager (If view visible)
-    private var realtimeFriendManager: RealtimeFriendManager?
+    private var realtimeFriendManager: RealtimeUserManager?
 
     private var recordId: NSNumber?
 
@@ -50,7 +50,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         super.viewWillAppear(animated)
         
         if let friendID = friendID {
-            realtimeFriendManager = RealtimeFriendManager(friendID: friendID, delegate: self)
+            realtimeFriendManager = RealtimeUserManager(userID: friendID, delegate: self)
         }
 
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -87,7 +87,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func refreshUIData() {
         
-        guard let friend = realtimeFriendManager?.friend else {
+        guard let friend = realtimeFriendManager?.user else {
             return
         }
         
@@ -173,7 +173,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int) {
 
-        guard let friend = realtimeFriendManager?.friend else { return }
+        guard let friend = realtimeFriendManager?.user else { return }
         
         let appDelegate = AppDelegate.sharedDelegate
         
@@ -234,14 +234,14 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBAction func commonFreeTimePeriodsButtonPressed(sender: AnyObject) {
 
         let commonFreeTimePeriodsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
-        commonFreeTimePeriodsViewController.initialFriend = friend
+        commonFreeTimePeriodsViewController.initialFriendID = friendID
 
         navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
     }
 
     func setRecordId() {
 
-        guard let friend = realtimeFriendManager?.friend, phoneNumber = friend.phoneNumber else { return }
+        guard let friend = realtimeFriendManager?.user, phoneNumber = friend.phoneNumber else { return }
         
         if phoneNumber.characters.count < 7 {
             recordId = nil
@@ -254,9 +254,9 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     }
 }
 
-extension FriendDetailViewController: RealtimeFriendManagerDelegate {
+extension FriendDetailViewController: RealtimeUserManagerDelegate {
     
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
         refreshUIData()
     }
 }

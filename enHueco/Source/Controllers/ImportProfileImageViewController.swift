@@ -172,6 +172,8 @@ extension ImportProfileImageViewController: UIImagePickerControllerDelegate {
 extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate {
     func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
 
+        // TODO: Update implementation
+        /*
         EHProgressHUD.showSpinnerInView(controller.view)
         let finalImage = RBResizeImage(croppedImage, targetSize: CGSizeMake(275, 275))
         AppUserInformationManager.sharedManager.pushProfilePicture(finalImage) {
@@ -186,7 +188,7 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate {
             controller.dismissViewControllerAnimated(true) {
                 self.delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
             }
-        }
+        }*/
     }
 
     func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {

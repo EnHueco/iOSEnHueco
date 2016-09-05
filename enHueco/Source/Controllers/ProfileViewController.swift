@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController {
 
     var imageActivityIndicator: UIActivityIndicatorView!
 
-    var realtimeAppUserManager: RealtimeAppUserManager?
+    var realtimeAppUserManager: RealtimeUserManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController {
             return
         }
 
-        realtimeAppUserManager = RealtimeAppUserManager(delegate: self)
+        realtimeAppUserManager = RealtimeUserManager(delegate: self)
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
     }
@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
 
     func refreshUIData() {
         
-        guard let user = realtimeAppUserManager?.appUser else {
+        guard let user = realtimeAppUserManager?.user else {
             return
         }
         
@@ -228,9 +228,9 @@ class ProfileViewController: UIViewController {
     }
 }
 
-extension ProfileViewController: RealtimeAppUserManagerDelegate {
+extension ProfileViewController: RealtimeUserManagerDelegate {
     
-    func realtimeAppUserManagerDidReceiveAppUserInformationUpdates(manager: RealtimeAppUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
         refreshUIData()
     }
 }

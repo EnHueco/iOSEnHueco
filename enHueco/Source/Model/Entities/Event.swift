@@ -11,7 +11,7 @@ import Genome
 
 /// A calendar event (class or free time at the moment)
 
-class Event: BaseEvent {
+class Event: BaseEvent, Equatable {
 
     struct JSONKeys {
         private init() {}

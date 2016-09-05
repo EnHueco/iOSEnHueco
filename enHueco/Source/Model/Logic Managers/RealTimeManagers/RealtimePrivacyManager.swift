@@ -16,12 +16,12 @@ class RealtimePrivacyManager: FirebaseSynchronizable {
     private(set) var settings : PrivacySettings?
 
     /// Delegate
-    weak var delegate: RealtimePrivacyManager?
+    weak var delegate: RealtimePrivacyManagerDelegate?
     
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
      */
-    init?(delegate: RealtimePrivacyManager?) {
+    init?(delegate: RealtimePrivacyManagerDelegate?) {
         
         super.init()
         self.delegate = delegate

@@ -13,9 +13,9 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var selectedFriendsCollectionView: UICollectionView!
     @IBOutlet weak var containerView: UIView!
-
-    private var realtimeEventsAndSchedulesManager: RealtimeEventsAndSchedulesManager?
-    private var realtimeFriendManagers = [RealtimeFriendManager]()
+    
+    /// User managers
+    private var realtimeUserManagers = [RealtimeUserManager]()
     
     /// A friend the controller should display upon appearance.
     var initialFriendID: String?
@@ -40,7 +40,6 @@ class CommonFreeTimePeriodsViewController: UIViewController {
         }
 
         commonFreeTimePeriodsSearchFriendViewController = storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddViewController") as! CommonFreeTimePeriodsSearchFriendToAddViewController
-
         commonFreeTimePeriodsSearchFriendViewController.delegate = self
 
         scheduleViewController = storyboard!.instantiateViewControllerWithIdentifier("ScheduleCalendarViewController") as! ScheduleCalendarViewController
@@ -48,7 +47,7 @@ class CommonFreeTimePeriodsViewController: UIViewController {
 
         switchToSchedule()
         
-        addUserIDToSelectedIDsAndReloadData(AccountManager.sharedManager.userID)
+        addUserIDToSelectedIDsAndReloadData(AccountManager.sharedManager.userID!)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -74,9 +73,6 @@ class CommonFreeTimePeriodsViewController: UIViewController {
             }
         })
         
-        EHProgressHUD.showSpinnerInView(view)
-        realtimeEventsAndSchedulesManager = RealtimeEventsAndSchedulesManager(delegate: self)
-        
         if let initialFriendID = initialFriendID {
             addUserIDToSelectedIDsAndReloadData(initialFriendID)
         }
@@ -89,11 +85,12 @@ class CommonFreeTimePeriodsViewController: UIViewController {
 
     func prepareInfoAndReloadScheduleData() {
 
-        guard let commonFreeTimePeriodsSchedule = realtimeEventsAndSchedulesManager?.commonFreeTimePeriodsScheduleAmong(realtimeFriendManagers.map { $0.schedule } ) else {
+        guard let firstSchedule = realtimeUserManagers.first?.schedule else {
             return
         }
     
-        scheduleViewController.schedule = commonFreeTimePeriodsSchedule
+        let commonFreeTimePeriodsSchedule = firstSchedule.commonFreeTimePeriodsScheduleAmong(realtimeUserManagers[1..<realtimeUserManagers.count].flatMap { $0.schedule } )
+        scheduleViewController.scheduleToDisplay = commonFreeTimePeriodsSchedule
         scheduleViewController.dayView.reloadData()
     }
 
@@ -102,14 +99,14 @@ class CommonFreeTimePeriodsViewController: UIViewController {
         // Prevent thread collisions
         dispatch_async(dispatch_get_main_queue()) {
             
-            guard !realtimeFriendManagers.contains(ID) else { return }
+            guard !(self.realtimeUserManagers.contains { $0.user?.id == ID }) else { return }
             
             EHProgressHUD.showSpinnerInView(self.view)
-            self.realtimeFriendManagers.append(RealtimeFriendManager(friendID: ID, delegate: self))
+            self.realtimeUserManagers.append(RealtimeUserManager(userID: ID, delegate: self)!)
             
-            let indexPathForLastItem = NSIndexPath(forItem: self.selectedFriendIDs.count - 1, inSection: 0)
+            let indexPathForLastItem = NSIndexPath(forItem: self.realtimeUserManagers.count - 1, inSection: 0)
             
-            if self.selectedFriendIDs.count == 1 {
+            if self.realtimeUserManagers.count == 1 {
                 self.selectedFriendsCollectionView.reloadData()
             } else {
                 self.selectedFriendsCollectionView.insertItemsAtIndexPaths([indexPathForLastItem])
@@ -122,11 +119,11 @@ class CommonFreeTimePeriodsViewController: UIViewController {
 
     func deleteFriendFromSelectedFriendsAtIndexPathAndReloadData(indexPath: NSIndexPath) {
 
-        guard !(selectedFriends[indexPath.row] is AppUser) else {
+        guard realtimeUserManagers[indexPath.row].user?.id != AccountManager.sharedManager.userID else {
             return
         }
 
-        selectedFriendIDs.removeAtIndex(indexPath.row)
+        realtimeUserManagers.removeAtIndex(indexPath.item)
         selectedFriendsCollectionView.deleteItemsAtIndexPaths([indexPath])
         prepareInfoAndReloadScheduleData()
     }
@@ -187,42 +184,38 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     
     func didReceiveInformationForUserID(ID: String) {
         
-        guard manager.schedule != nil && !loadedSchedulesUserIDs.contains(manager.appUserID) else { return }
+        let manager = realtimeUserManagers.find { $0.user?.id == ID }
+        
+        guard manager?.schedule != nil && manager?.user != nil else {
+            return
+        }
+        
         EHProgressHUD.dismissSpinnerForView(view)
-        loadedSchedulesUserIDs.append(manager.friendID)
+        loadedSchedulesUserIDs.append(ID)
         prepareInfoAndReloadScheduleData()
     }
 }
 
-extension CommonFreeTimePeriodsViewController: RealtimeEventsAndSchedulesManagerDelegate {
+extension CommonFreeTimePeriodsViewController: RealtimeUserManagerDelegate {
     
-    func realtimeEventsAndSchedulesManagerDidReceiveScheduleUpdates(manager: RealtimeEventsAndSchedulesManager) {
-        didReceiveInformationForUserID(manager.appUserID)
-    }
-}
-
-extension CommonFreeTimePeriodsViewController: RealtimeFriendManagerDelegate {
-    
-    func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
-        didReceiveInformationForUserID(manager.friendID)
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
+        didReceiveInformationForUserID(manager.userID)
     }
 }
 
 extension CommonFreeTimePeriodsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedFriendIDs.count
+        return realtimeUserManagers.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let friend = selectedFriendIDs[indexPath.item]
-
         let cell = selectedFriendsCollectionView.dequeueReusableCellWithReuseIdentifier("CommonFreeTimePeriodsSelectedFriendsCollectionViewCell", forIndexPath: indexPath) as! CommonFreeTimePeriodsSelectedFriendsCollectionViewCell
 
-        cell.friendNameLabel.text = friend.name
+        cell.friendNameLabel.text = realtimeUserManagers[indexPath.item].user?.name
 
-        cell.setDeleteButtonHidden(friend === enHueco.appUser)
+        cell.setDeleteButtonHidden(indexPath.item == 0)
 
         cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
         cell.setNeedsLayout()
@@ -248,7 +241,6 @@ extension CommonFreeTimePeriodsViewController: UICollectionViewDelegate {
 
 extension CommonFreeTimePeriodsViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-
         switchToSearch()
         return true
     }
@@ -262,7 +254,6 @@ extension CommonFreeTimePeriodsViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        
         switchToSchedule()
         searchBar.setShowsCancelButton(false, animated: true)
     }
@@ -280,8 +271,9 @@ extension CommonFreeTimePeriodsViewController: UISearchBarDelegate {
 
 extension CommonFreeTimePeriodsViewController: CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate {
     
-    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friend: User) {
-        addFriendIDToSelectedFriendsAndReloadData(friend)
+    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friendID: String) {
+        
+        addUserIDToSelectedIDsAndReloadData(friendID)
         searchBar.endEditing(true)
     }
 }

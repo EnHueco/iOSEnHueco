@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Genome
 import Firebase
 
 class FriendsManager: FirebaseLogicManager {
@@ -145,13 +146,15 @@ class FriendsManager: FirebaseLogicManager {
                 let firstNames = ($0[User.JSONKeys.firstNames] as? String) ?? ""
                 let lastNames = ($0[User.JSONKeys.lastNames] as? String) ?? ""
                 
-                for word in [firstNames.componentsSeparatedByString(" "), lastNames.componentsSeparatedByString(" ")] where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
-                    return true
+                for words in [firstNames.componentsSeparatedByString(" "), lastNames.componentsSeparatedByString(" ")] {
+                    for word in words where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                        return true
+                    }
                 }
                 
                 return false
             }
-
+            
             completionHandler(results: try? [User](js: filteredFriendsJSON) ?? [])
         }
     }
