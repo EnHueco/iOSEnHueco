@@ -198,6 +198,12 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         } else {
             AccountManager.sharedManager.loginWith(facebookToken: FBSDKAccessToken.currentAccessToken().tokenString) { error in
                 // TODO: Redirect to upload picture if needed
+                guard error == nil else {
+                    // TODO: Show error
+                    return
+                }
+                
+                goToMainTabViewController()
             }
         }
     }
