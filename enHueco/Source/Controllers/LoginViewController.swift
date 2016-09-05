@@ -203,7 +203,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                     return
                 }
                 
-                goToMainTabViewController()
+                self.goToMainTabViewController()
             }
         }
     }
