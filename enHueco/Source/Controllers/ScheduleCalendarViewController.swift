@@ -16,6 +16,15 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
     var userID = AccountManager.sharedManager.userID
     
+    /// An optional (existing) schedule to display, setting this will make the controller ignore the `userID` property.
+    var scheduleToDisplay: Schedule? {
+        
+        didSet {
+            userID = nil
+            reloadData()
+        }
+    }
+    
     /// The real-time updates manager
     private var friendManager: RealtimeFriendManager?
 
@@ -32,7 +41,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let userID = userID {
+        if let userID = userID where scheduleToDisplay == nil {
             friendManager = RealtimeFriendManager(friendID: userID, delegate: self)
         }
     }
@@ -50,7 +59,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]! {
 
-        guard let schedule = friendManager?.schedule else {
+        guard let schedule = scheduleToDisplay ?? friendManager?.schedule else {
             return []
         }
         
@@ -97,6 +106,6 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
 extension ScheduleCalendarViewController: RealtimeFriendManagerDelegate {
     
     func realtimeFriendManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendManager) {
-        dayView.reloadData()
+        reloadData()
     }
 }
