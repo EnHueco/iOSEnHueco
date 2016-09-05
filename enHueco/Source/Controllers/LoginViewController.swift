@@ -12,6 +12,7 @@ import FirebaseAuth
 
 
 @IBDesignable class LoginViewController: UIViewController {
+    
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var logoTitleLabel: UILabel!
 
@@ -62,8 +63,6 @@ import FirebaseAuth
 
         fbLoginButton.center = view.center
         view.addSubview(fbLoginButton)
-
-
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -164,15 +163,13 @@ import FirebaseAuth
 
         view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1, animations: {
-            () -> Void in
+        UIView.animateWithDuration(0.1, animations: {() -> Void in
 
             self.verticalSpaceToBottomConstraint.constant = self.verticalSpaceToBottomInitialValue
             self.view.layoutIfNeeded()
             self.view.setNeedsUpdateConstraints()
 
-        }, completion: {
-            (finished) -> Void in
+        }, completion: {(finished) -> Void in
 
             self.view.layoutIfNeeded()
         })
@@ -180,31 +177,30 @@ import FirebaseAuth
 }
 
 extension LoginViewController: ImportProfileImageViewControllerDelegate {
+    
     func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
-
         goToMainTabViewController()
     }
 
     func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController) {
-
         goToMainTabViewController()
     }
 }
 
 extension LoginViewController: FBSDKLoginButtonDelegate {
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
 
         if let error = error {
             print(error.localizedDescription)
             return
+            
         } else {
             AccountManager.sharedManager.loginWith(facebookToken: FBSDKAccessToken.currentAccessToken().tokenString) { error in
-                // TODO
+                // TODO: Redirect to upload picture if needed
             }
         }
     }
 
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-
-    }
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
 }

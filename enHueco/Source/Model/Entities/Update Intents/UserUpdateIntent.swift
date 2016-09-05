@@ -18,6 +18,7 @@ struct UserUpdateIntent: MappableBase {
     var image: NSURL?
     var imageThumbnail: NSURL?
     var phoneNumber: String?
+    var gender: Gender?
 
     static func newInstance(json: Json, context: Context) throws -> UserUpdateIntent {
         throw GenericError.UnsupportedOperation
@@ -28,10 +29,11 @@ struct UserUpdateIntent: MappableBase {
         typealias JSONKeys = User.JSONKeys
 
         try institution ~> map[.Key(JSONKeys.institution)]
-        try firstNames ~> map[.Key(JSONKeys.firstNames)]
-        try lastNames ~> map[.Key(JSONKeys.lastNames)]
+        try firstNames?.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.firstNames)]
+        try lastNames?.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.lastNames)]
         try image ~> map[.Key(JSONKeys.image)].transformToJson(GenomeTransformers.toJSON)
         try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)].transformToJson(GenomeTransformers.toJSON)
         try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
+        try gender ~> map[.Key(JSONKeys.gender)].transformToJson(GenomeTransformers.toJSON)
     }
 }

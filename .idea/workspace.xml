@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeAppUserManager.swift" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/AppDelegate.swift" afterPath="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/CurrentlyAvailableViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendDetailViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/FriendsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/SelectCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/SelectCalendarViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AppUserManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendsManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendsManager.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,10 +26,10 @@
       <file leaf-file-name="Schedule.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+            <state relative-caret-position="735">
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding>
-                <marker date="1473045758000" expanded="false" signature="137:168" ph="import ..." />
+                <marker date="1473084452000" expanded="false" signature="137:168" ph="import ..." />
               </folding>
             </state>
           </provider>
@@ -65,8 +49,10 @@
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-15">
-              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-              <folding />
+              <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+              <folding>
+                <marker date="1473049783000" expanded="true" signature="643:646" ph="/*...*/" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1320">
-              <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+              <caret line="98" column="62" selection-start-line="98" selection-start-column="62" selection-end-line="98" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -184,12 +170,12 @@
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/FriendsManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeAppUserManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeEventsAndSchedulesManager.swift" />
-        <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendsManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimePrivacyManager.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
         <option value="$PROJECT_DIR$/enHueco/AppDelegate.swift" />
         <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift" />
+        <option value="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendsManager.swift" />
       </list>
     </option>
   </component>
@@ -623,12 +609,12 @@
       <workItem from="1472260542004" duration="972000" />
       <workItem from="1472341492048" duration="6913000" />
       <workItem from="1472876450777" duration="1173000" />
-      <workItem from="1473045980345" duration="148000" />
+      <workItem from="1473045980345" duration="486000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24553000" />
+    <option name="totallyTimeSpent" value="24891000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -833,10 +819,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
+        <state relative-caret-position="735">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
           <folding>
-            <marker date="1473045758000" expanded="false" signature="137:168" ph="import ..." />
+            <marker date="1473084452000" expanded="false" signature="137:168" ph="import ..." />
           </folding>
         </state>
       </provider>
@@ -844,7 +830,7 @@
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1320">
-          <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+          <caret line="98" column="62" selection-start-line="98" selection-start-column="62" selection-end-line="98" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -864,8 +850,10 @@
     <entry file="file://$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15">
-          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-          <folding />
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+          <folding>
+            <marker date="1473049783000" expanded="true" signature="643:646" ph="/*...*/" />
+          </folding>
         </state>
       </provider>
     </entry>

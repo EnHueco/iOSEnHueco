@@ -9,6 +9,11 @@
 import Foundation
 import Genome
 
+enum Gender: String {
+    case Male = "Male"
+    case Female = "Female"
+}
+
 class User: Object, Equatable {
 
     struct JSONKeys {
@@ -21,27 +26,35 @@ class User: Object, Equatable {
         static let image = "image"
         static let imageThumbnail = "image_thumbnail"
         static let phoneNumber = "phone_number"
+        static let gender = "gender"
     }
 
     let id: String
-    let institution: String
+    let institution: String?
     let firstNames: String
     let lastNames: String
-    let image: NSURL
-    let imageThumbnail: NSURL
+    let image: NSURL?
+    let imageThumbnail: NSURL?
     let phoneNumber: String?
+    let gender: Gender
     
     var name: String { return "\(firstNames) \(lastNames)" }
 
     required init(map: Map) throws {
         
         id = try map.extract(.Key(JSONKeys.id))
-        institution = try map.extract(.Key(JSONKeys.institution))
-        firstNames = try map.extract(.Key(JSONKeys.firstNames))
-        lastNames = try map.extract(.Key(JSONKeys.lastNames))
-        image = try map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
-        imageThumbnail = try map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
-        phoneNumber = try map.extract(.Key(JSONKeys.phoneNumber))
+        institution = try? map.extract(.Key(JSONKeys.institution))
+        
+        let firstNames = try map.extract(.Key(JSONKeys.firstNames)) as [String]
+        let lastNames = try map.extract(.Key(JSONKeys.lastNames)) as [String]
+        
+        self.firstNames = firstNames.joinWithSeparator(" ")
+        self.lastNames = lastNames.joinWithSeparator(" ")
+        
+        image = try? map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
+        imageThumbnail = try? map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
+        phoneNumber = try? map.extract(.Key(JSONKeys.phoneNumber))
+        gender = try map.extract(.Key(JSONKeys.gender), transformer: GenomeTransformers.fromJSON)
         
         try super.init(map: map)
     }

@@ -66,11 +66,11 @@ class RealtimeUserManager: FirebaseSynchronizable {
         let scheduleReference = firebaseReference.child(FirebasePaths.schedules).child(userID)
         let scheduleHandle = scheduleReference.observeEventType(.Value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
             
-            guard let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]],
-                let schedule = try? Schedule(js: scheduleJSON) else {
-                    
-                    assertionFailure()
-                    return
+            let scheduleJSON = scheduleSnapshot.value as? [[String : AnyObject]] ?? []
+            
+            guard let schedule = try? Schedule(js: scheduleJSON) else {
+                assertionFailure()
+                return
             }
             
             /// Thread safety

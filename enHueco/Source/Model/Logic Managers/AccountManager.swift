@@ -9,6 +9,21 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import FBSDKCoreKit
+import Genome
+import PureJsonSerializer
+
+private struct SignupInfo {
+    
+    var firstNames: String
+    var lastNames: String
+    var phoneNumber: String?
+    var gender: Gender
+    
+    func updateIntent() -> UserUpdateIntent {
+        return UserUpdateIntent(institution: nil, firstNames: firstNames, lastNames: lastNames, image: nil, imageThumbnail: nil, phoneNumber: phoneNumber, gender: gender)
+    }
+}
 
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
 class AccountManager {
@@ -24,9 +39,45 @@ class AccountManager {
     
     func loginWith(facebookToken facebookToken: String, completionHandler: BasicCompletionHandler) {
         
-        FIRAuth.auth()?.signInWithCredential(FIRFacebookAuthProvider.credentialWithAccessToken(facebookToken)) { (user, error) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, email, gender"]).startWithCompletionHandler() { (_, userDictionary, error) -> Void in
+            
+            guard error == nil else {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
+                return
+            }
+         
+            FIRAuth.auth()?.signInWithCredential(FIRFacebookAuthProvider.credentialWithAccessToken(facebookToken)) { (user, error) in
+                
+                guard let user = user where error == nil else {
+                    dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
+                    return
+                }
+                
+                guard let firstNames = userDictionary["first_name"] as? String,
+                    let lastName = userDictionary["last_name"] as? String,
+                    let gender: Gender = (userDictionary["gender"] as? String) == "female" ? .Female : .Male else {
+                        dispatch_async(dispatch_get_main_queue()) { completionHandler(error: GenericError.UnknownError) }
+                        return
+                }
+                
+                self.checkIfUserExists(ID: user.uid) { (exists, error) in
+                    
+                    guard error == nil else {
+                        completionHandler(error: error)
+                        return
+                    }
+
+                    if exists == true {
+                        completionHandler(error: nil)
+                        return
+                        
+                    } else {
+                        let info = SignupInfo(firstNames: firstNames, lastNames: lastName, phoneNumber: nil, gender: gender)
+                        self.createUser(ID: user.uid, userInfo: info) { (error) in
+                            completionHandler(error: error)
+                        }
+                    }
+                }
             }
         }
     }
@@ -48,6 +99,35 @@ class AccountManager {
             dispatch_async(dispatch_get_main_queue()){
                 completionHandler(error: error)
             }
+        }
+    }
+    
+    private func checkIfUserExists(ID ID: String, completionHandler: (exists: Bool?, error: ErrorType?) -> Void) {
+        
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(exists: snapshot.exists(), error: nil)
+            }
+            
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(exists: nil, error: error)
+            }
+        }
+    }
+    
+    private func createUser(ID ID: String, userInfo: SignupInfo, completionHandler: BasicCompletionHandler) {
+        
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).child(User.JSONKeys.id).setValue(ID) { (error, _) in
+            
+            guard error == nil else {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
+                return
+            }
+            
+            AppUserManager.sharedManager.updateUserWith(userInfo.updateIntent(), completionHandler: completionHandler)
         }
     }
 
