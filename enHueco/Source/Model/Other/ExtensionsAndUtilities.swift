@@ -134,7 +134,7 @@ extension Array {
     
     func find(predicate: (Generator.Element) throws -> Bool) -> Element? {
         
-        guard let index = (try? indexOf(predicate) ?? nil) ?? nil else { return nil }
+        guard let index = (try? indexOf(predicate)) ?? nil else { return nil }
         return self[safe: index]
     }
     

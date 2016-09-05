@@ -21,7 +21,7 @@ class PrivacyManager: FirebaseLogicManager  {
             return
         }
         
-        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary ?? nil) ?? nil else {
+        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary) ?? nil else {
             assertionFailure()
             dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
             return
