@@ -9,6 +9,7 @@
 import Foundation
 import Genome
 import Firebase
+import PureJsonSerializer
 
 class FriendsManager: FirebaseLogicManager {
 
@@ -155,7 +156,7 @@ class FriendsManager: FirebaseLogicManager {
                 return false
             }
             
-            completionHandler(results: try? [User](js: filteredFriendsJSON) ?? [])
+            completionHandler(results: (try? [User](js: Json.from(filteredFriendsJSON))) ?? [])
         }
     }
 }

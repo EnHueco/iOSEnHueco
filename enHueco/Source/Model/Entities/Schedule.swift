@@ -126,7 +126,8 @@ class Schedule: MappableObject, Equatable {
             }
         }
         
-        return Schedule(events: commonFreeTimePeriods)
+        // TODO: Find a way to build a schedule with BaseEvents 
+        return Schedule(events: [])//Schedule(events: commonFreeTimePeriods)
     }
 }
 

@@ -7,7 +7,7 @@ import Foundation
 import Firebase
 
 protocol RealtimePrivacyManagerDelegate: class {
-    func realtimePrivacyManagerDidReceivePrivacyUpdates(manager: RealtimePrivacyManagerDelegate)
+    func realtimePrivacyManagerDidReceivePrivacyUpdates(manager: RealtimePrivacyManager)
 }
 
 /// Handles privacy settings

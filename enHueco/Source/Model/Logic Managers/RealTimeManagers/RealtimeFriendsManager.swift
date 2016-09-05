@@ -83,8 +83,11 @@ extension RealtimeFriendsManager {
 
         return friendAndSchedules().flatMap {
 
-            guard let freeTime = $0.schedule?.currentAndNextFreeTimePeriods().currentFreeTimePeriod else { return nil }
-            return ($0.friend, freeTime)
+            guard let friend = $0.friend, let freeTime = $0.schedule?.currentAndNextFreeTimePeriods().currentFreeTimePeriod else {
+                return nil
+            }
+            
+            return (friend, freeTime)
         }
     }
 
@@ -98,11 +101,12 @@ extension RealtimeFriendsManager {
 
         return friendAndSchedules().flatMap {
 
-            guard let freeTime = $0.schedule?.currentAndNextFreeTimePeriods().nextFreeTimePeriod where freeTime.startHourInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
-                return nil
+            guard let friend = $0.friend, let freeTime = $0.schedule?.currentAndNextFreeTimePeriods().nextFreeTimePeriod
+                where freeTime.startDateInNearestPossibleWeekToDate(currentDate).timeIntervalSinceNow <= interval else {
+                    return nil
             }
 
-            return ($0.friend, freeTime)
+            return (friend, freeTime)
         }
     }
 }
