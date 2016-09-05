@@ -19,7 +19,7 @@ class User: Object, Equatable {
     struct JSONKeys {
         private init() {}
 
-        static let id = "user_id"
+        static let id = "id"
         static let institution = "institution"
         static let firstNames = "first_names"
         static let lastNames = "last_names"
