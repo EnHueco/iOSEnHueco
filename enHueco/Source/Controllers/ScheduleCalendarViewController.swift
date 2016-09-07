@@ -25,8 +25,11 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         }
     }
     
+    /// The IDs of the events. This array serves as a String -> Int mapping based on the index of the string
+    var eventIDs = [String]()
+    
     /// The real-time updates manager
-    private var friendManager: RealtimeUserManager?
+    private var realtimeUserManager: RealtimeUserManager?
 
     let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
@@ -42,24 +45,25 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         super.viewWillAppear(animated)
         
         if let userID = userID where scheduleToDisplay == nil {
-            friendManager = RealtimeUserManager(userID: userID, delegate: self)
+            realtimeUserManager = RealtimeUserManager(userID: userID, delegate: self)
         }
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        friendManager = nil
+        realtimeUserManager = nil
     }
 
     func reloadData() {
 
+        eventIDs = realtimeUserManager?.schedule?.events.map { $0.id } ?? []
         dayView.reloadData()
     }
 
     override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]! {
 
-        guard let schedule = scheduleToDisplay ?? friendManager?.schedule else {
+        guard let schedule = scheduleToDisplay ?? realtimeUserManager?.schedule else {
             return []
         }
         
@@ -73,7 +77,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
                 eventView = TKCalendarDayEventView()
             }
             
-            eventView.identifier = NSNumber(integer: Int(event.id) ?? -1)
+            eventView.identifier = eventIDs.indexOf(event.id) ?? -1
             eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .FreeTime ? UIColor(red: 0 / 255.0, green: 150 / 255.0, blue: 245 / 255.0, alpha: 0.15) : UIColor(red: 255 / 255.0, green: 213 / 255.0, blue: 0 / 255.0, alpha: 0.15))
@@ -94,10 +98,10 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         guard userID == appUserID else {
             return
         }
-
+        
         let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditEventViewController") as! AddEditEventViewController
         
-        viewController.eventToEditID = String(eventView.identifier)
+        viewController.eventToEditID = eventIDs[eventView.identifier.integerValue]
         viewController.scheduleViewController = parentViewController as! ScheduleViewController
         presentViewController(viewController, animated: true, completion: nil)
     }

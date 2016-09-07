@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3EF81162CC1D5A13B0F27A87 /* RealtimePrivacyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */; };
-		3EF81437563CC43F1929E9B8 /* RealtimeFriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */; };
+		3EF81437563CC43F1929E9B8 /* RealtimeUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8109E050A8937E1D64E2A /* RealtimeUserManager.swift */; };
 		3EF817079302DED37CF01189 /* RealtimeFriendsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */; };
 		3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */; };
 		40A43EF21102292AE43CC9C7 /* Pods_enHuecoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */; };
@@ -158,7 +158,7 @@
 
 /* Begin PBXFileReference section */
 		0E467C9B8CB8574CB6D39209 /* Pods_enHuecoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_enHuecoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeFriendManager.swift; sourceTree = "<group>"; };
+		3EF8109E050A8937E1D64E2A /* RealtimeUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeUserManager.swift; sourceTree = "<group>"; };
 		3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimePrivacyManager.swift; sourceTree = "<group>"; };
 		3EF817B9F48C8B6FF1836B93 /* FirebasePaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebasePaths.swift; sourceTree = "<group>"; };
 		3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeFriendsManager.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		3EF81A57C98F05A07A39E201 /* RealTimeManagers */ = {
 			isa = PBXGroup;
 			children = (
-				3EF8109E050A8937E1D64E2A /* RealtimeFriendManager.swift */,
+				3EF8109E050A8937E1D64E2A /* RealtimeUserManager.swift */,
 				3EF81990497EFD2341536B2E /* RealtimeFriendsManager.swift */,
 				F1B8DA0E1D77A7720019420E /* RealtimeFriendRequestsManager.swift */,
 				3EF8162EEC2ACF537D0C6143 /* RealtimePrivacyManager.swift */,
@@ -1083,7 +1083,7 @@
 				F183F8411C8077FC00390CF7 /* AppUserManager.swift in Sources */,
 				F16C62A31D6557DA000D44CA /* BaseEvent.swift in Sources */,
 				3EF81ECD4C3E733406A0F7BD /* FirebasePaths.swift in Sources */,
-				3EF81437563CC43F1929E9B8 /* RealtimeFriendManager.swift in Sources */,
+				3EF81437563CC43F1929E9B8 /* RealtimeUserManager.swift in Sources */,
 				3EF817079302DED37CF01189 /* RealtimeFriendsManager.swift in Sources */,
 				3EF81162CC1D5A13B0F27A87 /* RealtimePrivacyManager.swift in Sources */,
 			);

@@ -8,13 +8,14 @@
 
 import Foundation
 import Genome
+import PureJsonSerializer
 
 enum Gender: String {
     case Male = "Male"
     case Female = "Female"
 }
 
-class User: Object, Equatable {
+class User: MappableObject, Equatable {
 
     struct JSONKeys {
         private init() {}
@@ -39,7 +40,19 @@ class User: Object, Equatable {
     let gender: Gender
     
     var name: String { return "\(firstNames) \(lastNames)" }
-
+    
+    init(id: String, institution: String?, firstNames: String, lastNames: String, image: NSURL? = nil, imageThumbnail: NSURL? = nil, phoneNumber: String? = nil, gender: Gender) {
+        
+        self.id = id
+        self.institution = institution
+        self.firstNames = firstNames
+        self.lastNames = lastNames
+        self.image = image
+        self.imageThumbnail = imageThumbnail
+        self.phoneNumber = phoneNumber
+        self.gender = gender
+    }
+    
     required init(map: Map) throws {
         
         id = try map.extract(.Key(JSONKeys.id))
@@ -54,9 +67,27 @@ class User: Object, Equatable {
         image = try? map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
         imageThumbnail = try? map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
         phoneNumber = try? map.extract(.Key(JSONKeys.phoneNumber))
-        gender = try map.extract(.Key(JSONKeys.gender), transformer: GenomeTransformers.fromJSON)
+        gender = try map.extract(.Key(JSONKeys.gender), transformer: GenomeTransformers.fromJSON)        
+    }
+    
+    static func newInstance(json: Json, context: Context) throws -> Self {
+        let map = Map(json: json, context: context)
+        let new = try self.init(map: map)
+        try new.sequence(map)
+        return new
+    }
+    
+    func sequence(map: Map) throws {
         
-        try super.init(map: map)
+        try id ~> map[.Key(JSONKeys.id)]
+        try institution ~> map[.Key(JSONKeys.institution)]
+        try institution ~> map[.Key(JSONKeys.institution)]
+        try firstNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.firstNames)]
+        try lastNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.lastNames)]
+        try image ~> map[.Key(JSONKeys.image)].transformToJson(GenomeTransformers.toJSON)
+        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)].transformToJson(GenomeTransformers.toJSON)
+        try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
+        try gender ~> map[.Key(JSONKeys.gender)].transformToJson(GenomeTransformers.toJSON)
     }
     
     /*

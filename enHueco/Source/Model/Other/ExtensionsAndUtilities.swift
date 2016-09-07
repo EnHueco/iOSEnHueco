@@ -132,10 +132,11 @@ extension CollectionType {
 
 extension Array {
     
-    func find(predicate: (Generator.Element) throws -> Bool) -> Element? {
+    /// Finds the first element that matches the predicate
+    func find(predicate: (Generator.Element) throws -> Bool) -> (index: Int, element: Element)? {
         
         guard let index = (try? indexOf(predicate)) ?? nil else { return nil }
-        return self[safe: index]
+        return (index: index, self[index])
     }
     
     mutating func removeObject<U:Equatable>(object: U) -> Bool {

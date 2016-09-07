@@ -95,8 +95,7 @@ import FirebaseAuth
 
         view.endEditing(true)
 
-        guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else
-        {
+        guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else{
             //TODO: Shake animation
             return
         }
@@ -196,10 +195,12 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             return
             
         } else {
+            EHProgressHUD.showSpinnerInView(view)
             AccountManager.sharedManager.loginWith(facebookToken: FBSDKAccessToken.currentAccessToken().tokenString) { error in
-                // TODO: Redirect to upload picture if needed
+                EHProgressHUD.dismissSpinnerForView(self.view)
+                
                 guard error == nil else {
-                    // TODO: Show error
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                     return
                 }
                 

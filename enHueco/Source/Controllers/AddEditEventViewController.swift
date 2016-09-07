@@ -45,7 +45,7 @@ class AddEditEventViewController: UIViewController {
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
                 guard error == nil else {
-                    //TODO: Show error
+                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                     self.dismissViewControllerAnimated(true, completion: nil)
                     return
                 }
@@ -74,7 +74,7 @@ class AddEditEventViewController: UIViewController {
     @IBAction func save(sender: UIButton) {
 
         // If no weekdays selected
-        if embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count == 0 {
+        guard embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count != 0 else {
             EHNotifications.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .Warning)
             return
         }

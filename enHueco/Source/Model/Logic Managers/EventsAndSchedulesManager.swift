@@ -42,7 +42,7 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
             return
         }
         
-        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(FirebasePaths.schedules).child(user.uid)
+        let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(user.uid)
         
         scheduleReference.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             
@@ -53,37 +53,50 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
                 }
             }
             
-            guard let scheduleJSON = snapshot.value as? [String : AnyObject], let schedule = try? Schedule(js: scheduleJSON) else {
-                unknownError()
-                return
-            }
-            
-            for dummyEvent in dummyEvents {
-                guard schedule.canAddEvent(dummyEvent) else {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completionHandler(addedEventIDs: nil, error: EventsAndSchedulesManagerError.EventsOverlap)
-                    }
+            if let JSON = snapshot.value where !(JSON is NSNull) {
+                
+                guard let scheduleJSON = JSON as? [String : AnyObject], let schedule = try? Schedule(js: scheduleJSON) else {
+                    unknownError()
                     return
                 }
-            }
-            
-            do {
-                var update = [String : AnyObject]()
                 
                 for dummyEvent in dummyEvents {
-                    let newID = scheduleReference.childByAutoId().key
-                    update[newID] = try dummyEvent.jsonRepresentation().foundationDictionary
-                }
-                
-                scheduleReference.updateChildValues(update) { (error, _) in
-                    
-                    dispatch_async(dispatch_get_main_queue()){
-                        completionHandler(addedEventIDs: error == nil ? Array(update.keys) : nil, error: error)
+                    guard schedule.canAddEvent(dummyEvent) else {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            completionHandler(addedEventIDs: nil, error: EventsAndSchedulesManagerError.EventsOverlap)
+                        }
+                        return
                     }
                 }
+            }
+            
+            var update = [String : AnyObject]()
+            
+            for dummyEvent in dummyEvents {
                 
-            } catch {
-                unknownError()
+                let newID = scheduleReference.childByAutoId().key
+                let newEvent = Event(userID: user.uid,
+                                  id: newID,
+                                  type: dummyEvent.type,
+                                  name: dummyEvent.name,
+                                  location: dummyEvent.location,
+                                  startDate: dummyEvent.startDate,
+                                  endDate: dummyEvent.endDate,
+                                  repeating: dummyEvent.repeating)
+                
+                guard let eventJSON = (try? newEvent.jsonRepresentation().foundationDictionary) ?? nil else {
+                    unknownError()
+                    return
+                }
+                
+                update[newID] = eventJSON
+            }
+            
+            scheduleReference.updateChildValues(update) { (error, _) in
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    completionHandler(addedEventIDs: error == nil ? Array(update.keys) : nil, error: error)
+                }
             }
         }
     }

@@ -17,7 +17,12 @@ class Schedule: MappableObject, Equatable {
     var privacySettings = try! PrivacySettings() // Temporary ! We have to initialize this correctly
     
     required init(map: Map) throws {
-        events = try [Event](js: map.json).sort(<)
+        
+        guard let dictionary = map.json.foundationDictionary else {
+            throw GenericError.Error(message: "Not a dictionary")
+        }
+        
+        events = try [Event](js: Json.from(Array(dictionary.values))).sort(<)
     }
     
     init(events: [Event]) {

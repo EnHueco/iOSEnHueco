@@ -59,7 +59,20 @@ class BaseEvent: MappableObject {
     static func newInstance(json: Json, context: Context) throws -> Self {
         let map = Map(json: json, context: context)
         let new = try self.init(map: map)
+        try new.sequence(map)
         return new
+    }
+
+    func sequence(map: Map) throws {
+        
+        typealias JSONKeys = BaseEvent.JSONKeys
+        
+        try type ~> map[.Key(JSONKeys.type)].transformToJson(GenomeTransformers.toJSON)
+        try name ~> map[.Key(JSONKeys.name)]
+        try startDate ~> map[.Key(JSONKeys.startDate)].transformToJson(GenomeTransformers.toJSON)
+        try endDate ~> map[.Key(JSONKeys.endDate)].transformToJson(GenomeTransformers.toJSON)
+        try location ~> map[.Key(JSONKeys.location)]
+        try repeating ~> map[.Key(JSONKeys.repeating)]
     }
     
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest

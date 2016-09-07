@@ -22,12 +22,29 @@ class Event: BaseEvent, Equatable {
 
     let userID: String
     let id: String
+    
+    init(userID: String, id: String, type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repeating: Bool) {
+        
+        self.userID = userID
+        self.id = id
+        
+        super.init(type: type, name: name, location: location, startDate: startDate, endDate: endDate, repeating: repeating)
+    }
 
     required init(map: Map) throws {
+        
         userID = try map.extract(.Key(JSONKeys.userID))
         id = try map.extract(.Key(JSONKeys.id))
 
         try super.init(map: map)
+    }
+    
+    override func sequence(map: Map) throws {
+                
+        try userID ~> map[.Key(JSONKeys.userID)]
+        try id ~> map[.Key(JSONKeys.id)]
+        
+        try super.sequence(map)
     }
 }
 

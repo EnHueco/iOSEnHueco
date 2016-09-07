@@ -13,16 +13,12 @@ import FBSDKCoreKit
 import Genome
 import PureJsonSerializer
 
-private struct SignupInfo {
-    
+struct SignupInfo {
+
     var firstNames: String
     var lastNames: String
     var phoneNumber: String?
     var gender: Gender
-    
-    func updateIntent() -> UserUpdateIntent {
-        return UserUpdateIntent(institution: nil, firstNames: firstNames, lastNames: lastNames, image: nil, imageThumbnail: nil, phoneNumber: phoneNumber, gender: gender)
-    }
 }
 
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
@@ -73,7 +69,7 @@ class AccountManager {
                         
                     } else {
                         let info = SignupInfo(firstNames: firstNames, lastNames: lastName, phoneNumber: nil, gender: gender)
-                        self.createUser(ID: user.uid, userInfo: info) { (error) in
+                        self.createUser(id: user.uid, userInfo: info) { (error) in
                             completionHandler(error: error)
                         }
                     }
@@ -118,16 +114,21 @@ class AccountManager {
         }
     }
     
-    private func createUser(ID ID: String, userInfo: SignupInfo, completionHandler: BasicCompletionHandler) {
+    private func createUser(id id: String, userInfo: SignupInfo, completionHandler: BasicCompletionHandler) {
         
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).child(User.JSONKeys.id).setValue(ID) { (error, _) in
+        let user = User(id: id, institution: nil, firstNames: userInfo.firstNames, lastNames: userInfo.lastNames, gender: userInfo.gender)
+        
+        guard var updateJSON = (try? user.jsonRepresentation().foundationDictionary) ?? nil else {
+            assertionFailure()
+            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            return
+        }
+        
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(id).updateChildValues(updateJSON) { (error, reference) in
             
-            guard error == nil else {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
-                return
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(error: error)
             }
-            
-            AppUserManager.sharedManager.updateUserWith(userInfo.updateIntent(), completionHandler: completionHandler)
         }
     }
 

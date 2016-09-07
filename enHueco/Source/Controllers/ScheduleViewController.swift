@@ -44,10 +44,9 @@ class ScheduleViewController: UIViewController {
         
         navigationController?.navigationBarHidden = true
 
-        if userID != nil && userID == appUserID {
-            importCalendarButton.hidden = true
-            addEventButton.hidden = true
-        }
+        let canEdit = userID != nil && userID == appUserID
+        importCalendarButton.hidden = !canEdit
+        addEventButton.hidden = !canEdit
     }
 
     override func viewDidAppear(animated: Bool) {

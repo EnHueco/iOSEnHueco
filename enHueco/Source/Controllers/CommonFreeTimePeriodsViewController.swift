@@ -184,7 +184,7 @@ class CommonFreeTimePeriodsViewController: UIViewController {
     
     func didReceiveInformationForUserID(ID: String) {
         
-        let manager = realtimeUserManagers.find { $0.user?.id == ID }
+        let manager = realtimeUserManagers.find { $0.user?.id == ID }?.element
         
         guard manager?.schedule != nil && manager?.user != nil else {
             return
