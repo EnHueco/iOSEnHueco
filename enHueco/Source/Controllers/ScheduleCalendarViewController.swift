@@ -31,13 +31,9 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     /// The real-time updates manager
     private var realtimeUserManager: RealtimeUserManager?
 
-    let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         dayView.daysBackgroundView.backgroundColor = UIColor(red: 248 / 255.0, green: 248 / 255.0, blue: 248 / 255.0, alpha: 1)
     }
 
@@ -81,8 +77,6 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
             eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .FreeTime ? UIColor(red: 0 / 255.0, green: 150 / 255.0, blue: 245 / 255.0, alpha: 0.15) : UIColor(red: 255 / 255.0, green: 213 / 255.0, blue: 0 / 255.0, alpha: 0.15))
-
-            globalCalendar.timeZone = NSTimeZone(name: "UTC")!
 
             eventView.startDate = event.startDateInNearestPossibleWeekToDate(date)
             eventView.endDate = event.endDateInNearestPossibleWeekToDate(date)

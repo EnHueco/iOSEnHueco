@@ -90,10 +90,9 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             freeTimeOrClassSegmentedControl.selectedSegmentIndex = 1
         }
         
-        let currentDate = NSDate()
-        
-        startHourDatePicker.setDate(eventToEdit.startDateInNearestPossibleWeekToDate(currentDate), animated: true)
-        endHourDatePicker.setDate(eventToEdit.endDateInNearestPossibleWeekToDate(currentDate), animated: true)
+        startHourDatePicker.setDate(eventToEdit.startDate, animated: true)
+        endHourDatePicker.setDate(eventToEdit.endDate, animated: true)
+        updateStartAndEndHourCells()
     }
 
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -203,7 +202,7 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))
             
-        alertController.addAction(UIAlertAction(title: "Si", style: .Cancel, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Si", style: .Destructive, handler: { (action) in
             self.addEditEventParentViewController.deleteEventToEdit()
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))

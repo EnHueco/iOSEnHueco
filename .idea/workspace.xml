@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bda18d8-607b-4e76-b83d-1ca5f39340c5" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeFriendManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/RealTimeManagers/RealtimeUserManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/enHueco.iml" afterPath="$PROJECT_DIR$/.idea/enHueco.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/enHueco.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/AddEditEventViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/AddEditEventViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/CommonFreeTimePeriodsViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/LoginViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/LoginViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleCalendarViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleViewController.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Controllers/ScheduleViewController.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/BaseEvent.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Event.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/Schedule.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Entities/User.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/AccountManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Logic Managers/EventsAndSchedulesManager.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" afterPath="$PROJECT_DIR$/enHueco/Source/Model/Other/ExtensionsAndUtilities.swift" />
     </list>
     <ignored path="enHueco.iws" />
     <ignored path=".idea/workspace.xml" />

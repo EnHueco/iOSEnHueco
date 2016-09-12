@@ -56,10 +56,11 @@ class Schedule: MappableObject, Equatable {
     
     func eventsInDayOfDate(date: NSDate) -> [Event] {
         
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
         
         return events.filter {
-            return localCalendar.isDate($0.startDateInNearestPossibleWeekToDate(date), inSameDayAsDate: date)
+            return globalCalendar.component(.Weekday, fromDate: $0.startDate) == globalCalendar.component(.Weekday, fromDate: date)
         }
     }
     
