@@ -30,6 +30,9 @@ class ProfileViewController: UIViewController {
         view.addSubview(imageActivityIndicator!)
         imageActivityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
         imageActivityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
+        
+        imageImageView.contentMode = .ScaleAspectFill
+        backgroundImageView.contentMode = .ScaleAspectFill
     }
 
     override func viewDidLayoutSubviews() {
@@ -72,6 +75,26 @@ class ProfileViewController: UIViewController {
         
         firstNamesLabel.text = user.firstNames
         lastNamesLabel.text = user.lastNames
+        
+        imageImageView.hidden = false
+        backgroundImageView.hidden = false
+        
+        imageImageView.sd_setImageWithURL(user.image, placeholderImage: nil, options: [.RefreshCached, .RetryFailed, .AvoidAutoSetImage]) { (image, error, cacheType, url) in
+            
+            defer {
+                self.updateButtonColors()
+            }
+            
+            guard let image = image ?? UIImage(named: "stripes") else { return }
+            
+            UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                self.imageImageView.image = image
+            }, completion: nil)
+            
+            UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+            }, completion: nil)
+        }
     }
     
     func updateButtonColors() {
@@ -82,60 +105,6 @@ class ProfileViewController: UIViewController {
             self.editScheduleButton.backgroundColor = averageImageColor
         }
     }
-
-    func assignImages() {
-
-        /*PersistenceManager.sharedManager.loadImageFromPath(PersistenceManager.sharedManager.documentsPath + "/profile.jpg") {
-            (image) -> () in
-
-            dispatch_async(dispatch_get_main_queue()) {
-                var image: UIImage! = image
-
-                if image == nil {
-                    image = UIImage(named: "stripes")
-                }
-
-                self.imageImageView.hidden = false
-                self.backgroundImageView.hidden = false
-
-                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-
-                    self.imageImageView.image = image
-
-                }, completion: nil)
-
-                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-
-                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
-
-                }, completion: nil)
-
-                self.imageImageView.contentMode = .ScaleAspectFill
-                self.backgroundImageView.contentMode = .ScaleAspectFill
-                self.backgroundImageView.clipsToBounds = true
-                self.imageActivityIndicator.stopAnimating()
-
-                self.updateButtonColors()
-            }
-        }*/
-    }
-
-    /*func pollFromServer(timer: NSTimer) {
-
-        if imageImageView.image == nil {
-            imageActivityIndicator.startAnimating()
-        }
-
-        AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
-            success, error in
-
-            self.assignImages()
-
-            if !success {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-            }
-        }
-    }*/
 
     @IBAction func settingsButtonPressed(sender: UIButton) {
 

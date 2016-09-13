@@ -45,10 +45,10 @@ struct EventUpdateIntent: MappableBase {
 
         typealias JSONKeys = BaseEvent.JSONKeys
 
-        try type ~> map[.Key(JSONKeys.type)].transformToJson(GenomeTransformers.toJSON)
+        try type ~> map[.Key(JSONKeys.type)]
         try name ~> map[.Key(JSONKeys.name)]
-        try startDate ~> map[.Key(JSONKeys.startDate)].transformToJson(GenomeTransformers.toJSON)
-        try endDate ~> map[.Key(JSONKeys.endDate)].transformToJson(GenomeTransformers.toJSON)
+        try startDate ~> map[.Key(JSONKeys.startDate)]
+        try endDate ~> map[.Key(JSONKeys.endDate)]
         try location ~> map[.Key(JSONKeys.location)]
         try repeating ~> map[.Key(JSONKeys.repeating)]
     }

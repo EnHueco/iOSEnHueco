@@ -43,7 +43,7 @@ class PrivacySettings: Object {
         userID = try map.extract(.Key(JSONKeys.userID))
         showEventsNames = try map.extract(.Key(JSONKeys.showEventsNames))
         showEventsLocations = try map.extract(.Key(JSONKeys.showEventsLocations))
-        invisibilityEndDate = try map.extract(.Key(JSONKeys.showEventsLocations), transformer: GenomeTransformers.fromJSON)
+        invisibilityEndDate = try map.extract(.Key(JSONKeys.showEventsLocations))
         try super.init(map: map)
     }
 }

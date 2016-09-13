@@ -7,42 +7,53 @@
 //
 
 import Foundation
+import Genome
 import PureJsonSerializer
 
-struct GenomeTransformers
-{
-    static func fromJSON(value: String) throws -> NSURL {
-        guard let mapped = NSURL(string: value) else {
-            throw GenericError.Error(message: "Could not map URL. Found \(value)")
-        }
-        return mapped
-    }
+extension NSDate: JsonConvertibleType {
     
-    static func fromJSON(value: Double) throws -> NSDate {
-        return NSDate(timeIntervalSince1970: value)
-    }
-    
-    static func fromJSON<T: RawRepresentable>(value: Json) throws -> T {
-        guard let rawValue = value.anyValue as? T.RawValue,
-              let mapped = T(rawValue: rawValue) else {
-            
-                throw GenericError.Error(message: "Could not map URL. Found \(value)")
-        }
-        return mapped
-    }
-    
-    static func toJSON(value: NSURL?) -> Json {
-        guard let value = value?.absoluteString else { return Json.NullValue }
-        return Json(value)
-    }
+    public static func newInstance(json: Json, context: Context) throws -> Self {
         
-    static func toJSON<T: RawRepresentable>(value: T?) -> Json {
-        guard let value = value?.rawValue else { return Json.NullValue }
-        return Json(String(value))
+        guard let value = json.doubleValue else {
+            throw GenericError.Error(message: "Could not map URL. Found \(self)")
+        }
+        
+        return self.init(timeIntervalSince1970: value)
     }
     
-    static func toJSON(value: NSDate?) -> Json {
-        guard let value = value?.timeIntervalSince1970 else { return Json.NullValue }
-        return Json(value)
+    public func jsonRepresentation() throws -> Json {
+        return Json(timeIntervalSince1970)
+    }
+}
+
+extension RawRepresentable {
+    
+    public static func newInstance(json: Json, context: Context) throws -> Self {
+        
+        guard let rawValue = json.anyValue as? RawValue, let mapped = Self(rawValue: rawValue) else {
+            throw GenericError.Error(message: "Could not map RawRepresentable. Found \(self)")
+        }
+        
+        return mapped
+    }
+    
+    public func jsonRepresentation() throws -> Json {
+        return Json(String(rawValue))
+    }
+}
+
+extension NSURL: JsonConvertibleType {
+    
+    public static func newInstance(json: Json, context: Context) throws -> Self {
+        
+        guard let value = json.stringValue, let mapped = self.init(string: value) else {
+            throw GenericError.Error(message: "Could not map URL. Found \(self)")
+        }
+        
+        return mapped
+    }
+    
+    public func jsonRepresentation() throws -> Json {
+        return Json(absoluteString)
     }
 }

@@ -31,9 +31,9 @@ struct UserUpdateIntent: MappableBase {
         try institution ~> map[.Key(JSONKeys.institution)]
         try firstNames?.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.firstNames)]
         try lastNames?.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.lastNames)]
-        try image ~> map[.Key(JSONKeys.image)].transformToJson(GenomeTransformers.toJSON)
-        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)].transformToJson(GenomeTransformers.toJSON)
+        try image ~> map[.Key(JSONKeys.image)]
+        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)]
         try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
-        try gender ~> map[.Key(JSONKeys.gender)].transformToJson(GenomeTransformers.toJSON)
+        try gender ~> map[.Key(JSONKeys.gender)]
     }
 }

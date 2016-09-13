@@ -10,7 +10,7 @@ import Foundation
 import Genome
 import PureJsonSerializer
 
-enum Gender: String {
+enum Gender: String, JsonConvertibleType {
     case Male = "Male"
     case Female = "Female"
 }
@@ -64,10 +64,10 @@ class User: MappableObject, Equatable {
         self.firstNames = firstNames.joinWithSeparator(" ")
         self.lastNames = lastNames.joinWithSeparator(" ")
         
-        image = try? map.extract(.Key(JSONKeys.image), transformer: GenomeTransformers.fromJSON)
-        imageThumbnail = try? map.extract(.Key(JSONKeys.imageThumbnail), transformer: GenomeTransformers.fromJSON)
+        image = try? map.extract(.Key(JSONKeys.image))
+        imageThumbnail = try? map.extract(.Key(JSONKeys.imageThumbnail))
         phoneNumber = try? map.extract(.Key(JSONKeys.phoneNumber))
-        gender = try map.extract(.Key(JSONKeys.gender), transformer: GenomeTransformers.fromJSON)        
+        gender = try map.extract(.Key(JSONKeys.gender))        
     }
     
     static func newInstance(json: Json, context: Context) throws -> Self {
@@ -84,10 +84,10 @@ class User: MappableObject, Equatable {
         try institution ~> map[.Key(JSONKeys.institution)]
         try firstNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.firstNames)]
         try lastNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.lastNames)]
-        try image ~> map[.Key(JSONKeys.image)].transformToJson(GenomeTransformers.toJSON)
-        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)].transformToJson(GenomeTransformers.toJSON)
+        try image ~> map[.Key(JSONKeys.image)]
+        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)]
         try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
-        try gender ~> map[.Key(JSONKeys.gender)].transformToJson(GenomeTransformers.toJSON)
+        try gender ~> map[.Key(JSONKeys.gender)]
     }
     
     /*

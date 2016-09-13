@@ -118,11 +118,9 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     @IBAction func importFromFacebookButtonPressed(sender: UIButton) {
 
         let loginManager = FBSDKLoginManager()
-        loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self) {
-            (result, error) -> Void in
+        loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self) {(result, error) -> Void in
 
-            guard error == nil else
-            {
+            guard error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
@@ -130,23 +128,34 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
             if !result.isCancelled {
                 //We are logged into Facebook
 
-                FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields": "url", "width": "500", "redirect": "false"], HTTPMethod: "GET").startWithCompletionHandler() {
-                    (_, result, error) -> Void in
+                FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields": "url", "width": "500", "redirect": "false"], HTTPMethod: "GET").startWithCompletionHandler() {(_, result, error) -> Void in
 
                     guard let data = result["data"],
-                    let imageURL = data?["url"] as? String,
-                    let imageData = NSData(contentsOfURL: NSURL(string: imageURL)!),
-                    let image = UIImage(data: imageData)
-                    where error == nil
-                    else
-                    {
-                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                        return
+                        let imageURL = NSURL(string: data?["url"] as? String ?? ""),
+                        let imageData = NSData(contentsOfURL: imageURL),
+                        let image = UIImage(data: imageData)
+                        where error == nil
+                    else {
+                            EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                            return
                     }
 
                     let imageCropVC = RSKImageCropViewController(image: image)
                     imageCropVC.delegate = self
-                    self.presentViewController(imageCropVC, animated: true, completion: nil)
+                    //self.presentViewController(imageCropVC, animated: true, completion: nil)
+                    
+                    var intent = UserUpdateIntent()
+                    intent.image = imageURL
+                    
+                    AppUserManager.sharedManager.updateUserWith(intent, completionHandler: { (error) in
+                        
+                        guard error == nil else {
+                            EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                            return
+                        }
+                        
+                        self.delegate?.importProfileImageViewControllerDidFinishImportingImage(self)
+                    })
                 }
             }
         }

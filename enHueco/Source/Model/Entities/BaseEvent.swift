@@ -12,7 +12,7 @@ import PureJsonSerializer
 
 /// The type of the event
 
-enum EventType: String {
+enum EventType: String, JsonConvertibleType {
     case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
@@ -48,10 +48,10 @@ class BaseEvent: MappableObject {
 
     required init(map: Map) throws {
         
-        type = try map.extract(.Key(JSONKeys.type), transformer: GenomeTransformers.fromJSON)
+        type = try map.extract(.Key(JSONKeys.type))
         name = try? map.extract(.Key(JSONKeys.name))
-        startDate = try map.extract(.Key(JSONKeys.startDate), transformer: GenomeTransformers.fromJSON)
-        endDate = try map.extract(.Key(JSONKeys.endDate), transformer: GenomeTransformers.fromJSON)
+        startDate = try map.extract(.Key(JSONKeys.startDate))
+        endDate = try map.extract(.Key(JSONKeys.endDate))
         location = try? map.extract(.Key(JSONKeys.location))
         repeating = try map.extract(.Key(JSONKeys.repeating))
     }
@@ -67,10 +67,10 @@ class BaseEvent: MappableObject {
         
         typealias JSONKeys = BaseEvent.JSONKeys
         
-        try type ~> map[.Key(JSONKeys.type)].transformToJson(GenomeTransformers.toJSON)
+        try type ~> map[.Key(JSONKeys.type)]
         try name ~> map[.Key(JSONKeys.name)]
-        try startDate ~> map[.Key(JSONKeys.startDate)].transformToJson(GenomeTransformers.toJSON)
-        try endDate ~> map[.Key(JSONKeys.endDate)].transformToJson(GenomeTransformers.toJSON)
+        try startDate ~> map[.Key(JSONKeys.startDate)]
+        try endDate ~> map[.Key(JSONKeys.endDate)]
         try location ~> map[.Key(JSONKeys.location)]
         try repeating ~> map[.Key(JSONKeys.repeating)]
     }
