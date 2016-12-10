@@ -14,7 +14,7 @@ class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDe
 
         delegate = self
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FriendsSplitViewController.orientationChanged(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(FriendsSplitViewController.orientationChanged(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,13 +22,13 @@ class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDe
         // Dispose of any resources that can be recreated.
     }
 
-    func orientationChanged(notification: NSNotification) {
+    func orientationChanged(_ notification: Notification) {
 
-        switch UIApplication.sharedApplication().statusBarOrientation {
+        switch UIApplication.shared.statusBarOrientation {
 
-        case .Portrait, .PortraitUpsideDown:
+        case .portrait, .portraitUpsideDown:
 
-            preferredDisplayMode = .PrimaryHidden
+            preferredDisplayMode = .primaryHidden
 
         default: break
 
@@ -39,7 +39,7 @@ class FriendsSplitViewController: UISplitViewController, UISplitViewControllerDe
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

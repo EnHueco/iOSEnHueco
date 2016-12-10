@@ -9,14 +9,15 @@
 import Foundation
 import EventKit
 import Firebase
+import Genome
 
 enum EventsAndSchedulesManagerError: EHErrorType {
-    case EventsOverlap
+    case eventsOverlap
 
     var localizedDescription: String? {
 
         switch self {
-        case .EventsOverlap: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
+        case .eventsOverlap: return "EventImportOverlapExplanation".localizedUsingGeneralFile()
 
         default: return nil
         }
@@ -25,7 +26,7 @@ enum EventsAndSchedulesManagerError: EHErrorType {
 
 class EventsAndSchedulesManager: FirebaseLogicManager {
 
-    private init() {}
+    fileprivate init() {}
 
     static let sharedManager = EventsAndSchedulesManager()
 
@@ -34,43 +35,45 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
      
      - parameter dummyEvents:    Dummy events that contain the information of the events that wish to be added
      */
-    func addEventsWithDataFrom(dummyEvents: [BaseEvent], completionHandler: (addedEventIDs: [String]?, error: ErrorType?) -> Void) {
+    func addEventsWithDataFrom(_ dummyEvents: [BaseEvent], completionHandler: @escaping (_ addedEventIDs: [String]?, _ error: Error?) -> Void) {
         
         guard let user = (firebaseUser() { (error) in
-            completionHandler(addedEventIDs: nil, error: error)
+            completionHandler(nil, error)
         }) else {
             return
         }
         
         let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(user.uid)
         
-        scheduleReference.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+        scheduleReference.observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) in
             
             let unknownError = {
                 assertionFailure()
-                dispatch_async(dispatch_get_main_queue()) {
-                    completionHandler(addedEventIDs: nil, error: GenericError.UnknownError)
+                DispatchQueue.main.async {
+                    completionHandler(nil, GenericError.unknownError)
                 }
             }
             
-            if let JSON = snapshot.value where !(JSON is NSNull) {
+            let json = snapshot.value ?? [:]
+            
+            if !(json is NSNull) {
                 
-                guard let scheduleJSON = JSON as? [String : AnyObject], let schedule = try? Schedule(js: scheduleJSON) else {
+                guard let schedule = try? Schedule(node: json) else {
                     unknownError()
                     return
                 }
                 
                 for dummyEvent in dummyEvents {
                     guard schedule.canAddEvent(dummyEvent) else {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            completionHandler(addedEventIDs: nil, error: EventsAndSchedulesManagerError.EventsOverlap)
+                        DispatchQueue.main.async {
+                            completionHandler(nil, EventsAndSchedulesManagerError.eventsOverlap)
                         }
                         return
                     }
                 }
             }
             
-            var update = [String : AnyObject]()
+            var update = [String : Any]()
             
             for dummyEvent in dummyEvents {
                 
@@ -84,7 +87,7 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
                                   endDate: dummyEvent.endDate,
                                   repeating: dummyEvent.repeating)
                 
-                guard let eventJSON = (try? newEvent.jsonRepresentation().foundationDictionary) ?? nil else {
+                guard let eventJSON = (try? newEvent.foundationDictionary()) ?? nil else {
                     unknownError()
                     return
                 }
@@ -94,29 +97,29 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
             
             scheduleReference.updateChildValues(update) { (error, _) in
                 
-                dispatch_async(dispatch_get_main_queue()){
-                    completionHandler(addedEventIDs: error == nil ? Array(update.keys) : nil, error: error)
+                DispatchQueue.main.async{
+                    completionHandler(error == nil ? Array(update.keys) : nil, error)
                 }
             }
         }
     }
     
     /// Deletes the events with the given IDs
-    func deleteEvents(IDs: [String], completionHandler: BasicCompletionHandler) {
+    func deleteEvents(_ IDs: [String], completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
+        guard let appUser = firebaseUser(completionHandler) else { return }
 
         let scheduleReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid)
         
-        var update = [String : AnyObject]()
+        var update = [String : Any]()
 
         for ID in IDs {
             update[ID] = NSNull()
         }
         
         scheduleReference.updateChildValues(update) { (error, _) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
@@ -127,43 +130,43 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
      - parameter eventID: The ID of the event to edit
      - parameter intent:  The intent with the values to change
      */
-    func editEvent(eventID eventID: String, withIntent intent: EventUpdateIntent, completionHandler: BasicCompletionHandler) {
+    func editEvent(_ eventID: String, withIntent intent: EventUpdateIntent, completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUser = firebaseUser(errorHandler: completionHandler) else { return }
+        guard let appUser = firebaseUser(completionHandler) else { return }
         
         let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(eventID)
         
-        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary) ?? nil else {
+        guard let updateJSON = (try? intent.foundationDictionary()) ?? nil else {
             assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            DispatchQueue.main.async{ completionHandler(GenericError.unknownError) }
             return
         }
         
         eventReference.updateChildValues(updateJSON) { (error, _) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
     
     /// Fetches the event with the given ID
-    func fetchEvent(id id: String, completionHandler: (event: Event?, error: ErrorType?) -> Void) {
+    func fetchEvent(_ id: String, completionHandler: @escaping (_ event: Event?, _ error: Error?) -> Void) {
         
-        guard let appUser = firebaseUser(errorHandler: { (error) in
-            dispatch_async(dispatch_get_main_queue()) { completionHandler(event: nil, error: error) }
+        guard let appUser = firebaseUser({ (error) in
+            DispatchQueue.main.async { completionHandler(nil, error) }
         }) else { return }
         
         let eventReference = FIRDatabase.database().reference().child(FirebasePaths.schedules).child(appUser.uid).child(id)
 
-        eventReference.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+        eventReference.observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) in
             
-            guard let valueJSON = snapshot.value as? [String : AnyObject], let event = try? Event(js: valueJSON) else {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(event: nil, error: GenericError.UnknownError) }
+            guard let valueJSON = snapshot.value, let event = try? Event(node: valueJSON) else {
+                DispatchQueue.main.async { completionHandler(nil, GenericError.unknownError) }
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(event: event, error: nil)
+            DispatchQueue.main.async {
+                completionHandler(event, nil)
             }
         }
     }
@@ -178,7 +181,7 @@ extension EventsAndSchedulesManager {
      - parameter generateFreeTimePeriodsBetweenClasses: If gaps between classes should be calculated and added to the schedule.
      */
     
-    class func importScheduleFromCalendar(calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses: Bool, completionHandler: BasicCompletionHandler) {
+    class func importScheduleFromCalendar(_ calendar: EKCalendar, generateFreeTimePeriodsBetweenClasses: Bool, completionHandler: BasicCompletionHandler) {
         /*
 
         let today = NSDate()

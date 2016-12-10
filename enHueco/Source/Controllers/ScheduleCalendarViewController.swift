@@ -11,7 +11,7 @@ import TapkuLibrary
 
 class ScheduleCalendarViewController: TKCalendarDayViewController {
     
-    private let appUserID = AccountManager.sharedManager.userID
+    fileprivate let appUserID = AccountManager.sharedManager.userID
     
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
     var userID = AccountManager.sharedManager.userID
@@ -29,7 +29,7 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
     var eventIDs = [String]()
     
     /// The real-time updates manager
-    private var realtimeUserManager: RealtimeUserManager?
+    fileprivate var realtimeUserManager: RealtimeUserManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +37,15 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         dayView.daysBackgroundView.backgroundColor = UIColor(red: 248 / 255.0, green: 248 / 255.0, blue: 248 / 255.0, alpha: 1)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let userID = userID where scheduleToDisplay == nil {
+        if let userID = userID, scheduleToDisplay == nil {
             realtimeUserManager = RealtimeUserManager(userID: userID, delegate: self)
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeUserManager = nil
@@ -57,53 +57,49 @@ class ScheduleCalendarViewController: TKCalendarDayViewController {
         dayView.reloadData()
     }
 
-    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventsForDate date: NSDate!) -> [AnyObject]! {
-
+    override func calendarDayTimelineView(_ calendarDay: TKCalendarDayView!, eventsFor date: Date!) -> [Any]! {
+        
         guard let schedule = scheduleToDisplay ?? realtimeUserManager?.schedule else {
             return []
         }
         
         let eventsInDay = schedule.eventsInDayOfDate(date)
         var eventViews = [TKCalendarDayEventView]()
-
+        
         for event in eventsInDay {
-            var eventView = calendarDay.dequeueReusableEventView
-
-            if eventView == nil {
-                eventView = TKCalendarDayEventView()
-            }
+            var eventView = calendarDay.dequeueReusableEventView!
             
-            eventView.identifier = eventIDs.indexOf(event.id) ?? -1
+            eventView.identifier = NSNumber(integerLiteral: eventIDs.index(of: event.id) ?? -1)
             eventView.titleLabel.text = event.name ?? (event.type == .FreeTime ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
             eventView.locationLabel.text = event.location
             eventView.backgroundColor = (event.type == .FreeTime ? UIColor(red: 0 / 255.0, green: 150 / 255.0, blue: 245 / 255.0, alpha: 0.15) : UIColor(red: 255 / 255.0, green: 213 / 255.0, blue: 0 / 255.0, alpha: 0.15))
-
+            
             eventView.startDate = event.startDateInNearestPossibleWeekToDate(date)
             eventView.endDate = event.endDateInNearestPossibleWeekToDate(date)
-
+            
             eventViews.append(eventView)
         }
-
+        
         return eventViews
     }
-
-    override func calendarDayTimelineView(calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!) {
+    
+    override func calendarDayTimelineView(_ calendarDay: TKCalendarDayView!, eventViewWasSelected eventView: TKCalendarDayEventView!) {
 
         guard userID == appUserID else {
             return
         }
         
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditEventViewController") as! AddEditEventViewController
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "AddEditEventViewController") as! AddEditEventViewController
         
-        viewController.eventToEditID = eventIDs[eventView.identifier.integerValue]
-        viewController.scheduleViewController = parentViewController as! ScheduleViewController
-        presentViewController(viewController, animated: true, completion: nil)
+        viewController.eventToEditID = eventIDs[eventView.identifier.intValue]
+        viewController.scheduleViewController = parent as! ScheduleViewController
+        present(viewController, animated: true, completion: nil)
     }
 }
 
 extension ScheduleCalendarViewController: RealtimeUserManagerDelegate {
     
-    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeUserManager) {
         reloadData()
     }
 }

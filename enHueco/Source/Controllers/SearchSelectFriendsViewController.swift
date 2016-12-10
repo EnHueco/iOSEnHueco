@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchSelectFriendsViewControllerDelegate: class {
-    func searchSelectFriendsViewController(controller: SearchSelectFriendsViewController, didSelectFriends friends: [User])
+    func searchSelectFriendsViewController(_ controller: SearchSelectFriendsViewController, didSelectFriends friends: [User])
 }
 
 class SearchSelectFriendsViewController: UIViewController {
@@ -22,16 +22,16 @@ class SearchSelectFriendsViewController: UIViewController {
     var filteredFriendsAndSchedules = [(friend: User, schedule: Schedule)]()
 
     /// The friends logic manager (if currently fetching updates)
-    private var realtimeFriendsManager: RealtimeFriendsManager?
+    fileprivate var realtimeFriendsManager: RealtimeFriendsManager?
 
-    var selectedCells = [NSIndexPath: AnyObject]()
+    var selectedCells = [IndexPath: Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.tintColor = UIColor.whiteColor()
-        navigationBar.barStyle = .BlackTranslucent
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.tintColor = UIColor.white
+        navigationBar.barStyle = .blackTranslucent
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
         view.backgroundColor = EHInterfaceColor.defaultNavigationBarColor
 
         tableView.dataSource = self
@@ -39,13 +39,13 @@ class SearchSelectFriendsViewController: UIViewController {
         searchBar.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         realtimeFriendsManager = RealtimeFriendsManager(delegate: self)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeFriendsManager = nil
@@ -56,7 +56,7 @@ class SearchSelectFriendsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func addButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 
         var selectedFriends = [User]()
 
@@ -66,12 +66,12 @@ class SearchSelectFriendsViewController: UIViewController {
 
         delegate?.searchSelectFriendsViewController(self, didSelectFriends: selectedFriends)
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func cancelButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     /// Reloads the friends and schedules array
@@ -80,7 +80,7 @@ class SearchSelectFriendsViewController: UIViewController {
         guard let friendsManager = realtimeFriendsManager else { return }
         
         filteredFriendsAndSchedules = friendsManager.friendAndSchedules().flatMap {
-            guard let friend = $0.friend, schedule = $0.schedule else { return nil }
+            guard let friend = $0.friend, let schedule = $0.schedule else { return nil }
             return (friend, schedule)
         }
     }
@@ -88,19 +88,19 @@ class SearchSelectFriendsViewController: UIViewController {
 
 extension SearchSelectFriendsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return filteredFriendsAndSchedules.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let friend = filteredFriendsAndSchedules[indexPath.row].friend
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("SearchFriendsPrivacyViewControllerCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchFriendsPrivacyViewControllerCell")!
         
         cell.textLabel?.text = friend.name
-        cell.accessoryType = (selectedCells[indexPath] != nil ? .Checkmark : .None)
+        cell.accessoryType = (selectedCells[indexPath] != nil ? .checkmark : .none)
         
         return cell
     }
@@ -108,23 +108,23 @@ extension SearchSelectFriendsViewController: UITableViewDataSource {
 
 extension SearchSelectFriendsViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if selectedCells[indexPath] != nil {
-            selectedCells.removeValueForKey(indexPath)
+            selectedCells.removeValue(forKey: indexPath)
         } else {
-            selectedCells[indexPath] = true
+            selectedCells[indexPath] = true as Any?
         }
         
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
 extension SearchSelectFriendsViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeFriendsManager) {
         reloadFriendsData()
         tableView.reloadData()
     }
@@ -132,14 +132,14 @@ extension SearchSelectFriendsViewController: RealtimeFriendsManagerDelegate {
 
 extension SearchSelectFriendsViewController: UISearchBarDelegate {
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         reloadFriendsData()
         
         if !searchText.isBlank() {
             filteredFriendsAndSchedules = filteredFriendsAndSchedules.filter {
                 
-                for word in $0.friend.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                for word in $0.friend.name.components(separatedBy: " ") where word.lowercased().hasPrefix(searchText.lowercased()) {
                     return true
                 }
                 

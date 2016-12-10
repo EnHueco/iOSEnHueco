@@ -10,16 +10,16 @@ import Foundation
 import FirebaseAuth
 
 protocol FirebaseLogicManager {
-    func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser?
+    func firebaseUser(_ errorHandler: @escaping BasicCompletionHandler) -> FIRUser?
 }
 
 extension FirebaseLogicManager {
     
-    func firebaseUser(errorHandler errorHandler: BasicCompletionHandler) -> FIRUser? {
+    func firebaseUser(_ errorHandler: @escaping BasicCompletionHandler) -> FIRUser? {
         
         guard let user = FIRAuth.auth()?.currentUser else {
             assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ errorHandler(error: GenericError.NotLoggedIn) }
+            DispatchQueue.main.async{ errorHandler(GenericError.notLoggedIn) }
             return nil
         }
         

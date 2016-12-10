@@ -16,10 +16,10 @@ import Firebase
 import APAddressBook
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     static var sharedDelegate: AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
 
     /// The navigation to which the login controller belongs
@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     /// If we are currently logging out
     var loggingOut = false
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // Start Firebase
         FIRApp.configure()
@@ -41,33 +41,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Start FBSDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
-        if #available(iOS 9.0, *) {
-            if WCSession.isSupported() {
-                let session = WCSession.defaultSession()
-                session.delegate = self
-                session.activateSession()
-            }
-        }
+        // FIXME: Implement correctly or remove
+        
+//        if #available(iOS 9.0, *) {
+//            if WCSession.isSupported() {
+//                let session = WCSession.default()
+//                session.delegate = self
+//                session.activate()
+//            }
+//        }
 
-        if NSUserDefaults.standardUserDefaults().boolForKey("notFirstLaunch") {
-            UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+        if UserDefaults.standard.bool(forKey: "notFirstLaunch") {
+            UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
             
         } else {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "notFirstLaunch")
+            UserDefaults.standard.set(true, forKey: "notFirstLaunch")
         }
 
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
 
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
 
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
 
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -75,61 +77,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
 
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
 
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
         FBSDKAppEvents.activateApp()
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
 
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
     }
 
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
 
-        return UI_USER_INTERFACE_IDIOM() == .Phone ? .Portrait : .All
+        return UI_USER_INTERFACE_IDIOM() == .phone ? .portrait : .all
     }
 
-    @available(iOS 9.0, *)
-    func session(session: WCSession, didReceiveMessage message: [String:AnyObject], replyHandler: ([String:AnyObject]) -> Void) {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
 
-        /*
-        if message["request"] as! String == "friendsCurrentlyInGap"
-        {
-            var responseDictionary = [String : AnyObject]()
-            let friendsCurrentlyFreeAndFreeTimePeriods = CurrentStateManager.sharedManager.currentlyAvailableFriends()
-            
-            var friendsArray = [[String : AnyObject]]()
-            
-            for (friend, freeTimePeriod) in friendsCurrentlyFreeAndFreeTimePeriods
-            {
-                var friendDictionary = [String : AnyObject]()
-                
-                friendDictionary["name"] = friend.name
-                friendDictionary["imageURL"] = friend.imageURL?.absoluteString
-                friendDictionary["gapEndDate"] = freeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
-                
-                friendsArray.append(friendDictionary)
-            }
-            
-            responseDictionary["friends"] = friendsArray
-            
-            replyHandler(responseDictionary)
-        }
-        */
-    }
-
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     // TODO: Update when the time comes
@@ -192,54 +165,92 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }*/
 }
 
+// TODO: Implement correctly or remove
+
+//@available(iOS 9.0, *)
+//extension AppDelegate: WCSessionDelegate {
+//    
+//    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+//        
+//        /*
+//         if message["request"] as! String == "friendsCurrentlyInGap"
+//         {
+//         var responseDictionary = [String : Any]()
+//         let friendsCurrentlyFreeAndFreeTimePeriods = CurrentStateManager.sharedManager.currentlyAvailableFriends()
+//         
+//         var friendsArray = [[String : Any]]()
+//         
+//         for (friend, freeTimePeriod) in friendsCurrentlyFreeAndFreeTimePeriods
+//         {
+//         var friendDictionary = [String : Any]()
+//         
+//         friendDictionary["name"] = friend.name
+//         friendDictionary["imageURL"] = friend.imageURL?.absoluteString
+//         friendDictionary["gapEndDate"] = freeTimePeriod.endHourInNearestPossibleWeekToDate(NSDate())
+//         
+//         friendsArray.append(friendDictionary)
+//         }
+//         
+//         responseDictionary["friends"] = friendsArray
+//         
+//         replyHandler(responseDictionary)
+//         }
+//         */
+//    }
+//    
+//    func sessionDidBecomeInactive(_ session: WCSession) {}
+//    
+//    func sessionDidDeactivate(_ session: WCSession) {}
+//}
+
 extension AppDelegate {
     
     // TODO: Move later to a dedicated manager
-    func callFriend(phoneNumber : String) {
-        guard let url = NSURL(string: "tel://\(phoneNumber)") else { return }
-        UIApplication.sharedApplication().openURL(url)
+    func callFriend(_ phoneNumber : String) {
+        guard let url = URL(string: "tel://\(phoneNumber)") else { return }
+        UIApplication.shared.openURL(url)
     }
     
     // TODO: Move later to a dedicated manager
-    func whatsappMessageTo(friendABID : NSNumber?) {
-        guard let url = NSURL(string: "whatsapp://send?" + ((friendABID == nil) ? "": "abid=\(friendABID!)")) else { return }
-        UIApplication.sharedApplication().openURL(url)
+    func whatsappMessageTo(_ friendABID : NSNumber?) {
+        guard let url = URL(string: "whatsapp://send?" + ((friendABID == nil) ? "": "abid=\(friendABID!)")) else { return }
+        UIApplication.shared.openURL(url)
     }
     
     // TODO: Move later to a dedicated manager
-    func getFriendABID(phoneNumber : String, completionHandler : (abid: NSNumber?) -> ()) {
+    func getFriendABID(_ phoneNumber : String, completionHandler : @escaping (_ abid: NSNumber?) -> ()) {
         
-        let addressBook = APAddressBook()
-        addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
-        
-        addressBook.loadContacts({ (contacts: [AnyObject]!, error: NSError!) in
-            
-            guard let contacts = contacts else {
-                completionHandler(abid: nil)
-                return
-            }
-            
-            for contact in contacts {
-                guard let contactAP = contact as? APContact else { continue }
-                
-                for phone in contactAP.phones ?? [] {
-                    guard var phoneString = phone as? String else { continue }
-                    
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
-                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
-                    
-                    if phoneString.rangeOfString(phoneNumber) != nil {
-                        completionHandler(abid: contactAP.recordID)
-                        return
-                    }
-                }
-            }
-        })
-        return
+        // FIXME
+//        let addressBook = APAddressBook()
+//        addressBook.fieldsMask =  APContactField.Phones.union(APContactField.RecordID)
+//        
+//        addressBook.loadContacts({ (contacts: [Any]!, error: NSError!) in
+//            
+//            guard let contacts = contacts else {
+//                completionHandler(abid: nil)
+//                return
+//            }
+//            
+//            for contact in contacts {
+//                guard let contactAP = contact as? APContact else { continue }
+//                
+//                for phone in contactAP.phones ?? [] {
+//                    guard var phoneString = phone as? String else { continue }
+//                    
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString("(", withString: "")
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString(")", withString: "")
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString("-", withString: "")
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString("+", withString: "")
+//                    phoneString = phoneString.stringByReplacingOccurrencesOfString(" ", withString: "")
+//                    
+//                    if phoneString.rangeOfString(phoneNumber) != nil {
+//                        completionHandler(abid: contactAP.recordID)
+//                        return
+//                    }
+//                }
+//            }
+//        })
+//        return
     }
 }
-

@@ -17,15 +17,15 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
     @IBOutlet weak var commonFreeTimePeriodsButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
 
-    private var dotsBarButtonItem: UIBarButtonItem!
+    fileprivate var dotsBarButtonItem: UIBarButtonItem!
     
     /// The ID of the friend to display
     var friendID: String?
 
     // Real-time logic manager (If view visible)
-    private var realtimeFriendManager: RealtimeUserManager?
+    fileprivate var realtimeFriendManager: RealtimeUserManager?
 
-    private var recordId: NSNumber?
+    fileprivate var recordId: NSNumber?
 
     let localizableStringsFile = "Friends"
 
@@ -46,7 +46,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let friendID = friendID {
@@ -55,7 +55,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
         navigationController?.setNavigationBarHidden(false, animated: true)
 
-        transitionCoordinator()?.animateAlongsideTransition({
+        transitionCoordinator?.animate(alongsideTransition: {
             (context) -> Void in
 
             self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -64,21 +64,21 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         }, completion: {
             (context) -> Void in
 
-            if !context.isCancelled() {
-                UIView.animateWithDuration(0.3) {
-                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), forBarMetrics: .Default)
-                }
+            if !context.isCancelled {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), for: .default)
+                }) 
             } else {
                 self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
                 self.navigationController?.navigationBar.shadowImage = UIImage()
             }
         })
 
-        let dotsButton = UIButton(type: .Custom)
+        let dotsButton = UIButton(type: .custom)
         dotsButton.frame.size = CGSize(width: 20, height: 20)
-        dotsButton.setBackgroundImage(UIImage(named: "Dots")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dotsButton.addTarget(self, action: #selector(FriendDetailViewController.dotsIconPressed(_:)), forControlEvents: .TouchUpInside)
-        dotsButton.tintColor = UIColor.whiteColor()
+        dotsButton.setBackgroundImage(UIImage(named: "Dots")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+        dotsButton.addTarget(self, action: #selector(FriendDetailViewController.dotsIconPressed(_:)), for: .touchUpInside)
+        dotsButton.tintColor = UIColor.white
 
         dotsBarButtonItem = UIBarButtonItem(customView: dotsButton)
 
@@ -101,14 +101,14 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
         
         setRecordId()
         
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         view.addSubview(activityIndicator)
-        activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
-        activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
+        activityIndicator.autoAlignAxis(.horizontal, toSameAxisOf: imageImageView)
+        activityIndicator.autoAlignAxis(.vertical, toSameAxisOf: imageImageView)
         activityIndicator.startAnimating()
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.imageImageView.sd_setImageWithURL(friend.image, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed], completed: {
+        DispatchQueue.main.async {
+            self.imageImageView.sd_setImage(with: friend.image as URL!, placeholderImage: nil, options: [.avoidAutoSetImage, .highPriority, .refreshCached, .retryFailed], completed: {
                 (image, error, cacheType, _) in
                 
                 activityIndicator.removeFromSuperview()
@@ -117,15 +117,15 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                     return
                 }
                 
-                UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                UIView.transition(with: self.imageImageView, duration: 1, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                     
                     self.imageImageView.image = image
                     
                     }, completion: nil)
                 
-                UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                UIView.transition(with: self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                     
-                    self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+                    self.backgroundImageView.image = image.applyBlur(withRadius: 40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
                     
                     }, completion: nil)
                 
@@ -133,8 +133,8 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             })
         }
         
-        imageImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.contentMode = .ScaleAspectFill
+        imageImageView.contentMode = .scaleAspectFill
+        backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.clipsToBounds = true
     }
 
@@ -146,52 +146,52 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func updateButtonColors() {
 
-        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFromImage: imageImageView.image), isFlat: true, alpha: 0.4)
+        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFrom: imageImageView.image!), isFlat: true, alpha: 0.4)
 
-        UIView.animateWithDuration(0.8) {
+        UIView.animate(withDuration: 0.8, animations: {
             self.viewScheduleButton.backgroundColor = averageImageColor
             self.commonFreeTimePeriodsButton.backgroundColor = averageImageColor
-        }
+        }) 
     }
 
-    func dotsIconPressed(sender: UIButton) {
+    func dotsIconPressed(_ sender: UIButton) {
 
-        let menu = storyboard!.instantiateViewControllerWithIdentifier("PopOverMenuViewController") as! PopOverMenuViewController
+        let menu = storyboard!.instantiateViewController(withIdentifier: "PopOverMenuViewController") as! PopOverMenuViewController
 
         menu.titlesAndIcons = [("Call".localizedUsingGeneralFile(), UIImage(named: "Phone")!), ("WhatsApp", UIImage(named: "WhatsApp")!), ("Options".localizedUsingGeneralFile(), UIImage(named: "sliders")!)]
         menu.tintColor = UIColor(white: 1, alpha: 0.8)
         menu.delegate = self
 
-        menu.modalInPopover = true
-        menu.modalPresentationStyle = .Popover
+        menu.isModalInPopover = true
+        menu.modalPresentationStyle = .popover
         menu.popoverPresentationController?.delegate = self
         menu.popoverPresentationController?.barButtonItem = dotsBarButtonItem
         menu.popoverPresentationController?.backgroundColor = UIColor(white: 0.80, alpha: 0.35)
 
-        presentViewController(menu, animated: true, completion: nil)
+        present(menu, animated: true, completion: nil)
     }
 
-    func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int) {
+    func popOverMenuViewController(_ controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int) {
 
         guard let friend = realtimeFriendManager?.user else { return }
         
         let appDelegate = AppDelegate.sharedDelegate
         
-        if let number = friend.phoneNumber where index == 0 {
+        if let number = friend.phoneNumber, index == 0 {
             
             appDelegate.callFriend(number)
-            controller.dismissViewControllerAnimated(true, completion: nil)
+            controller.dismiss(animated: true, completion: nil)
             
-        } else if let recordId = recordId where index == 1 {
+        } else if let recordId = recordId, index == 1 {
             
             appDelegate.whatsappMessageTo(recordId)
-            controller.dismissViewControllerAnimated(true, completion: nil)
+            controller.dismiss(animated: true, completion: nil)
             
         } else if index == 2 {
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-            alertController.addAction(UIAlertAction(title: "DeleteFriend".localizedUsingFile(localizableStringsFile), style: .Destructive, handler: {
+            alertController.addAction(UIAlertAction(title: "DeleteFriend".localizedUsingFile(localizableStringsFile), style: .destructive, handler: {
                 (action) -> Void in
 
                 EHProgressHUD.showSpinnerInView(self.view)
@@ -203,37 +203,37 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                         return
                     }
 
-                    self.navigationController?.popViewControllerAnimated(true)
+                    self.navigationController?.popViewController(animated: true)
                 })
             }))
 
-            alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .cancel, handler: nil))
 
-            controller.dismissViewControllerAnimated(true, completion: nil)
-            presentViewController(alertController, animated: true, completion: nil)
+            controller.dismiss(animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
         }
     }
 
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
 
-        return .None
+        return .none
     }
 
-    @IBAction func viewSchedule(sender: UIButton) {
+    @IBAction func viewSchedule(_ sender: UIButton) {
 
         guard let friendID = friendID else {
             assertionFailure()
             return
         }
         
-        let scheduleCalendar = storyboard?.instantiateViewControllerWithIdentifier("ScheduleViewController") as! ScheduleViewController
+        let scheduleCalendar = storyboard?.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
         scheduleCalendar.userID = friendID
-        presentViewController(scheduleCalendar, animated: true, completion: nil)
+        present(scheduleCalendar, animated: true, completion: nil)
     }
 
-    @IBAction func commonFreeTimePeriodsButtonPressed(sender: AnyObject) {
+    @IBAction func commonFreeTimePeriodsButtonPressed(_ sender: AnyObject) {
 
-        let commonFreeTimePeriodsViewController = storyboard?.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
+        let commonFreeTimePeriodsViewController = storyboard?.instantiateViewController(withIdentifier: "CommonFreeTimePeriodsViewController") as! CommonFreeTimePeriodsViewController
         commonFreeTimePeriodsViewController.initialFriendID = friendID
 
         navigationController?.pushViewController(commonFreeTimePeriodsViewController, animated: true)
@@ -241,7 +241,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
     func setRecordId() {
 
-        guard let friend = realtimeFriendManager?.user, phoneNumber = friend.phoneNumber else { return }
+        guard let friend = realtimeFriendManager?.user, let phoneNumber = friend.phoneNumber else { return }
         
         if phoneNumber.characters.count < 7 {
             recordId = nil
@@ -256,7 +256,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
 extension FriendDetailViewController: RealtimeUserManagerDelegate {
     
-    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeUserManager) {
         refreshUIData()
     }
 }

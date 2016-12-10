@@ -21,7 +21,7 @@ class AddEditEventViewController: UIViewController {
     var eventToEditID: String?
     
     /// The event to edit that was fetched using the eventToEditID
-    private(set) var fetchedEventToEdit: Event?
+    fileprivate(set) var fetchedEventToEdit: Event?
 
     ///Parent schedule view controller
     var scheduleViewController: ScheduleViewController!
@@ -38,15 +38,15 @@ class AddEditEventViewController: UIViewController {
 
         if let eventToEditID = eventToEditID {
             titleLabel.text = "EditEvent".localizedUsingGeneralFile()
-            embeddedTableViewController.weekDaysCell.hidden = true
+            embeddedTableViewController.weekDaysCell.isHidden = true
             
             EHProgressHUD.showSpinnerInView(view)
-            EventsAndSchedulesManager.sharedManager.fetchEvent(id: eventToEditID) { (event, error) in
+            EventsAndSchedulesManager.sharedManager.fetchEvent(eventToEditID) { (event, error) in
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
                 guard error == nil else {
                     EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     return
                 }
                 
@@ -64,39 +64,39 @@ class AddEditEventViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         view.endEditing(true)
         embeddedTableViewController.view.endEditing(true)
     }
 
-    @IBAction func save(sender: UIButton) {
+    @IBAction func save(_ sender: UIButton) {
 
         // If no weekdays selected
         guard embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count != 0 else {
-            EHNotifications.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .Warning)
+            EHNotifications.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .warning)
             return
         }
 
-        let localCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let localCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
 
-        let globalCalendar = NSCalendar.currentCalendar()
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        var globalCalendar = Calendar.current
+        globalCalendar.timeZone = TimeZone(identifier: "UTC")!
 
         var eventsToAdd = [BaseEvent]()
 
         for index in embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes {
-            let components: NSCalendarUnit = [.Year, .Month, .WeekOfMonth, .Weekday, .Hour, .Minute]
+            let components: Set<Calendar.Component> = [.year, .month, .weekOfMonth, .weekday, .hour, .minute]
 
-            let localStartHourComponents = localCalendar.components(components, fromDate: embeddedTableViewController.startHourDatePicker.date)
-            let localEndHourComponents = localCalendar.components(components, fromDate: embeddedTableViewController.endHourDatePicker.date)
+            var localStartHourComponents = localCalendar.dateComponents(components, from: embeddedTableViewController.startHourDatePicker.date)
+            var localEndHourComponents = localCalendar.dateComponents(components, from: embeddedTableViewController.endHourDatePicker.date)
 
             localStartHourComponents.weekday = index + 1
             localEndHourComponents.weekday = index + 1
 
-            let globalStartTimeDateInWeekday = localCalendar.dateFromComponents(localStartHourComponents)!
-            let globalEndTimeDateInWeekday = localCalendar.dateFromComponents(localEndHourComponents)!
+            let globalStartTimeDateInWeekday = localCalendar.date(from: localStartHourComponents)!
+            let globalEndTimeDateInWeekday = localCalendar.date(from: localEndHourComponents)!
 
             let type: EventType = (embeddedTableViewController.freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? .FreeTime : .Class)
 
@@ -125,33 +125,33 @@ class AddEditEventViewController: UIViewController {
             intent.location = dummyEvent.location
             
             scheduleViewController.editEventWithUndoCapability(eventToEdit, withIntent: intent, completionHandler: { (error) in
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             })
             
         } else {
             
             scheduleViewController.addEventsWithUndoCapability(eventsToAdd) { error in
                 
-                guard (error as? EventsAndSchedulesManagerError) != EventsAndSchedulesManagerError.EventsOverlap else {
+                guard (error as? EventsAndSchedulesManagerError) != EventsAndSchedulesManagerError.eventsOverlap else {
                     
-                    let alert = UIAlertController(title: "CouldNotAddEventErrorMessage".localizedUsingGeneralFile(), message: "EventOverlapExplanation".localizedUsingGeneralFile(), preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "CouldNotAddEventErrorMessage".localizedUsingGeneralFile(), message: "EventOverlapExplanation".localizedUsingGeneralFile(), preferredStyle: .alert)
                     
-                    alert.addAction(UIAlertAction(title: "OKIwillCheck".localizedUsingGeneralFile(), style: .Cancel, handler: { (action) in
-                        alert.dismissViewControllerAnimated(true, completion: nil)
+                    alert.addAction(UIAlertAction(title: "OKIwillCheck".localizedUsingGeneralFile(), style: .cancel, handler: { (action) in
+                        alert.dismiss(animated: true, completion: nil)
                     }))
                     
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil)
                     return
                 }
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
 
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: AnyObject) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: Methods
@@ -165,14 +165,14 @@ class AddEditEventViewController: UIViewController {
                     EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 }
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             })
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if let embeddedController = segue.destinationViewController as? EmbeddedAddEditEventTableViewController {
+        if let embeddedController = segue.destination as? EmbeddedAddEditEventTableViewController {
             embeddedTableViewController = embeddedController
         }
     }

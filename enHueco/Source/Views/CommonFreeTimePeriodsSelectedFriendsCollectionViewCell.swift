@@ -14,7 +14,7 @@ class CommonFreeTimePeriodsSelectedFriendsCollectionViewCell: UICollectionViewCe
 
     @IBOutlet weak var deleteButtonWidthConstraint: NSLayoutConstraint!
 
-    func setDeleteButtonHidden(hidden: Bool) {
+    func setDeleteButtonHidden(_ hidden: Bool) {
 
         deleteButtonWidthConstraint.constant = hidden ? 0 : 20
         layoutIfNeeded()

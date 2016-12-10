@@ -10,51 +10,51 @@ import UIKit
 import TSMessages
 
 enum EHNotificationsNotificationType {
-    case Success, Error, Information, Warning
+    case success, error, information, warning
 
-    private func toTSMessageNotificationType() -> TSMessageNotificationType {
+    fileprivate func toTSMessageNotificationType() -> TSMessageNotificationType {
 
         switch self {
-        case Success:
-            return .Success
+        case .success:
+            return .success
 
-        case Error:
-            return .Error
+        case .error:
+            return .error
 
-        case Warning:
-            return .Warning
+        case .warning:
+            return .warning
 
-        case Information:
-            return .Message
+        case .information:
+            return .message
 
         }
     }
 }
 
 enum EHNotificationsNotificationPosition {
-    case Top, Bottom
+    case top, bottom
 
-    private func toTSMessageNotificationPosition() -> TSMessageNotificationPosition {
+    fileprivate func toTSMessageNotificationPosition() -> TSMessageNotificationPosition {
 
         switch self {
 
-        case Top:
-            return .Top
+        case .top:
+            return .top
 
-        case Bottom:
-            return .Bottom
+        case .bottom:
+            return .bottom
         }
     }
 }
 
 class EHNotifications: NSObject, TSMessageViewProtocol {
-    private override init() {
+    fileprivate override init() {
     }
 
-    private static var once = dispatch_once_t()
+    fileprivate static var once = Int()
 
     /// Responsible for being the delegate of TSMessages to customize the views
-    private static var tsMessagesDelegate = EHNotifications()
+    fileprivate static var tsMessagesDelegate = EHNotifications()
 
     /** Shows a notification message in a specific view controller
      
@@ -70,9 +70,9 @@ class EHNotifications: NSObject, TSMessageViewProtocol {
      - parameter messagePosition: The position of the message on the screen
      - parameter dismissingEnabled: Should the message be dismissed when the user taps/swipes it
      */
-    class func showNotificationInViewController(viewController: UIViewController!, title: String, subtitle: String? = nil, image: UIImage? = nil, type: EHNotificationsNotificationType = .Information, duration: NSTimeInterval? = nil, callback: (() -> Void)? = nil, buttonTitle: String? = nil, buttonCallback: (() -> Void)? = nil, atPosition messagePosition: EHNotificationsNotificationPosition = .Top, canBeDismissedByUser dismissingEnabled: Bool = true) {
+    class func showNotificationInViewController(_ viewController: UIViewController!, title: String, subtitle: String? = nil, image: UIImage? = nil, type: EHNotificationsNotificationType = .information, duration: TimeInterval? = nil, callback: (() -> Void)? = nil, buttonTitle: String? = nil, buttonCallback: (() -> Void)? = nil, atPosition messagePosition: EHNotificationsNotificationPosition = .top, canBeDismissedByUser dismissingEnabled: Bool = true) {
 
-        TSMessage.showNotificationInViewController(viewController, title: title, subtitle: subtitle, image: image, type: type.toTSMessageNotificationType(), duration: duration ?? 0, callback: callback, buttonTitle: buttonTitle, buttonCallback: buttonCallback, atPosition: messagePosition.toTSMessageNotificationPosition(), canBeDismissedByUser: dismissingEnabled)
+        TSMessage.showNotification(in: viewController, title: title, subtitle: subtitle, image: image, type: type.toTSMessageNotificationType(), duration: duration ?? 0, callback: callback, buttonTitle: buttonTitle, buttonCallback: buttonCallback, at: messagePosition.toTSMessageNotificationPosition(), canBeDismissedByUser: dismissingEnabled)
     }
 
     /** Shows a notification message in a specific view controller
@@ -89,12 +89,12 @@ class EHNotifications: NSObject, TSMessageViewProtocol {
      - parameter messagePosition: The position of the message on the screen
      - parameter dismissingEnabled: Should the message be dismissed when the user taps/swipes it
      */
-    class func tryToShowErrorNotificationInViewController(viewController: UIViewController!, withPossibleTitle title: String!, subtitle: String? = nil, image: UIImage? = nil, duration: NSTimeInterval? = nil, callback: (() -> Void)? = nil, buttonTitle: String? = nil, buttonCallback: (() -> Void)? = nil, atPosition messagePosition: EHNotificationsNotificationPosition = .Top, canBeDismissedByUser dismissingEnabled: Bool = true) {
+    class func tryToShowErrorNotificationInViewController(_ viewController: UIViewController!, withPossibleTitle title: String!, subtitle: String? = nil, image: UIImage? = nil, duration: TimeInterval? = nil, callback: (() -> Void)? = nil, buttonTitle: String? = nil, buttonCallback: (() -> Void)? = nil, atPosition messagePosition: EHNotificationsNotificationPosition = .top, canBeDismissedByUser dismissingEnabled: Bool = true) {
 
         guard title != nil else {
             return
         }
 
-        TSMessage.showNotificationInViewController(viewController, title: title, subtitle: subtitle, image: image, type: EHNotificationsNotificationType.Error.toTSMessageNotificationType(), duration: duration ?? 0, callback: callback, buttonTitle: buttonTitle, buttonCallback: buttonCallback, atPosition: messagePosition.toTSMessageNotificationPosition(), canBeDismissedByUser: dismissingEnabled)
+        TSMessage.showNotification(in: viewController, title: title, subtitle: subtitle, image: image, type: EHNotificationsNotificationType.error.toTSMessageNotificationType(), duration: duration ?? 0, callback: callback, buttonTitle: buttonTitle, buttonCallback: buttonCallback, at: messagePosition.toTSMessageNotificationPosition(), canBeDismissedByUser: dismissingEnabled)
     }
 }

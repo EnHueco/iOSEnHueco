@@ -1,7 +1,7 @@
 // Swift 2.0 extension for sorted array operations
 
 extension Array where Element: Comparable {
-    func findValueInSortedArray(value: Element) -> (Int, Bool) {
+    func findValueInSortedArray(_ value: Element) -> (Int, Bool) {
         var min = self.startIndex
         var max = self.endIndex
         
@@ -22,12 +22,12 @@ extension Array where Element: Comparable {
         return (min, false)
     }
     
-    mutating func insertInSortedArray(newElement: Element) {
+    mutating func insertInSortedArray(_ newElement: Element) {
         let (index, _) = findValueInSortedArray(newElement)
-        insert(newElement, atIndex: index)
+        insert(newElement, at: index)
     }
     
-    func getIndexInSortedArray(value: Element) -> Int? {
+    func getIndexInSortedArray(_ value: Element) -> Int? {
         let (index, exists) = findValueInSortedArray(value)
         return exists ? index : nil
     }

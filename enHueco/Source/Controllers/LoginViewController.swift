@@ -24,24 +24,24 @@ import FirebaseAuth
     @IBOutlet weak var verticalSpaceToBottomConstraint: NSLayoutConstraint!
     var verticalSpaceToBottomInitialValue: CGFloat!
 
-    private var firstAppearance = true
+    fileprivate var firstAppearance = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        (UIApplication.sharedApplication().delegate as! AppDelegate).mainNavigationController = navigationController
+        (UIApplication.shared.delegate as! AppDelegate).mainNavigationController = navigationController
 
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
 
         loginButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
         let title = NSMutableAttributedString(string: "ENHUECO")
-        let boldFont = UIFont.boldSystemFontOfSize(logoTitleLabel.font.pointSize)
+        let boldFont = UIFont.boldSystemFont(ofSize: logoTitleLabel.font.pointSize)
 
         title.addAttribute(NSFontAttributeName, value: boldFont, range: NSMakeRange(0, 2))
 
@@ -49,14 +49,14 @@ import FirebaseAuth
 
         let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
 
-        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-        effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        effectView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
 
-        backgroundImageView.addSubview(effectView)
+        backgroundImageView?.addSubview(effectView)
         effectView.autoPinEdgesToSuperviewEdges()
 
-        view.insertSubview(backgroundImageView, atIndex: 0)
-        backgroundImageView.autoPinEdgesToSuperviewEdges()
+        view.insertSubview(backgroundImageView!, at: 0)
+        backgroundImageView?.autoPinEdgesToSuperviewEdges()
 
         let fbLoginButton = FBSDKLoginButton()
         fbLoginButton.delegate = self
@@ -65,21 +65,21 @@ import FirebaseAuth
         view.addSubview(fbLoginButton)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if firstAppearance && AccountManager.sharedManager.userID != nil {
             goToMainTabViewController()
         } else {
             try? AccountManager.sharedManager.logOut()
-            (UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut = false
+            (UIApplication.shared.delegate as! AppDelegate).loggingOut = false
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        UIApplication.shared.setStatusBarStyle(.default, animated: true)
         firstAppearance = false
     }
 
@@ -91,17 +91,17 @@ import FirebaseAuth
     }
 
 
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func login(_ sender: Any) {
 
         view.endEditing(true)
 
-        guard let username = usernameTextField.text, password = passwordTextField.text where username != "" && password != "" else{
+        guard let username = usernameTextField.text, let password = passwordTextField.text, username != "" && password != "" else{
             //TODO: Shake animation
             return
         }
 
         EHProgressHUD.showSpinnerInView(view)
-        AccountManager.sharedManager.loginWith(email: username, password: password) { error -> Void in
+        AccountManager.sharedManager.loginWith(username, password: password) { error -> Void in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
             guard error == nil else {
@@ -128,41 +128,41 @@ import FirebaseAuth
 
         //ProximityUpdatesManager.sharedManager.beginProximityUpdates()
 
-        let mainTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MainTabBarViewController") as! MainTabBarViewController
+        let mainTabBarController = storyboard?.instantiateViewController(withIdentifier: "MainTabBarViewController") as! MainTabBarViewController
 
-        navigationController?.presentViewController(mainTabBarController, animated: true, completion: {
+        navigationController?.present(mainTabBarController, animated: true, completion: {
 
             self.navigationController?.setViewControllers([self.navigationController!.viewControllers.first!], animated: false)
         })
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         self.view.endEditing(true)
     }
 
     // MARK: Keyboard
 
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
 
         var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 
         view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1) {
+        UIView.animate(withDuration: 0.1, animations: {
             self.verticalSpaceToBottomConstraint.constant = keyboardFrame.size.height + 20
             self.view.layoutIfNeeded()
             self.view.setNeedsUpdateConstraints()
-        }
+        }) 
     }
 
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
 
         view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1, animations: {() -> Void in
+        UIView.animate(withDuration: 0.1, animations: {() -> Void in
 
             self.verticalSpaceToBottomConstraint.constant = self.verticalSpaceToBottomInitialValue
             self.view.layoutIfNeeded()
@@ -177,26 +177,26 @@ import FirebaseAuth
 
 extension LoginViewController: ImportProfileImageViewControllerDelegate {
     
-    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidFinishImportingImage(_ controller: ImportProfileImageViewController) {
         goToMainTabViewController()
     }
 
-    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidCancel(_ controller: ImportProfileImageViewController) {
         goToMainTabViewController()
     }
 }
 
 extension LoginViewController: FBSDKLoginButtonDelegate {
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
         if let error = error {
             print(error.localizedDescription)
             return
             
         } else {
             EHProgressHUD.showSpinnerInView(view)
-            AccountManager.sharedManager.loginWith(facebookToken: FBSDKAccessToken.currentAccessToken().tokenString) { error in
+            AccountManager.sharedManager.loginWith(FBSDKAccessToken.current().tokenString) { error in
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
                 guard error == nil else {
@@ -208,6 +208,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             }
         }
     }
-
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {}
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {}
 }

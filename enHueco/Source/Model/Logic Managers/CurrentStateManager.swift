@@ -11,7 +11,7 @@ import Foundation
 /// Handles operations related to the users' current state (i.e. users' availability (EnHueco's core services))
 
 class CurrentStateManager {
-    private init() {}
+    fileprivate init() {}
 
     static let sharedManager = CurrentStateManager()
 
@@ -42,13 +42,13 @@ class CurrentStateManager {
      
      Updates the appUser
      */
-    func postInstantFreeTimePeriod(newFreeTimePeriod: BaseEvent, completionHandler: BasicCompletionHandler) {
+    func postInstantFreeTimePeriod(_ newFreeTimePeriod: BaseEvent, completionHandler: BasicCompletionHandler) {
 
         /*
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)
         request.HTTPMethod = "PUT"
 
-        var instantEvent: [String:AnyObject] =
+        var instantEvent: [String:Any] =
         [
                 "type": "EVENT",
                 "valid_until": newFreeTimePeriod.endDateInNearestPossibleDateToDate(NSDate()).serverFormattedString(),
@@ -78,7 +78,7 @@ class CurrentStateManager {
         })*/
     }
 
-    func deleteInstantFreeTimePeriodWithCompletionHandler(completionHandler: BasicCompletionHandler) {
+    func deleteInstantFreeTimePeriodWithCompletionHandler(_ completionHandler: BasicCompletionHandler) {
 
         /*
         let request = NSMutableURLRequest(URL: NSURL(string: EHURLS.Base + EHURLS.ImmediateEventsSegment)!)

@@ -16,7 +16,7 @@ class FriendDetailInterfaceController: WKInterfaceController
     @IBOutlet var friendNameLabel: WKInterfaceLabel!
     @IBOutlet var timeLabel: WKInterfaceLabel!
     
-    override func awakeWithContext(context: AnyObject?)
+    override func awakeWithContext(context: Any?)
     {
         super.awakeWithContext(context)
         

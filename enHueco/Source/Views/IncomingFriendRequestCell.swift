@@ -9,9 +9,9 @@
 import UIKit
 
 @objc protocol IncomingFriendRequestCellDelegate: class {
-    optional func didPressDiscardButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
+    @objc optional func didPressDiscardButtonInIncomingFriendRequestCell(_ cell: IncomingFriendRequestCell)
 
-    optional func didPressAcceptButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell)
+    @objc optional func didPressAcceptButtonInIncomingFriendRequestCell(_ cell: IncomingFriendRequestCell)
 }
 
 class IncomingFriendRequestCell: UITableViewCell {
@@ -27,20 +27,20 @@ class IncomingFriendRequestCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func discardButtonPressed(sender: AnyObject) {
+    @IBAction func discardButtonPressed(_ sender: Any) {
 
         if let delegate = delegate {
             delegate.didPressDiscardButtonInIncomingFriendRequestCell?(self)
         }
     }
 
-    @IBAction func acceptButtonPressed(sender: AnyObject) {
+    @IBAction func acceptButtonPressed(_ sender: AnyObject) {
 
         if let delegate = delegate {
             delegate.didPressAcceptButtonInIncomingFriendRequestCell?(self)

@@ -7,107 +7,120 @@
 //
 
 import UIKit
+import Genome
 
-enum GenericError: ErrorType {
-    case NotLoggedIn
-    case UnknownError
-    case Error(message: String)
-    case UnsupportedOperation
+enum GenericError: Error {
+    case notLoggedIn
+    case unknownError
+    case error(message: String)
+    case unsupportedOperation
 }
 
-typealias BasicCompletionHandler = (error:ErrorType?) -> Void
+typealias BasicCompletionHandler = (_ error:Error?) -> Void
 
 struct Either<T1, T2> {
     let left: T1?
     let right: T2?
 }
 
-func >(lhs: NSDate, rhs: NSDate) -> Bool {
+extension Array where Element: NodeInitializable {
 
-    return lhs.compare(rhs) == .OrderedDescending
+    init(node: Any) throws {
+        try self.init(node: node as? [Any] ?? [])
+    }
+    
+    init(node: [Any]) throws {
+        try self.init(node: Node(any: node))
+    }
 }
 
-func <(lhs: NSDate, rhs: NSDate) -> Bool {
-
-    return lhs.compare(rhs) == .OrderedAscending
+extension MappableObject {
+    
+    init(node: Any) throws {
+        try self.init(node: Node(any: node))
+    }
+    
+    init(node: [Any]) throws {
+        try self.init(node: Node(any: node))
+    }
 }
 
-extension NSDate {
-    func isBetween(startDate: NSDate, and endDate: NSDate) -> Bool {
+extension Date {
+    func isBetween(_ startDate: Date, and endDate: Date) -> Bool {
 
-        return startDate.compare(self) == .OrderedAscending && endDate.compare(self) == .OrderedDescending
+        return startDate.compare(self) == .orderedAscending && endDate.compare(self) == .orderedDescending
     }
 
-    func hasSameHourAndMinutesThan(date: NSDate) -> Bool {
+    func hasSameHourAndMinutesThan(_ date: Date) -> Bool {
 
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let hourMinute: NSCalendarUnit = [.Hour, .Minute]
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let hourMinute: Set<Calendar.Component> = [.hour, .minute]
 
-        let lhsComp = calendar!.components(hourMinute, fromDate: self)
-        let rhsComp = calendar!.components(hourMinute, fromDate: date)
+        let lhsComp = calendar.dateComponents(hourMinute, from: self)
+        let rhsComp = calendar.dateComponents(hourMinute, from: date)
 
         return lhsComp.hour == rhsComp.hour && lhsComp.minute == rhsComp.minute
     }
 
-    func hasSameWeekdayHourAndMinutesThan(date: NSDate) -> Bool {
+    func hasSameWeekdayHourAndMinutesThan(_ date: Date) -> Bool {
 
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let weekdayHourMinute: NSCalendarUnit = [.Weekday, .Hour, .Minute]
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let weekdayHourMinute: Set<Calendar.Component> = [.weekday, .hour, .minute]
 
-        let lhsComp = calendar!.components(weekdayHourMinute, fromDate: self)
-        let rhsComp = calendar!.components(weekdayHourMinute, fromDate: date)
+        let lhsComp = calendar.dateComponents(weekdayHourMinute, from: self)
+        let rhsComp = calendar.dateComponents(weekdayHourMinute, from: date)
 
         return lhsComp.weekday == rhsComp.weekday && lhsComp.hour == rhsComp.hour && lhsComp.minute == rhsComp.minute
     }
 
-    func addDays(daysToAdd: Int) -> NSDate {
+    func addDays(_ daysToAdd: Int) -> Date {
 
-        let secondsInDays: NSTimeInterval = Double(daysToAdd) * 60 * 60 * 24
-        let dateWithDaysAdded: NSDate = self.dateByAddingTimeInterval(secondsInDays)
+        let secondsInDays: TimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded: Date = self.addingTimeInterval(secondsInDays)
 
         //Return Result
         return dateWithDaysAdded
     }
 
-    func addHours(hoursToAdd: Int) -> NSDate {
+    func addHours(_ hoursToAdd: Int) -> Date {
 
-        let secondsInHours: NSTimeInterval = Double(hoursToAdd) * 60 * 60
-        let dateWithHoursAdded: NSDate = self.dateByAddingTimeInterval(secondsInHours)
+        let secondsInHours: TimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded: Date = self.addingTimeInterval(secondsInHours)
 
         //Return Result
         return dateWithHoursAdded
     }
 
-    convenience init?(serverFormattedString: String) {
-        let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    init?(serverFormattedString: String) {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateStringFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let possibleDate = dateStringFormatter.dateFromString(serverFormattedString)
+        let possibleDate = dateStringFormatter.date(from: serverFormattedString)
 
         guard let date = possibleDate else {
             return nil
         }
 
-        self.init(timeInterval: 0, sinceDate: date)
+        self.init(timeInterval: 0, since: date)
     }
 
     func serverFormattedString() -> String {
 
-        let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.timeZone = NSTimeZone(name: "UTC")
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateStringFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
-        return dateStringFormatter.stringFromDate(self)
+        return dateStringFormatter.string(from: self)
     }
 }
 
-extension NSDateComponents {
+extension DateComponents {
     /**
         Returns a new instance of NSDateComponents with all its components set to 0 except for the ones provided.
     */
-    convenience init(weekday: Int, hour: Int, minute: Int) {
+    init(weekday: Int, hour: Int, minute: Int) {
         self.init()
 
         self.weekday = weekday
@@ -116,14 +129,12 @@ extension NSDateComponents {
     }
 }
 
-func -(lhs: NSDate, rhs: NSDate) -> NSDateComponents {
-
-    let dayHourMinuteSecond: NSCalendarUnit = [.Day, .Hour, .Minute, .Second]
-
-    return NSCalendar.currentCalendar().components(dayHourMinuteSecond, fromDate: rhs, toDate: lhs, options: [])
+func -(lhs: Date, rhs: Date) -> DateComponents {
+    return Calendar.current.dateComponents([.day, .hour, .minute, .second], from: rhs, to: lhs)
 }
 
-extension CollectionType {
+extension Collection where Indices.Iterator.Element == Index {
+    
     /// Returns the element at the specified index iff it is within bounds, otherwise nil.
     subscript (safe index: Index) -> Generator.Element? {
         return indices.contains(index) ? self[index] : nil
@@ -132,18 +143,11 @@ extension CollectionType {
 
 extension Array {
     
-    /// Finds the first element that matches the predicate
-    func find(predicate: (Generator.Element) throws -> Bool) -> (index: Int, element: Element)? {
-        
-        guard let index = (try? indexOf(predicate)) ?? nil else { return nil }
-        return (index: index, self[index])
-    }
-    
-    mutating func removeObject<U:Equatable>(object: U) -> Bool {
+    mutating func removeObject<U:Equatable>(_ object: U) -> Bool {
 
         var index: Int?
 
-        for (idx, objectToCompare) in self.enumerate() {
+        for (idx, objectToCompare) in self.enumerated() {
             if let to = objectToCompare as? U {
                 if object == to {
                     index = idx
@@ -152,7 +156,7 @@ extension Array {
         }
 
         if (index != nil) {
-            self.removeAtIndex(index!)
+            self.remove(at: index!)
             return true
         }
 
@@ -163,7 +167,7 @@ extension Array {
 extension String {
     func isBlank() -> Bool {
 
-        let trimmed = stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let trimmed = trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return trimmed.isEmpty
     }
 
@@ -172,9 +176,9 @@ extension String {
      
      - parameter fileName: .strings file that contains the key
      */
-    func localizedUsingFile(fileName: String) -> String {
+    func localizedUsingFile(_ fileName: String) -> String {
 
-        return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: "")
+        return NSLocalizedString(self, tableName: fileName, bundle: Bundle.main, value: "", comment: "")
     }
 
     /// Localizes the receiver using the General.strings file
@@ -188,31 +192,31 @@ extension String {
      
      - parameter fileName: .strings file that contains the key
      */
-    func localizedUsingFile(fileName: String, withComment comment: String) -> String {
+    func localizedUsingFile(_ fileName: String, withComment comment: String) -> String {
 
-        return NSLocalizedString(self, tableName: fileName, bundle: NSBundle.mainBundle(), value: "", comment: comment)
+        return NSLocalizedString(self, tableName: fileName, bundle: Bundle.main, value: "", comment: comment)
     }
 }
 
 extension UIImage {
     /// Initializes an image with the given size containing a given color
-    convenience init(color: UIColor, size: CGSize = CGSizeMake(1, 1)) {
-        let rect = CGRectMake(0, 0, size.width, size.height)
+    convenience init(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         color.setFill()
         UIRectFill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        self.init(CGImage: image.CGImage!)
+        self.init(cgImage: (image?.cgImage!)!)
     }
 }
 
-protocol EHErrorType: ErrorType {
+protocol EHErrorType: Error {
 
     var localizedDescription: String? { get }
 }
 
-extension ErrorType {
+extension Error {
     /**
      Attempts to extract a localized description that is suitable for display to the user. This
      is determined by the domain of the error.
@@ -222,9 +226,9 @@ extension ErrorType {
      */
     func localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage() -> String? {
 
-        if self.dynamicType == NSError.self {
+        if type(of: self) == NSError.self {
             /// Not forcing the downcast causes information loss because of compiler magic
-            let nserror = self as! NSError
+            let nserror = self as NSError
 
             let errorMessage: String
 
@@ -263,7 +267,7 @@ class Wrapper<T> {
 
 extension UIViewController {
     func reportScreenViewToGoogleAnalyticsWithName(name: String) {
-
+        
         // TODO: Send report to Firebase analytics
     }
 }

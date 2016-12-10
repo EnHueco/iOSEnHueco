@@ -21,7 +21,7 @@ class AvailableFriendCell: SWTableViewCell {
 
     var friendUsername: String? = nil
 
-    func setInstantFreeTimeIconVisibility(visible visible: Bool) {
+    func setInstantFreeTimeIconVisibility(_ visible: Bool) {
 
         instantFreeTimeIconWidthConstraint.constant = visible ? 25 : 0
     }

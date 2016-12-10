@@ -15,9 +15,9 @@ class InGapInterfaceController: WKInterfaceController
     @IBOutlet var table: WKInterfaceTable!
     @IBOutlet var noFriendsInGapLabel: WKInterfaceLabel!
 
-    var friendsInGap = [[String : AnyObject]]()
+    var friendsInGap = [[String : Any]]()
     
-    override func awakeWithContext(context: AnyObject?)
+    override func awakeWithContext(context: Any?)
     {
         super.awakeWithContext(context)
         
@@ -34,10 +34,10 @@ class InGapInterfaceController: WKInterfaceController
     
     func fetchAndUpdateDataIfNeeded()
     {
-        WCSession.defaultSession().sendMessage(["request":"friendsCurrentlyInGap"], replyHandler: { (response: [String : AnyObject]) -> Void in
+        WCSession.defaultSession().sendMessage(["request":"friendsCurrentlyInGap"], replyHandler: { (response: [String : Any]) -> Void in
             
-            var friendsInGap = response["friends"] as! [AnyObject]
-            self.friendsInGap = friendsInGap as! [[String : AnyObject]]
+            var friendsInGap = response["friends"] as! [Any]
+            self.friendsInGap = friendsInGap as! [[String : Any]]
             
             self.table.setNumberOfRows(friendsInGap.count, withRowType: "InGapCell")
             
@@ -77,7 +77,7 @@ class InGapInterfaceController: WKInterfaceController
         }
     }
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject?
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> Any?
     {
         return friendsInGap[rowIndex]
     }

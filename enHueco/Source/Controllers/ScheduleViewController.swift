@@ -15,7 +15,7 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var importCalendarButton: UIButton!
 
-    private let appUserID = AccountManager.sharedManager.userID
+    fileprivate let appUserID = AccountManager.sharedManager.userID
     
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
     var userID = AccountManager.sharedManager.userID
@@ -39,17 +39,17 @@ class ScheduleViewController: UIViewController {
         addEventButton.layer.cornerRadius = addEventButton.frame.size.height / 2
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
 
         let canEdit = userID != nil && userID == appUserID
-        importCalendarButton.hidden = !canEdit
-        addEventButton.hidden = !canEdit
+        importCalendarButton.isHidden = !canEdit
+        addEventButton.isHidden = !canEdit
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if userID == appUserID {
@@ -57,34 +57,34 @@ class ScheduleViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         resignFirstResponder()
     }
 
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
 
         return userID == appUserID
     }
 
     ///Adds the event to their assigned daySchedules, giving the ability to undo and redo the actions.
-    func addEventsWithUndoCapability(eventsToAdd: [BaseEvent], completionHandler: BasicCompletionHandler?) {
+    func addEventsWithUndoCapability(_ eventsToAdd: [BaseEvent], completionHandler: BasicCompletionHandler?) {
 
         EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.addEventsWithDataFrom(eventsToAdd) { (addedEventIDs, error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            completionHandler?(error: error)
+            completionHandler?(error)
 
-            guard let addedEventIDs = addedEventIDs where error == nil else {
+            guard let addedEventIDs = addedEventIDs, error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
-            (self.undoManager?.prepareWithInvocationTarget(self) as? ScheduleViewController)?.deleteEventsWithUndoCapability(eventsToAdd, IDs: addedEventIDs, completionHandler: nil)
+            (self.undoManager?.prepare(withInvocationTarget: self) as? ScheduleViewController)?.deleteEventsWithUndoCapability(eventsToAdd, IDs: addedEventIDs, completionHandler: nil)
 
-            if self.undoManager != nil && !self.undoManager!.undoing {
+            if self.undoManager != nil && !self.undoManager!.isUndoing {
                 self.undoManager?.setActionName("AddEvents".localizedUsingGeneralFile())
             }
 
@@ -93,24 +93,24 @@ class ScheduleViewController: UIViewController {
     }
 
     ///Edits the event, giving the ability to undo and redo the actions.
-    func editEventWithUndoCapability(event: Event, withIntent intent: EventUpdateIntent, completionHandler: BasicCompletionHandler?) {
+    func editEventWithUndoCapability(_ event: Event, withIntent intent: EventUpdateIntent, completionHandler: BasicCompletionHandler?) {
 
         let oldEventIntent = EventUpdateIntent(valuesOfEvent: event)
 
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.editEvent(eventID: event.id, withIntent: intent) { (error) in
+        EventsAndSchedulesManager.sharedManager.editEvent(event.id, withIntent: intent) { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            completionHandler?(error: error)
+            completionHandler?(error)
 
             guard error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
-            (self.undoManager?.prepareWithInvocationTarget(self) as? ScheduleViewController)?.editEventWithUndoCapability(event, withIntent: oldEventIntent, completionHandler: nil)
+            (self.undoManager?.prepare(withInvocationTarget: self) as? ScheduleViewController)?.editEventWithUndoCapability(event, withIntent: oldEventIntent, completionHandler: nil)
 
-            if self.undoManager != nil && !self.undoManager!.undoing {
+            if self.undoManager != nil && !self.undoManager!.isUndoing {
                 self.undoManager?.setActionName("EditEvent".localizedUsingGeneralFile())
             }
 
@@ -119,22 +119,22 @@ class ScheduleViewController: UIViewController {
     }
 
     ///Deletes the events from their assigned daySchedules, giving the ability to undo and redo the actions.
-    func deleteEventsWithUndoCapability(events: [BaseEvent], IDs: [String], completionHandler: BasicCompletionHandler?) {
+    func deleteEventsWithUndoCapability(_ events: [BaseEvent], IDs: [String], completionHandler: BasicCompletionHandler?) {
 
         EHProgressHUD.showSpinnerInView(view)
         EventsAndSchedulesManager.sharedManager.deleteEvents(IDs) { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
-            completionHandler?(error: error)
+            completionHandler?(error)
 
             guard error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
-            (self.undoManager?.prepareWithInvocationTarget(self) as? ScheduleViewController)?.addEventsWithUndoCapability(events, completionHandler: nil)
+            (self.undoManager?.prepare(withInvocationTarget: self) as? ScheduleViewController)?.addEventsWithUndoCapability(events, completionHandler: nil)
 
-            if self.undoManager != nil && !self.undoManager!.undoing {
+            if self.undoManager != nil && !self.undoManager!.isUndoing {
                 self.undoManager?.setActionName("DeleteEvents".localizedUsingGeneralFile())
             }
 
@@ -142,23 +142,23 @@ class ScheduleViewController: UIViewController {
         }
     }
 
-    @IBAction func importScheduleButtonPressed(sender: AnyObject) {
+    @IBAction func importScheduleButtonPressed(_ sender: AnyObject) {
 
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("SelectCalendarViewController") as! SelectCalendarViewController
+        let controller = storyboard!.instantiateViewController(withIdentifier: "SelectCalendarViewController") as! SelectCalendarViewController
         navigationController!.pushViewController(controller, animated: true)
     }
 
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: AnyObject) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if let controller = segue.destinationViewController as? ScheduleCalendarViewController {
+        if let controller = segue.destination as? ScheduleCalendarViewController {
             scheduleCalendarViewController = controller
             controller.userID = userID
-        } else if let controller = segue.destinationViewController as? AddEditEventViewController {
+        } else if let controller = segue.destination as? AddEditEventViewController {
             controller.scheduleViewController = self
         }
     }

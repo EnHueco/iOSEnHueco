@@ -8,9 +8,10 @@
 
 import Foundation
 import Firebase
+import Genome
 
 protocol RealtimeUserManagerDelegate: class {
-    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager)
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeUserManager)
 }
 
 /// Handles user and schedule real-time fetching for a given user
@@ -18,8 +19,8 @@ class RealtimeUserManager: FirebaseSynchronizable {
     
     let userID: String
     
-    private(set) var user: User?
-    private(set) var schedule: Schedule?
+    fileprivate(set) var user: User?
+    fileprivate(set) var schedule: Schedule?
     
     /// Delegate
     weak var delegate: RealtimeUserManagerDelegate?
@@ -45,17 +46,17 @@ class RealtimeUserManager: FirebaseSynchronizable {
         let firebaseReference = FIRDatabase.database().reference()
         
         let friendReference = firebaseReference.child(FirebasePaths.users).child(userID)
-        let friendHandle = friendReference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
+        let friendHandle = friendReference.observe(.value) { [unowned self] (snapshot: FIRDataSnapshot) in
             
-            guard let friendJSON = snapshot.value as? [String : AnyObject],
-                let friend = try? User(js: friendJSON) else {
+            guard let friendJSON = snapshot.value,
+                let friend = try? User(node: friendJSON) else {
                     
                     assertionFailure()
                     return
             }
             
             /// Thread safety, dictionaries are structs and therefore copied.
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 self.user = friend
                 self.notifyChangesIfNeeded()
             }
@@ -64,19 +65,19 @@ class RealtimeUserManager: FirebaseSynchronizable {
         _trackHandle(friendHandle, forReference: friendReference)
         
         let scheduleReference = firebaseReference.child(FirebasePaths.schedules).child(userID)
-        let scheduleHandle = scheduleReference.observeEventType(.Value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
+        let scheduleHandle = scheduleReference.observe(.value) { [unowned self] (scheduleSnapshot: FIRDataSnapshot) in
             
-            guard let scheduleJSON = scheduleSnapshot.value as? [String : AnyObject] else {
+            guard let scheduleJSON = scheduleSnapshot.value else {
                 return
             }
             
-            guard let schedule = try? Schedule(js: scheduleJSON) else {
+            guard let schedule = try? Schedule(node: scheduleJSON) else {
                 assertionFailure()
                 return
             }
             
             /// Thread safety
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 self.schedule = schedule
                 self.notifyChangesIfNeeded()
             }
@@ -85,11 +86,11 @@ class RealtimeUserManager: FirebaseSynchronizable {
         _trackHandle(scheduleHandle, forReference: scheduleReference)
     }
     
-    private func notifyChangesIfNeeded() {
+    fileprivate func notifyChangesIfNeeded() {
         
         guard user != nil && schedule != nil else { return }
         
-        dispatch_async(dispatch_get_main_queue()){
+        DispatchQueue.main.async{
             self.delegate?.realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(self)
         }
     }

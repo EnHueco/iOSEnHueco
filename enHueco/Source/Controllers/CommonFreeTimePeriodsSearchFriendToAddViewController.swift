@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CommonFreeTimePeriodsSearchFriendToAddViewControllerDelegate: class {
-    func commonFreeTimePeriodsSearchFriendToAddViewController(controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friendID: String)
+    func commonFreeTimePeriodsSearchFriendToAddViewController(_ controller: CommonFreeTimePeriodsSearchFriendToAddViewController, didSelectFriend friendID: String)
 }
 
 class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
@@ -28,13 +28,13 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
         resultsTableView.dataSource = self
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         realtimeFriendsManager = RealtimeFriendsManager(delegate: self)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeFriendsManager = nil
@@ -51,12 +51,12 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
         guard let friendsManager = realtimeFriendsManager else { return }
         
         filteredFriendsAndSchedules = friendsManager.friendAndSchedules().flatMap {
-            guard let friend = $0.friend, schedule = $0.schedule else { return nil }
+            guard let friend = $0.friend, let schedule = $0.schedule else { return nil }
             return (friend, schedule)
         }
     }
 
-    func filterContentForSearchText(searchText: String) {
+    func filterContentForSearchText(_ searchText: String) {
 
         reloadFriendsData()
         
@@ -67,23 +67,23 @@ class CommonFreeTimePeriodsSearchFriendToAddViewController: UIViewController {
         guard searchText != "" else { return }
         
         filteredFriendsAndSchedules = filteredFriendsAndSchedules.filter {
-            return $0.friend.name.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
+            return $0.friend.name.lowercased().range(of: searchText.lowercased()) != nil
         }
     }
 }
 
 extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return filteredFriendsAndSchedules.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let friend = filteredFriendsAndSchedules[indexPath.row].friend
         
-        let cell = resultsTableView.dequeueReusableCellWithIdentifier("CommonFreeTimePeriodsSearchFriendToAddResultsCell") as! CommonFreeTimePeriodsSearchFriendToAddResultsCell
+        let cell = resultsTableView.dequeueReusableCell(withIdentifier: "CommonFreeTimePeriodsSearchFriendToAddResultsCell") as! CommonFreeTimePeriodsSearchFriendToAddResultsCell
         cell.friendNameLabel.text = friend.name
         
         return cell
@@ -92,17 +92,17 @@ extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDataS
 
 extension CommonFreeTimePeriodsSearchFriendToAddViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let friend = filteredFriendsAndSchedules[indexPath.row].friend
         delegate?.commonFreeTimePeriodsSearchFriendToAddViewController(self, didSelectFriend: friend.id)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension CommonFreeTimePeriodsSearchFriendToAddViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeFriendsManager) {
         reloadFriendsData()
         resultsTableView.reloadData()
     }    

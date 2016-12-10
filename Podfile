@@ -4,19 +4,17 @@ use_frameworks!
  
 target 'enHueco' do
 
-    # Only pull in the "Auth" FirebaseUI features (including Facebook and Google)
-    #    pod 'FirebaseUI/Auth', '~> 0.4'
     pod 'Firebase/Auth'
 
     # JSON parsing library
-    pod 'Genome', '~> 2.0.0'
-
+    pod 'Genome'
+	
 	pod 'Fabric'
 	pod 'Crashlytics'
     pod 'Firebase/Database'
 	#pod 'MSCollectionViewCalendarLayout'
-	pod 'SWTableViewCell', '~> 0.3.7'
-	pod 'APAddressBook', '~> 0.1.11'
+	pod 'SWTableViewCell'
+	pod 'APAddressBook'
 	pod 'RSKImageCropper'
 	pod 'TSMessages', :git => 'https://github.com/KrauseFx/TSMessages.git'
 	pod 'MRProgress'
@@ -24,14 +22,15 @@ target 'enHueco' do
 	pod 'ASMediaFocusManager'
 	pod 'Alamofire'
 	pod 'ReachabilitySwift'
-	pod 'ChameleonFramework/Swift'
+	pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 	pod 'PureLayout'
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
     pod 'TapkuLibrary'
     pod 'MultiSelectSegmentedControl'
     pod 'SwiftGraph'
-    pod 'CSwiftV'
+    pod 'SwiftyJSON'
+    #pod 'CSwiftV'
     pod 'RKNotificationHub'
 end
 

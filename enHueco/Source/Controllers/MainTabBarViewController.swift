@@ -14,14 +14,14 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
 
         tabBar.barTintColor = UIColor(red: 50 / 255.0, green: 50 / 255.0, blue: 50 / 255.0, alpha: 1)
-        tabBar.tintColor = UIColor.whiteColor()
+        tabBar.tintColor = UIColor.white
 
-        tabBar.translucent = true
+        tabBar.isTranslucent = true
     }
 }

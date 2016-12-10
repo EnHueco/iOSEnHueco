@@ -14,7 +14,7 @@ class FirebaseSynchronizable {
     let appUserID: String
     
     /// All references and handles for the references
-    private var databaseRefsAndHandles = [FIRDatabaseReference : [FIRDatabaseHandle]]()
+    fileprivate var databaseRefsAndHandles = [FIRDatabaseReference : [FIRDatabaseHandle]]()
     
     /** Creates an instance of the manager that listens to database changes as soon as it is created.
      You must set the delegate property if you want to be notified when any data has changed.
@@ -33,7 +33,7 @@ class FirebaseSynchronizable {
         fatalError("Not yet implemented")
     }
     
-    func _trackHandle(handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference) {
+    func _trackHandle(_ handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference) {
         
         if databaseRefsAndHandles[reference] == nil {
             databaseRefsAndHandles[reference] = []
@@ -42,11 +42,11 @@ class FirebaseSynchronizable {
         databaseRefsAndHandles[reference]?.append(handle)
     }
     
-    private func removeFirebaseSubscriptions() {
+    fileprivate func removeFirebaseSubscriptions() {
         
         for (reference, handles) in databaseRefsAndHandles {
             for handle in handles {
-                reference.removeObserverWithHandle(handle)
+                reference.removeObserver(withHandle: handle)
             }
         }
         

@@ -8,15 +8,14 @@
 
 import Foundation
 import Genome
-import PureJsonSerializer
 
 struct EventUpdateIntent: MappableBase {
 
     var id: String
     var type: EventType?
     var name: String?
-    var startDate: NSDate?
-    var endDate: NSDate?
+    var startDate: Date?
+    var endDate: Date?
     var location: String?
     var repeating: Bool?
     
@@ -31,25 +30,25 @@ struct EventUpdateIntent: MappableBase {
         type = event.type
         name = event.name
         location = event.location
-        startDate = event.startDate
-        endDate = event.endDate
+        startDate = event.startDate as Date
+        endDate = event.endDate as Date
         location = event.location
         repeating = event.repeating
     }
     
-    static func newInstance(json: Json, context: Context) throws -> EventUpdateIntent {
-        throw GenericError.UnsupportedOperation
+    init(node: Node, in context: Context) throws {
+        throw GenericError.unsupportedOperation
     }
 
-    func sequence(map: Map) throws {
+    func sequence(_ map: Map) throws {
 
         typealias JSONKeys = BaseEvent.JSONKeys
 
-        try type ~> map[.Key(JSONKeys.type)]
-        try name ~> map[.Key(JSONKeys.name)]
-        try startDate ~> map[.Key(JSONKeys.startDate)]
-        try endDate ~> map[.Key(JSONKeys.endDate)]
-        try location ~> map[.Key(JSONKeys.location)]
-        try repeating ~> map[.Key(JSONKeys.repeating)]
+        try type ~> map[JSONKeys.type]
+        try name ~> map[JSONKeys.name]
+        try startDate ~> map[JSONKeys.startDate]
+        try endDate ~> map[JSONKeys.endDate]
+        try location ~> map[JSONKeys.location]
+        try repeating ~> map[JSONKeys.repeating]
     }
 }

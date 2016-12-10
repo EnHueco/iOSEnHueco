@@ -10,14 +10,16 @@ import UIKit
 import FBSDKLoginKit
 import RSKImageCropper
 import MobileCoreServices
+import SwiftyJSON
 
 protocol ImportProfileImageViewControllerDelegate: class {
-    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController)
+    func importProfileImageViewControllerDidFinishImportingImage(_ controller: ImportProfileImageViewController)
 
-    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController)
+    func importProfileImageViewControllerDidCancel(_ controller: ImportProfileImageViewController)
 }
 
 class ImportProfileImageViewController: UIViewController, UINavigationControllerDelegate {
+    
     @IBOutlet weak var importFromLocalStorageButton: UIButton!
     @IBOutlet weak var importFromFacebookButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -31,35 +33,35 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
     weak var delegate: ImportProfileImageViewControllerDelegate?
 
     /// Status bar style before presenting this controller
-    private var originalStatusBarStyle: UIStatusBarStyle!
+    fileprivate var originalStatusBarStyle: UIStatusBarStyle!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        originalStatusBarStyle = UIApplication.sharedApplication().statusBarStyle
+        originalStatusBarStyle = UIApplication.shared.statusBarStyle
 
-        modalPresentationStyle = .OverCurrentContext
+        modalPresentationStyle = .overCurrentContext
 
         if hideCancelButton {
-            cancelButton.hidden = true
+            cancelButton.isHidden = true
         }
 
         if let cancelButtonText = cancelButtonText {
-            cancelButton.setTitle(cancelButtonText, forState: .Normal)
+            cancelButton.setTitle(cancelButtonText, for: UIControlState())
         }
 
-        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
         if translucent {
-            view.backgroundColor = UIColor.clearColor()
-            view.insertSubview(effectView, atIndex: 0)
+            view.backgroundColor = UIColor.clear
+            view.insertSubview(effectView, at: 0)
         } else {
-            effectView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.3)
+            effectView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
 
             let backgroundImageView = UIImageView(imageNamed: "blurryBackground")
-            view.insertSubview(backgroundImageView, atIndex: 0)
-            backgroundImageView.autoPinEdgesToSuperviewEdges()
-            backgroundImageView.addSubview(effectView)
+            view.insertSubview(backgroundImageView!, at: 0)
+            backgroundImageView?.autoPinEdgesToSuperviewEdges()
+            backgroundImageView?.addSubview(effectView)
         }
 
         effectView.autoPinEdgesToSuperviewEdges()
@@ -72,72 +74,73 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         importFromLocalStorageButton.roundCorners()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
+        UIApplication.shared.setStatusBarStyle(.default, animated: animated)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        UIApplication.sharedApplication().setStatusBarStyle(originalStatusBarStyle, animated: animated)
+        UIApplication.shared.setStatusBarStyle(originalStatusBarStyle, animated: animated)
     }
 
-    @IBAction func importFromLocalStorageButtonPressed(sender: UIButton) {
+    @IBAction func importFromLocalStorageButtonPressed(_ sender: UIButton) {
 
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.allowsEditing = false
         imagePicker.delegate = self
 
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             // There is a camera on this device, so show the take photo button.
 
-            alertController.addAction(UIAlertAction(title: "TakePhoto".localizedUsingGeneralFile(), style: .Default, handler: {
+            alertController.addAction(UIAlertAction(title: "TakePhoto".localizedUsingGeneralFile(), style: .default, handler: {
                 (action) -> Void in
 
-                self.imagePicker.sourceType = .Camera
-                self.presentViewController(self.imagePicker, animated: true, completion: nil)
+                self.imagePicker.sourceType = .camera
+                self.present(self.imagePicker, animated: true, completion: nil)
             }))
         }
 
-        alertController.addAction(UIAlertAction(title: "ChoosePhoto".localizedUsingGeneralFile(), style: .Default, handler: {
+        alertController.addAction(UIAlertAction(title: "ChoosePhoto".localizedUsingGeneralFile(), style: .default, handler: {
             (action) -> Void in
 
-            self.imagePicker.sourceType = .PhotoLibrary
-            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
         }))
 
-        alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel".localizedUsingGeneralFile(), style: .cancel, handler: nil))
 
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
-    @IBAction func importFromFacebookButtonPressed(sender: UIButton) {
+    @IBAction func importFromFacebookButtonPressed(_ sender: UIButton) {
 
         let loginManager = FBSDKLoginManager()
-        loginManager.logInWithReadPermissions(["public_profile"], fromViewController: self) {(result, error) -> Void in
+        loginManager.logIn(withReadPermissions: ["public_profile"], from: self) {(result, error) -> Void in
 
             guard error == nil else {
                 EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
                 return
             }
 
-            if !result.isCancelled {
+            if !(result?.isCancelled)! {
                 //We are logged into Facebook
 
-                FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields": "url", "width": "500", "redirect": "false"], HTTPMethod: "GET").startWithCompletionHandler() {(_, result, error) -> Void in
+                FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields": "url", "width": "500", "redirect": "false"], httpMethod: "GET").start() {(_, result, error) -> Void in
 
-                    guard let data = result["data"],
-                        let imageURL = NSURL(string: data?["url"] as? String ?? ""),
-                        let imageData = NSData(contentsOfURL: imageURL),
-                        let image = UIImage(data: imageData)
-                        where error == nil
+                    let json = JSON(result ?? [:])
+                    
+                    guard let imageURLString = json["data"]["url"].string,
+                        let imageURL = URL(string: imageURLString),
+                        let imageData = try? Data(contentsOf: imageURL),
+                        let image = UIImage(data: imageData), error == nil
                     else {
-                            EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                            return
+                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                        return
                     }
 
                     let imageCropVC = RSKImageCropViewController(image: image)
@@ -161,25 +164,32 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         }
     }
 
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
 
         delegate?.importProfileImageViewControllerDidCancel(self)
     }
 }
 
 extension ImportProfileImageViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String:AnyObject]?) {
-
-        let imageCropVC = RSKImageCropViewController(image: image)
-        imageCropVC.delegate = self
-        picker.dismissViewControllerAnimated(true) {
-            self.presentViewController(imageCropVC, animated: true, completion: nil)
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+     
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let imageCropVC = RSKImageCropViewController(image: image)
+            imageCropVC.delegate = self
+            
+            picker.dismiss(animated: true) {
+                self.present(imageCropVC, animated: true, completion: nil)
+            }
+            
+        } else {
+            picker.dismiss(animated: true, completion: nil)
         }
     }
 }
 
 extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate {
-    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
 
         // TODO: Update implementation
         /*
@@ -200,8 +210,8 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate {
         }*/
     }
 
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
 
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 }

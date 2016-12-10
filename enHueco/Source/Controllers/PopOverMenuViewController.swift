@@ -10,18 +10,18 @@ import UIKit
 import PureLayout
 
 @objc protocol PopOverMenuViewControllerDelegate: class {
-    optional func popOverMenuViewController(controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int)
+    @objc optional func popOverMenuViewController(_ controller: PopOverMenuViewController, didSelectMenuItemAtIndex index: Int)
 }
 
 class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDelegate {
-    private var tapOutsideRecognizer: UITapGestureRecognizer!
+    fileprivate var tapOutsideRecognizer: UITapGestureRecognizer!
 
     weak var delegate: PopOverMenuViewControllerDelegate?
 
     var titlesAndIcons = [(String, UIImage)]()
     var tintColor: UIColor?
 
-    private let rowHeight: CGFloat = 44.0
+    fileprivate let rowHeight: CGFloat = 44.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
         view.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if tapOutsideRecognizer == nil {
@@ -42,7 +42,7 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if tapOutsideRecognizer != nil {
@@ -57,50 +57,50 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return titlesAndIcons.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let (title, icon) = titlesAndIcons[indexPath.row]
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("PopOverMenuTableViewCell") as! PopOverMenuTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PopOverMenuTableViewCell") as! PopOverMenuTableViewCell
 
-        cell.iconImageView.image = icon.imageWithRenderingMode(.AlwaysTemplate)
+        cell.iconImageView.image = icon.withRenderingMode(.alwaysTemplate)
         cell.titleLabel.text = title
 
-        cell.iconImageView.tintColor = tintColor ?? UIColor.blackColor()
-        cell.titleLabel.textColor = tintColor ?? UIColor.blackColor()
+        cell.iconImageView.tintColor = tintColor ?? UIColor.black
+        cell.titleLabel.textColor = tintColor ?? UIColor.black
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         return rowHeight
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         delegate?.popOverMenuViewController?(self, didSelectMenuItemAtIndex: indexPath.row)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func handleTapBehind(sender: UITapGestureRecognizer) {
+    func handleTapBehind(_ sender: UITapGestureRecognizer) {
 
-        if sender.state == UIGestureRecognizerState.Ended {
-            let location: CGPoint = sender.locationInView(nil)
+        if sender.state == UIGestureRecognizerState.ended {
+            let location: CGPoint = sender.location(in: nil)
 
-            if !view.pointInside(view.convertPoint(location, fromView: view.window), withEvent: nil) {
+            if !view.point(inside: view.convert(location, from: view.window), with: nil) {
                 view.window?.removeGestureRecognizer(sender)
-                dismissViewControllerAnimated(true, completion: nil)
+                dismiss(animated: true, completion: nil)
             }
         }
     }
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 
         return true
     }
@@ -109,7 +109,7 @@ class PopOverMenuViewController: UITableViewController, UIGestureRecognizerDeleg
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

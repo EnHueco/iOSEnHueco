@@ -8,18 +8,17 @@
 
 import Foundation
 import Genome
-import PureJsonSerializer
 
 /// The type of the event
 
-enum EventType: String, JsonConvertibleType {
+enum EventType: String, NodeConvertible {
     case FreeTime = "FREE_TIME", Class = "CLASS"
 }
 
 class BaseEvent: MappableObject {
 
     struct JSONKeys {
-        private init() {}
+        fileprivate init() {}
 
         static let type = "type"
         static let name = "name"
@@ -31,12 +30,12 @@ class BaseEvent: MappableObject {
 
     let type: EventType
     let name: String?
-    let startDate: NSDate
-    let endDate: NSDate
+    let startDate: Date
+    let endDate: Date
     let location: String?
     let repeating: Bool
 
-    init(type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repeating: Bool) {
+    init(type: EventType, name: String?, location: String?, startDate: Date, endDate: Date, repeating: Bool) {
 
         self.type = type
         self.name = name
@@ -48,31 +47,31 @@ class BaseEvent: MappableObject {
 
     required init(map: Map) throws {
         
-        type = try map.extract(.Key(JSONKeys.type))
-        name = try? map.extract(.Key(JSONKeys.name))
-        startDate = try map.extract(.Key(JSONKeys.startDate))
-        endDate = try map.extract(.Key(JSONKeys.endDate))
-        location = try? map.extract(.Key(JSONKeys.location))
-        repeating = try map.extract(.Key(JSONKeys.repeating))
+        type = try map.extract(JSONKeys.type)
+        name = try? map.extract(JSONKeys.name)
+        startDate = try map.extract(JSONKeys.startDate)
+        endDate = try map.extract(JSONKeys.endDate)
+        location = try? map.extract(JSONKeys.location)
+        repeating = try map.extract(JSONKeys.repeating)
     }
     
-    static func newInstance(json: Json, context: Context) throws -> Self {
-        let map = Map(json: json, context: context)
-        let new = try self.init(map: map)
-        try new.sequence(map)
-        return new
-    }
+//    static func newInstance(_ json: Json, context: Context) throws -> Self {
+//        let map = Map(json: json, context: context)
+//        let new = try self.init(map: map)
+//        try new.sequence(map)
+//        return new
+//    }
 
-    func sequence(map: Map) throws {
+    func sequence(_ map: Map) throws {
         
         typealias JSONKeys = BaseEvent.JSONKeys
         
-        try type ~> map[.Key(JSONKeys.type)]
-        try name ~> map[.Key(JSONKeys.name)]
-        try startDate ~> map[.Key(JSONKeys.startDate)]
-        try endDate ~> map[.Key(JSONKeys.endDate)]
-        try location ~> map[.Key(JSONKeys.location)]
-        try repeating ~> map[.Key(JSONKeys.repeating)]
+        try type ~> map[JSONKeys.type]
+        try name ~> map[JSONKeys.name]
+        try startDate ~> map[JSONKeys.startDate]
+        try endDate ~> map[JSONKeys.endDate]
+        try location ~> map[JSONKeys.location]
+        try repeating ~> map[JSONKeys.repeating]
     }
     
     /** Returns the start hour (Weekday, Hour, Minute) by setting the components to the date of the nearest
@@ -81,7 +80,7 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the startDate is returned unchanged.
      */
-    func startDateInNearestPossibleWeekToDate(targetDate: NSDate) -> NSDate  {
+    func startDateInNearestPossibleWeekToDate(_ targetDate: Date) -> Date  {
 
         guard repeating else { return startDate }
         return date(startDate, inNearestPossibleWeekToDate: targetDate)
@@ -93,17 +92,17 @@ class BaseEvent: MappableObject {
      
      If the event is unique (i.e. non-repeating), the endDate is returned unchanged.
      */
-    func endDateInNearestPossibleWeekToDate(targetDate: NSDate) -> NSDate  {
+    func endDateInNearestPossibleWeekToDate(_ targetDate: Date) -> Date  {
 
         guard repeating else { return endDate }
         
-        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        var globalCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        globalCalendar.timeZone = TimeZone(identifier: "UTC")!
         
         var endHourDate = date(endDate, inNearestPossibleWeekToDate: targetDate)
         
         if endHourDate < startDateInNearestPossibleWeekToDate(targetDate) {
-            endHourDate = globalCalendar.dateByAddingUnit(.WeekOfMonth, value: 1, toDate: endHourDate, options: [])!
+            endHourDate = (globalCalendar as NSCalendar).date(byAdding: .weekOfMonth, value: 1, to: endHourDate, options: [])!
         }
         
         return endHourDate
@@ -113,29 +112,29 @@ class BaseEvent: MappableObject {
      possible week to the date provided. The nearest possible week can be the week of the date provided itself, or the next
      one given that the weekday of the event doesn't exist for the week of the month of the date provided.
      */
-    private func date(date: NSDate, inNearestPossibleWeekToDate targetDate: NSDate) -> NSDate  {
+    fileprivate func date(_ date: Date, inNearestPossibleWeekToDate targetDate: Date) -> Date  {
 
-        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        var globalCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        globalCalendar.timeZone = TimeZone(identifier: "UTC")!
         
-        let eventComponents = globalCalendar.components([.Weekday, .Hour, .Minute], fromDate: date)
+        let eventComponents = (globalCalendar as NSCalendar).components([.weekday, .hour, .minute], from: date)
         
         var startOfWeek: NSDate?
         
-        globalCalendar.rangeOfUnit(.WeekOfMonth, startDate: &startOfWeek, interval: nil, forDate: targetDate)
+        (globalCalendar as NSCalendar).range(of: .weekOfMonth, start: &startOfWeek, interval: nil, for: targetDate)
         
-        let componentsToAdd = NSDateComponents()
-        componentsToAdd.day = eventComponents.weekday-1
+        var componentsToAdd = DateComponents()
+        componentsToAdd.day = eventComponents.weekday!-1
         componentsToAdd.hour = eventComponents.hour
         componentsToAdd.minute = eventComponents.minute
         
-        return globalCalendar.dateByAddingComponents(componentsToAdd, toDate: startOfWeek!, options: [])!
+        return (globalCalendar as NSCalendar).date(byAdding: componentsToAdd, to: startOfWeek! as Date, options: [])!
     }
     
     /// Returns true iff the event overlaps with another.
-    func overlapsWith(anotherEvent: BaseEvent) -> Bool {
+    func overlapsWith(_ anotherEvent: BaseEvent) -> Bool {
         
-        let currentDate = NSDate()
+        let currentDate = Date()
         
         let anotherEventStartHourInCurrentDate = anotherEvent.startDateInNearestPossibleWeekToDate(currentDate)
         let anotherEventEndHourInCurrentDate = anotherEvent.endDateInNearestPossibleWeekToDate(currentDate)

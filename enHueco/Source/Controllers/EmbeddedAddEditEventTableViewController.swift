@@ -33,14 +33,14 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
 
     var datePickerViewCellToDisplay: UITableViewCell?
     
-    private let weekdayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map { $0.localizedUsingGeneralFile() }
+    fileprivate let weekdayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map { $0.localizedUsingGeneralFile() }
 
-    override func didMoveToParentViewController(parent: UIViewController?) {
-        super.didMoveToParentViewController(parent)
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
 
         assert(parent is AddEditEventViewController)
 
-        addEditEventParentViewController = parentViewController as! AddEditEventViewController
+        addEditEventParentViewController = parent as! AddEditEventViewController
 
         freeTimeOrClassSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
         weekDaysSegmentedControl.tintColor = EHInterfaceColor.mainInterfaceColor
@@ -48,11 +48,11 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         nameTextField.delegate = self
         locationTextField.delegate = self
 
-        startHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.startHourChanged(_:)), forControlEvents: .ValueChanged)
-        endHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.endHourChanged(_:)), forControlEvents: .ValueChanged)
+        startHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.startHourChanged(_:)), for: .valueChanged)
+        endHourDatePicker.addTarget(self, action: #selector(EmbeddedAddEditEventTableViewController.endHourChanged(_:)), for: .valueChanged)
 
         if addEditEventParentViewController.eventToEditID == nil {
-            deleteButton.hidden = true
+            deleteButton.isHidden = true
             deleteButtonHeightConstraint.constant = 0
             
             let indexSet = NSMutableIndexSet()
@@ -76,13 +76,13 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         
         deleteButton.clipsToBounds = true
         deleteButton.layer.cornerRadius = 5
-        deleteButton.hidden = false
+        deleteButton.isHidden = false
         
-        let globalCalendar = NSCalendar.currentCalendar()
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        var globalCalendar = Calendar.current
+        globalCalendar.timeZone = TimeZone(identifier: "UTC")!
         
-        let indexSet = NSIndexSet(index: globalCalendar.component(.Weekday, fromDate: eventToEdit.startDate) - 1)
-        weekDaysSegmentedControl.selectedSegmentIndexes = indexSet
+        let indexSet = IndexSet(integer: globalCalendar.component(.weekday, from: eventToEdit.startDate as Date) - 1)
+        weekDaysSegmentedControl.selectedSegmentIndexes = indexSet as NSIndexSet!
         
         if eventToEdit.type == .FreeTime {
             freeTimeOrClassSegmentedControl.selectedSegmentIndex = 0
@@ -90,14 +90,14 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
             freeTimeOrClassSegmentedControl.selectedSegmentIndex = 1
         }
         
-        startHourDatePicker.setDate(eventToEdit.startDate, animated: true)
-        endHourDatePicker.setDate(eventToEdit.endDate, animated: true)
+        startHourDatePicker.setDate(eventToEdit.startDate as Date, animated: true)
+        endHourDatePicker.setDate(eventToEdit.endDate as Date, animated: true)
         updateStartAndEndHourCells()
     }
 
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
 
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if cell == startHourCell || cell == endHourCell {
             return indexPath
@@ -106,9 +106,9 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if (cell == startHourCell && datePickerViewCellToDisplay != startHourDatePickerCell)
                 || (cell == endHourCell && datePickerViewCellToDisplay != endHourDatePickerCell) {
@@ -123,27 +123,27 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
 
         tableView.beginUpdates()
         tableView.endUpdates()
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if cell == startHourCell || cell == endHourCell {
-            cell.selectionStyle = .Blue
+            cell.selectionStyle = .blue
         } else {
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
         }
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
-        if cell == weekDaysCell && weekDaysCell.hidden {
+        if cell == weekDaysCell && weekDaysCell.isHidden {
             return 0
         } else if cell == startHourDatePickerCell || cell == endHourDatePickerCell {
             if datePickerViewCellToDisplay == cell {
@@ -152,76 +152,76 @@ class EmbeddedAddEditEventTableViewController: UITableViewController, UIPickerVi
                 return 0
             }
         } else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+            return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
     }
 
     // MARK: PickerView Delegate
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
 
         return 1
     }
 
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 
         return 5
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return weekdayNames[row + 2]
     }
 
     // MARK Buttons
 
-    func startHourChanged(sender: UIDatePicker) {
+    func startHourChanged(_ sender: UIDatePicker) {
 
         endHourDatePicker.minimumDate = startHourDatePicker.date
         updateStartAndEndHourCells()
     }
 
-    func endHourChanged(sender: UIDatePicker) {
+    func endHourChanged(_ sender: UIDatePicker) {
 
         updateStartAndEndHourCells()
     }
 
-    @IBAction func deleteButtonPressed(sender: AnyObject) {
+    @IBAction func deleteButtonPressed(_ sender: AnyObject) {
         
         let title = "Eliminar " + (freeTimeOrClassSegmentedControl.selectedSegmentIndex == 0 ? "FreeTime".localizedUsingGeneralFile() : "Class".localizedUsingGeneralFile())
         let message = "AreYouSureDeleteEventMessage".localizedUsingGeneralFile()
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-        alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action) in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+            alertController.dismiss(animated: true, completion: nil)
         }))
             
-        alertController.addAction(UIAlertAction(title: "Si", style: .Destructive, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "Si", style: .destructive, handler: { (action) in
             self.addEditEventParentViewController.deleteEventToEdit()
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+            alertController.dismiss(animated: true, completion: nil)
         }))
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     // MARK: Methods
 
     func updateStartAndEndHourCells() {
 
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
 
-        startHourCell.detailTextLabel?.text = formatter.stringFromDate(startHourDatePicker.date)
-        endHourCell.detailTextLabel?.text = formatter.stringFromDate(endHourDatePicker.date)
+        startHourCell.detailTextLabel?.text = formatter.string(from: startHourDatePicker.date)
+        endHourCell.detailTextLabel?.text = formatter.string(from: endHourDatePicker.date)
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
         textField.resignFirstResponder()
         return true

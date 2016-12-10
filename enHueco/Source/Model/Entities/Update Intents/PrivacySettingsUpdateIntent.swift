@@ -14,11 +14,11 @@ struct PrivacyUpdateIntent: BasicMappable {
     var showEventsNames: Bool?
     var showEventsLocations: Bool?
 
-    func sequence(map: Map) throws {
+    func sequence(_ map: Map) throws {
 
         typealias JSONKeys = PrivacySettings.JSONKeys
 
-        try showEventsNames ~> map[.Key(JSONKeys.showEventsNames)]
-        try showEventsLocations ~> map[.Key(JSONKeys.showEventsLocations)]
+        try showEventsNames ~> map[JSONKeys.showEventsNames]
+        try showEventsLocations ~> map[JSONKeys.showEventsLocations]
     }
 }

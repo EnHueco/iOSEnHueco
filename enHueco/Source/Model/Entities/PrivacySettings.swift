@@ -8,11 +8,24 @@
 
 import UIKit
 import Genome
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class PrivacySettings: Object {
 
     struct JSONKeys {
-        private init() {}
+        fileprivate init() {}
 
         static let userID = "user_id"
         static let showEventsNames = "show_events_names"
@@ -21,7 +34,7 @@ class PrivacySettings: Object {
     }
 
     let userID: String
-    let invisibilityEndDate: NSDate?
+    let invisibilityEndDate: Date?
     let showEventsNames: Bool
     let showEventsLocations: Bool
     
@@ -35,15 +48,15 @@ class PrivacySettings: Object {
         userID = ""
         showEventsNames = true
         showEventsLocations = true
-        try super.init(map: Map(json: [:]))
+        try super.init(map: Map(node: [:]))
     }
 
     required init(map: Map) throws {
         
-        userID = try map.extract(.Key(JSONKeys.userID))
-        showEventsNames = try map.extract(.Key(JSONKeys.showEventsNames))
-        showEventsLocations = try map.extract(.Key(JSONKeys.showEventsLocations))
-        invisibilityEndDate = try map.extract(.Key(JSONKeys.showEventsLocations))
+        userID = try map.extract(JSONKeys.userID)
+        showEventsNames = try map.extract(JSONKeys.showEventsNames)
+        showEventsLocations = try map.extract(JSONKeys.showEventsLocations)
+        invisibilityEndDate = try map.extract(JSONKeys.showEventsLocations)
         try super.init(map: map)
     }
 }

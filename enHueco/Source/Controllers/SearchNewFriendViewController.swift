@@ -16,58 +16,58 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
     var searchResults = [User]()
 
     var searchText: String!
-    var searchTimer: NSTimer?
+    var searchTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
 
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
 
         searchBar.delegate = self
         searchBar.becomeFirstResponder()
-        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.tintColor = UIColor.white
 
         //Ugly, but... is there another solution?
-        if let textFieldInsideSearchBar = searchBar.valueForKey("searchField") as? UITextField {
-            textFieldInsideSearchBar.textColor = UIColor.whiteColor()
+        if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
+            textFieldInsideSearchBar.textColor = UIColor.white
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationController?.navigationBar.backgroundColor = UIColor.clear
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.translucent = true
-        navigationController?.navigationBar.barTintColor = UIColor.clearColor()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = UIColor.clear
 
-        navigationBar.barStyle = .Black
-        navigationBar.tintColor = UIColor.whiteColor()
-        navigationBar.barTintColor = UIColor.whiteColor()
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationBar.barStyle = .black
+        navigationBar.tintColor = UIColor.white
+        navigationBar.barTintColor = UIColor.white
+        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        let blurEffect = UIBlurEffect(style: .Light)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = view.bounds
-        view.insertSubview(blurView, atIndex: 0)
+        view.insertSubview(blurView, at: 0)
 
-        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
+        let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurEffect))
         vibrancyView.frame = view.bounds
         blurView.addSubview(vibrancyView)
     }
 
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,31 +76,31 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         // Dispose of any resources that can be recreated.
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return searchResults.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let searchResult = searchResults[indexPath.row]
 
-        let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("SearchFriendCell") as! SearchFriendCell
+        let cell = searchResultsTableView.dequeueReusableCell(withIdentifier: "SearchFriendCell") as! SearchFriendCell
         cell.friendNameLabel.text = searchResult.name
 
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let friend = searchResults[indexPath.row]
 
-        let window = UIApplication.sharedApplication().delegate!.window!!
+        let window = UIApplication.shared.delegate!.window!!
 
         EHProgressHUD.showSpinnerInView(window)
         FriendsManager.sharedManager.sendFriendRequestTo(id: friend.id, completionHandler: { (error) in
             EHProgressHUD.dismissSpinnerForView(window)
-            self.searchResultsTableView.deselectRowAtIndexPath(indexPath, animated: true)
+            self.searchResultsTableView.deselectRow(at: indexPath, animated: true)
             
             // TODO: Check this
             guard error == nil else
@@ -109,19 +109,19 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
                 return
             }
             
-            EHNotifications.showNotificationInViewController(self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .Success)
+            EHNotifications.showNotificationInViewController(self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .success)
             
-            self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            self.navigationController?.dismiss(animated: true, completion: nil)
         })
     }
 
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         searchBar.endEditing(true)
     }
@@ -138,19 +138,19 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         return true
     }*/
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         if let timer = searchTimer {
             timer.invalidate()
         }
 
         self.searchText = searchText
-        searchTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(SearchNewFriendViewController.timeToSearch(_:)), userInfo: nil, repeats: false)
+        searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(SearchNewFriendViewController.timeToSearch(_:)), userInfo: nil, repeats: false)
     }
 
-    func timeToSearch(timer: NSTimer) {
+    func timeToSearch(_ timer: Timer) {
 
-        FriendsManager.sharedManager.searchUsersByName(searchText: searchText, institutionID: nil, completionHandler: { (results) in
+        FriendsManager.sharedManager.searchUsersByName(searchText, institutionID: nil, completionHandler: { (results) in
             
             self.searchResults = results
             self.searchResultsTableView.reloadData()

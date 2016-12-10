@@ -11,25 +11,25 @@ import Firebase
 
 class PrivacyManager: FirebaseLogicManager  {
 
-    private init() {}
+    fileprivate init() {}
 
     static let sharedManager = PrivacyManager()
 
-    func updatePrivacySettingsWith(intent: PrivacyUpdateIntent, completionHandler: BasicCompletionHandler) {
+    func updatePrivacySettingsWith(_ intent: PrivacyUpdateIntent, completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else {
+        guard let appUserID = firebaseUser(completionHandler)?.uid else {
             return
         }
         
-        guard let updateJSON = (try? intent.jsonRepresentation().foundationDictionary) ?? nil else {
+        guard let updateJSON = (try? intent.foundationDictionary()) ?? nil else {
             assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            DispatchQueue.main.async{ completionHandler(GenericError.unknownError) }
             return
         }
         
         FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID).updateChildValues(updateJSON) { (error, reference) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }

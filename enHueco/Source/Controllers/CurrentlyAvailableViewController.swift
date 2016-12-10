@@ -27,7 +27,7 @@ class CurrentlyAvailableViewController: UIViewController {
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
     /// The friends logic manager (if currently fetching updates)
-    private var realtimeFriendsManager: RealtimeFriendsManager?
+    fileprivate var realtimeFriendsManager: RealtimeFriendsManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +37,8 @@ class CurrentlyAvailableViewController: UIViewController {
 
         emptyLabel = UILabel()
         emptyLabel.text = "NobodyAvailableMessage".localizedUsingGeneralFile()
-        emptyLabel.textColor = UIColor.grayColor()
-        emptyLabel.textAlignment = .Center
+        emptyLabel.textColor = UIColor.gray
+        emptyLabel.textAlignment = .center
         emptyLabel.numberOfLines = 0
         emptyLabel.sizeToFit()
 
@@ -49,19 +49,19 @@ class CurrentlyAvailableViewController: UIViewController {
 
         searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: #selector(UIResponder.resignFirstResponder))
 
-        let imInvisibleButton = UIButton(type: .Custom)
+        let imInvisibleButton = UIButton(type: .custom)
         imInvisibleButton.frame.size = CGSize(width: 20, height: 20)
-        imInvisibleButton.setBackgroundImage(UIImage(named: "Eye")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        imInvisibleButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imInvisibleButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        imInvisibleButton.tintColor = UIColor.whiteColor()
+        imInvisibleButton.setBackgroundImage(UIImage(named: "Eye")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+        imInvisibleButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imInvisibleButtonPressed(_:)), for: .touchUpInside)
+        imInvisibleButton.tintColor = UIColor.white
         imInvisibleBarItem = UIBarButtonItem(customView: imInvisibleButton)
         navigationItem.leftBarButtonItem = imInvisibleBarItem
 
-        let imFreeButton = UIButton(type: .Custom)
+        let imFreeButton = UIButton(type: .custom)
         imFreeButton.frame.size = CGSize(width: 20, height: 20)
-        imFreeButton.setBackgroundImage(UIImage(named: "HandRaised")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        imFreeButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imAvailableButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        imFreeButton.tintColor = UIColor.whiteColor()
+        imFreeButton.setBackgroundImage(UIImage(named: "HandRaised")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+        imFreeButton.addTarget(self, action: #selector(CurrentlyAvailableViewController.imAvailableButtonPressed(_:)), for: .touchUpInside)
+        imFreeButton.tintColor = UIColor.white
         imAvailableBarItem = UIBarButtonItem(customView: imFreeButton)
         navigationItem.rightBarButtonItem = imAvailableBarItem
     }
@@ -71,15 +71,15 @@ class CurrentlyAvailableViewController: UIViewController {
         emptyLabel.center = tableView.center
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         navigationController?.setNavigationBarHidden(false, animated: false)
 
-        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
 
-        transitionCoordinator()?.animateAlongsideTransition({
+        transitionCoordinator?.animate(alongsideTransition: {
             (context) -> Void in
 
             self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
@@ -87,18 +87,18 @@ class CurrentlyAvailableViewController: UIViewController {
         }, completion: {
             (context) -> Void in
 
-            if context.isCancelled() {
+            if context.isCancelled {
                 self.navigationController?.navigationBar.barTintColor = UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)
-                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), forBarMetrics: .Default)
+                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), for: .default)
             }
         })
 
         if let selectedIndex = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+            tableView.deselectRow(at: selectedIndex, animated: true)
         }
 
         /// This way we ensure this call will not collide with the next one in the completion handler
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.updateFreeTimePeriodDataAndReloadTableView()
         }
 
@@ -106,25 +106,25 @@ class CurrentlyAvailableViewController: UIViewController {
         realtimeFriendsManager = RealtimeFriendsManager(delegate: self)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        reportScreenViewToGoogleAnalyticsWithName("Currently Available")
+        reportScreenViewToGoogleAnalyticsWithName(name: "Currently Available")
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeFriendsManager = nil
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         view.endEditing(true)
     }
 
-    func imInvisibleButtonPressed(sender: UIButton) {
+    func imInvisibleButtonPressed(_ sender: UIButton) {
 
         // TODO: Update implementation
         /*
@@ -135,7 +135,7 @@ class CurrentlyAvailableViewController: UIViewController {
         }*/
     }
 
-    private func turnInvisible() {
+    fileprivate func turnInvisible() {
 
         // TODO: Update implementation
         /*
@@ -189,7 +189,7 @@ class CurrentlyAvailableViewController: UIViewController {
          */
     }
 
-    private func turnVisible() {
+    fileprivate func turnVisible() {
 
         // TODO: Update implementation
         /*
@@ -208,9 +208,9 @@ class CurrentlyAvailableViewController: UIViewController {
         }*/
     }
 
-    func imAvailableButtonPressed(sender: UIButton) {
+    func imAvailableButtonPressed(_ sender: UIButton) {
 
-        let instantFreeTimeViewController = storyboard!.instantiateViewControllerWithIdentifier("InstantFreeTimeViewController") as! InstantFreeTimeViewController
+        let instantFreeTimeViewController = storyboard!.instantiateViewController(withIdentifier: "InstantFreeTimeViewController") as! InstantFreeTimeViewController
         instantFreeTimeViewController.delegate = self
         instantFreeTimeViewController.showInViewController(navigationController!)
     }
@@ -226,7 +226,7 @@ class CurrentlyAvailableViewController: UIViewController {
             filteredFriendsAndFreeTimePeriods.insert((enHueco.appUser, instantFreeTimePeriod), atIndex: 0)
         }*/
         
-        filteredSoonFreefriendsAndFreeTimePeriods = realtimeFriendsManager.soonAvailableFriendsWithin(interval: 3600)
+        filteredSoonFreefriendsAndFreeTimePeriods = realtimeFriendsManager.soonAvailableFriendsWithin(3600)
     }
 
     func updateFreeTimePeriodDataAndReloadTableView() {
@@ -241,7 +241,7 @@ class CurrentlyAvailableViewController: UIViewController {
         }
         */
         
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
         
             let oldFilteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods
             let oldFilteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods
@@ -249,20 +249,20 @@ class CurrentlyAvailableViewController: UIViewController {
             self.resetDataArrays()
             
             if self.filteredFriendsAndFreeTimePeriods.isEmpty && self.filteredSoonFreefriendsAndFreeTimePeriods.isEmpty {
-                self.tableView.hidden = true
+                self.tableView.isHidden = true
                 self.view.addSubview(self.emptyLabel)
                 
             } else {
-                self.tableView.hidden = false
+                self.tableView.isHidden = false
                 self.emptyLabel.removeFromSuperview()
             }
             
-            if !oldFilteredFriendsAndFreeTimePeriods.elementsEqual(self.filteredFriendsAndFreeTimePeriods, isEquivalent: ==)
-                || !oldFilteredSoonFreefriendsAndFreeTimePeriods.elementsEqual(self.filteredSoonFreefriendsAndFreeTimePeriods, isEquivalent: ==) {
+            if !oldFilteredFriendsAndFreeTimePeriods.elementsEqual(self.filteredFriendsAndFreeTimePeriods, by: ==)
+                || !oldFilteredSoonFreefriendsAndFreeTimePeriods.elementsEqual(self.filteredSoonFreefriendsAndFreeTimePeriods, by: ==) {
                 
                 let range = NSMakeRange(0, self.tableView.numberOfSections)
-                let sections = NSIndexSet(indexesInRange: range)
-                self.tableView.reloadSections(sections, withRowAnimation: .Automatic)
+                let sections = IndexSet(integersIn: range.toRange() ?? 0..<0)
+                self.tableView.reloadSections(sections, with: .automatic)
             }
         }
     }
@@ -270,20 +270,20 @@ class CurrentlyAvailableViewController: UIViewController {
     func rightButtons() -> NSArray {
 
         let rightUtilityButtons = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatMintColor(), title: "WhatsApp")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.flatWatermelonColor(), title: "Call".localizedUsingGeneralFile())
+        rightUtilityButtons.sw_addUtilityButton(with: UIColor.flatMint, title: "WhatsApp")
+        rightUtilityButtons.sw_addUtilityButton(with: UIColor.flatWatermelon, title: "Call".localizedUsingGeneralFile())
 
         return rightUtilityButtons
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 extension CurrentlyAvailableViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeFriendsManager) {
         
         updateFreeTimePeriodDataAndReloadTableView()
     }
@@ -291,13 +291,13 @@ extension CurrentlyAvailableViewController: RealtimeFriendsManagerDelegate {
 
 extension CurrentlyAvailableViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
 
         // Should be and stay constant in order for animations to work
         return 2
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if section == 0 {
             return filteredFriendsAndFreeTimePeriods.count
@@ -308,15 +308,15 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("AvailableFriendCell") as! AvailableFriendCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AvailableFriendCell") as! AvailableFriendCell
 
         cell.delegate = self
 
         cell.freeTimeStartOrEndHourIconImageView.tintColor = cell.freeTimeStartOrEndHourLabel.textColor
 
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
 
         var (friend, freeTime): (User, Event)
@@ -324,26 +324,26 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             (friend, freeTime) = filteredFriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.endDateInNearestPossibleWeekToDate(NSDate()))
-            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+            cell.freeTimeStartOrEndHourLabel.text = formatter.string(from: freeTime.endDateInNearestPossibleWeekToDate(Date()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")?.withRenderingMode(.alwaysTemplate)
         } else {
             (friend, freeTime) = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row]
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(freeTime.startDateInNearestPossibleWeekToDate(NSDate()))
-            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.imageWithRenderingMode(.AlwaysTemplate)
+            cell.freeTimeStartOrEndHourLabel.text = formatter.string(from: freeTime.startDateInNearestPossibleWeekToDate(Date()))
+            cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.withRenderingMode(.alwaysTemplate)
         }
 
         if friend.id == AccountManager.sharedManager.userID {
-            cell.setInstantFreeTimeIconVisibility(visible: true)
+            cell.setInstantFreeTimeIconVisibility(true)
 
             let array = NSMutableArray()
-            array.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Delete".localizedUsingGeneralFile())
+            array.sw_addUtilityButton(with: UIColor.red, title: "Delete".localizedUsingGeneralFile())
 
-            cell.rightUtilityButtons = array as [AnyObject]
+            cell.rightUtilityButtons = Array(array) as [Any]
             
         } else {
-            cell.setInstantFreeTimeIconVisibility(visible: false)
-            cell.rightUtilityButtons = rightButtons() as [AnyObject]
+            cell.setInstantFreeTimeIconVisibility(false)
+            cell.rightUtilityButtons = Array(rightButtons()) as [Any]
 
         }
 
@@ -356,25 +356,25 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 61 / 2
         cell.friendImageImageView.image = nil
-        cell.friendImageImageView.contentMode = .ScaleAspectFill
+        cell.friendImageImageView.contentMode = .scaleAspectFill
 
-        cell.instantFreeTimeIcon.image = cell.instantFreeTimeIcon.image?.imageWithRenderingMode(.AlwaysTemplate)
-        cell.instantFreeTimeIcon.tintColor = UIColor.grayColor()
+        cell.instantFreeTimeIcon.image = cell.instantFreeTimeIcon.image?.withRenderingMode(.alwaysTemplate)
+        cell.instantFreeTimeIcon.tintColor = UIColor.gray
 
-        SDWebImageManager().downloadImageWithURL(url, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil, completed: { (image, error, cacheType, bool, url) -> Void in
+        SDWebImageManager().downloadImage(with: url as URL!, options: SDWebImageOptions.allowInvalidSSLCertificates, progress: nil, completed: { (image, error, cacheType, bool, url) -> Void in
             
             guard error == nil else { return }
             
-            if cacheType == .None || cacheType == .Disk {
+            if cacheType == .none || cacheType == .disk {
                 
                 cell.friendImageImageView.alpha = 0
                 cell.friendImageImageView.image = image
                 
-                UIView.animateWithDuration(0.5) {
+                UIView.animate(withDuration: 0.5, animations: {
                     cell.friendImageImageView.alpha = 1
-                }
+                }) 
                 
-            } else if cacheType == SDImageCacheType.Memory {
+            } else if cacheType == SDImageCacheType.memory {
                 cell.friendImageImageView.image = image
             }
         })
@@ -382,7 +382,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
         return cell
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         if section == 0 {
             return "Now".localizedUsingGeneralFile()
@@ -393,7 +393,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
 }
 
 extension CurrentlyAvailableViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let friend: User
 
@@ -403,7 +403,7 @@ extension CurrentlyAvailableViewController: UITableViewDelegate {
             friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
         }
 
-        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
+        let friendDetailViewController = storyboard?.instantiateViewController(withIdentifier: "FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friendID = friend.id
 
         navigationController!.pushViewController(friendDetailViewController, animated: true)
@@ -412,10 +412,10 @@ extension CurrentlyAvailableViewController: UITableViewDelegate {
 
 extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
     
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+    func swipeableTableViewCell(_ cell: SWTableViewCell!, didTriggerRightUtilityButtonWith index: Int) {
 
         if let cell = cell as? AvailableFriendCell {
-            let indexPath = tableView.indexPathForCell(cell)!
+            let indexPath = tableView.indexPath(for: cell)!
             let friend: User
 
             if indexPath.section == 0 {
@@ -457,34 +457,34 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
                 appDelegate.callFriend(phoneNumber)
             }
         }
-        cell.hideUtilityButtonsAnimated(true)
+        cell.hideUtilityButtons(animated: true)
     }
 
-    func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
+    func swipeableTableViewCellShouldHideUtilityButtons(onSwipe cell: SWTableViewCell!) -> Bool {
         return true
     }
 }
 
 extension CurrentlyAvailableViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 
         tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
         tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.resetDataArrays()
 
             let nameContainsPrefix = {
                 (name: String, string: String) -> Bool in
 
-                for word in name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(string) {
+                for word in name.components(separatedBy: " ") where word.lowercased().hasPrefix(string) {
                     return true
                 }
 
@@ -493,10 +493,10 @@ extension CurrentlyAvailableViewController: UISearchBarDelegate {
 
             if !searchText.isBlank() {
                 self.filteredFriendsAndFreeTimePeriods = self.filteredFriendsAndFreeTimePeriods.filter {
-                    nameContainsPrefix($0.friend.name, searchText.lowercaseString)
+                    nameContainsPrefix($0.friend.name, searchText.lowercased())
                 }
                 self.filteredSoonFreefriendsAndFreeTimePeriods = self.filteredSoonFreefriendsAndFreeTimePeriods.filter {
-                    nameContainsPrefix($0.friend.name, searchText.lowercaseString)
+                    nameContainsPrefix($0.friend.name, searchText.lowercased())
                 }
             }
 
@@ -507,7 +507,7 @@ extension CurrentlyAvailableViewController: UISearchBarDelegate {
 
 extension CurrentlyAvailableViewController: InstantFreeTimeViewControllerDelegate {
     
-    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(controller: InstantFreeTimeViewController) {
+    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(_ controller: InstantFreeTimeViewController) {
         updateFreeTimePeriodDataAndReloadTableView()
     }
 }

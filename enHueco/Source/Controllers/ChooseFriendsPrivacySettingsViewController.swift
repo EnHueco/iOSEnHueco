@@ -17,36 +17,36 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
         segmentedControl.tintColor = EHInterfaceColor.defaultNavigationBarColor
     }
 
-    @IBAction func editButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
 
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.addButtonPressed(_:))), animated: true)
-        navigationItem.setLeftBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.doneButtonPressed(_:))), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.addButtonPressed(_:))), animated: true)
+        navigationItem.setLeftBarButton(UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.doneButtonPressed(_:))), animated: true)
 
         navigationItem.setHidesBackButton(true, animated: true)
     }
 
-    func addButtonPressed(sender: UIBarButtonItem) {
+    func addButtonPressed(_ sender: UIBarButtonItem) {
 
-        let controller = storyboard?.instantiateViewControllerWithIdentifier("SearchSelectFriendsViewController") as! SearchSelectFriendsViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "SearchSelectFriendsViewController") as! SearchSelectFriendsViewController
 
         controller.delegate = self
 
-        presentViewController(controller, animated: true, completion: nil)
+        present(controller, animated: true, completion: nil)
     }
 
-    func doneButtonPressed(sender: UIBarButtonItem) {
+    func doneButtonPressed(_ sender: UIBarButtonItem) {
 
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.editButtonPressed(_:))), animated: true)
-        navigationItem.setLeftBarButtonItem(nil, animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(ChooseFriendsPrivacySettingsViewController.editButtonPressed(_:))), animated: true)
+        navigationItem.setLeftBarButton(nil, animated: true)
 
         navigationItem.setHidesBackButton(false, animated: true)
     }
 
-    @IBAction func segmentedControlSelectionChanged(sender: UISegmentedControl) {
+    @IBAction func segmentedControlSelectionChanged(_ sender: UISegmentedControl) {
 
     }
 
-    func searchSelectFriendsViewController(controller: SearchSelectFriendsViewController, didSelectFriends friends: [User]) {
+    func searchSelectFriendsViewController(_ controller: SearchSelectFriendsViewController, didSelectFriends friends: [User]) {
 
     }
 
@@ -60,7 +60,7 @@ class ChooseFriendsPrivacySettingsViewController: UIViewController, SearchSelect
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

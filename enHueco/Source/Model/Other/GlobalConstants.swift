@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class GlobalConstants {
+open class GlobalConstants {
     static let delayForBackendRequest = 15.0
 
     struct Schedule {

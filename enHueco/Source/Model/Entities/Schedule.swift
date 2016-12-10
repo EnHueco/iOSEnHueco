@@ -8,7 +8,6 @@
 
 import Foundation
 import Genome
-import PureJsonSerializer
 
 class Schedule: MappableObject, Equatable {
     
@@ -18,25 +17,25 @@ class Schedule: MappableObject, Equatable {
     
     required init(map: Map) throws {
         
-        guard let dictionary = map.json.foundationDictionary else {
-            throw GenericError.Error(message: "Not a dictionary")
+        guard let dictionary = map.node.any as? [String : Any] else {
+            throw GenericError.error(message: "Not a dictionary")
         }
-        
-        events = try [Event](js: Json.from(Array(dictionary.values))).sort(<)
+
+        events = try [Event](node: Array(dictionary.values)).sorted(by: <)
     }
     
     init(events: [Event]) {
-        self.events = events.sort(<)
+        self.events = events.sorted(by: <)
     }
     
-    static func newInstance(json: Json, context: Context) throws -> Self {
-        let map = Map(json: json, context: context)
-        let new = try self.init(map: map)
-        return new
-    }
+//    static func newInstance(_ json: Json, context: Context) throws -> Self {
+//        let map = Map(json: json, context: context)
+//        let new = try self.init(map: map)
+//        return new
+//    }
     
     /// Returns true if event doesn't overlap with any other event, excluding the event with ID == eventToExcludeID.
-    func canAddEvent(newEvent: BaseEvent, excludingEvent eventToExcludeID: String? = nil) -> Bool {
+    func canAddEvent(_ newEvent: BaseEvent, excludingEvent eventToExcludeID: String? = nil) -> Bool {
         
         for event in events where (eventToExcludeID == nil || event.id != eventToExcludeID) && event.overlapsWith(newEvent) {
             return false
@@ -45,7 +44,7 @@ class Schedule: MappableObject, Equatable {
         return true
     }
 
-    func eventWithID(ID: String) -> Event? {
+    func eventWithID(_ ID: String) -> Event? {
 
         for event in events where event.id == ID {
             return event
@@ -54,13 +53,13 @@ class Schedule: MappableObject, Equatable {
         return nil
     }
     
-    func eventsInDayOfDate(date: NSDate) -> [Event] {
+    func eventsInDayOfDate(_ date: Date) -> [Event] {
         
-        let globalCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        globalCalendar.timeZone = NSTimeZone(name: "UTC")!
+        var globalCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        globalCalendar.timeZone = TimeZone(identifier: "UTC")!
         
         return events.filter {
-            return globalCalendar.component(.Weekday, fromDate: $0.startDate) == globalCalendar.component(.Weekday, fromDate: date)
+            return globalCalendar.dateComponents([.weekday], from: $0.startDate) == globalCalendar.dateComponents([.weekday], from: date)
         }
     }
     
@@ -69,7 +68,7 @@ class Schedule: MappableObject, Equatable {
         
         guard !privacySettings.invisible else { return (nil, nil) }
         
-        let currentDate = NSDate()
+        let currentDate = Date()
         var currentFreeTimePeriod: Event?
         
         for event in events where event.type == .FreeTime {
@@ -91,7 +90,7 @@ class Schedule: MappableObject, Equatable {
         
         guard !privacySettings.invisible else { return nil }
         
-        let currentDate = NSDate()
+        let currentDate = Date()
         
         for event in events where event.startDateInNearestPossibleWeekToDate(currentDate) > currentDate {
             return event
@@ -103,9 +102,9 @@ class Schedule: MappableObject, Equatable {
     /** Returns the common free time periods among the schedules provided and this one
      Note: **Only works with repeating days for now**
      */
-    func commonFreeTimePeriodsScheduleAmong(schedules: [Schedule]) -> Schedule {
+    func commonFreeTimePeriodsScheduleAmong(_ schedules: [Schedule]) -> Schedule {
         
-        let currentDate = NSDate()
+        let currentDate = Date()
         var commonFreeTimePeriods = [BaseEvent]()
         
         guard schedules.count >= 2 else {

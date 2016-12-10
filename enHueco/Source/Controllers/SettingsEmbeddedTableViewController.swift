@@ -17,32 +17,32 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     @IBOutlet weak var phoneNumberCell: UITableViewCell!
 
     /// !!! Sections that must be hidden because they are not implemented yet
-    private let unimplementedSections = [1, 3]
+    fileprivate let unimplementedSections = [1, 3]
     
-    private var realtimeAppUserManager: RealtimeUserManager?
+    fileprivate var realtimeAppUserManager: RealtimeUserManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Ajustes"
 
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.barStyle = .BlackTranslucent
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
 
         clearsSelectionOnViewWillAppear = true
 
-        authTouchIDSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
+        authTouchIDSwitch.isOn = UserDefaults.standard.bool(forKey: EHUserDefaultsKeys.authTouchID)
 //        nearbyFriendsNotificationsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.nearbyCloseFriendsNotifications)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         realtimeAppUserManager = RealtimeUserManager(delegate: self)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeAppUserManager = nil
@@ -58,7 +58,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
 
     // !!! REMOVE WHEN READY TO IMPLEMENT THE FEATURES IN THE HIDDEN SECTIONS
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         guard !unimplementedSections.contains(section) else {
             return 0
@@ -66,7 +66,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         guard !unimplementedSections.contains(section) else {
             return nil
@@ -74,7 +74,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         return super.tableView(tableView, titleForHeaderInSection: section)
     }
 
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 
         guard !unimplementedSections.contains(section) else {
             return nil
@@ -82,7 +82,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         return super.tableView(tableView, titleForFooterInSection: section)
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
         guard !unimplementedSections.contains(section) else {
             return 1
@@ -90,7 +90,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         return super.tableView(tableView, heightForHeaderInSection: section)
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 
         guard !unimplementedSections.contains(section) else {
             return 1
@@ -102,24 +102,24 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    @IBAction func doneButtonPressed(_ sender: AnyObject) {
 
-        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func nearbyFriendsNotificationsToggleChanged(sender: AnyObject) {
+    @IBAction func nearbyFriendsNotificationsToggleChanged(_ sender: AnyObject) {
 
         //TODO
     }
 
-    @IBAction func authenticateWithTIDChanged(sender: UISwitch) {
+    @IBAction func authenticateWithTIDChanged(_ sender: UISwitch) {
 
-        var isOn = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.authTouchID)
+        var isOn = UserDefaults.standard.bool(forKey: EHUserDefaultsKeys.authTouchID)
         isOn = !isOn
 
-        NSUserDefaults.standardUserDefaults().setBool(isOn, forKey: EHUserDefaultsKeys.authTouchID)
+        UserDefaults.standard.set(isOn, forKey: EHUserDefaultsKeys.authTouchID)
 
-        authTouchIDSwitch.on = isOn
+        authTouchIDSwitch.isOn = isOn
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,9 +128,9 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
 
         if cell == logoutCell {
             logout()
@@ -138,16 +138,16 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         } else if cell == phoneNumberCell {
             
             let alertView = UIAlertView(title: "Teléfono", message: "Agrega un nuevo número de teléfono", delegate: self, cancelButtonTitle: "Cancelar", otherButtonTitles: "Agregar")
-            alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
-            alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.PhonePad
+            alertView.alertViewStyle = UIAlertViewStyle.plainTextInput
+            alertView.textField(at: 0)?.keyboardType = UIKeyboardType.phonePad
             alertView.show()
             
         } else if cell == changeProfilePictureCell {
             
-            let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+            let importPictureController = storyboard?.instantiateViewController(withIdentifier: "ImportProfileImageViewController") as! ImportProfileImageViewController
             importPictureController.delegate = self
 
-            presentViewController(importPictureController, animated: true, completion: nil)
+            present(importPictureController, animated: true, completion: nil)
         }
     }
 
@@ -167,20 +167,20 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
          The problem is that view(Will/Did)Appear is being called on all intermediate controllers without them ever appearing on screen, causing unexpected behavior if
          we did the actual logout procedure here*/
 
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
 
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
             appDelegate.loggingOut = true
-            appDelegate.mainNavigationController.dismissViewControllerAnimated(true, completion: nil)
+            appDelegate.mainNavigationController.dismiss(animated: true, completion: nil)
         }
     }
 
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
 
         phoneNumberCell.setSelected(false, animated: true)
         
-        if let newNumber = alertView.textFieldAtIndex(0)?.text where !newNumber.isEmpty {
+        if let newNumber = alertView.textField(at: 0)?.text, !newNumber.isEmpty {
 //            enHueco.appUser.phoneNumber = newNumber
 /*
             AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) {
@@ -204,20 +204,20 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
 
 extension SettingsEmbeddedTableViewController: RealtimeUserManagerDelegate {
     
-    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeUserManager) {
         refreshUIData()
     }
 }
 
 extension SettingsEmbeddedTableViewController: ImportProfileImageViewControllerDelegate {
     
-    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidFinishImportingImage(_ controller: ImportProfileImageViewController) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidCancel(_ controller: ImportProfileImageViewController) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

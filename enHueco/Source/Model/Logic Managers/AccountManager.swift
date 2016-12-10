@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FBSDKCoreKit
 import Genome
-import PureJsonSerializer
+import SwiftyJSON
 
 struct SignupInfo {
 
@@ -24,7 +24,7 @@ struct SignupInfo {
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
 class AccountManager {
 
-    private init() {}
+    fileprivate init() {}
 
     static let sharedManager = AccountManager()
     
@@ -33,44 +33,46 @@ class AccountManager {
         return FIRAuth.auth()?.currentUser?.uid
     }
     
-    func loginWith(facebookToken facebookToken: String, completionHandler: BasicCompletionHandler) {
+    func loginWith(_ facebookToken: String, completionHandler: @escaping BasicCompletionHandler) {
         
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, email, gender"]).startWithCompletionHandler() { (_, userDictionary, error) -> Void in
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name, last_name, email, gender"]).start() { (_, userDictionary, error) -> Void in
             
             guard error == nil else {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
+                DispatchQueue.main.async { completionHandler(error) }
                 return
             }
          
-            FIRAuth.auth()?.signInWithCredential(FIRFacebookAuthProvider.credentialWithAccessToken(facebookToken)) { (user, error) in
+            FIRAuth.auth()?.signIn(with: FIRFacebookAuthProvider.credential(withAccessToken: facebookToken)) { (user, error) in
                 
-                guard let user = user where error == nil else {
-                    dispatch_async(dispatch_get_main_queue()) { completionHandler(error: error) }
+                guard let user = user, error == nil else {
+                    DispatchQueue.main.async { completionHandler(error) }
                     return
                 }
                 
-                guard let firstNames = userDictionary["first_name"] as? String,
-                    let lastName = userDictionary["last_name"] as? String,
-                    let gender: Gender = (userDictionary["gender"] as? String) == "female" ? .Female : .Male else {
-                        dispatch_async(dispatch_get_main_queue()) { completionHandler(error: GenericError.UnknownError) }
+                let userJSON = JSON(userDictionary)
+                
+                guard let firstNames = userJSON["first_name"].string,
+                    let lastName = userJSON["last_name"].string,
+                    let gender: Gender = userJSON["gender"].string == "female" ? .Female : .Male else {
+                        DispatchQueue.main.async { completionHandler(GenericError.unknownError) }
                         return
                 }
                 
-                self.checkIfUserExists(ID: user.uid) { (exists, error) in
+                self.checkIfUserExists(user.uid) { (exists, error) in
                     
                     guard error == nil else {
-                        completionHandler(error: error)
+                        completionHandler(error)
                         return
                     }
 
                     if exists == true {
-                        completionHandler(error: nil)
+                        completionHandler(nil)
                         return
                         
                     } else {
                         let info = SignupInfo(firstNames: firstNames, lastNames: lastName, phoneNumber: nil, gender: gender)
-                        self.createUser(id: user.uid, userInfo: info) { (error) in
-                            completionHandler(error: error)
+                        self.createUser(user.uid, userInfo: info) { (error) in
+                            completionHandler(error)
                         }
                     }
                 }
@@ -79,61 +81,61 @@ class AccountManager {
     }
     
     /// Creates an account.
-    func loginWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
+    func loginWith(_ email: String, password: String, completionHandler: @escaping BasicCompletionHandler) {
         
-        FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
 
     /// Creates an account.
-    func signupWith(email email: String, password: String, completionHandler: BasicCompletionHandler) {
+    func signupWith(_ email: String, password: String, completionHandler: @escaping BasicCompletionHandler) {
 
-        FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
     
-    private func checkIfUserExists(ID ID: String, completionHandler: (exists: Bool?, error: ErrorType?) -> Void) {
+    fileprivate func checkIfUserExists(_ ID: String, completionHandler: @escaping (_ exists: Bool?, _ error: Error?) -> Void) {
         
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(exists: snapshot.exists(), error: nil)
+            DispatchQueue.main.async {
+                completionHandler(snapshot.exists(), nil)
             }
             
         }) { (error) in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(exists: nil, error: error)
+            DispatchQueue.main.async {
+                completionHandler(nil, error)
             }
         }
     }
     
-    private func createUser(id id: String, userInfo: SignupInfo, completionHandler: BasicCompletionHandler) {
+    fileprivate func createUser(_ id: String, userInfo: SignupInfo, completionHandler: @escaping BasicCompletionHandler) {
         
         let user = User(id: id, institution: nil, firstNames: userInfo.firstNames, lastNames: userInfo.lastNames, gender: userInfo.gender)
         
-        guard var updateJSON = (try? user.jsonRepresentation().foundationDictionary) ?? nil else {
+        guard var updateJSON = (try? user.foundationDictionary()) ?? nil else {
             assertionFailure()
-            dispatch_async(dispatch_get_main_queue()){ completionHandler(error: GenericError.UnknownError) }
+            DispatchQueue.main.async{ completionHandler(GenericError.unknownError) }
             return
         }
         
         FIRDatabase.database().reference().child(FirebasePaths.users).child(id).updateChildValues(updateJSON) { (error, reference) in
             
-            dispatch_async(dispatch_get_main_queue()) {
-                completionHandler(error: error)
+            DispatchQueue.main.async {
+                completionHandler(error)
             }
         }
     }
 
     func logOut() throws {
         try FIRAuth.auth()?.signOut()
-        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(NSBundle.mainBundle().bundleIdentifier!)
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     }
 }

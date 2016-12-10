@@ -10,18 +10,18 @@ import UIKit
 import MRProgress
 
 class EHProgressHUD: NSObject {
-    class func showSpinnerInView(view: UIView, title: String? = nil, animated: Bool = true) {
+    class func showSpinnerInView(_ view: UIView, title: String? = nil, animated: Bool = true) {
 
-        MRProgressOverlayView.showOverlayAddedTo(view, title: title ?? "", mode: MRProgressOverlayViewMode.Indeterminate, animated: animated).setTintColor(EHInterfaceColor.mainInterfaceColor)
+        MRProgressOverlayView.showOverlayAdded(to: view, title: title ?? "", mode: MRProgressOverlayViewMode.indeterminate, animated: animated).setTintColor(EHInterfaceColor.mainInterfaceColor)
     }
 
-    class func dismissSpinnerForView(view: UIView, animated: Bool = true) {
+    class func dismissSpinnerForView(_ view: UIView, animated: Bool = true) {
 
-        MRProgressOverlayView.dismissOverlayForView(view, animated: animated)
+        MRProgressOverlayView.dismissOverlay(for: view, animated: animated)
     }
 
-    class func dismissAllSpinnersForView(view: UIView, animated: Bool = true) {
+    class func dismissAllSpinnersForView(_ view: UIView, animated: Bool = true) {
 
-        MRProgressOverlayView.dismissAllOverlaysForView(view, animated: animated)
+        MRProgressOverlayView.dismissAllOverlays(for: view, animated: animated)
     }
 }

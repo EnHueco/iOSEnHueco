@@ -8,9 +8,8 @@
 
 import Foundation
 import Genome
-import PureJsonSerializer
 
-enum Gender: String, JsonConvertibleType {
+enum Gender: String, NodeConvertible {
     case Male = "Male"
     case Female = "Female"
 }
@@ -18,7 +17,7 @@ enum Gender: String, JsonConvertibleType {
 class User: MappableObject, Equatable {
 
     struct JSONKeys {
-        private init() {}
+        fileprivate init() {}
 
         static let id = "id"
         static let institution = "institution"
@@ -34,14 +33,14 @@ class User: MappableObject, Equatable {
     let institution: String?
     let firstNames: String
     let lastNames: String
-    let image: NSURL?
-    let imageThumbnail: NSURL?
+    let image: URL?
+    let imageThumbnail: URL?
     let phoneNumber: String?
     let gender: Gender
     
     var name: String { return "\(firstNames) \(lastNames)" }
     
-    init(id: String, institution: String?, firstNames: String, lastNames: String, image: NSURL? = nil, imageThumbnail: NSURL? = nil, phoneNumber: String? = nil, gender: Gender) {
+    init(id: String, institution: String?, firstNames: String, lastNames: String, image: URL? = nil, imageThumbnail: URL? = nil, phoneNumber: String? = nil, gender: Gender) {
         
         self.id = id
         self.institution = institution
@@ -55,39 +54,39 @@ class User: MappableObject, Equatable {
     
     required init(map: Map) throws {
         
-        id = try map.extract(.Key(JSONKeys.id))
-        institution = try? map.extract(.Key(JSONKeys.institution))
+        id = try map.extract(JSONKeys.id)
+        institution = try? map.extract(JSONKeys.institution)
         
-        let firstNames = try map.extract(.Key(JSONKeys.firstNames)) as [String]
-        let lastNames = try map.extract(.Key(JSONKeys.lastNames)) as [String]
+        let firstNames = try map.extract(JSONKeys.firstNames) as [String]
+        let lastNames = try map.extract(JSONKeys.lastNames) as [String]
         
-        self.firstNames = firstNames.joinWithSeparator(" ")
-        self.lastNames = lastNames.joinWithSeparator(" ")
+        self.firstNames = firstNames.joined(separator: " ")
+        self.lastNames = lastNames.joined(separator: " ")
         
-        image = try? map.extract(.Key(JSONKeys.image))
-        imageThumbnail = try? map.extract(.Key(JSONKeys.imageThumbnail))
-        phoneNumber = try? map.extract(.Key(JSONKeys.phoneNumber))
-        gender = try map.extract(.Key(JSONKeys.gender))        
+        image = try? map.extract(JSONKeys.image)
+        imageThumbnail = try? map.extract(JSONKeys.imageThumbnail)
+        phoneNumber = try? map.extract(JSONKeys.phoneNumber)
+        gender = try map.extract(JSONKeys.gender)
     }
     
-    static func newInstance(json: Json, context: Context) throws -> Self {
-        let map = Map(json: json, context: context)
-        let new = try self.init(map: map)
-        try new.sequence(map)
-        return new
-    }
+//    static func newInstance(_ json: Json, context: Context) throws -> Self {
+//        let map = Map(json: json, context: context)
+//        let new = try self.init(map: map)
+//        try new.sequence(map)
+//        return new
+//    }
     
-    func sequence(map: Map) throws {
+    func sequence(_ map: Map) throws {
         
-        try id ~> map[.Key(JSONKeys.id)]
-        try institution ~> map[.Key(JSONKeys.institution)]
-        try institution ~> map[.Key(JSONKeys.institution)]
-        try firstNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.firstNames)]
-        try lastNames.componentsSeparatedByString(" ") ~> map[.Key(JSONKeys.lastNames)]
-        try image ~> map[.Key(JSONKeys.image)]
-        try imageThumbnail ~> map[.Key(JSONKeys.imageThumbnail)]
-        try phoneNumber ~> map[.Key(JSONKeys.phoneNumber)]
-        try gender ~> map[.Key(JSONKeys.gender)]
+        try id ~> map[JSONKeys.id]
+        try institution ~> map[JSONKeys.institution]
+        try institution ~> map[JSONKeys.institution]
+        try firstNames.components(separatedBy: " ") ~> map[JSONKeys.firstNames]
+        try lastNames.components(separatedBy: " ") ~> map[JSONKeys.lastNames]
+        try image ~> map[JSONKeys.image]
+        try imageThumbnail ~> map[JSONKeys.imageThumbnail]
+        try phoneNumber ~> map[JSONKeys.phoneNumber]
+        try gender ~> map[JSONKeys.gender]
     }
     
     /*
@@ -98,7 +97,7 @@ class User: MappableObject, Equatable {
         super.init(username: username, firstNames: firstNames, lastNames: lastNames, phoneNumber: phoneNumber, imageURL: imageURL, imageThumbnailURL: imageThumbnailURL, ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
 
-    override init(JSONDictionary: [String:AnyObject]) {
+    override init(JSONDictionary: [String:Any]) {
         super.init(JSONDictionary: JSONDictionary)
     }
 
@@ -137,7 +136,7 @@ class User: MappableObject, Equatable {
         }
     }
 
-    override func updateUserWithJSONDictionary(JSONDictionary: [String:AnyObject]) {
+    override func updateUserWithJSONDictionary(JSONDictionary: [String:Any]) {
 
         super.updateUserWithJSONDictionary(JSONDictionary)
 
@@ -192,7 +191,7 @@ class User: MappableObject, Equatable {
         super.init(ID: ID, lastUpdatedOn: lastUpdatedOn)
     }
 
-    init(JSONDictionary: [String:AnyObject]) {
+    init(JSONDictionary: [String:Any]) {
         self.username = JSONDictionary["login"] as! String
         self.firstNames = JSONDictionary["firstNames"] as! String
         self.lastNames = JSONDictionary["lastNames"] as! String
@@ -200,13 +199,13 @@ class User: MappableObject, Equatable {
         self.imageThumbnailURL = ((JSONDictionary["image_thumbnail"] == nil || JSONDictionary["image_thumbnail"] is NSNull) ? nil : NSURL(string: (EHURLS.Base + (JSONDictionary["image_thumbnail"]! as! String)).replace("https", withString: "http")))
         self.phoneNumber = JSONDictionary["phoneNumber"] as? String
 
-        if let JSONEvents = JSONDictionary["gap_set"] as? [[String:AnyObject]] {
+        if let JSONEvents = JSONDictionary["gap_set"] as? [[String:Any]] {
             schedule = Schedule(JSONEvents: JSONEvents)
         }
 
         let lastUpdatedOn = NSDate(serverFormattedString: JSONDictionary["updated_on"] as! String)!
 
-        if let instantEvent = JSONDictionary["immediate_event"] as? [String:AnyObject],
+        if let instantEvent = JSONDictionary["immediate_event"] as? [String:Any],
         let endDate = NSDate(serverFormattedString: instantEvent["valid_until"] as! String),
         let type = instantEvent["type"] as? String
         where endDate.timeIntervalSinceNow > 0 {
@@ -220,7 +219,7 @@ class User: MappableObject, Equatable {
         super.init(ID: username, lastUpdatedOn: lastUpdatedOn)
     }
 
-    func updateUserWithJSONDictionary(JSONDictionary: [String:AnyObject]) {
+    func updateUserWithJSONDictionary(JSONDictionary: [String:Any]) {
 
         let dummyUser = User(JSONDictionary: JSONDictionary)
 
@@ -241,9 +240,9 @@ class User: MappableObject, Equatable {
         inivisibilityEndDate = date
     }
 
-    func addEvents(JSONDictionary: [String:AnyObject]) {
+    func addEvents(JSONDictionary: [String:Any]) {
 
-        let eventSet = JSONDictionary["gap_set"] as! [[String:AnyObject]]
+        let eventSet = JSONDictionary["gap_set"] as! [[String:Any]]
 
         for eventJSON in eventSet {
             let event = Event(JSONDictionary: eventJSON)
@@ -312,9 +311,9 @@ func == (lhs: User, rhs: User) -> Bool {
 }
 
 extension String {
-    func replace(target: String, withString: String) -> String {
+    func replace(_ target: String, withString: String) -> String {
 
-        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }
 }
 

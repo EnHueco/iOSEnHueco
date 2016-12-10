@@ -29,24 +29,24 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
         calendarsTableView.delegate = self
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 
-        navigationController!.navigationBarHidden = false
+        navigationController!.isNavigationBarHidden = false
 
         checkCalendarAuthorizationStatus()
     }
 
     func checkCalendarAuthorizationStatus() {
 
-        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
-        if status == EKAuthorizationStatus.NotDetermined {
+        if status == EKAuthorizationStatus.notDetermined {
             //First Time
             requestAccessToCalendar()
-        } else if status == EKAuthorizationStatus.Authorized {
+        } else if status == EKAuthorizationStatus.authorized {
             loadCalendars()
             calendarsTableView.reloadData()
-        } else if status == EKAuthorizationStatus.Restricted || status == EKAuthorizationStatus.Denied {
+        } else if status == EKAuthorizationStatus.restricted || status == EKAuthorizationStatus.denied {
 
         } else {
             UIAlertView(title: "Advertencia", message: "No nos has dado permiso para acceder a tus calendarios. Para arreglarlo debes ingresar a tus ajustes de privacidad en el dispositivo", delegate: nil, cancelButtonTitle: "OK, lo siento").show()
@@ -55,16 +55,16 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
 
     func requestAccessToCalendar() {
 
-        eventStore.requestAccessToEntityType(.Event) {
+        eventStore.requestAccess(to: .event) {
             (accessGranted, error) -> Void in
 
             if accessGranted {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.loadCalendars()
                     self.calendarsTableView.reloadData()
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     UIAlertView(title: "Advertencia", message: "No nos has dado permiso para acceder a tus calendarios. Para arreglarlo debes ingresar a tus ajustes de privacidad en el dispositivo", delegate: nil, cancelButtonTitle: "OK, lo siento").show()
                 }
             }
@@ -73,18 +73,18 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
 
     func loadCalendars() {
 
-        calendars = eventStore.calendarsForEntityType(EKEntityType.Event)
+        calendars = eventStore.calendars(for: EKEntityType.event)
         calendarsTableView.reloadData()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return calendars != nil ? calendars!.count : 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("CalendarSelectionCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarSelectionCell")!
 
         let calendarName = calendars![indexPath.row].title
         cell.textLabel?.text = calendarName
@@ -92,7 +92,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         selectedCalendar = calendars![indexPath.row]
 
@@ -105,7 +105,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
         navigationController!.pushViewController(controller, animated: true)*/
     }
 
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
 
         // TODO: Update implementation
         /*

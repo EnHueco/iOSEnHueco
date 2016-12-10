@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InstantFreeTimeViewControllerDelegate: class {
-    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(controller: InstantFreeTimeViewController)
+    func instantFreeTimeViewControllerDidPostInstantFreeTimePeriod(_ controller: InstantFreeTimeViewController)
 }
 
 class InstantFreeTimeViewController: UIViewController {
@@ -31,22 +31,22 @@ class InstantFreeTimeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        endTimeDatePicker.timeZone = NSTimeZone.localTimeZone()
-        endTimeDatePicker.locale = NSLocale(localeIdentifier: "en_US")
-        endTimeDatePicker.minimumDate = NSDate().dateByAddingTimeInterval(60)
+        endTimeDatePicker.timeZone = TimeZone.autoupdatingCurrent
+        endTimeDatePicker.locale = Locale(identifier: "en_US")
+        endTimeDatePicker.minimumDate = Date().addingTimeInterval(60)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(InstantFreeTimeViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
-        navigationBar.barStyle = .Black
+        navigationBar.barStyle = .black
         navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
-        navigationBar.tintColor = UIColor.whiteColor()
+        navigationBar.tintColor = UIColor.white
 
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
     }
 
-    func showInViewController(controller: UIViewController) {
+    func showInViewController(_ controller: UIViewController) {
 
         view.frame = CGRect(x: 20, y: -300, width: controller.view.bounds.width - 40, height: 270)
 
@@ -55,12 +55,12 @@ class InstantFreeTimeViewController: UIViewController {
 
         backgroundView = UIView()
         backgroundView.frame = controller.view.bounds
-        backgroundView.backgroundColor = UIColor.clearColor()
+        backgroundView.backgroundColor = UIColor.clear
         controller.view.insertSubview(backgroundView, belowSubview: view)
 
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(InstantFreeTimeViewController.hideKeyboard)))
 
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1.6, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1.6, options: UIViewAnimationOptions(), animations: {
 
             self.backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.3)
             self.view.frame.origin.y = 110
@@ -69,17 +69,17 @@ class InstantFreeTimeViewController: UIViewController {
         }, completion: {
             finished in
 
-            self.didMoveToParentViewController(controller)
+            self.didMove(toParentViewController: controller)
             self.nameTextField.becomeFirstResponder()
         })
     }
 
     func dismiss() {
 
-        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
 
             self.view.frame.origin.y = -self.view.frame.height - 30
-            self.backgroundView.backgroundColor = UIColor.clearColor()
+            self.backgroundView.backgroundColor = UIColor.clear
 
         }, completion: {
             finished in
@@ -88,7 +88,7 @@ class InstantFreeTimeViewController: UIViewController {
 
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
-            self.didMoveToParentViewController(nil)
+            self.didMove(toParentViewController: nil)
         })
     }
 
@@ -97,9 +97,9 @@ class InstantFreeTimeViewController: UIViewController {
         view.endEditing(true)
     }
 
-    @IBAction func postButtonPressed(sender: AnyObject) {
+    @IBAction func postButtonPressed(_ sender: Any) {
 
-        let newFreeTimePeriod = BaseEvent(type: .FreeTime, name: nameTextField.text, location: locationTextField.text, startDate: NSDate(), endDate: endTimeDatePicker.date, repeating: false)
+        let newFreeTimePeriod = BaseEvent(type: .FreeTime, name: nameTextField.text, location: locationTextField.text, startDate: Date(), endDate: endTimeDatePicker.date, repeating: false)
 
         EHProgressHUD.showSpinnerInView(view)
         CurrentStateManager.sharedManager.postInstantFreeTimePeriod(newFreeTimePeriod) { error in
@@ -116,7 +116,7 @@ class InstantFreeTimeViewController: UIViewController {
         }
     }
 
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
+    @IBAction func cancelButtonPressed(_ sender: Any) {
 
         dismiss()
     }
@@ -127,14 +127,14 @@ class InstantFreeTimeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
 
         var info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 
         view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1) {
+        UIView.animate(withDuration: 0.1, animations: {
             let offset = (self.view.frame.origin.y + self.view.frame.height) - keyboardFrame.origin.y
 
             if offset > 0 {
@@ -144,26 +144,26 @@ class InstantFreeTimeViewController: UIViewController {
                 //self.view.frame.size.height = 130
                 self.view.layoutIfNeeded()
             }
-        }
+        }) 
     }
 
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
 
         self.view.layoutIfNeeded()
 
-        UIView.animateWithDuration(0.1) {
+        UIView.animate(withDuration: 0.1, animations: {
             self.view.frame = self.originalFrame
             //self.endTimeLabelHeightConstraint.constant = 20
             //self.endTimeDatePickerHeightConstraint.constant = 104
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 
     /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

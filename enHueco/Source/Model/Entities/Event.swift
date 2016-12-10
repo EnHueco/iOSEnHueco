@@ -14,7 +14,7 @@ import Genome
 class Event: BaseEvent, Equatable {
 
     struct JSONKeys {
-        private init() {}
+        fileprivate init() {}
 
         static let userID = "user_id"
         static let id = "id"
@@ -23,7 +23,7 @@ class Event: BaseEvent, Equatable {
     let userID: String
     let id: String
     
-    init(userID: String, id: String, type: EventType, name: String?, location: String?, startDate: NSDate, endDate: NSDate, repeating: Bool) {
+    init(userID: String, id: String, type: EventType, name: String?, location: String?, startDate: Date, endDate: Date, repeating: Bool) {
         
         self.userID = userID
         self.id = id
@@ -33,16 +33,16 @@ class Event: BaseEvent, Equatable {
 
     required init(map: Map) throws {
         
-        userID = try map.extract(.Key(JSONKeys.userID))
-        id = try map.extract(.Key(JSONKeys.id))
+        userID = try map.extract(JSONKeys.userID)
+        id = try map.extract(JSONKeys.id)
 
         try super.init(map: map)
     }
     
-    override func sequence(map: Map) throws {
+    override func sequence(_ map: Map) throws {
                 
-        try userID ~> map[.Key(JSONKeys.userID)]
-        try id ~> map[.Key(JSONKeys.id)]
+        try userID ~> map[JSONKeys.userID]
+        try id ~> map[JSONKeys.id]
         
         try super.sequence(map)
     }
@@ -50,7 +50,7 @@ class Event: BaseEvent, Equatable {
 
 func < (lhs: Event, rhs: Event) -> Bool {
     
-    let currentDate = NSDate()
+    let currentDate = Date()
     return lhs.startDateInNearestPossibleWeekToDate(currentDate) < rhs.startDateInNearestPossibleWeekToDate(currentDate)
 }
 

@@ -10,21 +10,20 @@ import Foundation
 import SystemConfiguration.CaptiveNetwork
 import ReachabilitySwift
 import SwiftGraph
-import CSwiftV
 
 /// ProximityUpdatesManager Notifications
 
 class EHProximityUpdatesManagerNotification {
-    private init() {
+    fileprivate init() {
     }
 
     static let ProximityUpdatesManagerDidReceiveProximityUpdates = "ProximityUpdatesManagerDidReceiveProximityUpdates"
 }
 
 enum ProximityUpdatesManagerReportingCompletionStatus {
-    case NotConnectedToWifi
-    case NetworkFailure
-    case Success
+    case notConnectedToWifi
+    case networkFailure
+    case success
 }
 
 /// Handles operations related to proximity between users, including location reporting.
@@ -36,12 +35,12 @@ class ProximityUpdatesManager: NSObject {
     static let backgroundFetchIntervalAfterDayOver = 7 * 3600.0
 
     ///Graph with BSSIDs of the access points
-    private let wifiAccessPointsGraph = UnweightedGraph<String>()
+    fileprivate let wifiAccessPointsGraph = UnweightedGraph<String>()
 
     /// Temporary solution: Timer to trigger location updates with the server while app open
-    private var proximityInformationRefreshTimer: NSTimer!
+    fileprivate var proximityInformationRefreshTimer: Timer!
 
-    private override init() {
+    fileprivate override init() {
         super.init()
     }
 /*
@@ -123,7 +122,7 @@ class ProximityUpdatesManager: NSObject {
         }
     }*/
 
-    func wifiAccessPointWithBSSID(bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool {
+    func wifiAccessPointWithBSSID(_ bssidA: String, isNearAccessPointWithBSSID bssidB: String) -> Bool {
 
         guard let neighbors = wifiAccessPointsGraph.neighborsForVertex(bssidA) else {
             return false
@@ -146,19 +145,21 @@ class ProximityUpdatesManager: NSObject {
 
     static func currentBSSID() -> String? {
 
-        guard let reachability = try? Reachability.reachabilityForLocalWiFi() where reachability.currentReachabilityStatus == .ReachableViaWiFi && TARGET_OS_SIMULATOR == 0 else {
-            return nil
-        }
-
-        if let interfaces: CFArray! = CNCopySupportedInterfaces() where CFArrayGetCount(interfaces) > 0 {
-            let interfaceName: UnsafePointer<Void> = CFArrayGetValueAtIndex(interfaces, 0)
-            let rec = unsafeBitCast(interfaceName, AnyObject.self)
-
-            if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec)) {
-                let interfaceData = unsafeInterfaceData as Dictionary
-                return (interfaceData["BSSID"] as? String)?.uppercaseString
-            }
-        }
+        // FIXME
+        
+//        guard let reachability = Reachability(), reachability.currentReachabilityStatus == .reachableViaWiFi && TARGET_OS_SIMULATOR == 0 else {
+//            return nil
+//        }
+//
+//        if let interfaces = CNCopySupportedInterfaces(), CFArrayGetCount(interfaces) > 0 {
+//            let interfaceName: UnsafeRawPointer = CFArrayGetValueAtIndex(interfaces, 0)
+//            let rec = unsafeBitCast(interfaceName, to: Any.self)
+//
+//            if let unsafeInterfaceData = CNCopyCurrentNetworkInfo(String(rec)) {
+//                let interfaceData = unsafeInterfaceData as Dictionary
+//                return (interfaceData["BSSID"] as? String)?.uppercased()
+//            }
+//        }
 
         return nil
     }
@@ -184,7 +185,7 @@ class ProximityUpdatesManager: NSObject {
         ConnectionManager.sendAsyncRequest(request, withJSONParams: params, successCompletionHandler: {
             (JSONResponse) -> () in
 
-            for friendDictionary in JSONResponse as! [[String:AnyObject]] {
+            for friendDictionary in JSONResponse as! [[String:Any]] {
                 enHueco.appUser.friends[friendDictionary["login"] as! String]?.currentBSSID = (friendDictionary["location"]!["bssid"] as! String).uppercaseString
             }
 

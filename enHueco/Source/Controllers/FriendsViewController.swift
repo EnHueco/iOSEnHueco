@@ -20,12 +20,12 @@ class FriendsViewController: UIViewController {
     var friendsAndSchedules = [(user: User, schedule: Schedule)]()
 
     /// The friends logic manager (if currently fetching updates)
-    private var realtimeFriendsManager: RealtimeFriendsManager?
+    fileprivate var realtimeFriendsManager: RealtimeFriendsManager?
     
-    private var realtimeFriendRequestsManager: RealtimeFriendRequestsManager?
+    fileprivate var realtimeFriendRequestsManager: RealtimeFriendRequestsManager?
 
     /// Notification indicator for the friend requests button. Set count to change the number (animatable)
-    private(set) var friendRequestsNotificationHub: RKNotificationHub!
+    fileprivate(set) var friendRequestsNotificationHub: RKNotificationHub!
 
     var searchEndEditingGestureRecognizer: UITapGestureRecognizer!
 
@@ -46,24 +46,24 @@ class FriendsViewController: UIViewController {
 
         searchEndEditingGestureRecognizer = UITapGestureRecognizer(target: searchBar, action: #selector(UIResponder.resignFirstResponder))
 
-        let friendRequestsButton = UIButton(type: .Custom)
+        let friendRequestsButton = UIButton(type: .custom)
         friendRequestsButton.frame.size = CGSize(width: 20, height: 20)
-        friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        friendRequestsButton.addTarget(self, action: #selector(FriendsViewController.friendRequestsButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        friendRequestsButton.tintColor = UIColor.whiteColor()
+        friendRequestsButton.setBackgroundImage(UIImage(named: "FriendRequests")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+        friendRequestsButton.addTarget(self, action: #selector(FriendsViewController.friendRequestsButtonPressed(_:)), for: .touchUpInside)
+        friendRequestsButton.tintColor = UIColor.white
 
         friendRequestsNotificationHub = RKNotificationHub(view: friendRequestsButton)
-        friendRequestsNotificationHub.scaleCircleSizeBy(0.48)
-        friendRequestsNotificationHub.moveCircleByX(0, y: 0)
-        friendRequestsNotificationHub.setCircleColor(UIColor(red: 1.0, green: 0.4, blue: 0.4, alpha: 1.0), labelColor: UIColor.whiteColor())
+        friendRequestsNotificationHub.scaleCircleSize(by: 0.48)
+        friendRequestsNotificationHub.moveCircleBy(x: 0, y: 0)
+        friendRequestsNotificationHub.setCircleColor(UIColor(red: 1.0, green: 0.4, blue: 0.4, alpha: 1.0), label: UIColor.white)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: friendRequestsButton)
 
-        let commonFreeTimeButton = UIButton(type: .Custom)
+        let commonFreeTimeButton = UIButton(type: .custom)
         commonFreeTimeButton.frame.size = CGSize(width: 20, height: 20)
-        commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        commonFreeTimeButton.addTarget(self, action: #selector(FriendsViewController.commonFreeTimeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        commonFreeTimeButton.tintColor = UIColor.whiteColor()
+        commonFreeTimeButton.setBackgroundImage(UIImage(named: "CommonFreeTime")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+        commonFreeTimeButton.addTarget(self, action: #selector(FriendsViewController.commonFreeTimeButtonPressed(_:)), for: .touchUpInside)
+        commonFreeTimeButton.tintColor = UIColor.white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: commonFreeTimeButton)
     }
 
@@ -71,9 +71,9 @@ class FriendsViewController: UIViewController {
 
         emptyLabel = UILabel()
         emptyLabel.text = "NoFriendsMessage".localizedUsingGeneralFile()
-        emptyLabel.textColor = UIColor.grayColor()
-        emptyLabel.textAlignment = .Center
-        emptyLabel.lineBreakMode = .ByWordWrapping
+        emptyLabel.textColor = UIColor.gray
+        emptyLabel.textAlignment = .center
+        emptyLabel.lineBreakMode = .byWordWrapping
         emptyLabel.numberOfLines = 0
         emptyLabel.sizeToFit()
     }
@@ -84,14 +84,14 @@ class FriendsViewController: UIViewController {
         emptyLabel.center = tableView.center
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
 
-        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
 
-        transitionCoordinator()?.animateAlongsideTransition({
+        transitionCoordinator?.animate(alongsideTransition: {
             (context) -> Void in
 
             self.navigationController?.navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
@@ -100,9 +100,9 @@ class FriendsViewController: UIViewController {
         }, completion: {
             (context) -> Void in
 
-            if context.isCancelled() {
+            if context.isCancelled {
                 self.navigationController?.navigationBar.barTintColor = UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)
-                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), forBarMetrics: .Default)
+                self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(red: 57 / 255.0, green: 57 / 255.0, blue: 57 / 255.0, alpha: 0.6)), for: .default)
             }
         })
 
@@ -111,13 +111,13 @@ class FriendsViewController: UIViewController {
         realtimeFriendRequestsManager = RealtimeFriendRequestsManager(delegate: self)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        reportScreenViewToGoogleAnalyticsWithName("Friends")
+        reportScreenViewToGoogleAnalyticsWithName(name: "Friends")
 
         if let selectedIndex = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+            tableView.deselectRow(at: selectedIndex, animated: true)
         }
     }
     
@@ -137,7 +137,7 @@ class FriendsViewController: UIViewController {
         friendRequestsNotificationHub.pop()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         // Stop realtime updates
@@ -145,14 +145,14 @@ class FriendsViewController: UIViewController {
         realtimeFriendRequestsManager = nil
     }
 
-    func friendRequestsButtonPressed(sender: UIButton) {
+    func friendRequestsButtonPressed(_ sender: UIButton) {
 
-        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("FriendRequestsViewController"), sender: self)
+        navigationController?.show(storyboard!.instantiateViewController(withIdentifier: "FriendRequestsViewController"), sender: self)
     }
 
-    func commonFreeTimeButtonPressed(sender: UIButton) {
+    func commonFreeTimeButtonPressed(_ sender: UIButton) {
 
-        navigationController?.showViewController(storyboard!.instantiateViewControllerWithIdentifier("CommonFreeTimePeriodsViewController"), sender: self)
+        navigationController?.show(storyboard!.instantiateViewController(withIdentifier: "CommonFreeTimePeriodsViewController"), sender: self)
     }
     
     /// Reloads the friends and schedules array
@@ -161,7 +161,7 @@ class FriendsViewController: UIViewController {
         guard let friendsManager = realtimeFriendsManager else { return }
 
         friendsAndSchedules = friendsManager.friendAndSchedules().flatMap {
-            guard let friend = $0.friend, schedule = $0.schedule else { return nil }
+            guard let friend = $0.friend, let schedule = $0.schedule else { return nil }
             return (friend, schedule)
         }
     }
@@ -173,52 +173,52 @@ class FriendsViewController: UIViewController {
         reloadFriendsData()
         
         if friendsAndSchedules.isEmpty {
-            tableView.hidden = true
+            tableView.isHidden = true
             view.addSubview(emptyLabel)
         } else {
-            tableView.hidden = false
+            tableView.isHidden = false
             emptyLabel.removeFromSuperview()
         }
 
-        if !oldFriendsAndSchedules.elementsEqual(friendsAndSchedules, isEquivalent: ==) {
+        if !oldFriendsAndSchedules.elementsEqual(friendsAndSchedules, by: ==) {
 
             let range = NSMakeRange(0, tableView.numberOfSections)
-            let sections = NSIndexSet(indexesInRange: range)
-            tableView.reloadSections(sections, withRowAnimation: .Automatic)
+            let sections = IndexSet(integersIn: range.toRange() ?? 0..<0)
+            tableView.reloadSections(sections, with: .automatic)
         }
     }
 }
 
 extension FriendsViewController: RealtimeFriendsManagerDelegate {
     
-    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeFriendsManager) {
+    func realtimeFriendsManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeFriendsManager) {
         reloadFriendsAndTableView()
     }
 }
 
 extension FriendsViewController: RealtimeFriendRequestsManagerDelegate {
     
-    func realtimeFriendRequestsManagerDidReceiveFriendRequestUpdates(manager: RealtimeFriendRequestsManager) {
+    func realtimeFriendRequestsManagerDidReceiveFriendRequestUpdates(_ manager: RealtimeFriendRequestsManager) {
         refreshFriendRequestsHub()
     }
 }
 
 extension FriendsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return friendsAndSchedules.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendsCell") as! FriendsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
 
         let (friend, schedule) = friendsAndSchedules[indexPath.row]
         
         cell.friendNameLabel.text = friend.name
 
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
 
         cell.eventNameOrLocationLabel.text = nil
@@ -229,13 +229,12 @@ extension FriendsViewController: UITableViewDataSource {
 
         if let currentFreeTimePeriod = currentFreeTimePeriod {
             
-            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endDateInNearestPossibleWeekToDate(NSDate())
+            let currentFreeTimePeriodEndDate = currentFreeTimePeriod.endDateInNearestPossibleWeekToDate(Date())
 
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(currentFreeTimePeriodEndDate)
+            cell.freeTimeStartOrEndHourLabel.text = formatter.string(from: currentFreeTimePeriodEndDate)
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "SouthEastArrow")
 
-            if let nextEvent = schedule.nextEvent(), nextEventName = nextEvent.name
-            where nextEvent.type == .Class && nextEvent.startDateInNearestPossibleWeekToDate(NSDate()).timeIntervalSinceDate(currentFreeTimePeriodEndDate) < 60 * 10000 {
+            if let nextEvent = schedule.nextEvent(), let nextEventName = nextEvent.name, nextEvent.type == .Class && nextEvent.startDateInNearestPossibleWeekToDate(Date()).timeIntervalSince(currentFreeTimePeriodEndDate) < 60 * 10000 {
                 cell.eventNameOrLocationLabel.text = nextEventName
 
                 if let nextEventLocation = nextEvent.location {
@@ -244,7 +243,7 @@ extension FriendsViewController: UITableViewDataSource {
             }
             
         } else if let nextFreeTimePeriod = nextFreeTimePeriod {
-            cell.freeTimeStartOrEndHourLabel.text = formatter.stringFromDate(nextFreeTimePeriod.startDateInNearestPossibleWeekToDate(NSDate()))
+            cell.freeTimeStartOrEndHourLabel.text = formatter.string(from: nextFreeTimePeriod.startDateInNearestPossibleWeekToDate(Date()))
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")
             cell.eventNameOrLocationLabel.text = nextFreeTimePeriod.name ?? "FreeTime".localizedUsingGeneralFile()
         } else {
@@ -256,24 +255,24 @@ extension FriendsViewController: UITableViewDataSource {
 
         cell.friendImageImageView.clipsToBounds = true
         cell.friendImageImageView.layer.cornerRadius = 53.0 / 2.0
-        cell.friendImageImageView.contentMode = .ScaleAspectFill
+        cell.friendImageImageView.contentMode = .scaleAspectFill
         cell.friendImageImageView.image = nil
 
-        cell.friendImageImageView.sd_setImageWithURL(friend.imageThumbnail, placeholderImage: nil, options: [.AvoidAutoSetImage, .HighPriority, .RefreshCached, .RetryFailed, .AllowInvalidSSLCertificates]) {
+        cell.friendImageImageView.sd_setImage(with: friend.imageThumbnail as URL!, placeholderImage: nil, options: [.avoidAutoSetImage, .highPriority, .refreshCached, .retryFailed, .allowInvalidSSLCertificates]) {
             (image, error, cacheType, _) in
 
             if error == nil {
-                if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk {
+                if cacheType == SDImageCacheType.none || cacheType == SDImageCacheType.disk {
                     cell.friendImageImageView.alpha = 0
                     cell.friendImageImageView.image = image
 
-                    UIView.animateWithDuration(0.4, animations: {
+                    UIView.animate(withDuration: 0.4, animations: {
                         () -> Void in
 
                         cell.friendImageImageView.alpha = 1
 
                     }, completion: nil)
-                } else if cacheType == SDImageCacheType.Memory {
+                } else if cacheType == SDImageCacheType.memory {
                     cell.friendImageImageView.image = image
                 }
             }
@@ -285,15 +284,15 @@ extension FriendsViewController: UITableViewDataSource {
 
 extension FriendsViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let friend = friendsAndSchedules[indexPath.row].user
 
-        let friendDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("FriendDetailViewController") as! FriendDetailViewController
+        let friendDetailViewController = storyboard?.instantiateViewController(withIdentifier: "FriendDetailViewController") as! FriendDetailViewController
         friendDetailViewController.friendID = friend.id
         //friendDetailViewController.hidesBottomBarWhenPushed = true
 
@@ -303,22 +302,22 @@ extension FriendsViewController: UITableViewDelegate {
 
 extension FriendsViewController: UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         tableView.addGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         tableView.removeGestureRecognizer(searchEndEditingGestureRecognizer)
     }
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         reloadFriendsData()
 
         if !searchText.isBlank() {
             friendsAndSchedules = friendsAndSchedules.filter {
 
-                for word in $0.0.name.componentsSeparatedByString(" ") where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                for word in $0.0.name.components(separatedBy: " ") where word.lowercased().hasPrefix(searchText.lowercased()) {
                     return true
                 }
 

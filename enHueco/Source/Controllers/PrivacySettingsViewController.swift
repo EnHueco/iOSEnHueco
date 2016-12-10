@@ -19,7 +19,7 @@ class PrivacySettingsViewController: UITableViewController {
     @IBOutlet weak var selectFriendsShareEventLocationsCell: UITableViewCell!
 
     /// !!! Sections that must be hidden because they are not implemented yet
-    private let unimplementedSections = [0]
+    fileprivate let unimplementedSections = [0]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PrivacySettingsViewController: UITableViewController {
         clearsSelectionOnViewWillAppear = true
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         //shareLocationWithBestFriendsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(EHUserDefaultsKeys.shareLocationWithCloseFriends)
@@ -40,14 +40,14 @@ class PrivacySettingsViewController: UITableViewController {
          */
     }
 
-    @IBAction func shareLocationWithBestFriendsToggleChanged(sender: UISwitch) {
+    @IBAction func shareLocationWithBestFriendsToggleChanged(_ sender: UISwitch) {
 
         //TODO
         tableView.beginUpdates()
         tableView.endUpdates()
     }
 
-    @IBAction func shareEventNamesToggleChanged(sender: UISwitch) {
+    @IBAction func shareEventNamesToggleChanged(_ sender: UISwitch) {
 
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -56,7 +56,7 @@ class PrivacySettingsViewController: UITableViewController {
         //_togglePrivacySetting(.ShowEventNames, on: sender.on, senderSwitch: sender)
     }
 
-    @IBAction func shareEventLocationsToggleChanged(sender: UISwitch) {
+    @IBAction func shareEventLocationsToggleChanged(_ sender: UISwitch) {
 
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -96,9 +96,9 @@ class PrivacySettingsViewController: UITableViewController {
     }
     */
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if cell == selectFriendsShareLocationCell {
             return 0 // !!! <- REMOVE WHEN READY TO IMPLEMENT GROUPS
@@ -111,7 +111,7 @@ class PrivacySettingsViewController: UITableViewController {
             //return shareEventLocationsSwitch.on ? 44:0
         }
 
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ class PrivacySettingsViewController: UITableViewController {
 
     // !!! REMOVE WHEN READY TO IMPLEMENT THE FEATURES IN THE HIDDEN SECTIONS
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         guard !unimplementedSections.contains(section) else {
             return 0
@@ -127,7 +127,7 @@ class PrivacySettingsViewController: UITableViewController {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         guard !unimplementedSections.contains(section) else {
             return nil
@@ -135,7 +135,7 @@ class PrivacySettingsViewController: UITableViewController {
         return super.tableView(tableView, titleForHeaderInSection: section)
     }
 
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 
         guard !unimplementedSections.contains(section) else {
             return nil
@@ -143,7 +143,7 @@ class PrivacySettingsViewController: UITableViewController {
         return super.tableView(tableView, titleForFooterInSection: section)
     }
 
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 
         guard !unimplementedSections.contains(section) else {
             return 1
@@ -151,7 +151,7 @@ class PrivacySettingsViewController: UITableViewController {
         return super.tableView(tableView, heightForHeaderInSection: section)
     }
 
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 
         guard !unimplementedSections.contains(section) else {
             return 1

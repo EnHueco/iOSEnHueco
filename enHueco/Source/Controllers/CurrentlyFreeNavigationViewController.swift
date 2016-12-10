@@ -20,12 +20,12 @@ class CurrentlyFreeNavigationViewController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationBar.barStyle = UIBarStyle.Black
+        navigationBar.barStyle = UIBarStyle.black
         navigationBar.barTintColor = EHInterfaceColor.defaultNavigationBarColor
-        navigationBar.tintColor = UIColor.whiteColor()
+        navigationBar.tintColor = UIColor.white
     }
 
 
@@ -33,7 +33,7 @@ class CurrentlyFreeNavigationViewController: UINavigationController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

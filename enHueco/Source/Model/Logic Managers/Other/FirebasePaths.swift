@@ -7,7 +7,7 @@ import Foundation
 
 struct FirebasePaths {
 
-    private init() {}
+    fileprivate init() {}
 
     static let friends = "friends"
     static let users = "users"

@@ -26,13 +26,13 @@ class ProfileViewController: UIViewController {
 
         editScheduleButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
-        imageActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        imageActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         view.addSubview(imageActivityIndicator!)
-        imageActivityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: imageImageView)
-        imageActivityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: imageImageView)
+        imageActivityIndicator.autoAlignAxis(.horizontal, toSameAxisOf: imageImageView)
+        imageActivityIndicator.autoAlignAxis(.vertical, toSameAxisOf: imageImageView)
         
-        imageImageView.contentMode = .ScaleAspectFill
-        backgroundImageView.contentMode = .ScaleAspectFill
+        imageImageView.contentMode = .scaleAspectFill
+        backgroundImageView.contentMode = .scaleAspectFill
     }
 
     override func viewDidLayoutSubviews() {
@@ -45,26 +45,26 @@ class ProfileViewController: UIViewController {
         imageImageView.layer.cornerRadius = imageImageView.frame.height / 2
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else {
+        guard !(UIApplication.shared.delegate as! AppDelegate).loggingOut else {
             return
         }
 
         realtimeAppUserManager = RealtimeUserManager(delegate: self)
         
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard !(UIApplication.sharedApplication().delegate as! AppDelegate).loggingOut else {
+        guard !(UIApplication.shared.delegate as! AppDelegate).loggingOut else {
             return
         }
 
-        reportScreenViewToGoogleAnalyticsWithName("Profile")
+        reportScreenViewToGoogleAnalyticsWithName(name: "Profile")
     }
 
     func refreshUIData() {
@@ -76,10 +76,10 @@ class ProfileViewController: UIViewController {
         firstNamesLabel.text = user.firstNames
         lastNamesLabel.text = user.lastNames
         
-        imageImageView.hidden = false
-        backgroundImageView.hidden = false
+        imageImageView.isHidden = false
+        backgroundImageView.isHidden = false
         
-        imageImageView.sd_setImageWithURL(user.image, placeholderImage: nil, options: [.RefreshCached, .RetryFailed, .AvoidAutoSetImage]) { (image, error, cacheType, url) in
+        imageImageView.sd_setImage(with: user.image as URL!, placeholderImage: nil, options: [.refreshCached, .retryFailed, .avoidAutoSetImage]) { (image, error, cacheType, url) in
             
             defer {
                 self.updateButtonColors()
@@ -87,48 +87,50 @@ class ProfileViewController: UIViewController {
             
             guard let image = image ?? UIImage(named: "stripes") else { return }
             
-            UIView.transitionWithView(self.imageImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            UIView.transition(with: self.imageImageView, duration: 1, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                 self.imageImageView.image = image
             }, completion: nil)
             
-            UIView.transitionWithView(self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                self.backgroundImageView.image = image.applyBlurWithRadius(40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
+            UIView.transition(with: self.backgroundImageView, duration: 1, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
+                self.backgroundImageView.image = image.applyBlur(withRadius: 40, tintColor: UIColor(white: 0.2, alpha: 0.5), saturationDeltaFactor: 1.8, maskImage: nil)
             }, completion: nil)
         }
     }
     
     func updateButtonColors() {
 
-        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFromImage: imageImageView.image), isFlat: true, alpha: 0.4)
+        guard let image = imageImageView.image else { return }
+        
+        let averageImageColor = UIColor(contrastingBlackOrWhiteColorOn: UIColor(averageColorFrom: image), isFlat: true, alpha: 0.4)
 
-        UIView.animateWithDuration(0.8) {
+        UIView.animate(withDuration: 0.8) {
             self.editScheduleButton.backgroundColor = averageImageColor
         }
     }
 
-    @IBAction func settingsButtonPressed(sender: UIButton) {
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
 
-        if NSUserDefaults.standardUserDefaults().boolForKey("authTouchID") {
+        if UserDefaults.standard.bool(forKey: "authTouchID") {
             authenticateUser()
         } else {
             showSettings()
         }
     }
 
-    private func showSettings() {
+    fileprivate func showSettings() {
 
-        let viewController = storyboard?.instantiateViewControllerWithIdentifier("SettingsNavigationViewController")
-        presentViewController(viewController!, animated: true, completion: nil)
+        let viewController = storyboard?.instantiateViewController(withIdentifier: "SettingsNavigationViewController")
+        present(viewController!, animated: true, completion: nil)
     }
 
     enum LAError: Int {
-        case AuthenticationFailed
-        case UserCancel
-        case UserFallback
-        case SystemCancel
-        case PasscodeNotSet
-        case TouchIDNotAvailable
-        case TouchIDNotEnrolled
+        case authenticationFailed
+        case userCancel
+        case userFallback
+        case systemCancel
+        case passcodeNotSet
+        case touchIDNotAvailable
+        case touchIDNotEnrolled
     }
 
     func authenticateUser() {
@@ -139,21 +141,21 @@ class ProfileViewController: UIViewController {
         let reasonString = "AuthenticationRequired".localizedUsingGeneralFile()
 
         // Check if the device can evaluate the policy.
-        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
-            context.evaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {
+        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {
                 (success: Bool, evalPolicyError: NSError?) -> Void in
 
                 if success {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self.showSettings()
                     }
                 } else {
                     switch evalPolicyError!.code {
-                    case LAError.SystemCancel.rawValue:
+                    case LAError.systemCancel.rawValue:
                         break
-                    case LAError.UserCancel.rawValue:
+                    case LAError.userCancel.rawValue:
                         break
-                    case LAError.UserFallback.rawValue:
+                    case LAError.userFallback.rawValue:
                         break
                     default:
                         break
@@ -161,14 +163,14 @@ class ProfileViewController: UIViewController {
                             //                        self.showPasswordAlert()
                     }
                 }
-            })
+            } as! (Bool, Error?) -> Void)
         } else {
             // If the security policy cannot be evaluated then show a short message depending on the error.
             switch error!.code {
-            case LAError.TouchIDNotEnrolled.rawValue:
+            case LAError.touchIDNotEnrolled.rawValue:
                 break
 
-            case LAError.PasscodeNotSet.rawValue:
+            case LAError.passcodeNotSet.rawValue:
                 break
 
             default:
@@ -185,33 +187,33 @@ class ProfileViewController: UIViewController {
 
     // MARK: Image Handlers
 
-    @IBAction func imageViewClicked(sender: AnyObject) {
+    @IBAction func imageViewClicked(_ sender: Any) {
 
         definesPresentationContext = true
 
-        let importPictureController = storyboard?.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
+        let importPictureController = storyboard?.instantiateViewController(withIdentifier: "ImportProfileImageViewController") as! ImportProfileImageViewController
         importPictureController.delegate = self
         importPictureController.translucent = true
 
-        presentViewController(importPictureController, animated: true, completion: nil)
+        present(importPictureController, animated: true, completion: nil)
     }
 }
 
 extension ProfileViewController: RealtimeUserManagerDelegate {
     
-    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(manager: RealtimeUserManager) {
+    func realtimeUserManagerDidReceiveFriendOrFriendScheduleUpdates(_ manager: RealtimeUserManager) {
         refreshUIData()
     }
 }
 
 extension ProfileViewController: ImportProfileImageViewControllerDelegate {
-    func importProfileImageViewControllerDidFinishImportingImage(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidFinishImportingImage(_ controller: ImportProfileImageViewController) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    func importProfileImageViewControllerDidCancel(controller: ImportProfileImageViewController) {
+    func importProfileImageViewControllerDidCancel(_ controller: ImportProfileImageViewController) {
 
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

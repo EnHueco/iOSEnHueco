@@ -9,18 +9,18 @@
 import Foundation
 import Genome
 import Firebase
-import PureJsonSerializer
+import SwiftyJSON
 
 class FriendsManager: FirebaseLogicManager {
 
-    private init() {}
+    fileprivate init() {}
 
     static let sharedManager = FriendsManager()
 
     /// Deletes a friend.
-    func deleteFriend(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func deleteFriend(id friendID: String, completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else { return }
+        guard let appUserID = firebaseUser(completionHandler)?.uid else { return }
 
         let update = [
             appUserID + "/" + friendID : NSNull(),
@@ -28,16 +28,16 @@ class FriendsManager: FirebaseLogicManager {
         ]
         
         FIRDatabase.database().reference().child(FirebasePaths.friends).updateChildValues(update) { (error, reference) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
 
     /// Sends a friend request to the username provided and notifies the result via Notification Center.
-    func sendFriendRequestTo(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func sendFriendRequestTo(id friendID: String, completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else { return }
+        guard let appUserID = firebaseUser(completionHandler)?.uid else { return }
         
         let update = [
             FirebasePaths.sentRequests + "/" + appUserID : friendID,
@@ -45,56 +45,56 @@ class FriendsManager: FirebaseLogicManager {
         ]
         
         FIRDatabase.database().reference().updateChildValues(update) { (error, reference) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
     
     /// Accepts friend request from the friend id provided.
-    func acceptFriendRequestFrom(id friendID: String, completionHandler: BasicCompletionHandler) {
+    func acceptFriendRequestFrom(id friendID: String, completionHandler: @escaping BasicCompletionHandler) {
         
-        guard let appUserID = firebaseUser(errorHandler: completionHandler)?.uid else { return }
+        guard let appUserID = firebaseUser(completionHandler)?.uid else { return }
 
         let update = [
             FirebasePaths.receivedRequests + "/" + appUserID + "/" + friendID : NSNull(),
             FirebasePaths.sentRequests + "/" + friendID + "/" + appUserID  : NSNull(),
             FirebasePaths.friends + "/" + appUserID : friendID,
             FirebasePaths.friends + "/" + friendID : appUserID
-        ]
+        ] as [String : Any]
 
         FIRDatabase.database().reference().updateChildValues(update) { (error, reference) in
-            dispatch_async(dispatch_get_main_queue()){
-                completionHandler(error: error)
+            DispatchQueue.main.async{
+                completionHandler(error)
             }
         }
     }
     
-    func fetchUserWithID(id: String, completionHandler: (user: User?, error: ErrorType?) -> Void) {
+    func fetchUserWithID(_ id: String, completionHandler: @escaping (_ user: User?, _ error: Error?) -> Void) {
         
         fetchUsersWithIDs([id]) { (users, error) in
-            completionHandler(user: users?.first, error: error)
+            completionHandler(users?.first, error)
         }
     }
     
-    func fetchUsersWithIDs(ids: [String], completionHandler: (users: [User]?, error: ErrorType?) -> Void) {
+    func fetchUsersWithIDs(_ ids: [String], completionHandler: @escaping (_ users: [User]?, _ error: Error?) -> Void) {
                 
         var errorOccurred = false
         var users = [User]()
         
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let queue = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
         
         for id in ids {
             
-            FIRDatabase.database().reference().child(FirebasePaths.users).child(id).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            FIRDatabase.database().reference().child(FirebasePaths.users).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                dispatch_async(queue) {
+                queue.async {
                     guard !errorOccurred else { return }
                     
-                    guard let valueJSON = snapshot.value as? [String : AnyObject], let user = try? User(js: valueJSON) else {
-                        dispatch_async(dispatch_get_main_queue()){
+                    guard let valueJSON = snapshot.value, let user = try? User(node: valueJSON) else {
+                        DispatchQueue.main.async{
                             errorOccurred = true
-                            completionHandler(users: nil, error: GenericError.UnknownError)
+                            completionHandler(nil, GenericError.unknownError)
                         }
                         return
                     }
@@ -102,21 +102,21 @@ class FriendsManager: FirebaseLogicManager {
                     users.append(user)
                     
                     if users.count == ids.count {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            completionHandler(users: users, error: nil)
+                        DispatchQueue.main.async {
+                            completionHandler(users, nil)
                         }
                     }
                 }
                 
-            }, withCancelBlock: { (error) in
+            }, withCancel: { (error) in
                 
-                dispatch_async(queue) {
+                queue.async {
                     guard !errorOccurred else { return }
 
                     errorOccurred = true
                     
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completionHandler(users: nil, error: error)
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error)
                     }
                 }
             })
@@ -128,27 +128,24 @@ class FriendsManager: FirebaseLogicManager {
      
      - parameter searchText:        Text to search
      */
-    func searchUsersByName(searchText searchText: String, institutionID: String?, completionHandler: (results:[User]) -> ()) {
+    func searchUsersByName(_ searchText: String, institutionID: String?, completionHandler: @escaping (_ results:[User]) -> ()) {
         
         guard !searchText.isBlank() else {
-            dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }
+            DispatchQueue.main.async { completionHandler([User]()) }
             return
         }
         
-        FIRDatabase.database().reference().child(FirebasePaths.users).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.users).observeSingleEvent(of: .value) { (snapshot: FIRDataSnapshot) in
             
-            guard let value = snapshot.value as? [[String : AnyObject]] else {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(results: [User]()) }
-                return
-            }
+            let json = JSON(snapshot.value ?? [:])
             
-            let filteredFriendsJSON = value.filter {
+            let filteredFriendsJSON = json.arrayValue.filter {
                 
-                let firstNames = ($0[User.JSONKeys.firstNames] as? String) ?? ""
-                let lastNames = ($0[User.JSONKeys.lastNames] as? String) ?? ""
+                let firstNames = $0[User.JSONKeys.firstNames].stringValue
+                let lastNames = $0[User.JSONKeys.lastNames].stringValue
                 
-                for words in [firstNames.componentsSeparatedByString(" "), lastNames.componentsSeparatedByString(" ")] {
-                    for word in words where word.lowercaseString.hasPrefix(searchText.lowercaseString) {
+                for words in [firstNames.components(separatedBy: " "), lastNames.components(separatedBy: " ")] {
+                    for word in words where word.lowercased().hasPrefix(searchText.lowercased()) {
                         return true
                     }
                 }
@@ -156,7 +153,8 @@ class FriendsManager: FirebaseLogicManager {
                 return false
             }
             
-            completionHandler(results: (try? [User](js: Json.from(filteredFriendsJSON))) ?? [])
+            let array = filteredFriendsJSON.map { $0.object }
+            completionHandler((try? [User](node: array)) ?? [])
         }
     }
 }

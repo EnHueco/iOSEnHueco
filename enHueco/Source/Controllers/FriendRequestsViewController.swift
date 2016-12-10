@@ -14,7 +14,7 @@ class FriendRequestsViewController: UIViewController, UIActionSheetDelegate {
     @IBOutlet weak var incomingOutgoingSegmentedControl: UISegmentedControl!
     @IBOutlet weak var requestsTableView: UITableView!
 
-    private var realtimeFriendRequestsManager: RealtimeFriendRequestsManager?
+    fileprivate var realtimeFriendRequestsManager: RealtimeFriendRequestsManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,30 +24,30 @@ class FriendRequestsViewController: UIViewController, UIActionSheetDelegate {
         requestsTableView.allowsSelection = false
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
         navigationController?.navigationBar.barTintColor = EHInterfaceColor.mainInterfaceColor
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.tintColor = UIColor.white
 
         EHProgressHUD.showSpinnerInView(view)
         realtimeFriendRequestsManager = RealtimeFriendRequestsManager(delegate: self)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         realtimeFriendRequestsManager = nil
     }
 
-    @IBAction func addFriendButtonPressed(sender: AnyObject) {
+    @IBAction func addFriendButtonPressed(_ sender: AnyObject) {
 
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("SearchNewFriendViewController") as! SearchNewFriendViewController
-        viewController.modalPresentationStyle = .OverCurrentContext
+        let viewController = storyboard!.instantiateViewController(withIdentifier: "SearchNewFriendViewController") as! SearchNewFriendViewController
+        viewController.modalPresentationStyle = .overCurrentContext
 
-        presentViewController(viewController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,14 +56,14 @@ class FriendRequestsViewController: UIViewController, UIActionSheetDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func incomingOutgoingSegmentedControlDidChangeValue(sender: AnyObject) {
+    @IBAction func incomingOutgoingSegmentedControlDidChangeValue(_ sender: AnyObject) {
         requestsTableView.reloadData()
     }
 }
 
 extension FriendRequestsViewController: RealtimeFriendRequestsManagerDelegate {
     
-    func realtimeFriendRequestsManagerDidReceiveFriendRequestUpdates(manager: RealtimeFriendRequestsManager) {
+    func realtimeFriendRequestsManagerDidReceiveFriendRequestUpdates(_ manager: RealtimeFriendRequestsManager) {
         
         EHProgressHUD.dismissAllSpinnersForView(self.view)
         requestsTableView.reloadData()
@@ -72,7 +72,7 @@ extension FriendRequestsViewController: RealtimeFriendRequestsManagerDelegate {
 
 extension FriendRequestsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let realtimeFriendRequestsManager = realtimeFriendRequestsManager else { return 0 }
         
@@ -83,11 +83,11 @@ extension FriendRequestsViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if incomingOutgoingSegmentedControl.selectedSegmentIndex == 0 {
             
-            let cell = requestsTableView.dequeueReusableCellWithIdentifier("IncomingFriendRequestCell") as! IncomingFriendRequestCell
+            let cell = requestsTableView.dequeueReusableCell(withIdentifier: "IncomingFriendRequestCell") as! IncomingFriendRequestCell
             
             let requestFriend = realtimeFriendRequestsManager!.receivedFriendRequests[indexPath.row]
             
@@ -96,29 +96,29 @@ extension FriendRequestsViewController: UITableViewDataSource {
             cell.friendImageImageView.clipsToBounds = true
             cell.friendImageImageView.layer.cornerRadius = 50.0 / 2.0
             cell.friendImageImageView.image = nil
-            cell.friendImageImageView.contentMode = .ScaleAspectFill
+            cell.friendImageImageView.contentMode = .scaleAspectFill
             
-            SDWebImageManager().downloadImageWithURL(requestFriend.image, options: SDWebImageOptions.AllowInvalidSSLCertificates, progress: nil) {
+            SDWebImageManager().downloadImage(with: requestFriend.image as URL!, options: SDWebImageOptions.allowInvalidSSLCertificates, progress: nil) {
                 (image, error, cacheType, bool, url) -> Void in
                 
                 guard error == nil else { return }
                 
-                if cacheType == SDImageCacheType.None || cacheType == SDImageCacheType.Disk {
+                if cacheType == SDImageCacheType.none || cacheType == SDImageCacheType.disk {
                     cell.friendImageImageView.alpha = 0
                     cell.friendImageImageView.image = image
                     
-                    UIView.animateWithDuration(0.5) {
+                    UIView.animate(withDuration: 0.5, animations: {
                         cell.friendImageImageView.alpha = 1
-                    }
+                    }) 
                     
-                } else if cacheType == SDImageCacheType.Memory {
+                } else if cacheType == SDImageCacheType.memory {
                     cell.friendImageImageView.image = image
                 }
             }
             
             cell.acceptButton.layer.cornerRadius = 4
             
-            cell.deleteButton.layer.borderColor = UIColor.lightGrayColor().CGColor
+            cell.deleteButton.layer.borderColor = UIColor.lightGray.cgColor
             cell.deleteButton.layer.borderWidth = 1
             cell.deleteButton.layer.cornerRadius = 4
             
@@ -128,7 +128,7 @@ extension FriendRequestsViewController: UITableViewDataSource {
             
         } else {
             
-            let cell = requestsTableView.dequeueReusableCellWithIdentifier("OutgoingFriendRequestCell") as! OutgoingFriendRequestCell
+            let cell = requestsTableView.dequeueReusableCell(withIdentifier: "OutgoingFriendRequestCell") as! OutgoingFriendRequestCell
             return cell
         }
     }
@@ -136,21 +136,21 @@ extension FriendRequestsViewController: UITableViewDataSource {
 
 extension FriendRequestsViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 66
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.backgroundColor = UIColor.clearColor()
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
     }
 }
 
 extension FriendRequestsViewController: IncomingFriendRequestCellDelegate {
     
-    func didPressAcceptButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell) {
+    func didPressAcceptButtonInIncomingFriendRequestCell(_ cell: IncomingFriendRequestCell) {
         
         guard let realtimeFriendRequestsManager = realtimeFriendRequestsManager,
-              let indexPath = requestsTableView.indexPathForCell(cell) else {
+              let indexPath = requestsTableView.indexPath(for: cell) else {
             return
         }
         
@@ -169,9 +169,9 @@ extension FriendRequestsViewController: IncomingFriendRequestCellDelegate {
         })
     }
     
-    func didPressDiscardButtonInIncomingFriendRequestCell(cell: IncomingFriendRequestCell) {
+    func didPressDiscardButtonInIncomingFriendRequestCell(_ cell: IncomingFriendRequestCell) {
         
-        let indexPath = requestsTableView.indexPathForCell(cell)
+        let indexPath = requestsTableView.indexPath(for: cell)
         
         // TODO:
     }

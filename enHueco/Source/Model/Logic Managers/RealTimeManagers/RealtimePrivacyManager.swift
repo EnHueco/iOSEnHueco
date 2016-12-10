@@ -5,15 +5,16 @@
 
 import Foundation
 import Firebase
+import Genome
 
 protocol RealtimePrivacyManagerDelegate: class {
-    func realtimePrivacyManagerDidReceivePrivacyUpdates(manager: RealtimePrivacyManager)
+    func realtimePrivacyManagerDidReceivePrivacyUpdates(_ manager: RealtimePrivacyManager)
 }
 
 /// Handles privacy settings
 class RealtimePrivacyManager: FirebaseSynchronizable {
 
-    private(set) var settings : PrivacySettings?
+    fileprivate(set) var settings : PrivacySettings?
 
     /// Delegate
     weak var delegate: RealtimePrivacyManagerDelegate?
@@ -30,16 +31,16 @@ class RealtimePrivacyManager: FirebaseSynchronizable {
     override func _createFirebaseSubscriptions() {
         
         let reference = FIRDatabase.database().reference().child(FirebasePaths.privacy).child(appUserID)
-        let handle = reference.observeEventType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
+        let handle = reference.observe(.value) { [unowned self] (snapshot: FIRDataSnapshot) in
 
-            guard let userJSON = snapshot.value as? [String : AnyObject],
-            let settings = try? PrivacySettings(js: snapshot) else {
+            guard let json = snapshot.value,
+                let settings = try? PrivacySettings(node: json) else {
                 return
             }
 
             self.settings = settings
 
-            dispatch_async(dispatch_get_main_queue()){
+            DispatchQueue.main.async{
                 self.delegate?.realtimePrivacyManagerDidReceivePrivacyUpdates(self)
             }
         }
