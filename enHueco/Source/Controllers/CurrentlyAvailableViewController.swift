@@ -143,7 +143,7 @@ class CurrentlyAvailableViewController: UIViewController {
             (interval: NSTimeInterval) -> Void in
 
             EHProgressHUD.showSpinnerInView(self.view)
-            PrivacyManager.sharedManager.turnInvisibleForTimeInterval(interval, completionHandler: {
+            PrivacyManager.shared.turnInvisibleForTimeInterval(interval, completionHandler: {
                 (success, error) -> Void in
 
                 EHProgressHUD.dismissSpinnerForView(self.view)
@@ -194,7 +194,7 @@ class CurrentlyAvailableViewController: UIViewController {
         // TODO: Update implementation
         /*
         EHProgressHUD.showSpinnerInView(self.view)
-        PrivacyManager.sharedManager.turnVisibleWithCompletionHandler {(success, error) -> Void in
+        PrivacyManager.shared.turnVisibleWithCompletionHandler {(success, error) -> Void in
 
             EHProgressHUD.dismissSpinnerForView(self.view)
 
@@ -333,7 +333,7 @@ extension CurrentlyAvailableViewController: UITableViewDataSource {
             cell.freeTimeStartOrEndHourIconImageView.image = UIImage(named: "NorthEastArrow")?.withRenderingMode(.alwaysTemplate)
         }
 
-        if friend.id == AccountManager.sharedManager.userID {
+        if friend.id == AccountManager.shared.userID {
             cell.setInstantFreeTimeIconVisibility(true)
 
             let array = NSMutableArray()
@@ -424,14 +424,14 @@ extension CurrentlyAvailableViewController: SWTableViewCellDelegate {
                 friend = filteredSoonFreefriendsAndFreeTimePeriods[indexPath.row].friend
             }
 
-            let appDelegate = AppDelegate.sharedDelegate
+            let appDelegate = AppDelegate.shared
             
-            if friend.id == AccountManager.sharedManager.userID {
+            if friend.id == AccountManager.shared.userID {
                 EHProgressHUD.showSpinnerInView(view)
                 
                 // TODO: Update implementation
                 /*
-                CurrentStateManager.sharedManager.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
+                CurrentStateManager.shared.deleteInstantFreeTimePeriodWithCompletionHandler({ (success, error) -> Void in
 
                     EHProgressHUD.dismissSpinnerForView(self.view)
 

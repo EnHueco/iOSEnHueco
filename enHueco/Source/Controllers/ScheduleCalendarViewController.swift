@@ -11,10 +11,10 @@ import TapkuLibrary
 
 class ScheduleCalendarViewController: TKCalendarDayViewController {
     
-    fileprivate let appUserID = AccountManager.sharedManager.userID
+    fileprivate let appUserID = AccountManager.shared.userID
     
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
-    var userID = AccountManager.sharedManager.userID
+    var userID = AccountManager.shared.userID
     
     /// An optional (existing) schedule to display, setting this will make the controller ignore the `userID` property.
     var scheduleToDisplay: Schedule? {

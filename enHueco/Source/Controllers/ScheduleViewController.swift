@@ -15,10 +15,10 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var importCalendarButton: UIButton!
 
-    fileprivate let appUserID = AccountManager.sharedManager.userID
+    fileprivate let appUserID = AccountManager.shared.userID
     
     /// ID of the user who's schedule will be displayed. Defaults to the AppUser's
-    var userID = AccountManager.sharedManager.userID
+    var userID = AccountManager.shared.userID
     
     ///Reference to the embeded calendar view controller
     var scheduleCalendarViewController: ScheduleCalendarViewController!
@@ -72,13 +72,13 @@ class ScheduleViewController: UIViewController {
     func addEventsWithUndoCapability(_ eventsToAdd: [BaseEvent], completionHandler: BasicCompletionHandler?) {
 
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.addEventsWithDataFrom(eventsToAdd) { (addedEventIDs, error) in
+        EventsAndSchedulesManager.shared.addEventsWithDataFrom(eventsToAdd) { (addedEventIDs, error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
             completionHandler?(error)
 
             guard let addedEventIDs = addedEventIDs, error == nil else {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
 
@@ -98,13 +98,13 @@ class ScheduleViewController: UIViewController {
         let oldEventIntent = EventUpdateIntent(valuesOfEvent: event)
 
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.editEvent(event.id, withIntent: intent) { (error) in
+        EventsAndSchedulesManager.shared.editEvent(event.id, withIntent: intent) { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
             completionHandler?(error)
 
             guard error == nil else {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
 
@@ -122,13 +122,13 @@ class ScheduleViewController: UIViewController {
     func deleteEventsWithUndoCapability(_ events: [BaseEvent], IDs: [String], completionHandler: BasicCompletionHandler?) {
 
         EHProgressHUD.showSpinnerInView(view)
-        EventsAndSchedulesManager.sharedManager.deleteEvents(IDs) { (error) in
+        EventsAndSchedulesManager.shared.deleteEvents(IDs) { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
             completionHandler?(error)
 
             guard error == nil else {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
 

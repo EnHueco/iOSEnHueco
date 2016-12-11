@@ -71,7 +71,7 @@ class CommonFreeTimePeriodsViewController: UIViewController {
 
         switchToSchedule()
         
-        addUserIDToSelectedIDsAndReloadData(AccountManager.sharedManager.userID!)
+        addUserIDToSelectedIDsAndReloadData(AccountManager.shared.userID!)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -143,7 +143,7 @@ class CommonFreeTimePeriodsViewController: UIViewController {
 
     func deleteFriendFromSelectedFriendsAtIndexPathAndReloadData(_ indexPath: IndexPath) {
 
-        guard realtimeUserManagers[indexPath.row].user?.id != AccountManager.sharedManager.userID else {
+        guard realtimeUserManagers[indexPath.row].user?.id != AccountManager.shared.userID else {
             return
         }
 

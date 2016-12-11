@@ -31,7 +31,7 @@ class RealtimeUserManager: FirebaseSynchronizable {
  
      - parameter userID:   The ID of the user to fetch information for (default is the app user's ID)
      */
-    init?(userID: String! = AccountManager.sharedManager.userID, delegate: RealtimeUserManagerDelegate?) {
+    init?(userID: String! = AccountManager.shared.userID, delegate: RealtimeUserManagerDelegate?) {
         
         guard userID != nil else { return nil }
         

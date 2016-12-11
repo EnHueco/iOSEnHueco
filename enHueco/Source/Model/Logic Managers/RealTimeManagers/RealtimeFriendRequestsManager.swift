@@ -41,7 +41,7 @@ class RealtimeFriendRequestsManager: FirebaseSynchronizable {
             
             guard let ids = snapshot.value as? [String] else { return }
             
-            FriendsManager.sharedManager.fetchUsersWithIDs(ids, completionHandler: { (users, error) in
+            FriendsManager.shared.fetchUsersWithIDs(ids, completionHandler: { (users, error) in
                 guard error == nil, let users = users else { return }
                 
                 self.sentFriendRequests = users
@@ -61,7 +61,7 @@ class RealtimeFriendRequestsManager: FirebaseSynchronizable {
             
             guard let ids = snapshot.value as? [String] else { return }
             
-            FriendsManager.sharedManager.fetchUsersWithIDs(ids, completionHandler: { (users, error) in
+            FriendsManager.shared.fetchUsersWithIDs(ids, completionHandler: { (users, error) in
                 guard error == nil, let users = users else { return }
                 
                 self.receivedFriendRequests = users

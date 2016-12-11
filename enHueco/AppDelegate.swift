@@ -18,7 +18,7 @@ import APAddressBook
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    static var sharedDelegate: AppDelegate {
+    static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
 
@@ -40,26 +40,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Start FBSDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if AccountManager.shared.userID != nil {
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "MainTabBarViewController") as! MainTabBarViewController
+        } else {
+            window?.rootViewController = storyboard.instantiateInitialViewController()
+        }
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        
         // FIXME: Implement correctly or remove
         
-//        if #available(iOS 9.0, *) {
-//            if WCSession.isSupported() {
-//                let session = WCSession.default()
-//                session.delegate = self
-//                session.activate()
-//            }
-//        }
-
-        if UserDefaults.standard.bool(forKey: "notFirstLaunch") {
-            UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
-            
-        } else {
-            UserDefaults.standard.set(true, forKey: "notFirstLaunch")
-        }
-
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
-
+        //        if #available(iOS 9.0, *) {
+        //            if WCSession.isSupported() {
+        //                let session = WCSession.default()
+        //                session.delegate = self
+        //                session.activate()
+        //            }
+        //        }
+        
         return true
     }
 
@@ -74,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 
-        ProximityUpdatesManager.sharedManager.updateBackgroundFetchInterval()
+        ProximityUpdatesManager.shared.updateBackgroundFetchInterval()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -111,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         let minTimeIntervalToNotify = /*2.0*/ 60*80 as NSTimeInterval
         
-        let friendsToNotifyToUser = CurrentStateManager.sharedManager.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
+        let friendsToNotifyToUser = CurrentStateManager.shared.friendsCurrentlyNearby().filter { $0.lastNotifiedNearbyStatusDate == nil || $0.lastNotifiedNearbyStatusDate?.timeIntervalSinceNow > minTimeIntervalToNotify }
         
         let currentDate = NSDate()
         
@@ -176,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //         if message["request"] as! String == "friendsCurrentlyInGap"
 //         {
 //         var responseDictionary = [String : Any]()
-//         let friendsCurrentlyFreeAndFreeTimePeriods = CurrentStateManager.sharedManager.currentlyAvailableFriends()
+//         let friendsCurrentlyFreeAndFreeTimePeriods = CurrentStateManager.shared.currentlyAvailableFriends()
 //         
 //         var friendsArray = [[String : Any]]()
 //         

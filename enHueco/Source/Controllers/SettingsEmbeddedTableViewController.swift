@@ -183,7 +183,7 @@ class SettingsEmbeddedTableViewController: UITableViewController, UIAlertViewDel
         if let newNumber = alertView.textField(at: 0)?.text, !newNumber.isEmpty {
 //            enHueco.appUser.phoneNumber = newNumber
 /*
-            AppUserInformationManager.sharedManager.pushPhoneNumber(newNumber) {
+            AppUserInformationManager.shared.pushPhoneNumber(newNumber) {
                 success, error in
 
                 guard success && error == nil else

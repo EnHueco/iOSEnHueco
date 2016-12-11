@@ -102,12 +102,11 @@ class InstantFreeTimeViewController: UIViewController {
         let newFreeTimePeriod = BaseEvent(type: .FreeTime, name: nameTextField.text, location: locationTextField.text, startDate: Date(), endDate: endTimeDatePicker.date, repeating: false)
 
         EHProgressHUD.showSpinnerInView(view)
-        CurrentStateManager.sharedManager.postInstantFreeTimePeriod(newFreeTimePeriod) { error in
+        CurrentStateManager.shared.postInstantFreeTimePeriod(newFreeTimePeriod) { error in
             EHProgressHUD.dismissSpinnerForView(self.view)
 
             guard error == nil else {
-
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
 

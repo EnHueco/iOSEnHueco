@@ -13,7 +13,7 @@ import Foundation
 class CurrentStateManager {
     fileprivate init() {}
 
-    static let sharedManager = CurrentStateManager()
+    static let shared = CurrentStateManager()
 
     /*
     /**
@@ -63,7 +63,7 @@ class CurrentStateManager {
             enHueco.appUser.setInivisibilityEndDate(nil)
             enHueco.appUser.schedule.instantFreeTimePeriod = newFreeTimePeriod
 
-            let _ = try? PersistenceManager.sharedManager.persistData()
+            let _ = try? PersistenceManager.shared.persistData()
 
             dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: true, error: nil)
@@ -93,7 +93,7 @@ class CurrentStateManager {
         ConnectionManager.sendAsyncRequest(request, withJSONParams: instantEvent, successCompletionHandler: {
             (JSONResponse) -> () in
 
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
+            AppUserInformationManager.shared.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
                 success, error in
 
                 dispatch_async(dispatch_get_main_queue()) {

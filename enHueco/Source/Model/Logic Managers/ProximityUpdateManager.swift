@@ -29,7 +29,7 @@ enum ProximityUpdatesManagerReportingCompletionStatus {
 /// Handles operations related to proximity between users, including location reporting.
 
 class ProximityUpdatesManager: NSObject {
-    static let sharedManager = ProximityUpdatesManager()
+    static let shared = ProximityUpdatesManager()
 
     static let backgroundFetchIntervalDuringFreeTimePeriods = 5 * 60.0
     static let backgroundFetchIntervalAfterDayOver = 7 * 3600.0

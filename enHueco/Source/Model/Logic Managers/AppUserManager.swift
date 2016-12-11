@@ -13,7 +13,7 @@ class AppUserManager: FirebaseLogicManager {
 
     fileprivate init() {}
 
-    static let sharedManager = AppUserManager()
+    static let shared = AppUserManager()
 
     func updateUserWith(_ intent: UserUpdateIntent, completionHandler: @escaping BasicCompletionHandler) {
         
@@ -71,8 +71,8 @@ class AppUserManager: FirebaseLogicManager {
             ConnectionManager.sendAsyncDataRequest(request, successCompletionHandler: {
                 (data) -> () in
                 
-                let path = PersistenceManager.sharedManager.documentsPath + "/profile.jpg"
-                PersistenceManager.sharedManager.saveImage(data, path: path, successCompletionHandler: {
+                let path = PersistenceManager.shared.documentsPath + "/profile.jpg"
+                PersistenceManager.shared.saveImage(data, path: path, successCompletionHandler: {
                     () -> () in
                     
                     dispatch_async(dispatch_get_main_queue()) {

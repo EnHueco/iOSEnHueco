@@ -13,7 +13,7 @@ class PrivacyManager: FirebaseLogicManager  {
 
     fileprivate init() {}
 
-    static let sharedManager = PrivacyManager()
+    static let shared = PrivacyManager()
 
     func updatePrivacySettingsWith(_ intent: PrivacyUpdateIntent, completionHandler: @escaping BasicCompletionHandler) {
         
@@ -106,9 +106,9 @@ class PrivacyManager: FirebaseLogicManager  {
             enHueco.appUser.setInivisibilityEndDate(endDate)
             enHueco.appUser.schedule.instantFreeTimePeriod = nil
 
-            try? PersistenceManager.sharedManager.persistData()
+            try? PersistenceManager.shared.persistData()
 
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
+            AppUserInformationManager.shared.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
                 success, error in
 
                 dispatch_async(dispatch_get_main_queue()) {
@@ -144,9 +144,9 @@ class PrivacyManager: FirebaseLogicManager  {
 
             enHueco.appUser.setInivisibilityEndDate(endDate)
 
-            try? PersistenceManager.sharedManager.persistData()
+            try? PersistenceManager.shared.persistData()
 
-            AppUserInformationManager.sharedManager.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
+            AppUserInformationManager.shared.fetchUpdatesForAppUserAndScheduleWithCompletionHandler {
                 success, error in
 
                 dispatch_async(dispatch_get_main_queue()) {

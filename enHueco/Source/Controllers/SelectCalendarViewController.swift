@@ -113,7 +113,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDataSource, UIT
             generateFreeTimePeriodsQuestionAlertView = UIAlertView(title: "Generar huecos", message: "¿Deseas que generemos los huecos que detectemos entre clases por ti? \n Recuerda que a menos de que agregues huecos a tu tiempo libre tus amigos no verán que estás en hueco.", delegate: self, cancelButtonTitle: nil, otherButtonTitles: "No, Gracias", "Si")
             generateFreeTimePeriodsQuestionAlertView!.show()
         } else {
-            EventsAndSchedulesManager.sharedManager.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1) {
+            EventsAndSchedulesManager.shared.importScheduleFromCalendar(selectedCalendar, generateFreeTimePeriodsBetweenClasses: buttonIndex == 1) {
                 success, error in
 
                 guard success && error == nil else

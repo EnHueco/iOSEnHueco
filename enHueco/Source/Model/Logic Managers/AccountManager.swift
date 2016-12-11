@@ -19,6 +19,7 @@ struct SignupInfo {
     var lastNames: String
     var phoneNumber: String?
     var gender: Gender
+    var imageURL: URL?
 }
 
 /// Handles account related operations (i.e. Signup, Login, Logout, Forgot Password, etc)
@@ -26,7 +27,7 @@ class AccountManager {
 
     fileprivate init() {}
 
-    static let sharedManager = AccountManager()
+    static let shared = AccountManager()
     
     /// The ID of the currently logged in user
     var userID: String? {
@@ -49,7 +50,7 @@ class AccountManager {
                     return
                 }
                 
-                let userJSON = JSON(userDictionary)
+                let userJSON = JSON(userDictionary ?? [:])
                 
                 guard let firstNames = userJSON["first_name"].string,
                     let lastName = userJSON["last_name"].string,
@@ -58,7 +59,7 @@ class AccountManager {
                         return
                 }
                 
-                self.checkIfUserExists(user.uid) { (exists, error) in
+                self.checkIfUserExists(id: user.uid) { (exists, error) in
                     
                     guard error == nil else {
                         completionHandler(error)
@@ -70,9 +71,13 @@ class AccountManager {
                         return
                         
                     } else {
-                        let info = SignupInfo(firstNames: firstNames, lastNames: lastName, phoneNumber: nil, gender: gender)
-                        self.createUser(user.uid, userInfo: info) { (error) in
-                            completionHandler(error)
+                        
+                        self.fetchImageFromFacebook { (imageURL, error) in
+                            let info = SignupInfo(firstNames: firstNames, lastNames: lastName, phoneNumber: nil, gender: gender, imageURL: imageURL)
+                            
+                            self.createUser(id: user.uid, userInfo: info) { (error) in
+                                completionHandler(error)
+                            }
                         }
                     }
                 }
@@ -80,29 +85,9 @@ class AccountManager {
         }
     }
     
-    /// Creates an account.
-    func loginWith(_ email: String, password: String, completionHandler: @escaping BasicCompletionHandler) {
+    fileprivate func checkIfUserExists(id: String, completionHandler: @escaping (_ exists: Bool?, _ error: Error?) -> Void) {
         
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            DispatchQueue.main.async{
-                completionHandler(error)
-            }
-        }
-    }
-
-    /// Creates an account.
-    func signupWith(_ email: String, password: String, completionHandler: @escaping BasicCompletionHandler) {
-
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            DispatchQueue.main.async{
-                completionHandler(error)
-            }
-        }
-    }
-    
-    fileprivate func checkIfUserExists(_ ID: String, completionHandler: @escaping (_ exists: Bool?, _ error: Error?) -> Void) {
-        
-        FIRDatabase.database().reference().child(FirebasePaths.users).child(ID).observeSingleEvent(of: .value, with: { (snapshot) in
+        FIRDatabase.database().reference().child(FirebasePaths.users).child(id).observeSingleEvent(of: .value, with: { (snapshot) in
             
             DispatchQueue.main.async {
                 completionHandler(snapshot.exists(), nil)
@@ -116,11 +101,11 @@ class AccountManager {
         }
     }
     
-    fileprivate func createUser(_ id: String, userInfo: SignupInfo, completionHandler: @escaping BasicCompletionHandler) {
+    fileprivate func createUser(id: String, userInfo: SignupInfo, completionHandler: @escaping BasicCompletionHandler) {
         
-        let user = User(id: id, institution: nil, firstNames: userInfo.firstNames, lastNames: userInfo.lastNames, gender: userInfo.gender)
+        let user = User(id: id, institution: nil, firstNames: userInfo.firstNames, lastNames: userInfo.lastNames, image: userInfo.imageURL, gender: userInfo.gender)
         
-        guard var updateJSON = (try? user.foundationDictionary()) ?? nil else {
+        guard let updateJSON = (try? user.foundationDictionary()) ?? nil else {
             assertionFailure()
             DispatchQueue.main.async{ completionHandler(GenericError.unknownError) }
             return
@@ -131,6 +116,23 @@ class AccountManager {
             DispatchQueue.main.async {
                 completionHandler(error)
             }
+        }
+    }
+    
+    func fetchImageFromFacebook(completionHandler: @escaping (_ imageURL: URL?, _ error: Error?) -> Void) {
+        
+        FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields": "url", "width": "500", "redirect": "false"], httpMethod: "GET").start() {(_, result, error) -> Void in
+            
+            let json = JSON(result ?? [:])
+            
+            guard let imageURLString = json["data"]["url"].string,
+                let imageURL = URL(string: imageURLString)
+                else {
+                    completionHandler(nil, error)
+                    return
+            }
+            
+            completionHandler(imageURL, nil)
         }
     }
 

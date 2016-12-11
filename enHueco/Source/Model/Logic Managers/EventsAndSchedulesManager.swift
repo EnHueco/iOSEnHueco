@@ -28,7 +28,7 @@ class EventsAndSchedulesManager: FirebaseLogicManager {
 
     fileprivate init() {}
 
-    static let sharedManager = EventsAndSchedulesManager()
+    static let shared = EventsAndSchedulesManager()
 
     /**
      Adds the events given events to the AppUser's schedule if and only if the request is successful.
@@ -228,7 +228,7 @@ extension EventsAndSchedulesManager {
         }
 
         do {
-            try EventsAndSchedulesManager.sharedManager.addEventsWithDataFromEvents(classEvents) {
+            try EventsAndSchedulesManager.shared.addEventsWithDataFromEvents(classEvents) {
                 (addedEvents, error) in
 
                 guard addedEvents != nil && error == nil else {

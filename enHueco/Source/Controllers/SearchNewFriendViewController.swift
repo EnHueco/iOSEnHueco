@@ -98,18 +98,17 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
         let window = UIApplication.shared.delegate!.window!!
 
         EHProgressHUD.showSpinnerInView(window)
-        FriendsManager.sharedManager.sendFriendRequestTo(id: friend.id, completionHandler: { (error) in
+        FriendsManager.shared.sendFriendRequestTo(id: friend.id, completionHandler: { (error) in
             EHProgressHUD.dismissSpinnerForView(window)
             self.searchResultsTableView.deselectRow(at: indexPath, animated: true)
             
             // TODO: Check this
-            guard error == nil else
-            {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+            guard error == nil else {
+                EHNotifications.showError(in: self, error: error)
                 return
             }
             
-            EHNotifications.showNotificationInViewController(self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .success)
+            EHNotifications.showNotification(in: self, title: "RequestSentConfirmation".localizedUsingGeneralFile(), type: .success)
             
             self.navigationController?.dismiss(animated: true, completion: nil)
         })
@@ -150,7 +149,7 @@ class SearchNewFriendViewController: UIViewController, UITableViewDataSource, UI
 
     func timeToSearch(_ timer: Timer) {
 
-        FriendsManager.sharedManager.searchUsersByName(searchText, institutionID: nil, completionHandler: { (results) in
+        FriendsManager.shared.searchUsersByName(searchText, institutionID: nil, completionHandler: { (results) in
             
             self.searchResults = results
             self.searchResultsTableView.reloadData()

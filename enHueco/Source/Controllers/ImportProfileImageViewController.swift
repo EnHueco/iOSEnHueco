@@ -123,7 +123,7 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
         loginManager.logIn(withReadPermissions: ["public_profile"], from: self) {(result, error) -> Void in
 
             guard error == nil else {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
 
@@ -139,7 +139,7 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
                         let imageData = try? Data(contentsOf: imageURL),
                         let image = UIImage(data: imageData), error == nil
                     else {
-                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                        EHNotifications.showError(in: self, error: error)
                         return
                     }
 
@@ -150,10 +150,10 @@ class ImportProfileImageViewController: UIViewController, UINavigationController
                     var intent = UserUpdateIntent()
                     intent.image = imageURL
                     
-                    AppUserManager.sharedManager.updateUserWith(intent, completionHandler: { (error) in
+                    AppUserManager.shared.updateUserWith(intent, completionHandler: { (error) in
                         
                         guard error == nil else {
-                            EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                            EHNotifications.showError(in: self, error: error)
                             return
                         }
                         
@@ -195,7 +195,7 @@ extension ImportProfileImageViewController: RSKImageCropViewControllerDelegate {
         /*
         EHProgressHUD.showSpinnerInView(controller.view)
         let finalImage = RBResizeImage(croppedImage, targetSize: CGSizeMake(275, 275))
-        AppUserInformationManager.sharedManager.pushProfilePicture(finalImage) {
+        AppUserInformationManager.shared.pushProfilePicture(finalImage) {
             success, error in
 
             guard error == nil else

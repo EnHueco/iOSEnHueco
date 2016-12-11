@@ -41,11 +41,11 @@ class AddEditEventViewController: UIViewController {
             embeddedTableViewController.weekDaysCell.isHidden = true
             
             EHProgressHUD.showSpinnerInView(view)
-            EventsAndSchedulesManager.sharedManager.fetchEvent(eventToEditID) { (event, error) in
+            EventsAndSchedulesManager.shared.fetchEvent(eventToEditID) { (event, error) in
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
                 guard error == nil else {
-                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    EHNotifications.showError(in: self, error: error)
                     self.dismiss(animated: true, completion: nil)
                     return
                 }
@@ -75,7 +75,7 @@ class AddEditEventViewController: UIViewController {
 
         // If no weekdays selected
         guard embeddedTableViewController.weekDaysSegmentedControl.selectedSegmentIndexes.count != 0 else {
-            EHNotifications.showNotificationInViewController(self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .warning)
+            EHNotifications.showNotification(in: self, title: "SelectAtLeastOneDayErrorMessage".localizedUsingGeneralFile(), type: .warning)
             return
         }
 
@@ -162,7 +162,7 @@ class AddEditEventViewController: UIViewController {
             scheduleViewController.deleteEventsWithUndoCapability([eventToEdit], IDs: [eventToEdit.id], completionHandler: { (error) in
                 
                 if error != nil {
-                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    EHNotifications.showError(in: self, error: error)
                 }
                 
                 self.dismiss(animated: true, completion: nil)

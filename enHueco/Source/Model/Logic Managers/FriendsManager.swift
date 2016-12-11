@@ -15,7 +15,7 @@ class FriendsManager: FirebaseLogicManager {
 
     fileprivate init() {}
 
-    static let sharedManager = FriendsManager()
+    static let shared = FriendsManager()
 
     /// Deletes a friend.
     func deleteFriend(id friendID: String, completionHandler: @escaping BasicCompletionHandler) {

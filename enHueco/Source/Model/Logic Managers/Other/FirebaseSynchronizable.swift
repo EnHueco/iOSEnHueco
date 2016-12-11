@@ -20,7 +20,7 @@ class FirebaseSynchronizable {
      You must set the delegate property if you want to be notified when any data has changed.
      */
     init?() {
-        guard let userID = AccountManager.sharedManager.userID else {
+        guard let userID = AccountManager.shared.userID else {
             assertionFailure()
             return nil
         }

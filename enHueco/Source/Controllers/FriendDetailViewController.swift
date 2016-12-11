@@ -175,7 +175,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
 
         guard let friend = realtimeFriendManager?.user else { return }
         
-        let appDelegate = AppDelegate.sharedDelegate
+        let appDelegate = AppDelegate.shared
         
         if let number = friend.phoneNumber, index == 0 {
             
@@ -195,11 +195,11 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
                 (action) -> Void in
 
                 EHProgressHUD.showSpinnerInView(self.view)
-                FriendsManager.sharedManager.deleteFriend(id: friend.id, completionHandler: { (error) in
+                FriendsManager.shared.deleteFriend(id: friend.id, completionHandler: { (error) in
                     EHProgressHUD.dismissSpinnerForView(self.view)
 
                     guard error == nil else {
-                        EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                        EHNotifications.showError(in: self, error: error)
                         return
                     }
 
@@ -247,7 +247,7 @@ class FriendDetailViewController: UIViewController, UIPopoverPresentationControl
             recordId = nil
             
         } else {
-            AppDelegate.sharedDelegate.getFriendABID(phoneNumber, completionHandler: { (abid) -> () in
+            AppDelegate.shared.getFriendABID(phoneNumber, completionHandler: { (abid) -> () in
                 self.recordId = abid
             })
         }

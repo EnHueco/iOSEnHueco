@@ -19,7 +19,7 @@ import FirebaseAuth
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: FBSDKLoginButton!
 
     @IBOutlet weak var verticalSpaceToBottomConstraint: NSLayoutConstraint!
     var verticalSpaceToBottomInitialValue: CGFloat!
@@ -29,7 +29,7 @@ import FirebaseAuth
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        (UIApplication.shared.delegate as! AppDelegate).mainNavigationController = navigationController
+        AppDelegate.shared.mainNavigationController = navigationController
 
         navigationController?.isNavigationBarHidden = true
 
@@ -37,8 +37,6 @@ import FirebaseAuth
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         verticalSpaceToBottomInitialValue = verticalSpaceToBottomConstraint.constant
-
-        loginButton.backgroundColor = EHInterfaceColor.defaultBigRoundedButtonsColor
 
         let title = NSMutableAttributedString(string: "ENHUECO")
         let boldFont = UIFont.boldSystemFont(ofSize: logoTitleLabel.font.pointSize)
@@ -58,21 +56,17 @@ import FirebaseAuth
         view.insertSubview(backgroundImageView!, at: 0)
         backgroundImageView?.autoPinEdgesToSuperviewEdges()
 
-        let fbLoginButton = FBSDKLoginButton()
-        fbLoginButton.delegate = self
-
-        fbLoginButton.center = view.center
-        view.addSubview(fbLoginButton)
+        loginButton.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if firstAppearance && AccountManager.sharedManager.userID != nil {
+        if firstAppearance && AccountManager.shared.userID != nil {
             goToMainTabViewController()
         } else {
-            try? AccountManager.sharedManager.logOut()
-            (UIApplication.shared.delegate as! AppDelegate).loggingOut = false
+            try? AccountManager.shared.logOut()
+            AppDelegate.shared.loggingOut = false
         }
     }
 
@@ -86,59 +80,24 @@ import FirebaseAuth
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        loginButton.roundCorners()
         logoImageView.roundCorners()
-    }
-
-
-    @IBAction func login(_ sender: Any) {
-
-        view.endEditing(true)
-
-        guard let username = usernameTextField.text, let password = passwordTextField.text, username != "" && password != "" else{
-            //TODO: Shake animation
-            return
-        }
-
-        EHProgressHUD.showSpinnerInView(view)
-        AccountManager.sharedManager.loginWith(username, password: password) { error -> Void in
-            EHProgressHUD.dismissSpinnerForView(self.view)
-
-            guard error == nil else {
-
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
-                return
-            }
-
-            // TODO: Update
-            /*
-            if enHueco.appUser.imageURL == nil {
-                let importImageController = self.storyboard!.instantiateViewControllerWithIdentifier("ImportProfileImageViewController") as! ImportProfileImageViewController
-                importImageController.cancelButtonText = "Skip".localizedUsingGeneralFile()
-                importImageController.delegate = self
-
-                self.navigationController?.pushViewController(importImageController, animated: true)
-            } else {
-                self.goToMainTabViewController()
-            }*/
-        }
     }
 
     func goToMainTabViewController() {
 
-        //ProximityUpdatesManager.sharedManager.beginProximityUpdates()
+        //ProximityUpdatesManager.shared.beginProximityUpdates()
 
+        let window = AppDelegate.shared.window!
         let mainTabBarController = storyboard?.instantiateViewController(withIdentifier: "MainTabBarViewController") as! MainTabBarViewController
 
-        navigationController?.present(mainTabBarController, animated: true, completion: {
-
-            self.navigationController?.setViewControllers([self.navigationController!.viewControllers.first!], animated: false)
-        })
+        // FIXME: Use a decent animation
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+            window.rootViewController = mainTabBarController
+        }, completion: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
         self.view.endEditing(true)
     }
 
@@ -163,13 +122,11 @@ import FirebaseAuth
         view.layoutIfNeeded()
 
         UIView.animate(withDuration: 0.1, animations: {() -> Void in
-
             self.verticalSpaceToBottomConstraint.constant = self.verticalSpaceToBottomInitialValue
             self.view.layoutIfNeeded()
             self.view.setNeedsUpdateConstraints()
 
         }, completion: {(finished) -> Void in
-
             self.view.layoutIfNeeded()
         })
     }
@@ -191,16 +148,17 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         if let error = error {
-            print(error.localizedDescription)
+            EHNotifications.showError(in: self, error: error)
+            debugPrint(error)
             return
             
         } else {
             EHProgressHUD.showSpinnerInView(view)
-            AccountManager.sharedManager.loginWith(FBSDKAccessToken.current().tokenString) { error in
+            AccountManager.shared.loginWith(FBSDKAccessToken.current().tokenString) { error in
                 EHProgressHUD.dismissSpinnerForView(self.view)
                 
                 guard error == nil else {
-                    EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                    EHNotifications.showError(in: self, error: error)
                     return
                 }
                 

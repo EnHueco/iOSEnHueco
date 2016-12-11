@@ -140,8 +140,8 @@ class User: MappableObject, Equatable {
 
         super.updateUserWithJSONDictionary(JSONDictionary)
 
-        PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
-        PrivacyManager.sharedManager.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
+        PrivacyManager.shared.changeUserDefaultsValueForPrivacySetting(.ShowEventLocations, toNewValue: JSONDictionary[PrivacySetting.ShowEventLocations.rawValue] as! Bool)
+        PrivacyManager.shared.changeUserDefaultsValueForPrivacySetting(.ShowEventNames, toNewValue: JSONDictionary[PrivacySetting.ShowEventNames.rawValue] as! Bool)
     }
 
     var schedule = Schedule()
@@ -259,7 +259,7 @@ class User: MappableObject, Equatable {
     func refreshIsNearby() {
 
         if let appUserBSSID = enHueco.appUser.currentBSSID, currentBSSID = currentBSSID {
-            isNearby = ProximityUpdatesManager.sharedManager.wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
+            isNearby = ProximityUpdatesManager.shared.wifiAccessPointWithBSSID(appUserBSSID, isNearAccessPointWithBSSID: currentBSSID)
         } else {
             isNearby = false
         }

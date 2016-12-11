@@ -213,6 +213,7 @@
 		F126AE241BE58CE600AE561D /* InGapRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InGapRowController.swift; path = Views/InGapRowController.swift; sourceTree = "<group>"; };
 		F134AE5D1A800BB200E6E9AB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F13C06361BFE8CE0000546E5 /* SettingsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsEmbeddedTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		F13CFD8B1DFCCB5400A788FC /* enHueco.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = enHueco.entitlements; sourceTree = "<group>"; };
 		F13DB8451C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F13DB8461C27A1F800DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F13DB8471C27A1F900DB11AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -418,6 +419,7 @@
 		F1229BD81A74947200C4FDE2 /* enHueco */ = {
 			isa = PBXGroup;
 			children = (
+				F13CFD8B1DFCCB5400A788FC /* enHueco.entitlements */,
 				F183F84E1C82014E00390CF7 /* Localization */,
 				F183F84F1C82032100390CF7 /* Source */,
 				F1229C361A7495A200C4FDE2 /* enHueco-Bridging-Header.h */,
@@ -805,6 +807,9 @@
 							};
 							com.apple.DataProtection = {
 								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -1278,6 +1283,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = enHueco/enHueco.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1294,7 +1300,7 @@
 					/Users/Diego/Developer/Libraries/Tapku/tapkulibrary/src,
 				);
 				INFOPLIST_FILE = enHueco/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1319,6 +1325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = enHueco/enHueco.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Diego Diego (JWR9F7H7N4)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1335,7 +1342,7 @@
 					/Users/Diego/Developer/Libraries/Tapku/tapkulibrary/src,
 				);
 				INFOPLIST_FILE = enHueco/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

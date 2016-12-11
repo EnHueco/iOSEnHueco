@@ -157,11 +157,11 @@ extension FriendRequestsViewController: IncomingFriendRequestCellDelegate {
         let requestFriend = realtimeFriendRequestsManager.receivedFriendRequests[indexPath.row]
         
         EHProgressHUD.showSpinnerInView(view)
-        FriendsManager.sharedManager.acceptFriendRequestFrom(id: requestFriend.id, completionHandler: { (error) in
+        FriendsManager.shared.acceptFriendRequestFrom(id: requestFriend.id, completionHandler: { (error) in
             EHProgressHUD.dismissSpinnerForView(self.view)
             
             guard error == nil else {
-                EHNotifications.tryToShowErrorNotificationInViewController(self, withPossibleTitle: error?.localizedUserSuitableDescriptionOrDefaultUnknownErrorMessage())
+                EHNotifications.showError(in: self, error: error)
                 return
             }
             

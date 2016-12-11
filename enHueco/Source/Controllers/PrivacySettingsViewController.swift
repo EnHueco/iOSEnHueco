@@ -35,8 +35,8 @@ class PrivacySettingsViewController: UITableViewController {
 
         //TODO: Uncomment and update !!
         /*
-        shareEventNamesSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventNames)
-        shareEventLocationsSwitch.on = PrivacyManager.sharedManager.isPrivacySettingTurnedOn(.ShowEventLocations)
+        shareEventNamesSwitch.on = PrivacyManager.shared.isPrivacySettingTurnedOn(.ShowEventNames)
+        shareEventLocationsSwitch.on = PrivacyManager.shared.isPrivacySettingTurnedOn(.ShowEventLocations)
          */
     }
 
@@ -89,9 +89,9 @@ class PrivacySettingsViewController: UITableViewController {
             }
         }
         if on {
-            PrivacyManager.sharedManager.turnOnSetting(setting, withCompletionHandler: completionHandler)
+            PrivacyManager.shared.turnOnSetting(setting, withCompletionHandler: completionHandler)
         } else {
-            PrivacyManager.sharedManager.turnOffSetting(setting, withCompletionHandler: completionHandler)
+            PrivacyManager.shared.turnOffSetting(setting, withCompletionHandler: completionHandler)
         }
     }
     */
